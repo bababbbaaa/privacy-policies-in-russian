@@ -1,0 +1,287 @@
+<html style="min-height:100%" class="k-webkit k-webkit70"><head>
+<title>Спортивная школа по автомотоспорту | Политика обработки персональных данных</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description">
+<meta name="keywords">
+
+<link rel="shortcut icon" href="//lsport.net/Content/Websites/Images/96b16c11-5ed5-4526-bf56-16c9be1cc6c2/favicon.png">
+<link rel="stylesheet" href="//kendo.cdn.telerik.com/2021.1.119/styles/kendo.bootstrap-v4.min.css">
+<link rel="stylesheet" href="//lsport.net/Content/css4/bootstrap.min.css">
+<link rel="stylesheet" href="//lsport.net/Content/jquery.fileupload.min.css">
+<link rel="stylesheet" href="//lsport.net/Content/bootstrapValidator.min.css">
+<link rel="stylesheet" href="//lsport.net/Content/layout/webstyle.min.css">
+<link rel="stylesheet" href="/bundles/fa/css/all.min.css">
+<script src="//lsport.net/scripts/jquery-3.3.1.min.js"></script>
+<script src="//lsport.net/scripts/bootstrapValidator.min.js"></script>
+<script src="//lsport.net/scripts/jquery-ui.min.js"></script>
+<script src="//lsport.net/scripts/jquery.fileupload.min.js"></script>
+<script src="//lsport.net/scripts/jquery.fileupload-ui.min.js"></script>
+<script src="//lsport.net/scripts/jquery.fileupload-process.min.js"></script>
+<script src="//lsport.net/scripts/jquery.ba-hashchange.min.js"></script>
+<script src="//lsport.net/scripts/jquery.easytabs.min.js"></script>
+<script src="//lsport.net/scripts/jquery.blockUI.min.js"></script>
+<script src="//lsport.net/scripts/jquery.signalr-2.4.3.min.js"></script>
+<script src="//lsport.net/scripts/moment-with-locales.js"></script>
+<script src="//lsport.net/scripts/jquery.inputmask.bundle.min.js"></script>
+<script src="//lsport.net/scripts/inputmask/inputmask.numeric.extensions.min.js"></script>
+<script src="//lsport.net/scripts/map.min.js"></script>
+<script src="//lsport.net/scripts/layout.min.js"></script>
+<script src="//lsport.net/scripts/jquery.parseJSON.min.js"></script>
+<script src="//lsport.net/Scripts/bs4/bootstrap.bundle.min.js"></script>
+<script src="//kendo.cdn.telerik.com/2021.1.119/js/kendo.all.min.js"></script>
+<script src="//kendo.cdn.telerik.com/2021.1.119/js/cultures/kendo.culture.ru-RU.min.js"></script>
+<script src="//kendo.cdn.telerik.com/2021.1.119/js/messages/kendo.messages.ru-RU.min.js"></script>
+<script src="//api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=@Html.Raw(LSport.External.Systems.Yandex.GetMapKey())" type="text/javascript"></script>
+<script src="//lsport.net/scripts/blind.js"></script>
+<script src="/signalr/hubs"></script>
+
+<script src="/scripts/arcart.js"></script>
+<script>
+    $(function () { lsport.ar.cart.init({ }, 0) })
+</script>
+
+    <script src="/scripts/jsnlog.min.js"></script>
+    <script>
+        var a=JL.createAjaxAppender("ajax"); a.setOptions({ disallow:/((mCustomScrollbar|kendo|popover|ymaps_map) is not|circular|cyclic|unitegallery)/i, url:"/data/Common/LogError", beforeSend:function(xhr, json) { json.lg = JSON.stringify(json.lg); } }); JL().setOptions({ "appenders": [a] });
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-42574221-1', "motocross74.ru");
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+<script>
+    if (!location.hash) addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    var loaderSettings = { baseZ:10000, message: "<img src='/Content/Default/loading.gif' border='0' />" };
+    kendo.culture("ru-RU");
+    moment.locale('ru');
+
+    if (typeof ymaps != "undefined" && ymaps) {
+        ymaps.ready(function() {
+            ymaps.geolocation.get({provider:'auto'}).then(function (res) {
+                ymaps.geocode(res.geoObjects.get(0).geometry.getCoordinates()).then(function (res) {
+                    var obj = res.geoObjects.get(0);
+                    var reg, city;
+                    var aa = obj.properties.get("metaDataProperty").GeocoderMetaData.AddressDetails.Country.AdministrativeArea;
+                    try {
+                        reg = aa.AdministrativeAreaName;
+                    }
+                    catch(ex) { }
+                    try {
+                        city = aa.SubAdministrativeArea.Locality.LocalityName;
+                    }
+                    catch(ex) { 
+                        try {
+                            city = aa.Locality.LocalityName;
+                        }
+                        catch(ex) { 
+                        }
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "/data/Common/SetTimeOffset",
+                        data: JSON.stringify({ timeoffset: new Date().getTimezoneOffset(), region:reg, city:city }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                    });
+                });
+            });
+        });
+    }
+    </script>
+<link href="//lsport.net/Content/Websites/Assets/Municipality/css/style.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Scada" rel="stylesheet">
+<script>
+    $(function() {
+        $(".scroll").click(function(event){
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+    });
+</script>
+</head>
+<body style="min-height:100%">
+
+        
+        <script id="tmp-sport-item" type="text/x-kendo-template">
+        <div class="d-flex flex-column"><big>#=Name#</big><small>#=data.Sport?Sport : ""#</small></div>
+    </script>
+    <script id="tmp-city-item" type="text/x-kendo-template">
+        <div class="d-flex flex-column"><big><span class='text-muted'>#=data.Type?Type:''#</span> #=Name#</big><small>#=data.Region?Region:''##=!data.Municipality || Name==Municipality ? '' : (' / ' + Municipality)#</small></div>
+    </script>
+    <script>
+    if (!window.lsport) window.lsport = {}; if (!window.lsport.templates) window.lsport.templates = {};
+    lsport.templates.tmpSport = kendo.template($("#tmp-sport-item").html());
+    lsport.templates.tmpCity = kendo.template($("#tmp-city-item").html());
+    </script>
+
+    <nav class="navbar navbar-expand-md navbar-static-top top-menu">
+        <div class="container-fluid  justify-content-between">
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#top-nav-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fas fa-bars"></span>
+                </button>
+                <a class="navbar-brand" href="http://motocross74.ru/">
+                    <img src="/Avatar/Image/647cc234-ee82-43e2-b3f2-f0fc3a7d4616" style="height:50px">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" style="flex-grow:0" id="top-nav-menu">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/News">Новости</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/Page/37166ae3-3b1e-4a3a-86e6-2f4c941939bb" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Основные сведения</a>
+                        <div class="dropdown-menu text-lg-left text-center">
+                                <a class="dropdown-item nav-link" href="/Page/37166ae3-3b1e-4a3a-86e6-2f4c941939bb">Сведения об организации</a>
+                                <a class="dropdown-item nav-link" href="/Page/88ded1da-375a-4fc6-be13-a853b14e1be3">Контакты</a>
+                                <a class="dropdown-item nav-link" href="/Page/c7691941-7aa1-4182-baa0-a30ed5d766bd">Документы</a>
+                                <a class="dropdown-item nav-link" href="/Page/aa03372c-610f-4ce3-843f-c7218dd87411">Руководство и тренерский состав</a>
+                                <a class="dropdown-item nav-link" href="/Page/f943beef-5a25-42a7-aa24-d20d1469c6f6">Материально-техническое обеспечение</a>
+                                <a class="dropdown-item nav-link" href="/Page/c5fddc6f-1235-40c2-9405-1b82dc6245a6">Платные услуги</a>
+                                <a class="dropdown-item nav-link" href="/Page/e18188b9-26fc-4720-b038-4c73204c4f3e">Политика обработки персональных данных</a>
+                                <a class="dropdown-item nav-link" href="/Page/29d35e01-9959-4a36-b17a-835215497dff">Финансово-хозяйственная деятельность</a>
+                                <a class="dropdown-item nav-link" href="/Page/2cb1fe2f-cb7a-4f32-a36f-edca7f24cfc1">Антикоррупционная деятельность</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Для родителей и воспитанников</a>
+                        <div class="dropdown-menu text-lg-left text-center">
+                                <a class="dropdown-item nav-link" href="/Page/9bbad420-50c7-43f6-9cc5-b31557c77f6d">Порядок приема и документы</a>
+                                <a class="dropdown-item nav-link" href="/Page/68eaf137-ac95-4f51-96f6-12834e4cca3f">Контрольные нормативы</a>
+                                <a class="dropdown-item nav-link" href="/Page/019c49bb-2d15-456c-8065-82917c542581">Расписание тренировок</a>
+                                <a class="dropdown-item nav-link" href="/Articles/d0e52c25-f648-45dd-8cd4-217366a6c40e">Полезная информация</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Соревнования и мероприятия</a>
+                        <div class="dropdown-menu text-lg-left text-center">
+                                <a class="dropdown-item nav-link" href="/Page/73d9b16f-377b-4387-a429-b983d05ca8fe">Календарь мероприятий</a>
+                                <a class="dropdown-item nav-link" href="/Page/3832bbf1-93fe-4901-a99a-817a68fd999f">Профилактические акции</a>
+                                <a class="dropdown-item nav-link" href="/Page/59b5b523-dede-4477-b1ee-cc7173a20ea3">Положения о соревнованиях</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Galleries">Фото и видео</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Page/c6b30ce0-5c7d-4a88-8916-5fc3ff4efdd2">безопасность жизнедеятельности</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">автокурсы</a>
+                        <div class="dropdown-menu text-lg-left text-center">
+                                <a class="dropdown-item nav-link" href="#">Рабочие программы профессиональной подготовки водителей транспортных средств</a>
+                                    <a class="dropdown-item nav-link ml-1" href="/Page/96893ff8-380e-4da6-bc95-ea842ce029b8">РАБОЧИЕ ПРОГРАММЫ</a>
+                                <a class="dropdown-item nav-link" href="#">Лицензия</a>
+                                    <a class="dropdown-item nav-link ml-1" href="/Page/96893ff8-380e-4da6-bc95-ea842ce029b8">ЛИЦЕНЗИЯ</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex flex-column">
+                <div><button class="btn btn-outline-default" id="blind-btn-size" type="button"><em class="fas fa-eye"></em></button></div>
+                <div><button class="btn btn-outline-default" id="blind-btn-black" type="button"><em class="fas fa-palette"></em></button></div>
+                <script>
+                    $("#blind-btn-size").click(function(){ $(window).trigger("blind.big"); });
+                    $("#blind-btn-black").click(function(){ $(window).trigger("blind.black"); });
+                    $(window).trigger("blind.switch");
+                </script>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid content">
+        <div class="header d-flex justify-content-between align-items-center">
+            <img src="/Avatar/Image/647cc234-ee82-43e2-b3f2-f0fc3a7d4616" class="header-image" title="" style="width:80px">
+            <span class="header-title">Спортивная школа по автомотоспорту</span>
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="lnk-login" href="/Home/Login">Вход</a>
+                    </li>
+            </ul>
+        </div>
+        
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-9">
+
+<div class="widget">
+        <span class="widget-header"> Политика обработки персональных данных </span>
+    <div class="widget-content">
+         Все персональные данные размещены с согласия субъекта(ов) на обработку персональных данных<br>Контент является обязательным к размещению<br>Информация, содержащаяся в разделе «Сведения об образовательной организации», однозначно идентифицируются как обязательный к размещению контент 
+    </div>
+</div>        </div>
+        <div class="col-12 col-sm-3">
+
+<div class="widget">
+        <span class="widget-header"> 
+        <a href="http://motocross74.ru/News">Новости</a> 
+</span>
+    <div class="widget-content">
+        
+    <div class="d-flex flex-column position-relative news">
+        <div class="media position-relative w-100">
+            <a href="http://motocross74.ru/News/59d3b5eb-743b-4c92-bc26-86497ca3a5dd" class="stretched-link"></a>
+            <div class="media-left p-2">
+                <img class="media-object" src="/content/images/noimage.png" style="max-height:60px;max-width:60px" onerror="this.src='/content/images/noimage.png'">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">Памятка о порядке действий при получении сигнала "ВНИМАНИЕ ВСЕМ". Порядок действий в чрезвычайных ситуациях и в военное время.</h4>
+            </div>
+        </div>
+        <div class="media position-relative w-100">
+            <a href="http://motocross74.ru/News/4b34ec48-dce1-4ec3-a88f-f9a89e66fe72" class="stretched-link"></a>
+            <div class="media-left p-2">
+                <img class="media-object" src="/content/images/noimage.png" style="max-height:60px;max-width:60px" onerror="this.src='/content/images/noimage.png'">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">Запись в спортивную школу.</h4>
+                    <small>Подача заявления в спортивную школу осуществляется через цифровой сервис для записи детей в спортивные школы: https://хочувспортшколу.рф.</small>
+            </div>
+        </div>
+        <div class="media position-relative w-100">
+            <a href="http://motocross74.ru/News/70e089ec-4178-44d7-9148-c5cba2f31435" class="stretched-link"></a>
+            <div class="media-left p-2">
+                <img class="media-object" src="/content/images/noimage.png" style="max-height:60px;max-width:60px" onerror="this.src='/content/images/noimage.png'">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">всё для победы</h4>
+            </div>
+        </div>
+        <div class="media position-relative w-100">
+            <a href="http://motocross74.ru/News/3ebba284-9412-4939-a35d-18309cd45b5e" class="stretched-link"></a>
+            <div class="media-left p-2">
+                <img class="media-object" src="/content/images/noimage.png" style="max-height:60px;max-width:60px" onerror="this.src='/content/images/noimage.png'">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">Командный Кубок России по мотокроссу 2022 года</h4>
+            </div>
+        </div>
+        <div class="media position-relative w-100">
+            <a href="http://motocross74.ru/News/4fd7f384-c9c0-438e-8a89-dc3aaf61c445" class="stretched-link"></a>
+            <div class="media-left p-2">
+                <img class="media-object" src="/Web/ImageThumbnail/96b16c11-5ed5-4526-bf56-16c9be1cc6c2?fallback=1&amp;path=Ws6KZOy41PA.jpg" style="max-height:60px;max-width:60px" onerror="this.src='/content/images/noimage.png'">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">ПОС</h4>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>        </div>
+    </div>
+</div>
+
+        <div class="footer-main">
+            
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+
+<div id="body-notify" class="hidden-print" data-role="notification"></div><button type="button" data-role="floatingactionbutton" class="k-widget k-fab k-fab-danger k-fab-md k-fab-pill k-bottom-end k-pos-fixed k-hidden" style="bottom: 30px; right: 100px; left: auto;" aria-disabled="false"><span class="k-fab-icon k-icon k-i-cart"></span><span class="k-fab-text">0</span></button></body></html>

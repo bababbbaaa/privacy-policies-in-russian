@@ -1,0 +1,1155 @@
+<html lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+	
+    <script data-cfasync="false" data-no-defer="1">var ewww_webp_supported=!1;function check_webp_feature(A,e){var w;e=void 0!==e?e:function(){},ewww_webp_supported?e(ewww_webp_supported):((w=new Image).onload=function(){ewww_webp_supported=0<w.width&&0<w.height,e&&e(ewww_webp_supported)},w.onerror=function(){e&&e(!1)},w.src="data:image/webp;base64,"+{alpha:"UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="}[A])}check_webp_feature("alpha");</script><script data-cfasync="false" data-no-defer="1">var Arrive=function(c,w){"use strict";if(c.MutationObserver&&"undefined"!=typeof HTMLElement){var r,a=0,u=(r=HTMLElement.prototype.matches||HTMLElement.prototype.webkitMatchesSelector||HTMLElement.prototype.mozMatchesSelector||HTMLElement.prototype.msMatchesSelector,{matchesSelector:function(e,t){return e instanceof HTMLElement&&r.call(e,t)},addMethod:function(e,t,r){var a=e[t];e[t]=function(){return r.length==arguments.length?r.apply(this,arguments):"function"==typeof a?a.apply(this,arguments):void 0}},callCallbacks:function(e,t){t&&t.options.onceOnly&&1==t.firedElems.length&&(e=[e[0]]);for(var r,a=0;r=e[a];a++)r&&r.callback&&r.callback.call(r.elem,r.elem);t&&t.options.onceOnly&&1==t.firedElems.length&&t.me.unbindEventWithSelectorAndCallback.call(t.target,t.selector,t.callback)},checkChildNodesRecursively:function(e,t,r,a){for(var i,n=0;i=e[n];n++)r(i,t,a)&&a.push({callback:t.callback,elem:i}),0<i.childNodes.length&&u.checkChildNodesRecursively(i.childNodes,t,r,a)},mergeArrays:function(e,t){var r,a={};for(r in e)e.hasOwnProperty(r)&&(a[r]=e[r]);for(r in t)t.hasOwnProperty(r)&&(a[r]=t[r]);return a},toElementsArray:function(e){return e=void 0!==e&&("number"!=typeof e.length||e===c)?[e]:e}}),e=(l.prototype.addEvent=function(e,t,r,a){a={target:e,selector:t,options:r,callback:a,firedElems:[]};return this._beforeAdding&&this._beforeAdding(a),this._eventsBucket.push(a),a},l.prototype.removeEvent=function(e){for(var t,r=this._eventsBucket.length-1;t=this._eventsBucket[r];r--)e(t)&&(this._beforeRemoving&&this._beforeRemoving(t),(t=this._eventsBucket.splice(r,1))&&t.length&&(t[0].callback=null))},l.prototype.beforeAdding=function(e){this._beforeAdding=e},l.prototype.beforeRemoving=function(e){this._beforeRemoving=e},l),t=function(i,n){var o=new e,l=this,s={fireOnAttributesModification:!1};return o.beforeAdding(function(t){var e=t.target;e!==c.document&&e!==c||(e=document.getElementsByTagName("html")[0]);var r=new MutationObserver(function(e){n.call(this,e,t)}),a=i(t.options);r.observe(e,a),t.observer=r,t.me=l}),o.beforeRemoving(function(e){e.observer.disconnect()}),this.bindEvent=function(e,t,r){t=u.mergeArrays(s,t);for(var a=u.toElementsArray(this),i=0;i<a.length;i++)o.addEvent(a[i],e,t,r)},this.unbindEvent=function(){var r=u.toElementsArray(this);o.removeEvent(function(e){for(var t=0;t<r.length;t++)if(this===w||e.target===r[t])return!0;return!1})},this.unbindEventWithSelectorOrCallback=function(r){var a=u.toElementsArray(this),i=r,e="function"==typeof r?function(e){for(var t=0;t<a.length;t++)if((this===w||e.target===a[t])&&e.callback===i)return!0;return!1}:function(e){for(var t=0;t<a.length;t++)if((this===w||e.target===a[t])&&e.selector===r)return!0;return!1};o.removeEvent(e)},this.unbindEventWithSelectorAndCallback=function(r,a){var i=u.toElementsArray(this);o.removeEvent(function(e){for(var t=0;t<i.length;t++)if((this===w||e.target===i[t])&&e.selector===r&&e.callback===a)return!0;return!1})},this},i=new function(){var s={fireOnAttributesModification:!1,onceOnly:!1,existing:!1};function n(e,t,r){return!(!u.matchesSelector(e,t.selector)||(e._id===w&&(e._id=a++),-1!=t.firedElems.indexOf(e._id)))&&(t.firedElems.push(e._id),!0)}var c=(i=new t(function(e){var t={attributes:!1,childList:!0,subtree:!0};return e.fireOnAttributesModification&&(t.attributes=!0),t},function(e,i){e.forEach(function(e){var t=e.addedNodes,r=e.target,a=[];null!==t&&0<t.length?u.checkChildNodesRecursively(t,i,n,a):"attributes"===e.type&&n(r,i)&&a.push({callback:i.callback,elem:r}),u.callCallbacks(a,i)})})).bindEvent;return i.bindEvent=function(e,t,r){t=void 0===r?(r=t,s):u.mergeArrays(s,t);var a=u.toElementsArray(this);if(t.existing){for(var i=[],n=0;n<a.length;n++)for(var o=a[n].querySelectorAll(e),l=0;l<o.length;l++)i.push({callback:r,elem:o[l]});if(t.onceOnly&&i.length)return r.call(i[0].elem,i[0].elem);setTimeout(u.callCallbacks,1,i)}c.call(this,e,t,r)},i},o=new function(){var a={};function i(e,t){return u.matchesSelector(e,t.selector)}var n=(o=new t(function(){return{childList:!0,subtree:!0}},function(e,r){e.forEach(function(e){var t=e.removedNodes,e=[];null!==t&&0<t.length&&u.checkChildNodesRecursively(t,r,i,e),u.callCallbacks(e,r)})})).bindEvent;return o.bindEvent=function(e,t,r){t=void 0===r?(r=t,a):u.mergeArrays(a,t),n.call(this,e,t,r)},o};d(HTMLElement.prototype),d(NodeList.prototype),d(HTMLCollection.prototype),d(HTMLDocument.prototype),d(Window.prototype);var n={};return s(i,n,"unbindAllArrive"),s(o,n,"unbindAllLeave"),n}function l(){this._eventsBucket=[],this._beforeAdding=null,this._beforeRemoving=null}function s(e,t,r){u.addMethod(t,r,e.unbindEvent),u.addMethod(t,r,e.unbindEventWithSelectorOrCallback),u.addMethod(t,r,e.unbindEventWithSelectorAndCallback)}function d(e){e.arrive=i.bindEvent,s(i,e,"unbindArrive"),e.leave=o.bindEvent,s(o,e,"unbindLeave")}}(window,void 0),ewww_webp_supported=!1;function check_webp_feature(e,t){var r;ewww_webp_supported?t(ewww_webp_supported):((r=new Image).onload=function(){ewww_webp_supported=0<r.width&&0<r.height,t(ewww_webp_supported)},r.onerror=function(){t(!1)},r.src="data:image/webp;base64,"+{alpha:"UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",animation:"UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"}[e])}function ewwwLoadImages(e){if(e){for(var t=document.querySelectorAll(".batch-image img, .image-wrapper a, .ngg-pro-masonry-item a, .ngg-galleria-offscreen-seo-wrapper a"),r=0,a=t.length;r<a;r++)ewwwAttr(t[r],"data-src",t[r].getAttribute("data-webp")),ewwwAttr(t[r],"data-thumbnail",t[r].getAttribute("data-webp-thumbnail"));for(var i=document.querySelectorAll(".rev_slider ul li"),r=0,a=i.length;r<a;r++){ewwwAttr(i[r],"data-thumb",i[r].getAttribute("data-webp-thumb"));for(var n=1;n<11;)ewwwAttr(i[r],"data-param"+n,i[r].getAttribute("data-webp-param"+n)),n++}for(r=0,a=(i=document.querySelectorAll(".rev_slider img")).length;r<a;r++)ewwwAttr(i[r],"data-lazyload",i[r].getAttribute("data-webp-lazyload"));for(var o=document.querySelectorAll("div.woocommerce-product-gallery__image"),r=0,a=o.length;r<a;r++)ewwwAttr(o[r],"data-thumb",o[r].getAttribute("data-webp-thumb"))}for(var l=document.querySelectorAll("video"),r=0,a=l.length;r<a;r++)ewwwAttr(l[r],"poster",e?l[r].getAttribute("data-poster-webp"):l[r].getAttribute("data-poster-image"));for(var s,c=document.querySelectorAll("img.ewww_webp_lazy_load"),r=0,a=c.length;r<a;r++)e&&(ewwwAttr(c[r],"data-lazy-srcset",c[r].getAttribute("data-lazy-srcset-webp")),ewwwAttr(c[r],"data-srcset",c[r].getAttribute("data-srcset-webp")),ewwwAttr(c[r],"data-lazy-src",c[r].getAttribute("data-lazy-src-webp")),ewwwAttr(c[r],"data-src",c[r].getAttribute("data-src-webp")),ewwwAttr(c[r],"data-orig-file",c[r].getAttribute("data-webp-orig-file")),ewwwAttr(c[r],"data-medium-file",c[r].getAttribute("data-webp-medium-file")),ewwwAttr(c[r],"data-large-file",c[r].getAttribute("data-webp-large-file")),null!=(s=c[r].getAttribute("srcset"))&&!1!==s&&s.includes("R0lGOD")&&ewwwAttr(c[r],"src",c[r].getAttribute("data-lazy-src-webp"))),c[r].className=c[r].className.replace(/\bewww_webp_lazy_load\b/,"");for(var w=document.querySelectorAll(".ewww_webp"),r=0,a=w.length;r<a;r++)e?(ewwwAttr(w[r],"srcset",w[r].getAttribute("data-srcset-webp")),ewwwAttr(w[r],"src",w[r].getAttribute("data-src-webp")),ewwwAttr(w[r],"data-orig-file",w[r].getAttribute("data-webp-orig-file")),ewwwAttr(w[r],"data-medium-file",w[r].getAttribute("data-webp-medium-file")),ewwwAttr(w[r],"data-large-file",w[r].getAttribute("data-webp-large-file")),ewwwAttr(w[r],"data-large_image",w[r].getAttribute("data-webp-large_image")),ewwwAttr(w[r],"data-src",w[r].getAttribute("data-webp-src"))):(ewwwAttr(w[r],"srcset",w[r].getAttribute("data-srcset-img")),ewwwAttr(w[r],"src",w[r].getAttribute("data-src-img"))),w[r].className=w[r].className.replace(/\bewww_webp\b/,"ewww_webp_loaded");window.jQuery&&jQuery.fn.isotope&&jQuery.fn.imagesLoaded&&(jQuery(".fusion-posts-container-infinite").imagesLoaded(function(){jQuery(".fusion-posts-container-infinite").hasClass("isotope")&&jQuery(".fusion-posts-container-infinite").isotope()}),jQuery(".fusion-portfolio:not(.fusion-recent-works) .fusion-portfolio-wrapper").imagesLoaded(function(){jQuery(".fusion-portfolio:not(.fusion-recent-works) .fusion-portfolio-wrapper").isotope()}))}function ewwwWebPInit(e){ewwwLoadImages(e),ewwwNggLoadGalleries(e),document.arrive(".ewww_webp",function(){ewwwLoadImages(e)}),document.arrive(".ewww_webp_lazy_load",function(){ewwwLoadImages(e)}),document.arrive("videos",function(){ewwwLoadImages(e)}),"loading"==document.readyState?document.addEventListener("DOMContentLoaded",ewwwJSONParserInit):("undefined"!=typeof galleries&&ewwwNggParseGalleries(e),ewwwWooParseVariations(e))}function ewwwAttr(e,t,r){null!=r&&!1!==r&&e.setAttribute(t,r)}function ewwwJSONParserInit(){"undefined"!=typeof galleries&&check_webp_feature("alpha",ewwwNggParseGalleries),check_webp_feature("alpha",ewwwWooParseVariations)}function ewwwWooParseVariations(e){if(e)for(var t=document.querySelectorAll("form.variations_form"),r=0,a=t.length;r<a;r++){var i=t[r].getAttribute("data-product_variations"),n=!1;try{for(var o in i=JSON.parse(i))void 0!==i[o]&&void 0!==i[o].image&&(void 0!==i[o].image.src_webp&&(i[o].image.src=i[o].image.src_webp,n=!0),void 0!==i[o].image.srcset_webp&&(i[o].image.srcset=i[o].image.srcset_webp,n=!0),void 0!==i[o].image.full_src_webp&&(i[o].image.full_src=i[o].image.full_src_webp,n=!0),void 0!==i[o].image.gallery_thumbnail_src_webp&&(i[o].image.gallery_thumbnail_src=i[o].image.gallery_thumbnail_src_webp,n=!0),void 0!==i[o].image.thumb_src_webp&&(i[o].image.thumb_src=i[o].image.thumb_src_webp,n=!0));n&&ewwwAttr(t[r],"data-product_variations",JSON.stringify(i))}catch(e){}}}function ewwwNggParseGalleries(e){if(e)for(var t in galleries){var r=galleries[t];galleries[t].images_list=ewwwNggParseImageList(r.images_list)}}function ewwwNggLoadGalleries(e){e&&document.addEventListener("ngg.galleria.themeadded",function(e,t){window.ngg_galleria._create_backup=window.ngg_galleria.create,window.ngg_galleria.create=function(e,t){var r=$(e).data("id");return galleries["gallery_"+r].images_list=ewwwNggParseImageList(galleries["gallery_"+r].images_list),window.ngg_galleria._create_backup(e,t)}})}function ewwwNggParseImageList(e){for(var t in e){var r=e[t];if(void 0!==r["image-webp"]&&(e[t].image=r["image-webp"],delete e[t]["image-webp"]),void 0!==r["thumb-webp"]&&(e[t].thumb=r["thumb-webp"],delete e[t]["thumb-webp"]),void 0!==r.full_image_webp&&(e[t].full_image=r.full_image_webp,delete e[t].full_image_webp),void 0!==r.srcsets)for(var a in r.srcsets)nggSrcset=r.srcsets[a],void 0!==r.srcsets[a+"-webp"]&&(e[t].srcsets[a]=r.srcsets[a+"-webp"],delete e[t].srcsets[a+"-webp"]);if(void 0!==r.full_srcsets)for(var i in r.full_srcsets)nggFSrcset=r.full_srcsets[i],void 0!==r.full_srcsets[i+"-webp"]&&(e[t].full_srcsets[i]=r.full_srcsets[i+"-webp"],delete e[t].full_srcsets[i+"-webp"])}return e}check_webp_feature("alpha",ewwwWebPInit);</script><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Политика в отношении обработки персональных данных — Наркологическая клиника "Нева"</title><link rel="stylesheet" href="https://neva-clinic.ru/wp-content/cache/min/1/366f8cb2539995ff527affe661162342.css" data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" onerror="this.removeAttribute('data-rocket-async')" media="all" data-minify="1">
+	<meta name="description" content="1. Общие положения Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О">
+	<link rel="canonical" href="https://neva-clinic.ru/privacy-policy/">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Политика в отношении обработки персональных данных — Наркологическая клиника &quot;Нева&quot;">
+	<meta property="og:description" content="1. Общие положения Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О">
+	<meta property="og:url" content="https://neva-clinic.ru/privacy-policy/">
+	<meta property="og:site_name" content="Наркологическая клиника &quot;Нева&quot;">
+	<meta property="article:modified_time" content="2022-08-02T14:57:28+00:00">
+	<meta name="twitter:card" content="summary_large_image">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://neva-clinic.ru/#organization","name":"Наркологическая клиника \"НЕВА\"","url":"https://neva-clinic.ru/","sameAs":[],"logo":{"@type":"ImageObject","inLanguage":"ru-RU","@id":"https://neva-clinic.ru/#/schema/logo/image/","url":"https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png","contentUrl":"https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png","width":153,"height":45,"caption":"Наркологическая клиника \"НЕВА\""},"image":{"@id":"https://neva-clinic.ru/#/schema/logo/image/"}},{"@type":"WebSite","@id":"https://neva-clinic.ru/#website","url":"https://neva-clinic.ru/","name":"Наркологическая клиника &quot;Нева&quot;","description":"Сеть наркологических клиник в Санкт-Петербурге","publisher":{"@id":"https://neva-clinic.ru/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://neva-clinic.ru/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":"WebPage","@id":"https://neva-clinic.ru/privacy-policy/#webpage","url":"https://neva-clinic.ru/privacy-policy/","name":"Политика в отношении обработки персональных данных &mdash; Наркологическая клиника &quot;Нева&quot;","isPartOf":{"@id":"https://neva-clinic.ru/#website"},"datePublished":"2022-08-02T14:57:27+00:00","dateModified":"2022-08-02T14:57:28+00:00","description":"1. Общие положения Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О","breadcrumb":{"@id":"https://neva-clinic.ru/privacy-policy/#breadcrumb"},"inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://neva-clinic.ru/privacy-policy/"]}]},{"@type":"BreadcrumbList","@id":"https://neva-clinic.ru/privacy-policy/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://neva-clinic.ru/"},{"@type":"ListItem","position":2,"name":"Политика в отношении обработки персональных данных"}]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="amphtml" href="https://neva-clinic.ru/privacy-policy/amp/"><meta name="generator" content="AMP for WP 1.0.77.54.1"><link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="alternate" type="application/rss+xml" title="Наркологическая клиника &quot;Нева&quot; » Лента" href="https://neva-clinic.ru/feed/">
+<link rel="alternate" type="application/rss+xml" title="Наркологическая клиника &quot;Нева&quot; » Лента комментариев" href="https://neva-clinic.ru/comments/feed/">
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/neva-clinic.ru\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.1.1"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	
+
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT%2BSans%3A400%2C700%7COpen%2BSans%3A300%2C400%2C600%2C700i%7CWork%2BSans%3A300%2C400%2C600%2C700%2C800%7CRubik%3A300%2C400%2C700%2C900&amp;subset=latin%2Clatin-ext" data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" onerror="this.removeAttribute('data-rocket-async')" type="text/css" media="all">
+
+
+
+
+
+
+<style id="medical-heed-pro-style-inline-css" type="text/css">
+ .breadcrumb, .widget_search .search-submit, .side-info, .btn.btn-primary, .page-numbers, button, input[type='button'], input[type='reset'], input[type='submit'], .wpcf7 input[type='submit'], .wpcf7 input[type='button'], .woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce nav.woocommerce-pagination ul li a:focus, .woocommerce nav.woocommerce-pagination ul li a:hover, .woocommerce nav.woocommerce-pagination ul li span.current, .woocommerce-cart .wc-proceed-to-checkout a.checkout-button, .woocommerce button.button.alt, .woocommerce-account .woocommerce-MyAccount-navigation ul li a, .facilities .box .service-icon, .facilities .box:hover .service-icon, .accordion__item.active .accordion-header, .medical_layout_services a.read-more, .call_to_action a, .medical_layout_team .box:hover, .booking_form .wpcf7 input[type='submit'], .wpcf7 input[type='button']{
+                background-color: #1e9de3;
+            }
+.featuresarea.medical_layout_feature .feature-box-inner,.facilities .box:hover .service-icon, .accordion-header:hover, .medical_layout_services a.read-more:hover{
+                background-color: #1e9de3;
+            }
+.about-us h3,a, .main-navigation .current-menu-item a, .main-navigation a:hover,
+                .nav-menu li.menu-item-has-children:hover:after,
+                .nav-menu > li.current-menu-item:after,
+                .btn.btn-primary:hover, .page-numbers.current, .page-numbers:hover, .topbar-light ul li i, button:hover, input[type='button']:hover, input[type='reset']:hover, input[type='submit']:hover, #comments h2.comments-title, .wpcf7 input[type='submit']:hover, .wpcf7 input[type='button']:hover, .woocommerce #respond input#submit:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover, .woocommerce ul.products li.product .price, .woocommerce nav.woocommerce-pagination ul li .page-numbers, .woocommerce a.button.alt:hover, .woocommerce-info:before, .woocommerce button.button.alt:hover, .woocommerce-error:before, .woocommerce-account .woocommerce-MyAccount-navigation ul li.is-active a, .woocommerce-account .woocommerce-MyAccount-navigation ul li:hover a, .promotion .sectiontitle h2, .about-us ul li:before, .about-us ol li:before, .facilities.medical_layout_facility .facility-box .service-icon i, .call_to_action a:hover, .call_to_action a.btn-active, .medical_layout_team h3, .widget a:hover, .widget a:hover::before, .widget li:hover::before {
+                color: #1e9de3;
+            }
+.booking_form .wpcf7 input[type='submit'], .wpcf7 input[type='button']{
+                color:#fff;
+            }
+.booking_form .wpcf7 input[type='submit']:hover, .wpcf7 input[type='button']:hover{
+                background: transparent;
+            }
+a:hover, a:focus, a:active, .copyright ul li a:hover, .topbar-light ul li a:hover, .prevNextArticle a:hover{
+                color: rgba(30,157,227,0.8);
+            }
+.widget-area .widget .widget-title, .site-footer .widget h2.widget-title:before{
+                border-color: rgba(30,157,227,0.8);
+            }
+.btn.btn-primary, .btn.btn-primary:hover, .page-numbers, .page-numbers:hover, button, input[type='button'], input[type='reset'], input[type='submit'], button:hover, input[type='button']:hover, input[type='reset']:hover, input[type='submit']:hover, #comments h2.comments-title, .wpcf7 input[type='submit'], .wpcf7 input[type='button'], .wpcf7 input[type='submit']:hover, .wpcf7 input[type='button']:hover, .woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce nav.woocommerce-pagination ul li, .cart_totals h2, .cross-sells>h2, .woocommerce-billing-fields h3, .woocommerce-additional-fields h3, .related>h2, .upsells>h2, .woocommerce-shipping-fields>h3, .woocommerce-Address-title h3, .woocommerce-cart .wc-proceed-to-checkout a.checkout-button, .woocommerce-info, .woocommerce-error, .woocommerce-account .woocommerce-MyAccount-navigation ul li a, .woocommerce-account .woocommerce-MyAccount-navigation ul li.is-active a, .woocommerce-account .woocommerce-MyAccount-navigation ul li:hover a, .woocommerce-account .woocommerce-MyAccount-content, .flex-control-nav>li>a:hover, .flex-control-nav>li>a.flex-active, .about-us h2:after, .facilities.medical_layout_facility .facility-box .service-icon, .call_to_action a, .call_to_action a:hover, .call_to_action a.btn-active, .booking_form .wpcf7 input[type='submit'], .wpcf7 input[type='button']{
+                border-color: #1e9de3;
+            }
+
+                .widget_archive a::before, .widget_categories a::before, .widget_recent_entries a::before, .widget_meta a::before, .widget_recent_comments li::before, .widget_rss li:before, .widget_pages li:before, .widget_nav_menu li:before{
+                    color: #1e9de3;
+                }
+.topbar.topbar-light{
+                background-color: #ffffff;
+            }
+.topbar-light ul li i,
+             .topbar-light ul li a,
+             .topbar-light ul li{
+                color: #1e9de3;
+            }
+.header-wrap, .main-navigation ul ul{
+                background-color: #ffffff;
+            }
+            .nav__top:before{
+                border-top-color: #ffffff;
+            }
+            
+
+            .nav-menu li.menu-item-has-children:after,
+            .main-navigation a, .side-info-button, .main-nav-search, .header-logo.site-branding, .header-logo.site-branding h1 a{
+                color: #1e9de3;
+            }
+.breadcrumb{
+                background-color: #1e73be;
+            }
+.site-footer{
+                background-color: #1e9de3;
+            }
+.site-footer .widget ul li, .site-footer .widget ul li a, .site-footer .widget ul li:before, .site-footer .widget ul li a:before{
+                color: ;
+            }
+.site-footer .widget .widget-title{
+                border-color: ;
+            }
+.site-footer .widget ul li a:hover, .site-footer .widget a:hover::before, .site-footer .widget li:hover::before{
+                color: ;
+            }
+.site-footer .widget h2.widget-title:before{
+                border-color: ;
+            }
+
+</style>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/plugins/wp-yandex-metrika/assets/YmEc.min.js?ver=1.1.7" id="wp-yandex-metrika_YmEc-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" id="jquery-core-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/plugins/wp-yandex-metrika/assets/frontend.min.js?ver=1.1.7" id="wp-yandex-metrika_frontend-js" defer=""></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://neva-clinic.ru/wp-content/themes/medical-heed-pro/assets/library/html5shiv/html5shiv.min.js?ver=3.7.3' id='html5-js'></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://neva-clinic.ru/wp-content/themes/medical-heed-pro/assets/library/respond/respond.min.js?ver=6.1.1' id='respond-js'></script>
+<![endif]-->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/themes/medical-heed-pro/assets/library/theia-sticky-sidebar/js/theia-sticky-sidebar.min.js?ver=1.6.0" id="theia-sticky-sidebar-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/themes/medical-heed-pro//assets/library/flexslider/js/jquery.flexslider-min.js?ver=1" id="jquery-flexslider-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://neva-clinic.ru/wp-json/"><link rel="alternate" type="application/json" href="https://neva-clinic.ru/wp-json/wp/v2/pages/1225"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://neva-clinic.ru/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://neva-clinic.ru/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.1.1">
+<link rel="shortlink" href="https://neva-clinic.ru/?p=1225">
+<link rel="alternate" type="application/json+oembed" href="https://neva-clinic.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fneva-clinic.ru%2Fprivacy-policy%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://neva-clinic.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fneva-clinic.ru%2Fprivacy-policy%2F&amp;format=xml">
+
+            <style type="text/css">
+                .no-js #loader {
+                    display: none; 
+                }
+                .js #loader { 
+                    display: block;
+                    position: absolute; 
+                    left: 100px; 
+                    top: 0; 
+                }
+                .preloader {
+                    position: fixed;
+                    left: 0px;
+                    top: 0px;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 9999999;
+                    background: url('https://neva-clinic.ru/wp-content/themes/medical-heed-pro/assets/images/preloader/rhombus.gif') center no-repeat #fff;
+                }
+            </style>
+
+        <noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style>.lazyload{background-image:none !important;}.lazyload:before{background-image:none !important;}</style><style>.wp-block-gallery.is-cropped .blocks-gallery-item picture{height:100%;width:100%;}</style>		<style type="text/css">
+					.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				</style>
+		<meta name="generator" content="Powered by Slider Revolution 6.5.22 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+        <!-- Yandex.Metrica counter -->
+        <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+            (function (m, e, t, r, i, k, a) {
+                m[i] = m[i] || function () {
+                    (m[i].a = m[i].a || []).push(arguments)
+                };
+                m[i].l = 1 * new Date();
+                k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+            })
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+            ym("86321144", "init", {
+                clickmap: true,
+                trackLinks: true,
+                accurateTrackBounce: true,
+                webvisor: true,
+                ecommerce: "dataLayer",
+                params: {
+                    __ym: {
+                        "ymCmsPlugin": {
+                            "cms": "wordpress",
+                            "cmsVersion":"6.1",
+                            "pluginVersion": "1.1.7",
+                            "ymCmsRip": "1831917418"
+                        }
+                    }
+                }
+            });
+        </script>
+        <!-- /Yandex.Metrica counter -->
+        <link rel="icon" href="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-—-копия-32x32.png" sizes="32x32">
+<link rel="icon" href="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-—-копия-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-—-копия-180x180.png">
+<meta name="msapplication-TileImage" content="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-—-копия-270x270.png">
+<script type="rocketlazyloadscript">function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+				try {
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) || (e.l=="fullwidth" || e.layout=="fullwidth") ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+					if(e.layout==="fullscreen" || e.l==="fullscreen")
+						newh = Math.max(e.mh,window.RSIH);
+					else{
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,
+							sl;
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}
+			//});
+		  };</script>
+		<style type="text/css" id="wp-custom-css">
+			#masthead {
+	position: sticky;
+	top: 0;
+	z-index: 99;
+}
+
+/* топ-бар */
+#masthead .top-header-left .col-lg-6 {
+	width: 100%;
+}
+
+/* основной хедер */
+#masthead .side-info-button {
+	display: none;
+}
+
+#masthead .main-nav-search {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+#masthead  .main-navigation ul > li > a {
+	line-height: 1.5em;
+}
+
+#masthead .header-logo {	
+	height: auto;
+	padding: 10px 0;
+	max-width: 280px;
+	margin: 0;
+}
+
+#masthead .main-nav-icons {
+	height: auto;
+}
+
+@media (max-width: 992px) {
+	#header-wrap > .container > .row {
+		flex-wrap: nowrap;
+		align-items: center;
+	}
+	#header-wrap .search-side-info {
+		display: none;
+	}
+	#header-wrap > .container > .row > div {
+		width: auto;
+	}
+	#header-wrap > .container > .row .col-lg-8 {
+		margin-left: auto;
+	}
+	#header-wrap .navbar-toggle {
+		background-color: #307ed4;
+	}
+	#header-wrap .main-navigation.toggled ul.nav-menu {
+		width: 260px;
+		max-width: calc(100vw - 30px);
+	}
+	#header-wrap .main-navigation a {
+		color: #fff;
+		padding: 10px;
+	}
+	#header-wrap .main-navigation .sub-menu a {
+		color: #307ed4;
+		padding: 10px;
+	}
+	#header-wrap .sub-toggle {
+		max-height: 100%;
+	}
+}
+
+@media (max-width: 500px) { 
+	#masthead .top-header-left .contact-item li:last-child {
+		display: none;
+	}
+}
+
+/* ПОДВАЛ */
+#block-25 p,
+#block-27 p {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+/* САЙДБАР */
+#secondary {	
+	box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+}
+
+#secondary section:not(:last-of-type) {
+	margin-bottom: 0;
+	border-bottom: 2px solid #f5f5f5;
+}
+
+#block-28, #block-31 {
+	padding-bottom: 0;
+	border-bottom: none !important;
+}
+
+#block-28 p, #block-31 p {
+	text-transform: uppercase;
+	font-weight: bold;
+	padding-left: 1em;
+	border-left: 4px solid #1e9de3cc;
+	line-height: 2;
+}
+
+.widget-area .widget {
+	box-shadow: none;
+}
+
+/* ГЛАНВАЯ */
+
+/* услуги */
+.home .services-wrap h3 {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* врачи */
+.home .medical_layout_team .box {
+	position: relative;
+	overflow: hidden;
+}
+
+.home .medical_layout_team .socials {
+	line-height: 0;
+}
+
+.home .medical_layout_team .socials a {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	opacity: 0;
+}
+
+/* ПОСТ - сингл */
+.prevNextArticle a {
+	line-height: 1.2;
+}
+
+.prevNextArticle span {
+	display: block;
+	margin-bottom: 0.5em;
+	background: #1E9DE3 !important;
+}
+
+.prevNextArticle span:hover {
+	opacity: 0.9;
+}
+
+/* СПЕЦИАЛИСТЫ */
+.team__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+	grid-column-gap: 1em;
+	grid-row-gap: 2em;
+}
+
+.team__item__info {
+	line-height: 1.3;
+	text-align: center;
+}
+
+.team__item__foto img {
+	height: 200px;
+	width: 100%;
+	object-fit: cover;
+	object-position: top;
+	transition: 0.1s;
+}
+
+.team__item:hover .team__item__foto img {
+	filter: sepia(0.1);
+}
+
+.team__item__name {
+	font-size: 1.1em;
+	margin: 0.5em 0;
+}
+
+.team__item__position {
+	color: #666;
+	font-size: 0.9em;
+}
+
+/* ЦЕНЫ */
+.page-id-308 article {
+	padding: 0;
+	box-shadow: none;
+}
+
+.price__tabs td {
+	border: none;
+}
+
+.price__tabs tr:first-child {
+	background: #e8f7ff;
+}
+
+.price__tabs tr:first-child {
+	border-bottom: 2px solid #ccc;
+}
+
+@media (min-width: 768px) {	
+	.price__tabs {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+	}	
+	.price__tabs__title {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		background: #FAFAFA;		
+		border: 2px solid transparent;
+		border-bottom-color: #1e9de3;
+		border-radius: 6px 6px 0px 0px;
+		padding: 10px;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 1.3;
+		color: #4d4d4d;
+		min-height: 60px;
+		position: relative;
+	}	
+	.price__tabs__title.active {
+		color: #1e9de3;
+		background: #fff;
+		border-top-color: #1e9de3;
+		border-left-color: #1e9de3;
+		border-right-color: #1e9de3;
+		border-bottom-color: transparent;
+		transition: 0 !important;
+		pointer-events: none;
+	}
+	.price__tabs__title:not(:last-of-type):not(.active)::after {
+		content: '';
+    width: 1px;
+    height: 50%;
+    position: absolute;
+    right: -3px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #7E7E7E;
+		z-index: 1;
+	}
+	.price__tabs__title i {
+		display: none;
+	}
+	.price__tabs__content {		
+		order: 10;
+		grid-column: 1/-1;
+		background: #fff;
+		border-radius: 0 0 6px 6px;
+		border-width: 0px 2px 2px 2px;
+		border-style: solid;
+		border-color: #1e9de3;
+		padding: 20px;
+		font-size: 18px;
+	}
+}
+
+
+@media (max-width: 992px) and (min-width: 768px) {
+	.price__tabs__title {
+		font-size: 14px;
+	}
+	.price__tabs__content {
+		font-size: 15px;
+	}
+}
+
+
+@media (max-width: 767px) {
+	.price__tabs__title {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-gap: 1em;
+		align-items: center;
+		background: #FAFAFA;
+		border-radius: 6px 6px 0px 0px;
+		padding: 20px 15px;
+		font-size: 16px;
+		font-weight: bold;
+		color: #4d4d4d !important;
+	}
+	.price__tabs__title:not(:first-child) {
+		margin-top: 1em;
+	}
+	.price__tabs__title.active * {
+		color: #1e9de3;
+	}
+	.price__tabs__title:not(.active) {
+		border-radius: 6px;
+	}
+	.info_tab__nav__item i {
+		transition: 0.15s;
+	}
+	.price__tabs__title.active i {
+		transform: scale(-1, -1);
+	}
+	.price__tabs__content {		
+		background: #FAFAFA;
+		border-radius: 0 0 6px 6px;
+		padding: 15px;
+		font-size: 14px;
+	}
+	.price__tabs__content table {
+		width: calc(100% + 30px);
+		margin: 0 -15px;
+		line-height: 1.5;
+	}
+	.price__tabs__content td {
+		padding: 8px 15px;
+	}	
+	.price__tabs tr:first-child em {
+		font-style: normal;
+		font-size: 0.9em;
+	}
+	.price__tabs tr:first-child em strong {
+		font-weight: normal;
+	}
+}
+
+@media (max-width: 700px) {
+	.price__tabs__content {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 500px) {
+	.price__tabs__content {
+		font-size: 12px;
+		padding: 10px;
+		overflow-x: auto;
+	}	
+	.price__tabs__content table {
+		width: calc(100% + 20px);
+		margin: 0 -10px;
+		min-width: fit-content;
+	}
+	.price__tabs__content td {
+		padding: 8px 10px;
+	}	
+	.price__tabs tr:first-child {
+		font-size: 11px;
+	}
+	.price__tabs__title.active {
+		background: #1e9de3;
+	}
+	.price__tabs__title.active * {
+		color: #fff;
+	}
+	.price__tabs__title {
+		border: 1px solid #1e9de3;
+	}
+}		</style>
+		<script type="rocketlazyloadscript">
+/*! loadCSS rel=preload polyfill. [c]2017 Filament Group, Inc. MIT License */
+(function(w){"use strict";if(!w.loadCSS){w.loadCSS=function(){}}
+var rp=loadCSS.relpreload={};rp.support=(function(){var ret;try{ret=w.document.createElement("link").relList.supports("preload")}catch(e){ret=!1}
+return function(){return ret}})();rp.bindMediaToggle=function(link){var finalMedia=link.media||"all";function enableStylesheet(){link.media=finalMedia}
+if(link.addEventListener){link.addEventListener("load",enableStylesheet)}else if(link.attachEvent){link.attachEvent("onload",enableStylesheet)}
+setTimeout(function(){link.rel="stylesheet";link.media="only x"});setTimeout(enableStylesheet,3000)};rp.poly=function(){if(rp.support()){return}
+var links=w.document.getElementsByTagName("link");for(var i=0;i<links.length;i++){var link=links[i];if(link.rel==="preload"&&link.getAttribute("as")==="style"&&!link.getAttribute("data-loadcss")){link.setAttribute("data-loadcss",!0);rp.bindMediaToggle(link)}}};if(!rp.support()){rp.poly();var run=w.setInterval(rp.poly,500);if(w.addEventListener){w.addEventListener("load",function(){rp.poly();w.clearInterval(run)})}else if(w.attachEvent){w.attachEvent("onload",function(){rp.poly();w.clearInterval(run)})}}
+if(typeof exports!=="undefined"){exports.loadCSS=loadCSS}
+else{w.loadCSS=loadCSS}}(typeof global!=="undefined"?global:this))
+</script>    
+
+<script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1592942-hGyYI"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><script type="text/javascript" async="" src="https://vk.com/js/api/openapi.js?169"></script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1592942-hGyYI" style="position:fixed; left:-999px;" alt=""/></noscript>
+
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+var __cs = __cs || [];
+__cs.push(["setCsAccount", "p0k6Mz48pb9eo2p9yXlfXkF0hsoborUM"]);
+</script>
+<script type="text/javascript" async="" src="https://app.callbackhunter.com/static/cs.min.js"></script>
+	
+<script type="text/javascript" src="/wp-admin/js/dop-skripty.js"></script>
+<script type="text/javascript" async="" charset="UTF-8" class="js-jivo-bundle" src="https://code.jivo.ru/js/bundle_ru_RU.js?rand=1676295863"></script></head>
+
+<body class="page-template-default page page-id-1225 wp-custom-logo webp-support">
+<script data-cfasync="false" data-no-defer="1">if(typeof ewww_webp_supported==="undefined"){var ewww_webp_supported=!1}if(ewww_webp_supported){document.body.classList.add("webp-support")}</script>
+
+<div id="page" class="site">
+
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header headerthree">
+            <div class="topbar topbar-light">
+            <div class="container">
+                <div class="row">
+                    <div class="top-header-left">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                <ul class="contact-item">
+                                    		
+			    <li>
+			        <i class="far fa-clock"></i>
+			        Круглосуточно			    </li>
+
+			
+			    <li>
+			    	<a href="tel:78126790735"><i class="fas fa-mobile-alt"></i> +7 (812) 679-07-35 </a>
+			    </li>
+
+			
+			    <li>
+			    	<i class="fas fa-envelope"></i>
+	                <a href="mailto:nevamed@mail.ru" class="email">
+	                    nevamed@mail.ru	                </a>
+			    </li>
+			                                </ul>
+                            </div>
+                                            </div>
+
+                    <div class="top-header-right">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                <ul class="social-link">
+                                    		
+	                                </ul>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    
+    <div id="header-wrap" class="header-wrap">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="header-logo site-branding">
+
+                        <a href="https://neva-clinic.ru/" class="custom-logo-link" rel="home"><picture><source sizes="263px" type="image/webp" data-srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png.webp 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png.webp 300w" srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png.webp 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png.webp 300w"><img src="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png" class="custom-logo lazyautosizes lazyloaded" alt="Наркологическая клиника &quot;Нева&quot;" decoding="async" data-eio="p" data-src="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png" data-srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png 300w" data-sizes="auto" sizes="263px" srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png 300w" width="463" height="100"><noscript><img width="463" height="100" src="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png" class="custom-logo" alt="Наркологическая клиника &quot;Нева&quot;" decoding="async" srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png 300w" sizes="(max-width: 463px) 100vw, 463px" data-eio="l" /></noscript></picture></a>
+                        <div class="site-title">
+                            <a href="https://neva-clinic.ru/" rel="home">
+                                Наркологическая клиника "Нева"                            </a>
+                        </div>
+
+                                                    <p class="site-description">Сеть наркологических клиник в Санкт-Петербурге</p>
+                                            </div> <!-- .site-branding -->
+                </div>
+
+                <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9">
+                    <nav id="site-navigation" class="main-navigation nav-border-side">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle menu-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div><!-- Mobile navbar toggler -->
+                        <div class="menu-main-menu-container"><ul id="primary-menu" class="menu"><li id="menu-item-168" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-168"><a href="/">Главная</a></li>
+<li id="menu-item-186" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-186"><a href="https://neva-clinic.ru/about/">О нас</a>
+<ul class="sub-menu">
+	<li id="menu-item-484" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-484"><a href="https://neva-clinic.ru/gallery-foto-klinik/">Фото клиник</a></li>
+	<li id="menu-item-880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-880"><a href="/nashi-specialisty/">Врачи</a></li>
+	<li id="menu-item-628" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-628"><a href="/licenzii/">Лицензии</a></li>
+	<li id="menu-item-885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-885"><a href="/vakansii/">Вакансии</a></li>
+</ul>
+</li>
+<li id="menu-item-171" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-171"><a href="#">Услуги</a>
+<ul class="sub-menu">
+	<li id="menu-item-297" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-297"><a href="/vyvod-iz-zapoya-na-domu/">Вывод из запоя</a></li>
+	<li id="menu-item-298" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-298"><a href="/kodirovanie/">Кодирование</a></li>
+	<li id="menu-item-190" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-190"><a href="https://neva-clinic.ru/kapelnitsa/">Капельница</a></li>
+	<li id="menu-item-177" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-177"><a href="https://neva-clinic.ru/lechenie-alkogolizma/">Стационар</a></li>
+	<li id="menu-item-889" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-889"><a href="/vyzov-narkologa-na-dom/">Вызов на дом</a></li>
+	<li id="menu-item-1405" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1405"><a href="/lechenie-narkomanii/">Лечение наркомании</a></li>
+	<li id="menu-item-317" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-317"><a href="/zagorodnaya-reabilitatsiya/">Реабилитация</a></li>
+	<li id="menu-item-890" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-890"><a href="/analizy-krovi-mochi/">Анализы</a></li>
+</ul>
+</li>
+<li id="menu-item-307" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-307"><a href="/ceny/">Цены</a></li>
+<li id="menu-item-185" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-185"><a href="https://neva-clinic.ru/shema-proezda/">Контакты</a></li>
+</ul></div>                    </nav><!-- #site-navigation -->
+                </div>
+
+                <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3 search-side-info">
+                    <div class="main-nav-icons">
+                        <div class="main-nav-search">
+                            <i class="fa fa-search"></i>
+                        </div>
+                        <div class="side-info-button">
+                            <span><i class="fas fa-bars"></i></span>
+                        </div>
+                        <div class="search-pop-up widget_search">
+                            <form role="search" method="get" class="search-form" action="https://neva-clinic.ru/">
+				<label>
+					<span class="screen-reader-text">Найти:</span>
+					<input type="search" class="search-field" placeholder="Поиск…" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Поиск">
+			</form>                        </div>
+                    </div><!-- Icons -->
+                </div>
+            </div>
+        </div>
+    </div><!-- #site-navigation -->
+</header><!-- #masthead -->
+    <div id="side-contact" class="side-info">
+
+        <span class="closebtn">×</span>
+
+        <div class="header-logo site-branding">
+
+            <a href="https://neva-clinic.ru/" class="custom-logo-link" rel="home"><picture><source sizes="318px" type="image/webp" data-srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png.webp 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png.webp 300w" srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png.webp 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png.webp 300w"><img src="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png" class="custom-logo lazyautosizes lazyloaded" alt="Наркологическая клиника &quot;Нева&quot;" decoding="async" data-eio="p" data-src="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png" data-srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png 300w" data-sizes="auto" sizes="318px" srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png 300w" width="463" height="100"><noscript><img width="463" height="100" src="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png" class="custom-logo" alt="Наркологическая клиника &quot;Нева&quot;" decoding="async" srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo.png 463w, https://neva-clinic.ru/wp-content/uploads/2022/06/cropped-nevalogo-300x65.png 300w" sizes="(max-width: 463px) 100vw, 463px" data-eio="l" /></noscript></picture></a>
+            <div class="site-title">
+                <a href="https://neva-clinic.ru/" rel="home">
+                    Наркологическая клиника "Нева"                </a>
+            </div>
+
+                                <p class="site-description">Сеть наркологических клиник в Санкт-Петербурге</p>
+                    </div> <!-- .site-branding -->
+
+        
+            <div class="popup-sidebar widget-area">
+                <section id="text-3" class="widget widget_text">			<div class="textwidget"><p>&nbsp;</p>
+<div role="form" class="wpcf7" id="wpcf7-f73-o1" dir="ltr" lang="en-US">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/privacy-policy/#wpcf7-f73-o1" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="73">
+<input type="hidden" name="_wpcf7_version" value="5.6.4">
+<input type="hidden" name="_wpcf7_locale" value="en_US">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f73-o1">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<p><label> Your Name (required)<br>
+    <span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span> </label></p>
+<p><label> Your Email (required)<br>
+    <span class="wpcf7-form-control-wrap" data-name="your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false"></span> </label></p>
+<p><label> Subject<br>
+    <span class="wpcf7-form-control-wrap" data-name="your-subject"><input type="text" name="your-subject" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span> </label></p>
+<p><label> Your Message<br>
+    <span class="wpcf7-form-control-wrap" data-name="your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false"></textarea></span> </label></p>
+<p><input type="submit" value="Send" class="wpcf7-form-control has-spinner wpcf7-submit"></p>
+<div class="wpcf7-response-output" aria-hidden="true"></div></form></div>
+</div>
+		</section>            </div>
+
+            </div><!--  End Sidebar Pop UP -->
+
+
+    
+            <section class="breadcrumb">
+                <div class="container">
+                    <h1 class="entry-title">Политика в отношении обработки персональных данных</h1>
+                                    </div>
+            </section>
+
+    
+<div id="content" class="site-content"><div class="container">
+
+    <div class="row">
+
+        
+        <div id="primary" class="col-lg-8 col-md-8 col-sm-12 content-area">
+            <main id="main" class="site-main">
+                
+<article id="post-1225" class="post-1225 page type-page status-publish hentry">
+	
+    
+	<div class="entry-content">
+		
+<h5>1. Общие положения</h5>
+
+
+
+<p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые&nbsp;ООО “Наркологическая клиника Нева”&nbsp;(далее – Оператор).</p>
+
+
+
+<p>1.1. Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.</p>
+
+
+
+<p>1.2. Настоящая политика Оператора в отношении обработки персональных данных (далее – Политика) применяется ко всей информации, которую Оператор может получить о посетителях веб-сайта&nbsp;https://neva-clinic.ru/.</p>
+
+
+
+<h5>2. Основные понятия, используемые в Политике</h5>
+
+
+
+<p>2.1. Автоматизированная обработка персональных данных – обработка персональных данных с помощью средств вычислительной техники;</p>
+
+
+
+<p>2.2. Блокирование персональных данных – временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных);</p>
+
+
+
+<p>2.3. Веб-сайт – совокупность графических и информационных материалов, а также программ для ЭВМ и баз данных, обеспечивающих их доступность в сети интернет по сетевому адресу&nbsp;https://neva-clinic.ru/;</p>
+
+
+
+<p>2.4. Информационная система персональных данных — совокупность содержащихся в базах данных персональных данных, и обеспечивающих их обработку информационных технологий и технических средств;</p>
+
+
+
+<p>2.5. Обезличивание персональных данных — действия, в результате которых невозможно определить без использования дополнительной информации принадлежность персональных данных конкретному Пользователю или иному субъекту персональных данных;</p>
+
+
+
+<p>2.6. Обработка персональных данных – любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных;</p>
+
+
+
+<p>2.7. Оператор – государственный орган, муниципальный орган, юридическое или физическое лицо, самостоятельно или совместно с другими лицами организующие и (или) осуществляющие обработку персональных данных, а также определяющие цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными;</p>
+
+
+
+<p>2.8. Персональные данные – любая информация, относящаяся прямо или косвенно к определенному или определяемому Пользователю веб-сайта&nbsp;https://neva-clinic.ru/;</p>
+
+
+
+<p>2.9. Пользователь – любой посетитель веб-сайта&nbsp;https://neva-clinic.ru/;</p>
+
+
+
+<p>2.10. Предоставление персональных данных – действия, направленные на раскрытие персональных данных определенному лицу или определенному кругу лиц;</p>
+
+
+
+<p>2.11. Распространение персональных данных – любые действия, направленные на раскрытие персональных данных неопределенному кругу лиц (передача персональных данных) или на ознакомление с персональными данными неограниченного круга лиц, в том числе обнародование персональных данных в средствах массовой информации, размещение в информационно-телекоммуникационных сетях или предоставление доступа к персональным данным каким-либо иным способом;</p>
+
+
+
+<p>2.12. Трансграничная передача персональных данных – передача персональных данных на территорию иностранного государства органу власти иностранного государства, иностранному физическому или иностранному юридическому лицу;</p>
+
+
+
+<p>2.13. Уничтожение персональных данных – любые действия, в результате которых персональные данные уничтожаются безвозвратно с невозможностью дальнейшего восстановления содержания персональных данных в информационной системе персональных данных и (или) уничтожаются материальные носители персональных данных.</p>
+
+
+
+<h5>3. Оператор может обрабатывать следующие персональные данные Пользователя</h5>
+
+
+
+<p>3.1.&nbsp;Фамилия, имя, отчество;</p>
+
+
+
+<p>3.2.&nbsp;Электронный адрес;</p>
+
+
+
+<p>3.3.&nbsp;Номера телефонов;</p>
+
+
+
+<p>3.4. Также на сайте происходит сбор и обработка обезличенных данных о посетителях (в т.ч. файлов «cookie») с помощью сервисов интернет-статистики (Яндекс Метрика и Гугл Аналитика и других).</p>
+
+
+
+<p>3.5. Вышеперечисленные данные далее по тексту Политики объединены общим понятием Персональные данные.</p>
+
+
+
+<h5>4. Цели обработки персональных данных</h5>
+
+
+
+<p>4.1. Цель обработки персональных данных Пользователя —&nbsp;информирование Пользователя посредством отправки электронных писем; заключение, исполнение и прекращение гражданско-правовых договоров.</p>
+
+
+
+<p>4.2. Также Оператор имеет право направлять Пользователю уведомления о новых продуктах и услугах, специальных предложениях и различных событиях. Пользователь всегда может отказаться от получения информационных сообщений, направив Оператору письмо на адрес электронной почты&nbsp;nevamed@mail.ru&nbsp;с пометкой «Отказ от уведомлений о новых продуктах и услугах и специальных предложениях».</p>
+
+
+
+<p>4.3. Обезличенные данные Пользователей, собираемые с помощью сервисов интернет-статистики, служат для сбора информации о действиях Пользователей на сайте, улучшения качества сайта и его содержания.</p>
+
+
+
+<h5>5. Правовые основания обработки персональных данных</h5>
+
+
+
+<p>5.1. Оператор обрабатывает персональные данные Пользователя только в случае их заполнения и/или отправки Пользователем самостоятельно через специальные формы, расположенные на сайте&nbsp;https://neva-clinic.ru/. Заполняя соответствующие формы и/или отправляя свои персональные данные Оператору, Пользователь выражает свое согласие с данной Политикой.</p>
+
+
+
+<p>5.2. Оператор обрабатывает обезличенные данные о Пользователе в случае, если это разрешено в настройках браузера Пользователя (включено сохранение файлов «cookie» и использование технологии JavaScript).</p>
+
+
+
+<h5>6. Порядок сбора, хранения, передачи и других видов обработки персональных данных</h5>
+
+
+
+<p>Безопасность персональных данных, которые обрабатываются Оператором, обеспечивается путем реализации правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований действующего законодательства в области защиты персональных данных.</p>
+
+
+
+<p>6.1. Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.</p>
+
+
+
+<p>6.2. Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства.</p>
+
+
+
+<p>6.3. В случае выявления неточностей в персональных данных, Пользователь может актуализировать их самостоятельно, путем направления Оператору уведомление на адрес электронной почты Оператора&nbsp;nevamed@mail.ru&nbsp;с пометкой «Актуализация персональных данных».</p>
+
+
+
+<p>6.4. Срок обработки персональных данных является неограниченным. Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора&nbsp;nevamed@mail.ru&nbsp;с пометкой «Отзыв согласия на обработку персональных данных».</p>
+
+
+
+<h5>7. Трансграничная передача персональных данных</h5>
+
+
+
+<p>7.1. Оператор до начала осуществления трансграничной передачи персональных данных обязан убедиться в том, что иностранным государством, на территорию которого предполагается осуществлять передачу персональных данных, обеспечивается надежная защита прав субъектов персональных данных.</p>
+
+
+
+<p>7.2. Трансграничная передача персональных данных на территории иностранных государств, не отвечающих вышеуказанным требованиям, может осуществляться только в случае наличия согласия в письменной форме субъекта персональных данных на трансграничную передачу его персональных данных и/или исполнения договора, стороной которого является субъект персональных данных.</p>
+
+
+
+<h5>8. Заключительные положения</h5>
+
+
+
+<p>8.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты&nbsp;nevamed@mail.ru.</p>
+
+
+
+<p>8.2. В данном документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены ее новой версией.</p>
+
+
+
+<p>8.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу&nbsp;https://neva-clinic.ru/privacy-policy.</p>
+	</div><!-- .entry-content -->
+
+</article><!-- #post-1225 -->
+            </main><!-- #main -->
+
+        </div><!-- #primary -->
+
+        		<aside id="secondary" class="col-lg-4 col-md-4 col-sm-12 widget-area">
+			<section id="block-16" class="widget widget_block widget_text">
+<p><strong>Звоните:<br><a href="tel:+78126790735">+7 (812) 679-07-35</a></strong></p>
+</section><section id="block-28" class="widget widget_block widget_text">
+<p>Услуги клиники</p>
+</section><section id="nav_menu-5" class="widget widget_nav_menu"><div class="menu-%d1%83%d1%81%d0%bb%d1%83%d0%b3%d0%b8-container"><ul id="menu-%d1%83%d1%81%d0%bb%d1%83%d0%b3%d0%b8" class="menu"><li id="menu-item-178" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-178"><a href="https://neva-clinic.ru/lechenie-alkogolizma/">Лечение алкоголизма в стационаре</a></li>
+<li id="menu-item-179" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-179"><a href="https://neva-clinic.ru/alkogolizm-ambulatorno/">Лечение алкоголизма амбулаторно</a></li>
+<li id="menu-item-192" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-192"><a href="https://neva-clinic.ru/kapelnitsa/">Капельница от запоя</a></li>
+<li id="menu-item-193" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-193"><a href="https://neva-clinic.ru/vyvod-iz-zapoya-na-domu/">Вывод из запоя на дому</a></li>
+<li id="menu-item-194" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-194"><a href="https://neva-clinic.ru/lechenie-narkomanii/">Помощь наркозависимым</a></li>
+<li id="menu-item-195" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-195"><a href="https://neva-clinic.ru/kodirovanie/">Кодирование от алкоголизма</a></li>
+<li id="menu-item-180" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-180"><a href="https://neva-clinic.ru/vyzov-narkologa-na-dom/">Вызов нарколога на дом</a></li>
+<li id="menu-item-181" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-181"><a href="https://neva-clinic.ru/analizy-krovi-mochi/">Лабораторные анализы</a></li>
+</ul></div></section><section id="block-31" class="widget widget_block widget_text">
+<p>О клинике</p>
+</section><section id="text-4" class="widget widget_text">			<div class="textwidget"><p><picture><source sizes="153px" type="image/webp" data-srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png.webp 153w, https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2-150x45.png.webp 150w" srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png.webp 153w, https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2-150x45.png.webp 150w"><img decoding="async" class="alignnone wp-image-497 size-full lazyautosizes lazyloaded" src="https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png" alt="" data-eio="p" data-src="https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png" data-srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png 153w, https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2-150x45.png 150w" data-sizes="auto" sizes="153px" srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png 153w, https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2-150x45.png 150w" width="153" height="45"><noscript><img decoding="async" class="alignnone wp-image-497 size-full" src="https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png" alt="" width="153" height="45" srcset="https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2.png 153w, https://neva-clinic.ru/wp-content/uploads/2022/06/nevalogo-—-копия-2-150x45.png 150w" sizes="(max-width: 153px) 100vw, 153px" data-eio="l" /></noscript></picture><br>
+Сеть&nbsp; клиник “Нева” оказывает услуги по лечению алкоголизма и наркомании в Санкт-Петербурге и области.</p>
+<ul>
+<li>Работаем с 2006 года</li>
+<li>3 клиники в разных районах</li>
+<li>Выезд по городу и области</li>
+<li>Анонимность лечения</li>
+</ul>
+</div>
+		</section><section id="block-41" class="widget widget_block"><script type="rocketlazyloadscript" data-minify="1" src="https://neva-clinic.ru/wp-content/cache/min/1/taxi-widget/ya-taxi-widget.js?ver=1671279356" defer=""></script><div class="ya-taxi-widget" data-use-location="false" data-app="3" data-redirect="25395763362139037" data-tariff="econom" data-lang="ru" data-size="s" data-theme="action" data-title="Вызвать водителя" data-point-a="" data-point-b="30.378984,59.858367" data-ref="2728879" data-proxy-url="https://{app}.redirect.appmetrica.yandex.com/route?start-lat={start-lat}&amp;start-lon={start-lon}&amp;end-lat={end-lat}&amp;end-lon={end-lon}&amp;ref={ref}&amp;appmetrica_tracking_id={redirect}&amp;tariffClass={tariff}&amp;lang={lang}" data-description="Будапештская улица, 44"></div></section>		</aside><!-- #secondary -->
+	 
+          
+    </div>
+    
+</div>
+    </div><!-- #content -->
+
+	<footer id="colophon" class="site-footer">
+        
+            		
+            <div class="upper-footer">
+                <div class="container">
+                    
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+
+                                <section id="block-36" class="widget widget_block widget_media_image">
+<figure class="wp-block-image size-full"><img decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAR8AAAENAQAAAAAeMlxwAAAAAnRSTlMAAHaTzTgAAAAgSURBVBgZ7cExAQAAAMIg+6deDQ9gAAAAAAAAAAAA8Cgm4QABmHEAoQAAAABJRU5ErkJggg==" alt="" class="wp-image-1501 lazyload" data-src="https://neva-clinic.ru/wp-content/uploads/2022/10/narkoligiya-v-spb-na-karte.jpg" width="287" height="269"><noscript><img decoding="async" width="287" height="269" src="https://neva-clinic.ru/wp-content/uploads/2022/10/narkoligiya-v-spb-na-karte.jpg" alt="" class="wp-image-1501" data-eio="l" /></noscript></figure>
+</section>
+                            </div>
+
+                    
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+
+                                <section id="block-27" class="widget widget_block widget_text">
+<p>Наши услуги</p>
+</section><section id="block-20" class="widget widget_block">
+<ul><li><a href="/analizy-krovi-mochi/" target="_blank" rel="noreferrer noopener">Лабораторные анализы</a></li><li><a href="https://neva-clinic.ru/transportirovka-v-kliniku/" data-type="URL" data-id="https://neva-clinic.ru/transportirovka-v-kliniku/" target="_blank" rel="noreferrer noopener">Скорая наркологическая помощь</a></li><li><a href="/alkogolizm-ambulatorno/" target="_blank" rel="noreferrer noopener">Амбулаторное лечение</a></li><li><a href="/lechenie-alkogolizma/" target="_blank" rel="noreferrer noopener">Стационарное лечение</a></li><li><a href="/zagorodnaya-reabilitatsiya/" target="_blank" rel="noreferrer noopener">Реабилитация</a></li><li><a href="/kodirovanie/" target="_blank" rel="noreferrer noopener">Кодирование</a></li><li><a href="/konsultaciya-narkologa" target="_blank" rel="noreferrer noopener">Консультации</a></li><li><a href="/kapelnitsa/" target="_blank" rel="noreferrer noopener">Капельница</a></li><li><a href="/vyvod-iz-zapoya-na-domu/" target="_blank" rel="noreferrer noopener">Выведение из запоя</a></li></ul>
+</section>
+                            </div>
+
+                    
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+
+                                <section id="block-25" class="widget widget_block widget_text">
+<p>Адреса клиник</p>
+</section><section id="text-2" class="widget widget_text">			<div class="textwidget"><ol>
+<li>Петербург, Будапештская, д. 44.</li>
+<li>Красное Село, пр. Ленина, д. 43, к1, А</li>
+<li>Петергоф, Санкт-Петербургский пр., д. 60, А</li>
+</ol>
+<p>Тел: <a style="color: white;" href="tel:+78126790735">+7(812)679-07-35</a><br>
+E-mail:&nbsp;<a style="color: white;" href="mailto:nevamed@mail.ru">nevamed@mail.ru</a><br>
+График: 24\7</p>
+</div>
+		</section><section id="block-33" class="widget widget_block"><iframe loading="lazy" data-src="https://yandex.ru/sprav/widget/rating-badge/26403194549" class="lazyload" width="150" height="50" frameborder="0"></iframe></section>
+                            </div>
+
+                                    </div>
+            </div><!-- upper-footer -->
+
+        	    <div class="copyright">
+	        <div class="container">
+
+	        	<div class="col-lg-6 col-md-6 col-sm-12">
+		        	<p>
+			            2006-2022 (с) - Наркологическая клиника "НЕВА"					</p>
+				</div>
+
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="menu-footer-menu-container"><ul id="menu-footer-menu" class="menu"><li id="menu-item-379" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-379"><a href="/uslugi/">Услуги</a></li>
+<li id="menu-item-1212" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1212"><a href="https://neva-clinic.ru/normativno-pravovye-akty/">Нормативно-правовые акты</a></li>
+<li id="menu-item-1227" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1227"><a href="/privacy-policy/" aria-current="page">Политика конфиденциальности</a></li>
+<li id="menu-item-1213" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1213"><a href="https://neva-clinic.ru/otzyvy/">Отзывы</a></li>
+<li id="menu-item-184" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-184"><a href="https://neva-clinic.ru/shema-proezda/">Контакты</a></li>
+</ul></div>	            </div>
+	        </div><!-- container -->
+	    </div><!-- copyright -->
+		</footer><!-- #colophon -->
+</div><!-- #page -->
+
+            <noscript>
+                <div>
+                    <img src="https://mc.yandex.ru/watch/86321144" style="position:absolute; left:-9999px;" alt=""/>
+                </div>
+            </noscript>
+            
+		<script type="rocketlazyloadscript">
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+		
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/cache/min/1/wp-content/uploads/winp-css-js/1368.js?ver=1669803060" defer=""></script>
+
+<style id="rs-plugin-settings-inline-css" type="text/css">
+#rs-demo-id {}
+</style>
+<script type="text/javascript" id="eio-lazy-load-js-before">
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":0,"threshold":0};
+</script>
+<script type="text/javascript" src="https://neva-clinic.ru/wp-content/plugins/ewww-image-optimizer/includes/lazysizes.min.js?ver=692" id="eio-lazy-load-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=1669803060" id="swv-js" defer=""></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/neva-clinic.ru\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1669803060" id="contact-form-7-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.5.18" defer="" async="" id="tp-tools-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.5.22" defer="" async="" id="revmin-js"></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/cache/min/1/wp-content/themes/medical-heed-pro/assets/js/js.cookie.js?ver=1669803060" id="js-cookie-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/cache/min/1/wp-content/themes/medical-heed-pro/assets/js/jquery.sticky.js?ver=1669803060" id="jquery-sticky-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/themes/medical-heed-pro/assets/library/owlcarousel/js/owl.carousel.min.js?ver=3.3.7" id="owlcarousel-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/cache/min/1/wp-content/themes/medical-heed-pro/assets/js/swiper-bundle.js?ver=1669803060" id="swiper-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/cache/min/1/wp-content/themes/medical-heed-pro/assets/js/index.js?ver=1669803060" id="swiper-index-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/cache/min/1/wp-content/themes/medical-heed-pro/assets/js/navigation.js?ver=1669803060" id="medical-heed-pro-navigation-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://neva-clinic.ru/wp-content/cache/min/1/wp-content/themes/medical-heed-pro/assets/js/skip-link-focus-fix.js?ver=1669803060" id="medical-heed-pro-skip-link-focus-fix-js" defer=""></script>
+
+
+																									   
+<script type="rocketlazyloadscript" data-minify="1" src="https://neva-clinic.ru/wp-content/cache/min/1/callibri.js?ver=1669803060" data-rocket-type="text/javascript" charset="utf-8" defer=""></script>
+	<script defer="" src="//code.jivo.ru/widget/gAQcfS3wdf"></script>
+<script>"use strict";function wprRemoveCPCSS(){var preload_stylesheets=document.querySelectorAll('link[data-rocket-async="style"][rel="preload"]');if(preload_stylesheets&&0<preload_stylesheets.length)for(var stylesheet_index=0;stylesheet_index<preload_stylesheets.length;stylesheet_index++){var media=preload_stylesheets[stylesheet_index].getAttribute("media")||"all";if(window.matchMedia(media).matches)return void setTimeout(wprRemoveCPCSS,200)}var elem=document.getElementById("rocket-critical-css");elem&&"remove"in elem&&elem.remove()}window.addEventListener?window.addEventListener("load",wprRemoveCPCSS):window.attachEvent&&window.attachEvent("onload",wprRemoveCPCSS);</script><noscript><link rel="stylesheet" href="https://neva-clinic.ru/wp-content/cache/min/1/366f8cb2539995ff527affe661162342.css" media="all" data-minify="1" /><link rel='stylesheet' id='medical-heed-pro-fonts-css' href='https://fonts.googleapis.com/css?family=PT%2BSans%3A400%2C700%7COpen%2BSans%3A300%2C400%2C600%2C700i%7CWork%2BSans%3A300%2C400%2C600%2C700%2C800%7CRubik%3A300%2C400%2C700%2C900&#038;subset=latin%2Clatin-ext' type='text/css' media='all' /></noscript>
+
+
+</body></html>

@@ -1,0 +1,1329 @@
+<html class="" lang="ru-RU"><head>
+    <!-- newRelic browser code -->
+    <script src="https://js-agent.newrelic.com/nr-1099.min.js"></script><script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-53LVMK"></script><script type="text/javascript">
+        window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1099.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);
+        ;NREUM.info={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",licenseKey:"915b4bd684",applicationID:"158993848",sa:1}
+    </script>
+    <!-- endof newRelic browser code -->
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+    
+
+    
+        <title id="title" itemprop="name">
+            Политика конфиденциальности - интернет-магазин VseMayki        </title>
+    
+
+    
+                <meta name="google-verification" content="">
+        <meta name="yandex-verification" content="">
+                    <link rel="canonical" href="https://www.vsemayki.ru/doc/policy">
+        
+            
+
+    <meta property="og:title" content="Политика конфиденциальности - интернет-магазин VseMayki">
+    <meta property="og:description" content="Политика конфиденциальности - интернет-магазин VseMayki">
+    <meta property="og:image" content="https://www.vsemayki.ru/images/black_logo.png">
+    <meta property="og:url" content="https://www.vsemayki.ru/doc/policy">
+
+    <meta name="description" content="Политика конфиденциальности - интернет-магазин VseMayki">
+    <meta name="keywords" content="">
+    <meta name="verify-reformal" content="ca5d2301e833bedfa62053bb">
+    <meta name="geo.position" content="55; 37">
+    <meta name="geo.placename" content="Москва, Россия">
+    <meta name="geo.region" content="RU-Москва">
+
+    <!-- Stylesheets -->
+    
+    <link rel="stylesheet preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&amp;subset=cyrillic-ext" rel="stylesheet">
+
+    
+        <link rel="stylesheet" href="/assets/css/libs.css?v=DEFAULT-1055">
+        <link rel="stylesheet" href="/assets/css/mayki.css?v=DEFAULT-mn1671197829">
+        <link rel="stylesheet" href="/assets/css/footerMayki.css?ver=f0eb51f419ebe37951f6">
+    
+
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/media/js/html5shiv.min.js?v=1649319654"></script>
+    <script src="/media/js/respond.min.js?v=1649319654"></script>
+    <![endif]-->
+
+    <script>
+        var cityList = JSON.parse('{"\u041c\u043e\u0441\u043a\u0432\u0430":"8 (495) 646-87-67","\u0421\u0430\u043d\u043a\u0442-\u041f\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433":"8 (812) 648-24-33","\u041d\u043e\u0432\u043e\u0441\u0438\u0431\u0438\u0440\u0441\u043a":"8 (383) 233-39-09","\u0415\u043a\u0430\u0442\u0435\u0440\u0438\u043d\u0431\u0443\u0440\u0433":"8 (343) 288-51-59","\u041a\u0440\u0430\u0441\u043d\u043e\u0434\u0430\u0440":"8 (861) 202-54-16","\u0421\u0430\u043c\u0430\u0440\u0430":"8 (846) 212-95-39","\u041a\u0440\u0430\u0441\u043d\u043e\u044f\u0440\u0441\u043a":"8 (391) 228-70-27","\u041f\u0435\u0440\u043c\u044c":"8 (342) 235-79-96","\u041a\u0430\u0437\u0430\u043d\u044c":"8 (843) 210-09-66","\u0420\u043e\u0441\u0442\u043e\u0432-\u043d\u0430-\u0414\u043e\u043d\u0443":"8 (863) 303-21-99","\u0412\u043e\u0440\u043e\u043d\u0435\u0436":"8 (473) 300-30-87","\u0423\u0444\u0430":"8 (347) 200-06-87","\u0412\u043e\u043b\u0433\u043e\u0433\u0440\u0430\u0434":"8 (844) 296-21-60","\u0427\u0435\u043b\u044f\u0431\u0438\u043d\u0441\u043a":"8 (351) 200-33-36","\u041d\u0438\u0436\u043d\u0438\u0439 \u041d\u043e\u0432\u0433\u043e\u0440\u043e\u0434":"8 (831) 280-82-73"}');
+        var currentCurrency = 'RUB';
+        var currentCityGeo = 'Москва';
+        var currentCountryGeo = 'Россия';
+        var terminalFlag = false;
+        var onLoadImg = function(el) {
+            var prev = el.previousElementSibling;
+            prev && prev.classList.add('list-item__image--loaded');
+        };
+    </script>
+
+    <script src="https://cdn.ravenjs.com/3.21.0/raven.min.js" crossorigin="anonymous"></script>
+    <script>
+        var fakeRaven = {
+            config: function(){},
+            install: function(){
+                console.warn('Sentry Disabled')
+            },
+            setExtraContext: function(){},
+            setTagsContext: function(){},
+            captureMessage: function(){},
+            captureException: function(){},
+            setUserContext: function(){},
+        };
+    </script>
+
+    <!-- Scripts -->
+    <script src="/media/js/jquery-1.11.1.min.js"></script>
+
+    <script>
+        /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/ 		var executeModules = data[2];
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 		// add entry modules from loaded chunk to deferred list
+/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
+/******/
+/******/ 		// run deferred modules when all chunks ready
+/******/ 		return checkDeferredModules();
+/******/ 	};
+/******/ 	function checkDeferredModules() {
+/******/ 		var result;
+/******/ 		for(var i = 0; i < deferredModules.length; i++) {
+/******/ 			var deferredModule = deferredModules[i];
+/******/ 			var fulfilled = true;
+/******/ 			for(var j = 1; j < deferredModule.length; j++) {
+/******/ 				var depId = deferredModule[j];
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 			}
+/******/ 			if(fulfilled) {
+/******/ 				deferredModules.splice(i--, 1);
+/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		return result;
+/******/ 	}
+/******/
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		0: 0
+/******/ 	};
+/******/
+/******/ 	var deferredModules = [];
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "js/" + ({"1":"vendor"}[chunkId]||chunkId) + ".js?ver=" + {"1":"529322c6","5":"55c9048f","11":"8c9990d8","28":"88dadf9e"}[chunkId] + ""
+/******/ 	}
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/assets/";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
+/******/
+/******/ 	// run deferred modules from other chunks
+/******/ 	checkDeferredModules();
+/******/ })
+/************************************************************************/
+/******/ ([]);    </script>
+    <script src="/assets/js/vendor.js?ver=529322c6"></script>
+    <script src="/assets/js/header.scripts.min.js?v=DEFAULT-mn1671197829"></script>
+    <script src="/assets/js/components.js?ver=7d1824d9"></script>
+    <script src="/assets/js/headerMayki.js?ver=7f04bf02"></script>
+
+    <script>
+        Raven.setExtraContext({
+            userCart: localStorage.getItem('user_cart'),
+            promocode: localStorage.getItem('promocode'),
+            clientData: localStorage.getItem('clientData'),
+        });
+        Raven.setTagsContext({
+            siteVersion: 'DEFAULT'
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        URLBuilder.catalogRoute = 'catalog';
+        URLBuilder.catalogCategory = '';
+        URLBuilder.catalogCategoryTitle = '';
+        URLBuilder.catalogSubCategory = '';
+        URLBuilder.catalogSubCategoryTitle = '';
+        URLBuilder.catalogGroup = '';
+        URLBuilder.catalogType = '';
+        URLBuilder.catalogView = '';
+        URLBuilder.catalogSort = '';
+        URLBuilder.catalogAuthor = '';
+    </script>
+
+    <!-- Google Tag Manager -->
+    <noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id=GTM-53LVMK" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <script>
+        var userMail = '';
+        var dataLayer = dataLayer || [];
+
+        var dataLayerPageName = '';
+        var systemVersion = 'DEFAULT';
+
+        dataLayer.push({
+            page: '',
+            frontbuild: 'DEFAULT'
+        });
+
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-53LVMK');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    
+
+    <!--[if gte IE 8]>
+    <link rel="stylesheet" href="/media/css/ie.css?v=1649319654">
+    <![endif]-->
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/media/css/ie8.css?v=1649319654">
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+
+    
+        <!-- Apple integration -->
+        <link rel="apple-touch-icon" href="/media/img/icons/apple/touch-icon-iphone.png?v=1649319654">
+        <link rel="apple-touch-icon" sizes="76x76" href="/media/img/icons/apple/touch-icon-ipad.png?v=1649319654">
+        <link rel="apple-touch-icon" sizes="120x120" href="/media/img/icons/apple/touch-icon-iphone-retina.png?v=1649319654">
+        <link rel="apple-touch-icon" sizes="152x152" href="/media/img/icons/apple/touch-icon-ipad-retina.png?v=1649319654">
+
+        <!-- Windows8 integration -->
+        <meta name="application-name" content="Vsemayki.ru">
+        <meta name="msapplication-TileColor" content="#ec008c">
+        <meta name="msapplication-square70x70logo" content="/media/img/icons/win/tiny.png?v=1649319654">
+        <meta name="msapplication-square150x150logo" content="/media/img/icons/win/square.png?v=1649319654">
+        <meta name="msapplication-wide310x150logo" content="/media/img/icons/win/wide.png?v=1649319654">
+        <meta name="msapplication-square310x310logo" content="/media/img/icons/win/large.png?v=1649319654">
+    
+
+    
+
+    <meta name="unitpay-verification" content="ed306306d000976fdde9af694e4309">
+<meta name="google-site-verification" content="Zq020N502fLkzJ6s6dXQjkX7B7Ahc43S_71Eio2Fcu4">
+    
+
+
+
+<style type="text/css">.fancybox-margin{margin-right:12px;}</style></head>
+
+<body class="bnroff new-main ">
+
+
+    <div class="totop2">
+        <i class="fa fa-angle-up"></i>
+        <p>Наверх</p>
+    </div>
+
+
+
+    <div class="left-mobile-menu">
+        <span class="icons-mobile-menu mobile-menu--close"></span>
+
+        
+<ul class="privateoffice-block">
+    <li class="privateoffice">
+        <a rel="nofollow" title="Избранное" href="/favorites">
+            <i class="icons-mobile-menu icons-mobile-menu--favorites"></i>
+            Избранное
+        </a>
+    </li>
+    <li class="privateoffice" id="mobile-login-link"></li>
+</ul>
+
+        
+<ul class="catalog-menu__list folder"><li class="catalog-menu__list-item"><a class="catalog-menu__link" href="/catalog/view/odezhda">Одежда<i class="fa fa-angle-right" aria-hidden="true"></i></a></li><li class="catalog-menu__list-item"><a class="catalog-menu__link" href="/catalog/view/accessory">Аксессуары<i class="fa fa-angle-right" aria-hidden="true"></i></a></li><li class="catalog-menu__list-item"><a class="catalog-menu__link" href="/catalog/view/cases">Чехлы<i class="fa fa-angle-right" aria-hidden="true"></i></a></li><li class="catalog-menu__list-item"><a class="catalog-menu__link" href="/catalog/view/interior">Для дома<i class="fa fa-angle-right" aria-hidden="true"></i></a></li><li class="catalog-menu__list-item"><a class="catalog-menu__link" href="/catalog/prikolnye_podarki">Подарки<i class="fa fa-angle-right" aria-hidden="true"></i></a></li><li class="catalog-menu__list-item"><a class="catalog-menu__link" href="/constructor">Свой дизайн<i class="fa fa-angle-right" aria-hidden="true"></i></a></li><li class="catalog-menu__list-item"><span class="catalog-menu__link">Спорт<i class="fa fa-angle-right" aria-hidden="true"></i></span></li><li class="catalog-menu__list-item"><span class="catalog-menu__link">Бренды<i class="fa fa-angle-right" aria-hidden="true"></i></span></li><li class="catalog-menu__list-item"><span class="catalog-menu__link">АнтиCovid-19<i class="fa fa-angle-right" aria-hidden="true"></i></span></li></ul><ul class="folders"><li class="folders__item"><a class="folders__link" href="/favorites">Избранное</a></li><li class="folders__item"><a class="folders__link" href="/catalog">Каталог</a></li><li class="folders__item"><a class="folders__link" href="/deliverytype">Доставка</a></li><li class="folders__item"><a class="folders__link" href="/paymentoperation">Способы оплаты</a></li><li class="folders__item"><a class="folders__link" href="/status">Узнай статус заказа</a></li><li class="folders__item"><a class="folders__link" href="/doc/information">Помощь</a></li><li class="folders__item"><a class="folders__link" href="/contacts">Контакты</a></li><li class="folders__item"><a class="folders__link" href="/photo">Коллекция образов</a></li></ul>
+                    <div class="footer-mobile-menu">
+                <span class="location__city-name" data-autotest-id="header_city_text"></span>
+                <a data-toggle="modal" data-target="#city" data-from="city-select">&nbsp;Другой город</a>
+                <a class="location__phone"></a>
+            </div>
+            </div>
+
+
+
+
+
+
+<header class="header">
+    <div class="container-fluid">
+        <div class="wrap">
+            <section class="row hidden-xs top-header">
+                <script>
+                    var topHeaderMenu = [{"id":1,"class":"vm-visible-xs vm-visible-sm vm-visible-md vm-visible-lg","depth":1,"title":"\u041a\u043e\u0440\u043f\u043e\u0440\u0430\u0442\u0438\u0432\u043d\u044b\u043c \u043a\u043b\u0438\u0435\u043d\u0442\u0430\u043c","action":{"href":"https:\/\/opt.vsemayki.ru\/?from=otp_up","target":true},"is_new":false,"noindex":false,"children":[],"nofollow":false,"is_active":true,"properties":[],"description":"","active":true},{"id":2,"class":"vm-visible-xs vm-visible-sm vm-visible-md vm-visible-lg","depth":1,"title":"\u0411\u043b\u043e\u0433\u0435\u0440\u0430\u043c","action":{"href":"https:\/\/bloggers.vsemayki.ru\/","target":false},"is_new":false,"children":[],"is_active":true,"properties":[],"description":"","active":true,"nofollow":false,"noindex":false},{"id":3,"class":"vm-visible-xs vm-visible-sm vm-visible-md vm-visible-lg","depth":1,"title":"\u0412\u0435\u0431\u043c\u0430\u0441\u0442\u0435\u0440\u0430\u043c","action":{"href":"https:\/\/webmasters.vsemayki.ru\/","target":false},"is_new":false,"children":[],"is_active":true,"properties":[],"description":"","active":true,"nofollow":false,"noindex":false},{"id":4,"class":"vm-visible-xs vm-visible-sm vm-visible-md vm-visible-lg","depth":1,"title":"\u0414\u0438\u0437\u0430\u0439\u043d\u0435\u0440\u0430\u043c","action":{"href":"\/landing\/designer","target":true},"is_new":false,"children":[],"is_active":true,"properties":[],"description":"","active":true,"nofollow":false,"noindex":false},{"id":5,"class":"vm-visible-xs vm-visible-sm vm-visible-md vm-visible-lg","depth":1,"title":"\u041f\u043e\u043c\u043e\u0449\u044c","action":{"href":"\/doc\/information","target":false},"is_new":false,"noindex":false,"children":[{"id":6,"class":"vm-visible-xs vm-visible-sm vm-visible-md vm-visible-lg","depth":2,"title":"\u0413\u0434\u0435 \u043c\u043e\u0439 \u0437\u0430\u043a\u0430\u0437?","action":{"href":"\/status","target":false},"is_new":false,"noindex":false,"children":[],"nofollow":false,"is_active":true,"properties":[],"description":"","active":true},{"id":7,"class":"vm-visible-xs vm-visible-sm vm-visible-md vm-visible-lg","depth":2,"title":"\u0414\u043e\u0441\u0442\u0430\u0432\u043a\u0430","action":{"href":"\/deliverytype","target":false},"is_new":false,"noindex":false,"children":[],"nofollow":false,"is_active":true,"properties":[],"description":"","active":true},{"id":8,"class":"vm-visible-xs vm-visible-sm vm-visible-md vm-visible-lg","depth":2,"title":"\u041e\u043f\u043b\u0430\u0442\u0430","action":{"href":"\/paymentoperation","target":false},"is_new":false,"children":[],"nofollow":false,"is_active":true,"properties":[],"description":"","active":true,"noindex":false},{"id":9,"class":"vm-visible-xs vm-visible-sm vm-visible-md vm-visible-lg","depth":2,"title":"\u041e\u0431\u043c\u0435\u043d \u0438 \u0432\u043e\u0437\u0432\u0440\u0430\u0442","action":{"href":"\/doc\/information\/brak","target":false},"is_new":false,"children":[],"is_active":true,"properties":[],"description":"","active":true,"nofollow":false,"noindex":false}],"nofollow":false,"is_active":true,"properties":[],"description":"","active":true}];
+                </script>
+                <div class="info-menu">
+
+                </div>
+
+                <div class="location" id="organization-city">
+                                            <a class="top-header__link location__city" data-toggle="modal" data-target="#city" data-from="city-select" itemprop="address">
+                            <span class="top-header__link--dotted location__city-name" data-autotest-id="header_city_text"></span>
+                        </a>
+
+                        <a class="top-header__link location__phone"></a>
+
+                        <div class="location__city-confirm">
+                            <p>Ваш город — <b>Москва?</b></p>
+                            <div class="text-nowrap">
+                                <a id="ok" class="btn location__confirm-button" href="#">Всё верно</a>
+                                <a id="no" class="btn location__select-button" href="#">Нет, выбрать другой</a>
+                            </div>
+                        </div>
+                                    </div>
+            </section>
+
+            <section class="row middle-header">
+                <div class="mobile-menu-toggler col-xs-2 hidden-lg hidden-sm hidden-md">
+                    <a class="toggler" href="#"><i class="icons-mobile-menu icon-menu"></i></a>
+                </div>
+
+                <div class="middle-menu col-sm-4 col-lg-3 hidden-xs">
+                                    </div>
+
+                <div class="logo col-xs-8 col-sm-4 col-lg-6">
+                                                                
+                    
+    <div itemscope="" itemtype="http://schema.org/Organization" itemref="title contacts socials organization-city">
+        <a href="/" itemprop="url">
+            <img class="logo__image" itemprop="logo" src="/media/img/content/logos/vm_main.svg?v=1649319654" title="Vsemayki.ru" alt="Vsemayki.ru">
+        </a>
+    </div>
+                </div>
+
+                <div class="col-xs-2 col-sm-4 col-lg-3 user-nav">
+                    <div class="user-local-info" style="display: none;">
+                        <span class="favorites-block hidden-xs">
+                            <a class="favorites-block__link" href="/favorites">
+                                <i class="fa fa-heart-o middle-header__fa favorites-block__icon"></i>
+                                <span class="favorites-block__title">Избранное</span>
+                            </a>
+                        </span>
+
+                        <span class="cart-block">
+                            <a class="cart-block__link shopping-cart" href="/cart">
+                                <span class="cart-block__counter"></span>
+                                <span class="cart-block__suffix hidden-xs">Корзина</span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container-fluid bottom-header">
+        <div class="wrap">
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<section class="content   ">
+    <div class="container-fluid">
+    
+        <div class="col-lg-8 col-lg-offset-2 wrap">
+            <div class="row">
+                
+
+                
+                
+    <section class="col-sm-3 hidden-xs leftpad">
+        <nav class="left-menu info-menu">
+                            <h4>Информация</h4>
+                <ul class="left-menu__list">
+                                            <li class="info-menu__item">
+                                                            <a class="info-menu__link" href="/doc/about">О компании<i class="fa fa-angle-right info-menu__fa"></i></a>
+                                                                                </li>
+                                            <li class="info-menu__item">
+                                                            <a class="info-menu__link" href="/reviews">Отзывы<i class="fa fa-angle-right info-menu__fa"></i></a>
+                                                                                </li>
+                                            <li class="info-menu__item">
+                                                            <a class="info-menu__link" href="/doc/information">Помощь<i class="fa fa-angle-right info-menu__fa"></i></a>
+                                                                                </li>
+                                            <li class="info-menu__item">
+                                                            <a class="info-menu__link" href="/deliverytype">Доставка<i class="fa fa-angle-right info-menu__fa"></i></a>
+                                                                                </li>
+                                            <li class="info-menu__item">
+                                                            <a class="info-menu__link" href="/paymentoperation">Способы оплаты<i class="fa fa-angle-right info-menu__fa"></i></a>
+                                                                                </li>
+                                            <li class="info-menu__item">
+                                                            <a class="info-menu__link" href="/status">Где мой заказ?<i class="fa fa-angle-right info-menu__fa"></i></a>
+                                                                                </li>
+                                            <li class="info-menu__item">
+                                                            <a class="info-menu__link" href="/retails">Принт-центры<i class="fa fa-angle-right info-menu__fa"></i></a>
+                                                                                        <ul class="info-menu__subcategory">
+                                                                            <li class="info-menu__subcategory-item">
+                                                                                            <a class="info-menu__subcategory-link" href="/retails/msk">Москва</a>
+                                                                                    </li>
+                                                                            <li class="info-menu__subcategory-item">
+                                                                                            <a class="info-menu__subcategory-link" href="/retails/nsk">Новосибирск</a>
+                                                                                    </li>
+                                                                            <li class="info-menu__subcategory-item">
+                                                                                            <a class="info-menu__subcategory-link" href="/retails/spb">Санкт-Петербург</a>
+                                                                                    </li>
+                                                                    </ul>
+                                                    </li>
+                                            <li class="info-menu__item">
+                                                            <a class="info-menu__link" href="http://novosibirsk.hh.ru/employer/873710" target="_blank">Вакансии<i class="fa fa-angle-right info-menu__fa"></i></a>
+                                                                                </li>
+                                            <li class="info-menu__item">
+                                                            <a class="info-menu__link" href="/contacts">Контакты<i class="fa fa-angle-right info-menu__fa"></i></a>
+                                                                                </li>
+                                    </ul>
+                    </nav>
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_prodid: "",
+                ecomm_pagetype: "other",
+                ecomm_totalvalue: ''
+            };
+
+            $('.info-menu__subcategory-item--active').parents('.info-menu__item').addClass('info-menu__item--active');
+        </script>
+    </section>
+
+
+
+                
+<div class="col-sm-9 static help">
+    
+                
+                
+        <h1>Политика конфиденциальности</h1>
+                <div class="policy">
+<div class="policy__title">Политика конфиденциальности</div>
+<p>Настоящий документ «Политика конфиденциальности» (далее&nbsp;— «Политика») представляет собой правила использования сайтом&nbsp;— <a href="/" target="_blank" rel="noopener">www.vsemayki.ru</a> [ООО ВСЕМАРКЕТ] (далее&nbsp;— Оператор) персональной информации Пользователя, которую Оператор может получить о&nbsp;Пользователе во&nbsp;время использования им&nbsp;Сайта, любого из&nbsp;сервисов, служб, программ, продуктов или услуг Оператора (далее&nbsp;— Сервис онлайн печати, Сайт) и&nbsp;в&nbsp;ходе исполнения Оператором любых соглашений и&nbsp;договоров с&nbsp;Пользователем. Использование Сайта означает безоговорочное согласие Пользователя с&nbsp;настоящей Политикой и&nbsp;указанными в&nbsp;ней условиями обработки его персональной информации; в&nbsp;случае несогласия с&nbsp;этими условиями Пользователь должен воздержаться от&nbsp;использования Сайта.</p>
+<ul class="list-unstyled policy__list">
+<li class="policy__section-title"><span class="policy__section-number">1.</span>Общие положения политики</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">1.1.</span>Настоящая Политика является неотъемлемой частью Договора возмездного оказания услуг по&nbsp;нанесению изображений на&nbsp;основу в&nbsp;Сервисе онлайн-печати vsemayki.ru (далее&nbsp;— «Оферта»), размещенной и/или доступной в&nbsp;сети Интернет <a href="/doc/policy" target="_blank" rel="noopener">www.vsemayki.ru/doc/policy</a>, Правил использования Сервиса онлайн-печати <a href="/doc/user_agreement" target="_blank" rel="noopener">www.vsemayki.ru/doc/user_agreement</a>, а&nbsp;также иных заключаемых с&nbsp;Пользователем договоров, когда это прямо предусмотрено их&nbsp;условиями.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">1.2.</span>Настоящая Политика составлена в&nbsp;соответствии с&nbsp;Федеральным законом «О&nbsp;персональных данных» №&nbsp;152-ФЗ от&nbsp;27&nbsp;июля 2006&nbsp;г., Федеральным законом «О&nbsp;связи» от&nbsp;07.07.2003&nbsp;г. №&nbsp;126-ФЗ, а&nbsp;также иными нормативно-правовыми актами Российской Федерации в&nbsp;области защиты и&nbsp;обработки персональных данных и&nbsp;действует в&nbsp;отношении всех персональных данных, которые Оператор может получить от&nbsp;Пользователя, являющегося стороной по&nbsp;гражданско-правовому договору.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">1.3.</span>Оператор имеет право вносить изменения в&nbsp;настоящую Политику (в&nbsp;том числе, в&nbsp;любую из&nbsp;его частей) без уведомления Пользователя. Пользователь обязуется регулярно отслеживать изменения в&nbsp;Политике, размещенной на&nbsp;Сайте. При внесении изменений в&nbsp;заголовке Политики указывается дата последнего обновления редакции. Новая редакция Политики вступает в&nbsp;силу с&nbsp;момента ее&nbsp;размещения на&nbsp;Сайте либо доведения до&nbsp;сведения Пользователя в&nbsp;иной удобной форме, если иное не&nbsp;предусмотрено новой редакцией Политики.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">1.4.</span>К&nbsp;настоящей Политике, включая толкование ее&nbsp;положений и&nbsp;порядок принятия, исполнения, изменения и&nbsp;прекращения, подлежит применению законодательство Российской Федерации.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">1.5.</span>Действующая редакция Политики размещена на&nbsp;Сайте <a href="/doc/policy" target="_blank" rel="noopener">www.vsemayki.ru/doc/policy</a>.</p>
+</li>
+<li class="policy__section-title"><span class="policy__section-number">2.</span>Персональная информация Пользователей, которую обрабатывает Сайт</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">2.1.</span>Под персональной информацией в&nbsp;настоящей Политике понимается:</p>
+<ul>
+<li>персональные данные, предоставляемые Пользователем самостоятельно при заполнении любой из&nbsp;регистрационных форм в&nbsp;разделах «ОФОРМИТЬ ЗАКАЗ», «РЕГИСТРАЦИЯ», «ПОДПИСАТЬСЯ», «ОСТАВЬТЕ ОТЗЫВ О&nbsp;Vsemayki.ru» или в&nbsp;процессе использования Сайта;</li>
+<li>данные, которые передаются в&nbsp;автоматическом режиме Сайту в&nbsp;процессе их&nbsp;использования с&nbsp;помощью установленного на&nbsp;устройстве Пользователя программного обеспечения, в&nbsp;том числе IP-адрес, данные файлов cookie, информация о&nbsp;браузере Пользователя (или иной программе, с&nbsp;помощью которой осуществляется доступ к&nbsp;Сайту), технические характеристики оборудования и&nbsp;программного обеспечения, используемых Пользователем, дата и&nbsp;время доступа к&nbsp;Сайту, адреса запрашиваемых страниц и&nbsp;иная подобная информация;</li>
+<li>иная информация о&nbsp;Пользователе, обработка которой предусмотрена условиями использования Сайта.</li>
+</ul>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">2.2.</span>Настоящая Политика применима только к&nbsp;информации, обрабатываемой в&nbsp;ходе использования Сайта. Сайт не&nbsp;контролирует и&nbsp;не&nbsp;несет ответственность за&nbsp;обработку информации сайтами третьих лиц, на&nbsp;которые Пользователь может перейти по&nbsp;ссылкам, доступным на&nbsp;Сайте.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">2.3.</span>Сайт не&nbsp;проверяет достоверность персональной информации, предоставляемой Пользователем, и&nbsp;не&nbsp;имеет возможности оценивать его дееспособность. Однако Сайт исходит из&nbsp;того, что Пользователь предоставляет достоверную и&nbsp;достаточную персональную информацию и&nbsp;поддерживает эту информацию в&nbsp;актуальном состоянии.</p>
+</li>
+<li class="policy__section-title"><span class="policy__section-number">3.</span>Цели обработки персональных данных Пользователей</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">3.1.</span>Обработка вышеуказанных персональных данных будет осуществляться путем смешанной обработки персональных данных (неавтоматизированной и&nbsp;автоматизированной), включая, сбор, систематизацию, накопление, хранение, уточнение (обновление, изменение использования), передачу, обезличивание, блокирование, уничтожение персональных данных.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">3.2.</span>Сайт собирает и&nbsp;хранит в&nbsp;базе данных Сайта в&nbsp;зашифрованном виде с&nbsp;правом доступа для просмотра исключительно Сайтом только ту&nbsp;персональную информацию, которая необходима для предоставления сервисов или исполнения соглашений и&nbsp;договоров с&nbsp;Пользователем, за&nbsp;исключением случаев, когда законодательством предусмотрено обязательное хранение персональных данных в&nbsp;течение определенного законом срока.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">3.3.</span>Персональные данные Пользователя Сайт обрабатывает в&nbsp;следующих целях:</p>
+<ul>
+<li>идентификация стороны в&nbsp;рамках использования сервисов Сайта;</li>
+<li>предоставление Пользователю персонализированных сервисов и&nbsp;услуг в&nbsp;рамках исполнения соглашений и&nbsp;договоров.</li>
+</ul>
+</li>
+<li class="policy__section-title"><span class="policy__section-number">4.</span>Условия обработки персональных данных Пользователей и&nbsp;их&nbsp;передача третьим лицам</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">4.1.</span>В&nbsp;отношении персональных данных Пользователя сохраняется их&nbsp;конфиденциальность, кроме случаев добровольного предоставления Пользователем информации о&nbsp;себе для общего доступа неограниченному кругу лиц.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">4.2.</span>Сайт вправе передать персональные данные Пользователя третьим лицам в&nbsp;следующих случаях:</p>
+<ul>
+<li>пользователь выразил согласие на&nbsp;такие действия;</li>
+<li>передача необходима для исполнения определенного соглашения или договора с&nbsp;Пользователем, включая, но&nbsp;не&nbsp;ограничиваясь Договор возмездного оказания услуг по&nbsp;нанесению изображений на&nbsp;основу в&nbsp;Сервисе онлайн-печати <a href="/doc/user_agreement_dogovor" target="_blank" rel="noopener">www.vsemayki.ru/doc/user_agreement_dogovor</a>;</li>
+<li>передача предусмотрена российским или иным применимым законодательством в&nbsp;рамках установленной законодательством процедуры;</li>
+<li>такая передача происходит в&nbsp;рамках продажи или иной передачи бизнеса (полностью или в&nbsp;части), при этом к&nbsp;приобретателю переходят все обязательства по&nbsp;соблюдению условий настоящей Политики применительно к&nbsp;полученной им&nbsp;персональной информации;</li>
+<li>в&nbsp;целях обеспечения возможности защиты прав и&nbsp;законных интересов Сайта или третьих лиц в&nbsp;случаях, когда Пользователь нарушает Пользовательское соглашение Сайта, настоящую Политику, либо документы, содержащие условия использования конкретных сервисов.</li>
+<li>в&nbsp;результате обработки персональных данных Пользователя путем их&nbsp;обезличивания получены обезличенные статистические данные, которые передаются третьему лицу для проведения исследований, выполнения работ или оказания услуг по&nbsp;поручению Сайта.</li>
+</ul>
+</li>
+<li class="policy__section-title"><span class="policy__section-number">5.</span>Изменение и&nbsp;удаление персональных данных.<br>Обязательное хранение данных</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">5.1.</span>Пользователь может в&nbsp;любой момент изменить (обновить, дополнить) предоставленные им&nbsp;персональные данные или их&nbsp;часть, обратившись к&nbsp;Сайту по&nbsp;адресам, указанным в&nbsp;разделе 8&nbsp;настоящей Политики.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">5.2.</span>Права, предусмотренные&nbsp;п.&nbsp;5.1. настоящей Политики могут быть ограничены в&nbsp;соответствии с&nbsp;требованиями законодательства. Например, такие ограничения могут предусматривать обязанность Сайта сохранить измененные или удаленные Пользователем данные на&nbsp;срок, установленный законодательством, и&nbsp;передать такие данные в&nbsp;соответствии с&nbsp;законодательно установленной процедурой государственному органу.</p>
+</li>
+<li class="policy__section-title"><span class="policy__section-number">6.</span>Обработка персональной информации при помощи файлов Cookie и&nbsp;счетчиков</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">6.1.</span>Файлы cookie, передаваемые Сайтом оборудованию Пользователя и&nbsp;оборудованием Пользователя Сайту, могут использоваться Сайтом для предоставления Пользователю персонализированных сервисов, для таргетирования рекламы, которая показывается Пользователю, в&nbsp;статистических и&nbsp;исследовательских целях, а&nbsp;также для улучшения Сайта.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">6.2.</span>Пользователь осознает, что оборудование и&nbsp;программное обеспечение, используемые им&nbsp;для посещения сайтов в&nbsp;сети интернет могут обладать функцией запрещения операций с&nbsp;файлами cookie (для любых сайтов или для определенных сайтов), а&nbsp;также удаления ранее полученных файлов cookie.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">6.3.</span>Сайт вправе установить, что предоставление определенного сервиса или услуги возможно только при условии, что прием и&nbsp;получение файлов cookie разрешены Пользователем.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">6.4.</span>Структура файла cookie, его содержание и&nbsp;технические параметры определяются Сайтом и&nbsp;могут изменяться без предварительного уведомления Пользователя.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">6.5.</span>Счетчики, размещенные Сайтом, могут использоваться для анализа файлов cookie Пользователя, для сбора и&nbsp;обработки статистической информации об&nbsp;использовании Сайта, а&nbsp;также для обеспечения работоспособности Сайта в&nbsp;целом или их&nbsp;отдельных функций в&nbsp;частности. Технические параметры работы счетчиков определяются Сайтом и&nbsp;могут изменяться без предварительного уведомления Пользователя.</p>
+</li>
+<li class="policy__section-title"><span class="policy__section-number">7.</span>Защита персональных данных Пользователя</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">7.1.</span>Сайт предпринимает необходимые и&nbsp;достаточные организационные и&nbsp;технические меры для защиты персональных данных Пользователя от&nbsp;неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а&nbsp;также от&nbsp;иных неправомерных действий с&nbsp;ними третьих лиц.</p>
+</li>
+<li class="policy__section-title"><span class="policy__section-number">8.</span>Заключительные положения</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">8.1.</span>Заполняя любую из&nbsp;регистрационных форм на&nbsp;Сайте или посещая страницы Сайта, Пользователь автоматически принимает условия Политики конфиденциальности. Предоставив свои персональные данные, Пользователь подтверждает, что прочитал и&nbsp;выразил полное согласие с&nbsp;условиями Политики конфиденциальности без какого-либо изменения или дополнения, и&nbsp;разрешил Оператору обработку своих персональных по&nbsp;форме Согласия, как она утверждена в&nbsp;Приложении 1&nbsp;к настоящей Политике.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">8.2.</span>Все предложения, вопросы, запросы и&nbsp;иные обращения по&nbsp;поводу настоящей Политики и&nbsp;использования своих персональных данных Пользователь вправе направлять Сайту:</p>
+<ul>
+<li>по&nbsp;адресу электронной почты: info@vsemayki.ru</li>
+<li>по&nbsp;почтовому адресу: 630007, г.Новосибирск, Красный проспект, дом 2/1, этаж: отметка -3,500, помещение 7</li>
+</ul>
+</li>
+</ul>
+</div>
+<p><br><br><br><br><br><br></p>
+<div class="policy">
+<p style="text-align: right;">Приложение&nbsp;1</p>
+<p style="text-align: right;">к&nbsp;Политике конфиденциальности сайта www.vsemayki.ru</p>
+<div class="policy__title">Форма</div>
+<p style="text-align: center;">Согласие на&nbsp;обработку персональных данных</p>
+<br><br>
+<p><strong>Субъект персональных данных</strong>&nbsp;— Пользователь Сайта www.vsemayki.ru (ООО ВСЕМАРКЕТ) настоящим принимаю решение о&nbsp;предоставлении моих персональных данных ООО ВСЕМАРКЕТ&nbsp;(далее&nbsp;— Оператор, Сайт), ОГРН&nbsp;1205400034344 ИНН 5406807316&nbsp;и&nbsp;даю согласие на&nbsp;их&nbsp;обработку свободно, своей волей и&nbsp;в&nbsp;своем интересе в&nbsp;соответствии с&nbsp;Федеральным законом от&nbsp;27.07.2006 №&nbsp;152-ФЗ «О&nbsp;персональных данных», Федеральным законом «О&nbsp;связи» от&nbsp;07.07.2003&nbsp;г. №&nbsp;126-ФЗ.</p>
+<ul class="list-unstyled policy__list">
+<li class="policy__list-item">
+<p><span class="policy__section-number">1.</span>Согласие дается мною в&nbsp;целях:</p>
+<ul>
+<li>идентификация стороны в&nbsp;рамках использования сервисов Сайта;</li>
+<li>предоставление Пользователю персонализированных сервисов и&nbsp;услуг в&nbsp;рамках исполнения соглашений и&nbsp;договоров.</li>
+</ul>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">2.</span>Перечень персональных данных, на&nbsp;обработку которых дается согласие:</p>
+<ul>
+<li>фамилия, имя, отчество;</li>
+<li>контактный телефон (мобильный, стационарный);</li>
+<li>адрес электронной почты;</li>
+<li>страна, город и&nbsp;фактический адрес доставки;</li>
+<li>изображение, в&nbsp;том числе, фотография;</li>
+<li>а&nbsp;также метаданные пользователя сайта (cookie, данные об&nbsp;IP-адресе, информация о&nbsp;браузере Пользователя (или иной программе, с&nbsp;помощью которой осуществляется доступ к&nbsp;Сайту), технические характеристики оборудования и&nbsp;программного обеспечения, используемых Пользователем, дата и&nbsp;время доступа к&nbsp;Сайту, адреса запрашиваемых страниц и&nbsp;иная подобная информация).</li>
+</ul>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">3.</span>Персональные данные передаются в&nbsp;электронной форме по&nbsp;каналам связи сети «Интернет» для реализации целей, указанных в&nbsp;настоящем Согласии, Договоре возмездного оказания услуг по&nbsp;нанесению изображений на&nbsp;основу в&nbsp;Сервисе онлайн-печати vsemayki.ru (далее&nbsp;— «Оферта»), размещенной и/или доступной в&nbsp;сети Интернет <a href="/doc/user_agreement_dogovor" target="_blank" rel="noopener">www.vsemayki.ru/doc/user_agreement_dogovor</a>, Правил использования Сервиса онлайн-печати <a href="/doc/user_agreement" target="_blank" rel="noopener">www.vsemayki.ru/doc/user_agreement</a>, Политике конфиденциальности <a href="/doc/policy" target="_blank" rel="noopener">www.vsemayki.ru/doc/policy</a> и&nbsp;могут быть переданы третьим лицам, в&nbsp;соответствии с&nbsp;разделом 4&nbsp;Политики конфиденциальности, для реализации указанных целей.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">4.</span>В&nbsp;целях дополнительной защиты от&nbsp;мошеннических действий указанные Пользователем персональные данные могут быть переданы банку, осуществляющему транзакции по&nbsp;оплате оформленных заказов.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">5.</span>Обработка вышеуказанных персональных данных будет осуществляться путем смешанной обработки персональных данных (неавтоматизированной и&nbsp;автоматизированной), включая, сбор, систематизацию, накопление, хранение, уточнение (обновление, изменение использования), передачу, обезличивание, блокирование, уничтожение персональных данных.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">6.</span>Персональные данные субъекта персональных данных подлежат хранению в&nbsp;базе данных Сайта в&nbsp;зашифрованном виде и&nbsp;доступы для просмотра исключительно Сайтом в&nbsp;течение сроков, установленных законодательством РФ. По&nbsp;достижении целей обработки или в&nbsp;случае утраты необходимости в&nbsp;достижении этих целей, персональные данные уничтожаются. Срок, в&nbsp;течение которого действует настоящее согласие субъекта персональных данных&nbsp;— 5&nbsp;лет.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">7.</span>На&nbsp;основании письменного обращения субъекта персональных данных об&nbsp;отзыве настоящего согласия, направленному по&nbsp;адресу&nbsp;630007, г.Новосибирск, Красный проспект, дом 2/1, этаж: отметка -3,500, помещение 7&nbsp;или на адрес электронной почты info@vsemayki.ru, Оператор прекратит обработку персональных данных в&nbsp;течение&nbsp;3 (трех) рабочих дней, о&nbsp;чем будет направлено письменное уведомление субъекту персональных данных в&nbsp;течение&nbsp;10 (десяти) рабочих дней.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">8.</span>Обработка персональных данных прекращается в&nbsp;случае ликвидации или реорганизации ООО ВСЕМАРКЕТ.</p>
+</li>
+<li class="policy__list-item">
+<p><span class="policy__section-number">9.</span>Я&nbsp;согласен с&nbsp;тем, что по&nbsp;моему письменному требованию уведомление об&nbsp;уничтожении персональных данных будет вручаться мне (моему представителю) по&nbsp;месту нахождения Оператора.</p>
+</li>
+</ul>
+<br><br>
+<p>Подпись субъекта персональных данных (ФИО полностью):</p>
+<p>__________________________________________________</p>
+</div>
+
+    
+                
+</div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="content ">
+    <div class="container-fluid">
+
+        <div class="row">
+             
+
+            <div class="col-lg-8 col-lg-offset-2 wrap">
+                <noindex class="hidden-xs">
+                    
+                </noindex>
+
+                <div class="row hidden-xs hidden-sm widgets">
+                    <div class="col-lg-12">
+                        
+                    </div>
+                </div>
+
+                <div class="row seo-text">
+                    <div class="col-lg-12">
+                        
+                                                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer class="top-footer hidden-sm hidden-xs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-lg-8 col-lg-offset-2 wrap">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="top-footer-item dignity-guarantee">
+                            <div class="top-footer-item__title">Гарантия</div>
+                            <p>Качественные экологичные материалы.<br>Контроль каждого изделия</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="top-footer-item dignity-delivery">
+                            <div class="top-footer-item__title">Доставка</div>
+                            <p>Быстрая доставка по России.<br>Доставка по всему миру</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="top-footer-item  dignity-service">
+                            <div class="top-footer-item__title">Сервис</div>
+                            <p>Лёгкий процесс оплаты,<br> обмена и возврата</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<footer class="bottom-footer">
+    <div class="container-fluid">
+        <div class="row wrap">
+            <div class="col-md-3 col-sm-3">
+                <ul class="social-links" id="socials">
+                    <li class="social-links__button social-links__button--vk">
+                        <a class="social-links__link" href="//vk.com/club_vsemayki" target="_blank" itemprop="sameAs" rel="noopener noreferrer">
+                            <i class="fa fa-vk social-links__fa" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="social-links__button social-links__button--ok">
+                        <a class="social-links__link" href="//ok.ru/group/50868321255604" itemprop="sameAs" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-odnoklassniki social-links__fa" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="contacts" id="contacts">
+                    <div class="contacts__title">Контакты</div>
+                    <p>Телефон:
+                        <a class="tel" itemprop="telephone" href="tel:8 (495) 646-87-67">
+                            <span>8 (495) 646-87-67</span>
+                        </a>
+                    </p>
+                    <p><a itemprop="email" href="mailto:info@vsemayki.ru">info@vsemayki.ru</a></p>
+                    <p></p>
+                </div>
+                <div class="bottom-footer-agreement hidden-xs">
+                    © 2007-2023<br>
+                    <a tabindex="0" role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="Внимание" data-content="Все материалы данного сайта являются объектами авторского права (в том числе дизайн). Запрещается копирование, распространение или любое иное использование материалов сайта без предварительного согласия правообладателя. Нарушение авторских прав может влечь гражданско-правовую, административную и/или уголовную ответственность.">Все права защищены.</a> 18+
+                </div>
+            </div>
+
+            <div class="footer-menu col-md-7 col-sm-9">
+                <div class="row"><div class="col-sm-4 hidden-xs"><div class="footer-menu__title"><span>Информация</span></div><ul><li class="footer-menu__item"><a class="footer-menu__link" href="/doc/information/kak_sdelat_zakaz">Как сделать заказ?</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/deliverytype">Доставка</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/doc/information/brak">Обмен и возврат</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/status">Где мой заказ?</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/paymentoperation">Способы оплаты</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/doc/user_agreement">Пользовательское соглашение</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/promotions">Акции и скидки</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/doc/information/legal">Юридическая информация</a></li></ul></div><div class="col-sm-4 hidden-xs"><div class="footer-menu__title"><span>О компании</span></div><ul><li class="footer-menu__item"><a class="footer-menu__link" href="/doc/about">О нас</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/contacts">Контакты</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="https://novosibirsk.hh.ru/employer/873710" rel="nofollow">Вакансии</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/reviews">Отзывы</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/doc/production">Наше производство</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="/docs/certificates-vsemayki.zip">Сертификаты</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="https://blog.vsemayki.ru/" target="_blank" rel="nofollow noopener noreferrer">Блог Vsemayki</a></li></ul></div><div class="col-sm-4 hidden-xs"><div class="footer-menu__title"><span>Сотрудничество</span></div><ul><li class="footer-menu__item"><a class="footer-menu__link" href="https://opt.vsemayki.ru" target="_blank" rel="noopener noreferrer">Корпоративным клиентам</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="https://designers.vsemayki.ru/">Дизайнерам</a></li><li class="footer-menu__item"><a class="footer-menu__link" href="https://webmasters.vsemayki.ru/">Партнерская программа</a></li></ul></div></div>
+            </div>
+
+            <div class="col-md-2 col-sm-12">
+                <div class="apps col-md-12 col-sm-6 col-xs-12">
+                    <div class="ios-button col-md-12 col-sm-6 col-xs-6">
+                        <a href="https://redirect.appmetrica.yandex.com/serve/24840016337370637" target="_blank" rel="noopener noreferrer" data-utm-link="">
+                            <i class="fa fa-apple"></i>
+                            <span>Загрузите в&nbsp;<span class="company">AppStore</span></span>
+                        </a>
+                    </div>
+
+                    <div class="android-button col-md-12 col-sm-6 col-xs-6">
+                        <a href="https://redirect.appmetrica.yandex.com/serve/673358361655259554" target="_blank" rel="noopener noreferrer" data-utm-link="">
+                            <i class="icon-google-play"></i>
+                            <span>Загрузите в&nbsp;<span class="company">Google Play</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <a href="/paymentoperation" class="sprite vm-cards payment"></a>
+            </div>
+        </div>
+
+        
+        <div class="row visible-xs">
+            <div class="col-sm-5 text-center">
+                <a class="mobile-fullversion" href="/">
+                    <span class="mobile-fullversion-text">Перейти на полную версию сайта</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="bottom-footer-agreement hidden-lg hidden-md hidden-sm">
+            © 2007-2023<br>
+            <a tabindex="0" role="button" data-placement="top" data-toggle="popover" data-trigger="focus" title="Внимание" data-content="Все материалы данного сайта являются объектами авторского права (в том числе дизайн). Запрещается копирование, распространение или любое иное использование материалов сайта без предварительного согласия правообладателя. Нарушение авторских прав может влечь гражданско-правовую, административную и/или уголовную ответственность.">Все права защищены.</a> 18+
+        </div>
+    </div>
+</footer>
+
+<div id="mobile-app_popup"></div>
+
+<!-- Popups place -->
+
+    
+<!-- CITY SELECT -->
+<!-- desktop -->
+<div class="modal fade vm-modal" id="city" tabindex="-1" role="dialog" aria-labelledby="cityLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button class="close vm-modal__close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-title" id="cityLabel">Выберите ваш город</div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="city-content">
+
+                            <form class="select_city_form select-city-for-delivery" data-alias="userLocation">
+                                <div class="form-group col-sm-4 col-xs-6">
+                                    <label class="sr-only" for="country_select">Страна:</label>
+                                    <select class="country_select form-control" id="country_select">
+                                        <option value="ru" selected="selected">Россия</option>
+                                        <option value="kz">Казахстан</option>
+                                        <option value="by">Беларусь</option>
+                                        <option value="kg">Киргизия</option>
+                                        <option value="am">Армения</option>
+                                        <option value="ua">Украина</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-sm-8 col-xs-6">
+                                    <input class="form-control address_city" type="text" placeholder="Москва" style="display: none;" onkeydown="javascript:if(13==event.keyCode){return false;}">
+
+                                    <input class="form-control address_city_fias" type="text" placeholder="Москва" onkeydown="javascript:if(13==event.keyCode){return false;}">
+
+                                    <input class="address_cityy" type="hidden" value="">
+
+                                    <input class="address_region" type="hidden" value="">
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <label>Популярные</label>
+                                    <div class="form-group city-list  cf">
+                                        <div class="col-sm-4">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Москва" data-city-id="1" data-region-name="Москва">Москва</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Санкт-Петербург" data-city-id="2" data-region-name="Санкт-Петербург">Санкт-Петербург</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Новосибирск" data-city-id="3" data-region-name="Новосибирская обл" data-region-type="обл.">Новосибирск</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Екатеринбург" data-city-id="61" data-region-name="Свердловская обл" data-region-type="обл." data-vm-domain="ekb">Екатеринбург</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Нижний Новгород" data-city-id="39" data-region-name="Нижегородская обл" data-region-type="обл.">Нижний Новгород</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Омск" data-city-id="53" data-region-name="Омская обл" data-region-type="обл.">Омск</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Ростов-на-Дону" data-city-id="115" data-region-name="Ростовская обл" data-region-type="обл.">Ростов-на-Дону</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Пермь" data-city-id="35" data-region-name="Пермский край" data-region-type="край">Пермь</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Волгоград" data-city-id="129" data-region-name="Волгоградская обл" data-region-type="обл.">Волгоград</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Уфа" data-city-id="115" data-region-name="Башкортостан республика" data-region-type="респ.">Уфа</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Красноярск" data-city-id="49" data-region-name="Красноярский край" data-region-type="край">Красноярск</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Казань" data-city-id="31" data-region-name="Татарстан" data-region-type="респ.">Казань</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Самара" data-city-id="105" data-region-name="Самарская обл" data-region-type="обл.">Самара</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Челябинск" data-city-id="69" data-region-name="Челябинская обл" data-region-type="обл.">Челябинск</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="select_city" title="Краснодар" data-city-id="93" data-region-name="Краснодарский край" data-region-type="край">Краснодар</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CITY SELECT END -->
+    <!-- LOCALSTORAGE POPUP FOR FORMS -->
+<!-- desktop -->
+<div class="modal fade vm-modal" id="localstorage_error_popup" tabindex="-1" role="dialog" aria-labelledby="localstorage_error_popupLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close vm-modal__close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span class="vm-modal__close-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="modal-title" id="localstorage_error_popupLabel">Внимание</div>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        К&nbsp;сожалению добавление в&nbsp;корзину в&nbsp;режиме «инкогнито» не&nbsp;работает на&nbsp;мобильных устройствах.
+                        Мы&nbsp;обязательно исправим это, а&nbsp;пока вы&nbsp;можете сделать заказ, переключив браузер в&nbsp;обычный режим.
+                        Спасибо.
+                    </p>
+
+                    <div class="buttons text-center">
+                        <input class="btn btn-vm vm-modal__button" type="submit" value="ОК" data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- LOCALSTORAGE POPUP END -->
+    <!-- ANDROID APP -->
+<!-- mobile -->
+<div class="modal fade vm-modal" id="android_app_popup" tabindex="-1" role="dialog" aria-labelledby="android_app_popupLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img class="icon" src="/media/img/android-app-128x128.jpg?v=1649319654">
+                    <div class="promo-text">Попробуйте наше<br> приложение для Android:</div>
+                    <a class="btn btn-vm" id="goto_download" href="https://redirect.appmetrica.yandex.com/serve/385001728631722962" onclick="setCookie('android-promo-show', '1')" data-utm-link="">Скачать приложение</a>
+                    <div class="gray-link"><a href="#" data-dismiss="modal">продолжить просмотр в&nbsp;браузере</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ANDROID APP END -->
+    
+<!-- EMPTY -->
+<!-- desktop -->
+<div class="modal fade vm-modal" id="empty" tabindex="-1" role="dialog" aria-labelledby="emptyLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close vm-modal__close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-title" id="emptyLabel"></div>
+                </div>
+                <div class="modal-body">
+                    <p class="text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- EMPTY END -->
+
+<!-- EMPTY CALLBACK -->
+<!-- desktop -->
+<div class="modal fade vm-modal" id="empty_callback" tabindex="-1" role="dialog" aria-labelledby="empty_callbackLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close vm-modal__close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-title" id="empty_callbackLabel"></div>
+                </div>
+
+                <div class="modal-body">
+                    <p class="text"></p>
+                    <div class="buttons text-center">
+                        <input class="btn btn-vm vm-modal__button" type="submit" value="ОК" data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- EMPTY END -->
+
+<!-- TROUBLE -->
+<!-- desktop -->
+<div class="modal fade vm-modal" id="trouble" tabindex="-1" role="dialog" aria-labelledby="troubleLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close vm-modal__close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-title" id="troubleLabel">Сообщите нам о&nbsp;проблеме</div>
+                </div>
+
+                <div class="modal-body">
+                    <form class="form-horizontal" id="trouble_form" onsubmit="troSubmit();return false;">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="text1">Текст сообщения:</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" id="text1" name="feedback[text]" placeholder="Детально опишите возникшую проблему"></textarea>
+                                <p class="error"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="email5">E-mail:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="email" name="feedback[email]" id="email5" placeholder="Введите ваш e-mail для обратной связи">
+                                <p class="error emailfield"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group buttons text-center">
+                            <input class="btn btn-vm vm-modal__button" type="submit" value="Отправить">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- TROUBLE END -->
+
+<!-- COPYRIGHTS -->
+<!-- desktop -->
+<div class="modal fade vm-modal" id="copyrights" tabindex="-1" role="dialog" aria-labelledby="copyrightsLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog modal-lg vertical-align-center modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close vm-modal__close" data-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-title" id="copyrightsLabel">Нарушение авторских прав</div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="copyrights-content">
+                                <div class="col-sm-6 desc">
+                                    <p class="lead">Все макеты на&nbsp;сайте Vsemayki.ru создаются пользователями
+                                        с&nbsp;соблюдением авторских прав. Если вы&nbsp;уверены, что данное изображение нарушает
+                                        ваши авторские права и&nbsp;используется несанкционированно, пожалуйста, заполните
+                                        форму. Если вы&nbsp;являетесь правообладателем и&nbsp;у&nbsp;вас есть документы, подтверждающие
+                                        ваше право на&nbsp;изображение (зарегистрированный товарный знак), отметьте это
+                                        в&nbsp;форме и&nbsp;по&nbsp;возможности укажите ссылку на&nbsp;сайт в&nbsp;сообщении.</p>
+
+                                    <p class="lead">Все Ваши обращения будут рассмотрены и&nbsp;мы&nbsp;примем соответствующие
+                                        меры. Заранее спасибо.</p>
+
+                                    <p>
+                                        Название макета: <a href="#" class="copyrights-name-product"></a><br>
+                                        Дизайнер: <span class="copyrights-disigner"></span>
+                                    </p>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <form id="copyrights_form" onsubmit="return false;">
+                                        <div class="form-group">
+                                            <label class="control-label" for="copyrights_user_name">Ваше имя:</label>
+                                            <input class="form-control" id="copyrights_user_name" type="text" name="form[name]">
+                                            <p class="error"></p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="copyrights_user_phone">Телефон для связи:</label>
+                                            <input class="form-control" id="copyrights_user_phone" type="tel" name="form[phone]">
+                                            <p class="error"></p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="copyrights_user_email">Ваш email:</label>
+                                            <input class="form-control" id="copyrights_user_email" type="email" name="form[email]">
+                                            <p class="error"></p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="copyrights_user_meassage">Сообщение:</label>
+                                            <textarea class="form-control" id="copyrights_user_meassage" name="form[text]"></textarea>
+                                            <p class="error"></p>
+                                        </div>
+
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="chck1" name="form[is_rightholder]">
+                                                Я&nbsp;являюсь правообладателем
+                                            </label>
+                                        </div>
+
+                                        <div class="button">
+                                            <button class="btn btn-block btn-vm vm-modal__button" id="senderCopyrightsMessage" type="button" onclick="sendCopyrightsMessage(); return false;">Отправить</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- COPYRIGHTS END -->
+
+<!-- SIMPLE POPUP FOR FORMS -->
+<!-- desktop -->
+<div class="modal fade vm-modal" id="simple_popup" tabindex="-1" role="dialog" aria-labelledby="simple_popupLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close vm-modal__close" type="button" data-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-title" id="simple_popupLabel"></div>
+                </div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- SIMPLE POPUP END -->
+
+<!-- INSTAWIDGET -->
+<!-- desktop -->
+<div class="modal fade vm-modal" id="instawidget_popup" tabindex="-1" role="dialog" aria-labelledby="instawidget_popupLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close vm-modal__close" type="button" data-dismiss="modal" aria-label="Close"></button>
+
+                    <span class="button button-prev">
+                        <i class="fa fa-angle-left"></i>
+                    </span>
+
+                    <span class="button button-next">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+
+                    <div class="row">
+                        <div class="photo col-sm-8">
+                            <img class="img-responsive" src="">
+                            <div class="likes hidden">
+                                <i class="fa fa-heart"></i>
+                                <span class="counter"></span>
+                            </div>
+                        </div>
+
+                        <div class="info col-sm-4">
+                            <div>
+                                <p class="caption"></p>
+                                <img class="img-responsive product-image" src="">
+                                <p>
+                                    <a class="btn btn-lg btn-block btn-vm" href="#">
+                                        <i class="fa fa-shopping-cart"></i> Купить
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- INSTAWIDGET END -->
+
+
+
+
+<!-- Scripts -->
+<script src="/assets/js/footer.vendors.min.js?v=DEFAULT-1055"></script>
+<script src="/assets/js/footer.scripts.min.js?v=DEFAULT-mn1671197829"></script>
+<script src="/assets/js/footerMayki.js?ver=f5d4db38"></script>
+<iframe src="https://creativecdn.com/tags?id=pr_PU9PkFH2Jux4IaiZY1Fa&amp;ncm=1" scrolling="no" style="display: none;" width="1" height="1" frameborder="0"></iframe>
+
+<script>
+    var cartRoute = '/cart';
+    var vsemaykiLogoUrl = '/media/img/content/logos/vm_main.svg?v=1649319654';
+
+    $(function(){
+        var cities = [];
+
+        
+        $('#go_to_cart_button').on('click', function () {
+            cart.goToCart('/cart');
+
+            return false
+        });
+
+    });
+</script>
+
+
+<div id="react-portal-container"></div>
+
+
+
+</body></html>

@@ -1,0 +1,935 @@
+<html lang="ru"><head><style>:root{--litepicker-container-months-color-bg: #fff;--litepicker-container-months-box-shadow-color: #ddd;--litepicker-footer-color-bg: #fafafa;--litepicker-footer-box-shadow-color: #ddd;--litepicker-tooltip-color-bg: #fff;--litepicker-month-header-color: #333;--litepicker-button-prev-month-color: #9e9e9e;--litepicker-button-next-month-color: #9e9e9e;--litepicker-button-prev-month-color-hover: #2196f3;--litepicker-button-next-month-color-hover: #2196f3;--litepicker-month-width: calc(var(--litepicker-day-width) * 7);--litepicker-month-weekday-color: #9e9e9e;--litepicker-month-week-number-color: #9e9e9e;--litepicker-day-width: 38px;--litepicker-day-color: #333;--litepicker-day-color-hover: #2196f3;--litepicker-is-today-color: #f44336;--litepicker-is-in-range-color: #bbdefb;--litepicker-is-locked-color: #9e9e9e;--litepicker-is-start-color: #fff;--litepicker-is-start-color-bg: #2196f3;--litepicker-is-end-color: #fff;--litepicker-is-end-color-bg: #2196f3;--litepicker-button-cancel-color: #fff;--litepicker-button-cancel-color-bg: #9e9e9e;--litepicker-button-apply-color: #fff;--litepicker-button-apply-color-bg: #2196f3;--litepicker-button-reset-color: #909090;--litepicker-button-reset-color-hover: #2196f3;--litepicker-highlighted-day-color: #333;--litepicker-highlighted-day-color-bg: #ffeb3b}.show-week-numbers{--litepicker-month-width: calc(var(--litepicker-day-width) * 8)}.litepicker{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:0.8em;display:none}.litepicker button{border:none;background:none}.litepicker .container__main{display:-webkit-box;display:-ms-flexbox;display:flex}.litepicker .container__months{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;background-color:var(--litepicker-container-months-color-bg);border-radius:5px;-webkit-box-shadow:0 0 5px var(--litepicker-container-months-box-shadow-color);box-shadow:0 0 5px var(--litepicker-container-months-box-shadow-color);width:calc(var(--litepicker-month-width) + 10px);-webkit-box-sizing:content-box;box-sizing:content-box}.litepicker .container__months.columns-2{width:calc((var(--litepicker-month-width) * 2) + 20px)}.litepicker .container__months.columns-3{width:calc((var(--litepicker-month-width) * 3) + 30px)}.litepicker .container__months.columns-4{width:calc((var(--litepicker-month-width) * 4) + 40px)}.litepicker .container__months.split-view .month-item-header .button-previous-month,.litepicker .container__months.split-view .month-item-header .button-next-month{visibility:visible}.litepicker .container__months .month-item{padding:5px;width:var(--litepicker-month-width);-webkit-box-sizing:content-box;box-sizing:content-box}.litepicker .container__months .month-item-header{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-weight:500;padding:10px 5px;text-align:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;color:var(--litepicker-month-header-color)}.litepicker .container__months .month-item-header div{-webkit-box-flex:1;-ms-flex:1;flex:1}.litepicker .container__months .month-item-header div>.month-item-name{margin-right:5px}.litepicker .container__months .month-item-header div>.month-item-year{padding:0}.litepicker .container__months .month-item-header .reset-button{color:var(--litepicker-button-reset-color)}.litepicker .container__months .month-item-header .reset-button>svg{fill:var(--litepicker-button-reset-color)}.litepicker .container__months .month-item-header .reset-button *{pointer-events:none}.litepicker .container__months .month-item-header .reset-button:hover{color:var(--litepicker-button-reset-color-hover)}.litepicker .container__months .month-item-header .reset-button:hover>svg{fill:var(--litepicker-button-reset-color-hover)}.litepicker .container__months .month-item-header .button-previous-month,.litepicker .container__months .month-item-header .button-next-month{visibility:hidden;text-decoration:none;padding:3px 5px;border-radius:3px;-webkit-transition:color 0.3s, border 0.3s;transition:color 0.3s, border 0.3s;cursor:default}.litepicker .container__months .month-item-header .button-previous-month *,.litepicker .container__months .month-item-header .button-next-month *{pointer-events:none}.litepicker .container__months .month-item-header .button-previous-month{color:var(--litepicker-button-prev-month-color)}.litepicker .container__months .month-item-header .button-previous-month>svg,.litepicker .container__months .month-item-header .button-previous-month>img{fill:var(--litepicker-button-prev-month-color)}.litepicker .container__months .month-item-header .button-previous-month:hover{color:var(--litepicker-button-prev-month-color-hover)}.litepicker .container__months .month-item-header .button-previous-month:hover>svg{fill:var(--litepicker-button-prev-month-color-hover)}.litepicker .container__months .month-item-header .button-next-month{color:var(--litepicker-button-next-month-color)}.litepicker .container__months .month-item-header .button-next-month>svg,.litepicker .container__months .month-item-header .button-next-month>img{fill:var(--litepicker-button-next-month-color)}.litepicker .container__months .month-item-header .button-next-month:hover{color:var(--litepicker-button-next-month-color-hover)}.litepicker .container__months .month-item-header .button-next-month:hover>svg{fill:var(--litepicker-button-next-month-color-hover)}.litepicker .container__months .month-item-weekdays-row{display:-webkit-box;display:-ms-flexbox;display:flex;justify-self:center;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;color:var(--litepicker-month-weekday-color)}.litepicker .container__months .month-item-weekdays-row>div{padding:5px 0;font-size:85%;-webkit-box-flex:1;-ms-flex:1;flex:1;width:var(--litepicker-day-width);text-align:center}.litepicker .container__months .month-item:first-child .button-previous-month{visibility:visible}.litepicker .container__months .month-item:last-child .button-next-month{visibility:visible}.litepicker .container__months .month-item.no-previous-month .button-previous-month{visibility:hidden}.litepicker .container__months .month-item.no-next-month .button-next-month{visibility:hidden}.litepicker .container__days{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;justify-self:center;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:center;-webkit-box-sizing:content-box;box-sizing:content-box}.litepicker .container__days>div,.litepicker .container__days>a{padding:5px 0;width:var(--litepicker-day-width)}.litepicker .container__days .day-item{color:var(--litepicker-day-color);text-align:center;text-decoration:none;border-radius:3px;-webkit-transition:color 0.3s, border 0.3s;transition:color 0.3s, border 0.3s;cursor:default}.litepicker .container__days .day-item:hover{color:var(--litepicker-day-color-hover);-webkit-box-shadow:inset 0 0 0 1px var(--litepicker-day-color-hover);box-shadow:inset 0 0 0 1px var(--litepicker-day-color-hover)}.litepicker .container__days .day-item.is-today{color:var(--litepicker-is-today-color)}.litepicker .container__days .day-item.is-locked{color:var(--litepicker-is-locked-color)}.litepicker .container__days .day-item.is-locked:hover{color:var(--litepicker-is-locked-color);-webkit-box-shadow:none;box-shadow:none;cursor:default}.litepicker .container__days .day-item.is-in-range{background-color:var(--litepicker-is-in-range-color);border-radius:0}.litepicker .container__days .day-item.is-start-date{color:var(--litepicker-is-start-color);background-color:var(--litepicker-is-start-color-bg);border-top-left-radius:5px;border-bottom-left-radius:5px;border-top-right-radius:0;border-bottom-right-radius:0}.litepicker .container__days .day-item.is-start-date.is-flipped{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px}.litepicker .container__days .day-item.is-end-date{color:var(--litepicker-is-end-color);background-color:var(--litepicker-is-end-color-bg);border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px}.litepicker .container__days .day-item.is-end-date.is-flipped{border-top-left-radius:5px;border-bottom-left-radius:5px;border-top-right-radius:0;border-bottom-right-radius:0}.litepicker .container__days .day-item.is-start-date.is-end-date{border-top-left-radius:5px;border-bottom-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px}.litepicker .container__days .day-item.is-highlighted{color:var(--litepicker-highlighted-day-color);background-color:var(--litepicker-highlighted-day-color-bg)}.litepicker .container__days .week-number{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;color:var(--litepicker-month-week-number-color);font-size:85%}.litepicker .container__footer{text-align:right;padding:10px 5px;margin:0 5px;background-color:var(--litepicker-footer-color-bg);-webkit-box-shadow:inset 0px 3px 3px 0px var(--litepicker-footer-box-shadow-color);box-shadow:inset 0px 3px 3px 0px var(--litepicker-footer-box-shadow-color);border-bottom-left-radius:5px;border-bottom-right-radius:5px}.litepicker .container__footer .preview-date-range{margin-right:10px;font-size:90%}.litepicker .container__footer .button-cancel{background-color:var(--litepicker-button-cancel-color-bg);color:var(--litepicker-button-cancel-color);border:0;padding:3px 7px 4px;border-radius:3px}.litepicker .container__footer .button-cancel *{pointer-events:none}.litepicker .container__footer .button-apply{background-color:var(--litepicker-button-apply-color-bg);color:var(--litepicker-button-apply-color);border:0;padding:3px 7px 4px;border-radius:3px;margin-left:10px;margin-right:10px}.litepicker .container__footer .button-apply:disabled{opacity:0.7}.litepicker .container__footer .button-apply *{pointer-events:none}.litepicker .container__tooltip{position:absolute;margin-top:-4px;padding:4px 8px;border-radius:4px;background-color:var(--litepicker-tooltip-color-bg);-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.25);box-shadow:0 1px 3px rgba(0,0,0,0.25);white-space:nowrap;font-size:11px;pointer-events:none;visibility:hidden}.litepicker .container__tooltip:before{position:absolute;bottom:-5px;left:calc(50% - 5px);border-top:5px solid rgba(0,0,0,0.12);border-right:5px solid transparent;border-left:5px solid transparent;content:""}.litepicker .container__tooltip:after{position:absolute;bottom:-4px;left:calc(50% - 4px);border-top:4px solid var(--litepicker-tooltip-color-bg);border-right:4px solid transparent;border-left:4px solid transparent;content:""}
+</style><style>:root {
+  --litepicker-mobilefriendly-backdrop-color-bg: #000;
+}
+
+.litepicker-backdrop {
+  display: none;
+  background-color: var(--litepicker-mobilefriendly-backdrop-color-bg);
+  opacity: 0.3;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.litepicker-open {
+  overflow: hidden;
+}
+
+.litepicker.mobilefriendly[data-plugins*="mobilefriendly"] {
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  --litepicker-container-months-box-shadow-color: #616161;
+}
+.litepicker.mobilefriendly-portrait {
+  --litepicker-day-width: 13.5vw;
+  --litepicker-month-width: calc(var(--litepicker-day-width) * 7);
+}
+.litepicker.mobilefriendly-landscape {
+  --litepicker-day-width: 5.5vw;
+  --litepicker-month-width: calc(var(--litepicker-day-width) * 7);
+}
+
+.litepicker[data-plugins*="mobilefriendly"] .container__months {
+  overflow: hidden;
+}
+
+.litepicker.mobilefriendly[data-plugins*="mobilefriendly"] .container__months .month-item-header {
+  height: var(--litepicker-day-width);
+}
+
+.litepicker.mobilefriendly[data-plugins*="mobilefriendly"] .container__days > div {
+  height: var(--litepicker-day-width);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.litepicker[data-plugins*="mobilefriendly"] .container__months .month-item {
+  transform-origin: center;
+}
+
+.litepicker[data-plugins*="mobilefriendly"] .container__months .month-item.touch-target-next {
+  animation-name: lp-bounce-target-next;
+  animation-duration: .5s;
+  animation-timing-function: ease;
+}
+
+.litepicker[data-plugins*="mobilefriendly"] .container__months .month-item.touch-target-prev {
+  animation-name: lp-bounce-target-prev;
+  animation-duration: .5s;
+  animation-timing-function: ease;
+}
+
+@keyframes lp-bounce-target-next {
+  from {
+    transform: translateX(100px) scale(0.5);
+  }
+  to {
+    transform: translateX(0px) scale(1);
+  }
+}
+
+@keyframes lp-bounce-target-prev {
+  from {
+    transform: translateX(-100px) scale(0.5);
+  }
+  to {
+    transform: translateX(0px) scale(1);
+  }
+}</style>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <link rel="apple-touch-icon" sizes="115x115" href="/favicon/favicon-115x115.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" crossorigin="use-credentials" href="/favicon/manifest.json">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#22449c">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml">
+    <meta name="msapplication-TileColor" content="#22449c">
+    <meta name="theme-color" content="#ffffff">
+    <!--meta name="viewport" content="width=1200px"-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">            
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Политика конфиденциальности портала Azur.ru</title>
+    <meta name="description" content="Настоящая политика конфиденциальности распространяется на пользование услугами и сервисами туристического интернет-портала Azur.ru">
+
+    <meta property="og:site_name" content="Azur">
+    <meta property="og:title" content="Политика конфиденциальности портала Azur...">
+    <meta property="og:url" content="https://azur.ru/policy/">
+    <meta property="og:description" content="Настоящая политика конфиденциальности распространяется на пользование услугами и сервисами туристического интернет-портала Azur...">
+    <meta property="og:image" itemprop="image" content="/favicon/favicon-300x300.png">
+    <meta property="og:type" content="website">
+    <meta name="yandex-verification" content="51db691a9782d14a">
+        <link rel="canonical" href="https://azur.ru/policy/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/new/css/slick.css?1651840838">
+    <link rel="stylesheet" href="/new/css/litepicker.css?1651840838">
+    <link rel="stylesheet" href="/new/css/jquery.fancybox.min.css?1651840838">
+    <link rel="stylesheet" href="/new/css/nouislider.css?1651840838">
+    <link rel="stylesheet" href="/new/css/select2.min.css?1651840838">
+    <link rel="stylesheet" href="/new/css/jquery.mCustomScrollbar.min.css?1651840838">
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css">
+
+        <link rel="stylesheet" href="/new/css/main.css?1654263372">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script type="text/javascript" async="" id="topmailru-code" src="https://top-fwz1.mail.ru/js/code.js"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-240687-2');
+    </script>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style>.swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;overflow-y:hidden;background:#fff;box-shadow:0 0 .625em #d9d9d9}.swal2-popup.swal2-toast .swal2-header{flex-direction:row;padding:0}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:static;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;padding:0;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:700}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{font-size:.25em}}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{flex-basis:auto!important;width:auto;height:auto;margin:0 .3125em}.swal2-popup.swal2-toast .swal2-styled{margin:0 .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(50,100,150,.4)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-container{display:flex;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:.625em;overflow-x:hidden;transition:background-color .1s;-webkit-overflow-scrolling:touch}.swal2-container.swal2-backdrop-show,.swal2-container.swal2-noanimation{background:rgba(0,0,0,.4)}.swal2-container.swal2-backdrop-hide{background:0 0!important}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{margin-top:auto}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-no-transition{transition:none!important}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-popup{display:none;position:relative;box-sizing:border-box;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border:none;border-radius:.3125em;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-header{display:flex;flex-direction:column;align-items:center;padding:0 1.8em}.swal2-title{position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-actions.swal2-loading .swal2-styled.swal2-confirm{box-sizing:border-box;width:2.5em;height:2.5em;margin:.46875em;padding:0;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:.25em solid transparent;border-radius:100%;border-color:transparent;background-color:transparent!important;color:transparent!important;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-actions.swal2-loading .swal2-styled.swal2-cancel{margin-right:30px;margin-left:30px}.swal2-actions.swal2-loading :not(.swal2-styled).swal2-confirm::after{content:"";display:inline-block;width:15px;height:15px;margin-left:5px;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:3px solid #999;border-radius:50%;border-right-color:transparent;box-shadow:1px 1px 1px #fff}.swal2-styled{margin:.3125em;padding:.625em 2em;box-shadow:none;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#3085d6;color:#fff;font-size:1.0625em}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#aaa;color:#fff;font-size:1.0625em}.swal2-styled:focus{outline:0;box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(50,100,150,.4)}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;height:.25em;overflow:hidden;border-bottom-right-radius:.3125em;border-bottom-left-radius:.3125em}.swal2-timer-progress-bar{width:100%;height:.25em;background:rgba(0,0,0,.2)}.swal2-image{max-width:100%;margin:1.25em auto}.swal2-close{position:absolute;z-index:2;top:0;right:0;align-items:center;justify-content:center;width:1.2em;height:1.2em;padding:0;overflow:hidden;transition:color .1s ease-out;border:none;border-radius:0;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-close::-moz-focus-inner{border:0}.swal2-content{z-index:1;justify-content:center;margin:0;padding:0 1.6em;color:#545454;font-size:1.125em;font-weight:400;line-height:normal;text-align:center;word-wrap:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em auto}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 3px #c4e6f5}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::-ms-input-placeholder,.swal2-input::-ms-input-placeholder,.swal2-textarea::-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em auto;background:#fff}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:#fff;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{margin:0 .4em}.swal2-validation-message{display:none;align-items:center;justify-content:center;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:"!";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;border:.25em solid transparent;border-radius:50%;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474;color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-error.swal2-icon-show{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86;color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-progress-steps{align-items:center;margin:0 0 1.25em;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;width:2em;height:2em;border-radius:2em;background:#3085d6;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#3085d6}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;width:2.5em;height:.4em;margin:0 -1px;background:#3085d6}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{right:auto;left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-moz-document url-prefix(){.swal2-close:focus{outline:2px solid rgba(50,100,150,.4)}}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-container{top:auto;right:auto;bottom:auto;left:auto;max-width:calc(100% - .625em * 2);background-color:transparent!important}body.swal2-no-backdrop .swal2-container>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-container.swal2-top{top:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-top-left,body.swal2-no-backdrop .swal2-container.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-top-end,body.swal2-no-backdrop .swal2-container.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-container.swal2-center{top:50%;left:50%;transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-left,body.swal2-no-backdrop .swal2-container.swal2-center-start{top:50%;left:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-end,body.swal2-no-backdrop .swal2-container.swal2-center-right{top:50%;right:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom{bottom:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom-left,body.swal2-no-backdrop .swal2-container.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-bottom-end,body.swal2-no-backdrop .swal2-container.swal2-bottom-right{right:0;bottom:0}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}body.swal2-toast-shown .swal2-container{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validation-message{font-size:1em}</style></head>
+<body class="">
+<div class="wrapper">        
+    
+
+<header class="header">
+    <div class="top" id="top">
+        <div class="contain">
+            <div class="top-w">
+                <a href="/" class="logo"><img src="https://uploads-ssl.webflow.com/616e5f3df5a97f09e3e547c2/616e60e097a93bee5c7a8d16_logo.svg" class="logo-img loading" data-was-processed="true"></a>
+                <a href="#" class="burger">
+                    <div class="burger-icon"></div>
+                    <div class="burger-txt hide-767">Курорты</div>
+                    <div class="burger-txt show-767">Меню</div>
+                </a>
+                <div class="resort-open">
+                                        <div class="top-btns cpadding show-767">
+                        <a href="/wishlist/" class="btn-wh btn-min" style="margin-right: auto;">
+                            <img src="/new/img/like.svg?1651840839" class="btn-icon">
+                            <span class="wishlist-count">0</span>
+                        </a>
+                        <a href="/account/login" class="btn btn-min top-btn-wh">
+                            <img src="/new/img/user-i.svg" class="btn-icon">
+                            <div>Войти</div>
+                        </a>
+                        <a href="/account/owners/add" class="btn-wh btn-min top-btn-wh">
+                            <img src="/new/img/plus-icon.svg" class="btn-icon">
+                            <div>Разместить объект</div>
+                        </a>
+                    </div>
+
+                    <div class="resort-top">
+                        <ul class="resort-controls tabs-control-1">
+                                                            <li class="resort-control-item tabs_control_item active">
+                                    <a href="#" class="resort-control-link tabs_control_link">Абхазия</a>
+                                                                        <ul class="resort-child-list">
+                                                                                                                                    <li class="resort-child-list-it">
+                                                    <a href="/tsandripsh/" class="resort-child-link">Цандрипш</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/gagra/" class="resort-child-link">Гагра</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/alahadzy/" class="resort-child-link">Алахадзы</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/picunda/" class="resort-child-link">Пицунда</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/gudauta/" class="resort-child-link">Гудаута</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/afon/" class="resort-child-link">Новый Афон</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/suhumi/" class="resort-child-link">Сухум</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/gulripsh/" class="resort-child-link">Гулрыпш</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/ochamchira/" class="resort-child-link">Очамчыра</a>
+                                                </li>
+                                                                                                                        </ul>
+                                </li>
+                                                            <li class="resort-control-item tabs_control_item ">
+                                    <a href="#" class="resort-control-link tabs_control_link">Сочи</a>
+                                                                        <ul class="resort-child-list">
+                                                                                                                                    <li class="resort-child-list-it">
+                                                    <a href="/veseloe/" class="resort-child-link">Сириус</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/adler/" class="resort-child-link">Адлер</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/hosta/" class="resort-child-link">Хоста и Кудепста</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/sochi/" class="resort-child-link">Сочи</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/dagomys/" class="resort-child-link">Дагомыс</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/loo/" class="resort-child-link">Лоо и Горный Воздух</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/vardane/" class="resort-child-link">Вардане и Нижняя Хобза</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/yakornaya/" class="resort-child-link">Якорная Щель и Беранда</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/golovinka/" class="resort-child-link">Головинка и Каткова щель</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/soloniki/" class="resort-child-link">Солоники и Волконка</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/lazarevsk/" class="resort-child-link">Лазаревское</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/ashe/" class="resort-child-link">Аше и Голубая дача</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/vishnevka/" class="resort-child-link">Вишнёвка - Совет-Квадже</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/krasnya/" class="resort-child-link">Красная Поляна</a>
+                                                </li>
+                                                                                                                        </ul>
+                                </li>
+                                                            <li class="resort-control-item tabs_control_item ">
+                                    <a href="#" class="resort-control-link tabs_control_link">Крым</a>
+                                                                        <ul class="resort-child-list">
+                                                                                                                                                                                    <li class="resort-child-list-it">
+                                                    <span class="resort-child-region">Западный берег Крыма</span>
+                                                    <ul>
+                                                                                                                    <li>
+                                                                <a href="/balaklava/">Балаклава</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/sevastopol/">Севастополь</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/kacha/">Кача и Орловка</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/peschanoe/">Песчаное и Береговое</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/nikolaevka/">Николаевка</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/saki/">Саки и Новофёдоровка</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/evpatoriya/">Евпатория</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/zaozernoe/">Заозёрное</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/mirnuy/">Поповка и Штормовое</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/olenevka/">Оленевка</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/chernomor/">Черноморский район</a>
+                                                            </li>
+                                                                                                            </ul>
+                                                </li>
+                                                                                                                                            <li class="resort-child-list-it">
+                                                    <span class="resort-child-region">Южный берег Крыма</span>
+                                                    <ul>
+                                                                                                                    <li>
+                                                                <a href="/privetnoe/">Приветное и Канака</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/rybachiye/">Рыбачье</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/malorechka/">Малореченское</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/alushta/">Алушта</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/partenit/">Партенит и Утёс</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/gurzuf/">Гурзуф</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/yalta/">Ялта</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/alupka/">Алупка - Гаспра</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/simeiz/">Симеиз</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/foros/">Форос</a>
+                                                            </li>
+                                                                                                            </ul>
+                                                </li>
+                                                                                                                                            <li class="resort-child-list-it">
+                                                    <span class="resort-child-region">Восточный берег Крыма</span>
+                                                    <ul>
+                                                                                                                    <li>
+                                                                <a href="/kerch/">Керчь и Героевское</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/schelkino/">Щёлкино и Ленинский район</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/feodosia/">Феодосия</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/primorskiy/">Приморский и Береговое</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/ordjo/">Орджоникидзе</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/koktebel/">Коктебель</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/kurortnoe/">Курортное</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/sundolina/">Солнечная Долина</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/sudak/">Судак</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/newsvet/">Новый Свет</a>
+                                                            </li>
+                                                                                                                    <li>
+                                                                <a href="/morskoe/">Морское и Веселое</a>
+                                                            </li>
+                                                                                                            </ul>
+                                                </li>
+                                                                                                                        </ul>
+                                </li>
+                                                            <li class="resort-control-item tabs_control_item ">
+                                    <a href="#" class="resort-control-link tabs_control_link">Геленджик</a>
+                                                                        <ul class="resort-child-list">
+                                                                                                                                    <li class="resort-child-list-it">
+                                                    <a href="/kabardinka/" class="resort-child-link">Кабардинка</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/buhta/" class="resort-child-link">Голубая Бухта</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/gelendzhik/" class="resort-child-link">Геленджик</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/divnomorsk/" class="resort-child-link">Дивноморское</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/dzhanxot/" class="resort-child-link">Джанхот и Прасковеевка</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/betta/" class="resort-child-link">Бетта и Криница</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/arxipka/" class="resort-child-link">Архипо-Осиповка</a>
+                                                </li>
+                                                                                                                        </ul>
+                                </li>
+                                                            <li class="resort-control-item tabs_control_item ">
+                                    <a href="#" class="resort-control-link tabs_control_link">Анапа</a>
+                                                                        <ul class="resort-child-list">
+                                                                                                                                    <li class="resort-child-list-it">
+                                                    <a href="/blago/" class="resort-child-link">Благовещенская</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/vitazevo/" class="resort-child-link">Витязево</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/dzhemete/" class="resort-child-link">Джемете</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/anapa/" class="resort-child-link">Анапа</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/sykko/" class="resort-child-link">Сукко</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/ytrish/" class="resort-child-link">Большой Утриш</a>
+                                                </li>
+                                                                                                                        </ul>
+                                </li>
+                                                            <li class="resort-control-item tabs_control_item ">
+                                    <a href="#" class="resort-control-link tabs_control_link">Туапсе</a>
+                                                                        <ul class="resort-child-list">
+                                                                                                                                    <li class="resort-child-list-it">
+                                                    <a href="/inal/" class="resort-child-link">Бухта Инал</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/dgybga/" class="resort-child-link">Джубга</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/lermontovo/" class="resort-child-link">Лермонтово</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/newmih/" class="resort-child-link">Новомихайловский</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/olginka/" class="resort-child-link">Ольгинка</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/nebug/" class="resort-child-link">Небуг</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/agoi/" class="resort-child-link">Агой</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/tyapse/" class="resort-child-link">Туапсе</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/dederkoy/" class="resort-child-link">Дедеркой</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/shepsi/" class="resort-child-link">Шепси</a>
+                                                </li>
+                                                                                                                        </ul>
+                                </li>
+                                                            <li class="resort-control-item tabs_control_item ">
+                                    <a href="#" class="resort-control-link tabs_control_link">Тамань</a>
+                                                                        <ul class="resort-child-list">
+                                                                                                                                    <li class="resort-child-list-it">
+                                                    <a href="/temryuk/" class="resort-child-link">Темрюк</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/golubickay/" class="resort-child-link">Голубицкая</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/peresyp/" class="resort-child-link">Пересыпь и За Родину</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/kuchugury/" class="resort-child-link">Кучугуры</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/ilich/" class="resort-child-link">Ильич</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/tamane/" class="resort-child-link">Тамань и Сенной</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/volna/" class="resort-child-link">Волна</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/veselovka/" class="resort-child-link">Веселовка</a>
+                                                </li>
+                                                                                                                        </ul>
+                                </li>
+                                                            <li class="resort-control-item tabs_control_item ">
+                                    <a href="#" class="resort-control-link tabs_control_link">Новороссийск</a>
+                                                                        <ul class="resort-child-list">
+                                                                                                                                    <li class="resort-child-list-it">
+                                                    <a href="/abrau/" class="resort-child-link">Абрау-Дюрсо</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/ozereika/" class="resort-child-link">Южная Озереевка</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/balka/" class="resort-child-link">Широкая Балка</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/mishako/" class="resort-child-link">Мысхако</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/nvrsk/" class="resort-child-link">Новороссийск</a>
+                                                </li>
+                                                                                                                        </ul>
+                                </li>
+                                                            <li class="resort-control-item tabs_control_item ">
+                                    <a href="#" class="resort-control-link tabs_control_link">Ейск</a>
+                                                                        <ul class="resort-child-list">
+                                                                                                                                    <li class="resort-child-list-it">
+                                                    <a href="/yeysk/" class="resort-child-link">Ейск</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/dolzhanskaya/" class="resort-child-link">Должанская</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/kamyshevatskaya/" class="resort-child-link">Камышеватская</a>
+                                                </li>
+                                                                                            <li class="resort-child-list-it">
+                                                    <a href="/yasenskaya/" class="resort-child-link">Ясенская Переправа</a>
+                                                </li>
+                                                                                                                        </ul>
+                                </li>
+                                                    </ul>
+                    </div>
+                    <div class="resort-bot">
+                                                <ul class="tabs_content tabs_content-1">
+                                                            <li class="tabs_content_item active">
+                                    <div class="resort-row">
+                                                                                    <div class="resort-col">
+                                                <div class="resort-it">
+                                                    <ul class="resort-list">
+                                                                                                                    <li class="resort-list-li"><a href="/tsandripsh/" class="resort-list-a">Цандрипш</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/gagra/" class="resort-list-a">Гагра</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/alahadzy/" class="resort-list-a">Алахадзы</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/picunda/" class="resort-list-a">Пицунда</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/gudauta/" class="resort-list-a">Гудаута</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/afon/" class="resort-list-a">Новый Афон</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/suhumi/" class="resort-list-a">Сухум</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/gulripsh/" class="resort-list-a">Гулрыпш</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/ochamchira/" class="resort-list-a">Очамчыра</a></li>
+                                                                                                                </ul>
+                                                </div>
+                                            </div>
+                                                                            </div><!--row-->
+                                </li>
+                                                            <li class="tabs_content_item ">
+                                    <div class="resort-row">
+                                                                                    <div class="resort-col">
+                                                <div class="resort-it">
+                                                    <ul class="resort-list">
+                                                                                                                    <li class="resort-list-li"><a href="/veseloe/" class="resort-list-a">Сириус</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/adler/" class="resort-list-a">Адлер</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/hosta/" class="resort-list-a">Хоста и Кудепста</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/sochi/" class="resort-list-a">Сочи</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/dagomys/" class="resort-list-a">Дагомыс</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/loo/" class="resort-list-a">Лоо и Горный Воздух</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/vardane/" class="resort-list-a">Вардане и Нижняя Хобза</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/yakornaya/" class="resort-list-a">Якорная Щель и Беранда</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/golovinka/" class="resort-list-a">Головинка и Каткова щель</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/soloniki/" class="resort-list-a">Солоники и Волконка</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/lazarevsk/" class="resort-list-a">Лазаревское</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/ashe/" class="resort-list-a">Аше и Голубая дача</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/vishnevka/" class="resort-list-a">Вишнёвка - Совет-Квадже</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/krasnya/" class="resort-list-a">Красная Поляна</a></li>
+                                                                                                                </ul>
+                                                </div>
+                                            </div>
+                                                                            </div><!--row-->
+                                </li>
+                                                            <li class="tabs_content_item ">
+                                    <div class="resort-row">
+                                                                                                                                    <div class="resort-col">
+                                                    <div class="resort-it">
+                                                        <div class="resort-tit">Западный берег Крыма:</div>
+                                                        <ul class="resort-list">
+                                                                                                                            <li class="resort-list-li"><a href="/balaklava/" class="resort-list-a">Балаклава</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/sevastopol/" class="resort-list-a">Севастополь</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/kacha/" class="resort-list-a">Кача и Орловка</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/peschanoe/" class="resort-list-a">Песчаное и Береговое</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/nikolaevka/" class="resort-list-a">Николаевка</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/saki/" class="resort-list-a">Саки и Новофёдоровка</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/evpatoriya/" class="resort-list-a">Евпатория</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/zaozernoe/" class="resort-list-a">Заозёрное</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/mirnuy/" class="resort-list-a">Поповка и Штормовое</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/olenevka/" class="resort-list-a">Оленевка</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/chernomor/" class="resort-list-a">Черноморский район</a></li>
+                                                                                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                                                            <div class="resort-col">
+                                                    <div class="resort-it">
+                                                        <div class="resort-tit">Южный берег Крыма:</div>
+                                                        <ul class="resort-list">
+                                                                                                                            <li class="resort-list-li"><a href="/privetnoe/" class="resort-list-a">Приветное и Канака</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/rybachiye/" class="resort-list-a">Рыбачье</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/malorechka/" class="resort-list-a">Малореченское</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/alushta/" class="resort-list-a">Алушта</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/partenit/" class="resort-list-a">Партенит и Утёс</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/gurzuf/" class="resort-list-a">Гурзуф</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/yalta/" class="resort-list-a">Ялта</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/alupka/" class="resort-list-a">Алупка - Гаспра</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/simeiz/" class="resort-list-a">Симеиз</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/foros/" class="resort-list-a">Форос</a></li>
+                                                                                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                                                            <div class="resort-col">
+                                                    <div class="resort-it">
+                                                        <div class="resort-tit">Восточный берег Крыма:</div>
+                                                        <ul class="resort-list">
+                                                                                                                            <li class="resort-list-li"><a href="/kerch/" class="resort-list-a">Керчь и Героевское</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/schelkino/" class="resort-list-a">Щёлкино и Ленинский район</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/feodosia/" class="resort-list-a">Феодосия</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/primorskiy/" class="resort-list-a">Приморский и Береговое</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/ordjo/" class="resort-list-a">Орджоникидзе</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/koktebel/" class="resort-list-a">Коктебель</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/kurortnoe/" class="resort-list-a">Курортное</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/sundolina/" class="resort-list-a">Солнечная Долина</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/sudak/" class="resort-list-a">Судак</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/newsvet/" class="resort-list-a">Новый Свет</a></li>
+                                                                                                                                <li class="resort-list-li"><a href="/morskoe/" class="resort-list-a">Морское и Веселое</a></li>
+                                                                                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                                                                                        </div><!--row-->
+                                </li>
+                                                            <li class="tabs_content_item ">
+                                    <div class="resort-row">
+                                                                                    <div class="resort-col">
+                                                <div class="resort-it">
+                                                    <ul class="resort-list">
+                                                                                                                    <li class="resort-list-li"><a href="/kabardinka/" class="resort-list-a">Кабардинка</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/buhta/" class="resort-list-a">Голубая Бухта</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/gelendzhik/" class="resort-list-a">Геленджик</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/divnomorsk/" class="resort-list-a">Дивноморское</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/dzhanxot/" class="resort-list-a">Джанхот и Прасковеевка</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/betta/" class="resort-list-a">Бетта и Криница</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/arxipka/" class="resort-list-a">Архипо-Осиповка</a></li>
+                                                                                                                </ul>
+                                                </div>
+                                            </div>
+                                                                            </div><!--row-->
+                                </li>
+                                                            <li class="tabs_content_item ">
+                                    <div class="resort-row">
+                                                                                    <div class="resort-col">
+                                                <div class="resort-it">
+                                                    <ul class="resort-list">
+                                                                                                                    <li class="resort-list-li"><a href="/blago/" class="resort-list-a">Благовещенская</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/vitazevo/" class="resort-list-a">Витязево</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/dzhemete/" class="resort-list-a">Джемете</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/anapa/" class="resort-list-a">Анапа</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/sykko/" class="resort-list-a">Сукко</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/ytrish/" class="resort-list-a">Большой Утриш</a></li>
+                                                                                                                </ul>
+                                                </div>
+                                            </div>
+                                                                            </div><!--row-->
+                                </li>
+                                                            <li class="tabs_content_item ">
+                                    <div class="resort-row">
+                                                                                    <div class="resort-col">
+                                                <div class="resort-it">
+                                                    <ul class="resort-list">
+                                                                                                                    <li class="resort-list-li"><a href="/inal/" class="resort-list-a">Бухта Инал</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/dgybga/" class="resort-list-a">Джубга</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/lermontovo/" class="resort-list-a">Лермонтово</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/newmih/" class="resort-list-a">Новомихайловский</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/olginka/" class="resort-list-a">Ольгинка</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/nebug/" class="resort-list-a">Небуг</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/agoi/" class="resort-list-a">Агой</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/tyapse/" class="resort-list-a">Туапсе</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/dederkoy/" class="resort-list-a">Дедеркой</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/shepsi/" class="resort-list-a">Шепси</a></li>
+                                                                                                                </ul>
+                                                </div>
+                                            </div>
+                                                                            </div><!--row-->
+                                </li>
+                                                            <li class="tabs_content_item ">
+                                    <div class="resort-row">
+                                                                                    <div class="resort-col">
+                                                <div class="resort-it">
+                                                    <ul class="resort-list">
+                                                                                                                    <li class="resort-list-li"><a href="/temryuk/" class="resort-list-a">Темрюк</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/golubickay/" class="resort-list-a">Голубицкая</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/peresyp/" class="resort-list-a">Пересыпь и За Родину</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/kuchugury/" class="resort-list-a">Кучугуры</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/ilich/" class="resort-list-a">Ильич</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/tamane/" class="resort-list-a">Тамань и Сенной</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/volna/" class="resort-list-a">Волна</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/veselovka/" class="resort-list-a">Веселовка</a></li>
+                                                                                                                </ul>
+                                                </div>
+                                            </div>
+                                                                            </div><!--row-->
+                                </li>
+                                                            <li class="tabs_content_item ">
+                                    <div class="resort-row">
+                                                                                    <div class="resort-col">
+                                                <div class="resort-it">
+                                                    <ul class="resort-list">
+                                                                                                                    <li class="resort-list-li"><a href="/abrau/" class="resort-list-a">Абрау-Дюрсо</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/ozereika/" class="resort-list-a">Южная Озереевка</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/balka/" class="resort-list-a">Широкая Балка</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/mishako/" class="resort-list-a">Мысхако</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/nvrsk/" class="resort-list-a">Новороссийск</a></li>
+                                                                                                                </ul>
+                                                </div>
+                                            </div>
+                                                                            </div><!--row-->
+                                </li>
+                                                            <li class="tabs_content_item ">
+                                    <div class="resort-row">
+                                                                                    <div class="resort-col">
+                                                <div class="resort-it">
+                                                    <ul class="resort-list">
+                                                                                                                    <li class="resort-list-li"><a href="/yeysk/" class="resort-list-a">Ейск</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/dolzhanskaya/" class="resort-list-a">Должанская</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/kamyshevatskaya/" class="resort-list-a">Камышеватская</a></li>
+                                                                                                                        <li class="resort-list-li"><a href="/yasenskaya/" class="resort-list-a">Ясенская Переправа</a></li>
+                                                                                                                </ul>
+                                                </div>
+                                            </div>
+                                                                            </div><!--row-->
+                                </li>
+                                                    </ul>
+                        
+                    </div>
+                </div>
+
+                                <div class="top-btns hide-767">
+                    <a href="/wishlist/" class="btn-wh btn-min top-btn-wh">
+                        <img src="/new/img/like.svg?1651840839" class="btn-icon loading" data-was-processed="true">
+                        <span class="wishlist-count">0</span>
+                    </a>
+                    <a href="/account/login" class="btn btn-min top-btn-wh">
+                        <img src="/new/img/user-i.svg?1651840839" class="btn-icon loading" data-was-processed="true">
+                        <div>Войти</div>
+                    </a>
+                    <a href="/account/owners/add" class="btn-wh btn-min top-btn-wh">
+                        <img src="/new/img/plus-icon.svg?1651840839" class="btn-icon loading" data-was-processed="true">
+                        <div>Разместить объект</div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>    <div class="main">
+    
+    <section class="article-section">
+        <div class="contain">
+            <div itemscope="" itemtype="https://schema.org/Article">
+                <h1 class="h1" itemprop="name">Политика конфиденциальности туристического интернет-портала Azur.ru</h1>
+                
+                <div itemprop="articleBody">
+                        <div class="article_wrapper">
+        <article>
+            <div class="article_row" style="text-align:justify">
+    <div class="article_content">
+        
+                                            <div class="html_br">
+    <p class="article-p"></p><p align="justify"><br>
+Настоящая политика конфиденциальности распространяется на пользование услугами и сервисами туристического интернет-портала Azur.ru (http://azur.ru/, далее — Портал).<br>
+</p><p></p>
+</div><br><br>
+        
+        
+    </div>
+</div><div class="article_row" style="text-align:justify">
+    <div class="article_content">
+        
+                                            <div class="html_br">
+    <p class="article-p"></p><h4 class="h2 mb-0">Какие данные пользователей и в каких случаях используются Порталом?</h4><br>
+<br>
+Когда вы просматриваете страницы Портала, Вы делаете это анонимно, за исключением тех случаев, когда Вы осуществляете регистрацию на Портале с использованием своих данных или псевдонима и последующий вход в свою учётную запись (личный кабинет).<br>
+<br>
+1. Если Вы зарегистрировались на Портале как владелец жилья (арендодатель) то Ваши данные будут размещены в базе данных Портала и доступны в открытом доступе для всех посетителей Портала. Таким образом, владельцы жилья дают согласие на публичный доступ к этим данных.<br>
+<br>
+2. При регистрации на Портале как посетитель, желающий написать отзывы, загрузить фотографии каких-либо курортов, сохранению подлежит следующая информация: имена (псевдонимы), адрес электронной почты.<br>
+<br>
+3. Если Вы, как посетитель, пользуетесь сервисом для отправки заявок на жильё, информация о котором размещена на Портале, то сохранению и передаче владельцам отелей, гостевых домов и других типов жилья подлежит вся введённая пользователем информация: имя, адрес электронной почты, данные о дате и времени приезда и отъезда, номер телефона, город проживания и т.д. Данные указываются пользователем добровольно, не верифицируются Порталом и предназначены для обратной связи с пользователем.<br>
+<br>
+4. Для защиты от спам-сообщений и атак на серверы Портала производится сохранение IP-адресов устройств, с которого пользователь посещает портал. Эти данные хранятся в стандартных лог-файлах вебсервера, они обезличены и по сути не являются персональными.<br>
+<br>
+5. Как и многие другие коммерческие веб-сайты, Портал может использовать стандартные веб-технологии, например, cookies и прочие, что необходимо для сбора статистических данных о посещаемости и количестве просмотров тех или иных страниц Портала, перехода по внутренним и внешним ссылкам и т.п. Все эти данные обезличены и по сути не являются персональными.<p></p>
+</div><br><br><br><br><br><br><br><br><br><br><br><br>
+        
+        
+    </div>
+</div><div class="article_row" style="text-align:justify">
+    <div class="article_content">
+        
+                                            <div class="html_br">
+    <p class="article-p"></p><h4 class="h2 mb-0">Конфиденциальность при обработке данных</h4><br>
+1. Портал в обязательном порядке соблюдает права посетителей на неприкосновенность частной жизни, признаёт важность защиты их персональных данных, принимая все необходимые меры для недопущения неправомерного или случайного доступа к персональным данным со стороны третьих лиц.<br>
+<br>
+2. Передача персональных данных возможна только правоохранительным органам Российской Федерации по официальному запросу, при этом Портал не несёт ответственности за дальнейшее использование персональных данных пользователей.<p></p>
+</div><br><br><br>
+        
+        
+    </div>
+</div><div class="article_row" style="text-align:justify">
+    <div class="article_content">
+        
+                                            <div class="html_br">
+    <p class="article-p"></p><h4 class="h2 mb-0">Возможности пользователя по доступу, обновлению и удалению персональных данных</h4><br>
+Если Вы зарегистрированы на Портале, Вы в любое время можете войти в свою учётную запись для просмотра и изменения данных, для чего предусмотрен весь необходимый функционал. Для полного удаления персональных данных из базы Портала необходимо обратиться в службу поддержки по адресу электронной почты corp@azur.ru, указав страницу на сайте на котором размещены данные, подлежащие удалению и в кратчайшие сроки данная информация будет полностью удалена.<p></p>
+</div><br>
+        
+        
+    </div>
+</div><div class="article_row" style="text-align:center">
+    <div class="article_content">
+        
+                                            <div class="html_br">
+    <p class="article-p"><b>По всем вопросам, связанным с положениями настоящей политики конфиденциальности, пожалуйста, обращайтесь в службу поддержки по адресу электронной почты corp@azur.ru<br>
+</b></p>
+</div><br>
+        
+        
+    </div>
+</div>
+        </article>
+    </div>
+
+                                    </div>
+
+                
+                                
+                            </div>        
+        </div>
+    </section>
+</div>
+    
+
+
+    <footer class="foot">
+    <div class="contain">
+        <div class="foot-top">
+
+            <div class="foot-top-cont">
+        <div class="foot-cont-txt-w">
+          <div class="foot-cont-txt-1">Офис:</div>
+          <div class="foot-cont-txt-2">Геленджик, Тельмана 104а</div>
+        </div>
+        <div class="foot-cont-txt-w">
+          <div class="foot-cont-txt-1">Телефон техподдержки клиентов:</div>
+          <a href="tel:+79282400666" class="foot-cont-txt-2">+7 (928) 240-06-66</a>
+        </div>
+      </div>
+
+
+                        <div class="foot-mn">
+
+                                                    <ul class="c">
+                                                    <li class="foot-li"><a href="/about/" class="foot-a">О проекте</a></li>
+                                                        <li class="foot-li"><a href="/account/" class="foot-a">Вход в личный кабинет</a></li>
+                                                        <li class="foot-li"><a href="/policy/" class="foot-a">Политика конфиденциальности</a></li>
+                                                        <li class="foot-li"><a href="/agreement/" class="foot-a">Пользовательское соглашение</a></li>
+                                                </ul>
+                
+                                                    <ul class="c">
+                                                                                                                                            <li class="foot-li"><a href="/reklama/" class="foot-a">Реклама на сайте</a></li>
+                                                                                                                        <li class="foot-li"><a href="/account/owners/add" class="foot-a">Разместить объект</a></li>
+                                                                                                                        <li class="foot-li"><a href="/contacts/" class="foot-a">Контакты</a></li>
+                                                                                                                        <li class="foot-li"><a href="/oferta/" class="foot-a">Оферта</a></li>
+                                                                                                                    
+                    </ul>
+                
+                            </div>
+        </div>
+        <div class="foot-dw">
+            <a href="/" class="foot-dw-txt">© Azur.ru, 2003 - 2023
+</a>
+            <div class="foot-dw-soc-w">
+                                                            <a target="_blank" href="https://vk.com/azurru" title="ВКонтакте" class="foot-dw-soc"><img src="/new/img/icons/vk.svg"></a>
+                                                                                                                    <a target="_blank" href="https://www.odnoklassniki.ru/azur.ru" title="Одноклассники" class="foot-dw-soc"><img src="/new/img/icons/odnoklassniki.svg"></a>
+                                                                                <a target="_blank" href="https://www.youtube.com/channel/UCbyrjsTOGCMoknCFw5jttzA" title="YouTube" class="foot-dw-soc"><img src="/new/img/icons/youtube.svg"></a>
+                                                                                                                    <a target="_blank" href="https://vimeo.com/azurru" title="Vimeo" class="foot-dw-soc"><img src="/new/img/icons/vimeo.svg"></a>
+                                                </div>
+        </div>
+    </div>
+    <a href="#top" class="arr-up"></a>
+</footer>
+
+    <div class="overlay"></div>
+</div>
+
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-207209250-1"></script>
+
+<script type="text/javascript">
+
+new Image().src = "//counter.yadro.ru/hit?r"+escape(document.referrer)+((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+";h"+escape(document.title.substring(0,150))+";"+Math.random();
+
+
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ym(5935582, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
+
+var _tmr = window._tmr || (window._tmr = []);
+_tmr.push({id: "583974", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = "https://top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "topmailru-code");
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-207209250-1');
+</script>
+<script src="/new/js/jquery-3.4.1.min.js"></script>
+<script src="/new/js/slick.js"></script>
+<script src="/new/js/jquery.hideseek.js"></script>
+<script src="/new/js/litepicker.js"></script>
+<script src="/new/js/jquery.fancybox.min.js"></script>
+<script src="/new/js/nouislider.js"></script>
+<script src="/new/js/select2.min.js"></script>
+<script src="/new/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?load=package.standard,package.geoObjects&amp;lang=ru-RU&amp;apikey=1f72621f-3d2b-4056-bed8-a6021a183743" type="text/javascript"></script>
+<script src="/new/js/masonry.pkgd.js"></script>
+<script src="/new/js/common.js"></script>
+    <script src="/build/js/pages/newi.js?1654263372"></script>
+
+
+
+<div class="container__main_before container__main_before-1">Дата заезда/выезда</div>
+<div class="container__main_before container__main_before-2">Количество гостей</div>
+
+
+</body></html>

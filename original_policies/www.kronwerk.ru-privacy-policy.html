@@ -1,0 +1,1033 @@
+<html lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+	<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/cache/min/1/ajax/libs/jquery/1.9.0/jquery.min.js?ver=1676455461"></script>
+	<!-- <script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="exform/exform.js"></script> -->
+
+	<title>Политика конфиденциальности — ООО «СКД»</title>
+<meta name="robots" content="max-image-preview:large">
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="ООО «СКД» » Лента" href="https://kronwerk.ru/feed/">
+<link rel="alternate" type="application/rss+xml" title="ООО «СКД» » Лента комментариев" href="https://kronwerk.ru/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="ООО «СКД» » Лента комментариев к «Политика конфиденциальности»" href="https://kronwerk.ru/privacy-policy/feed/">
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/kronwerk.ru\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.1.1"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="https://kronwerk.ru/wp-includes/css/dist/block-library/style.min.css?ver=6.1.1" type="text/css" media="all">
+<style id="wp-block-library-theme-inline-css" type="text/css">
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-top:4px solid;border-bottom:4px solid;margin-bottom:1.75em;color:currentColor}.wp-block-pullquote__citation,.wp-block-pullquote cite,.wp-block-pullquote footer{color:currentColor;text-transform:uppercase;font-size:.8125em;font-style:normal}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;position:relative;font-style:normal}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:"0 0 1em 0"}.wp-block-table thead{border-bottom:3px solid}.wp-block-table tfoot{border-top:3px solid}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video{margin:0 0 1em}.wp-block-template-part.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}
+</style>
+<link data-minify="1" rel="stylesheet" id="wc-blocks-vendors-style-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-vendors-style.css?ver=1676455460" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="wc-blocks-style-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style.css?ver=1676455460" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="https://kronwerk.ru/wp-includes/css/classic-themes.min.css?ver=1" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0,44rem;--wp--preset--spacing--30: 0,67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1,5rem;--wp--preset--spacing--60: 2,25rem;--wp--preset--spacing--70: 3,38rem;--wp--preset--spacing--80: 5,06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link data-minify="1" rel="stylesheet" id="contact-form-7-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=1676455460" type="text/css" media="all">
+<style id="woocommerce-inline-inline-css" type="text/css">
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+<link data-minify="1" rel="stylesheet" id="elementor-icons-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=1676455460" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-frontend-css" href="https://kronwerk.ru/wp-content/plugins/elementor/assets/css/frontend-lite.min.css?ver=3.6.4" type="text/css" media="all">
+<style id="elementor-frontend-inline-css" type="text/css">
+.elementor-kit-16{--e-global-color-primary:#6EC1E4;--e-global-color-secondary:#54595F;--e-global-color-text:#7A7A7A;--e-global-color-accent:#61CE70;--e-global-color-50e0980:#043AAD;--e-global-color-ec4ad39:#FBFBFB;--e-global-typography-primary-font-family:"Roboto";--e-global-typography-primary-font-weight:600;--e-global-typography-secondary-font-family:"Roboto Slab";--e-global-typography-secondary-font-weight:400;--e-global-typography-text-font-family:"Roboto";--e-global-typography-text-font-weight:400;--e-global-typography-accent-font-family:"Roboto";--e-global-typography-accent-font-weight:500;}.elementor-section.elementor-section-boxed > .elementor-container{max-width:1140px;}.e-container{--container-max-width:1140px;}.elementor-widget:not(:last-child){margin-bottom:20px;}.elementor-element{--widgets-spacing:20px;}{}h1.entry-title{display:var(--page-title-display);}@media(max-width:1024px){.elementor-section.elementor-section-boxed > .elementor-container{max-width:1024px;}.e-container{--container-max-width:1024px;}}@media(max-width:767px){.elementor-section.elementor-section-boxed > .elementor-container{max-width:767px;}.e-container{--container-max-width:767px;}}
+.elementor-widget-heading .elementor-heading-title{color:var( --e-global-color-primary );font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );}.elementor-widget-image .widget-image-caption{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-text-editor{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-text-editor.elementor-drop-cap-view-stacked .elementor-drop-cap{background-color:var( --e-global-color-primary );}.elementor-widget-text-editor.elementor-drop-cap-view-framed .elementor-drop-cap, .elementor-widget-text-editor.elementor-drop-cap-view-default .elementor-drop-cap{color:var( --e-global-color-primary );border-color:var( --e-global-color-primary );}.elementor-widget-button .elementor-button{font-family:var( --e-global-typography-accent-font-family ), Sans-serif;font-weight:var( --e-global-typography-accent-font-weight );background-color:var( --e-global-color-accent );}.elementor-widget-divider{--divider-color:var( --e-global-color-secondary );}.elementor-widget-divider .elementor-divider__text{color:var( --e-global-color-secondary );font-family:var( --e-global-typography-secondary-font-family ), Sans-serif;font-weight:var( --e-global-typography-secondary-font-weight );}.elementor-widget-divider.elementor-view-stacked .elementor-icon{background-color:var( --e-global-color-secondary );}.elementor-widget-divider.elementor-view-framed .elementor-icon, .elementor-widget-divider.elementor-view-default .elementor-icon{color:var( --e-global-color-secondary );border-color:var( --e-global-color-secondary );}.elementor-widget-divider.elementor-view-framed .elementor-icon, .elementor-widget-divider.elementor-view-default .elementor-icon svg{fill:var( --e-global-color-secondary );}.elementor-widget-image-box .elementor-image-box-title{color:var( --e-global-color-primary );font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );}.elementor-widget-image-box .elementor-image-box-description{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-icon.elementor-view-stacked .elementor-icon{background-color:var( --e-global-color-primary );}.elementor-widget-icon.elementor-view-framed .elementor-icon, .elementor-widget-icon.elementor-view-default .elementor-icon{color:var( --e-global-color-primary );border-color:var( --e-global-color-primary );}.elementor-widget-icon.elementor-view-framed .elementor-icon, .elementor-widget-icon.elementor-view-default .elementor-icon svg{fill:var( --e-global-color-primary );}.elementor-widget-icon-box.elementor-view-stacked .elementor-icon{background-color:var( --e-global-color-primary );}.elementor-widget-icon-box.elementor-view-framed .elementor-icon, .elementor-widget-icon-box.elementor-view-default .elementor-icon{fill:var( --e-global-color-primary );color:var( --e-global-color-primary );border-color:var( --e-global-color-primary );}.elementor-widget-icon-box .elementor-icon-box-title{color:var( --e-global-color-primary );}.elementor-widget-icon-box .elementor-icon-box-title, .elementor-widget-icon-box .elementor-icon-box-title a{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );}.elementor-widget-icon-box .elementor-icon-box-description{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-star-rating .elementor-star-rating__title{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-image-gallery .gallery-item .gallery-caption{font-family:var( --e-global-typography-accent-font-family ), Sans-serif;font-weight:var( --e-global-typography-accent-font-weight );}.elementor-widget-icon-list .elementor-icon-list-item:not(:last-child):after{border-color:var( --e-global-color-text );}.elementor-widget-icon-list .elementor-icon-list-icon i{color:var( --e-global-color-primary );}.elementor-widget-icon-list .elementor-icon-list-icon svg{fill:var( --e-global-color-primary );}.elementor-widget-icon-list .elementor-icon-list-text{color:var( --e-global-color-secondary );}.elementor-widget-icon-list .elementor-icon-list-item > .elementor-icon-list-text, .elementor-widget-icon-list .elementor-icon-list-item > a{font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-counter .elementor-counter-number-wrapper{color:var( --e-global-color-primary );font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );}.elementor-widget-counter .elementor-counter-title{color:var( --e-global-color-secondary );font-family:var( --e-global-typography-secondary-font-family ), Sans-serif;font-weight:var( --e-global-typography-secondary-font-weight );}.elementor-widget-progress .elementor-progress-wrapper .elementor-progress-bar{background-color:var( --e-global-color-primary );}.elementor-widget-progress .elementor-title{color:var( --e-global-color-primary );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-testimonial .elementor-testimonial-content{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-testimonial .elementor-testimonial-name{color:var( --e-global-color-primary );font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );}.elementor-widget-testimonial .elementor-testimonial-job{color:var( --e-global-color-secondary );font-family:var( --e-global-typography-secondary-font-family ), Sans-serif;font-weight:var( --e-global-typography-secondary-font-weight );}.elementor-widget-tabs .elementor-tab-title, .elementor-widget-tabs .elementor-tab-title a{color:var( --e-global-color-primary );}.elementor-widget-tabs .elementor-tab-title.elementor-active,
+					 .elementor-widget-tabs .elementor-tab-title.elementor-active a{color:var( --e-global-color-accent );}.elementor-widget-tabs .elementor-tab-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );}.elementor-widget-tabs .elementor-tab-content{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-accordion .elementor-accordion-icon, .elementor-widget-accordion .elementor-accordion-title{color:var( --e-global-color-primary );}.elementor-widget-accordion .elementor-accordion-icon svg{fill:var( --e-global-color-primary );}.elementor-widget-accordion .elementor-active .elementor-accordion-icon, .elementor-widget-accordion .elementor-active .elementor-accordion-title{color:var( --e-global-color-accent );}.elementor-widget-accordion .elementor-active .elementor-accordion-icon svg{fill:var( --e-global-color-accent );}.elementor-widget-accordion .elementor-accordion-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );}.elementor-widget-accordion .elementor-tab-content{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-toggle .elementor-toggle-title, .elementor-widget-toggle .elementor-toggle-icon{color:var( --e-global-color-primary );}.elementor-widget-toggle .elementor-toggle-icon svg{fill:var( --e-global-color-primary );}.elementor-widget-toggle .elementor-tab-title.elementor-active a, .elementor-widget-toggle .elementor-tab-title.elementor-active .elementor-toggle-icon{color:var( --e-global-color-accent );}.elementor-widget-toggle .elementor-toggle-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );}.elementor-widget-toggle .elementor-tab-content{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-alert .elementor-alert-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );}.elementor-widget-alert .elementor-alert-description{font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-text-path{font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}
+</style>
+<link data-minify="1" rel="stylesheet" id="razzi-deals-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/razzi-addons/modules/product-deals/assets/deals.css?ver=1676455460" type="text/css" media="all">
+<link rel="stylesheet" id="razzi-fonts-css" href="https://fonts.googleapis.com/css?family=Jost%3A200%2C300%2C400%2C500%2C600%2C700%2C800&amp;subset=latin%2Clatin-ext&amp;ver=20200928" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="razzi-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/themes/razzi/style.css?ver=1676455461" type="text/css" media="all">
+<style id="razzi-inline-css" type="text/css">
+.topbar { background-color: #f5f5f5 }.site-header .logo .logo-image { height: 91px; }#site-header .header-main { height: 91px; }#site-header .header-bottom { height: 59px; }@media (min-width: 767px) {#campaign-bar { height: 50px;}}.site-content.custom-top-spacing { padding-top: 80px; }.site-content.custom-bottom-spacing{ padding-bottom: 80px; }.razzi-boxed-layout  {background-repeat: no-repeat;}#page-header .page-header__title { padding-top: 50px; }#page-header .page-header__title { padding-bottom: 50px; }.footer-branding .logo-image {  }.footer-newsletter { --rz-footer-newsletter-top-spacing: 110px }.footer-newsletter { --rz-footer-newsletter-bottom-spacing: 41px }.footer-extra { --rz-footer-extra-top-spacing: 105px }.footer-extra { --rz-footer-extra-bottom-spacing: 112px }.footer-widgets { --rz-footer-widget-top-spacing: 64px }.footer-widgets { --rz-footer-widget-bottom-spacing: 64px }.footer-main { --rz-footer-main-top-spacing: 22px }.footer-main { --rz-footer-main-bottom-spacing: 22px }body {--rz-color-primary:#053399;--rz-color-hover-primary:#053399; --rz-background-color-primary:#053399;--rz-border-color-primary:#053399}@media (max-width: 767px){.site-header .mobile-logo .logo-image {  }.menu-mobile-panel-content .mobile-logo .logo-image {  } }@media (max-width: 767px){ }
+</style>
+<link data-minify="1" rel="stylesheet" id="select2-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/woocommerce/assets/css/select2.css?ver=1676455461" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="tablepress-default-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/tablepress/css/default.min.css?ver=1676455461" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="razzi-woocommerce-style-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/themes/razzi/woocommerce.css?ver=1676455461" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="magnific-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/razzi-addons/assets/css/magnific-popup.css?ver=1676456055" type="text/css" media="all">
+<link rel="stylesheet" id="google-fonts-1-css" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;display=auto&amp;subset=cyrillic&amp;ver=6.1.1" type="text/css" media="all">
+<script type="text/template" id="tmpl-variation-template">
+	<div class="woocommerce-variation-description">{{{ data.variation.variation_description }}}</div>
+	<div class="woocommerce-variation-price">{{{ data.variation.price_html }}}</div>
+	<div class="woocommerce-variation-availability">{{{ data.variation.availability_html }}}</div>
+</script>
+<script type="text/template" id="tmpl-unavailable-variation-template">
+	<p>Этот товар недоступен. Пожалуйста, выберите другую комбинацию.</p>
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" id="jquery-core-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js"></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/razzi-addons/modules/buy-now/assets/buy-now.js?ver=1676455461" id="razzi-buy-now-script-js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://kronwerk.ru/wp-content/themes/razzi/assets/js/plugins/html5shiv.min.js?ver=3.7.2' id='html5shiv-js'></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://kronwerk.ru/wp-content/themes/razzi/assets/js/plugins/respond.min.js?ver=1.4.2' id='respond-js'></script>
+<![endif]-->
+<link rel="https://api.w.org/" href="https://kronwerk.ru/wp-json/"><link rel="alternate" type="application/json" href="https://kronwerk.ru/wp-json/wp/v2/pages/3"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://kronwerk.ru/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://kronwerk.ru/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.1.1">
+<meta name="generator" content="WooCommerce 6.9.4">
+<link rel="canonical" href="https://kronwerk.ru/privacy-policy/">
+<link rel="shortlink" href="https://kronwerk.ru/?p=3">
+<link rel="alternate" type="application/json+oembed" href="https://kronwerk.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fkronwerk.ru%2Fprivacy-policy%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://kronwerk.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fkronwerk.ru%2Fprivacy-policy%2F&amp;format=xml">
+	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	<meta name="generator" content="Powered by Slider Revolution 6.5.19 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+<link rel="icon" href="https://kronwerk.ru/wp-content/uploads/2022/04/cropped-favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="https://kronwerk.ru/wp-content/uploads/2022/04/cropped-favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://kronwerk.ru/wp-content/uploads/2022/04/cropped-favicon-180x180.png">
+<meta name="msapplication-TileImage" content="https://kronwerk.ru/wp-content/uploads/2022/04/cropped-favicon-270x270.png">
+<script type="rocketlazyloadscript">function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+				try {
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+					if(e.layout==="fullscreen" || e.l==="fullscreen")
+						newh = Math.max(e.mh,window.RSIH);
+					else{
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,
+							sl;
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}
+			//});
+		  };</script>
+		<style type="text/css" id="wp-custom-css">
+			.catalog-sidebar .widget-title {text-transform: none;    font-size: 17px;}
+.woocommerce-checkout .woocommerce-shipping-totals {
+	display: none;
+}		</style>
+		<style id="kirki-inline-styles">/* cyrillic */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://kronwerk.ru/wp-content/fonts/jost/92zPtBhPNqw79Ij1E865zBUv7mx9IjVFNI4un_HKCEl-Cw.woff) format('woff');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://kronwerk.ru/wp-content/fonts/jost/92zPtBhPNqw79Ij1E865zBUv7mx9IjVPNI4un_HKCEl-Cw.woff) format('woff');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://kronwerk.ru/wp-content/fonts/jost/92zPtBhPNqw79Ij1E865zBUv7mx9IjVBNI4un_HKCEk.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}/* cyrillic */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://kronwerk.ru/wp-content/fonts/jost/92zPtBhPNqw79Ij1E865zBUv7mx9IjVFNI4un_HKCEl-Cw.woff) format('woff');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://kronwerk.ru/wp-content/fonts/jost/92zPtBhPNqw79Ij1E865zBUv7mx9IjVPNI4un_HKCEl-Cw.woff) format('woff');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://kronwerk.ru/wp-content/fonts/jost/92zPtBhPNqw79Ij1E865zBUv7mx9IjVBNI4un_HKCEk.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}/* cyrillic */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://kronwerk.ru/wp-content/fonts/jost/92zPtBhPNqw79Ij1E865zBUv7mx9IjVFNI4un_HKCEl-Cw.woff) format('woff');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://kronwerk.ru/wp-content/fonts/jost/92zPtBhPNqw79Ij1E865zBUv7mx9IjVPNI4un_HKCEl-Cw.woff) format('woff');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://kronwerk.ru/wp-content/fonts/jost/92zPtBhPNqw79Ij1E865zBUv7mx9IjVBNI4un_HKCEk.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}</style><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>	<meta name="yandex-verification" content="cb39102a7130c66b">
+	<link rel="stylesheet" type="text/css" href="/slider-1/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="/slider-1/slick/slick-theme.css">
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="/slider-1/slick/slick.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/slider-2/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="/slider-2/slick/slick-theme.css">
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="/slider-2/slick/slick.min.js"></script>
+  <link data-minify="1" rel="stylesheet" href="https://kronwerk.ru/wp-content/cache/min/1/npm/@fancyapps/ui@4.0/dist/fancybox.css?ver=1676455461">
+    <script type="rocketlazyloadscript" data-minify="1" src="https://kronwerk.ru/wp-content/cache/min/1/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js?ver=1676455461"></script>
+<script type="rocketlazyloadscript">
+jQuery(document).ready(function($){
+
+$('.slider-hit').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: true,
+    dots: true,
+	responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+
+});
+
+
+$('.slider-partners').slick({
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: true,
+    dots: true,
+});
+
+$('.spec-slider1').slick({
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  arrows: true,
+  adaptiveHeight: true,
+  fade: false,
+  responsive: [
+    {
+      breakpoint: 700,
+      settings: {
+        slidesToShow: 3
+      }
+    },
+	{
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2
+      }
+    },
+	{
+      breakpoint: 400,
+      settings: {
+        slidesToShow: 1
+      }
+    },
+  ]
+});
+
+
+});
+</script>
+
+
+
+
+	<style>
+
+.spec-2-title {
+	color: #333;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+.spec-2 {
+	text-align: center;
+	margin: 10px 0;
+	box-sizing: border-box;
+	padding: 5px;
+}
+.spec-slider1 .spec-2 img {
+	width: 200px;
+	display: initial;
+}
+.review-19 .review-img {
+	width: 15%;
+	margin-right: 5%;
+	min-width: 100px;
+}
+.spec-2 .spec-item .spec-title {
+	font-size: 16px;
+	font-weight: bold;
+	display: block;
+	margin-bottom: 5px;
+}
+.spec-2 .spec-item .spec-dol {
+	display: block;
+	font-size: 12px;
+}
+
+.spec-slider1 .slick-prev:before, .spec-slider1 .slick-next:before {
+	color: #818181;
+}
+.spec-slider1 .slick-next {
+	right:-10px;
+	z-index: 999;
+}
+.spec-slider1 .slick-prev {
+	left: -10px;
+	z-index: 999;
+}
+	</style>
+
+	<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(52431613, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        trackHash:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/52431613" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Jost&amp;display=swap" rel="stylesheet">
+<!-- /Yandex.Metrika counter -->
+
+<script type="rocketlazyloadscript" data-minify="1" src="https://kronwerk.ru/wp-content/cache/min/1/jquery-migrate-1.2.1.min.js?ver=1676455462"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="/exform/exform.js"></script>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+			jQuery(document).ready(function($){
+			 $('.callback').exform({ theme:'callback'});
+			 $('.request').exform({ theme:'request'});
+			 $('.faq-call').exform({ theme:'callback'});
+			});
+		</script>
+<link data-minify="1" rel="stylesheet" href="https://kronwerk.ru/wp-content/cache/min/1/bxslider/4.2.12/jquery.bxslider.css?ver=1676455461">
+  <script type="rocketlazyloadscript" data-minify="1" src="https://kronwerk.ru/wp-content/cache/min/1/ajax/libs/jquery/3.1.1/jquery.min.js?ver=1676455462"></script>
+  <script type="rocketlazyloadscript" data-minify="1" src="https://kronwerk.ru/wp-content/cache/min/1/bxslider/4.2.12/jquery.bxslider.min.js?ver=1676455462"></script>
+
+  <script type="rocketlazyloadscript">
+    $(document).ready(function(){
+      $('.slider').bxSlider();
+    });
+  </script>
+	<script type="rocketlazyloadscript">
+	document.addEventListener('DOMContentLoaded', () => {
+	document.querySelector('.noindex').innerHTML = '<noindex>'+document.querySelector('.noindex').outerHTML+'</noindex>'
+});
+	</script>
+<meta name="description" content="На данной странице вы можете ознакомиться с политикой конфиденциальности сайта Компании «СКД»"></head>
+
+<body class="privacy-policy page-template-default page page-id-3 wp-embed-responsive theme-razzi woocommerce-no-js woocommerce-active product-qty-number full-content header-default header-v1 elementor-default elementor-kit-16">
+	
+	<div style="display:none">
+<div itemscope="" itemtype="http://schema.org/Organization">
+<span itemprop="name">ООО СКД</span>
+Контакты:<div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+Адрес:<span itemprop="streetAddress">Россия, Санкт-Петербург, Богатырский пр. д.18 корп.1</span>
+<span itemprop="postalCode">197348</span>
+<span itemprop="addressLocality">Санкт-Петербург</span>,</div>
+Телефон:<span itemprop="telephone">505507</span>,
+Электронная почта: <span itemprop="email">skd@kronwerk.ru</span></div></div>&nbsp;
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0,49803921568627"></feFuncR><feFuncG type="table" tableValues="0 0,49803921568627"></feFuncG><feFuncB type="table" tableValues="0 0,49803921568627"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0,54901960784314 0,98823529411765"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0,71764705882353 0,25490196078431"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 0,27843137254902"></feFuncG><feFuncB type="table" tableValues="0,5921568627451 0,27843137254902"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0"></feFuncR><feFuncG type="table" tableValues="0 0,64705882352941"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0,78039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0,94901960784314"></feFuncG><feFuncB type="table" tableValues="0,35294117647059 0,47058823529412"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0,65098039215686 0,40392156862745"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0,44705882352941 0,4"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0,098039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0,66274509803922"></feFuncG><feFuncB type="table" tableValues="0,84705882352941 0,41960784313725"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><div id="page" class="site">
+	<div id="topbar" class="topbar hidden-xs hidden-sm ">
+	<div class="razzi-container-fluid container">
+									<div class="topbar-items topbar-right-items">
+				
+				
+			
+				<nav id="topbar-menu" class=" has-arrow main-navigation topbar-menu-container"><ul id="menu-topbar-menu" class="nav-menu topbar-menu menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-12880 dropdown hasmenu"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Компания</a>
+<ul class="dropdown-submenu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12640"><a href="https://kronwerk.ru/about/">О компании</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12638"><a href="https://kronwerk.ru/news/">Новости</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12669"><a href="https://kronwerk.ru/vacancy/">Вакансии</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12636"><a href="https://kronwerk.ru/certificates/">Сертификаты</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12719"><a href="https://kronwerk.ru/guarantee/">Гарантийные обязательства</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14055"><a href="https://kronwerk.ru/akcii/">Акции</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14056"><a href="https://kronwerk.ru/dostavka-i-oplata/">Доставка и оплата</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14057"><a href="https://kronwerk.ru/otzyvy/">Отзывы</a></li>
+
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12896"><a href="/catalog/">Каталог</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-12879 dropdown hasmenu"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Сотрудничество</a>
+<ul class="dropdown-submenu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12635"><a href="https://kronwerk.ru/partners/">Партнеры</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12662"><a href="https://kronwerk.ru/partners/partners1/">Программа поддержки</a></li>
+
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-12875 dropdown hasmenu"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Сервис</a>
+<ul class="dropdown-submenu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12637"><a href="https://kronwerk.ru/services/">Сервисный центр</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12874"><a href="https://kronwerk.ru/licenzia-skd-master/">Расчет количества и стоимости лицензий</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12647"><a href="https://kronwerk.ru/services/services_youtube/">РЕВЕРС 8000 на Youtube</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12878"><a href="https://kronwerk.ru/services/services_spec/">Материалы и пособия технического назначения</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12648"><a href="https://kronwerk.ru/services/services_docum/">Документация «РЕВЕРС 8000»</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12649"><a href="https://kronwerk.ru/services/services_pres/">Буклеты, презентации</a></li>
+
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-14211 dropdown hasmenu"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Решения</a>
+<ul class="dropdown-submenu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13621"><a href="https://kronwerk.ru/iss_revers_industry/vozmozhnosti/">Возможности</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13681"><a href="https://kronwerk.ru/services/po_start/">ПО «Реверс Старт 8000»</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13682"><a href="https://kronwerk.ru/services/po_revers_8000/">ПО «Реверс 8000»</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13623"><a href="https://kronwerk.ru/iss_revers_industry/tipovye-resheniya/">Типовые решения</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13787"><a href="https://kronwerk.ru/services/revers_8000_osob/">Основные особенности СКУД «РЕВЕРС 8000»</a></li>
+
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12641"><a href="https://kronwerk.ru/partners/price/">Прайс-лист</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12639"><a href="https://kronwerk.ru/contacts/">Контакты</a></li>
+</ul></nav>			</div>
+			</div>
+</div>			<header id="site-header" class="site-header site-header__border">
+			        <div class="header-main header-contents hidden-xs hidden-sm has-center menu-center">
+            <div class="razzi-header-container container">
+
+									                    <div class="header-left-items header-items  has-logo">
+						<div class="site-branding">
+    <a href="https://kronwerk.ru/" class="logo ">
+		            <img src="https://kronwerk.ru/wp-content/uploads/2022/04/logo.png" alt="ООО «СКД»" class="logo-dark logo-image entered lazyloaded" data-lazy-src="https://kronwerk.ru/wp-content/uploads/2022/04/logo.png" data-ll-status="loaded"><noscript><img src="https://kronwerk.ru/wp-content/uploads/2022/04/logo.png" alt="ООО «СКД»"
+				 class="logo-dark logo-image"></noscript>
+				    </a>
+    		
+	        <p class="site-title">
+            <a href="https://kronwerk.ru/" rel="home">ООО «СКД»</a>
+        </p>
+	
+	        <p class="site-description">Системы контроля доступа. Разработка, производство и продажа систем безопасности</p>
+	
+<div class="ba">
+<div class="ba_description">
+<p>Многофункциональное оборудование<br> для систем безопасности</p>
+</div>
+<div class="ba_tell">
+<a class="phones_header" href="tel:+78126000282" style="margin-left: 0px;">+7 (812) 600-02-82</a><br>
+<a class="phones_header" href="tel:+78123209201" style="margin-left: 0px;">+7 (812) 320-92-01</a>
+</div>
+ 
+<div class="ba_call"><a href="/" class="callback">Заказать звонок</a></div>
+</div>
+
+</div>
+
+                    </div>
+
+									                    <div class="header-center-items header-items  has-menu has-logo">
+						<nav id="primary-menu" class="main-navigation primary-navigation">
+	</nav>
+                    </div>
+
+									                    <div class="header-right-items header-items  has-logo">
+						
+<div class="header-search ra-search-form search-type-icon">
+	        <span class="search-icon" data-toggle="modal" data-target="search-modal">
+			<span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>		</span>
+		</div>
+
+<div class="header-account">
+	<a class="account-icon" href="https://kronwerk.ru/my-account/" data-toggle="modal" data-target="account-modal">
+		<span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>	</a>
+	</div>
+
+<div class="header-cart">
+	<a href="https://kronwerk.ru/cart/" data-toggle="modal" data-target="cart-modal">
+		<span class="razzi-svg-icon icon-cart"><svg aria-hidden="true" role="img" focusable="false" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M21.9353 20.0337L20.7493 8.51772C20.7003 8.0402 20.2981 7.67725 19.8181 7.67725H4.21338C3.73464 7.67725 3.33264 8.03898 3.28239 8.51523L2.06458 20.0368C1.96408 21.0424 2.29928 22.0529 2.98399 22.8097C3.66874 23.566 4.63999 24.0001 5.64897 24.0001H18.3827C19.387 24.0001 20.3492 23.5747 21.0214 22.8322C21.7031 22.081 22.0361 21.0623 21.9353 20.0337ZM19.6348 21.5748C19.3115 21.9312 18.8668 22.1275 18.3827 22.1275H5.6493C5.16836 22.1275 4.70303 21.9181 4.37252 21.553C4.042 21.1878 3.88005 20.7031 3.92749 20.2284L5.056 9.55014H18.9732L20.0724 20.2216C20.1223 20.7281 19.9666 21.2087 19.6348 21.5748Z" fill="currentColor"></path> <path d="M12.1717 0C9.21181 0 6.80365 2.40811 6.80365 5.36803V8.6138H8.67622V5.36803C8.67622 3.44053 10.2442 1.87256 12.1717 1.87256C14.0992 1.87256 15.6674 3.44053 15.6674 5.36803V8.6138H17.5397V5.36803C17.5397 2.40811 15.1316 0 12.1717 0Z" fill="currentColor"></path> </svg></span>		<span class="counter cart-counter hidden">0</span>
+	</a>
+</div>
+                    </div>
+
+				            </div>
+        </div>
+				
+<div class="header-mobile  header-contents logo-default hidden-md hidden-lg">
+
+<div class="mobile-menu">
+	<a href="#" class="mobile-menu-toggle hamburger-menu" data-toggle="modal" data-target="mobile-menu-modal">
+		<span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" width="24" height="18" viewBox="0 0 24 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M24 0H0V2.10674H24V0Z"></path><path d="M24 7.88215H0V9.98889H24V7.88215Z"></path><path d="M24 15.8925H0V18H24V15.8925Z"></path></svg></span>	</a>
+</div>					<div class="site-branding">
+    <a href="https://kronwerk.ru/" class="logo ">
+		            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="ООО «СКД»" class="logo-dark logo-image" data-lazy-src="https://kronwerk.ru/wp-content/uploads/2022/04/logo.png"><noscript><img src="https://kronwerk.ru/wp-content/uploads/2022/04/logo.png" alt="ООО «СКД»"
+				 class="logo-dark logo-image"></noscript>
+				    </a>
+    		
+	        <p class="site-title">
+            <a href="https://kronwerk.ru/" rel="home">ООО «СКД»</a>
+        </p>
+	
+	        <p class="site-description">Системы контроля доступа. Разработка, производство и продажа систем безопасности</p>
+	
+<div class="ba">
+<div class="ba_description">
+<p>Многофункциональное оборудование<br> для систем безопасности</p>
+</div>
+<div class="ba_tell">
+<a class="phones_header" href="tel:+78126000282" style="margin-left: 0px;">+7 (812) 600-02-82</a><br>
+<a class="phones_header" href="tel:+78123209201" style="margin-left: 0px;">+7 (812) 320-92-01</a>
+</div>
+ 
+<div class="ba_call"><a href="/" class="callback">Заказать звонок</a></div>
+</div>
+
+</div>
+
+				 <div class="mobile-header-icons">
+<div class="mobile-search">
+	<a href="#" class="search-icon" data-toggle="modal" data-target="search-modal">
+		<span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>	</a>
+</div>
+<div class="header-cart">
+	<a href="https://kronwerk.ru/cart/" data-toggle="modal" data-target="cart-modal">
+		<span class="razzi-svg-icon icon-cart"><svg aria-hidden="true" role="img" focusable="false" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M21.9353 20.0337L20.7493 8.51772C20.7003 8.0402 20.2981 7.67725 19.8181 7.67725H4.21338C3.73464 7.67725 3.33264 8.03898 3.28239 8.51523L2.06458 20.0368C1.96408 21.0424 2.29928 22.0529 2.98399 22.8097C3.66874 23.566 4.63999 24.0001 5.64897 24.0001H18.3827C19.387 24.0001 20.3492 23.5747 21.0214 22.8322C21.7031 22.081 22.0361 21.0623 21.9353 20.0337ZM19.6348 21.5748C19.3115 21.9312 18.8668 22.1275 18.3827 22.1275H5.6493C5.16836 22.1275 4.70303 21.9181 4.37252 21.553C4.042 21.1878 3.88005 20.7031 3.92749 20.2284L5.056 9.55014H18.9732L20.0724 20.2216C20.1223 20.7281 19.9666 21.2087 19.6348 21.5748Z" fill="currentColor"></path> <path d="M12.1717 0C9.21181 0 6.80365 2.40811 6.80365 5.36803V8.6138H8.67622V5.36803C8.67622 3.44053 10.2442 1.87256 12.1717 1.87256C14.0992 1.87256 15.6674 3.44053 15.6674 5.36803V8.6138H17.5397V5.36803C17.5397 2.40811 15.1316 0 12.1717 0Z" fill="currentColor"></path> </svg></span>		<span class="counter cart-counter hidden">0</span>
+	</a>
+</div>
+</div>
+</div>
+							</header>
+		<div id="page-header" class="page-header ">
+<div class="page-header__content container"><nav class="site-breadcrumb"><span itemscope="" itemtype="http://schema.org/ListItem">
+					<a class="home" href="https://kronwerk.ru"><span>Главная </span></a>
+				</span><span class="razzi-svg-icon delimiter"><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+				<span itemscope="" itemtype="http://schema.org/ListItem">
+					<span><span>Политика конфиденциальности</span></span>
+				</span>
+			</nav><h1 class="page-header__title ">Политика конфиденциальности</h1></div>
+</div>
+	<div id="content" class="site-content ">	
+<article id="post-3" class="post-3 page type-page status-publish hentry layout-v1 product-add-to-cart-ajax razzi-play-video--popup razzi-no-product-image-lightbox ">
+
+<p>Данная политика конфиденциальности относится к сайту с доменным именем https://kronwerk.ru/ и его поддоменам. Страница содержит сведения о том, какую информацию администрация сайта или третьи лица могут получать, когда пользователь (вы) посещаете его.</p>
+<h2>Данные, который собираются при посещении</h2>
+<h3>Персональные данные</h3>
+<p>Персональные данные при посещении сайта передаются пользователем добровольно, к ним могут относиться: имя, фамилия, отчество, номера телефонов, адреса электронной почты, адреса для доставки товаров или оказания услуг, реквизиты компании, которую представляет пользователь, должность в компании, которую представляет пользователь, аккаунты в социальных сетях, а также — прочие, заполняемые поля форм.</p>
+<p>Эти данные собираются в целях оказания услуг или продажи товаров, возможности связи с пользователем или иной активности пользователя на сайте, а также, чтобы отправлять пользователю информацию, которую он согласился получать.</p>
+<p>Мы не проверяем достоверность оставляемых данных и не гарантируем качественного исполнения заказов, оказания услуг или обратной связи с нами при предоставлении некорректных сведений.</p>
+<p>Данные собираются имеющимися на сайте формами для заполнения (например, регистрации, оформления заказа, подписки, оставления отзыва, вопроса, обратной связи и иными).</p>
+<p>Формы, установленные на сайте, могут передавать данные как напрямую на сайт, так и на сайты сторонних организаций (скрипты сервисов сторонних организаций).</p>
+<p>Данные могут собираться через технологию cookies (куки) как непосредственно сайтом, так и скриптами сервисов сторонних организаций. Эти данные собираются автоматически, отправку этих данных можно запретить, отключив cookies (куки) в браузере, в котором открывается сайт.</p>
+<h3>Не персональные данные</h3>
+<p>Кроме персональных данных при посещении сайта собираются не персональные данные, их сбор происходит автоматически веб-сервером, на котором расположен сайт, средствами CMS (системы управления сайтом), скриптами сторонних организаций, установленными на сайте. К данным, собираемым автоматически, относятся: IP адрес и страна его регистрации, имя домена, с которого вы к нам пришли, переходы посетителей с одной страницы сайта на другую, информация, которую ваш браузер предоставляет добровольно при посещении сайта, cookies (куки), фиксируются посещения, иные данные, собираемые счетчиками аналитики сторонних организаций, установленными на сайте.</p>
+<p>Эти данные носят не персонифицированный характер и направлены на улучшение обслуживания клиентов, улучшения удобства использования сайта, анализа статистики посещаемости.</p>
+<h2>Предоставление данных третьим лицам</h2>
+<p>Мы не раскрываем личную информацию пользователей компаниям, организациям и частным лицам, не связанным с нами. Исключение составляют случаи, перечисленные ниже.</p>
+<h3>Данные пользователей в общем доступе</h3>
+<p>Персональные данные пользователя могут публиковаться в общем доступе в соответствии с функционалом сайта, например, при оставлении отзывов / вопросов, может публиковаться указанное пользователем имя, такая активность на сайте является добровольной, и пользователь своими действиями дает согласие на такую публикацию.</p>
+<h3>По требованию закона</h3>
+<p>Информация может быть раскрыта в целях воспрепятствования мошенничеству или иным противоправным действиям; по требованию законодательства и в иных случаях, предусмотренных законами РФ.</p>
+<h3>Для оказания услуг, выполнения обязательств</h3>
+<p>Пользователь соглашается с тем, что персональная информация может быть передана третьим лицам в целях оказания заказанных на сайте услуг, выполнении иных обязательств перед пользователем. К таким лицам, например, относятся курьерская служба, почтовые службы, службы грузоперевозок и иные.</p>
+<h3>Сервисам сторонних организаций, установленным на сайте</h3>
+<p>На сайте могут быть установлены формы, собирающие персональную информацию других организаций, в этом случае сбор, хранение и защита персональной информации пользователя осуществляется сторонними организациями в соответствии с их политикой конфиденциальности.</p>
+<p>Сбор, хранение и защита полученной от сторонней организации информации осуществляется в соответствии с настоящей политикой конфиденциальности.</p>
+<h2>Как мы защищаем вашу информацию</h2>
+<p>Мы принимаем соответствующие меры безопасности по сбору, хранению и обработке собранных данных для защиты их от несанкционированного доступа, изменения, раскрытия или уничтожения, ограничиваем нашим сотрудникам, подрядчикам и агентам доступ к персональным данным, постоянно совершенствуем способы сбора, хранения и обработки данных, включая физические меры безопасности, для противодействия несанкционированному доступу к нашим системам.</p>
+<h2>Ваше согласие с этими условиями</h2>
+<p>Используя сайт, вы выражаете свое согласие с этой политикой конфиденциальности. Если вы не согласны с этой политикой, пожалуйста, не используйте его. Ваше дальнейшее использование сайта после внесения изменений в настоящую политику будет рассматриваться как ваше согласие с этими изменениями.</p>
+<h2>Отказ от ответственности</h2>
+<p>Политика конфиденциальности не распространяется ни на какие другие сайты и не применима к веб-сайтам третьих лиц, которые могут содержать упоминание о нашем сайте и с которых могут делаться ссылки на сайт, а также ссылки с этого сайта на другие сайты сети интернет. Мы не несем ответственности за действия других веб-сайтов.</p>
+<h2>Изменения в политике конфиденциальности</h2>
+<p>Мы имеем право по своему усмотрению обновлять данную политику конфиденциальности в любое время. Мы рекомендуем пользователям регулярно проверять эту страницу (https://kronwerk.ru/privacy-policy/) для того, чтобы быть в курсе любых изменений о том, как мы защищаем информацию о пользователях, которую мы собираем. Используя сайт, вы соглашаетесь с принятием на себя ответственности за периодическое ознакомление с политикой конфиденциальности и изменениями в ней.</p>
+
+</article>
+
+</div><!--<div class="container">
+<div class="spec-2-title"><h3>
+	Наши лицензии
+	</h3></div>
+<div class="spec-slider1">
+	<div>
+		<div class="spec-2">
+			<div class="spec-item">
+				<div class="spec-img"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="/wp-content/uploads/2022/08/1.jpg"><noscript><img src="/wp-content/uploads/2022/08/1.jpg"></noscript></div>
+				<div class="spec-info">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="spec-2">
+			<div class="spec-item">
+				<div class="spec-img"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="/wp-content/uploads/2022/08/2.jpg"><noscript><img src="/wp-content/uploads/2022/08/2.jpg"></noscript></div>
+				<div class="spec-info">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="spec-2">
+			<div class="spec-item">
+				<div class="spec-img"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="/wp-content/uploads/2022/08/3.jpg"><noscript><img src="/wp-content/uploads/2022/08/3.jpg"></noscript></div>
+				<div class="spec-info">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="spec-2">
+			<div class="spec-item">
+				<div class="spec-img"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="/wp-content/uploads/2022/08/4.jpg"><noscript><img src="/wp-content/uploads/2022/08/4.jpg"></noscript></div>
+				<div class="spec-info">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+	</div>-->
+
+<div class="faq" style="background:#003366">
+    <div class="faq-container">
+		<p>Остались вопросы?</p>     
+		<span>Оставьте заявку, и мы свяжемся с вами в ближайшее время</span>
+		<button class="faq-call">Оставить заявку</button>
+    </div>
+</div>
+	<footer id="site-footer" class="site-footer site-footer-dark">
+		
+<div class="footer-widgets widgets-area has-divider 1">
+	<div class="footer-container container">
+		<div class="row-flex">
+			
+					<div class="footer-widgets-area-1 footer-widgets-area col-flex col-flex-xs-12 col-flex-sm-6 col-flex-md-3">
+						<div id="nav_menu-3" class="widget widget_nav_menu"><h2 class="widget-title">Компания</h2><div class="menu-footer-menu-kompaniya-container"><ul id="menu-footer-menu-kompaniya" class="menu"><li id="menu-item-12130" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12130"><a href="https://kronwerk.ru/about/">О компании</a></li>
+<li id="menu-item-12691" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12691"><a href="https://kronwerk.ru/vacancy/">Вакансии</a></li>
+<li id="menu-item-12457" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12457"><a href="https://kronwerk.ru/certificates/">Сертификаты</a></li>
+<li id="menu-item-13323" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13323"><a href="https://kronwerk.ru/catalog/">Каталог</a></li>
+<li id="menu-item-12128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12128"><a href="https://kronwerk.ru/news/">Новости</a></li>
+<li id="menu-item-12129" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12129"><a href="https://kronwerk.ru/services/">Сервисный центр</a></li>
+<li id="menu-item-12718" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12718"><a href="https://kronwerk.ru/guarantee/">Гарантийные обязательства</a></li>
+<li id="menu-item-12352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12352"><a href="https://kronwerk.ru/contacts/">Контакты</a></li>
+</ul></div></div><div id="nav_menu-5" class="widget widget_nav_menu"><h2 class="widget-title">Партнерам</h2><div class="menu-footer-menu-partners-container"><ul id="menu-footer-menu-partners" class="menu"><li id="menu-item-12692" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12692"><a href="https://kronwerk.ru/partners/">Партнеры</a></li>
+<li id="menu-item-12693" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12693"><a href="https://kronwerk.ru/partners/partners1/">Программа поддержки</a></li>
+<li id="menu-item-12694" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12694"><a href="https://kronwerk.ru/partners/price/">Прайс-лист</a></li>
+</ul></div></div>					</div>
+					
+					<div class="footer-widgets-area-2 footer-widgets-area col-flex col-flex-xs-12 col-flex-sm-6 col-flex-md-3">
+						<div id="nav_menu-8" class="widget widget_nav_menu"><h2 class="widget-title">Решения</h2><div class="menu-footer-menu-resheniya-container"><ul id="menu-footer-menu-resheniya" class="menu"><li id="menu-item-13541" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13541"><a href="https://kronwerk.ru/iss_revers_industry/">Типовые решения СКУД «РЕВЕРС 8000»</a></li>
+</ul></div></div><div id="nav_menu-4" class="widget widget_nav_menu"><h2 class="widget-title">Сервис</h2><div class="menu-footer-menu-servis-container"><ul id="menu-footer-menu-servis" class="menu"><li id="menu-item-12353" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12353"><a href="https://kronwerk.ru/services/">Сервисный центр</a></li>
+<li id="menu-item-12355" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12355"><a href="https://kronwerk.ru/services/services_pres/">Буклеты, презентации</a></li>
+<li id="menu-item-12397" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12397"><a href="https://kronwerk.ru/services/services_youtube/">РЕВЕРС 8000 на Youtube</a></li>
+<li id="menu-item-12356" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12356"><a href="https://kronwerk.ru/services/services_spec/">Материалы и пособия технического назначения</a></li>
+<li id="menu-item-13324" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13324"><a href="/licenzia-skd-master/">Расчет количества и стоимости лицензий (ПО) СКУД «РЕВЕРС 8000»</a></li>
+<li id="menu-item-13514" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13514"><a href="https://kronwerk.ru/services/services_docum/">Документация «РЕВЕРС 8000»</a></li>
+<li id="menu-item-13515" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13515"><a href="https://kronwerk.ru/services/services_pres/">Буклеты, презентации</a></li>
+</ul></div></div>					</div>
+					
+					<div class="footer-widgets-area-3 footer-widgets-area col-flex col-flex-xs-12 col-flex-sm-6 col-flex-md-3">
+						<div id="block-15" class="widget widget_block">
+<div class="is-layout-flow wp-block-group"><div class="wp-block-group__inner-container">
+<h2>Новости</h2>
+
+
+<ul class="wp-block-latest-posts__list wp-block-latest-posts"><li><a class="wp-block-latest-posts__post-title" href="https://kronwerk.ru/s-nastupayushhim-novym-2023-godom/">С наступающим Новым 2023 Годом!</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://kronwerk.ru/integraciya-skud-revers-8000-s-terminalami-raspoznavaniya-lic-zk-teso/">Интеграция СКУД «РЕВЕРС 8000» с терминалами распознавания лиц ZK Тeсo</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://kronwerk.ru/gosudarstvennaya-akkreditaciya-ooo-skd/">Государственная аккредитация ООО «СКД»</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://kronwerk.ru/videoprezentaciya-ooo-skd-na-vystavke-ekspotexnostrazh-2022/">Видеопрезентация ООО «СКД» на выставке «Экспотехностраж 2022»</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://kronwerk.ru/uvazhaemye-kollegi-i-klienty-vam-nuzhen-kontrol-dostupa-rabotayushhij-s-otkrytymi-operacionnymi-sistemami-i-subd/">Вам нужен контроль доступа, работающий с открытыми операционными системами и СУБД?</a></li>
+</ul></div></div>
+</div>					</div>
+					
+					<div class="footer-widgets-area-4 footer-widgets-area col-flex col-flex-xs-12 col-flex-sm-6 col-flex-md-3">
+						<div id="block-19" class="widget widget_block"><h2>КОНТАКТЫ</h2>
+<a>197348, Россия, Санкт-Петербург, Богатырский пр. д.18 корп.1 офис 505-507</a><br>
+<a href="tel:+78126000282">+7 (812) 600-02-82</a><br>
+<a href="tel:+78123209201">+7 (812) 320-92-01</a><br>
+<a href="mailto:skd@kronwerk.ru" class="link-mail">skd@kronwerk.ru</a><br><br>
+<img decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" style="float: left;margin-right: 30px;" data-lazy-src="/wp-content/uploads/map.png"><noscript><img decoding="async" src="/wp-content/uploads/map.png" style="float: left;margin-right: 30px;" ></noscript>
+<a href="https://yandex.ru/profile/1117989474" target="_blank" class="link-map">Оставьте отзыв о нас<br> 
+на Яндекс.Картах </a><br> 
+
+<style>
+.link-mail{family: Jost; Weight 400; size: 16px; #cdcdcd; text-decoration: underline;
+}
+.link-mail:hover{text-decoration: none}
+.link-map{family: Jost, Weight 400, size: 16px, #cdcdcd }
+.link-map:hover{text-decoration: underline}
+</style></div>					</div>
+					
+		</div>
+	</div>
+</div><div class="footer-main site-info has-divider">
+	<div class="footer-container container">
+		
+			<div class="footer-items footer-left">
+				<div class="copyright">Copyright ©2022 Системы контроля доступа ООО «СКД»</div>			</div>
+
+		
+			<div class="footer-items footer-center">
+				<nav class="menu-sitemap-container"><ul id="footer-menu" class="footer-menu nav-menu menu"><li id="menu-item-12720" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12720"><a href="https://kronwerk.ru/site_map/">Карта сайта</a></li>
+<li id="menu-item-14507" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14507"><a href="#">pay</a></li>
+</ul></nav>			</div>
+
+		
+			<div class="footer-items footer-right">
+				<div class="custom-text"><a href="/privacy-policy/">Политика конфиденциальности</a></div>			</div>
+
+			</div>
+</div>
+			</footer>
+<a href="#page" id="gotop"><span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span></a>
+</div><!-- #page -->
+
+		<script type="rocketlazyloadscript">
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+		        <div id="mobile-menu-modal" class="mobile-menu rz-modal ra-menu-mobile-modal ra-hamburger-modal side-left" tabindex="-1">
+            <div class="off-modal-layer"></div>
+            <div class="menu-mobile-panel-content panel-content">
+                <div class="modal-header">
+                    <div class="mobile-logo">
+											<div class="site-branding">
+    <a href="https://kronwerk.ru/" class="logo ">
+		            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="ООО «СКД»" class="logo-dark logo-image" data-lazy-src="https://kronwerk.ru/wp-content/uploads/2022/04/logo.png"><noscript><img src="https://kronwerk.ru/wp-content/uploads/2022/04/logo.png" alt="ООО «СКД»"
+				 class="logo-dark logo-image"></noscript>
+				    </a>
+    		
+	        <p class="site-title">
+            <a href="https://kronwerk.ru/" rel="home">ООО «СКД»</a>
+        </p>
+	
+	        <p class="site-description">Системы контроля доступа. Разработка, производство и продажа систем безопасности</p>
+	
+<div class="ba">
+<div class="ba_description">
+<p>Многофункциональное оборудование<br> для систем безопасности</p>
+</div>
+<div class="ba_tell">
+<a class="phones_header" href="tel:+78126000282" style="margin-left: 0px;">+7 (812) 600-02-82</a><br>
+<a class="phones_header" href="tel:+78123209201" style="margin-left: 0px;">+7 (812) 320-92-01</a>
+</div>
+ 
+<div class="ba_call"><a href="/" class="callback">Заказать звонок</a></div>
+</div>
+
+</div>
+
+					                    </div>
+                    <a href="#" class="close-account-panel button-close"><span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></a>
+                </div>
+                <div class="modal-content">
+                    <nav class="hamburger-navigation menu-mobile-navigation">
+						<ul id="menu-topbar-menu-1" class="nav-menu menu click-item"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-12880"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Компания</a>
+<ul class="sub-menu check">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12640"><a href="https://kronwerk.ru/about/">О компании</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12638"><a href="https://kronwerk.ru/news/">Новости</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12669"><a href="https://kronwerk.ru/vacancy/">Вакансии</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12636"><a href="https://kronwerk.ru/certificates/">Сертификаты</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12719"><a href="https://kronwerk.ru/guarantee/">Гарантийные обязательства</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14055"><a href="https://kronwerk.ru/akcii/">Акции</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14056"><a href="https://kronwerk.ru/dostavka-i-oplata/">Доставка и оплата</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14057"><a href="https://kronwerk.ru/otzyvy/">Отзывы</a></li>
+
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12896"><a href="/catalog/">Каталог</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-12879"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Сотрудничество</a>
+<ul class="sub-menu check">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12635"><a href="https://kronwerk.ru/partners/">Партнеры</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12662"><a href="https://kronwerk.ru/partners/partners1/">Программа поддержки</a></li>
+
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-12875"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Сервис</a>
+<ul class="sub-menu check">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12637"><a href="https://kronwerk.ru/services/">Сервисный центр</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12874"><a href="https://kronwerk.ru/licenzia-skd-master/">Расчет количества и стоимости лицензий</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12647"><a href="https://kronwerk.ru/services/services_youtube/">РЕВЕРС 8000 на Youtube</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12878"><a href="https://kronwerk.ru/services/services_spec/">Материалы и пособия технического назначения</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12648"><a href="https://kronwerk.ru/services/services_docum/">Документация «РЕВЕРС 8000»</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12649"><a href="https://kronwerk.ru/services/services_pres/">Буклеты, презентации</a></li>
+
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-14211"><a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Решения</a>
+<ul class="sub-menu check">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13621"><a href="https://kronwerk.ru/iss_revers_industry/vozmozhnosti/">Возможности</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13681"><a href="https://kronwerk.ru/services/po_start/">ПО «Реверс Старт 8000»</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13682"><a href="https://kronwerk.ru/services/po_revers_8000/">ПО «Реверс 8000»</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13623"><a href="https://kronwerk.ru/iss_revers_industry/tipovye-resheniya/">Типовые решения</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13787"><a href="https://kronwerk.ru/services/revers_8000_osob/">Основные особенности СКУД «РЕВЕРС 8000»</a></li>
+
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12641"><a href="https://kronwerk.ru/partners/price/">Прайс-лист</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12639"><a href="https://kronwerk.ru/contacts/">Контакты</a></li>
+</ul>                    </nav>
+                    <div class="content-footer">
+						                    </div>
+                </div>
+            </div>
+        </div>
+		        <div id="account-modal" class="account-modal rz-modal ra-account-modal" tabindex="-1" role="dialog">
+            <div class="off-modal-layer"></div>
+            <div class="account-panel-content panel-content">
+				<div class="modal-header">
+    <h3 class="modal-title">Войти</h3>
+    <a href="#" class="close-account-panel button-close"><span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></a>
+</div>
+
+<div class="modal-content">
+    <form class="woocommerce woocommerce-account woocommerce-form woocommerce-form-login login" method="post">
+
+		
+        <p class="form-row form-row-wide">
+            <input placeholder="Имя" type="text" class="input-text" name="username" id="panel_username">
+        </p>
+        <p class="form-row form-row-wide">
+            <span class="password-input">
+                <input placeholder="Пароль" class="input-text" type="password" name="password" id="panel_password">
+            </span>
+        </p>
+
+		
+        <p class="form-row form-row-wide form-row-remember">
+            <label class="woocommerce-form__label woocommerce-form__label-for-checkbox inline">
+                <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" value="forever">
+                <span>Запомнить меня</span>
+            </label>
+            <label class="form-row form-row-wide lost_password">
+                <a href="https://kronwerk.ru/my-account/lost-password/">Забыли пароль?</a>
+            </label>
+        </p>
+
+        <p class="form-row form-row-wide">
+			<input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="840cc7ede2"><input type="hidden" name="_wp_http_referer" value="/privacy-policy/">            <button type="submit" class="razzi-button" name="login" value="Авторизация" data-signing="Вход в систему..." data-signed="Вход выполнен">Войти</button>
+
+			        </p>
+
+		
+    </form>
+
+	</div>
+            </div>
+        </div>
+		        <div id="cart-modal" class="cart-modal rz-modal ra-cart-modal" tabindex="-1" role="dialog">
+            <div class="off-modal-layer"></div>
+            <div class="cart-panel-content panel-content">
+				<div class="modal-header">
+    <h3 class="modal-title">Корзина        <span class="cart-panel-counter">(0)</span>
+    </h3>
+    <a href="#" class="close-account-panel button-close"><span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></a>
+</div>
+<div class="modal-content">
+    <div class="widget_shopping_cart_content">
+		
+
+	<p class="woocommerce-mini-cart__empty-message">
+		<span>
+			Корзина пуста			<span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.4 16.4C16.4 16.4 14.75 14.2 12 14.2C9.25 14.2 7.6 16.4 7.6 16.4M8.7 8.7H8.711M15.3 8.7H15.311M23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12Z" stroke="#111111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>		</span>
+		<a class="razzi-button button-outline button-larger" href="https://kronwerk.ru/shop/">Продолжить покупки</a>
+	</p>
+
+
+    </div>
+</div>
+            </div>
+        </div>
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<link data-minify="1" rel="stylesheet" id="rs-plugin-settings-css" href="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/revslider/public/assets/css/rs6.css?ver=1676455461" type="text/css" media="all">
+<style id="rs-plugin-settings-inline-css" type="text/css">
+#rs-demo-id {}
+</style>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9" id="regenerator-runtime-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" id="wp-polyfill-js"></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/kronwerk.ru\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1676455462" id="contact-form-7-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.5.18" defer="" async="" id="tp-tools-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.5.19" defer="" async="" id="revmin-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.6.9.4" id="jquery-blockui-js"></script>
+<script type="text/javascript" id="wc-add-to-cart-js-extra">
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_view_cart":"\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440 \u043a\u043e\u0440\u0437\u0438\u043d\u044b","cart_url":"https:\/\/kronwerk.ru\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=6.9.4" id="wc-add-to-cart-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.6.9.4" id="js-cookie-js"></script>
+<script type="text/javascript" id="woocommerce-js-extra">
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=6.9.4" id="woocommerce-js"></script>
+<script type="text/javascript" id="wc-cart-fragments-js-extra">
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_4572846bfbcb5c2c6349b002c097adf9","fragment_name":"wc_fragments_4572846bfbcb5c2c6349b002c097adf9","request_timeout":"5000"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=6.9.4" id="wc-cart-fragments-js"></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/razzi-addons/assets/js/plugins/jquery.coundown.js?ver=1676455462" id="coundown-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/themes/razzi/assets/js/plugins/isInViewport.min.js?ver=20201012" id="isInViewport-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/themes/razzi/assets/js/plugins/swiper.min.js?ver=5.3.8" id="swiper-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/themes/razzi/assets/js/plugins/notify.min.js?ver=1.0.0" id="notify-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-includes/js/imagesloaded.min.js?ver=4.1.4" id="imagesloaded-js"></script>
+<script type="text/javascript" id="razzi-js-extra">
+/* <![CDATA[ */
+var razziData = {"direction":"false","ajax_url":"\/?wc-ajax=%%endpoint%%","nonce":"b46d4f92f6","search_content_type":"","header_search_number":"3","header_ajax_search":"0","sticky_header":"0","mobile_landscape":"3","mobile_portrait":"2","popup":"","popup_frequency":"7","popup_visible":"delay","popup_visible_delay":"5","product_gallery_slider":"1","product_image_zoom":"0","added_to_cart_notice":{"added_to_cart_notice_layout":"panel"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/themes/razzi/assets/js/scripts.min.js?ver=20220315" id="razzi-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/woocommerce/assets/js/selectWoo/selectWoo.full.min.js?ver=1.0.9-wc.6.9.4" id="selectWoo-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-includes/js/underscore.min.js?ver=1.13.4" id="underscore-js"></script>
+<script type="text/javascript" id="wp-util-js-extra">
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-includes/js/wp-util.min.js?ver=6.1.1" id="wp-util-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/woocommerce/assets/js/select2/select2.full.min.js?ver=4.0.3-wc.6.9.4" id="select2-js"></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/cache/min/1/wp-includes/js/jquery/jquery.serialize-object.js?ver=1676455462" id="jquery-serialize-object-js"></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/razzi-addons/modules/products-filter/assets/js/products-filter.js?ver=1676455462" id="razzi-products-filter-js"></script>
+<script type="text/javascript" id="wc-add-to-cart-variation-js-extra">
+/* <![CDATA[ */
+var wc_add_to_cart_variation_params = {"wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_no_matching_variations_text":"\u0416\u0430\u043b\u044c, \u043d\u043e \u0442\u043e\u0432\u0430\u0440\u043e\u0432, \u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0445 \u0432\u0430\u0448\u0435\u043c\u0443 \u0432\u044b\u0431\u043e\u0440\u0443, \u043d\u0435 \u043e\u0431\u043d\u0430\u0440\u0443\u0436\u0435\u043d\u043e. \u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u0432\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u0440\u0443\u0433\u0443\u044e \u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u044e.","i18n_make_a_selection_text":"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u043e\u043f\u0446\u0438\u0438 \u0442\u043e\u0432\u0430\u0440\u0430 \u043f\u0435\u0440\u0435\u0434 \u0435\u0433\u043e \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u0435\u043c \u0432 \u0432\u0430\u0448\u0443 \u043a\u043e\u0440\u0437\u0438\u043d\u0443.","i18n_unavailable_text":"\u042d\u0442\u043e\u0442 \u0442\u043e\u0432\u0430\u0440 \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u0435\u043d. \u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u0432\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u0440\u0443\u0433\u0443\u044e \u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u044e."};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js?ver=6.9.4" id="wc-add-to-cart-variation-js"></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/cache/min/1/wp-content/plugins/razzi-addons/assets/js/plugins/jquery.magnific-popup.js?ver=1676456055" id="magnific-js"></script>
+<script type="text/javascript" id="razzi-single-product-js-extra">
+/* <![CDATA[ */
+var razziProductData = {"related_product_navigation":"scrollbar"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://kronwerk.ru/wp-content/themes/razzi/assets/js/woocommerce/single-product.min.js?ver=20220310" id="razzi-single-product-js"></script>
+        <div id="search-modal" class="search-modal rz-modal ra-search-form ra-search-modal" tabindex="-1" role="dialog">
+            <div class="off-modal-layer"></div>
+            <div class="search-panel-content panel-content">
+				<div class="modal-header">
+    <h3 class="modal-title">
+		Поиск    </h3>
+    <a href="#" class="close-search-panel button-close"><span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></a>
+</div>
+<div class="modal-content">
+    <form method="get" class="form-search" action="https://kronwerk.ru/">
+        <div class="search-inner-content">
+			            <div class="search-wrapper">
+				                <input type="text" name="s" class="search-field" autocomplete="off" placeholder="Поиск предметов">
+				                <a href="#" class="close-search-results"><span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span></a>
+                <button class="search-submit" type="submit"><span class="razzi-svg-icon "><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span></button>
+            </div>
+        </div>
+        <span class="razzi-loading"></span>
+    </form>
+	    <div class="search-results woocommerce"></div>
+</div>
+            </div>
+        </div>
+		<input type="hidden" id="rz-base-url" data-url="https://kronwerk.ru/"><script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://kronwerk.ru/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>
+<script>class RocketElementorAnimation{constructor(){this.deviceMode=document.createElement("span"),this.deviceMode.id="elementor-device-mode",this.deviceMode.setAttribute("class","elementor-screen-only"),document.body.appendChild(this.deviceMode)}_detectAnimations(){let t=getComputedStyle(this.deviceMode,":after").content.replace(/"/g,"");this.animationSettingKeys=this._listAnimationSettingsKeys(t),document.querySelectorAll(".elementor-invisible[data-settings]").forEach(t=>{const e=t.getBoundingClientRect();if(e.bottom>=0&&e.top<=window.innerHeight)try{this._animateElement(t)}catch(t){}})}_animateElement(t){const e=JSON.parse(t.dataset.settings),i=e._animation_delay||e.animation_delay||0,n=e[this.animationSettingKeys.find(t=>e[t])];if("none"===n)return void t.classList.remove("elementor-invisible");t.classList.remove(n),this.currentAnimation&&t.classList.remove(this.currentAnimation),this.currentAnimation=n;let s=setTimeout(()=>{t.classList.remove("elementor-invisible"),t.classList.add("animated",n),this._removeAnimationSettings(t,e)},i);window.addEventListener("rocket-startLoading",function(){clearTimeout(s)})}_listAnimationSettingsKeys(t="mobile"){const e=[""];switch(t){case"mobile":e.unshift("_mobile");case"tablet":e.unshift("_tablet");case"desktop":e.unshift("_desktop")}const i=[];return["animation","_animation"].forEach(t=>{e.forEach(e=>{i.push(t+e)})}),i}_removeAnimationSettings(t,e){this._listAnimationSettingsKeys().forEach(t=>delete e[t]),t.dataset.settings=JSON.stringify(e)}static run(){const t=new RocketElementorAnimation;requestAnimationFrame(t._detectAnimations.bind(t))}}document.addEventListener("DOMContentLoaded",RocketElementorAnimation.run);</script>
+
+
+<span id="elementor-device-mode" class="elementor-screen-only"></span></body></html>

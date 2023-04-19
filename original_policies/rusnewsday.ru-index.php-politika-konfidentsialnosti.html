@@ -1,0 +1,1168 @@
+<html prefix="og: http://ogp.me/ns#" dir="ltr" style="" lang="ru-ru"><head>
+    <base href="https://rusnewsday.ru/index.php/politika-konfidentsialnosti">    <link href="https://rusnewsday.ru/templates/newsmodern05092022/images/designer/feb3e28702c393f309055a291a61d909_favicon.ico" rel="icon" type="image/x-icon">
+    <script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script>
+    var themeHasJQuery = !!window.jQuery;
+</script>
+<script src="/templates/newsmodern05092022/jquery.js?version=1.0.814"></script>
+<script>
+    window._$ = jQuery.noConflict(themeHasJQuery);
+</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/templates/newsmodern05092022/bootstrap.min.js?version=1.0.814"></script>
+<!--[if lte IE 9]>
+<script src="/templates/newsmodern05092022/layout.ie.js?version=1.0.814"></script>
+<link rel="stylesheet" href="/templates/newsmodern05092022/layout.ie.css?version=1.0.814" media="screen"/>
+<![endif]-->
+<link class="" href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,700,700italic&amp;subset=cyrillic" rel="stylesheet" type="text/css">
+<script src="/templates/newsmodern05092022/layout.core.js?version=1.0.814"></script>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="keywords" content="Новости России">
+	<meta name="twitter:card" content="summary">
+	<meta property="og:type" content="article">
+	<meta property="og:url" content="https://rusnewsday.ru/index.php/politika-konfidentsialnosti">
+	<meta property="og:title" content="Политика конфиденциальности">
+	<meta property="og:description" content="Реальная Россия">
+	<meta name="description" content="Реальная Россия">
+	<meta name="generator" content="Joomla! - Open Source Content Management">
+	<title>Политика конфиденциальности</title>
+	<link href="https://rusnewsday.ru/index.php/politika-konfidentsialnosti" rel="canonical">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet" type="text/css">
+	<link href="/components/com_k2/css/k2.css?v=2.8.0" rel="stylesheet" type="text/css">
+	<link href="/modules/mod_miniteklivesearch/assets/css/style.css" rel="stylesheet" type="text/css">
+	<link href="/modules/mod_raxo_allmode_k2/tmpl/css/allmode.css" rel="stylesheet" type="text/css">
+	<script src="/media/k2/assets/js/k2.frontend.js?v=2.8.0&amp;sitepath=/" type="text/javascript"></script>
+	<script type="text/javascript">
+(function($) {
+			$(function(){  
+				
+				var ajax_request;
+				var types_model = {"mls_20_k2i":"1","mls_20_k2c":"1","mls_20_k2a":"0"};
+				var types_model_js = encodeURIComponent(JSON.stringify(types_model));
+				var moduleid = 115;
+				
+				// Instance selector function
+				jQuery("#instance-selector-mls_mod_115 .subinstance").on("click", function(event) {	
+					
+					jQuery("#mls-results-cont-mls_mod_115").removeClass("expanded");
+					jQuery("#mls-results-mls_mod_115").empty();
+					
+					if (jQuery(this).find("i").hasClass("fa-check-square-o")) {
+						var this_subinstance = jQuery(this).attr("id");
+							types_model[this_subinstance] = "0";
+							
+						jQuery(this).find("i").removeClass("fa-check-square-o");
+						jQuery(this).find("i").addClass("fa-square-o");
+						jQuery(this).addClass("not-selected");
+						
+					} else {
+						var this_subinstance = jQuery(this).attr("id");
+							types_model[this_subinstance] = "1";
+							
+						jQuery(this).find("i").addClass("fa-check-square-o");
+						jQuery(this).find("i").removeClass("fa-square-o");
+						jQuery(this).removeClass("not-selected");
+					}
+					// Encode types
+					types_model_js = encodeURIComponent(JSON.stringify(types_model));
+				});
+												
+				// Search input function
+				jQuery("#mod-mls-searchword-mls_mod_115").bind("input", function(e) { 
+					var this_val = jQuery("#mod-mls-searchword-mls_mod_115").val();
+					this_val = encodeURIComponent(this_val);
+				
+					// Close mls-results-cont if input is empty
+					if ((jQuery.trim(this_val)).length == 0) {
+						ajax_request.abort();
+						jQuery("#close-results-mls_mod_115").hide();
+						var container = jQuery("#mls-results-cont-mls_mod_115");
+						if (!container.is(e.target)
+							&& container.has(e.target).length === 0)
+						{
+							jQuery("#mls-results-cont-mls_mod_115").removeClass("expanded");
+							jQuery("#mls-loading-mls_mod_115 .mls-module-spinner").hide();
+						}
+					}
+			
+					if ((jQuery.trim(this_val)).length > 0) {
+						
+						// Check if there is a pending ajax request
+						if(typeof ajax_request !== "undefined")
+							ajax_request.abort();
+							
+						// Spinner
+						if (!jQuery("#mls-loading-mls_mod_115 .mls-module-spinner .spinner").length)
+							createSpinner("#mls-loading-mls_mod_115 .mls-module-spinner");
+						jQuery("#mls-loading-mls_mod_115 .mls-module-spinner").css("display", "inline-block");
+						
+						// Execute new ajax request
+						ajax_request = jQuery.ajax({
+							type: "POST",
+							async: true,
+							cache: false,
+							url: "https://rusnewsday.ru/index.php?option=com_miniteklivesearch&task=search.getContent&mlsmodule=6&lang=ru&word=" + this_val + "&moduleid=" + moduleid + "&itemid=0",
+							data: "types=" + types_model_js,
+							beforeSend: function() {
+									jQuery("#mls-results-cont-mls_mod_115").removeClass("expanded");
+									jQuery("#instance-selector-cont-mls_mod_115").removeClass("expanded");
+									jQuery("#close-results-mls_mod_115").hide();
+									chosen = "";
+									jQuery("#mls-results-mls_mod_115 li").removeClass("selected");
+							},
+							success: function(msg) {
+									jQuery("#mls-loading-mls_mod_115 .mls-module-spinner").hide();
+									jQuery("#mls-loading-mls_mod_115 .mls-module-spinner .spinner").remove();
+									jQuery("#close-results-mls_mod_115").show();
+									if(msg.length > 2) {
+										jQuery("#mls-results-cont-mls_mod_115").addClass("expanded");
+										jQuery("#mls-results-mls_mod_115").html(msg);
+									} else {
+										jQuery("#mls-results-cont-mls_mod_115").removeClass("expanded");
+										jQuery("#mls-results-mls_mod_115").empty();
+									}
+							}
+						})	
+						
+					}
+				
+				});	
+				// End input function
+				
+				// Search input mouseup
+				jQuery("#mod-mls-searchword-mls_mod_115").bind("mouseup", function() {
+					
+					jQuery("#mls-tooltip-cont-mls_mod_115").addClass("expanded");
+					jQuery("#instance-selector-cont-mls_mod_115").removeClass("expanded");
+					
+					var this_val = jQuery("#mod-mls-searchword-mls_mod_115").val();
+					this_val = encodeURIComponent(this_val);
+					
+					// Cancel ajax on submit form
+					jQuery(document).on("submit","#mls-form-mls_mod_115",function() {
+						ajax_request.abort();
+						jQuery("#mls-loading-mls_mod_115 .mls-module-spinner").hide();
+						jQuery("#mls-loading-mls_mod_115 .mls-module-spinner .spinner").remove();
+					});
+										
+					if ((jQuery.trim(this_val)).length > 0) {
+						if( !jQuery("#mls-results-mls_mod_115").is(":empty") ) {
+							jQuery("#mls-results-cont-mls_mod_115").addClass("expanded");	
+						} else {
+							
+							// Check if there is a pending ajax request
+							if(typeof ajax_request !== "undefined")
+							ajax_request.abort();
+							
+							// Spinner
+							if (!jQuery("#mls-loading-mls_mod_115 .mls-module-spinner .spinner").length)
+								createSpinner("#mls-loading-mls_mod_115 .mls-module-spinner");
+							jQuery("#mls-loading-mls_mod_115 .mls-module-spinner").css("display", "inline-block");
+						
+							// Execute new ajax request
+							ajax_request = jQuery.ajax({
+								type: "POST",
+								async: true,
+								cache: false,
+								url: "https://rusnewsday.ru/index.php?option=com_miniteklivesearch&task=search.getContent&mlsmodule=6&lang=ru&word=" + this_val + "&moduleid=" + moduleid + "&itemid=0",
+								data: "types=" + types_model_js,
+								beforeSend: function() {
+										jQuery("#mls-results-cont-mls_mod_115").removeClass("expanded");
+										jQuery("#instance-selector-cont-mls_mod_115").removeClass("expanded");
+										jQuery("#close-results-mls_mod_115").hide();
+										chosen = "";
+										jQuery("#mls-results-mls_mod_115 li").removeClass("selected");
+								},
+								success: function(msg) {
+										jQuery("#mls-loading-mls_mod_115 .mls-module-spinner").hide();
+										jQuery("#mls-loading-mls_mod_115 .mls-module-spinner .spinner").remove();
+										jQuery("#close-results-mls_mod_115").show();
+										if(msg.length > 2) {
+											jQuery("#mls-results-cont-mls_mod_115").addClass("expanded");
+											jQuery("#mls-results-mls_mod_115").html(msg);
+										} else {
+											jQuery("#mls-results-cont-mls_mod_115").removeClass("expanded");
+											jQuery("#mls-results-mls_mod_115").empty();
+										}
+								}
+							})
+								
+						}
+					}
+				});
+				
+				// Close mls-results-cont on click outside
+				jQuery(document).mouseup(function (e) {
+					var container = jQuery(".mls-results-cont");
+					if ( !container.is(e.target) && container.has(e.target).length === 0 
+						&&  !jQuery("#mod-mls-searchword-mls_mod_115").is(e.target) )
+					{
+						jQuery(".mls-results-cont").removeClass("expanded");
+						chosen = "";
+						jQuery("#mls-results-mls_mod_115 li").removeClass("selected");
+					}
+				});
+								
+				// Close button function
+				jQuery("#close-results-mls_mod_115").on("click", function(event) {	
+					jQuery("#mod-mls-searchword-mls_mod_115").val("");
+					jQuery(this).hide();
+					jQuery("#instance-selector-cont-mls_mod_115").removeClass("expanded");
+				});
+				
+				// Selector button function
+				jQuery("#selector-button-mls_mod_115").on("click", function(event) {	
+					jQuery("#instance-selector-cont-mls_mod_115").toggleClass("expanded");
+				});
+				
+				// Close instance-selector-cont on click outside
+				jQuery(document).mouseup(function (e) {
+					var container = jQuery("#instance-selector-cont-mls_mod_115");
+					if ( (!container.is(e.target) && container.has(e.target).length === 0)
+						&& (!jQuery("#mls-parent-mls_mod_115").is(e.target) && jQuery("#mls-parent-mls_mod_115").has(e.target).length === 0)					
+					   )
+					{
+						jQuery("#instance-selector-cont-mls_mod_115").removeClass("expanded");
+					}
+				});
+				
+				// Arrows navigation function
+				var chosen = "";
+				jQuery(document).keydown(function(e){ // 38-up, 40-down
+					if (e.keyCode == 40) { 
+						if(chosen === "") {
+							chosen = 0;
+						} else if((chosen+1) < jQuery("#mls-results-mls_mod_115 li").length) {
+							chosen++; 
+						}
+						jQuery("#mls-results-mls_mod_115 li").removeClass("selected");
+						jQuery("#mls-results-mls_mod_115 li:eq("+chosen+")").addClass("selected");
+						return false;
+					}
+					if (e.keyCode == 38) { 
+						if(chosen === "") {
+							chosen = 0;
+						} else if(chosen > 0) {
+							chosen--;            
+						}
+						jQuery("#mls-results-mls_mod_115 li").removeClass("selected");
+						jQuery("#mls-results-mls_mod_115 li:eq("+chosen+")").addClass("selected");
+						return false;
+					}
+				});
+				
+				// Escape key
+				jQuery(document).keyup(function(e) {
+  					if (e.keyCode == 27) {
+						jQuery("#mls-results-cont-mls_mod_115").removeClass("expanded");
+						jQuery("#instance-selector-cont-mls_mod_115").removeClass("expanded");
+						chosen = "";
+						jQuery("#mls-results-mls_mod_115 li").removeClass("selected");
+					}
+				});
+				
+				// Enter key
+				jQuery("#mls-form-mls_mod_115").keypress(function(e) {
+					if(e.which == 13) {
+						if (jQuery("#mls-results-mls_mod_115 li.selected")[0]){
+							window.location.href = jQuery("#mls-results-mls_mod_115 li.selected a").attr("href");
+							e.preventDefault();
+    						return false;
+						} else {
+							return true;
+						}
+					}
+				});
+				
+				// Blur input
+				jQuery("#mod-mls-searchword-mls_mod_115").bind("blur", function() {
+					jQuery("#mls-tooltip-cont-mls_mod_115").removeClass("expanded");
+				});
+				
+				// Initialize spinner
+				var createSpinner = function(divIdentifier)
+				{ 
+					var spinner_options = {
+					  lines: 9,
+					  length: 3,
+					  width: 2,
+					  radius: 3,
+					  corners: 1,
+					  rotate: 0,
+					  direction: 1,
+					  color: "#dc0000",
+					  speed: 1,
+					  trail: 52,
+					  shadow: false,
+					  hwaccel: false,
+					  className: "spinner",
+					  zIndex: 2e9,
+					  top: "50%",
+					  left: "50%"
+					};
+					$(divIdentifier).html(new Spinner(spinner_options).spin().el);
+					
+					return;
+				}
+	
+			})
+		})(jQuery);
+		
+(function($) {
+			$(function(){  
+			
+				jQuery(document).on("submit","#mls-form-mls_mod_115",function() {
+					return false;
+				});
+			
+			})
+		})(jQuery);
+		
+	</script>
+	<script src="/components/com_miniteklivesearch/assets/js/spin.min.js" type="text/javascript"></script><style type="text/css"></style>
+        <link rel="stylesheet" href="/templates/newsmodern05092022/css/bootstrap.min.css?version=1.0.814" media="screen">
+            <link rel="stylesheet" href="/templates/newsmodern05092022/css/template.min.css?version=1.0.814" media="screen">
+            <script src="/templates/newsmodern05092022/script.js?version=1.0.814"></script>
+    <meta name="google-site-verification" content="d5CDkv7Rth6y0qJm644MS9Q46szlX37D1OEyCEk-QNU">
+<meta name="yandex-verification" content="6bd6ce66573b8d6e">
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-2713566706756046",
+    enable_page_level_ads: true
+  });
+</script>
+<script type="text/javascript" src="/templates/js/rusnewsday-all.js"></script>
+</head>
+<body class=" bootstrap bd-body-6  bd-pagebackground bd-margins">
+    <header class=" bd-headerarea-1 bd-margins">
+        <section class=" bd-section-5 bd-tagstyles" id="section5" data-section-title="Section">
+    <div class="bd-container-inner bd-margins clearfix">
+        <div class=" bd-layoutcontainer-11 bd-columns bd-no-margins">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class=" bd-columnwrapper-23 
+ col-lg-4
+ col-sm-5">
+    <div class="bd-layoutcolumn-23 bd-column"><div class="bd-vertical-align-wrapper">    
+        <div class=" bd-joomlaposition-26 hidden-sm hidden-xs clearfix">
+            <div class=" bd-block-10 bd-own-margins ">
+            
+    <div class="bd-blockcontent bd-tagstyles">
+        
+
+<div class="custom">
+	<style>
+.plus16let {width:30px; height:30px; display:block; background-image: url(/images/systems/entersprite.png); background-position:-120px -30px; float: left; margin-right: 10px;}
+</style>
+
+
+<div class="plus16let hidden-sm hidden-xs hidden-xxs"></div><div id="time">&nbsp;</div>
+<script type="text/javascript" language="JavaScript">var pos = document.getElementById("time");
+function time() {
+var today = new Date();
+var day_of_week = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+var month_of_year = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+var day_ = day_of_week[today.getDay()];
+var date_ = today.getDate();
+var month_ = month_of_year[today.getMonth()];
+var year_ = today.getFullYear();
+var hours_ = today.getHours();
+var min_ = today.getMinutes();
+var sec_ = today.getSeconds();
+var zerom = zeros = '';
+if(min_ < 10) zerom = '0';
+if(sec_ < 10) zeros = '0';
+pos.innerHTML =  day_+', '+date_+' '+month_+' '+year_+', '+hours_+':'+zerom+min_;
+}
+setInterval(time, 1);</script></div>
+    </div>
+    
+</div>
+        </div>
+        </div></div>
+</div>
+	
+		<div class=" bd-columnwrapper-9 
+ col-lg-3
+ col-sm-4
+ hidden-sm hidden-xs">
+    <div class="bd-layoutcolumn-9 hidden-sm hidden-xs bd-column"><div class="bd-vertical-align-wrapper">    </div></div>
+</div>
+	
+		<div class=" bd-columnwrapper-24 
+ col-lg-2
+ col-sm-2
+ hidden-sm hidden-xs">
+    <div class="bd-layoutcolumn-24 hidden-sm hidden-xs bd-column"><div class="bd-vertical-align-wrapper"><a href="/index.php/prislat-novost" class="bd-linkbutton-2  bd-button-18  bd-own-margins bd-content-element">
+    Прислать новость
+</a></div></div>
+</div>
+	
+		<div class=" bd-columnwrapper-28 
+ col-lg-3
+ col-sm-4">
+    <div class="bd-layoutcolumn-28 bd-column"><div class="bd-vertical-align-wrapper">    
+        <div class=" bd-joomlaposition-24 clearfix">
+            <div class=" bd-block bd-own-margins ">
+            
+    <div class="bd-blockcontent bd-tagstyles">
+        
+
+<div class="custom">
+	<style>
+.b-services-menu {padding: 0px 0px 0px 0px ;}
+.b-services-menu ul { list-style-type: none; height: 30px; padding:0px 0px 0px 0px;}
+.b-services-menu ul li {display:inline-block;}
+.b-services-menu ul li:last-child {}
+.b-services-menu ul li a {width:30px;height:30px;display:block; background-image: url(/images/systems/entersprite.png);}
+.b-services-menu ul li a.odnoklassniki {background-position:-300px 0}
+.b-services-menu ul li a.odnoklassniki:hover {background-position:-300px -30px}
+.b-services-menu ul li a.vkontakte {background-position:-330px 0}
+.b-services-menu ul li a.vkontakte:hover {background-position:-330px -30px}
+.b-services-menu ul li a.youtube {background-position:-360px 0}
+.b-services-menu ul li a.youtube:hover {background-position:-360px -30px}
+.b-services-menu ul li a.rss {background-position:-450px 0}
+.b-services-menu ul li a.rss:hover {background-position:-450px -30px}
+</style>
+<div class="b-services-menu">
+<ul>
+<li><a href="https://ok.ru/" target="_blank" rel="nofollow noopener" class="odnoklassniki"></a></li>
+<li><a href="https://vk.com/" target="_blank" rel="nofollow noopener" class="vkontakte"></a></li>
+<li><a href="http://www.youtube.com" target="_blank" rel="nofollow noopener" class="youtube"></a></li>
+<li><a href="http://rusnewsday.ru/index.php?option=com_sdrsssyndicator&amp;feed_id=1&amp;format=raw" target="_blank" rel="nofollow noopener" class="rss"></a></li>
+</ul>
+</div></div>
+    </div>
+    
+</div>
+        </div>
+        </div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</section>
+	
+		<section class=" bd-section-13 bd-tagstyles" id="section13" data-section-title="Section">
+    <div class="bd-container-inner bd-margins clearfix">
+        <div class=" bd-layoutcontainer-32 bd-columns bd-no-margins">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class=" bd-columnwrapper-79 
+ col-sm-12">
+    <div class="bd-layoutcolumn-79 bd-column"><div class="bd-vertical-align-wrapper">    
+        <div class=" bd-joomlaposition-21 clearfix">
+            <div class=" bd-block-7 bd-own-margins top1px">
+            
+    <div class="bd-blockcontent bd-tagstyles">
+        <div class="bannergrouptop1px">
+
+	<div class="banneritem">
+																																																																			<a href="/index.php/component/banners/click/9" target="_blank" rel="noopener noreferrer" title="Национальная премия">
+							<img src="https://rusnewsday.ru/images/realrussia/2022/banner15022022.jpg" alt="Национальная премия">
+						</a>
+																<div class="clr"></div>
+	</div>
+
+</div>
+    </div>
+    
+</div>
+        </div>
+        </div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</section>
+	
+		<section class=" bd-section-9 bd-tagstyles" id="section9" data-section-title="Section">
+    <div class="bd-container-inner bd-margins clearfix">
+        <div class=" bd-layoutcontainer-13 bd-columns bd-no-margins">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row 
+ bd-row-flex 
+ bd-row-align-middle">
+                <div class=" bd-columnwrapper-38 
+ col-lg-4
+ col-md-4
+ col-sm-3">
+    <div class="bd-layoutcolumn-38 bd-column"><div class="bd-vertical-align-wrapper">    
+        <div class=" bd-joomlaposition-30 clearfix">
+            <div class=" bd-block-11 bd-own-margins ">
+            
+    <div class="bd-blockcontent bd-tagstyles">
+        
+
+<div class="custom">
+	<style type="text/css">
+.logonews {width:130px; height:104px; display:block; background-image: url(/images/systems/entersprite.png); background-position:-330px -60px;}
+.logonews:hover {opacity: 0.70; transition: .6s ease;}
+.slogan {padding: 32px 0px 0px 8px;}
+.slogan {padding: 32px 0px 0px 8px;}
+@media (max-width: 750px) 
+  {.logonews {margin: 0px auto !important;}	
+}</style>
+<div class="row">
+<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+<div><a href="http://rusnewsday.ru" class="logonews"></a></div>
+</div>
+<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 slogan hidden-sm hidden-xs hidden-xxs">
+<p style="font-size: 20px;">РЕАЛЬНАЯ</p>
+<p style="font-size: 20px;">РОССИЯ</p>
+</div>
+</div></div>
+    </div>
+    
+</div>
+        </div>
+        </div></div>
+</div>
+	
+		<div class=" bd-columnwrapper-26 
+ col-lg-1
+ col-md-1
+ col-sm-2">
+    <div class="bd-layoutcolumn-26 bd-column"><div class="bd-vertical-align-wrapper">    
+        <div class=" bd-joomlaposition-20 clearfix">
+            <div class=" bd-block-24 bd-own-margins ">
+            
+    <div class="bd-blockcontent bd-tagstyles">
+        
+
+<div class="custom">
+	<style type="text/css">
+#open {cursor: pointer; 
+height: 24px; width: 25px; 
+background-image: url(/images/systems/entersprite.png); 
+background-position: -180px 0px ;
+background-repeat: no-repeat; 
+margin-top:0px; 
+margin-left: -24px;}
+
+#open:hover {
+cursor: pointer; 
+height: 24px; 
+width: 25px; 
+background-image: url(/images/systems/entersprite.png); 
+background-position: -210px 0px; 
+background-repeat: no-repeat;  
+color: #0F1C30; 
+}
+.myopim {padding-left:30px;}
+@media (max-width: 750px) 
+  {#open {margin: 0px auto !important;}	
+}
+
+</style>
+<div id="open">
+<div class="myopim">&nbsp;</div>
+</div></div>
+    </div>
+    
+</div>
+        </div>
+        </div></div>
+</div>
+	
+		<div class=" bd-columnwrapper-36 
+ col-lg-4
+ col-md-4
+ col-sm-7
+ hidden-xs">
+    <div class="bd-layoutcolumn-36 hidden-xs bd-column"><div class="bd-vertical-align-wrapper">    
+        <div class=" bd-joomlaposition-32 clearfix">
+            <div class=" bd-block bd-own-margins exklusive">
+            
+    <div class="bd-blockcontent bd-tagstyles">
+        
+<div class="allmode-box allmode-list exklusive">
+<ul class="allmode-items">
+			<li class="allmode-topitem allmode-category-id6">
+<div class="allmode-img-cont">
+						<div class="allmode-img"><a href="/index.php/obshchestvo/item/11319-irina-girsh-realnaya-rossiya-territoriya-perspektiv-talantov-i-novoj-realnosti"><img src="/images/raxo_thumbs/amk/tb-w70-h70-crop-int-870c956ac5c6f3f6e145beca89b1b8c5.jpg" title="Ирина Гирш: «Реальная Россия» - территория перспектив, талантов и новой реальности" alt="" width="70" height="70"></a></div>
+			<div class="allmode-img-ex"></div>
+</div>
+			
+						<h3 class="allmode-title"><a href="/index.php/obshchestvo/item/11319-irina-girsh-realnaya-rossiya-territoriya-perspektiv-talantov-i-novoj-realnosti">Ирина Гирш: «Реальная Россия» - территория перспектив, талантов и новой реальности</a></h3>
+			            
+            
+                  <div class="list-item-tags">
+      	        <a href="/index.php/component/k2/itemlist/tag/ИНТЕРВЬЮ">#ИНТЕРВЬЮ</a>&nbsp;
+                <a href="/index.php/component/k2/itemlist/tag/ГИРШ">#ГИРШ</a>&nbsp;
+              </div>
+                    
+            
+            
+
+			
+			<a href="/index.php/obshchestvo/item/11319-irina-girsh-realnaya-rossiya-territoriya-perspektiv-talantov-i-novoj-realnosti" class="allmode-readmore"></a>
+
+		</li>
+
+	
+
+	
+</ul>
+</div>
+    </div>
+    
+</div>
+        </div>
+        </div></div>
+</div>
+	
+		<div class=" bd-columnwrapper-31 
+ col-lg-3
+ col-md-3
+ hidden-sm hidden-xs">
+    <div class="bd-layoutcolumn-31 hidden-sm hidden-xs bd-column"><div class="bd-vertical-align-wrapper">    </div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</section>
+	
+		<section class=" bd-section-12 bd-tagstyles" id="section12" data-section-title="Section">
+    <div class="bd-container-inner bd-margins clearfix">
+        <div class=" bd-layoutcontainer-16 bd-columns bd-no-margins">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class=" bd-columnwrapper-71 
+ col-lg-12
+ col-md-12
+ col-sm-12
+ col-xs-12">
+    <div class="bd-layoutcolumn-71 bd-column"><div class="bd-vertical-align-wrapper"><div class=" bd-layoutbox-3 bd-no-margins clearfix">
+    <div class="bd-container-inner">
+        <div class=" bd-layoutbox-6 hidden-sm hidden-xs bd-no-margins clearfix">
+    <div class="bd-container-inner">
+                    
+        <nav class=" bd-hmenu-3" data-responsive-menu="true" data-responsive-levels="expand on click" data-responsive-type="" data-offcanvas-delay="0ms" data-offcanvas-duration="700ms" data-offcanvas-timing-function="ease">
+                        
+                <div class=" bd-menuoverlay-23 bd-menu-overlay"></div>
+                <div class=" bd-responsivemenu-2 collapse-button">
+    <div class="bd-container-inner">
+        <div class="bd-menuitem-16 ">
+            <a data-toggle="collapse" data-target=".bd-hmenu-3 .collapse-button + .navbar-collapse" href="#" onclick="return false;">
+                    <span></span>
+            </a>
+        </div>
+    </div>
+</div>
+                <div class="navbar-collapse collapse ">
+            <div class=" bd-horizontalmenu-2 clearfix">
+    <div class="bd-container-inner">
+        
+                
+<ul class=" bd-menu-3 nav navbar-left nav-pills">
+                        
+        <li class=" bd-menuitem-7 bd-toplevel-item  item-101 ">
+<a href="/index.php"><span>Главное</span></a></li>                        
+        <li class=" bd-menuitem-7 bd-toplevel-item  item-117 ">
+<a href="/index.php/politika"><span>Политика</span></a></li>                        
+        <li class=" bd-menuitem-7 bd-toplevel-item  item-151 ">
+<a href="/index.php/obshchestvo"><span>Общество</span></a></li>                        
+        <li class=" bd-menuitem-7 bd-toplevel-item  item-118 ">
+<a href="/index.php/ekonomika"><span>Экономика</span></a></li>                        
+        <li class=" bd-menuitem-7 bd-toplevel-item  item-119 ">
+<a href="/index.php/sport"><span>Спорт</span></a></li>                        
+        <li class=" bd-menuitem-7 bd-toplevel-item  item-120 ">
+<a href="/index.php/kultura"><span>Культура</span></a></li>                        
+        <li class=" bd-menuitem-7 bd-toplevel-item  item-187 ">
+<a href="/index.php/moda"><span>Мода</span></a></li>                        
+        <li class=" bd-menuitem-7 bd-toplevel-item  item-152 ">
+<a href="/index.php/tekhno"><span>Техно</span></a></li>                        
+        <li class=" bd-menuitem-7 bd-toplevel-item  item-121 ">
+<a href="/index.php/proisshestviya"><span>Происшествия</span></a></li>                </ul>        
+    </div>
+</div>                <div class="bd-menu-close-icon">
+    <a href="#" class="bd-icon  bd-icon-40"></a>
+</div>
+            
+                </div>
+                    </nav>
+        
+        </div>
+</div>
+	
+		<div class=" bd-layoutbox-11 hidden-sm hidden-xs bd-no-margins clearfix">
+    <div class="bd-container-inner">
+            
+        <div class=" bd-joomlaposition-39 clearfix">
+            <div class=" bd-block-23 bd-own-margins ">
+            
+    <div class="bd-blockcontent bd-tagstyles">
+        
+
+<div class="custom">
+	<style>
+	#searchOpenButton {
+	background-image: url(/images/systems/entersprite.png);
+	background-position: -270px -60px;
+	background-repeat: no-repeat;
+	margin-top: 10px;
+	width: 20px;
+	height: 20px;
+	text-indent: -9999px;
+	right: 20px;
+	cursor: pointer;
+	opacity: 1.0;
+	position: absolute;
+}
+#searchOpenButton:hover {    
+     background-image: url(/images/systems/entersprite.png); 
+    background-position: -270px -90px; 
+    background-repeat: no-repeat;      
+}
+#search-position #searchpanel {
+	display: none;
+position: absolute;
+right: 50px;
+height: 40px !important;
+width: 330px;
+z-index: 30;
+background-color: #fff;
+padding-left: 10px;
+
+border: 1px solid #e6e6e6;
+}
+#search-position #searchpanel input[type="text"] { border: 0px solid #ccc;}
+#search-position .inputbox {
+	font-size: 14px;
+	font-weight: 400;
+	width: auto;
+	border: 0px;
+	background: none;
+	float: left;
+	padding: 6px 12px 6px 12px;
+color: #8c8f8f;
+margin-top: 4px;
+border-left: 4px solid #e63c0f;
+}
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+<div id="search-position">                                 
+<div id="searchOpenButton">&nbsp;</div>
+<div id="searchpanel">		<div class="moduletable">
+						
+<form action="/" method="post" id="mls-form-mls_mod_115" class="form-inline mls-compact mls-form default-theme fade-effect blue-skin">
+	
+	<div class="mls-form-inner">
+	
+		<div id="mls-parent-mls_mod_115" class="mls-parent"><input name="searchword" id="mod-mls-searchword-mls_mod_115" maxlength="50" class="inputbox mls-query no-selector" type="text" placeholder="ПОИСК" autocomplete="off" onblur="if (this.value=='') this.value='ПОИСК';" onfocus="if (this.value=='ПОИСК') this.value='';" value=""><div id="mls-loading-mls_mod_115" class="mls-loading"><span class="mls-module-spinner"></span></div><div id="close-results-mls_mod_115" class="close-results"><i class="fa fa-times"></i></div></div><div id="mls-results-cont-mls_mod_115" class="mls-results-cont"><div id="mls-results-mls_mod_115" class="mls-results"></div></div>		
+		<input type="hidden" name="task" value="modSearch">
+		<input type="hidden" name="option" value="com_miniteklivesearch">
+		<input type="hidden" name="Itemid" value="0">
+	
+	</div>
+        
+</form>		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+    
+</div>
+        </div>
+            </div>
+</div>
+    </div>
+</div></div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</section>
+	
+		<div class="bd-containereffect-2 container-effect container "><div class=" bd-layoutbox-5  bd-no-margins clearfix">
+    <div class="bd-container-inner">
+            
+        <div class=" bd-joomlaposition-25 clearfix">
+            <div class=" bd-block-14 bd-own-margins ">
+            
+    <div class="bd-blockcontent bd-tagstyles">
+        
+
+<div class="custom">
+	<style type="text/css">#gazkal {padding: 30px 20px 30px 20px; background-color: #1f2125; display: none; position: absolute; z-index: 2000000; width: 100%; color: #fff; font-size: 24px;}
+.vmcat-name {margin-top: 14px;}
+.menurusnews li {list-style: none;}
+.menurusnews li a {color: #ddd; line-height: 45px; font-size: 22px;}
+.menurusnews li a:hover {color: #ddd; text-decoration: underline;}</style>
+<div id="gazkal">
+<div class="row">
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+<ul class="menurusnews">
+<li><a href="/index.php">Главное</a></li>
+<li><a href="/index.php/politika">Политика</a></li>
+<li><a href="/index.php/obshchestvo">Общество</a></li>
+<li><a href="/index.php/ekonomika">Экономика</a></li>
+<li><a href="/index.php/sport">Спорт</a></li>
+<li><a href="/index.php/kultura">Культура</a></li>
+<li><a href="/index.php/moda">Мода</a></li>
+<li><a href="/index.php/tekhno">Техно</a></li>
+<li><a href="/index.php/poisshestviya">Происшествия</a></li>
+</ul>
+</div>
+<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">		<div class="moduletablerusstagsmod">
+							<h3>Теги</h3>
+						
+<div id="k2ModuleBox149" class="k2TagCloudBlock russtagsmod">
+			<a href="/index.php/component/k2/itemlist/tag/БИЗНЕС" style="font-size:100%" title="155 материалов с тэгом БИЗНЕС">
+		БИЗНЕС	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ВЫСТАВКА" style="font-size:100%" title="254 материалов с тэгом ВЫСТАВКА">
+		ВЫСТАВКА	</a>
+				<a href="/index.php/component/k2/itemlist/tag/Дети" style="font-size:100%" title="202 материалов с тэгом Дети">
+		Дети	</a>
+				<a href="/index.php/component/k2/itemlist/tag/Дума" style="font-size:100%" title="868 материалов с тэгом Дума">
+		Дума	</a>
+				<a href="/index.php/component/k2/itemlist/tag/Закон" style="font-size:100%" title="196 материалов с тэгом Закон">
+		Закон	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ИНТЕРВЬЮ" style="font-size:100%" title="245 материалов с тэгом ИНТЕРВЬЮ">
+		ИНТЕРВЬЮ	</a>
+				<a href="/index.php/component/k2/itemlist/tag/История" style="font-size:100%" title="158 материалов с тэгом История">
+		История	</a>
+				<a href="/index.php/component/k2/itemlist/tag/КИНО" style="font-size:100%" title="191 материалов с тэгом КИНО">
+		КИНО	</a>
+				<a href="/index.php/component/k2/itemlist/tag/КИТАЙ" style="font-size:100%" title="187 материалов с тэгом КИТАЙ">
+		КИТАЙ	</a>
+				<a href="/index.php/component/k2/itemlist/tag/КОНКУРС" style="font-size:100%" title="173 материалов с тэгом КОНКУРС">
+		КОНКУРС	</a>
+				<a href="/index.php/component/k2/itemlist/tag/КРЕМЛЬ" style="font-size:100%" title="156 материалов с тэгом КРЕМЛЬ">
+		КРЕМЛЬ	</a>
+				<a href="/index.php/component/k2/itemlist/tag/МОШЕННИЧЕСТВО" style="font-size:100%" title="180 материалов с тэгом МОШЕННИЧЕСТВО">
+		МОШЕННИЧЕСТВО	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ОБРАЗОВАНИЕ" style="font-size:100%" title="171 материалов с тэгом ОБРАЗОВАНИЕ">
+		ОБРАЗОВАНИЕ	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ОКР" style="font-size:100%" title="460 материалов с тэгом ОКР">
+		ОКР	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ПОТРЕБИТЕЛЬ" style="font-size:100%" title="170 материалов с тэгом ПОТРЕБИТЕЛЬ">
+		ПОТРЕБИТЕЛЬ	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ПРИГОВОР" style="font-size:100%" title="249 материалов с тэгом ПРИГОВОР">
+		ПРИГОВОР	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ПРОМЫШЛЕННОСТЬ" style="font-size:100%" title="159 материалов с тэгом ПРОМЫШЛЕННОСТЬ">
+		ПРОМЫШЛЕННОСТЬ	</a>
+				<a href="/index.php/pravitelstvo" style="font-size:100%" title="153 материалов с тэгом Правительство">
+		Правительство	</a>
+				<a href="/index.php/component/k2/itemlist/tag/Путин" style="font-size:100%" title="455 материалов с тэгом Путин">
+		Путин	</a>
+				<a href="/index.php/component/k2/itemlist/tag/Регионы" style="font-size:100%" title="366 материалов с тэгом Регионы">
+		Регионы	</a>
+				<a href="/index.php/component/k2/itemlist/tag/СЕНАТ" style="font-size:100%" title="467 материалов с тэгом СЕНАТ">
+		СЕНАТ	</a>
+				<a href="/index.php/component/k2/itemlist/tag/СОТРУДНИЧЕСТВО" style="font-size:100%" title="567 материалов с тэгом СОТРУДНИЧЕСТВО">
+		СОТРУДНИЧЕСТВО	</a>
+				<a href="/index.php/component/k2/itemlist/tag/Следствие" style="font-size:100%" title="323 материалов с тэгом Следствие">
+		Следствие	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ТАМОЖНЯ" style="font-size:100%" title="158 материалов с тэгом ТАМОЖНЯ">
+		ТАМОЖНЯ	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ТЕАТР" style="font-size:100%" title="334 материалов с тэгом ТЕАТР">
+		ТЕАТР	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ФАС" style="font-size:100%" title="178 материалов с тэгом ФАС">
+		ФАС	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ФЕСТИВАЛЬ" style="font-size:100%" title="226 материалов с тэгом ФЕСТИВАЛЬ">
+		ФЕСТИВАЛЬ	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ФОРУМ" style="font-size:100%" title="156 материалов с тэгом ФОРУМ">
+		ФОРУМ	</a>
+				<a href="/index.php/component/k2/itemlist/tag/ЦИФРА" style="font-size:100%" title="273 материалов с тэгом ЦИФРА">
+		ЦИФРА	</a>
+				<a href="/index.php/component/k2/itemlist/tag/Шахматы" style="font-size:100%" title="206 материалов с тэгом Шахматы">
+		Шахматы	</a>
+			<div class="clr"></div>
+</div>
+		</div>
+	</div>
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 hidden-sm hidden-xs hidden-xxs">
+<ul class="menurusnews">
+<li><a href="/index.php/politika-konfidentsialnosti">Политика конфиденциальности</a></li>
+<li><a href="/index.php/reklamodatelyam">Рекламодателям</a></li>
+<li><a href="/index.php/kontakty">Контакты</a></li>
+<li><a href="/index.php/component/sdrsssyndicator/?feed_id=1&amp;format=raw">RSS</a></li>
+</ul>
+</div>
+</div>
+</div>
+<script type="text/javascript">jQuery(document).ready(function () {
+  var searchBlock = jQuery('#gazkal');
+  jQuery(document).on('click', '#open', function () {
+    searchBlock.slideToggle( 150 );
+    return false;
+  });
+});</script></div>
+    </div>
+    
+</div>
+        </div>
+            </div>
+</div>
+</div>
+	
+		<section class=" bd-section-17 bd-tagstyles" id="section20" data-section-title="Section">
+    <div class="bd-container-inner bd-margins clearfix">
+                </div>
+</section>
+</header>
+	
+		<div class=" bd-stretchtobottom-3 bd-stretch-to-bottom" data-control-selector=".bd-contentlayout-6">
+<div class="bd-contentlayout-6  bd-sheetstyles-5  bd-no-margins bd-margins">
+    <div class="bd-container-inner">
+
+        <div class="bd-flex-vertical bd-stretch-inner bd-contentlayout-offset">
+            
+                     <div class="bd-flex-horizontal bd-flex-wide bd-no-margins">
+                
+                         <div class="bd-flex-vertical bd-flex-wide bd-no-margins">
+                    
+
+                    <div class=" bd-layoutitemsbox-23 bd-flex-wide bd-no-margins">
+    <div class=" bd-content-6">
+    
+
+<div class=" bd-blog-3 " itemscope="" itemtype="http://schema.org/Article">
+    <div class="bd-container-inner">
+    
+                    <div class=" bd-grid-6 bd-margins">
+          <div class="container-fluid">
+            <div class="separated-grid row">
+                <div class="separated-item-38 col-md-12 ">
+                    
+                    <div class="bd-griditem-38">
+            
+        <article class=" bd-article-3">
+            <h2 class=" bd-postheader-3" itemprop="name">
+                        <a href="/index.php/politika-konfidentsialnosti">
+                Политика конфиденциальности и защиты информации            </a>
+            </h2>
+	
+		<div class=" bd-layoutbox-8 bd-no-margins clearfix">
+    <div class="bd-container-inner">
+        	
+			
+			
+			
+		    </div>
+</div>
+	
+		<div class=" bd-layoutbox-10 bd-no-margins clearfix">
+    <div class="bd-container-inner">
+        	
+		<div class=" bd-postcontent-3 bd-tagstyles  bd-contentlayout-offset" itemprop="articleBody">
+    <p><strong>Оставляя данные на сайте, Вы соглашаетесь с Политикой конфиденциальности и защиты информации.</strong></p>
+<h3>Защита данных</h3>
+<p>Администрация сайта rusnewsday.ru, реальнаяроссия.рф (далее Сайт) не может передать или раскрыть информацию, предоставленную пользователем (далее Пользователь) при регистрации и использовании функций сайта третьим лицам, кроме случаев, описанных законодательством страны, на территории которой пользователь ведет свою деятельность.</p>
+<h3>Получение персональной информации</h3>
+<p>Для коммуникации на сайте пользователь обязан внести некоторую персональную информацию. Для проверки предоставленных данных, сайт оставляет за собой право потребовать доказательства идентичности в онлайн или офлайн режимах.</p>
+<h3>Использование персональной информации</h3>
+<p>Сайт использует личную информацию Пользователя для обслуживания и для улучшения качества предоставляемых услуг. Часть персональной информации может быть предоставлена банку или платежной системе, в случае, если предоставление этой информации обусловлено процедурой перевода средств платежной системе, услугами которой Пользователь желает воспользоваться. Сайт прилагает все усилия для сбережения в сохранности личных данных Пользователя. Личная информация может быть раскрыта в случаях, описанных законодательством, либо когда администрация сочтет подобные действия необходимыми для соблюдения юридической процедуры, судебного распоряжения или легального процесса необходимого для работы Пользователя с Сайтом. В других случаях, ни при каких условиях, информация, которую Пользователь передает Сайту, не будет раскрыта третьим лицам.</p>
+<h3>Коммуникация</h3>
+<p>После того, как Пользователь оставил данные, он получает сообщение, подтверждающее его успешную регистрацию. Пользователь имеет право в любой момент прекратить получение информационных бюллетеней воспользовавшись соответствующим сервисом в Сайте.</p>
+<h3>Ссылки</h3>
+<p>На сайте могут содержаться ссылки на другие сайты. Сайт не несет ответственности за содержание, качество и политику безопасности этих сайтов. Данное заявление о конфиденциальности относится только к информации, размещенной непосредственно на сайте.</p>
+<h3>Безопасность</h3>
+<p>Сайт обеспечивает безопасность учетной записи Пользователя от несанкционированного доступа.</p>
+<h3>Уведомления об изменениях</h3>
+<p>Сайт оставляет за собой право вносить изменения в Политику конфиденциальности без дополнительных уведомлений. Нововведения вступают в силу с момента их опубликования. Пользователи могут отслеживать изменения в Политике конфиденциальности самостоятельно.</p> </div>
+    </div>
+</div>
+	
+		<div class=" bd-layoutbox-12 bd-no-margins clearfix">
+    <div class="bd-container-inner">
+        <div class=" bd-posticoncategory-9 bd-no-margins">
+    <span class=" bd-icon bd-icon-50"><span>Категория: <span class="bd-post-metadata-category-name"><a href="/index.php/politika-konfidentsialnosti/2-realnaya-rossiya" itemprop="genre">Реальная Россия</a></span></span></span>
+</div>
+	
+		    </div>
+</div>
+        </article>
+        <div class="bd-container-inner"></div>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+                    
+                </div>
+                
+                     <aside class="bd-sidebararea-2-column  bd-flex-vertical bd-flex-fixed ">
+                <div class="bd-sidebararea-2 bd-flex-wide  bd-contentlayout-offset">
+                    
+                    <div class=" bd-joomlaposition-6 clearfix">
+            <div class=" bd-block-20 bd-own-margins b-m-bottom">
+            
+    <div class="bd-blockcontent bd-tagstyles">
+        <div class="bannergroupb-m-bottom">
+	<div class="reklamatitle">реклама</div>
+
+	<div class="banneritem">
+																																																																			<a href="/index.php/component/banners/click/11" target="_blank" rel="noopener noreferrer" title="Юристы право на забвение">
+							<img src="https://rusnewsday.ru/images/realrussia/2019/klub-yuristov.jpg" alt="Юристы право на забвение">
+						</a>
+																<div class="clr"></div>
+	</div>
+	<div class="banneritem">
+																																																																			<a href="/index.php/component/banners/click/23" target="_blank" rel="noopener noreferrer" title="Род мой">
+							<img src="https://rusnewsday.ru/images/realrussia/2022/rodmoy22122022.jpg" alt="Сплотим семью">
+						</a>
+																<div class="clr"></div>
+	</div>
+
+</div>
+    </div>
+    
+</div>
+        </div>                    
+                </div>
+            </aside>
+                    </div>
+            
+        </div>
+
+    </div>
+</div></div>
+	
+		<footer class=" bd-footerarea-1 bd-margins">
+        <section class=" bd-section-2 bd-tagstyles" id="section2" data-section-title="">
+    <div class="bd-container-inner bd-margins clearfix">
+        <div class=" bd-layoutcontainer-28 bd-columns bd-no-margins">
+    <div class="bd-container-inner">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class=" bd-columnwrapper-25 
+ col-lg-1
+ col-sm-6">
+    <div class="bd-layoutcolumn-25 bd-column"><div class="bd-vertical-align-wrapper"><img class="bd-imagelink-2 bd-own-margins bd-imagestyles   " src="https://rusnewsday.ru/templates/newsmodern05092022/images/designer/94ef99d7ba6a8fa444b81cf4f2a0725f_logobott.png"></div></div>
+</div>
+	
+		<div class=" bd-columnwrapper-60 
+ col-lg-8
+ col-md-3
+ col-sm-6
+ col-xs-12">
+    <div class="bd-layoutcolumn-60 bd-column"><div class="bd-vertical-align-wrapper"><div class=" bd-customcmscode-2 bd-tagstyles">
+    <p>© <a href="http://rusnewsday.ru">Интернет-издание «Реальная Россия – rusnewsday».</a> 2023. Все права защищены. 18+</p>
+<p>Свидетельство о регистрации средства массовой информации Эл № ФC77-80305, от 09.02.2021г. Выдано Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций.</p>
+<p>Учредитель: Гирш И. Н., Главный редактор: Гирш И. Н.</p>
+<p>Адрес редакции: 121354, г. Москва, ул. Дорогобужская, д. 14, этаж 2, пом 203А.</p>
+<p>E-mail: irinagirsh@yandex.ru. Телефон редакции: 8&nbsp;926&nbsp;437 23 77</p>
+<p>Все права на материалы, опубликованные на сайте www.rusnewsday, принадлежат редакции и охраняются в соответствии с законодательством РФ. Использование материалов, опубликованных на сайте www.rusnewsday допускается только с разрешения правообладателя и с обязательной прямой гиперссылкой на страницу, с которой материал заимствован. </p>
+<p>Редакция не несет ответственности за рекламируемые товары и услуги. Все рекламируемые товары и услуги имеют в необходимых случаях сертификаты и лицензии.</p>
+<p style="font-size: 12px;">Изготовление сайта: <a href="http://abakanreklama.ru" target="blank">«Enter – компьютеры и коммуникации»</a></p>
+</div></div></div>
+</div>
+	
+		<div class=" bd-columnwrapper-61 
+ col-lg-3
+ col-md-3
+ col-sm-6
+ col-xs-12">
+    <div class="bd-layoutcolumn-61 bd-column"><div class="bd-vertical-align-wrapper">    
+        <div class=" bd-joomlaposition-3 clearfix">
+        
+
+<div class=" bd-vmenu-1" data-responsive-menu="true" data-responsive-levels="expand on click">
+    <div class=" bd-block-2 bd-own-margins vmenu">
+                <div class=" bd-blockcontent bd-tagstyles shape-only">
+            <div class=" bd-verticalmenu-3">
+                <div class="bd-container-inner">
+                                        
+<ul class=" bd-menu-23 nav nav-pills">
+                                                                            <li class=" bd-menuitem-23 item-159 current">
+<a class="  active" href="/index.php/politika-konfidentsialnosti"><span>Политика конфиденциальности</span></a></li>                                                                            <li class=" bd-menuitem-23 item-161">
+<a href="/index.php/reklamodatelyam"><span>Рекламодателям</span></a></li>                                                                            <li class=" bd-menuitem-23 item-163">
+<a href="/index.php/kontakty"><span>Контакты</span></a></li>                                                                            <li class=" bd-menuitem-23 item-160">
+<a href="http://rusnewsday.ru/index.php?option=com_sdrsssyndicator&amp;feed_id=1&amp;format=raw" target="_blank"><span>RSS</span></a></li>                                        </ul>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+        	
+		    
+        <div class=" bd-joomlaposition-5 clearfix">
+            <div class=" bd-block-6 bd-own-margins ">
+            
+    <div class="bd-blockcontent bd-tagstyles bd-custom-blockquotes bd-custom-button bd-custom-image bd-custom-inputs bd-custom-bulletlist bd-custom-orderedlist bd-custom-table">
+        
+
+<div class="custom">
+	<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(87482142, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/87482142" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+</div>
+    </div>
+    
+</div>
+        </div>
+        </div></div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+	
+		
+    </div>
+</section>
+</footer>
+	
+		<div data-smooth-scroll="" data-animation-time="200" class=" bd-smoothscroll-3"><a href="#" class=" bd-backtotop-1 hidden-sm hidden-xs " style="display: none;">
+    <span class="bd-icon-66 bd-icon "></span>
+</a></div>
+
+</body></html>

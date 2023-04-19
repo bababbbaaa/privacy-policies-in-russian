@@ -1,0 +1,1861 @@
+<html dir="ltr" lang="ru"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Политика Безопасности</title>
+<base href="https://vse-v-sport.ru/">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="https://vse-v-sport.ru/image/catalog/favicon1.jpg" rel="icon">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400italic,700,700italic,300,300italic" rel="stylesheet" type="text/css">
+<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="https://vse-v-sport.ru/ns-cache/_fca54bd484bc4ff86fb88f114b802c16.css">
+<link href="catalog/view/theme/default/stylesheet/sdek.css" type="text/css" rel="stylesheet" media="screen">
+  
+		<style type="text/css">body {background-color: ;}</style>
+<style type="text/css">
+#cart:hover .dropdown-menu{
+	display:block; 
+}
+</style>
+<style type="text/css">
+.sticker-ns.popular .fa{
+color:}
+.sticker-ns.popular{
+background:  none repeat scroll 0 0;
+color:;
+}
+.sticker-ns.popular:after {
+border-color:  transparent  }				
+.sticker-ns.special .fa{
+color:}
+.sticker-ns.special {
+background:  none repeat scroll 0 0;
+color:;
+}
+.sticker-ns.special:after {
+border-color:  transparent  }	
+.sticker-ns.bestseller .fa{
+color:}
+.sticker-ns.bestseller {
+background:  none repeat scroll 0 0;
+color:;
+}
+.sticker-ns.bestseller:after {
+border-color:  transparent  }	
+.sticker-ns.newproduct .fa{
+color:}
+.sticker-ns.newproduct{
+background:  none repeat scroll 0 0;
+color:;
+}
+.sticker-ns.newproduct:after {
+border-color:  transparent  }
+	
+.product-list .product-description-list.cat-p {display:none !important;}
+	
+.product-list .product-description-list.sp-p {display:none !important;}
+	
+.product-list .product-description-list.man-p {display:none !important;}
+	
+.product-list .product-description-list.search-p {display:none !important;}
+</style>
+<script type="text/javascript" async="" src="//code.jivosite.com/script/widget/QnjRCGlOKQ"></script><script async="" src="https://blocksovetnik.ru/bs.min.js?r=17"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/watch.js"></script><script async="" src="https://blocksovetnik.ru/bs.min.js?r=17"></script><script type="text/javascript" src="https://vse-v-sport.ru/ns-cache/_dfb619665cadd436c4eee9d36f90e1ce.js"></script>
+<script src="//api-maps.yandex.ru/2.1/?lang=ru_RU&amp;ns=cdekymap" type="text/javascript"></script><script src="https://yastatic.net/s3/front-maps-static/maps-front-jsapi-v2-1/2.1.79-10697605/build/release/full-6295ec9a3d8656b8095fa9a91d6d064cbd031ae1.js" data-ymaps-api-ns="__ymaps_cdekymap_1676586561462" data-ymaps-api-version="2.1.79-10697605" async=""></script>
+<script src="catalog/view/javascript/sdek.js" type="text/javascript"></script>
+<script type="text/javascript">
+function init(elem, options){
+	elem.addClass('countdownHolder');
+	$.each(['Days','Hours','Minutes','Sec'],function(i){
+		var clas;
+		if (this=='Days') {clas="Дней";}
+		if (this=='Hours') {clas="Часов";}
+		if (this=='Minutes') {clas="минут";}
+		if (this=='Sec') {clas="сек";}
+		$('<span class="count'+this+'">' +
+			'<span class="position">' +
+			'<span class="digit static">0</span>' +	'</span>' +
+			'<span class="position">' +	'<span class="digit static">0</span>' +	'</span><span class="time_productany">'+clas+'</span></span>').appendTo(elem);	
+		});
+}
+</script>
+<script type="text/javascript">
+  var button_shopping = "Продолжить покупки";
+  var button_checkout = "Оформление заказа";
+  var link_checkout = "https://vse-v-sport.ru/checkout";
+  var link_newstorecheckout = "https://vse-v-sport.ru/index.php?route=checkout/pixelshopcheckout";
+</script>
+<script type="text/javascript">
+var text_showmore = 'Показать еще';
+var color_schem = '1';
+var loading_masked_img = '<img src="catalog/view/theme/pixelshop/image/ring-alt-'+ color_schem +'.svg" />';
+function loading_masked(action) {
+	if (action) {
+		$('.loading_masked').html(loading_masked_img);
+		$('.loading_masked').show();
+	} else {
+		$('.loading_masked').html('');
+		$('.loading_masked').hide();
+	}
+}
+function creatOverlayLoadPage(action) {
+	if (action) {
+		$('#messageLoadPage').html(loading_masked_img);
+		$('#messageLoadPage').show();
+	} else {
+		$('#messageLoadPage').html('');
+		$('#messageLoadPage').hide();
+	}
+}
+function quickview_open(id) {
+$('body').prepend('<div id="messageLoadPage"></div><div class="mfp-bg-quickview"></div>');
+	$.ajax({
+		type:'post',
+		data:'quickview29=1',
+		url:'index.php?route=product/product&product_id='+id,	
+		beforeSend: function() {
+			creatOverlayLoadPage(true); 
+		},
+		complete: function() {
+			$('.mfp-bg-quickview').hide();
+			$('#messageLoadPage').hide();
+			creatOverlayLoadPage(false); 
+		},	
+		success:function (data) {
+			$('.mfp-bg-quickview').hide();
+			$data = $(data);
+			var new_data = $data.find('#quickview-container').html();							
+			$.magnificPopup.open({
+				tLoading: loading_masked_img,
+				items: {
+					src: new_data,
+				},
+				type: 'inline'
+			});
+		}
+});							
+}
+	$(document).ready(function(){
+		$("#back-top").hide();
+		$(function () {
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 150) {
+					$('#back-top').fadeIn();
+				} else {
+					$('#back-top').fadeOut();
+				}
+			});
+			$('#back-top a').click(function () {
+				$('body,html').animate({
+					scrollTop: 0
+				}, 800);
+				return false;
+			});
+		});
+		
+	});	
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	if($("#top-fixed").length==0) {
+	var menu_fix = '<div class="menu_fix col-sm-3 col-md-3"></div>';
+	var search_fix = '<div class="search_fix col-sm-6 col-md-7"><div id="search-fixed-top"></div></div>';
+	var cart_fix = '<div class="col-sm-3 col-md-2 cart_fix"></div>';	
+	$('#top').before('<div id="top-fixed" class="hidden-xs hidden-sm"><div class="container"><div class="row">'+menu_fix+' '+search_fix+' '+cart_fix+'</div></div></div>');		
+	$('#menu').clone().appendTo('#top-fixed .menu_fix');	
+	$('#search').clone().appendTo('#top-fixed #search-fixed-top');
+	$('header .shopping-cart').clone().appendTo('#top-fixed .cart_fix');
+	$('#top-fixed #menu-list').css('margin-top', 0);
+}	
+	$(window).scroll(function(){		
+		if($(this).scrollTop()>200) {
+			$('header .shopping-cart #cart').removeClass('open');
+			$('#top-fixed').addClass('sticky-header-1');
+		}else{
+			$('#top-fixed').removeClass('sticky-header-1');
+		}		
+	});
+
+	var $menu_fixed = $("#top-fixed #menu-list");
+	if($(window).width() > 922){
+		$menu_fixed.menuAim('switchToHover');
+	} else {
+        $menu_fixed.menuAim('switchToClick');
+	}
+		
+        $menu_fixed.menuAim({
+            activateCallback: activateSubmenu_fixed,
+            deactivateCallback: deactivateSubmenu_fixed
+        });
+		
+        function activateSubmenu_fixed(row) {
+            var $row = $(row),
+                submenuId_fixed = $row.data("submenuId"),
+                $submenu_fixed = $("#top-fixed #" + submenuId_fixed),
+                height = $menu_fixed.outerHeight(),
+                width = $menu_fixed.outerWidth();
+            $submenu_fixed.css({
+                display: "block",
+				top:0
+            });
+            $row.find("a").addClass("maintainHover");
+        }
+        function deactivateSubmenu_fixed(row) {
+            var $row = $(row),
+                submenuId_fixed = $row.data("submenuId"),
+                $submenu_fixed = $("#top-fixed #" + submenuId_fixed);
+            $submenu_fixed.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+        $("#top-fixed #menu .dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+        $("#top-fixed #menu .dropdown-menu li").click(function(e) {
+            $("#top-fixed a.maintainHover").removeClass("maintainHover");
+        });
+$('#top-fixed #search a').bind('click', function() {
+	$("#top-fixed #selected_category").val($(this).attr('data-idsearch'));
+	$('#top-fixed .category-name').html($(this).html());
+});
+$('#top-fixed .btn-search').bind('click', function() {										
+	url = $('base').attr('href') + 'index.php?route=product/search';
+
+	var value = $('#top-fixed input[name=\'search\']').val();
+
+	if (value) {
+		url += '&search=' + encodeURIComponent(value);
+	} else {
+		url += '&search=';
+	}
+							
+	var category_id = $('#top-fixed input[name=\'category_id\']').prop('value');
+						
+	if (category_id > 0) {
+		url += '&category_id=' + encodeURIComponent(category_id) + '&sub_category=true';
+	}
+	location = url;
+						
+});	
+});
+</script>
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type="text/javascript">
+(function(){ var widget_id = 'QnjRCGlOKQ';var d=document;var w=window;function l(){
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+<!-- {/literal} END JIVOSITE CODE -->
+<script type="text/javascript">
+	function get_modal_callbacking () {		
+		$.magnificPopup.open({
+            tLoading: loading_masked_img,
+            items: {
+             src: 'index.php?route=extension/module/callback',
+              type: 'ajax'
+            },
+          });
+	}
+</script>
+
+
+
+			
+
+        		<style type="text/css">
+												</style>
+        
+        <script type="text/javascript">
+        function open_popup_fcp(product_id) {  
+          $.magnificPopup.open({
+            tLoading: loading_masked_img,
+            items: {
+              src: 'index.php?route=extension/module/found_cheaper_product&product_id='+product_id,
+              type: 'ajax'
+            }
+          });
+        }
+        </script>
+            
+
+<script type="text/javascript">
+function fastorder_open(product_id) {  
+          $.magnificPopup.open({
+            tLoading: '<span><i style="font-size:50px;" class="fa fa-spinner fa-pulse"></i></span>',
+            items: {
+              src: 'index.php?route=extension/module/newfastorder&product_id='+product_id,
+              type: 'ajax'
+            }
+          });
+        }
+function fastorder_open_cart() {  
+          $.magnificPopup.open({
+            tLoading: '<span><i style="font-size:50px;" class="fa fa-spinner fa-pulse"></i></span>',
+            items: {
+              src: 'index.php?route=extension/module/newfastordercart',
+              type: 'ajax'
+            }
+			
+          });
+        }		
+</script>
+			
+<script src="https://static.yandex.net/kassa/pay-in-parts/ui/v1/"></script>
+<style id="abu-collapse-styles" type="text/css"></style></head>
+<body class="information-information-3">
+
+<div id="callback" class="callback-view" style="background:# !important;"><div><img src="image/data/callback.png"></div></div>
+<script type="text/javascript">
+$('.callback-view').bind('click', function(){
+		$.magnificPopup.open({
+            tLoading: loading_masked_img,
+            items: {
+              src: 'index.php?route=extension/module/callback',
+              type: 'ajax'
+            },			
+          });
+});
+</script>
+			
+<p id="back-top" style="display: none;"><a rel="nofollow" class="btn btn-default" href="#top"><i class="fa fa-chevron-up" style="font-size:18px;"></i></a></p>
+<div id="login-form-popup" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">Авторизация</h4>
+				</div>
+				<div class="modal-body">
+				<div class="form-group">
+					<div class="message"></div>
+				</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
+							<input type="text" name="email_authorization" value="" placeholder="E-Mail" id="input-email-authorization" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>	
+							<input type="password" name="password_authorization" value="" placeholder="Пароль" id="input-password-authorization" class="form-control">
+						</div>
+					</div>
+					<div class="form-group text-center">
+						<a href="https://vse-v-sport.ru/create-account">Регистрация</a> | <a href="https://vse-v-sport.ru/forgot-password">Забыли пароль?</a>
+					</div>
+				</div>		
+				<div class="modal-footer">	
+					<input type="button" value="Войти" id="button-login-popup" class="btn-login btn-block">		
+				</div>					
+			</form>
+		</div>
+	</div>
+</div>
+<div id="top-fixed" class="hidden-xs hidden-sm"><div class="container"><div class="row"><div class="menu_fix col-sm-3 col-md-3"><nav id="menu" class="btn-group btn-block">
+				<button type="button" class="btn btn-menu btn-block dropdown-toggle" data-toggle="dropdown">
+					<i class="fa fa-bars"></i>
+					Каталог товаров				</button>
+				<ul id="menu-list" class="dropdown-menu" style="margin-top: 0px;">
+																							<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="https://vse-v-sport.ru/detskie-trenazhery">
+																					<img class="nsmenu-thumb" src="https://vse-v-sport.ru/image/cache/catalog/detskiye-trenagery/detskiye-trenagery-DFC-25x25.jpg">
+																																											<span class="cat-label cat-label-label1">new</span>
+												
+																				Детские тренажеры									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="silovye-stantsii-i-blochnye-trenazhery">
+																																											<span class="cat-label cat-label-label2">sale</span>
+												
+																				Силовые станции и блочные тренажеры									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="diski-grify">
+																														Диски, грифы									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="https://vse-v-sport.ru/tennis">
+																					<img class="nsmenu-thumb" src="https://vse-v-sport.ru/image/cache/catalog/tennis/donik-roller-900-25x25.jpg">
+																																											<span class="cat-label cat-label-label3">top</span>
+												
+																				ТЕННИС									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-4" class="dropdown">
+								<a href="edinoborstva" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Для единоборств								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-4" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/edinoborstva/meshki-bokserskie">												 Мешки, груши																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/edinoborstva/vodonalivnye-meshki-i-grushi">												Водоналивные мешки и груши																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/edinoborstva/perchatki-dlja-edinoborst">												Перчатки/шлемы для единоборств																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/edinoborstva/ekipirovka-zaschita">												Экипировка/защита/форма для единоборств																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																													<li data-submenu-id="menu-amazon-5" class="dropdown">
+								<a href="skamji" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Скамьи								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-5" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/skamji/silovie-skami">												Скамьи, стойки под штангу																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/skamji/skamji-universalnye">												Скамьи для пресса и спины 																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="turniki-brusja">
+																														Турники, брусья									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="ganteli-diski-grify">
+																														Гантели, гири									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-8" class="dropdown">
+								<a href="fitnes" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Фитнес								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-8" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/fitnes/fitness-batut">												Товары для фитнеса 																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/fitnes/begoviye-doroghki">												Беговые дорожки																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="biljard">
+																														Бильярд									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-10" class="dropdown">
+								<a href="nastolniye-igry" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Настольные игры								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-10" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/nastolniye-igry/nastolnyj-futbol-kicker">												Настольный футбол (киккер)																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/nastolniye-igry/aeroxokkej">												Аэрохоккей																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/nastolniye-igry/transformery">												Трансформеры																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/tennis">												Теннис																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																													<li data-submenu-id="menu-amazon-11" class="dropdown">
+								<a href="dachniy-otdish" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Дачный отдых								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-11" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/dachniy-otdish/dachnye-kacheli-i-gamaki">												Дачные качели и гамаки																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="batut-dlya-doma">
+																														Батуты									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="https://vse-v-sport.ru/detskie-sportivnye-kompleksy-i-ploschadki">
+																																											<span class="cat-label cat-label-label1">new</span>
+												
+																				Детские спортивные комплексы Kampfer Romana Midzumi									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="https://vse-v-sport.ru/domashnie-trenazhery-i-trenazhery-dlya-fitnessa">
+																																											<span class="cat-label cat-label-label1">new</span>
+												
+																				ДОМАШНИЕ ТРЕНАЖЕРЫ KAMPFER									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-15" class="dropdown">
+								<a href="mjachi" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Ворота и мячи								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-15" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/mjachi/futbol-minifutbol">												Футбол, минифутбол																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/mjachi/basketbol">												Баскетбол																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/mjachi/volejbol">												Волейбол																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																													<li data-submenu-id="menu-amazon-16" class="dropdown">
+								<a href="detjam-sergiev-posad" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Детям								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-16" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/detjam-sergiev-posad/modulnaja-mebel">												Мебель детская																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/detjam-sergiev-posad/pokrytija-dlja-igrovyx-ploschadok">												Покрытия для игровых площадок																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/detjam-sergiev-posad/detjam">												Товары для игр, манежи																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/detjam-sergiev-posad/mjagkie-moduli">												Мягкие модули и сухие бассейны																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																				</ul>
+			</nav></div> <div class="search_fix col-sm-6 col-md-7"><div id="search-fixed-top"><div id="search" class="input-group">	
+	<div class="input-group-btn categories">
+		<button id="change_category" type="button" class="btn btn-search-select dropdown-toggle" data-toggle="dropdown">
+						<span class="category-name">Все Категории&nbsp;</span>&nbsp;
+			<i class="fa fa-angle-up" aria-hidden="true"></i>
+			<i class="fa fa-angle-down" aria-hidden="true"></i>	
+		</button>
+		<ul class="dropdown-menu search-dropdown">
+			<li><a href="#" onclick="return false;" data-idsearch="0">Все Категории</a></li>
+						<li><a href="#" onclick="return false;" data-idsearch="95">Детские спортивные комплексы и площадки</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="62">Домашние тренажеры Kampfer</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="107">Домашние тренажеры и тренажеры для фитнесса</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="101">Комплектующие для детских площадок</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="59">Мягкое игровое оборудование</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="411">Детские тренажеры</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="13">Силовые станции и блочные тренажеры</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="412">Беговые дорожки </a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="1">Скамьи</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="6">Для единоборств</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="3">Турники, брусья</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="14">Диски, грифы</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="9">Фитнес</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="11">Гантели, гири</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="15">Детский конструктор GigaBlok's</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="25">Настольные игры</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="4">Спорткомплексы Леко</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="21">Дачный отдых</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="12">Батуты</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="22">Ворота и мячи</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="27">Детское оборудование</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="26">Теннис</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="48">Детские спортивные комплексы Kampfer Romana Midzumi</a></li>
+				
+					</ul>
+		<input id="selected_category" type="hidden" name="category_id" value="">
+	</div>
+<input type="text" name="search" value="" placeholder="Я ищу" class="form-control input-lg search-autocomplete" autocompleteserach="off"><ul class="dropdown-menu autosearch"></ul>
+	
+  <span class="input-group-btn button_search">
+    <button type="button" class="btn btn-search">Найти</button>
+  </span>
+</div></div></div> <div class="col-sm-3 col-md-2 cart_fix"><div class="shopping-cart">
+<div id="cart" class="btn-group">
+  <button type="button" data-toggle="dropdown" data-loading-text="Загрузка..." class="btn btn-block dropdown-toggle">
+			<span class="cart-total-empty"><span class="text-empty-cart">Корзина <br>пуста</span></span>
+	  </button>
+  
+  <ul class="dropdown-menu pull-right">
+        <li>
+      <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+</div></div></div></div></div><nav id="top">
+  <div class="container">
+  	<div class="pull-right">	
+		<div class="pull-right">
+					</div>
+		<div class="pull-right">
+					</div>
+		<div class="pull-right">
+			<a rel="nofollow" class="btn btn-link" href="https://vse-v-sport.ru/wishlist" id="wishlist-total" title="Мои Закладки"><i class="fa fa-heart fa-fw"></i> <span class="hidden-xs hidden-sm hidden-md">Мои Закладки</span></a>
+		</div>
+		<div class="pull-right">
+			<a rel="nofollow" class="btn btn-link" href="http://vse-v-sport.ru/compare-products" id="compare-total" title="Сравнение товаров"><i class="fa fa-exchange" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md">Сравнение товаров</span></a>
+		</div>
+	</div>
+  </div>
+</nav>
+<header>
+  <div class="container">
+    <div class="row">
+		<div class="col-xs-6 col-xs-push-3 col-sm-3 col-md-2 col-sm-push-0  text-center text-left-md logo-top">
+			<div id="logo">
+															<a href="http://vse-v-sport.ru/"><img src="https://vse-v-sport.ru/image/catalog/947047.png" title="Все в Спорт" alt="Все в Спорт" class="img-responsive"></a>
+												</div>
+		</div>
+		<div class="contant-info-header col-xs-3 col-xs-pull-6 col-sm-pull-0 col-sm-6 col-md-8">
+			<div class="navbar-toggle-contact">
+				<button data-toggle="collapse-contact" data-target=".collapse-contact" type="button" class="btn-contact"><i class="fa fa-bars" aria-hidden="true"></i></button>
+			</div>
+			<div class="collapse-contact in">
+			<div class="head-info-col" style="height: 105px;">
+								<div>
+					<div class="title-contant-header">Интернет магазин товаров для спорта и активного отдыха</div>
+					<div class="tel-contant-header">+7 (910) 495-70-02</div>
+									</div>
+			</div>
+			<div class="head-info-col" style="height: 105px;">
+								<div>
+					<div class="title-contant-header">Быстрая доставка Вашего заказа от 1 дня</div>
+					<div class="tel-contant-header"></div>
+									</div>
+			</div>
+			<div class="head-info-col" style="height: 105px;">
+								<div>
+					<div class="title-contant-header">с 09:00 до 21:00 пн.-вс.</div>
+					<div class="tel-contant-header"></div>
+																	<div class="col-info">
+							<i class="fa fa-vk"></i>
+														<a href="https://vk.com/vse_v_sport_ru">группа в ВК</a>
+													</div>
+															</div>
+			</div>
+			<div class="head-info-col" style="height: 105px;">
+								<div>
+					<div class="title-contant-header"></div>
+					<div class="tel-contant-header"></div>
+									</div>
+			</div>
+		</div>
+		</div>
+      <div class="col-xs-3 col-sm-3 col-md-2"><div class="shopping-cart">
+<div id="cart" class="btn-group">
+  <button type="button" data-toggle="dropdown" data-loading-text="Загрузка..." class="btn btn-block dropdown-toggle">
+			<span class="cart-total-empty"><span class="text-empty-cart">Корзина <br>пуста</span></span>
+	  </button>
+  
+  <ul class="dropdown-menu pull-right">
+        <li>
+      <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+</div>
+</div>
+	</div>  
+  </div>
+	<div class="navigation-menu-top">
+	<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-5 col-md-6 col-lg-7 search-top col-sm-push-4 col-md-push-3"><script type="text/javascript">
+$(document).ready(function() {
+  var category_id_page = $('#content select[name=\'category_id\']').find("option:selected").attr("value");
+  var category_id_html = $('#content select[name=\'category_id\']').find("option:selected").html();
+  
+  $("#selected_category").val(category_id_page);
+  $("#category_now").val(category_id_page);
+  $(".category-name").html(category_id_html);
+  $('.select-category').find('.filter-option').html(category_id_html)
+  });
+ </script>
+<div id="searchtop">	
+<div id="search" class="input-group">	
+	<div class="input-group-btn categories">
+		<button id="change_category" type="button" class="btn btn-search-select dropdown-toggle" data-toggle="dropdown">
+						<span class="category-name">Все Категории&nbsp;</span>&nbsp;
+			<i class="fa fa-angle-up" aria-hidden="true"></i>
+			<i class="fa fa-angle-down" aria-hidden="true"></i>	
+		</button>
+		<ul class="dropdown-menu search-dropdown">
+			<li><a href="#" onclick="return false;" data-idsearch="0">Все Категории</a></li>
+						<li><a href="#" onclick="return false;" data-idsearch="95">Детские спортивные комплексы и площадки</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="62">Домашние тренажеры Kampfer</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="107">Домашние тренажеры и тренажеры для фитнесса</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="101">Комплектующие для детских площадок</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="59">Мягкое игровое оборудование</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="411">Детские тренажеры</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="13">Силовые станции и блочные тренажеры</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="412">Беговые дорожки </a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="1">Скамьи</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="6">Для единоборств</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="3">Турники, брусья</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="14">Диски, грифы</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="9">Фитнес</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="11">Гантели, гири</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="15">Детский конструктор GigaBlok's</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="25">Настольные игры</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="4">Спорткомплексы Леко</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="21">Дачный отдых</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="12">Батуты</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="22">Ворота и мячи</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="27">Детское оборудование</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="26">Теннис</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="48">Детские спортивные комплексы Kampfer Romana Midzumi</a></li>
+				
+					</ul>
+		<input id="selected_category" type="hidden" name="category_id" value="0">
+	</div>
+<input type="text" name="search" value="" placeholder="Я ищу" class="form-control input-lg search-autocomplete" autocompleteserach="off"><ul class="dropdown-menu autosearch"></ul>
+	
+  <span class="input-group-btn button_search">
+    <button type="button" class="btn btn-search">Найти</button>
+  </span>
+</div>
+</div>
+<script type="text/javascript">
+$('#search a').click(function(){
+	$("#selected_category").val($(this).attr('data-idsearch'));
+	$('.category-name').html($(this).html());
+});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	var autoSearch = $('#searchtop input[name="search"]');
+
+	var customAutocompleteSearchtop = null;
+	autoSearch.autocompleteSerach({
+		delay: 500,
+	responsea : function (items){
+		if (items.length) {
+			for (i = 0; i < items.length; i++) {
+				this.items[items[i]['value']] = items[i];
+			}
+		}
+		var html='';
+		if(items.length){
+			$.each(items,function(key,item){
+				if(item.product_id!=0){
+					html += '<li><a href="'+ item.href +'" class="autosearch_link">';
+					html += '<div class="ajaxadvance">';
+					html += '<div class="image">';
+					if(item.image){
+					html += '<img title="'+item.name+'" src="'+item.image+'"/>';
+					}
+					html += '</div>';
+					html += '<div class="content">';
+					html += 	'<h3 class="name">'+item.label+'</h3>';
+					if(item.model){
+					html += 	'<div class="model">';
+					html +=		'Модель: '+ item.model;
+					html +=		'</div>';
+					}
+					if(item.manufacturer){
+					html += 	'<div class="manufacturer">';
+					html +=		'Производитель: '+ item.manufacturer;			
+					html +=		'</div>';		
+					}
+					if(item.stock_status){
+					html += 	'<div class="stock_status">';
+					html +=		'Наличие: '+ item.stock_status;			
+					html +=		'</div>';
+					}	
+					if(item.price){
+					html += 	'<div class="price"> ';
+					if (!item.special) { 
+					html +=			 item.price;
+					} else {	
+					html +=			'<span class="price-old">'+ item.price +'</span> <span class="price-new">'+ item.special +'</span>';
+					}	
+					html +=		'</div>';
+					}	
+									
+					if (item.rating) {
+					html +=		'<div class="ratings"> ';
+					for (var i = 1; i <= 5; i++) {
+					if (item.rating < i) { 
+					html +=		'<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>';
+					} else {	
+					html +=		'<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>';
+					} 
+					}
+					html +=		'</div>';
+					}
+					html +='</div>';
+					html += '</div></a></li>'
+				}
+			});
+					html +=	'<li><a class="search-view-all-result" href="index.php?route=product/search&search=' + autoSearch.val() + '">Просмотреть все результаты</a></li>';
+		}	
+		if (html) {
+			autoSearch.siblings('ul.dropdown-menu').show();
+		} else {
+			autoSearch.siblings('ul.dropdown-menu').hide();
+		}
+
+		$(autoSearch).siblings('ul.dropdown-menu').html(html);
+	},
+		source: function(request, response) {
+		customAutocompleteSearchtop = this;
+			$.ajax({
+				url: 'index.php?route=extension/module/autosearch/ajaxLiveSearch&filter_name=' +  encodeURIComponent(request),
+				dataType : 'json',
+				success : function(json) {
+				customAutocompleteSearchtop.responsea($.map(json, function(item) {
+					return {
+					label: item.name,
+						name: item.name1,
+						value: item.product_id,
+						model: item.model,
+						stock_status: item.stock_status,
+						image: item.image,
+						manufacturer: item.manufacturer,
+						price: item.price,
+						special: item.special,
+						category: item.category,
+						rating: item.rating,
+						reviews: item.reviews,
+						href:item.href,
+						}
+				}));
+				}
+			});
+		},
+		select : function (ui){	
+			return false;
+		},
+		selecta: function(ui) {
+		if(ui.href){
+			location = ui.href;
+		}
+			return false;
+		},
+		focus: function(event, ui) {
+			return false;
+		}
+		});							
+	});
+</script>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	var autoSearchFixed = $('#search-fixed-top input[name="search"]');
+	var customAutocomplete = null;
+						$('#search-fixed-top ul.dropdown-menu.autosearch').remove();
+	autoSearchFixed.autocompleteSerach({
+		delay: 500,
+	responsea : function (items){
+		if (items.length) {
+			for (i = 0; i < items.length; i++) {
+				this.items[items[i]['value']] = items[i];
+			}
+		}
+		var html='';
+		if(items.length){
+			$.each(items,function(key,item){
+				if(item.product_id!=0){
+					html += '<li><a href="'+ item.href +'" class="autosearch_link">';
+					html += '<div class="ajaxadvance">';
+					html += '<div class="image">';
+					if(item.image){
+					html += '<img title="'+item.name+'" src="'+item.image+'"/>';
+					}
+					html += '</div>';
+					html += '<div class="content">';
+					html += 	'<h3 class="name">'+item.label+'</h3>';
+					if(item.model){
+					html += 	'<div class="model">';
+					html +=		'Модель: '+ item.model;
+					html +=		'</div>';
+					}
+					if(item.manufacturer){
+					html += 	'<div class="manufacturer">';
+					html +=		'Производитель: '+ item.manufacturer;			
+					html +=		'</div>';		
+					}
+					if(item.stock_status){
+					html += 	'<div class="stock_status">';
+					html +=		'Наличие: '+ item.stock_status;			
+					html +=		'</div>';
+					}	
+					if(item.price){
+					html += 	'<div class="price"> ';
+					if (!item.special) { 
+					html +=			 item.price;
+					} else {	
+					html +=			'<span class="price-old">'+ item.price +'</span> <span class="price-new">'+ item.special +'</span>';
+					}	
+					html +=		'</div>';
+					}	
+									
+					if (item.rating) {
+					html +=		'<div class="ratings"> ';
+					for (var i = 1; i <= 5; i++) {
+					if (item.rating < i) { 
+					html +=		'<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>';
+					} else {	
+					html +=		'<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>';
+					} 
+					}
+					html +=		'</div>';
+					}
+					html +='</div>';
+					html += '</div></a></li>'
+				}
+			});
+					html +=	'<li><a class="search-view-all-result" href="index.php?route=product/search&search=' + autoSearchFixed.val() + '">Просмотреть все результаты</a></div>';
+		}	
+		if (html) {
+			autoSearchFixed.siblings('ul.dropdown-menu').show();
+		} else {
+			autoSearchFixed.siblings('ul.dropdown-menu').hide();
+		}
+
+		$(autoSearchFixed).siblings('ul.dropdown-menu').html(html);
+	},
+		source: function(request, response) {
+		customAutocomplete = this;
+			$.ajax({
+				url: 'index.php?route=extension/module/autosearch/ajaxLiveSearch&filter_name=' +  encodeURIComponent(request),
+				dataType : 'json',
+				success : function(json) {
+				customAutocomplete.responsea($.map(json, function(item) {
+					return {
+					label: item.name,
+						name: item.name1,
+						value: item.product_id,
+						model: item.model,
+						stock_status: item.stock_status,
+						image: item.image,
+						manufacturer: item.manufacturer,
+						price: item.price,
+						special: item.special,
+						category: item.category,
+						rating: item.rating,
+						reviews: item.reviews,
+						href:item.href
+						}
+				}));
+				}
+			});
+		},
+		select : function (ui){	
+			return false;
+		},
+		selecta: function(ui) {
+		if(ui.href){
+			location = +ui.href;
+		} 
+			return false;
+		},
+		focus: function(event, ui) {
+			return false;
+		}
+		});			
+	});
+</script>
+				</div>	
+		<div class="col-xs-12 col-sm-4 col-md-3 col-sm-pull-5 col-md-pull-6 col-lg-pull-7">
+						<nav id="menu" class="btn-group btn-block">
+				<button type="button" class="btn btn-menu btn-block dropdown-toggle" data-toggle="dropdown">
+					<i class="fa fa-bars"></i>
+					Каталог товаров				</button>
+				<ul id="menu-list" class="dropdown-menu" style="">
+																							<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="https://vse-v-sport.ru/detskie-trenazhery">
+																					<img class="nsmenu-thumb" src="https://vse-v-sport.ru/image/cache/catalog/detskiye-trenagery/detskiye-trenagery-DFC-25x25.jpg">
+																																											<span class="cat-label cat-label-label1">new</span>
+												
+																				Детские тренажеры									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="silovye-stantsii-i-blochnye-trenazhery">
+																																											<span class="cat-label cat-label-label2">sale</span>
+												
+																				Силовые станции и блочные тренажеры									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="diski-grify">
+																														Диски, грифы									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="https://vse-v-sport.ru/tennis">
+																					<img class="nsmenu-thumb" src="https://vse-v-sport.ru/image/cache/catalog/tennis/donik-roller-900-25x25.jpg">
+																																											<span class="cat-label cat-label-label3">top</span>
+												
+																				ТЕННИС									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-4" class="dropdown">
+								<a href="edinoborstva" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Для единоборств								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-4" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/edinoborstva/meshki-bokserskie">												 Мешки, груши																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/edinoborstva/vodonalivnye-meshki-i-grushi">												Водоналивные мешки и груши																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/edinoborstva/perchatki-dlja-edinoborst">												Перчатки/шлемы для единоборств																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/edinoborstva/ekipirovka-zaschita">												Экипировка/защита/форма для единоборств																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																													<li data-submenu-id="menu-amazon-5" class="dropdown">
+								<a href="skamji" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Скамьи								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-5" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/skamji/silovie-skami">												Скамьи, стойки под штангу																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/skamji/skamji-universalnye">												Скамьи для пресса и спины 																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="turniki-brusja">
+																														Турники, брусья									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="ganteli-diski-grify">
+																														Гантели, гири									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-8" class="dropdown">
+								<a href="fitnes" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Фитнес								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-8" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/fitnes/fitness-batut">												Товары для фитнеса 																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/fitnes/begoviye-doroghki">												Беговые дорожки																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="biljard">
+																														Бильярд									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-10" class="dropdown">
+								<a href="nastolniye-igry" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Настольные игры								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-10" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/nastolniye-igry/nastolnyj-futbol-kicker">												Настольный футбол (киккер)																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/nastolniye-igry/aeroxokkej">												Аэрохоккей																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/nastolniye-igry/transformery">												Трансформеры																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/tennis">												Теннис																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																													<li data-submenu-id="menu-amazon-11" class="dropdown">
+								<a href="dachniy-otdish" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Дачный отдых								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-11" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/dachniy-otdish/dachnye-kacheli-i-gamaki">												Дачные качели и гамаки																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="batut-dlya-doma">
+																														Батуты									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="https://vse-v-sport.ru/detskie-sportivnye-kompleksy-i-ploschadki">
+																																											<span class="cat-label cat-label-label1">new</span>
+												
+																				Детские спортивные комплексы Kampfer Romana Midzumi									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="https://vse-v-sport.ru/domashnie-trenazhery-i-trenazhery-dlya-fitnessa">
+																																											<span class="cat-label cat-label-label1">new</span>
+												
+																				ДОМАШНИЕ ТРЕНАЖЕРЫ KAMPFER									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-15" class="dropdown">
+								<a href="mjachi" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Ворота и мячи								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-15" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/mjachi/futbol-minifutbol">												Футбол, минифутбол																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/mjachi/basketbol">												Баскетбол																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/mjachi/volejbol">												Волейбол																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																													<li data-submenu-id="menu-amazon-16" class="dropdown">
+								<a href="detjam-sergiev-posad" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+									<i class="fa fa-angle-down arrow"></i>
+																			Детям								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																								
+								  <div id="menu-amazon-16" class="ns-dd dropdown-menu-simple nsmenu-type-category-simple">
+									<div class="dropdown-inner">
+									    
+										<ul class="list-unstyled nsmenu-haschild">
+																						<li class="">
+												<a href="http://vse-v-sport.ru/detjam-sergiev-posad/modulnaja-mebel">												Мебель детская																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/detjam-sergiev-posad/pokrytija-dlja-igrovyx-ploschadok">												Покрытия для игровых площадок																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/detjam-sergiev-posad/detjam">												Товары для игр, манежи																								</a>
+																
+											</li>
+																						<li class="">
+												<a href="http://vse-v-sport.ru/detjam-sergiev-posad/mjagkie-moduli">												Мягкие модули и сухие бассейны																								</a>
+																
+											</li>
+																					</ul>
+									  									</div>            
+									</div>
+									
+										
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																																									<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																				</ul>
+			</nav>
+			<div id="menuMask"></div>	
+					</div>
+		<div class="col-sm-3 col-md-3 col-lg-2 hidden-xs">
+			<div class="account_login_icon"></div>	
+			<div class="account_login_text"><a rel="nofollow" href="https://vse-v-sport.ru/my-account">Личный кабинет</a></div>
+							<div class="account_login_come"><a rel="nofollow" href="#login_modal_popup" data-toggle="modal" data-target="#login-form-popup">Войти</a></div>	
+				
+		</div>	
+<script type="text/javascript">
+var $menu = $("header #menu-list");
+	$menu.menuAim({
+        activateCallback: activateSubmenu,
+        deactivateCallback: deactivateSubmenu
+    });
+		
+    function activateSubmenu(row) {
+        var $row = $(row),
+            submenuId = $row.data("submenuId"),
+            $submenu = $("header #" + submenuId),
+            height = $menu.outerHeight(),
+            width = $menu.outerWidth();
+            $submenu.css({
+                display: "block",
+				top:0
+            });
+            $row.find("a").addClass("maintainHover");
+        }
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("header #" + submenuId);
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+        $("header #menu .dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+        $("header #menu .dropdown-menu li").click(function(e) {
+            $("header a.maintainHover").removeClass("maintainHover");
+        });		
+function screenClass() {
+    if($(window).innerWidth() > 922) {
+		ToHoverMenu();
+    } else {
+		ToClickMenu();
+    }
+}
+function ToHoverMenu(){
+    $menu.menuAim('switchToHover');	
+}
+function ToClickMenu(){
+    $menu.menuAim('switchToClick');	
+}
+
+$(window).bind('resize',function(){
+    screenClass();
+});		
+$(".ns-dd").hover(function() {$(this).parent().find('.parent-link').toggleClass('hover');});
+$(".child-box").hover(function() {$(this).parent().find('.with-child').toggleClass('hover');});
+$('#menu #menu-list span.toggle-child').bind('click', function() {
+	$(this).parent().toggleClass('open');
+});
+</script>
+    </div>	
+    </div>	
+    </div>	
+
+<script src="https://static.yandex.net/kassa/pay-in-parts/ui/v1/"></script>
+</header>
+
+<div class="container">
+  <ul class="breadcrumb " itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+									<li><a itemprop="url" href="http://vse-v-sport.ru/"><span itemprop="title"><i class="fa fa-home"></i></span></a></li>
+												<li>Политика Безопасности</li>
+						</ul>
+  <div class="row">
+                     <div id="content" class="col-sm-12">
+        <h1>Политика Безопасности</h1>
+      <p><br></p><h4><span style="font-family: Arsenal, sans-serif; text-align: justify; background-color: rgb(255, 255, 255);"><b><u>Наш сайт носит исключительно информационный характер и не является публичной офертой, определяемой положениями Статьи 437 ГК РФ.</u></b></span></h4><h4>Цены на товар могут отличатся от представленных на сайте. Мы не всегда успеваем быстро отреагировать на изменения цен у поставщиков. Приносим свои извинения и спасибо за понимание. Актуальные цены уточняйте у менеджеров.</h4><p>Полученные личные данные :</p><p>1. Интернет-магазин гарантирует, что полученная от Вас информация никогда и ни при каких условиях не будет предоставлена третьим лицам, за исключением случаев, предусмотренных действующим законодательством Российской Федерации.<br><br>2.Вся информация, которую Вы укажите при регистрации, будет храниться в защищенной информационной базе.<br><br>3.Интернет-магазин обеспечивает полную конфиденциальность при выполнении заказа, а также то, что информация о клиенте будет использована исключительно для выполнения поступившего заказа.<br><br>4.Ваши регистрационные данные нам необходимы только лишь чтобы наши менеджеры сумели с Вами связаться по телефону, а служба доставки сумела доставить заказанный Вами продукт в необходимое место в срок.<br></p></div>
+    </div>
+</div>
+﻿<div class="banner-footer-privilege">
+	<div class="container">
+			</div>
+</div>
+
+            <footer>
+<div class="footer">
+<div class="container footer-center">
+    <div class="row">
+		<div class="col-sm-12 col-md-3">
+			<h3>О нашем магазине</h3>
+			<div class="description_store_footer"><h5 style="color: rgb(0, 0, 0); margin-top: 10px; margin-bottom: 10px;"><font face="Tahoma">В нашем магазине представлен широкий ассортимент товаров для спорта : детские спортивные комплексы&nbsp; + большое количество дополнений к ним, уличные спортивные комплексы для взрослых и детей , силовые станции и блоковые тренажеры, скамьи и стойки под штангу, гантели и гири, турники, брусья, батуты, настольный футбол (кикер) и аэрохоккей, товары для дачного отдыха и многое другое.&nbsp;</font></h5><h5 style="color: rgb(0, 0, 0); margin-top: 10px; margin-bottom: 10px;"><font face="Tahoma">ИНН 504219702788 ОГРНИП 315504200005183&nbsp;</font></h5></div>
+		</div>
+		
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<h3></h3>
+			<ul class="list-unstyled">
+															<li><a href="http://vse-v-sport.ru/blog-statji">БЛОГ / Статьи</a></li>
+											<li><a href="http://vse-v-sport.ru/o-nas">О нас / Контакты</a></li>
+											<li><a href="http://vse-v-sport.ru/galereya-tovarov">Галерея товаров</a></li>
+											<li><a href="http://vse-v-sport.ru/delivery">Доставка и оплата</a></li>
+											<li><a href="http://vse-v-sport.ru/dokumenti">Документы</a></li>
+											<li><a href="http://vse-v-sport.ru/privacy">Политика Безопасности</a></li>
+											<li><a href="http://vse-v-sport.ru/terms">Условия соглашения</a></li>
+											<li><a href="http://vse-v-sport.ru/metodicheskoe-posobiye-dlya-mladshego-vozrasta">Методические пособия для воспитателей.</a></li>
+											<li><a href="http://vse-v-sport.ru/sotrudnichestvo">Сотрудничество</a></li>
+																															<li><a href=""></a></li>
+																		</ul>
+		</div>
+		
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<h3></h3>
+			<ul class="list-unstyled">
+								<li><a href="http://vse-v-sport.ru/contact-us">Обратная связь</a></li>
+												<li><a href="https://vse-v-sport.ru/return-add">Возврат товара</a></li>
+												<li><a href="http://vse-v-sport.ru/sitemap">Карта сайта</a></li>
+																															</ul>
+		</div>
+		<div class="clearfix visible-sm"></div>
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<h3></h3>
+			<ul class="list-unstyled">
+									<li><a href="http://vse-v-sport.ru/brands">Производители</a></li>
+												<li><a href="https://vse-v-sport.ru/vouchers">Подарочные сертификаты</a></li>
+												<li><a href="https://vse-v-sport.ru/affiliates">Партнерская программа</a></li>
+												<li><a href="http://vse-v-sport.ru/specials">Акции</a></li>
+												<li><a href="https://vse-v-sport.ru/my-account">Личный Кабинет</a></li>
+												<li><a href="https://vse-v-sport.ru/order-history">История заказов</a></li>
+												<li><a href="https://vse-v-sport.ru/wishlist">Закладки</a></li>
+												<li><a href="https://vse-v-sport.ru/newsletter">Рассылка</a></li>
+																															</ul>
+		</div>
+	  <div class="col-xs-12 col-sm-6 col-md-3">
+		<div class="footer-info-col">
+				
+					<div class="title-contant-footer">
+					<h3><i class="fa fa-futbol-o"></i> Интернет-магазин товаров для спорта и активного отдыха</h3></div>
+				
+				<div>	
+					<div class="tel-contant-footer">+7 (910) 495-70-02 ; +7 (963) 766-77-00</div>
+									</div>
+			</div>
+		
+	   </div>
+	       </div>
+  </div>
+		<div class="footer-nav">
+			<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-4 text-left">
+					<div class="powored">
+						<div class="powored-table">
+							<div class="powored-table-cell">
+						Все в Спорт © 2023							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-4 text-center">
+									</div>
+				<div class="col-sm-12 col-md-4 text-right">
+							
+					<div class="social-icon">
+						<div class="social-icon-table">
+							<div class="social-icon-table-cell">
+								<ul class="list-unstyled">			
+									<li>
+																												<a target="_blank" href="https://vk.com/vse_v_sport_ru"><img src="https://vse-v-sport.ru/image/cache/catalog/vk-35x35.png" alt="" title=""></a>
+																											</li>			
+								</ul>
+							</div>
+						</div>
+					</div>
+									</div>
+			</div>  
+			</div>  
+		</div>  
+<div class="container">
+	<div class="row">
+		<script>!function(){var t=document.createElement("script");t.async=!0;var e=(new Date).getDate();t.src=("https:"==document.location.protocol?"https:":"http:")+"//blocksovetnik.ru/bs.min.js?r="+e;var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)}();</script>
+<!-- Yandex.Metrika informer --> <a href="https://metrika.yandex.ru/stat/?id=43005194&amp;from=informer" target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/43005194/3_1_FFFFFFFF_EFEFEFFF_0_pageviews" style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="43005194" data-lang="ru"></a> <!-- /Yandex.Metrika informer --> <!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter43005194 = new Ya.Metrika({ id:43005194, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/43005194" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?152"></script>
+
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?153"></script>
+
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?153"></script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(54843196, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/54843196" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->	</div>
+</div>
+</div>
+</footer>
+<script>!function(){var t=document.createElement("script");t.async=!0;var e=(new Date).getDate();t.src=("https:"==document.location.protocol?"https:":"http:")+"//blocksovetnik.ru/bs.min.js?r="+e;var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)}();</script>
+
+				<link href="catalog/view/theme/pixelshop/stylesheet/agree_popup/style_agree.css" rel="stylesheet">
+							
+
+				<link href="catalog/view/theme/pixelshop/stylesheet/popup-found_cheaper_product/stylefcp.css" rel="stylesheet" media="screen">
+			
+<b>Warning</b>: fclose() expects parameter 1 to be resource, boolean given in <b>/home/m/makenoad/vse-v-sport.ru/public_html/system/library/log.php</b> on line <b>14</b><b>Warning</b>: fclose() expects parameter 1 to be resource, boolean given in <b>/home/m/makenoad/vse-v-sport.ru/public_html/system/library/log.php</b> on line <b>14</b></body></html>

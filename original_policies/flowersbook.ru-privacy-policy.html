@@ -1,0 +1,428 @@
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#  profile: http://ogp.me/ns/profile# fb: http://ogp.me/ns/fb#" lang="ru-RU"><head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let i;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",i=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")&&this._isValidScriptType(i)?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}_isValidScriptType(e){return!e||""===e||"string"==typeof e&&["text/javascript","text/x-javascript","text/ecmascript","text/jscript","application/javascript","application/x-javascript","application/ecmascript","application/jscript","module"].includes(e.toLowerCase())}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript;n||console.error("WPRocket unable to document.write this: "+t);const i=document.createRange(),r=n.parentElement;let a=e.get(n);void 0===a&&(a=n.nextSibling,e.set(n,a));const o=document.createDocumentFragment();i.setStart(o,0),o.appendChild(i.createContextualFragment(t)),r.insertBefore(o,a)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+    <link rel="preload" as="font" type="font/woff2" href="https://flowersbook.ru/wp-content/themes/vine-great/fonts/ibm-plex-sans-v8-latin_cyrillic-300.woff2" crossorigin="">
+    <link rel="preload" as="font" type="font/woff2" href="https://flowersbook.ru/wp-content/themes/vine-great/fonts/ibm-plex-sans-v8-latin_cyrillic-500.woff2" crossorigin="">
+    <link rel="preload" as="font" type="font/woff2" href="https://flowersbook.ru/wp-content/themes/vine-great/fonts/montserrat-v15-latin_cyrillic-700.woff2" crossorigin="">
+
+    <link rel="preload" as="image" href="https://flowersbook.ru/wp-content/uploads/2021/08/logo-1.png">
+
+            <link rel="preload" as="image" href="https://flowersbook.ru/wp-content/uploads/2021/08/00.jpg">
+            
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v16.8 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Политика конфиденциальности - Книга Цветов</title>
+	<link rel="canonical" href="https://flowersbook.ru/privacy-policy">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Политика конфиденциальности - Книга Цветов">
+	<meta property="og:description" content="Настоящая Политика конфиденциальности персональных данных (далее — Политика конфиденциальности) действует в отношении всей информации, которую сайт flowersbook.ru (далее — Сайт), расположенный на доменном имени flowersbook.ru (а также его субдоменах), может получить о Пользователе во время использования сайта flowersbook.ru (а также его субдоменов), его программ и его продуктов. 1. Определение терминов 1.1 В настоящей Политике конфиденциальности […]">
+	<meta property="og:url" content="https://flowersbook.ru/privacy-policy">
+	<meta property="og:site_name" content="Книга Цветов">
+	<meta property="article:modified_time" content="2021-09-07T12:24:54+00:00">
+	<meta name="twitter:card" content="summary_large_image">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://flowersbook.ru/#website","url":"https://flowersbook.ru/","name":"\u041a\u043d\u0438\u0433\u0430 \u0426\u0432\u0435\u0442\u043e\u0432","description":"\u042d\u043d\u0446\u0438\u043a\u043b\u043e\u043f\u0435\u0434\u0438\u044f \u043a\u043e\u043c\u043d\u0430\u0442\u043d\u044b\u0445 \u0438 \u0441\u0430\u0434\u043e\u0432\u044b\u0445 \u0440\u0430\u0441\u0442\u0435\u043d\u0438\u0439","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://flowersbook.ru/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":"WebPage","@id":"https://flowersbook.ru/privacy-policy#webpage","url":"https://flowersbook.ru/privacy-policy","name":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438 - \u041a\u043d\u0438\u0433\u0430 \u0426\u0432\u0435\u0442\u043e\u0432","isPartOf":{"@id":"https://flowersbook.ru/#website"},"datePublished":"2021-04-09T04:41:47+00:00","dateModified":"2021-09-07T12:24:54+00:00","breadcrumb":{"@id":"https://flowersbook.ru/privacy-policy#breadcrumb"},"inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://flowersbook.ru/privacy-policy"]}]},{"@type":"BreadcrumbList","@id":"https://flowersbook.ru/privacy-policy#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"\u0413\u043b\u0430\u0432\u043d\u0430\u044f \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430","item":"https://flowersbook.ru/"},{"@type":"ListItem","position":2,"name":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438"}]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+
+<link rel="alternate" type="application/rss+xml" title="Книга Цветов » Лента" href="https://flowersbook.ru/feed">
+<link rel="alternate" type="application/rss+xml" title="Книга Цветов » Лента комментариев" href="https://flowersbook.ru/comments/feed">
+<link rel="stylesheet" id="wp-block-library-css" href="https://flowersbook.ru/wp-includes/css/dist/block-library/style.min.css?ver=5.8.6" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="contact-form-7-css" href="https://flowersbook.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=1674979255" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="myStyle-css" href="https://flowersbook.ru/wp-content/cache/min/1/wp-content/plugins/laskovaa_perelink/style.css?ver=1674979255" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="style-mikolator-css" href="https://flowersbook.ru/wp-content/cache/min/1/wp-content/plugins/mikolator-by-webnavoz/css/mikolator-style.css?ver=1674979255" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="rate-my-post-css" href="https://flowersbook.ru/wp-content/cache/min/1/wp-content/plugins/rate-my-post/public/css/rate-my-post.css?ver=1674979255" type="text/css" media="all">
+<style id="rate-my-post-inline-css" type="text/css">
+.rmp-icon--full-highlight {color: #ffd06a;}.rmp-icon--half-highlight {  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #ffd06a), color-stop(50%, #ccc));  background: linear-gradient(to right, #ffd06a 50%, #ccc 50%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}.rmp-rating-widget .rmp-icon--processing-rating {color: #ffd06a;  -webkit-background-clip: initial;  -webkit-text-fill-color: initial;  background: transparent;}.rmp-rating-widget .rmp-icon--ratings {  font-size: 23px;}
+</style>
+<link data-minify="1" rel="stylesheet" id="style-rating_webnavoz-css" href="https://flowersbook.ru/wp-content/cache/min/1/wp-content/plugins/webnavoz-rating/css/style-rating-webnavoz.css?ver=1674979255" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="main-css" href="https://flowersbook.ru/wp-content/cache/min/1/wp-content/themes/vine-great/css/main.css?ver=1674979280" type="text/css" media="all">
+<style id="main-inline-css" type="text/css">
+
+		:root {
+            --main: #adbc4a;
+            --main2: #000;
+            --menu: #d7dde9;
+            --menu_color: #000;
+            --accent: #98d6e5;
+            --accent2: #5a6e8f;
+            --grad1: #eef6ff;
+            --grad2: #f3f7e3;
+        }
+        .site-header {
+            --accent2: #5a6e8f;
+        }
+        @media screen and (min-width: 1141px) {
+            .site-header {
+                --width: 915px;
+            }
+        }
+        .image-block:before {
+            background-image: url(https://flowersbook.ru/wp-content/themes/vine-great/img/block.png);
+        }
+</style>
+<link rel="stylesheet" id="fancybox-css" href="https://flowersbook.ru/wp-content/plugins/easy-fancybox/css/jquery.fancybox.min.css?ver=1.3.24" type="text/css" media="screen">
+<link rel="stylesheet" id="webnavoz_dots_css-css" href="https://flowersbook.ru/wp-content/plugins/webnavoz-dots/webnavoz-dots.min.css?ver=5.8.6" type="text/css" media="all">
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" id="jquery-core-js"></script>
+<link rel="https://api.w.org/" href="https://flowersbook.ru/wp-json/"><link rel="alternate" type="application/json" href="https://flowersbook.ru/wp-json/wp/v2/pages/3"><link rel="icon" href="https://flowersbook.ru/wp-content/uploads/2021/08/cropped-logo-famicon-32x32.png" sizes="32x32">
+<link rel="icon" href="https://flowersbook.ru/wp-content/uploads/2021/08/cropped-logo-famicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://flowersbook.ru/wp-content/uploads/2021/08/cropped-logo-famicon-180x180.png">
+<meta name="msapplication-TileImage" content="https://flowersbook.ru/wp-content/uploads/2021/08/cropped-logo-famicon-270x270.png">
+		<style type="text/css" id="wp-custom-css">
+			.site-header {
+    --width: 100% !important;
+}		</style>
+		<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>
+    	
+	<!-- Yandex.RTB -->
+<script type="rocketlazyloadscript">window.yaContextCb=window.yaContextCb||[]</script>
+<script type="rocketlazyloadscript" src="https://yandex.ru/ads/system/context.js" async=""></script>
+	
+</head>
+
+
+<body class="privacy-policy page-template-default page page-id-3 bg-page">
+
+    <div class="site-container">
+
+        <header class="site-header small">
+
+            <div class="header-top">
+
+                <div>
+                                            <a class="logo left" href="https://flowersbook.ru">
+                            <div class="site-title">Книга Цветов</div>
+                            <img class="skip-lazy" src="https://flowersbook.ru/wp-content/uploads/2021/08/logo-1.png" alt="" width="400" height="132">
+                        </a>
+                    
+                    
+
+                    <div class="right">
+                                                                    </div>
+
+                </div>
+
+                <div class="header-search search-block">
+                    <div class="search-icon"></div>
+                    <form method="get" class="search-form" action="https://flowersbook.ru/">
+    <input type="search" placeholder="Поиск информации на сайте" name="s" value="">
+    <button class="search-submit"></button>
+</form>                </div>
+
+            </div>
+
+            <nav class="header-menu mobile-menu" aria-label="Главное меню">
+                <input id="mobile-menu-toggle" type="checkbox">
+                <label class="mobile-menu-button" for="mobile-menu-toggle">
+                    <span></span>
+                </label>
+                <div class="primary-menu">
+                    <span class="cross"></span>
+                    <ul class="menu"><li id="menu-item-1147" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1147"><a href="https://flowersbook.ru/komnatnye">Комнатные</a>
+<ul class="sub-menu">
+	<li id="menu-item-1148" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1148"><a href="https://flowersbook.ru/komnatnye/ampelnye">Ампельные</a></li>
+	<li id="menu-item-1316" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1316"><a href="https://flowersbook.ru/komnatnye/bonsaj">Бонсай</a></li>
+	<li id="menu-item-1149" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1149"><a href="https://flowersbook.ru/komnatnye/dekorativno-listvennye">Декоративно-лиственные</a></li>
+	<li id="menu-item-1150" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1150"><a href="https://flowersbook.ru/komnatnye/derevja-i-kustarniki">Деревья и Кустарники</a></li>
+	<li id="menu-item-1154" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1154"><a href="https://flowersbook.ru/komnatnye/kaktusy">Кактусы</a></li>
+	<li id="menu-item-1156" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1156"><a href="https://flowersbook.ru/komnatnye/palmy">Пальмы</a></li>
+	<li id="menu-item-2465" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2465"><a href="https://flowersbook.ru/komnatnye/paporotniki">Папоротники</a></li>
+	<li id="menu-item-1157" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1157"><a href="https://flowersbook.ru/komnatnye/sukkulenty">Суккуленты</a></li>
+	<li id="menu-item-1155" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1155"><a href="https://flowersbook.ru/komnatnye/orhidei">Орхидеи</a></li>
+	<li id="menu-item-1158" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1158"><a href="https://flowersbook.ru/komnatnye/cvetushhie">Цветущие</a></li>
+</ul>
+</li>
+<li id="menu-item-1151" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1151"><a href="https://flowersbook.ru/sadovye">Садовые</a>
+<ul class="sub-menu">
+	<li id="menu-item-1166" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1166"><a href="https://flowersbook.ru/sadovye/derevja-i-kusty">Деревья и Кусты</a></li>
+	<li id="menu-item-1152" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1152"><a href="https://flowersbook.ru/sadovye/mnogoletnie">Многолетние</a></li>
+	<li id="menu-item-1317" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1317"><a href="https://flowersbook.ru/sadovye/odnoletnie">Однолетние</a></li>
+	<li id="menu-item-1510" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1510"><a href="https://flowersbook.ru/sadovye/lukovichnye">Луковичные</a></li>
+</ul>
+</li>
+<li id="menu-item-1153" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1153"><a href="https://flowersbook.ru/poleznoe">Полезное</a></li>
+</ul>                </div>
+            </nav>
+
+            
+                            <picture>
+                    <img src="https://flowersbook.ru/wp-content/uploads/2021/08/00.jpg" alt="" class="lazyloaded" data-ll-status="loaded" width="1600" height="500"><noscript><img src="https://flowersbook.ru/wp-content/uploads/2021/08/00.jpg" width="1600" height="500" alt=""></noscript>
+                </picture>
+            
+        </header>
+
+        <main class="content-wrap">
+<div class="content-wrap">
+
+    <ul class="breadcrumbs" itemprop="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="https://flowersbook.ru/" itemprop="item"><span itemprop="name">Главная</span></a>
+                    <meta itemprop="position" content="1"></li></ul>
+    
+        
+<article class="post post-3 page type-page status-publish hentry">
+
+    <h1>
+        Политика конфиденциальности    </h1>
+
+    <div class="post-content">
+        <p>Настоящая Политика конфиденциальности персональных данных (далее — Политика конфиденциальности) действует в отношении всей информации, которую сайт flowersbook.ru (далее — Сайт), расположенный на доменном имени flowersbook.ru (а также его субдоменах), может получить о Пользователе во время использования сайта flowersbook.ru (а также его субдоменов), его программ и его продуктов.</p>
+<h2>1. Определение терминов</h2>
+<p>1.1 В настоящей Политике конфиденциальности используются следующие термины:</p>
+<p>1.1.1. «Администрация сайта» (далее — Администрация) — уполномоченные сотрудники на управление сайтом flowersbook.ru, которые организуют и (или) осуществляют обработку персональных данных, а также определяет цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.</p>
+<p>1.1.2. «Персональные данные» — любая информация, относящаяся к прямо или косвенно определенному, или определяемому физическому лицу (субъекту персональных данных).</p>
+<p>1.1.3. «Обработка персональных данных» — любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных.</p>
+<p>1.1.4. «Конфиденциальность персональных данных» — обязательное для соблюдения Оператором или иным получившим доступ к персональным данным лицом требование не допускать их распространения без согласия субъекта персональных данных или наличия иного законного основания.</p>
+<p>1.1.5. «Сайт flowersbook.ru» — это совокупность связанных между собой веб-страниц, размещенных в сети Интернет по уникальному адресу (URL): flowersbook.ru, а также его субдоменах.</p>
+<p>1.1.6. «Субдомены» — это страницы или совокупность страниц, расположенные на доменах третьего уровня, принадлежащие сайту flowersbook.ru, а также другие временные страницы, внизу который указана контактная информация Администрации.</p>
+<p>1.1.7. «Пользователь сайта flowersbook.ru» (далее Пользователь) — лицо, имеющее доступ к сайту flowersbook.ru, посредством сети Интернет и использующее информацию, материалы и продукты сайта flowersbook.ru.</p>
+<p>1.1.8. «Cookies» — небольшой фрагмент данных, отправленный веб-сервером и хранимый на компьютере пользователя, который веб-клиент или веб-браузер каждый раз пересылает веб-серверу в HTTP-запросе при попытке открыть страницу соответствующего сайта.</p>
+<p>1.1.9. «IP-адрес» — уникальный сетевой адрес узла в компьютерной сети, через который Пользователь получает доступ на Сайт.</p>
+<h2>2. Общие положения</h2>
+<p>2.1. Использование сайта flowersbook.ru Пользователем означает согласие с настоящей Политикой конфиденциальности и условиями обработки персональных данных Пользователя.</p>
+<p>2.2. В случае несогласия с условиями Политики конфиденциальности Пользователь должен прекратить использование сайта flowersbook.ru.</p>
+<p>2.3. Настоящая Политика конфиденциальности применяется к сайту flowersbook.ru. Сайт не контролирует и не несет ответственность за сайты третьих лиц, на которые Пользователь может перейти по ссылкам, доступным на сайте flowersbook.ru.</p>
+<p>2.4. Администрация не проверяет достоверность персональных данных, предоставляемых Пользователем.</p>
+<h2>3. Предмет политики конфиденциальности</h2>
+<p>3.1. Настоящая Политика конфиденциальности устанавливает обязательства Администрации по неразглашению и обеспечению режима защиты конфиденциальности персональных данных, которые Пользователь предоставляет по запросу Администрации при регистрации на сайте flowersbook.ru или при подписке на информационную e-mail рассылку.</p>
+<p>3.2. Персональные данные, разрешённые к обработке в рамках настоящей Политики конфиденциальности, предоставляются Пользователем путём заполнения форм на сайте flowersbook.ru и включают в себя следующую информацию:</p>
+<p>3.2.1. фамилию, имя, отчество Пользователя;</p>
+<p>3.2.2. контактный телефон Пользователя;</p>
+<p>3.2.3. адрес электронной почты (e-mail)</p>
+<p>3.2.4. место жительство Пользователя (при необходимости)</p>
+<p>3.2.5. фотографию (при необходимости)</p>
+<p>3.3. Сайт защищает Данные, которые автоматически передаются при посещении страниц: IP адрес; информация из cookies; информация о браузере время доступа; реферер (адрес предыдущей страницы).</p>
+<p>3.3.1. Отключение cookies может повлечь невозможность доступа к частям сайта , требующим авторизации.</p>
+<p>3.3.2. Сайт осуществляет сбор статистики об IP-адресах своих посетителей. Данная информация используется с целью предотвращения, выявления и решения технических проблем.</p>
+<p>3.4. Любая иная персональная информация неоговоренная выше (история посещения, используемые браузеры, операционные системы и т.д.) подлежит надежному хранению и нераспространению, за исключением случаев, предусмотренных в п.п. 5.2. настоящей Политики конфиденциальности.</p>
+<h2>4. Цели сбора персональной информации пользователя</h2>
+<p>4.1. Персональные данные Пользователя Администрация может использовать в целях:</p>
+<p>4.1.1. Идентификации Пользователя, зарегистрированного на сайте flowersbook.ru для его дальнейшей авторизации.</p>
+<p>4.1.2. Предоставления Пользователю доступа к персонализированным данным сайта flowersbook.ru.</p>
+<p>4.1.3. Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования сайта flowersbook.ru, обработки запросов и заявок от Пользователя.</p>
+<p>4.1.4. Определения места нахождения Пользователя для обеспечения безопасности, предотвращения мошенничества.</p>
+<p>4.1.5. Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.</p>
+<p>4.1.6. Создания учетной записи для использования частей сайта flowersbook.ru, если Пользователь дал согласие на создание учетной записи.</p>
+<p>4.1.7. Уведомления Пользователя по электронной почте.</p>
+<p>4.1.8. Предоставления Пользователю эффективной технической поддержки при возникновении проблем, связанных с использованием сайта flowersbook.ru.</p>
+<p>4.1.9. Предоставления Пользователю с его согласия специальных предложений, новостной рассылки и иных сведений от имени сайта flowersbook.ru.</p>
+<h2>5. Способы и сроки обработки персональной информации</h2>
+<p>5.1. Обработка персональных данных Пользователя осуществляется без ограничения срока, любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств.</p>
+<p>5.2. Персональные данные Пользователя могут быть переданы уполномоченным органам государственной власти Российской Федерации только по основаниям и в порядке, установленным законодательством Российской Федерации.</p>
+<p>5.3. При утрате или разглашении персональных данных Администрация вправе не информировать Пользователя об утрате или разглашении персональных данных.</p>
+<p>5.4. Администрация принимает необходимые организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.</p>
+<p>5.5. Администрация совместно с Пользователем принимает все необходимые меры по предотвращению убытков или иных отрицательных последствий, вызванных утратой или разглашением персональных данных Пользователя.</p>
+<h2>6. Права и обязанности сторон</h2>
+<p>6.1. Пользователь вправе:</p>
+<p>6.1.1. Принимать свободное решение о предоставлении своих персональных данных, необходимых для использования сайта flowersbook.ru, и давать согласие на их обработку.</p>
+<p>6.1.2. Обновить, дополнить предоставленную информацию о персональных данных в случае изменения данной информации.</p>
+<p>6.1.3. Пользователь имеет право на получение у Администрации информации, касающейся обработки его персональных данных, если такое право не ограничено в соответствии с федеральными законами. Пользователь вправе требовать от Администрации уточнения его персональных данных, их блокирования или уничтожения в случае, если персональные данные являются неполными, устаревшими, неточными, незаконно полученными или не являются необходимыми для заявленной цели обработки, а также принимать предусмотренные законом меры по защите своих прав. Для этого достаточно уведомить Администрацию по указанному E-mail адресу.</p>
+<p>6.2. Администрация обязана:</p>
+<p>6.2.1. Использовать полученную информацию исключительно для целей, указанных в п. 4 настоящей Политики конфиденциальности.</p>
+<p>6.2.2. Обеспечить хранение конфиденциальной информации в тайне, не разглашать без предварительного письменного разрешения Пользователя, а также не осуществлять продажу, обмен, опубликование, либо разглашение иными возможными способами переданных персональных данных Пользователя, за исключением п.п. 5.2. настоящей Политики Конфиденциальности.</p>
+<p>6.2.3. Принимать меры предосторожности для защиты конфиденциальности персональных данных Пользователя согласно порядку, обычно используемого для защиты такого рода информации в существующем деловом обороте.</p>
+<p>6.2.4. Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента обращения или запроса Пользователя, или его законного представителя либо уполномоченного органа по защите прав субъектов персональных данных на период проверки, в случае выявления недостоверных персональных данных или неправомерных действий.</p>
+<h2>7. Ответственность сторон</h2>
+<p>7.1. Администрация, не исполнившая свои обязательства, несёт ответственность за убытки, понесённые Пользователем в связи с неправомерным использованием персональных данных, в соответствии с законодательством Российской Федерации, за исключением случаев, предусмотренных п.п. 5.2. и 7.2. настоящей Политики Конфиденциальности.</p>
+<p>7.2. В случае утраты или разглашения Конфиденциальной информации Администрация не несёт ответственность, если данная конфиденциальная информация:</p>
+<p>7.2.1. Стала публичным достоянием до её утраты или разглашения.</p>
+<p>7.2.2. Была получена от третьей стороны до момента её получения Администрацией Ресурса.</p>
+<p>7.2.3. Была разглашена с согласия Пользователя.</p>
+<p>7.3. Пользователь несет полную ответственность за соблюдение требований законодательства РФ, в том числе законов о рекламе, о защите авторских и смежных прав, об охране товарных знаков и знаков обслуживания, но не ограничиваясь перечисленным, включая полную ответственность за содержание и форму материалов.</p>
+<p>7.4. Пользователь признает, что ответственность за любую информацию (в том числе, но не ограничиваясь: файлы с данными, тексты и т. д.), к которой он может иметь доступ как к части сайта flowersbook.ru, несет лицо, предоставившее такую информацию.</p>
+<p>7.5. Пользователь соглашается, что информация, предоставленная ему как часть сайта flowersbook.ru, может являться объектом интеллектуальной собственности, права на который защищены и принадлежат другим Пользователям, партнерам или рекламодателям, которые размещают такую информацию на сайте flowersbook.ru. Пользователь не вправе вносить изменения, передавать в аренду, передавать на условиях займа, продавать, распространять или создавать производные работы на основе такого Содержания (полностью или в части), за исключением случаев, когда такие действия были письменно прямо разрешены собственниками такого Содержания в соответствии с условиями отдельного соглашения.</p>
+<p>7.6. В отношение текстовых материалов (статей, публикаций, находящихся в свободном публичном доступе на сайте flowersbook.ru) допускается их распространение при условии, что будет дана ссылка на Сайт.</p>
+<p>7.7. Администрация не несет ответственности перед Пользователем за любой убыток или ущерб, понесенный Пользователем в результате удаления, сбоя или невозможности сохранения какого-либо Содержания и иных коммуникационных данных, содержащихся на сайте flowersbook.ru или передаваемых через него.</p>
+<p>7.8. Администрация не несет ответственности за любые прямые или косвенные убытки, произошедшие из-за: использования либо невозможности использования сайта, либо отдельных сервисов; несанкционированного доступа к коммуникациям Пользователя; заявления или поведение любого третьего лица на сайте.</p>
+<p>7.9. Администрация не несет ответственность за какую-либо информацию, размещенную пользователем на сайте flowersbook.ru, включая, но не ограничиваясь: информацию, защищенную авторским правом, без прямого согласия владельца авторского права.</p>
+<h2>8. Разрешение споров</h2>
+<p>8.1. До обращения в суд с иском по спорам, возникающим из отношений между Пользователем и Администрацией, обязательным является предъявление претензии (письменного предложения или предложения в электронном виде о добровольном урегулировании спора).</p>
+<p>8.2. Получатель претензии в течение 30 календарных дней со дня получения претензии, письменно или в электронном виде уведомляет заявителя претензии о результатах рассмотрения претензии.</p>
+<p>8.3. При не достижении соглашения спор будет передан на рассмотрение Арбитражного суда г. Ростов-на-Дону.</p>
+<p>8.4. К настоящей Политике конфиденциальности и отношениям между Пользователем и Администрацией применяется действующее законодательство Российской Федерации.</p>
+<h2>9. Дополнительные условия</h2>
+<p>9.1. Администрация вправе вносить изменения в настоящую Политику конфиденциальности без согласия Пользователя.</p>
+<p>9.2. Новая Политика конфиденциальности вступает в силу с момента ее размещения на сайте flowersbook.ru, если иное не предусмотрено новой редакцией Политики конфиденциальности.</p>
+<p>9.3. Все предложения или вопросы касательно настоящей Политики конфиденциальности следует отпралять используя специальную форму: <a href="https://flowersbook.ru/napisat-nam">Написать нам</a></p>
+    </div>
+
+</article>
+    
+</div>
+
+
+
+</main> <!-- /.content-wrap -->
+
+<footer class="site-footer">
+
+    <div class="footer-info footer-block">
+        <div class="logo">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20132'%3E%3C/svg%3E" alt="" data-lazy-src="https://flowersbook.ru/wp-content/uploads/2021/08/logo-1.png" width="400" height="132"><noscript><img src="https://flowersbook.ru/wp-content/uploads/2021/08/logo-1.png" width="400" height="132" alt=""></noscript>
+        </div>
+    </div>
+
+    <div class="footer-block">
+        <div class="copyright">
+            © 2021 – Энциклопедия комнатных и садовых растений        </div>
+        
+<div class="social">
+                                </div>    </div>
+
+    <div class="footer-block footer-menu">
+        <ul class="menu"><li id="menu-item-1006" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1006"><a href="https://flowersbook.ru/napisat-nam">Написать нам</a></li>
+<li id="menu-item-4807" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4807"><a href="https://flowersbook.ru/sitemap">Карта Сайта</a></li>
+<li id="menu-item-1174" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-3 current_page_item menu-item-1174"><a href="https://flowersbook.ru/privacy-policy" aria-current="page">Политика конфиденциальности</a></li>
+</ul>    </div>
+
+    <div class="footer-block">
+                <div class="bottom">
+                        <a class="footer-design" target="_blank" rel="noopener noreferrer">Сделано в 2021</a>
+        </div>
+    </div>
+
+    <div class="footer-block footer-search">
+        <div class="search-block">
+            <div class="search-icon"></div>
+            <form method="get" class="search-form" action="https://flowersbook.ru/">
+    <input type="search" placeholder="Поиск информации на сайте" name="s" value="">
+    <button class="search-submit"></button>
+</form>        </div>
+    </div>
+
+</footer>
+
+</div> <!-- /.site-container -->
+
+<div class="menu-overlay"><span></span></div>
+
+<div id="scroll-button">
+    <div id="scroll-button_up" class="scroll-action_up">
+        <svg class="svg-inline--fa fa-arrow-up fa-w-14" aria-hidden="true" data-prefix="far" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+            <path d="M6.101 261.899L25.9 281.698c4.686 4.686 12.284 4.686 16.971 0L198 126.568V468c0 6.627 5.373 12 12 12h28c6.627 0 12-5.373 12-12V126.568l155.13 155.13c4.686 4.686 12.284 4.686 16.971 0l19.799-19.799c4.686-4.686 4.686-12.284 0-16.971L232.485 35.515c-4.686-4.686-12.284-4.686-16.971 0L6.101 244.929c-4.687 4.686-4.687 12.284 0 16.97z" fill="' . $webnavoz_button_button_color . '"></path>
+        </svg>
+    </div>
+    <div id="scroll-button_middle">
+        <span class="scroll-action_perc">10</span>%
+    </div>
+    <div id="scroll-button_down" class="scroll-action_down">
+        <svg class="svg-inline--fa fa-arrow-down fa-w-14" aria-hidden="true" data-prefix="far" data-icon="arrow-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+            <path d="M441.9 250.1l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L250 385.4V44c0-6.6-5.4-12-12-12h-28c-6.6 0-12 5.4-12 12v341.4L42.9 230.3c-4.7-4.7-12.3-4.7-17 0L6.1 250.1c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z"></path>
+        </svg>
+    </div>
+</div>
+
+ 		 <script type="rocketlazyloadscript"> var mikolator_ajaxUrl = "https://flowersbook.ru/wp-admin/admin-ajax.php";</script>
+		 
+ 	 <style type="text/css"> .wn_dots_dot
+        {
+            background:#a8e433;
+            border:5px solid #fff;
+            box-shadow: 0 0 0 0 rgba(255,255,255, .4);
+            animation:wn_dots_dot_pulse 1.5s infinite
+        }
+        @keyframes wn_dots_dot_pulse {
+        0%
+            {
+            box-shadow: 0 0 0 0 rgba(255,255,255,.4)
+            }
+        70%
+            {
+                box-shadow: 0 0 0 50px rgba(255,255,255,0)
+            }
+        100%
+            {
+                box-shadow: 0 0 0 0 rgba(255,255,255,0)
+            }
+        }
+    </style>	<style>
+		.bg-color-item-2{
+			background:;
+		}
+	</style>
+ 	 <script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7" id="regenerator-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" id="wp-polyfill-js"></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/flowersbook.ru\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1674979255" id="contact-form-7-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-content/cache/min/1/wp-content/plugins/mikolator-by-webnavoz/js/jquery.tooltipster.js?ver=1674979255" id="tooltipster-mikolator_webnavoz-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-content/cache/min/1/wp-content/plugins/mikolator-by-webnavoz/js/mikolator.js?ver=1674979255" id="script-mikolator-js" defer=""></script>
+<script type="text/javascript" id="rate-my-post-js-extra">
+/* <![CDATA[ */
+var rmp_frontend = {"admin_ajax":"https:\/\/flowersbook.ru\/wp-admin\/admin-ajax.php","postID":"3","noVotes":"","cookie":"\u0412\u044b \u0443\u0436\u0435 \u0441\u0442\u0430\u0432\u0438\u043b\u0438 \u043e\u0446\u0435\u043d\u043a\u0443. \u0422\u0435\u043a\u0443\u0449\u0430\u044f \u043e\u0446\u0435\u043d\u043a\u0430 \u043d\u0435 \u0437\u0430\u0441\u0447\u0438\u0442\u0430\u043d\u0430!","afterVote":"","notShowRating":"1","social":"1","feedback":"1","cookieDisable":"1","emptyFeedback":"\u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043e\u0442\u0437\u044b\u0432","hoverTexts":"1","preventAccidental":"1","grecaptcha":"1","siteKey":"","votingPriv":"1","loggedIn":"","positiveThreshold":"2","ajaxLoad":"1","nonce":"d9a76ef427"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-content/cache/min/1/wp-content/plugins/rate-my-post/public/js/rate-my-post.js?ver=1674979255" id="rate-my-post-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin|\/logout|\/wp-login.php","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/flowersbook.ru","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" id="main-js-extra">
+/* <![CDATA[ */
+var ajax_random = {"ajaxurl":"https:\/\/flowersbook.ru\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-content/cache/min/1/wp-content/themes/vine-great/js/main.js?ver=1674979280" id="main-js" defer=""></script>
+<script type="text/javascript" id="q2w3_fixed_widget-js-extra">
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"right-sidebar","margin_top":10,"margin_bottom":840,"stop_id":"","screen_max_width":992,"screen_max_height":0,"width_inherit":false,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["custom_html-5"]}];
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-content/plugins/q2w3-fixed-widget/js/q2w3-fixed-widget.min.js?ver=5.3.0" id="q2w3_fixed_widget-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-content/plugins/easy-fancybox/js/jquery.fancybox.min.js?ver=1.3.24" id="jquery-fancybox-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="jquery-fancybox-js-after">
+var fb_timeout, fb_opts={'overlayShow':true,'hideOnOverlayClick':true,'showCloseButton':true,'margin':20,'centerOnScroll':false,'enableEscapeButton':true,'autoScale':true };
+if(typeof easy_fancybox_handler==='undefined'){
+var easy_fancybox_handler=function(){
+jQuery('.nofancybox,a.wp-block-file__button,a.pin-it-button,a[href*="pinterest.com/pin/create"],a[href*="facebook.com/share"],a[href*="twitter.com/share"]').addClass('nolightbox');
+/* IMG */
+var fb_IMG_select='a[href*=".jpg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpg"]:not(.nolightbox),a[href*=".jpeg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpeg"]:not(.nolightbox),a[href*=".png"]:not(.nolightbox,li.nolightbox>a),area[href*=".png"]:not(.nolightbox),a[href*=".webp"]:not(.nolightbox,li.nolightbox>a),area[href*=".webp"]:not(.nolightbox)';
+jQuery(fb_IMG_select).addClass('fancybox image');
+var fb_IMG_sections=jQuery('.gallery,.wp-block-gallery,.tiled-gallery,.wp-block-jetpack-tiled-gallery');
+fb_IMG_sections.each(function(){jQuery(this).find(fb_IMG_select).attr('rel','gallery-'+fb_IMG_sections.index(this));});
+jQuery('a.fancybox,area.fancybox,li.fancybox a').each(function(){jQuery(this).fancybox(jQuery.extend({},fb_opts,{'transitionIn':'elastic','easingIn':'easeOutBack','transitionOut':'elastic','easingOut':'easeInBack','opacity':false,'hideOnContentClick':false,'titleShow':true,'titlePosition':'over','titleFromAlt':true,'showNavArrows':true,'enableKeyboardNav':true,'cyclic':false}))});};
+jQuery('a.fancybox-close').on('click',function(e){e.preventDefault();jQuery.fancybox.close()});
+};
+var easy_fancybox_auto=function(){setTimeout(function(){jQuery('#fancybox-auto').trigger('click')},1000);};
+jQuery(easy_fancybox_handler);jQuery(document).on('post-load',easy_fancybox_handler);
+jQuery(easy_fancybox_auto);
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-content/plugins/easy-fancybox/js/jquery.easing.min.js?ver=1.4.1" id="jquery-easing-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://flowersbook.ru/wp-content/plugins/webnavoz-dots/webnavoz-dots.min.js?ver=1.7.0" id="webnavoz_dots_js-js" defer=""></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://flowersbook.ru/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script>
+<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(86213064, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/86213064" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+
+</body></html>

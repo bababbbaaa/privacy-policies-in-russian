@@ -1,0 +1,644 @@
+<html xmlns="http://www.w3.org/1999/xhtml" class=""><head><title>
+	Пользовательское соглашение - Власть Вкуса
+</title><meta http-equiv="content-type" content="text/html; charset=utf-8"><link rel="stylesheet" href="/styles.css?12041200" type="text/css"><link rel="stylesheet" href="//www1.vlastvkusa.ru/jquery.fancybox.css" type="text/css" media="screen"><link rel="stylesheet" href="/jquery.stickynote.css" type="text/css" media="screen"><link rel="stylesheet" href="/jquery.rating.css" type="text/css" media="screen">
+ 
+    <script src="//www1.vlastvkusa.ru/jquery.js" type="text/javascript"></script>
+    <script src="//www1.vlastvkusa.ru/ui/effects.core.js" type="text/javascript"></script>
+    <script src="//www1.vlastvkusa.ru/ui/effects.pulsate.js" type="text/javascript"></script>
+    <script src="//www1.vlastvkusa.ru/jquery.fancybox.js" type="text/javascript"></script>
+    <script src="//www1.vlastvkusa.ru/ajaxupload.js" type="text/javascript"></script>
+    <script src="//www1.vlastvkusa.ru/jquery.form.js" type="text/javascript"></script>
+    <script src="//www1.vlastvkusa.ru/jquery.extend.js?11023101" type="text/javascript"></script>
+    <script src="//www1.vlastvkusa.ru/jquery.stickynote.js" type="text/javascript"></script>
+    <script src="//www1.vlastvkusa.ru/gunit.js" type="text/javascript"></script>
+    <!--<script type="text/javascript" src="/snowstorm.js"></script>-->
+    <script src="//www1.vlastvkusa.ru/jquery.autocomplete.js" type="text/javascript"></script>
+    <script src="//www1.vlastvkusa.ru/jquery.rating.js" type="text/javascript"></script>
+    <script src="//cdn.connect.mail.ru/js/loader.js" type="text/javascript"></script>
+   
+    <script type="text/javascript">
+        var ratio, ratio2, ratio3, ratio4, ratioprice, screenwidth;
+        
+        $(document).ready(function () {
+          $("a.fullimg").fancybox({ closeClick: true });
+          $("a.iframe").fancybox({ type: 'iframe' });
+          $("a.sendmsg").fancybox({ type: 'iframe', width: 700, height: 380 });
+          $("a.showvotes").fancybox({ type: 'iframe', width: 400, height: 350 });
+        });
+
+        
+
+        $(document).ready(function() {
+            screenwidth = screen.width;
+            if (screenwidth > 1280) 
+                screenwidth = 1280;
+            if (screenwidth < 1024) 
+                screenwidth = 1024;
+
+            ratio = 1280 / ((screenwidth < 1280) ? (screenwidth - 20) : (screenwidth));
+            if (screenwidth == 1152)
+                ratio = 1.21;
+            if (screenwidth == 1024)
+                ratio = 1.36;
+
+            ratio2 = 1280 / ((screenwidth < 1280) ? (screenwidth - (1280 - screenwidth) * 0.6) : (screenwidth));
+            ratio3 = ratio2 * 1.25;
+            ratio4 = ratio * 1.14;
+            ratioprice = 1280 / ((screenwidth < 1280) ? (screenwidth - 30) : (screenwidth));
+
+            if (screenwidth < 1280) {
+              adjustsize('');
+            }
+            postscreenwidth(0);
+
+            if (screenwidth > 1024) {
+              $('link').each(function() { if ($(this).attr("href").indexOf("styles_1024.css") > -1) {$(this).attr("href", "/styles.css?12041200")} });
+            }
+            else {
+              $('link').each(function() { if ($(this).attr("href").indexOf("styles.css") > -1) {$(this).attr("href", "/styles_1024.css?12041200")} });
+            }
+            //setTimeout(function() { alert($('#top').position().top); $('#logo').css({ top: "0px" }); alert(1); }, 1000);
+        });
+
+        $(document).ready(function () {
+          setTimeout(function () {
+            $('.forumimg').each(function () {
+              if ($(this).width() > 625 / ratio3) { $(this).width(625 / ratio3); }
+            });
+          }, 100);
+        });
+
+        function adjustsize(prefix) {
+            $(prefix + '.dynsize').each(function() { $(this).width($(this).width() / ratio) });
+            $(prefix + '.dynsize2').each(function() { if ($(this).width() >= ($(this).attr('defwidth')-10) && ($(this).width() <= $(this).attr('defwidth'))) { $(this).width($(this).width() / ratio2)} });
+            $(prefix + '.dynsize4').each(function() { $(this).width($(this).width() / ratio4) });
+            $(prefix + '.dynsize5').each(function() { $(this).width($(this).width() / ratio5) });
+            $(prefix + '.dynsizeprice').each(function() { $(this).width($(this).width() / ratioprice) });
+
+            if (screenwidth == 1024) {
+                $(prefix + '.dynfont').each(function(i) { $(this).css("font-size", parseInt($(this).css("font-size")) - 1); });
+            } else
+                if (screenwidth == 1152) {
+                    $(prefix + 'ol.toc').each(function() { $(this).width(680) });
+            }
+            else
+                $(prefix + 'ol.toc').each(function() { $(this).width($(this).width() / ratio2) });
+        }
+        
+        function postscreenwidth(w) {
+          if (screen.width != w)
+            $.post('/service/setscreenwidth/' + screen.width);
+        }
+
+        aboutscore = '<b><span style=\'color: #c24a4a;\'>Аппетитность</span></b> - ожидание вкуса блюда по внешнему виду,<br />составу, предполагаемым ощущениям.<br /><br />' +
+                     '<b><span style=\'color: #72c24a;\'>Творческая оригинальность</span></b> - творческий вклад кулинара<br />в создание оригинальности блюда.<br /><br />' +
+                     '<b><span style=\'color: #4ac2c2;\'>Подача блюда</span></b> - красота и изящность выбора кулинаром<br />композиции, перспективы, колоритности фото блюда.';
+
+        
+        $(document).ready(function() {
+          $(document).click(function(e) {
+            //banner click stat
+            $(".banner").each(function() {
+              var x = $(this).position().left;
+              var y = $(this).position().top;
+              if ((e.pageX >= x)&&(e.pageX <= (x + $(this).width())) &&
+                  (e.pageY >= y)&&(e.pageY <= (y + $(this).height()))) 
+              {
+                var pl = $(this).attr("place");
+                var bannerid = $(this).attr("bannerid");
+                
+                  $.post('/service/bannerclick/'+$(this).attr("id")+'?place=' + pl+'&bannerid='+bannerid);
+                
+              }
+            });
+          
+            //teaser click stat
+            $(".teaser").each(function() {
+              var x = $(this).position().left;
+              var y = $(this).position().top;
+              if ((e.pageX >= x)&&(e.pageX <= (x + $(this).width())) &&
+                  (e.pageY >= y)&&(e.pageY <= (y + $(this).height()))) 
+              {
+                var pl = $(this).attr("place");
+                var teaserid = $(this).attr("teaserid");
+                var bannerid = $(this).attr("bannerid");
+                $.post('/service/teaserclick?place=' + pl + '&teaserid=' + teaserid + '&bannerid=' + bannerid);
+              }
+            });
+          }); 
+        });
+    </script>
+
+    
+    
+
+  
+  <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{ lang: 'ru' }</script>
+<script src="https://ssl.google-analytics.com/ga.js" async="true"></script><style id="abu-collapse-styles" type="text/css"></style><style type="text/css">.fancybox-margin{margin-right:12px;}</style></head>
+
+
+<body><div id="WzTtDiV" style="visibility: hidden; position: absolute; overflow: hidden; padding: 0px; width: 0px; left: 0px; top: 0px;"></div>
+  <script type="text/javascript" src="//www1.vlastvkusa.ru/wz_tooltip/wz_tooltip.js"></script>
+  <center>
+  <table style="border-width: 0px; top: 0px;" cellspacing="0" cellpadding="0" border="0">
+  <tbody><tr>
+  <td></td>
+  <td style="background: #a0a0a0; width:1px;"></td>
+  <td style="vertical-align: top;" valign="top">
+    <table style="border-width: 0px; background: #fefcf7;" cellspacing="0" cellpadding="0" border="0">
+    <tbody><tr><td id="logo" style="background: url(//www1.vlastvkusa.ru/images/logo2.jpg); height: 150px;"></td></tr>
+    <tr><td style="background: url(//www1.vlastvkusa.ru/images/logo_line.gif); height:8px;"></td></tr>
+    <tr><td align="center">
+      <table style="padding: 0px;" class="topmenu" cellspacing="0" cellpadding="0" border="0">
+      <tbody><tr>
+        <td style="background: url(//www1.vlastvkusa.ru/images/top_menu_2_left.png); width: 88px; height: 32px;"></td>
+        <td id="main" class="off" onclick="document.location='/'" onmouseover="this.className='on';" onmouseout="this.className='off';"></td>
+        <td id="about" class="off" onclick="document.location='/service/about'" onmouseover="this.className='on';" onmouseout="this.className='off';"></td>
+        <td id="recipes" class="off" onclick="document.location='/recipes'" onmouseover="this.className='on';" onmouseout="this.className='off';"></td>
+        <td id="users" class="off" onclick="document.location='/users'" onmouseover="this.className='on';" onmouseout="this.className='off';"></td>
+        <td id="contests" class="off" onclick="document.location='/contests'" onmouseover="this.className='on';" onmouseout="this.className='off';"></td>
+        <td id="articles" class="off" onclick="document.location='/articles'" onmouseover="this.className='on';" onmouseout="this.className='off';"></td>
+        <td id="forum" class="off" onclick="document.location='/forum'" onmouseover="this.className='on';" onmouseout="this.className='off';"></td>
+        <td id="prizes" class="off" onclick="document.location='/contests/prizes'" onmouseover="this.className='on';" onmouseout="this.className='off';"></td>
+        <td id="feedback" class="off" onclick="document.location='/service/feedback'" onmouseover="this.className='on';" onmouseout="this.className='off';"></td>
+        <td style="background: url(//www1.vlastvkusa.ru/images/top_menu_2_right.png); width: 88px; height: 32px;"></td>
+      </tr>
+      </tbody></table>
+    </td></tr>
+    <tr><td style="vertical-align: top;" valign="top">
+      <table cellspacing="0" cellpadding="5" border="0"><tbody><tr>
+        <td style="_padding-right: 0px; vertical-align: top;" valign="top">
+
+          
+
+
+          
+
+        <!--noindex-->
+        <div class="block"> 
+        <div class="block_t">Вход в учетную запись</div> 
+        <div class="block_body">
+          <br>
+          <table class="dynfont" border="0" align="center">
+          <form action="/service/login" method="post"></form> 
+          <tbody><tr><td class="arial">Имя:</td><td><input class="it" name="username" alt="E-Mail:"> </td></tr>
+          <tr><td class="arial">Пароль:</td><td><input type="password" class="it" name="password" alt="Пароль:"> </td></tr>
+          <tr><td></td><td class="arial"><input type="checkbox" style="width: 14px; text-align: left;" name="autologin" alt="Запомнить"> Запомнить</td></tr>
+          <tr><td colspan="2" align="center"><div class="rw rwa submit"><button type="submit">Войти</button></div></td></tr>
+          <tr><td colspan="2" align="center"><a href="/users/edit">Регистрация</a></td></tr>
+          <tr><td colspan="2" align="center"><a href="/service/restorepassword">Забыли пароль?</a></td></tr>
+           
+          </tbody></table>
+          
+          <table class="dynfont" style="padding-top: 10px;" border="0" align="center">
+          <tbody><tr><td colspan="2" style="padding-top: 10px;" align="center">
+
+<a style="background-image: url(//www1.vlastvkusa.ru/images/mailru_connect.png); display: inline-block; width: 115px; height: 18px;" onclick="window.open('https://connect.mail.ru/oauth/authorize?client_id=485100&amp;response_type=code&amp;redirect_uri=http://www1.vlastvkusa.ru/service/loginmailru/341e653c-887c-4b24-a601-4755a20a8605?referrer=/service/agreement', null, 'width=550px, height=520px, center=yes, resizable=false, status=no, toolbar=no, location=no');"></a>
+
+    
+    
+    </td></tr>
+          </tbody></table>
+          <div class="block_b"></div> 
+        </div>
+      </div>
+      <!--/noindex-->
+
+          <br>
+
+
+          
+          
+          <div id="div_newsannouncement"><div class="block"> <div class="block_t">Новости</div> <div class="block_body">  <table class="text4" style="text-align: left;" width="100%" cellspacing="0" cellpadding="0" border="0">        <tbody><tr><td style="padding: 10px 15px 10px 15px;"><noindex>        <table class="text4" style="padding: 0px; text-align: justify;" width="100%" cellspacing="0" cellpadding="0" border="0">        <tbody><tr>          <td><b>Конкурс "Я - популярен!" завершен</b>          </td>        </tr>        <tr>          <td class="text2" style="padding-top: 5px; text-align: left; color: #777; white-space: nowrap;">13 февраля 2023 03:04</td>        </tr>        <tr>          <td style="padding-top: 5px;">Конкурс <a class="dynfont" href="https://www.vlastvkusa.ru/contests/show/1382">"Я - популярен!"</a> завершен. С результатами проведения конкурса Вы можете ознакомиться на <a class="dynfont" href="https://www.vlastvkusa.ru/contests/show/1382">странице конкурса</a>....</td>        </tr>        </tbody></table>    </noindex></td></tr>        <tr><td style="padding: 10px 15px 10px 15px;"><noindex>        <table class="text4" style="padding: 0px; text-align: justify;" width="100%" cellspacing="0" cellpadding="0" border="0">        <tbody><tr>          <td><b>Конкурс "Я - популярен!" завершен</b>          </td>        </tr>        <tr>          <td class="text2" style="padding-top: 5px; text-align: left; color: #777; white-space: nowrap;">6 февраля 2023 03:02</td>        </tr>        <tr>          <td style="padding-top: 5px;">Конкурс <a class="dynfont" href="https://www.vlastvkusa.ru/contests/show/1381">"Я - популярен!"</a> завершен. С результатами проведения конкурса Вы можете ознакомиться на <a class="dynfont" href="https://www.vlastvkusa.ru/contests/show/1381">странице конкурса</a>....</td>        </tr>        </tbody></table>    </noindex></td></tr>        <tr><td style="padding: 10px 15px 0px 15px;"><a href="/service/news">Читать все новости</a></td></tr>    <tr><td style="padding: 10px 35px 10px 15px; background: url(/images/rss.png) no-repeat 135px;"><a href="/service/rss">RSS-лента новостей</a></td></tr>  </tbody></table>  <div class="block_b"></div></div></div><br></div>
+          <script type="text/javascript">
+            $('#div_newsannouncement').html('<div class="block"> <div class="block_t">Новости</div> <div class="block_body">  <table cellpadding=0 cellspacing=0 class="text4" width=100% border=0 style="text-align: left;">        <tr><td style="padding: 10px 15px 10px 15px;"><noindex>        <table width=100% border=0 class=text4 style="padding: 0px; text-align: justify;" cellpadding=0 cellspacing=0>        <tr>          <td><b>Конкурс &quot;Я - популярен!&quot; завершен</b>          </td>        </tr>        <tr>          <td class=text2 style="padding-top: 5px; text-align: left; color: #777; white-space: nowrap;">13 февраля 2023 03:04</td>        </tr>        <tr>          <td style="padding-top: 5px;">Конкурс <a class=dynfont   href=\'https://www.vlastvkusa.ru/contests/show/1382\'>"Я - популярен!"</a> завершен. С результатами проведения конкурса Вы можете ознакомиться на <a class=dynfont   href=\'https://www.vlastvkusa.ru/contests/show/1382\'>странице конкурса</a>.</a></a>...</td>        </tr>        </table>    </noindex></td></tr>        <tr><td style="padding: 10px 15px 10px 15px;"><noindex>        <table width=100% border=0 class=text4 style="padding: 0px; text-align: justify;" cellpadding=0 cellspacing=0>        <tr>          <td><b>Конкурс &quot;Я - популярен!&quot; завершен</b>          </td>        </tr>        <tr>          <td class=text2 style="padding-top: 5px; text-align: left; color: #777; white-space: nowrap;">6 февраля 2023 03:02</td>        </tr>        <tr>          <td style="padding-top: 5px;">Конкурс <a class=dynfont   href=\'https://www.vlastvkusa.ru/contests/show/1381\'>"Я - популярен!"</a> завершен. С результатами проведения конкурса Вы можете ознакомиться на <a class=dynfont   href=\'https://www.vlastvkusa.ru/contests/show/1381\'>странице конкурса</a>.</a></a>...</td>        </tr>        </table>    </noindex></td></tr>        <tr><td style="padding: 10px 15px 0px 15px;"><a href="/service/news">Читать все новости</a></td></tr>    <tr><td style="padding: 10px 35px 10px 15px; background: url(/images/rss.png) no-repeat 135px;"><a href="/service/rss">RSS-лента новостей</a></td></tr>  </table>  <div class="block_b"></div></div></div><br />');
+          </script>
+          
+          
+
+          
+          
+
+<div style="width: 170px; height: 610px; padding-left: 20px;" class="dynsize">
+<div class="banner" id="banner_googleleft160" place="3" bannerid="201333632">
+<script type="text/javascript"><!--
+  google_ad_client = "ca-pub-5313548871898988";
+  /* 160x600 graphic */
+  google_ad_slot = "3279782506";
+  google_ad_width = 160;
+  google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+</div>
+
+
+  <!--noindex-->
+  <div class="block"> 
+    <div class="block_t">Подписка на новости</div> 
+    <div class="block_body">
+      <br>
+      <center>
+      <table class="text1" style="padding: 5px 10px 5px 10px;" cellspacing="0" cellpadding="0" border="0">
+      <tbody><tr>
+          <td style="width: 150px; text-align: center;">
+            <table width="100%" border="0">
+              <tbody><tr><td colspan="2" align="center">Подписаться через <a href="//www.rss2email.ru">RSS2Email</a></td></tr>
+              <tr><td colspan="2" style="padding-top: 5px;" align="center"><b>Новые рецепты</b></td></tr>
+              <tr><td><input class="blockinput" type="text" id="rss2email" name="email" value="Ваш E-mail" onfocus="if (this.value=='Ваш E-mail') this.value='';"></td></tr>
+              <tr><td colspan="2" style="padding-top: 5px;"><button type="submit" class="button2" onclick="window.open('//www.rss2email.ru/ready.asp?rss=https://www.vlastvkusa.ru/service/rss/recipes&amp;email='+$('#rss2email').val());">Подписать</button></td></tr>
+            </tbody></table>
+          </td>
+      </tr>
+      </tbody></table>  
+      </center>
+      <div class="block_b"></div>
+    </div>
+  </div>
+  <!--/noindex-->
+
+  <br>
+
+
+
+          <div id="div_randomrecipe">          <div class="block">             <div class="block_t">Случайный рецепт</div>             <div class="block_body">              <br>              <center>              <table class="text1" style="padding: 5px 10px 5px 10px;" cellspacing="0" cellpadding="0" border="0">              <tbody><tr>                  <td style="width: 150px; text-align: center;"><noindex>                    <a href="/recipes/show/5479" title="Фото-рецепт «Сладкое томатное чатни»"><img src="/images/recipes/5/5479_150.jpg" alt="Фото-рецепт «Сладкое томатное чатни»" title="Фото-рецепт «Сладкое томатное чатни»" width="112"></a><br><br>                    <a href="/recipes/show/5479" class="text5" title="Фото-рецепт «Сладкое томатное чатни»">Сладкое томатное чатни</a>                  </noindex></td>              </tr>              </tbody></table>              </center>              <div class="block_b"></div>            </div>          </div>          <br>          </div>
+          <script type="text/javascript">
+            $('#div_randomrecipe').html('          <div class="block">             <div class="block_t">Случайный рецепт</div>             <div class="block_body">              <br />              <center>              <table cellpadding=0 cellspacing=0 class="text1" border=0 style="padding: 5px 10px 5px 10px;">              <tr>                  <td style="width: 150px; text-align: center;"><noindex>                    <a href="/recipes/show/5479" title="Фото-рецепт «Сладкое томатное чатни»"><img src="/images/recipes/5/5479_150.jpg" width=112 alt="Фото-рецепт «Сладкое томатное чатни»" title="Фото-рецепт «Сладкое томатное чатни»"></a><br /><br />                    <a href="/recipes/show/5479" class=text5 title="Фото-рецепт «Сладкое томатное чатни»">Сладкое томатное чатни</a>                  </noindex></td>              </tr>              </table>              </center>              <div class="block_b"></div>            </div>          </div>          <br />          ');
+          </script>
+
+          
+
+          
+          
+
+<div class="blockads" style="padding: 0px 0px 10px 0px;">
+<div class="banner" id="banner_googleleft200" place="6" bannerid="201333633">
+<script type="text/javascript"><!--
+  google_ad_client = "ca-pub-5313548871898988";
+  /* 200x200 left graphic */
+  google_ad_slot = "6168462113";
+  google_ad_width = 200;
+  google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+</div>
+
+
+
+          <div id="div_birthdays"><div class="block">   <div class="block_t">Дни рождения</div>   <div class="block_body">    <table class="text4" style="padding: 10px 10px 5px 10px;" width="100%" cellspacing="0" cellpadding="0" border="0">        <tbody><tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/86" title="Профиль пользователя «Cadi / Gegin Sveta»"><img src="/images/users/86_60.jpg" alt="Профиль пользователя «Cadi / Gegin Sveta»" title="Профиль пользователя «Cadi / Gegin Sveta»" width="40"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/86" class="text4" title="Профиль пользователя «Cadi / Gegin Sveta»"><b>Cadi</b></a></td></tr>          <tr><td style="color: #777;">Gegin Sveta</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">15 февраля 1986</td></tr>        </tbody></table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/559" title="Профиль пользователя «Mila / ***** Мила»"><img src="/images/users/559_60.jpg" alt="Профиль пользователя «Mila / ***** Мила»" title="Профиль пользователя «Mila / ***** Мила»" width="44"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/559" class="text4" title="Профиль пользователя «Mila / ***** Мила»"><b>Mila</b></a></td></tr>          <tr><td style="color: #777;">***** Мила</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">15 февраля 1978</td></tr>        </tbody></table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/665" title="Профиль пользователя «Natalya / Иванова Мария»"><img src="/images/user_photo_60.png" alt="Профиль пользователя «Natalya / Иванова Мария»" title="Профиль пользователя «Natalya / Иванова Мария»" width="60"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/665" class="text4" title="Профиль пользователя «Natalya / Иванова Мария»"><b>Natalya</b></a></td></tr>          <tr><td style="color: #777;">Иванова Мария</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">15 февраля 1970</td></tr>        </tbody></table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/1049" title="Профиль пользователя «Mary777 / Злобина Мария»"><img src="/images/user_photo_60.png" alt="Профиль пользователя «Mary777 / Злобина Мария»" title="Профиль пользователя «Mary777 / Злобина Мария»" width="60"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/1049" class="text4" title="Профиль пользователя «Mary777 / Злобина Мария»"><b>Mary777</b></a></td></tr>          <tr><td style="color: #777;">Злобина Мария</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">15 февраля 1985</td></tr>        </tbody></table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/800" title="Профиль пользователя «kapele / Капранова Елена»"><img src="/images/users/800_60.jpg" alt="Профиль пользователя «kapele / Капранова Елена»" title="Профиль пользователя «kapele / Капранова Елена»" width="60"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/800" class="text4" title="Профиль пользователя «kapele / Капранова Елена»"><b>kapele</b></a></td></tr>          <tr><td style="color: #777;">Капранова Елена</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">16 февраля 1972</td></tr>        </tbody></table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/920" title="Профиль пользователя «JulaG / Голованова Юлия»"><img src="/images/users/920_60.jpg" alt="Профиль пользователя «JulaG / Голованова Юлия»" title="Профиль пользователя «JulaG / Голованова Юлия»" width="46"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/920" class="text4" title="Профиль пользователя «JulaG / Голованова Юлия»"><b>JulaG</b></a></td></tr>          <tr><td style="color: #777;">Голованова Юлия</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">17 февраля 1976</td></tr>        </tbody></table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/554" title="Профиль пользователя «vikka / Коломиец Виктория»"><img src="/images/user_photo_60.png" alt="Профиль пользователя «vikka / Коломиец Виктория»" title="Профиль пользователя «vikka / Коломиец Виктория»" width="60"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/554" class="text4" title="Профиль пользователя «vikka / Коломиец Виктория»"><b>vikka</b></a></td></tr>          <tr><td style="color: #777;">Коломиец Виктория</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">18 февраля 1973</td></tr>        </tbody></table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/955" title="Профиль пользователя «itlada / Вотчицева Любовь»"><img src="/images/user_photo_60.png" alt="Профиль пользователя «itlada / Вотчицева Любовь»" title="Профиль пользователя «itlada / Вотчицева Любовь»" width="60"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/955" class="text4" title="Профиль пользователя «itlada / Вотчицева Любовь»"><b>itlada</b></a></td></tr>          <tr><td style="color: #777;">Вотчицева Любовь</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">18 февраля 1950</td></tr>        </tbody></table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/1018" title="Профиль пользователя «Marika / Y Marina»"><img src="/images/user_photo_60.png" alt="Профиль пользователя «Marika / Y Marina»" title="Профиль пользователя «Marika / Y Marina»" width="60"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/1018" class="text4" title="Профиль пользователя «Marika / Y Marina»"><b>Marika</b></a></td></tr>          <tr><td style="color: #777;">Y Marina</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">18 февраля 1981</td></tr>        </tbody></table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/49" title="Профиль пользователя «Zinaida / * Зинаида»"><img src="/images/users/49_60.jpg" alt="Профиль пользователя «Zinaida / * Зинаида»" title="Профиль пользователя «Zinaida / * Зинаида»" width="60"></a></td>    <td style="padding: 10px 5px 10px 5px;" valign="top"><noindex>        <table style="text-align: justify; padding: 0px;" width="100%" cellspacing="0" cellpadding="0" border="0">          <tbody><tr><td><a href="/users/profile/49" class="text4" title="Профиль пользователя «Zinaida / * Зинаида»"><b>Zinaida</b></a></td></tr>          <tr><td style="color: #777;">* Зинаида</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">19 февраля 1960</td></tr>        </tbody></table>    </noindex></td>    </tr>        </tbody></table>    <div class="block_b"></div>  </div></div>          <br></div>
+          <script type="text/javascript">
+            $('#div_birthdays').html('<div class="block">   <div class="block_t">Дни рождения</div>   <div class="block_body">    <table cellpadding=0 cellspacing=0 class="text4" width=100% border=0 style="padding: 10px 10px 5px 10px;">        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/86" title="Профиль пользователя «Cadi / Gegin Sveta»"><img src="/images/users/86_60.jpg" width=40 alt="Профиль пользователя «Cadi / Gegin Sveta»" title="Профиль пользователя «Cadi / Gegin Sveta»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/86" class=text4 title="Профиль пользователя «Cadi / Gegin Sveta»"><b>Cadi</b></a></td></tr>          <tr><td style="color: #777;">Gegin Sveta</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">15 февраля 1986</td></tr>        </table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/559" title="Профиль пользователя «Mila / ***** Мила»"><img src="/images/users/559_60.jpg" width=44 alt="Профиль пользователя «Mila / ***** Мила»" title="Профиль пользователя «Mila / ***** Мила»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/559" class=text4 title="Профиль пользователя «Mila / ***** Мила»"><b>Mila</b></a></td></tr>          <tr><td style="color: #777;">***** Мила</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">15 февраля 1978</td></tr>        </table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/665" title="Профиль пользователя «Natalya / Иванова Мария»"><img src="/images/user_photo_60.png" width=60 alt="Профиль пользователя «Natalya / Иванова Мария»" title="Профиль пользователя «Natalya / Иванова Мария»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/665" class=text4 title="Профиль пользователя «Natalya / Иванова Мария»"><b>Natalya</b></a></td></tr>          <tr><td style="color: #777;">Иванова Мария</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">15 февраля 1970</td></tr>        </table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/1049" title="Профиль пользователя «Mary777 / Злобина Мария»"><img src="/images/user_photo_60.png" width=60 alt="Профиль пользователя «Mary777 / Злобина Мария»" title="Профиль пользователя «Mary777 / Злобина Мария»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/1049" class=text4 title="Профиль пользователя «Mary777 / Злобина Мария»"><b>Mary777</b></a></td></tr>          <tr><td style="color: #777;">Злобина Мария</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">15 февраля 1985</td></tr>        </table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/800" title="Профиль пользователя «kapele / Капранова Елена»"><img src="/images/users/800_60.jpg" width=60 alt="Профиль пользователя «kapele / Капранова Елена»" title="Профиль пользователя «kapele / Капранова Елена»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/800" class=text4 title="Профиль пользователя «kapele / Капранова Елена»"><b>kapele</b></a></td></tr>          <tr><td style="color: #777;">Капранова Елена</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">16 февраля 1972</td></tr>        </table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/920" title="Профиль пользователя «JulaG / Голованова Юлия»"><img src="/images/users/920_60.jpg" width=46 alt="Профиль пользователя «JulaG / Голованова Юлия»" title="Профиль пользователя «JulaG / Голованова Юлия»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/920" class=text4 title="Профиль пользователя «JulaG / Голованова Юлия»"><b>JulaG</b></a></td></tr>          <tr><td style="color: #777;">Голованова Юлия</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">17 февраля 1976</td></tr>        </table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/554" title="Профиль пользователя «vikka / Коломиец Виктория»"><img src="/images/user_photo_60.png" width=60 alt="Профиль пользователя «vikka / Коломиец Виктория»" title="Профиль пользователя «vikka / Коломиец Виктория»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/554" class=text4 title="Профиль пользователя «vikka / Коломиец Виктория»"><b>vikka</b></a></td></tr>          <tr><td style="color: #777;">Коломиец Виктория</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">18 февраля 1973</td></tr>        </table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/955" title="Профиль пользователя «itlada / Вотчицева Любовь»"><img src="/images/user_photo_60.png" width=60 alt="Профиль пользователя «itlada / Вотчицева Любовь»" title="Профиль пользователя «itlada / Вотчицева Любовь»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/955" class=text4 title="Профиль пользователя «itlada / Вотчицева Любовь»"><b>itlada</b></a></td></tr>          <tr><td style="color: #777;">Вотчицева Любовь</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">18 февраля 1950</td></tr>        </table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/1018" title="Профиль пользователя «Marika / Y Marina»"><img src="/images/user_photo_60.png" width=60 alt="Профиль пользователя «Marika / Y Marina»" title="Профиль пользователя «Marika / Y Marina»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/1018" class=text4 title="Профиль пользователя «Marika / Y Marina»"><b>Marika</b></a></td></tr>          <tr><td style="color: #777;">Y Marina</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">18 февраля 1981</td></tr>        </table>    </noindex></td>    </tr>        <tr>    <td style="width: 50px; padding-right: 5px; text-align: center;"><a href="/users/profile/49" title="Профиль пользователя «Zinaida / * Зинаида»"><img src="/images/users/49_60.jpg" width=60 alt="Профиль пользователя «Zinaida / * Зинаида»" title="Профиль пользователя «Zinaida / * Зинаида»"></a></td>    <td valign=top style="padding: 10px 5px 10px 5px;"><noindex>        <table width=100% border=0 cellpadding=0 cellspacing=0 style="text-align: justify; padding: 0px;">          <tr><td><a href="/users/profile/49" class=text4 title="Профиль пользователя «Zinaida / * Зинаида»"><b>Zinaida</b></a></td></tr>          <tr><td style="color: #777;">* Зинаида</td></tr>          <tr><td style="padding-top: 5px; vertical-align: bottom; white-space: nowrap;">19 февраля 1960</td></tr>        </table>    </noindex></td>    </tr>        </table>    <div class="block_b"></div>  </div></div>          <br />');
+          </script>
+
+          
+
+
+          
+                 
+
+
+        </td>
+        <td class="dynsize" style="text-align: left; vertical-align: top; _padding: 5px 5px 5px 0px; width: 814px;">
+
+        
+
+        
+        
+        <div id="maincontent">
+
+    <div id="tabs"><ul>
+      <li><a href="/service/news"><div class="dynfont">Новости</div></a></li>
+      <li><a href="/service/about"><div class="dynfont">О сервисе</div></a></li>
+      <li class="current"><div class="dynfont">Соглашение</div></li>
+      <li><a href="/service/policy"><div class="dynfont">Политика</div></a></li>
+      <li><a href="/service/contestrules"><div class="dynfont">Правила конкурсов</div></a></li>
+      <li><a href="/service/reklamafull"><div class="dynfont">Реклама на сайте</div></a></li>
+    </ul></div>
+    <div class="clear"></div>
+
+<div class="text3" style="text-align: center; padding: 10px; color: #000;">Пользовательское соглашение</div>
+
+<div class="text1" style="text-align:justify;">
+<b>1. Термины и определения</b><br><br>
+Соглашение - настоящее Пользовательское соглашение.<br><br>
+Сервис – система интерактивного обслуживания в режиме реального времени VLASTVKUSA.RU, эксплуатируемая через сеть Интернет и включающую в себя информационные услуги и данные, предоставляемые Администрацией сайта и третьими лицами.<br><br>
+Материалы - любые размещенные на сайте Сервиса текстовые материалы, фотографические и графические изображения, видеоматериалы с аудио сопровождением или без него, музыкальные и звуковые произведения, включая материалы Пользователей и иные произведения, размещенные на сайте Сервиса.<br><br>
+Пользователь - любое физическое или юридическое лицо, имеющее доступ к Сервису посредством сети Интернет.<br><br>
+Администрация – администрация сайта Сервиса.<br><br>
+<b>2. Общие положения</b><br><br>
+2.1. Настоящее Соглашение определяет правила и условия использования Пользователями Сервиса, порядок использования материалов, размещенных на сайте Сервиса, а также права Пользователей, обязанности и ограничения, касающиеся использования Пользователями Сервиса и материалов, размещенных на сайте Сервисе.<br><br>
+2.2. Под использованием материалов понимается воспроизведение, распространение, включение в другие произведения, перевод или другая переработка, доведение до всеобщего сведения и иные возможные способы использования, предусмотренные действующим законодательством РФ.<br><br>
+2.3. Зарегистрировавшись на Сервисе, воспользовавшись возможностью размещения материалов, просмотра информации на сайте Сервиса или любой иной функциональной возможностью Сервиса, Пользователь выражает свое безоговорочное согласие со всеми условиями настоящего Соглашения и Политики конфиденциальности, размещенной на сайте по адресу https://www.vlastvkusa.ru/service/policy, обязуется их соблюдать или прекратить использование Сервиса.<br><br>
+<b>3. Предоставление, размещение и использование информации</b><br><br>
+3.1. Полный доступ к Сервису, в том числе размещение Материалов, ознакомление с более полной информацией о других пользователях, отправка сообщений, возможен только для зарегистрированного Пользователя после авторизации на сайте Сервиса.<br><br>
+3.2. Пользователь самостоятельно отвечает за сохранность своих логина и пароля и не имеет права передавать или предоставлять их третьим лицам. Все действия, совершенные на Сервисе с использованием принадлежащих Пользователю логина и пароля, считаются совершенными Пользователем.<br><br>
+3.3. При создании профиля Пользователь в обязательном порядке предоставляет Администрации определенную информацию о себе, в том числе имя, адрес электронной почты, иную информацию. Эта информация будет использована для создания профиля Пользователя на Сервисе.<br><br>
+3.4. Присоединяясь к настоящему Соглашению, Пользователь дает согласие на обработку Администрацией предоставляемых им  персональных данных в целях заключения между таким Пользователем и Администрацией настоящего Соглашения, а также его последующего исполнения. Персональная информация о Пользователе хранится и обрабатывается в соответствии с Политикой конфиденциальности.<br><br>
+3.5. Использование отображенных на сайте Сервиса Материалов, кроме как в личных целях, без получения предварительного согласия Администрации не допускается. <br><br>
+3.6. Пользователь соглашается, что, размещая любые Материалы на сайте Сервисе, предоставляет Администрации исключительное право на безвозмездное использование размещенных им Материалов на территории всего мира в любой форме, посредством использования любых средств массовой информации или технологий, на весь срок действия авторских прав, предусмотренный законодательством РФ, в отношении таких Материалов.<br><br>
+3.7 Пользователь соглашается, что предоставление исключительного права на использование Администрацией размещенных им Материалов означает, что Пользователь не вправе передавать право на использование данных Материалов, путем создания копий размещенных Материалов на любых носителях и размещение в телекоммуникационных сетях любым, иным лицам, кроме Администрации.<br><br>
+3.8 Пользователь соглашается с тем, что Администрация вправе размещать на страницах, содержащих Материалы Пользователя, рекламные баннеры и объявления, модифицировать Материалы с целью размещения рекламы, а также использовать размещенные Пользователем Материалы в иных коммерческих целях.<br><br>
+<b>4. Обязанности Пользователя</b><br><br>
+4.1. Любые Материалы, размещаемые Пользователем, не должны содержать информации:<br>
+<ul class="text1">
+<li>	нарушающей положения законодательства и / или авторские права, права на товарные знаки, патенты, коммерческую тайну и/или права на иные объекты интеллектуальной собственности и смежные с ними права, принадлежащие третьим лицам;<br><br>
+</li><li>	вредоносной, угрожающей, оскорбляющей нравственность, честь и достоинство, клеветническими, пропагандирующими ненависть и/или дискриминацию людей по расовому, этническому, половому, социальному признакам, способствующие разжиганию религиозной, расовой или межнациональной розни, содержащие сцены насилия, либо бесчеловечного обращения с животными, и т.п.;<br><br>
+</li><li>	рекламного характера, массовых рассылок, схем "пирамид", "писем счастья" и т.п.;<br><br>
+</li><li>	эротического, порнографического характера;<br><br>
+</li><li>	нарушающей, по мнению Администрации, положения настоящего Соглашения.<br><br>
+</li></ul>
+4.2. На Сервисе запрещается совершение действий, направленных на введение других пользователей в заблуждение, в том числе запрещено:<br>
+<ul>
+<li>	использовать доступ к Сервису в целях представления себя другим лицом, в частности путем осуществления нескольких регистраций, создания нескольких профилей, с указанием чужого имени либо с использованием псевдонима;<br><br>
+</li><li>	размещать информацию в полях форм, которые не предназначены для данного типа информации;<br><br>
+</li><li>	размещать в рамках Сервиса фотографии и другие материалы, не относящиеся к тематике Сервиса.<br><br>
+</li></ul>
+4.3. Действия Пользователя не должны нарушать конституционные права граждан, других пользователей Сервиса, в том числе право на неприкосновенность частной жизни, личную и семейную тайну, честь и доброе имя. <br><br>
+<b>5. Ответственность</b><br><br>
+5.1. Пользователь самостоятельно несет ответственность перед третьими лицами за свои действия при использовании Сервиса, в том числе за то, что они соответствуют требованиям законодательства и не нарушают права и законные интересы третьих лиц. Пользователь самостоятельно и за свой счет обязуется урегулировать все претензии третьих лиц, связанные с действиями Пользователя при использовании Сервиса.<br><br>
+5.2. Администрация имеет право без уведомления по собственному усмотрению удалить полностью или частично размещенные Пользователем Материалы, в частности, в случае размещения Пользователем на сайте Сервиса Материалов, комментариев или совершения иных действий, не соответствующих требованиям настоящего Соглашения.<br><br>
+5.3. За нарушение положений настоящего Соглашения Администрация может блокировать доступ Пользователя к Сервису и/или удалить профиль Пользователя без предварительного уведомления.<br><br>
+5.4. Администрация не несёт ответственности за содержание не принадлежащих Администрации сайтов, ссылки на которые могут присутствовать в составе Материалов и не гарантирует их доступности, корректной работы и соответствия заявленной тематике.<br><br>
+5.5. Администрация не возмещает никакой ущерб, прямой или косвенный, причиненный Пользователю или третьим лицам в результате использования или невозможности использования Сервиса.<br><br>
+<b>6. Прочие условия</b><br><br>
+6.1. Сервис предоставляется «как есть». Администрация не гарантирует бесперебойную и безошибочную работу Сервиса, а также сохранность профиля и других Материалов Пользователя, размещенных им на сайте Сервиса.<br><br>
+6.2. Пользователь соглашается на получение уведомлений от Сервиса на указанный им в профиле электронный адрес.<br><br>
+6.3. Сервис использует современные интернет-технологии, такие как cookies, javascript и др., в частности, для поддержки сессий. Пользователь не сможет использовать Сервис, если его web-браузер не поддерживает cookies.<br><br>
+6.4. Все претензии, связанные с использованием/невозможностью использования Сервиса, нарушением прав и интересов правообладателей размещенных на сайте Сервиса Материалов, должны направляться через форму обратной связи по адресу https://www.vlastvkusa.ru/service/feedback/.<br><br>
+6.5. Администрация вправе в любое время в одностороннем порядке без уведомления Пользователя изменять текст настоящего Соглашения и/или любые иные условия использования Сервиса. Изменения в настоящее Соглашение и/или иные условия использования Сервиса вступают в силу с момента их опубликования на сайте https://www.vlastvkusa.ru.<br><br>
+6.6. Актуальный текст настоящего Соглашения размещается на сайте по адресу https://www.vlastvkusa.ru/service/agreement.<br><br>
+</div>
+
+</div>
+        </td>
+
+        <td style="_padding-right: 0px;" valign="top">
+
+
+          
+
+          <div id="div_globalstats">          <div class="block">             <div class="block_t">Статистика</div>             <div class="block_body">              <table class="text4" style="padding: 5px 10px 5px 0px; text-align: left;" width="100%" cellspacing="0" cellpadding="0" border="0">                    <tbody><tr><td style="padding: 10px 0px 0px 15px;"><b>Всего рецептов:</b> <a href="/recipes/showall">6554</a></td></tr>                    <tr><td style="padding: 5px 0px 0px 15px; padding-bottom: 0px;"><b>Скорость:</b> 0 рецептов/сутки</td></tr>                    <tr><td style="padding: 5px 0px 0px 15px;"><b>Всего кулинаров:</b> <a href="/users/showall">900</a></td></tr>                    <tr><td style="padding: 5px 0px 0px 15px; padding-bottom: 0px;"><b>Сейчас на сайте:</b> <a href="/users/showall/?activenow=on">0</a></td></tr>              </tbody></table>              <div class="block_b"></div>            </div>          </div>                    <br></div>
+          <script type="text/javascript">
+            $('#div_globalstats').html('          <div class="block">             <div class="block_t">Статистика</div>             <div class="block_body">              <table cellpadding=0 cellspacing=0 class="text4" width=100% border=0 style="padding: 5px 10px 5px 0px; text-align: left;">                    <tr><td style="padding: 10px 0px 0px 15px;"><b>Всего рецептов:</b> <a href="/recipes/showall">6554</a></td></tr>                    <tr><td style="padding: 5px 0px 0px 15px; padding-bottom: 0px;"><b>Скорость:</b> 0 рецептов/сутки</td></tr>                    <tr><td style="padding: 5px 0px 0px 15px;"><b>Всего кулинаров:</b> <a href="/users/showall">900</a></td></tr>                    <tr><td style="padding: 5px 0px 0px 15px; padding-bottom: 0px;"><b>Сейчас на сайте:</b> <a href="/users/showall/?activenow=on">0</a></td></tr>              </table>              <div class="block_b"></div>            </div>          </div>                    <br />');
+          </script>
+
+          
+
+          
+          
+
+<div style="width: 170px; height: 610px; padding-left: 20px;" class="dynsize">
+<div class="banner" id="banner_googleleft160" place="9" bannerid="201333634">
+<script type="text/javascript"><!--
+  google_ad_client = "ca-pub-5313548871898988";
+  /* 160x600 graphic */
+  google_ad_slot = "3279782506";
+  google_ad_width = 160;
+  google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+</div>
+
+
+<!--noindex-->
+<div class="block"> 
+<div class="block_t">Быстрый поиск</div> 
+<div class="block_body">
+  <table class="text4" style="text-align: left;" width="100%" cellspacing="0" cellpadding="0" border="0">
+    <form action="/recipes/showall" method="get"></form>
+    <tbody><tr><td style="padding: 10px 0px 0px 15px;"><b>Название рецепта:</b></td></tr>
+    <tr><td style="padding: 5px 0px 0px 15px;"><input class="blockinput" type="text" id="quicksearch" name="keywords" value="" autocomplete="off"></td></tr>
+    <tr><td style="text-align: center; padding-top: 5px;"><button type="submit" class="button2">Искать</button></td></tr>
+    
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $("#quicksearch").autocomplete({ 
+            serviceUrl:'/service/autocomplete',
+            minChars:0, 
+            delimiter: /(,|;)\s*/, // regex or character
+            maxHeight:400,
+            width:300,
+            zIndex: 9999,
+            deferRequestBy: 0, //miliseconds
+            params: { type: 'recipes' }, //aditional parameters
+            // callback function:
+            onSelect: function(value, data) { document.location = (value == '#all#') ? ('/recipes/showall/?keywords=' + data) : ('/recipes/show/' + data); }
+          });
+        });
+    </script>    
+  </tbody></table>
+  <div class="block_b"></div>
+</div>
+</div>
+<!--/noindex-->
+
+<br>
+
+
+          <div id="div_sponsoractivecontests"></div>
+          <script type="text/javascript">
+            $('#div_sponsoractivecontests').html('');
+          </script>
+
+          
+
+
+          <div id="div_sponsoroffercontests"></div>
+          <script type="text/javascript">
+            $('#div_sponsoroffercontests').html('');
+          </script>
+
+          
+
+
+          <div id="div_minicontests">          <div class="block">             <div class="block_t">Мини-конкурсы</div>             <div class="block_body">              <table class="text1" style="padding: 10px 10px 0px 10px;" width="100%" cellspacing="0" cellpadding="0" border="0">                <tbody><tr>                  <td valign="top"><noindex>                    <table class="list2 text4" width="100%" border="0">                                        <tbody><tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Ветчина жареная с горчицей и луком</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 16:01</td></tr>                                        <tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Флип из красного вина</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 16:21</td></tr>                                        <tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Десертный напиток "Черничный крем"</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 17:21</td></tr>                                        <tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Флип клюквенный</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 17:41</td></tr>                                        <tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Луковая сальса с редиской</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 18:11</td></tr>                                        <tr><td style="padding-top: 5px;"><b>Приз:<span style="color: #a92a2a;"> 3 бублика</span></b></td></tr>                    <tr><td style="padding-top: 5px;"><a href="/service/contestrules#minicontest" style="font-size: 12px;">Правила участия</a></td></tr>                    </tbody></table>                  </noindex></td>                </tr>              </tbody></table>              <div class="block_b"></div>            </div>          </div>                    <br></div>
+          <script type="text/javascript">
+            $('#div_minicontests').html('          <div class="block">             <div class="block_t">Мини-конкурсы</div>             <div class="block_body">              <table cellpadding=0 cellspacing=0 class="text1" width=100% border=0 style="padding: 10px 10px 0px 10px;">                <tr>                  <td valign=top><noindex>                    <table width=100% border=0 class="list2 text4">                                        <tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Ветчина жареная с горчицей и луком</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 16:01</b></td></tr>                                        <tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Флип из красного вина</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 16:21</b></td></tr>                                        <tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Десертный напиток "Черничный крем"</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 17:21</b></td></tr>                                        <tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Флип клюквенный</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 17:41</b></td></tr>                                        <tr><td style="padding: 5px 0px 0px 10px; color: #000; background: url(/images/reddot.png) no-repeat 0% 70%;"><b>Луковая сальса с редиской</b>                                        </td></tr>                    <tr><td style="padding: 0px 0px 0px 10px; font-size: 11px;">До 20 фев 2023 18:11</b></td></tr>                                        <tr><td style="padding-top: 5px;"><b>Приз:<span style="color: #a92a2a;"> 3 бублика</span></b></td></tr>                    <tr><td style="padding-top: 5px;"><a href="/service/contestrules#minicontest" style="font-size: 12px;">Правила участия</a></td></tr>                    </table>                  </noindex></td>                </tr>              </table>              <div class="block_b"></div>            </div>          </div>                    <br />');
+          </script>
+
+          
+
+
+          
+
+          <div id="div_offercontests"></div>
+          <script type="text/javascript">
+            $('#div_offercontests').html('');
+          </script>
+
+          
+
+
+          
+
+          <div id="div_contestpopular">          <div class="block">             <div class="block_t">Конкурс " Я - популярен "</div>             <div class="block_body">              <table class="text1" style="padding: 10px 10px 0px 10px;" width="100%" cellspacing="0" cellpadding="0" border="0">                <tbody><tr>                  <td valign="top">                    <table class="list2 text4" width="100%" border="0">                    <tbody><tr><td style="text-align: center; padding: 0px 0px 0px 0px;"><a href="/contests/show/1382" title="Конкурс фото-рецептов «Я - популярен»"><img class="blockimg" src="/images/contests/popular.png" alt="Конкурс фото-рецептов «Я - популярен»" title="Конкурс фото-рецептов «Я - популярен»"></a></td></tr>                    <tr><td style="padding-top: 5px;"><b>Приз:<span style="color: #a92a2a;"> 15 бубликов</span></b></td></tr>                    <tr><td style="padding-top: 5px;"><a href="/service/contestrules#contestpopular" style="font-size: 12px;">Правила участия</a></td></tr>                    </tbody></table>                  </td>                </tr>              </tbody></table>              <div class="block_b"></div>            </div>          </div>                    <br></div>
+          <script type="text/javascript">
+            $('#div_contestpopular').html('          <div class="block">             <div class="block_t">Конкурс " Я - популярен "</div>             <div class="block_body">              <table cellpadding=0 cellspacing=0 class="text1" width=100% border=0 style="padding: 10px 10px 0px 10px;">                <tr>                  <td valign=top>                    <table width=100% border=0 class="list2 text4">                    <tr><td style="text-align: center; padding: 0px 0px 0px 0px;"><a href=/contests/show/1382 title="Конкурс фото-рецептов «Я - популярен»"><img class=blockimg src="/images/contests/popular.png" alt="Конкурс фото-рецептов «Я - популярен»" title="Конкурс фото-рецептов «Я - популярен»"></a></td></tr>                    <tr><td style="padding-top: 5px;"><b>Приз:<span style="color: #a92a2a;"> 15 бубликов</span></b></td></tr>                    <tr><td style="padding-top: 5px;"><a href="/service/contestrules#contestpopular" style="font-size: 12px;">Правила участия</a></td></tr>                    </table>                  </td>                </tr>              </table>              <div class="block_b"></div>            </div>          </div>                    <br />');
+          </script>
+
+          
+
+
+          
+
+          <div id="div_activecontests"></div>
+          <script type="text/javascript">
+            $('#div_activecontests').html('');
+          </script>
+
+          
+
+          
+          
+
+        </td>
+      </tr>
+
+      
+      <tr>
+      <td style="text-align: center; padding-top: 45px;" colspan="10">
+        <a href="/">Главная</a> | 
+        <a href="/service/news">Новости</a> | 
+        <a href="/service/about">О сервисе</a> | 
+        <a href="/service/agreement">Пользовательское соглашение</a> | 
+        <a href="/service/policy">Политика конфиденциальности</a> | 
+        <a href="/users/edit">Регистрация пользователя</a> | 
+        <a href="/service/reklamafull">Реклама на сайте</a> | 
+        <a href="/service/feedback">Обратная связь</a><br>
+
+        <a href="/recipes/shownew">Новые рецепты</a> | 
+        <a href="/recipes/showbest">100 лучших рецептов</a> | 
+        <a href="/recipes/showcats">Каталог рецептов</a><br>
+
+        <a href="/users/shownew">Новые кулинары</a> | 
+        <a href="/users/showbest">100 лучших кулинаров</a> | 
+        <a href="/users/showall">Все кулинары</a><br>
+
+        <a href="/service/contestrules">Правила конкурсов</a> | 
+        <a href="/contests/active">Действующие конкурсы</a> | 
+        <a href="/contests/offers">Прием заявок на конкурсы</a> | 
+        <a href="/contests/showall">Завершенные конкурсы</a> | 
+        <a href="/contests/prizes">Центр призов</a><br>
+      </td>
+      </tr>
+      
+      <tr><td style="padding: 15px 0px 30px 0px; text-align: center;" colspan="10" class="text2"><hr style="height: 0px;"><br>
+      Все права защищены (c) 2009-2017
+      </td></tr>
+
+
+
+      
+      <tr><td style="padding: 10px 0px 30px 0px; text-align: center;" colspan="10" align="center">
+      <table border="0" align="center"><tbody><tr>
+      
+      <td style="width: 100px;">
+        <!-- begin of Top100 code -->
+        <script id="top100Counter" type="text/javascript" src="//counter.rambler.ru/top100.jcn?1894983"></script><noscript><img src="//counter.rambler.ru/top100.cnt?1894983" alt="" width="1" height="1" style="border: 0px;"/></noscript>
+        <!-- end of Top100 code -->
+        <!-- begin of Top100 logo -->
+        <a href="//top100.rambler.ru/home?id=1894983" target="_blank"><img src="//top100.rambler.ru/top100/banner-88x31-rambler-green2.gif" alt="Rambler's Top100" style="border: 0px;" width="88" height="31"></a>
+        <!-- end of Top100 logo -->
+      </td>
+      <td style="width: 100px;">
+        <!--Rating@Mail.ru counter-->
+        <script language="javascript" type="text/javascript">    //<![CDATA[
+            d = document; var a = ''; a += ';r=' + escape(d.referrer); js = 10; //]]></script>
+        <script language="javascript1.1" type="text/javascript">    //<![CDATA[
+            a += ';j=' + navigator.javaEnabled(); js = 11; //]]></script>
+        <script language="javascript1.2" type="text/javascript">    //<![CDATA[
+            s = screen; a += ';s=' + s.width + '*' + s.height;
+            a += ';d=' + (s.colorDepth ? s.colorDepth : s.pixelDepth); js = 12; //]]></script>
+        <script language="javascript1.3" type="text/javascript">    //<![CDATA[
+            js = 13; //]]></script><script language="javascript" type="text/javascript">                        //<![CDATA[
+                                d.write('<a href="//top.mail.ru/jump?from=1724753" target="_top">' +
+        '<img src="//top-fwz1.mail.ru/counter?id=1724753;t=223;js=' + js +
+        a + ';rand=' + Math.random() + '" alt="Рейтинг@Mail.ru" border="0" ' +
+        'height="31" width="88" \/><\/a>'); if (11 < js) d.write('<' + '!-- '); //]]></script><a href="//top.mail.ru/jump?from=1724753" target="_top"><img src="//top-fwz1.mail.ru/counter?id=1724753;t=223;js=13;r=;j=false;s=1366*768;d=24;rand=0.7910501845517286" alt="Рейтинг@Mail.ru" width="88" height="31" border="0"></a><!-- 
+        <noscript><a target="_top" href="//top.mail.ru/jump?from=1724753">
+        <img src="//top-fwz1.mail.ru/counter?js=na;id=1724753;t=223" 
+        height="31" width="88" border="0" alt="Рейтинг@Mail.ru" /></a></noscript>
+        <script language="javascript" type="text/javascript">    //<![CDATA[
+            if (11 < js) d.write('--' + '&#062'); //]]></script>
+        <!--// Rating@Mail.ru counter-->
+      </td>
+      <td style="width: 100px;">
+        <!--LiveInternet counter--><script type="text/javascript">document.write("<a href='//www.liveinternet.ru/click' target=_blank><img src='//counter.yadro.ru/hit?t15.6;r" + escape(document.referrer) + ((typeof (screen) == "undefined") ? "" : ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ? screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) + ";" + Math.random() + "' border=0 width=88 height=31 alt='' title='LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня'><\/a>")</script><a href="//www.liveinternet.ru/click" target="_blank"><img src="//counter.yadro.ru/hit?t15.6;r;s1366*768*24;uhttps%3A//www.vlastvkusa.ru/service/agreement;0.27080969806833277" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" width="88" height="31" border="0"></a><!--/LiveInternet-->
+      </td>
+      <td>
+        <!-- Yandex.Metrika counter --><div style="display:none;"><script type="text/javascript">                                                                    (function (w, c) { (w[c] = w[c] || []).push(function () { try { w.yaCounter7723327 = new Ya.Metrika({ id: 7723327, enableAll: true, webvisor: false }); } catch (e) { } }); })(window, 'yandex_metrika_callbacks');</script></div><script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script><noscript><div><img src="//mc.yandex.ru/watch/7723327" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+      </td>
+      
+      
+      
+      
+      
+      </tr>
+      <tr><td style="text-align: center;" colspan="10">
+        <a href="//host-tracker.com/ru/" onmouseover="this.href=&quot;//host-tracker.com/ru/web-site-monitoring-statistics/3578680/lvuc/&quot;;"><img alt="службы мониторинга серверов" src="//ext.host-tracker.com/uptime-img/?s=15&amp;t=3578680&amp;m=00.09&amp;p=Total&amp;src=lvuc" width="80" height="15" border="0"></a><noscript><a href='//host-tracker.com/ru/' >сервис по мониторингу, проверке, анализу работоспособности и доступности сайта</a></noscript>               
+      </td></tr>
+      </tbody></table>
+      </td></tr>
+      <tr><td colspan="10">
+        <script type="text/javascript">
+          var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-13094110-1']); _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script');
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                ga.setAttribute('async', 'true');
+                document.documentElement.firstChild.appendChild(ga);
+            })();
+        </script>
+        
+      </td></tr>
+      
+      </tbody></table>
+    </td></tr>
+    </tbody></table>
+  </td>
+  <td style="background: #a0a0a0; width:1px;"></td>
+  <td></td>
+  </tr>
+  </tbody></table>
+  </center>
+
+  
+ 
+<div id="content" style="left: 1128px; top: 0px; position: absolute; width: 160px; height: 162px;"><div class="jSticky-medium"><div class="jStickyNote"><table width="85%" cellspacing="0" cellpadding="0" border="0" align="left"><tbody><tr><td class="title">А знаете ли Вы?</td></tr><tr><td>Вы можете оставлять фото-отзывы в рецептах</td></tr></tbody></table></div><div class="jSticky-delete" style="cursor: pointer;"></div></div></div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*$("#content").css({ left: ($("#logo").position().left + $("#logo").width() - $("#content").width()) + 30 + "px" });
+        if (($.browser.msie)&&($.browser.version==7)) {
+        $("#content").css({ left: $("#content").position().left - 80 + "px" });
+        }*/
+        $("#content").css({ left: ($("#logo").position().left + $("#logo").width() - $("#content").width()) - 20 + "px" });
+        $("#content").stickynote({
+            size: 'small',
+            containment: 'content',
+            title: 'А знаете ли Вы?',
+            text: 'Вы можете оставлять фото-отзывы в рецептах',
+            onDelete: function() { $.post('/service/hidesticky/9'); }
+        });
+    });
+</script>
+
+
+
+
+  <!--<div id="snow_div" class=toolbar_top_sm style="position: absolute; top: 0px;" onclick="SwitchOnOffSnow();"></div>
+  <script>
+      $(document).ready(function() {
+          $("#snow_div").css({ left: ($(window).width()/2 - $("#snow_div").width()/2) + "px" });
+      });
+  </script>-->
+
+
+
+
+<div id="AutocompleteContainter_1676533168723" style="position: absolute; z-index: 9999; top: 1030px; left: 1109px;"><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_1676533168723" style="display: none; width: 300px; max-height: 400px;"></div></div></div></body></html>

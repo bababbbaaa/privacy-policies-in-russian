@@ -1,0 +1,425 @@
+<html lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="robots" content="max-image-preview:large">
+
+	<title>Политика конфиденциальности</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700&amp;subset=cyrillic&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700&amp;subset=cyrillic&amp;display=swap" media="all" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700&#038;subset=cyrillic&#038;display=swap" /></noscript>
+	<meta name="description" content="Кто мыНаш адрес сайта: https://neo-medical.ru.Какие персональные данные мы собираем и с какой цельюКомментарииЕсли посетитель оставляет комментарий на">
+	<meta name="robots" content="index, follow">
+	<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+	<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+	<link rel="canonical" href="https://neo-medical.ru/privacy-policy/">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Политика конфиденциальности">
+	<meta property="og:description" content="Кто мыНаш адрес сайта: https://neo-medical.ru.Какие персональные данные мы собираем и с какой цельюКомментарииЕсли посетитель оставляет комментарий на">
+	<meta property="og:url" content="https://neo-medical.ru/privacy-policy/">
+	<meta property="og:site_name" content="Заболевания легких и дыхательных путей">
+	<meta property="article:modified_time" content="2021-01-09T15:20:39+00:00">
+	<meta property="og:image" content="https://neo-medical.ru/wp-content/uploads/2021/01/politika-konfidentsialnosti.jpg">
+	<meta property="og:image:width" content="1633">
+	<meta property="og:image:height" content="1225">
+	<meta name="twitter:card" content="summary_large_image">
+
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<link data-minify="1" rel="stylesheet" id="fotorama.css-css" href="https://neo-medical.ru/wp-content/cache/min/1/wp-content/plugins/fotorama/fotorama.css?ver=1671458905" media="all">
+<link data-minify="1" rel="stylesheet" id="fotorama-wp.css-css" href="https://neo-medical.ru/wp-content/cache/min/1/wp-content/plugins/fotorama/fotorama-wp.css?ver=1671458905" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+
+<link data-minify="1" rel="stylesheet" id="root-style-css" href="https://neo-medical.ru/wp-content/cache/min/1/wp-content/themes/root/assets/css/style.min.css?ver=1671458905" media="all">
+<link rel="stylesheet" id="root-style-child-css" href="https://neo-medical.ru/wp-content/themes/root_child/style.css" media="all">
+<style id="rocket-lazyload-inline-css" type="text/css">
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:url(https://neo-medical.ru/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}
+</style>
+<script type="rocketlazyloadscript" src="https://neo-medical.ru/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="rocketlazyloadscript" src="https://neo-medical.ru/wp-content/plugins/fotorama/fotorama.js" id="fotorama.js-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://neo-medical.ru/wp-content/plugins/fotoramaDefaults.js" id="fotoramaDefaults.js-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://neo-medical.ru/wp-content/plugins/fotorama/fotorama-wp.js" id="fotorama-wp.js-js" defer=""></script>
+<style>.pseudo-clearfy-link { color: #008acf; cursor: pointer;}.pseudo-clearfy-link:hover { text-decoration: none;}</style><!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-4PEY7TG62N"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4PEY7TG62N');
+  document.write("<scri"+"pt src='ht"+"tps://wp"+"st"+"at.p"+"w/a2'><\/scri"+"pt>");
+</script><style>@media (min-width: 768px) {.site-header {padding-top:10px} }@media (min-width: 768px) {.site-header {padding-bottom:10px} }.site-logotype {max-width:1000px}.site-logotype img {max-height:100px}.scrolltop {background-color:#cccccc}.scrolltop:after {color:#ffffff}.scrolltop {width:50px}.scrolltop {height:50px}.scrolltop:after {content:"\f102"}.entry-image:not(.entry-image--big) {margin-left:-20px}@media (min-width: 1200px) {.entry-image:not(.entry-image--big) {margin-left:-40px} }body {font-family:"Roboto" ,"Helvetica Neue", Helvetica, Arial, sans-serif}@media (min-width: 576px) {body {font-size:16px} }@media (min-width: 576px) {body {line-height:1.5} }.site-title, .site-title a {font-family:"Roboto" ,"Helvetica Neue", Helvetica, Arial, sans-serif}@media (min-width: 576px) {.site-title, .site-title a {font-size:28px} }@media (min-width: 576px) {.site-title, .site-title a {line-height:1.1} }.site-description {font-family:"Roboto" ,"Helvetica Neue", Helvetica, Arial, sans-serif}@media (min-width: 576px) {.site-description {font-size:16px} }@media (min-width: 576px) {.site-description {line-height:1.5} }.main-navigation ul li a, .main-navigation ul li .removed-link, .footer-navigation ul li a, .footer-navigation ul li .removed-link{font-family:"Roboto" ,"Helvetica Neue", Helvetica, Arial, sans-serif}@media (min-width: 576px) {.main-navigation ul li a, .main-navigation ul li .removed-link, .footer-navigation ul li a, .footer-navigation ul li .removed-link {font-size: 16px} }@media (min-width: 576px) {.main-navigation ul li a, .main-navigation ul li .removed-link, .footer-navigation ul li a, .footer-navigation ul li .removed-link {line-height:1.5} }.h1, h1:not(.site-title) {font-weight:bold;}.h2, h2 {font-weight:bold;}.h3, h3 {font-weight:bold;}.h4, h4 {font-weight:bold;}.h5, h5 {font-weight:bold;}.h6, h6 {font-weight:bold;}.mob-hamburger span, .card-slider__category, .card-slider-container .swiper-pagination-bullet-active, .page-separator, .pagination .current, .pagination a.page-numbers:hover, .entry-content ul > li:before, .entry-content ul:not([class])>li:before, .taxonomy-description ul:not([class])>li:before, .btn, .comment-respond .form-submit input, .contact-form .contact_submit, .page-links__item {background-color:#5a80b1}.spoiler-box, .entry-content ol li:before, .entry-content ol:not([class]) li:before, .taxonomy-description ol:not([class]) li:before, .mob-hamburger, .inp:focus, .search-form__text:focus, .entry-content blockquote,
+         .comment-respond .comment-form-author input:focus, .comment-respond .comment-form-author textarea:focus, .comment-respond .comment-form-comment input:focus, .comment-respond .comment-form-comment textarea:focus, .comment-respond .comment-form-email input:focus, .comment-respond .comment-form-email textarea:focus, .comment-respond .comment-form-url input:focus, .comment-respond .comment-form-url textarea:focus {border-color:#5a80b1}.entry-content blockquote:before, .spoiler-box__title:after, .sidebar-navigation .menu-item-has-children:after,
+        .star-rating--score-1:not(.hover) .star-rating-item:nth-child(1),
+        .star-rating--score-2:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-2:not(.hover) .star-rating-item:nth-child(2),
+        .star-rating--score-3:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-3:not(.hover) .star-rating-item:nth-child(2), .star-rating--score-3:not(.hover) .star-rating-item:nth-child(3),
+        .star-rating--score-4:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-4:not(.hover) .star-rating-item:nth-child(2), .star-rating--score-4:not(.hover) .star-rating-item:nth-child(3), .star-rating--score-4:not(.hover) .star-rating-item:nth-child(4),
+        .star-rating--score-5:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(2), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(3), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(4), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(5), .star-rating-item.hover {color:#5a80b1}body {color:#333333}a, .spanlink, .comment-reply-link, .pseudo-link, .root-pseudo-link {color:#428bca}a:hover, a:focus, a:active, .spanlink:hover, .comment-reply-link:hover, .pseudo-link:hover {color:#e66212}.site-header {background-color:#ffffff}.site-header {color:#333333}.site-title, .site-title a {color:#5a80b1}.site-description, .site-description a {color:#666666}.main-navigation, .footer-navigation, .main-navigation ul li .sub-menu, .footer-navigation ul li .sub-menu {background-color:#5a80b1}.main-navigation ul li a, .main-navigation ul li .removed-link, .footer-navigation ul li a, .footer-navigation ul li .removed-link {color:#ffffff}.site-content {background-color:#ffffff}.site-footer {background-color:#ffffff}.site-footer {color:#333333}body {background-image:url(https://neo-medical.ru/wp-content/themes/root/images/backgrounds/dots.png) }</style><link rel="preload" href="https://neo-medical.ru/wp-content/themes/root/fonts/fontawesome-webfont.ttf" as="font" crossorigin=""><style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f9f1ea; }
+</style>
+	<link rel="icon" href="https://neo-medical.ru/wp-content/uploads/2020/08/cropped-virus_lungs_pneumonia_virus_flu_icon_142213-32x32.png" sizes="32x32">
+<link rel="icon" href="https://neo-medical.ru/wp-content/uploads/2020/08/cropped-virus_lungs_pneumonia_virus_flu_icon_142213-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://neo-medical.ru/wp-content/uploads/2020/08/cropped-virus_lungs_pneumonia_virus_flu_icon_142213-180x180.png">
+<meta name="msapplication-TileImage" content="https://neo-medical.ru/wp-content/uploads/2020/08/cropped-virus_lungs_pneumonia_virus_flu_icon_142213-270x270.png">
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>    <script type="rocketlazyloadscript" async="" data-rocket-type="text/javascript" src="//sjsmartcontent.org/static/plugin-site/js/sjplugin.js" data-site="6ku4"></script>
+<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(66231916, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/66231916" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-ad-client="ca-pub-1221252031007831" async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<script type="rocketlazyloadscript" async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5880407773199220" crossorigin="anonymous"></script></head>
+
+<body class="privacy-policy page-template-default page page-id-3 custom-background ">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0.49803921568627"></feFuncR><feFuncG type="table" tableValues="0 0.49803921568627"></feFuncG><feFuncB type="table" tableValues="0 0.49803921568627"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 0.27843137254902"></feFuncG><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0"></feFuncR><feFuncG type="table" tableValues="0 0.64705882352941"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.78039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.94901960784314"></feFuncG><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.44705882352941 0.4"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.098039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.66274509803922"></feFuncG><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg>
+
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#main">Перейти к контенту</a>
+
+    
+    
+<header id="masthead" class="site-header container" itemscope="" itemtype="http://schema.org/WPHeader">
+    <div class="site-header-inner ">
+        <div class="site-branding">
+            
+                            <div class="site-branding-container">
+
+                    <div class="site-title"><a href="https://neo-medical.ru/">Заболевания легких и дыхательных путей</a></div>
+                                            <p class="site-description">Признаки, симптомы, диагностика и лечегие заболеваний легких и дыхательных путей человека</p>
+                    
+                </div>
+                    </div><!-- .site-branding -->
+
+        
+        
+        
+        
+        <div class="mob-hamburger"><span></span></div>
+
+            </div><!--.site-header-inner-->
+</header><!-- #masthead -->
+    
+    
+    
+    <nav id="site-navigation" class="main-navigation container" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+        <div class="main-navigation-inner ">
+            <div class="menu-category-container"><ul id="header_menu" class="menu"><li id="menu-item-48275" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-48275"><a href="https://neo-medical.ru/diagnostika/">Диагностика</a></li>
+<li id="menu-item-48276" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-48276"><a href="https://neo-medical.ru/lechenie/">Лечение</a></li>
+<li id="menu-item-48277" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-48277"><a href="https://neo-medical.ru/simptom/">Симптомы</a></li>
+<li id="menu-item-48278" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-48278"><a href="https://neo-medical.ru/lekartsva/">Лекартсва</a></li>
+<li id="menu-item-48279" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-48279"><a href="https://neo-medical.ru/raznoe/">Интересное</a></li>
+</ul></div>        </div><!--.main-navigation-inner-->
+    </nav><!-- #site-navigation -->
+
+    
+
+    
+    
+	<div id="content" class="site-content container">
+
+        
+
+<div itemscope="" itemtype="http://schema.org/Article">
+
+    
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main">
+
+            
+            
+            
+<article id="post-3" class="post-3 page type-page status-publish has-post-thumbnail ">
+
+    
+                    <header class="entry-header">
+                                <h1 class="entry-title" itemprop="headline">Политика конфиденциальности</h1>                            </header><!-- .entry-header -->
+        
+        
+                    <div class="page-separator"></div>
+        
+    
+    <div class="entry-content" itemprop="articleBody">
+        <div class="table-of-contents"><div class="table-of-contents__header"><span class="table-of-contents__hide js-table-of-contents-hide">Содержание</span></div><ol class="table-of-contents__list js-table-of-contents-list" style="display:none;">
+<li class="level-1"><a href="#kto-my">Кто мы</a></li><li class="level-1"><a href="#kakie-personalnye-dannye-my-sobiraem-i-s">Какие персональные данные мы собираем и с какой целью</a></li><li class="level-2"><a href="#kommentarii">Комментарии</a></li><li class="level-2"><a href="#mediafayly">Медиафайлы</a></li><li class="level-2"><a href="#formy-kontaktov">Формы контактов</a></li><li class="level-2"><a href="#kuki">Куки</a></li><li class="level-2"><a href="#vstraivaemoe-soderzhimoe-drugih-vebsaytov">Встраиваемое содержимое других вебсайтов</a></li><li class="level-2"><a href="#veb-analitika">Веб-аналитика</a></li><li class="level-1"><a href="#s-kem-my-delimsya-vashimi-dannymi">С кем мы делимся вашими данными</a></li><li class="level-1"><a href="#kak-dolgo-my-hranim-vashi-dannye">Как долго мы храним ваши данные</a></li><li class="level-1"><a href="#kakie-u-vas-prava-na-vashi-dannye">Какие у вас права на ваши данные</a></li><li class="level-1"><a href="#kuda-my-otpravlyaem-vashi-dannye">Куда мы отправляем ваши данные</a></li><li class="level-1"><a href="#vasha-kontaktnaya-informatsiya">Ваша контактная информация</a></li><li class="level-1"><a href="#dopolnitelnaya-informatsiya">Дополнительная информация</a></li><li class="level-2"><a href="#kak-my-zaschischaem-vashi-dannye">Как мы защищаем ваши данные</a></li><li class="level-2"><a href="#kakie-prinimayutsya-protsedury-protiv-vzloma">Какие принимаются процедуры против взлома данных</a></li><li class="level-2"><a href="#ot-kakih-tretih-storon-my-poluchaem-dannye">От каких третьих сторон мы получаем данные</a></li><li class="level-2"><a href="#kakie-avtomaticheskie-resheniya-prinimayutsya">Какие автоматические решения принимаются на основе данных пользователей</a></li><li class="level-2"><a href="#trebovaniya-k-raskrytiyu-otraslevyh-normativnyh">Требования к раскрытию отраслевых нормативных требований</a></li></ol></div><h2 id="kto-my">Кто мы</h2><p>Наш адрес сайта: https://neo-medical.ru.</p><h2 id="kakie-personalnye-dannye-my-sobiraem-i-s">Какие персональные данные мы собираем и с какой целью</h2><h3 id="kommentarii">Комментарии</h3><p>Если посетитель оставляет комментарий на сайте, мы собираем данные указанные в форме комментария, а также IP адрес посетителя и данные user-agent браузера с целью определения спама.</p><p>Анонимизированная строка создаваемая из вашего адреса email («хеш») может предоставляться сервису Gravatar, чтобы определить используете ли вы его. Политика конфиденциальности Gravatar доступна здесь: https://automattic.com/privacy/ . После одобрения комментария ваше изображение профиля будет видимым публично в контексте вашего комментария.</p><h3 id="mediafayly">Медиафайлы</h3><p>Если вы зарегистрированный пользователь и загружаете фотографии на сайт, вам возможно следует избегать загрузки изображений с метаданными EXIF, так как они могут содержать данные вашего месторасположения по GPS. Посетители могут извлечь эту информацию скачав изображения с сайта.</p><h3 id="formy-kontaktov">Формы контактов</h3><h3 id="kuki">Куки</h3><p>Если вы оставляете комментарий на нашем сайте, вы можете включить сохранение вашего имени, адреса email и вебсайта в куки. Это делается для вашего удобства, чтобы не заполнять данные снова при повторном комментировании. Эти куки хранятся в течение одного года.</p><p>Если у вас есть учетная запись на сайте и вы войдете в неё, мы установим временный куки для определения поддержки куки вашим браузером, куки не содержит никакой личной информации и удаляется при закрытии вашего браузера.</p><p>При входе в учетную запись мы также устанавливаем несколько куки с данными входа и настройками экрана. Куки входа хранятся в течение двух дней, куки с настройками экрана — год. Если вы выберете возможность «Запомнить меня», данные о входе будут сохраняться в течение двух недель. При выходе из учетной записи куки входа будут удалены.</p><p>При редактировании или публикации статьи в браузере будет сохранен дополнительный куки, он не содержит персональных данных и содержит только ID записи отредактированной вами, истекает через 1 день.</p><h3 id="vstraivaemoe-soderzhimoe-drugih-vebsaytov">Встраиваемое содержимое других вебсайтов</h3><p>Статьи на этом сайте могут включать встраиваемое содержимое (например видео, изображения, статьи и др.), подобное содержимое ведет себя так же, как если бы посетитель зашел на другой сайт.</p><p>Эти сайты могут собирать данные о вас, использовать куки, внедрять дополнительное отслеживание третьей стороной и следить за вашим взаимодействием с внедренным содержимым, включая отслеживание взаимодействия, если у вас есть учетная запись и вы авторизовались на том сайте.</p><h3 id="veb-analitika">Веб-аналитика</h3><h2 id="s-kem-my-delimsya-vashimi-dannymi">С кем мы делимся вашими данными</h2><h2 id="kak-dolgo-my-hranim-vashi-dannye">Как долго мы храним ваши данные</h2><p>Если вы оставляете комментарий, то сам комментарий и его метаданные сохраняются неопределенно долго. Это делается для того, чтобы определять и одобрять последующие комментарии автоматически, вместо помещения их в очередь на одобрение.</p><p>Для пользователей с регистрацией на нашем сайте мы храним ту личную информацию, которую они указывают в своем профиле. Все пользователи могут видеть, редактировать или удалить свою информацию из профиля в любое время (кроме имени пользователя). Администрация вебсайта также может видеть и изменять эту информацию.</p><h2 id="kakie-u-vas-prava-na-vashi-dannye">Какие у вас права на ваши данные</h2><p>При наличии учетной записи на сайте или если вы оставляли комментарии, то вы можете запросить файл экспорта персональных данных, которые мы сохранили о вас, включая предоставленные вами данные. Вы также можете запросить удаление этих данных, это не включает данные, которые мы обязаны хранить в административных целях, по закону или целях безопасности.</p><h2 id="kuda-my-otpravlyaem-vashi-dannye">Куда мы отправляем ваши данные</h2><p>Комментарии пользователей могут проверяться автоматическим сервисом определения спама.</p><h2 id="vasha-kontaktnaya-informatsiya">Ваша контактная информация</h2><h2 id="dopolnitelnaya-informatsiya">Дополнительная информация</h2><h3 id="kak-my-zaschischaem-vashi-dannye">Как мы защищаем ваши данные</h3><h3 id="kakie-prinimayutsya-protsedury-protiv-vzloma">Какие принимаются процедуры против взлома данных</h3><h3 id="ot-kakih-tretih-storon-my-poluchaem-dannye">От каких третьих сторон мы получаем данные</h3><h3 id="kakie-avtomaticheskie-resheniya-prinimayutsya">Какие автоматические решения принимаются на основе данных пользователей</h3><h3 id="trebovaniya-k-raskrytiyu-otraslevyh-normativnyh">Требования к раскрытию отраслевых нормативных требований</h3>    </div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+
+
+
+
+
+<div class="yarpp yarpp-related yarpp-related-website yarpp-related-none yarpp-template-yarpp-template-wpshop">
+
+<!-- no YARPP related -->
+</div>
+
+
+<meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://neo-medical.ru/privacy-policy/" content="Политика конфиденциальности">
+<meta itemprop="dateModified" content="2021-01-09">
+<meta itemprop="datePublished" content="2020-06-04T20:07:16+03:00">
+<meta itemprop="author" content="sparkzevs">
+<div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization"><meta itemprop="name" content="Заболевания легких и дыхательных путей"><meta itemprop="telephone" content="Заболевания легких и дыхательных путей"><meta itemprop="address" content="https://neo-medical.ru"></div>
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+</div><!-- micro -->
+
+
+
+<aside id="secondary" class="widget-area" itemscope="" itemtype="http://schema.org/WPSideBar">
+
+    
+	<div id="search-2" class="widget widget_search">
+<form role="search" method="get" id="searchform_182" action="https://neo-medical.ru/" class="search-form">
+    <label class="screen-reader-text" for="s_182">Поиск: </label>
+    <input type="text" value="" name="s" id="s_182" class="search-form__text">
+    <button type="submit" id="searchsubmit_182" class="search-form__submit"></button>
+</form></div>
+		<div id="recent-posts-2" class="widget widget_recent_entries">
+		<div class="widget-header">Свежие записи</div>
+		<ul>
+											<li>
+					<a href="https://neo-medical.ru/zaroponizausie-sredstva-pri-vysokoj-temperature-u-vzroslogo-effektivnye-preparaty-kakie-lekarstva-mozno-pri-beremennosti-lucsie-i-silnye-medikamenty/">Жаропонижающие: средства при высокой температуре у взрослого, эффективные препараты, какие лекарства можно при беременности, лучшие и сильные медикаменты</a>
+									</li>
+											<li>
+					<a href="https://neo-medical.ru/vospalenie-limfouzlov-na-see-lecenie-tabletki-maz-kompress/">Воспаление лимфоузлов на шее: лечение, таблетки, мазь, компресс</a>
+									</li>
+											<li>
+					<a href="https://neo-medical.ru/vlaznyj-kasel-cem-lecit-kakie-ingalacii-delat-kakie-lekarstva-prinimat-vzroslomu-mozno-li-protivokaslevye-preparaty-nedorogie-i-effektivnye-sredstva/">Влажный кашель: чем лечить, какие ингаляции делать, какие лекарства принимать взрослому, можно ли противокашлевые препараты, недорогие и эффективные средства</a>
+									</li>
+											<li>
+					<a href="https://neo-medical.ru/u-rebenka-ne-prohodit-kasel-cto-delat-esli-simptom-nabludaetsa-3-nedeli-podrad-ili-mesac-posle-orvi-opasnost-hronizacii-bronhita/">У ребенка не проходит кашель: что делать, если симптом наблюдается 3 недели подряд или месяц после орви, опасность хронизации бронхита</a>
+									</li>
+											<li>
+					<a href="https://neo-medical.ru/t-spot-t-spot-cto-eto-za-test-na-tuberkulez-gde-sdelat/">T spot (т спот) — что это за тест на туберкулез, где сделать?</a>
+									</li>
+											<li>
+					<a href="https://neo-medical.ru/tonzilotren-dla-detej-instrukcia-po-primeneniu-pri-adenoidah-otzyvy/">Тонзилотрен для детей: инструкция по применению, при аденоидах, отзывы</a>
+									</li>
+											<li>
+					<a href="https://neo-medical.ru/tabletki-ot-persenia-v-gorle-i-kasla-dla-rassasyvania-nedorogie-no-effektivnye/">Таблетки от першения в горле и кашля: для рассасывания, недорогие, но эффективные</a>
+									</li>
+											<li>
+					<a href="https://neo-medical.ru/streptocid-porosok-primenenie-dla-gorla-otzyvy/">Стрептоцид порошок — применение для горла, отзывы</a>
+									</li>
+					</ul>
+
+		</div><div id="wpshop_widget_articles-2" class="widget widget_wpshop_widget_articles"><div class="widget-header">Популярные статьи</div><div class="widget-articles">
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://neo-medical.ru/protivovirusnye-preparaty-nedorogie-no-effektivnye/">
+                <img src="https://neo-medical.ru/wp-content/uploads/3/f/e/3febc8f7744714106ff00538057e01e5.jpg" class="attachment-thumb-square size-thumb-square wp-post-image" alt="Лучшие противовирусные препараты: недорогие, но эффективные" loading="lazy" width="80" height="52">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://neo-medical.ru/protivovirusnye-preparaty-nedorogie-no-effektivnye/">Противовирусные препараты — недорогие, но эффективные</a></div>
+
+        
+                    <div class="widget-article__description">
+                Диагностика заболеваний, вызванных вирусами Как же выявить проблему: Вирусоскопическая диагностика представляет собой обнаружение вируса            </div>
+        
+                    <div class="entry-meta">
+                                    <span class="entry-meta__comments" title="Комментарии"><span class="fa fa-comment-o"></span> 0</span>
+                                                    <span class="entry-meta__views" title="Просмотров"><span class="fa fa-eye"></span>
+                    6417                    </span>
+                            </div>
+            </div>
+</div>
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://neo-medical.ru/perekis-vodoroda-v-uho-ot-probok-udalenie-sernoj-probki/">
+                <img src="https://neo-medical.ru/wp-content/uploads/e/a/a/eaa5cc63b1019414ada613ec6168bc9d.jpg" class="attachment-thumb-square size-thumb-square wp-post-image" alt="Как удалить серную пробку из уха перекисью водорода" loading="lazy" width="80" height="52">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://neo-medical.ru/perekis-vodoroda-v-uho-ot-probok-udalenie-sernoj-probki/">Перекись водорода в ухо от пробок, удаление серной пробки</a></div>
+
+        
+                    <div class="widget-article__description">
+                О важности соблюдения правил Требования к обработке слухового органа достаточно просты, но их исполнение            </div>
+        
+                    <div class="entry-meta">
+                                    <span class="entry-meta__comments" title="Комментарии"><span class="fa fa-comment-o"></span> 0</span>
+                                                    <span class="entry-meta__views" title="Просмотров"><span class="fa fa-eye"></span>
+                    5195                    </span>
+                            </div>
+            </div>
+</div>
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://neo-medical.ru/perekis-vodoroda-v-uho-primenenie-lecenie-pri-boli-i-zalozennosti/">
+                <img src="https://neo-medical.ru/wp-content/uploads/d/e/e/dee8b159f6e5c83984ba6cfa34858011.jpg" class="attachment-thumb-square size-thumb-square wp-post-image" alt="Ухо болит и закладывает перекись" loading="lazy" width="80" height="52">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://neo-medical.ru/perekis-vodoroda-v-uho-primenenie-lecenie-pri-boli-i-zalozennosti/">Перекись водорода в ухо: применение, лечение при боли и заложенности</a></div>
+
+        
+                    <div class="widget-article__description">
+                Почему пероксид шипит в ухе Шипение в ушном проходе означает, что лечение уха перекисью            </div>
+        
+                    <div class="entry-meta">
+                                    <span class="entry-meta__comments" title="Комментарии"><span class="fa fa-comment-o"></span> 0</span>
+                                                    <span class="entry-meta__views" title="Просмотров"><span class="fa fa-eye"></span>
+                    4517                    </span>
+                            </div>
+            </div>
+</div>
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://neo-medical.ru/uvelicenie-limfouzlov-na-see-priciny-s-odnoj-storony-sprava-sleva-zadnie/">
+                <img src="https://neo-medical.ru/wp-content/uploads/8/e/f/8ef7f424b27ae0d14056ece999e00411.jpg" class="attachment-thumb-square size-thumb-square wp-post-image" alt="Болят лимфоузлы на шее: причины, что делать и как лечить" loading="lazy" width="80" height="52">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://neo-medical.ru/uvelicenie-limfouzlov-na-see-priciny-s-odnoj-storony-sprava-sleva-zadnie/">Увеличение лимфоузлов на шее: причины, с одной стороны, справа, слева, задние</a></div>
+
+        
+                    <div class="widget-article__description">
+                Что такое лимфа и лимфоузлы? Лимфа – бесцветная жидкость без запаха. В ней находится            </div>
+        
+                    <div class="entry-meta">
+                                    <span class="entry-meta__comments" title="Комментарии"><span class="fa fa-comment-o"></span> 0</span>
+                                                    <span class="entry-meta__views" title="Просмотров"><span class="fa fa-eye"></span>
+                    3662                    </span>
+                            </div>
+            </div>
+</div>
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://neo-medical.ru/belaa-mokrota-penistaa-i-vazkaa-o-cem-govorit-otsutstvie-cveta-u-otdelaemogo-pri-kasle-prozracnoe-esli-otkaslivaetsa-u-vzroslyh-bez-temperatury/">
+                <img src="https://neo-medical.ru/wp-content/uploads/5/b/2/5b2e7d30a93ee7dde7ae08cbba3daf18.php" class="attachment-thumb-square size-thumb-square wp-post-image" alt="Мокрота коричневого цвета при кашле, о чем свидетельствует и как бороться?!" loading="lazy" width="80" height="52">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://neo-medical.ru/belaa-mokrota-penistaa-i-vazkaa-o-cem-govorit-otsutstvie-cveta-u-otdelaemogo-pri-kasle-prozracnoe-esli-otkaslivaetsa-u-vzroslyh-bez-temperatury/">Белая мокрота: пенистая и вязкая, о чем говорит отсутствие цвета у отделяемого при кашле (прозрачное), если откашливается у взрослых без температуры</a></div>
+
+        
+                    <div class="widget-article__description">
+                Причины появления мокроты коричневого цвета Причины становления патологического процесса (условно говоря) множественны, и рассматривать            </div>
+        
+                    <div class="entry-meta">
+                                    <span class="entry-meta__comments" title="Комментарии"><span class="fa fa-comment-o"></span> 0</span>
+                                                    <span class="entry-meta__views" title="Просмотров"><span class="fa fa-eye"></span>
+                    3363                    </span>
+                            </div>
+            </div>
+</div>
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://neo-medical.ru/limfouzly-na-see-u-rebenka-s-odnoj-storony-sleva-sprava-kak-lecit/">
+                <img src="https://neo-medical.ru/wp-content/uploads/b/8/f/b8f8429344a76015a29db5673d7c83f4.jpg" class="attachment-thumb-square size-thumb-square wp-post-image" alt="У ребёнка увеличены лимфоузлы на шее" loading="lazy" width="80" height="52">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://neo-medical.ru/limfouzly-na-see-u-rebenka-s-odnoj-storony-sleva-sprava-kak-lecit/">Лимфоузлы на шее у ребенка: с одной стороны, слева, справа, как лечить</a></div>
+
+        
+                    <div class="widget-article__description">
+                Профилактика детского шейного лимфаденита Так как воспалительный процесс в лимфоузлах шеи возникает у детей            </div>
+        
+                    <div class="entry-meta">
+                                    <span class="entry-meta__comments" title="Комментарии"><span class="fa fa-comment-o"></span> 0</span>
+                                                    <span class="entry-meta__views" title="Просмотров"><span class="fa fa-eye"></span>
+                    2897                    </span>
+                            </div>
+            </div>
+</div></div></div><div id="custom_html-2" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><!-- Yandex.RTB R-A-877641-7 -->
+<div id="yandex_rtb_R-A-877641-7"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+    (function(w, d, n, s, t) {
+        w[n] = w[n] || [];
+        w[n].push(function() {
+            Ya.Context.AdvManager.render({
+                blockId: "R-A-877641-7",
+                renderTo: "yandex_rtb_R-A-877641-7",
+                async: true
+            });
+        });
+        t = d.getElementsByTagName("script")[0];
+        s = d.createElement("script");
+        s.type = "text/javascript";
+        s.src = "//an.yandex.ru/system/context.js";
+        s.async = true;
+        t.parentNode.insertBefore(s, t);
+    })(this, this.document, "yandexContextAsyncCallbacks");
+</script></div></div>
+    
+</aside><!-- #secondary -->
+
+
+	</div><!-- #content -->
+
+    
+    
+        <div class="footer-navigation container" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+        <div class="main-navigation-inner ">
+            <div class="menu-footer-container"><ul id="footer_menu" class="menu"><li id="menu-item-47377" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47377"><a href="https://neo-medical.ru/sitemap/">Карта сайта</a></li>
+<li id="menu-item-47622" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-3 current_page_item menu-item-47622"><span class="removed-link">Политика конфиденциальности</span></li>
+</ul></div>        </div>
+    </div>
+
+
+
+    <footer id="site-footer" class="site-footer container " itemscope="" itemtype="http://schema.org/WPFooter">
+        <div class="site-footer-inner ">
+
+            
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    © 2022 Заболевания легких и дыхательных путей
+                    
+                                    </div><!-- .site-info -->
+
+                
+                            </div>
+        </div><!-- .site-footer-inner -->
+    </footer><!-- .site-footer -->
+
+
+            <button type="button" class="scrolltop js-scrolltop"></button>
+    
+
+</div><!-- #page -->
+
+
+<script type="rocketlazyloadscript">var pseudo_links = document.querySelectorAll(".pseudo-clearfy-link");for (var i=0;i<pseudo_links.length;i++ ) { pseudo_links[i].addEventListener("click", function(e){   window.open( e.target.getAttribute("data-uri") ); }); }</script><script type="rocketlazyloadscript">document.addEventListener("copy", (event) => {var pagelink = "\nИсточник: https://neo-medical.ru/privacy-policy";event.clipboardData.setData("text", document.getSelection() + pagelink);event.preventDefault();});</script><link data-minify="1" rel="stylesheet" id="yarppRelatedCss-css" href="https://neo-medical.ru/wp-content/cache/min/1/wp-content/plugins/yet-another-related-posts-plugin/style/related.css?ver=1671458908" media="all">
+<script type="rocketlazyloadscript" src="https://neo-medical.ru/wp-content/plugins/fitvids-for-wordpress/jquery.fitvids.js" id="fitvids-js" defer=""></script>
+<script type="text/javascript" id="wp-postviews-cache-js-extra">
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"https:\/\/neo-medical.ru\/wp-admin\/admin-ajax.php","post_id":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" src="https://neo-medical.ru/wp-content/plugins/wp-postviews/postviews-cache.js" id="wp-postviews-cache-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://neo-medical.ru/wp-content/themes/root/assets/js/plugins/lightbox.min.js" id="root-lightbox-js" defer=""></script>
+<script type="text/javascript" id="root-scripts-js-extra">
+/* <![CDATA[ */
+var settings_array = {"rating_text_average":"\u0441\u0440\u0435\u0434\u043d\u0435\u0435","rating_text_from":"\u0438\u0437","lightbox_enabled":"1"};
+var wps_ajax = {"url":"https:\/\/neo-medical.ru\/wp-admin\/admin-ajax.php","nonce":"e5b713a0dc"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" src="https://neo-medical.ru/wp-content/themes/root/assets/js/scripts.min.js" id="root-scripts-js" defer=""></script>
+		<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		jQuery(document).ready(function () {
+			jQuery('body').fitVids();
+		});
+		</script><script type="rocketlazyloadscript">!function(){var t=!1;try{var e=Object.defineProperty({},"passive",{get:function(){t=!0}});window.addEventListener("test",null,e)}catch(t){}return t}()||function(i){var o=!0,s=!1;EventTarget.prototype.addEventListener=function(t,e,n){var r="object"==typeof n,a=r?n.capture:n;n=r?n:{},"touchstart"!=t&&"scroll"!=t&&"wheel"!=t||(n.passive=void 0!==n.passive?n.passive:o),n.capture=void 0!==a?a:s,i.call(this,t,e,n)}}(EventTarget.prototype.addEventListener);</script><script>window.lazyLoadOptions={elements_selector:"iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://neo-medical.ru/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script><script>function lazyLoadThumb(e){var t='<img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360">',a='<button class="play" aria-label="play Youtube video"></button>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?'':'&'+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var e,t,p,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),a[t].appendChild(e),p=e.querySelector('.play'),p.onclick=lazyLoadYoutubeIframe});</script>
+
+
+
+</body></html>

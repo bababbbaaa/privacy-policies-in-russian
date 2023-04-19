@@ -1,0 +1,387 @@
+<html dir="ltr" mozdisallowselectionprint="" style="--viewer-container-height: 651px; --progressBar-percent: 100%; --progressBar-end-offset: 12px; --scale-factor: 1.6666666666666665;"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>1.pdf</title>
+
+<!-- This snippet is used in the Firefox extension (included from viewer.html) -->
+<base href="resource://pdf.js/web/">
+<script src="../build/pdf.js"></script>
+
+    <link rel="stylesheet" href="viewer.css">
+
+  <script src="viewer.js"></script>
+
+  </head>
+
+  <body tabindex="1">
+    <div id="outerContainer">
+
+      <div id="sidebarContainer">
+        <div id="toolbarSidebar">
+          <div id="toolbarSidebarLeft">
+            <div id="sidebarViewButtons" class="splitToolbarButton toggled" role="radiogroup">
+              <button id="viewThumbnail" class="toolbarButton toggled" title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs" role="radio" aria-checked="true" aria-controls="thumbnailView">
+                 <span data-l10n-id="thumbs_label">Thumbnails</span>
+              </button>
+              <button id="viewOutline" class="toolbarButton" title="Show Document Outline (double-click to expand/collapse all items)" tabindex="3" data-l10n-id="document_outline" role="radio" aria-checked="false" aria-controls="outlineView" disabled="">
+                 <span data-l10n-id="document_outline_label">Document Outline</span>
+              </button>
+              <button id="viewAttachments" class="toolbarButton" title="Show Attachments" tabindex="4" data-l10n-id="attachments" role="radio" aria-checked="false" aria-controls="attachmentsView" disabled="">
+                 <span data-l10n-id="attachments_label">Attachments</span>
+              </button>
+              <button id="viewLayers" class="toolbarButton" title="Show Layers (double-click to reset all layers to the default state)" tabindex="5" data-l10n-id="layers" role="radio" aria-checked="false" aria-controls="layersView" disabled="">
+                 <span data-l10n-id="layers_label">Layers</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="toolbarSidebarRight">
+            <div id="outlineOptionsContainer" class="hidden">
+              <div class="verticalToolbarSeparator"></div>
+
+              <button id="currentOutlineItem" class="toolbarButton" disabled="" title="Find Current Outline Item" tabindex="6" data-l10n-id="current_outline_item">
+                <span data-l10n-id="current_outline_item_label">Current Outline Item</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="sidebarContent">
+          <div id="thumbnailView"><a href="https://stranicy.ru/static/docs/1.pdf#page=1" title="Page 1"><div class="thumbnail selected" data-page-number="1"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="https://stranicy.ru/static/docs/1.pdf#page=2" title="Page 2"><div class="thumbnail" data-page-number="2"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="https://stranicy.ru/static/docs/1.pdf#page=3" title="Page 3"><div class="thumbnail" data-page-number="3"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a><a href="https://stranicy.ru/static/docs/1.pdf#page=4" title="Page 4"><div class="thumbnail" data-page-number="4"><div class="thumbnailSelectionRing" style="width: 100px; height: 128px;"></div></div></a></div>
+          <div id="outlineView" class="hidden"></div>
+          <div id="attachmentsView" class="hidden"></div>
+          <div id="layersView" class="hidden"></div>
+        </div>
+        <div id="sidebarResizer"></div>
+      </div>  <!-- sidebarContainer -->
+
+      <div id="mainContainer">
+        <div class="findbar hidden doorHanger" id="findbar">
+          <div id="findbarInputContainer">
+            <input id="findInput" class="toolbarField" title="Find" placeholder="Find in document…" tabindex="91" data-l10n-id="find_input" aria-invalid="false">
+            <div class="splitToolbarButton">
+              <button id="findPrevious" class="toolbarButton" title="Find the previous occurrence of the phrase" tabindex="92" data-l10n-id="find_previous">
+                <span data-l10n-id="find_previous_label">Previous</span>
+              </button>
+              <div class="splitToolbarButtonSeparator"></div>
+              <button id="findNext" class="toolbarButton" title="Find the next occurrence of the phrase" tabindex="93" data-l10n-id="find_next">
+                <span data-l10n-id="find_next_label">Next</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="findbarOptionsOneContainer">
+            <input type="checkbox" id="findHighlightAll" class="toolbarField" tabindex="94">
+            <label for="findHighlightAll" class="toolbarLabel" data-l10n-id="find_highlight">Highlight All</label>
+            <input type="checkbox" id="findMatchCase" class="toolbarField" tabindex="95">
+            <label for="findMatchCase" class="toolbarLabel" data-l10n-id="find_match_case_label">Match Case</label>
+          </div>
+          <div id="findbarOptionsTwoContainer">
+            <input type="checkbox" id="findMatchDiacritics" class="toolbarField" tabindex="96">
+            <label for="findMatchDiacritics" class="toolbarLabel" data-l10n-id="find_match_diacritics_label">Match Diacritics</label>
+            <input type="checkbox" id="findEntireWord" class="toolbarField" tabindex="97">
+            <label for="findEntireWord" class="toolbarLabel" data-l10n-id="find_entire_word_label">Whole Words</label>
+          </div>
+
+          <div id="findbarMessageContainer" aria-live="polite">
+            <span id="findResultsCount" class="toolbarLabel"></span>
+            <span id="findMsg" class="toolbarLabel"></span>
+          </div>
+        </div>  <!-- findbar -->
+
+        <div class="editorParamsToolbar hidden doorHangerRight" id="editorFreeTextParamsToolbar">
+          <div class="editorParamsToolbarContainer">
+            <div class="editorParamsSetter">
+              <label for="editorFreeTextColor" class="editorParamsLabel" data-l10n-id="editor_free_text_color">Color</label>
+              <input type="color" id="editorFreeTextColor" class="editorParamsColor" tabindex="100">
+            </div>
+            <div class="editorParamsSetter">
+              <label for="editorFreeTextFontSize" class="editorParamsLabel" data-l10n-id="editor_free_text_size">Size</label>
+              <input type="range" id="editorFreeTextFontSize" class="editorParamsSlider" value="10" min="5" max="100" step="1" tabindex="101">
+            </div>
+          </div>
+        </div>
+
+        <div class="editorParamsToolbar hidden doorHangerRight" id="editorInkParamsToolbar">
+          <div class="editorParamsToolbarContainer">
+            <div class="editorParamsSetter">
+              <label for="editorInkColor" class="editorParamsLabel" data-l10n-id="editor_ink_color">Color</label>
+              <input type="color" id="editorInkColor" class="editorParamsColor" tabindex="102">
+            </div>
+            <div class="editorParamsSetter">
+              <label for="editorInkThickness" class="editorParamsLabel" data-l10n-id="editor_ink_thickness">Thickness</label>
+              <input type="range" id="editorInkThickness" class="editorParamsSlider" value="1" min="1" max="20" step="1" tabindex="103">
+            </div>
+            <div class="editorParamsSetter">
+              <label for="editorInkOpacity" class="editorParamsLabel" data-l10n-id="editor_ink_opacity">Opacity</label>
+              <input type="range" id="editorInkOpacity" class="editorParamsSlider" value="100" min="1" max="100" step="1" tabindex="104">
+            </div>
+          </div>
+        </div>
+
+        <div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight">
+          <div id="secondaryToolbarButtonContainer">
+
+            <button id="secondaryPrint" class="secondaryToolbarButton visibleMediumView" title="Print" tabindex="52" data-l10n-id="print">
+              <span data-l10n-id="print_label">Print</span>
+            </button>
+
+            <button id="secondaryDownload" class="secondaryToolbarButton visibleMediumView" title="Save" tabindex="53" data-l10n-id="save">
+              <span data-l10n-id="save_label">Save</span>
+            </button>
+
+          <div class="horizontalToolbarSeparator visibleMediumView"></div>
+
+            <button id="presentationMode" class="secondaryToolbarButton" title="Switch to Presentation Mode" tabindex="54" data-l10n-id="presentation_mode">
+              <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
+            </button>
+
+            <a href="https://stranicy.ru/static/docs/1.pdf#page=1&amp;zoom=auto,-100,792" id="viewBookmark" class="secondaryToolbarButton" title="Current view (copy or open in new window)" tabindex="55" data-l10n-id="bookmark">
+              <span data-l10n-id="bookmark_label">Current View</span>
+            </a>
+
+            <div id="viewBookmarkSeparator" class="horizontalToolbarSeparator"></div>
+
+            <button id="firstPage" class="secondaryToolbarButton" title="Go to First Page" tabindex="56" data-l10n-id="first_page" disabled="">
+              <span data-l10n-id="first_page_label">Go to First Page</span>
+            </button>
+            <button id="lastPage" class="secondaryToolbarButton" title="Go to Last Page" tabindex="57" data-l10n-id="last_page">
+              <span data-l10n-id="last_page_label">Go to Last Page</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <button id="pageRotateCw" class="secondaryToolbarButton" title="Rotate Clockwise" tabindex="58" data-l10n-id="page_rotate_cw">
+              <span data-l10n-id="page_rotate_cw_label">Rotate Clockwise</span>
+            </button>
+            <button id="pageRotateCcw" class="secondaryToolbarButton" title="Rotate Counterclockwise" tabindex="59" data-l10n-id="page_rotate_ccw">
+              <span data-l10n-id="page_rotate_ccw_label">Rotate Counterclockwise</span>
+            </button>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <div id="cursorToolButtons" role="radiogroup">
+              <button id="cursorSelectTool" class="secondaryToolbarButton toggled" title="Enable Text Selection Tool" tabindex="60" data-l10n-id="cursor_text_select_tool" role="radio" aria-checked="true">
+                <span data-l10n-id="cursor_text_select_tool_label">Text Selection Tool</span>
+              </button>
+              <button id="cursorHandTool" class="secondaryToolbarButton" title="Enable Hand Tool" tabindex="61" data-l10n-id="cursor_hand_tool" role="radio" aria-checked="false">
+                <span data-l10n-id="cursor_hand_tool_label">Hand Tool</span>
+              </button>
+            </div>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <div id="scrollModeButtons" role="radiogroup">
+              <button id="scrollPage" class="secondaryToolbarButton" title="Use Page Scrolling" tabindex="62" data-l10n-id="scroll_page" role="radio" aria-checked="false">
+                <span data-l10n-id="scroll_page_label">Page Scrolling</span>
+              </button>
+              <button id="scrollVertical" class="secondaryToolbarButton toggled" title="Use Vertical Scrolling" tabindex="63" data-l10n-id="scroll_vertical" role="radio" aria-checked="true">
+                <span data-l10n-id="scroll_vertical_label">Vertical Scrolling</span>
+              </button>
+              <button id="scrollHorizontal" class="secondaryToolbarButton" title="Use Horizontal Scrolling" tabindex="64" data-l10n-id="scroll_horizontal" role="radio" aria-checked="false">
+                <span data-l10n-id="scroll_horizontal_label">Horizontal Scrolling</span>
+              </button>
+              <button id="scrollWrapped" class="secondaryToolbarButton" title="Use Wrapped Scrolling" tabindex="65" data-l10n-id="scroll_wrapped" role="radio" aria-checked="false">
+                <span data-l10n-id="scroll_wrapped_label">Wrapped Scrolling</span>
+              </button>
+            </div>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <div id="spreadModeButtons" role="radiogroup">
+              <button id="spreadNone" class="secondaryToolbarButton toggled" title="Do not join page spreads" tabindex="66" data-l10n-id="spread_none" role="radio" aria-checked="true">
+                <span data-l10n-id="spread_none_label">No Spreads</span>
+              </button>
+              <button id="spreadOdd" class="secondaryToolbarButton" title="Join page spreads starting with odd-numbered pages" tabindex="67" data-l10n-id="spread_odd" role="radio" aria-checked="false">
+                <span data-l10n-id="spread_odd_label">Odd Spreads</span>
+              </button>
+              <button id="spreadEven" class="secondaryToolbarButton" title="Join page spreads starting with even-numbered pages" tabindex="68" data-l10n-id="spread_even" role="radio" aria-checked="false">
+                <span data-l10n-id="spread_even_label">Even Spreads</span>
+              </button>
+            </div>
+
+            <div class="horizontalToolbarSeparator"></div>
+
+            <button id="documentProperties" class="secondaryToolbarButton" title="Document Properties…" tabindex="69" data-l10n-id="document_properties" aria-controls="documentPropertiesDialog">
+              <span data-l10n-id="document_properties_label">Document Properties…</span>
+            </button>
+          </div>
+        </div>  <!-- secondaryToolbar -->
+
+        <div class="toolbar">
+          <div id="toolbarContainer">
+            <div id="toolbarViewer">
+              <div id="toolbarViewerLeft">
+                <button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar" tabindex="11" data-l10n-id="toggle_sidebar" aria-expanded="false" aria-controls="sidebarContainer">
+                  <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
+                </button>
+                <div class="toolbarButtonSpacer"></div>
+                <button id="viewFind" class="toolbarButton hidden" title="Find in Document" tabindex="12" data-l10n-id="findbar" aria-expanded="false" aria-controls="findbar">
+                  <span data-l10n-id="findbar_label">Find</span>
+                </button>
+                <div class="splitToolbarButton hiddenSmallView">
+                  <button class="toolbarButton" title="Previous Page" id="previous" tabindex="13" data-l10n-id="previous" disabled="">
+                    <span data-l10n-id="previous_label">Previous</span>
+                  </button>
+                  <div class="splitToolbarButtonSeparator"></div>
+                  <button class="toolbarButton" title="Next Page" id="next" tabindex="14" data-l10n-id="next">
+                    <span data-l10n-id="next_label">Next</span>
+                  </button>
+                </div>
+                <input type="number" id="pageNumber" class="toolbarField" title="Page" value="1" min="1" tabindex="15" data-l10n-id="page" autocomplete="off" max="4">
+                <span id="numPages" class="toolbarLabel">of 4</span>
+              </div>
+              <div id="toolbarViewerRight">
+
+                <button id="print" class="toolbarButton hiddenMediumView" title="Print" tabindex="32" data-l10n-id="print">
+                  <span data-l10n-id="print_label">Print</span>
+                </button>
+
+                <button id="download" class="toolbarButton hiddenMediumView" title="Save" tabindex="33" data-l10n-id="save">
+                  <span data-l10n-id="save_label">Save</span>
+                </button>
+
+                <div class="verticalToolbarSeparator hiddenMediumView"></div>
+
+                <div id="editorModeButtons" class="splitToolbarButton toggled" role="radiogroup">
+                  <button id="editorFreeText" class="toolbarButton" title="Text" role="radio" aria-checked="false" tabindex="34" data-l10n-id="editor_free_text2">
+                    <span data-l10n-id="editor_free_text2_label">Text</span>
+                  </button>
+                  <button id="editorInk" class="toolbarButton" title="Draw" role="radio" aria-checked="false" tabindex="35" data-l10n-id="editor_ink2">
+                    <span data-l10n-id="editor_ink2_label">Draw</span>
+                  </button>
+                </div>
+
+                <div id="editorModeSeparator" class="verticalToolbarSeparator"></div>
+
+                <button id="secondaryToolbarToggle" class="toolbarButton" title="Tools" tabindex="48" data-l10n-id="tools" aria-expanded="false" aria-controls="secondaryToolbar">
+                  <span data-l10n-id="tools_label">Tools</span>
+                </button>
+              </div>
+              <div id="toolbarViewerMiddle">
+                <div class="splitToolbarButton">
+                  <button id="zoomOut" class="toolbarButton" title="Zoom Out" tabindex="21" data-l10n-id="zoom_out">
+                    <span data-l10n-id="zoom_out_label">Zoom Out</span>
+                  </button>
+                  <div class="splitToolbarButtonSeparator"></div>
+                  <button id="zoomIn" class="toolbarButton" title="Zoom In" tabindex="22" data-l10n-id="zoom_in">
+                    <span data-l10n-id="zoom_in_label">Zoom In</span>
+                   </button>
+                </div>
+                <span id="scaleSelectContainer" class="dropdownToolbarButton">
+                  <select id="scaleSelect" title="Zoom" tabindex="23" data-l10n-id="zoom">
+                    <option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">Automatic Zoom</option>
+                    <option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual Size</option>
+                    <option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Page Fit</option>
+                    <option id="pageWidthOption" title="" value="page-width" data-l10n-id="page_scale_width">Page Width</option>
+                    <option id="customScaleOption" title="" value="custom" disabled="disabled" hidden="true"></option>
+                    <option title="" value="0.5" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 50 }">50%</option>
+                    <option title="" value="0.75" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 75 }">75%</option>
+                    <option title="" value="1" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 100 }">100%</option>
+                    <option title="" value="1.25" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 125 }">125%</option>
+                    <option title="" value="1.5" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 150 }">150%</option>
+                    <option title="" value="2" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 200 }">200%</option>
+                    <option title="" value="3" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 300 }">300%</option>
+                    <option title="" value="4" data-l10n-id="page_scale_percent" data-l10n-args="{ &quot;scale&quot;: 400 }">400%</option>
+                  </select>
+                </span>
+              </div>
+            </div>
+            <div id="loadingBar" class="hidden">
+              <div class="progress">
+                <div class="glimmer">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="viewerContainer" tabindex="0">
+          <div id="viewer" class="pdfViewer" lang="ru-RU"><div class="page" style="width: 1020px; height: 1320px;" data-page-number="1" role="region" aria-label="Page 1" data-loaded="true"><div style="width: 1020px; height: 1320px;" class="canvasWrapper"><canvas role="presentation" style="width: 1020px; height: 1320px;" width="1020" height="1320"></canvas></div><div class="textLayer" style="width: calc(var(--scale-factor) * 612px); height: calc(var(--scale-factor) * 792px);" data-main-rotation="0"><span style="left: 18.45%; top: 9.39%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(1.08758);" role="presentation" dir="ltr">ПОЛИТИКА ЗАЩИТЫ И ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ</span><br role="presentation"><span style="left: 43.55%; top: 12.55%; font-size: calc(var(--scale-factor)*14.00px); font-family: sans-serif; transform: scaleX(0.952535);" role="presentation" dir="ltr">Определения</span><br role="presentation"><span style="left: 15.08%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.983556);" role="presentation" dir="ltr">Персональные</span><span style="left: 28.2%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 29.4%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.980764);" role="presentation" dir="ltr">данные</span><span style="left: 36.03%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 37.25%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">–</span><span style="left: 38.23%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 39.44%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.907859);" role="presentation" dir="ltr">любая</span><span style="left: 44.65%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 45.85%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.899838);" role="presentation" dir="ltr">информация,</span><span style="left: 56.73%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 57.95%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.906648);" role="presentation" dir="ltr">относящаяся</span><span style="left: 68.64%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 69.85%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">к</span><span style="left: 70.8%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 72.02%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.909711);" role="presentation" dir="ltr">прямо</span><span style="left: 77.16%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 78.36%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.904909);" role="presentation" dir="ltr">или</span><span style="left: 81.44%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 82.65%; top: 15.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.898087);" role="presentation" dir="ltr">косвенно</span><br role="presentation"><span style="left: 10.44%; top: 17.39%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.955013);" role="presentation" dir="ltr">определенному, или определяемому физическому лицу (гражданину). К такой информации,</span><br role="presentation"><span style="left: 10.44%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.940038);" role="presentation" dir="ltr">могут</span><span style="left: 15.3%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 16.59%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.918807);" role="presentation" dir="ltr">относиться:</span><span style="left: 26.46%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 27.76%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.972704);" role="presentation" dir="ltr">Ф.И.О.,</span><span style="left: 34.09%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 35.4%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.881498);" role="presentation" dir="ltr">год,</span><span style="left: 38.55%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 39.85%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.933817);" role="presentation" dir="ltr">месяц,</span><span style="left: 45.32%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 46.62%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.873561);" role="presentation" dir="ltr">дата</span><span style="left: 50.17%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 51.47%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">и</span><span style="left: 52.52%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 53.82%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.909874);" role="presentation" dir="ltr">место</span><span style="left: 58.65%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 59.95%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.891672);" role="presentation" dir="ltr">рождения,</span><span style="left: 68.56%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 69.86%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.910398);" role="presentation" dir="ltr">почтовый</span><span style="left: 77.93%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 79.21%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.902851);" role="presentation" dir="ltr">адрес,</span><span style="left: 84.34%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 85.64%; top: 19.47%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.894125);" role="presentation" dir="ltr">адрес</span><br role="presentation"><span style="left: 10.44%; top: 21.57%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.980199);" role="presentation" dir="ltr">электронной почты, номер телефона, сведения о семейном, социальном, имущественном</span><br role="presentation"><span style="left: 10.44%; top: 23.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.936053);" role="presentation" dir="ltr">положении, сведения об образовании, профессии, доходах, сведения о состоянии здоровья, а</span><br role="presentation"><span style="left: 10.44%; top: 25.74%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.908625);" role="presentation" dir="ltr">также другая информация.</span><br role="presentation"><span style="left: 15.08%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.966179);" role="presentation" dir="ltr">Обработка</span><span style="left: 24.59%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 25.87%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.990567);" role="presentation" dir="ltr">персональных</span><span style="left: 38.71%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 39.98%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(1.0147);" role="presentation" dir="ltr">данных</span><span style="left: 46.72%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 48.02%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">–</span><span style="left: 49%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 50.27%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.904765);" role="presentation" dir="ltr">любое</span><span style="left: 55.58%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 56.86%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.897003);" role="presentation" dir="ltr">действие</span><span style="left: 64.34%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 65.61%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">с</span><span style="left: 66.48%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 67.75%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.91284);" role="presentation" dir="ltr">персональными</span><span style="left: 80.96%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 82.22%; top: 27.83%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.931421);" role="presentation" dir="ltr">данными,</span><br role="presentation"><span style="left: 10.44%; top: 29.92%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.912699);" role="presentation" dir="ltr">совершаемое с использованием средств автоматизации или без использования таких средств. К</span><br role="presentation"><span style="left: 10.44%; top: 32.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.971257);" role="presentation" dir="ltr">таким действиям могут относиться: сбор, получение, запись, систематизация, накопление,</span><br role="presentation"><span style="left: 10.44%; top: 34.1%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.948943);" role="presentation" dir="ltr">хранение, обновление, изменение, извлечение, использование, передача (распространение,</span><br role="presentation"><span style="left: 10.44%; top: 36.19%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.915433);" role="presentation" dir="ltr">предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных</span><br role="presentation"><span style="left: 10.44%; top: 38.28%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.945953);" role="presentation" dir="ltr">данных.</span><br role="presentation"><span style="left: 15.08%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.959601);" role="presentation" dir="ltr">Пользователь</span><span style="left: 27.35%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 28.61%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">–</span><span style="left: 29.59%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 30.85%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.884608);" role="presentation" dir="ltr">физическое</span><span style="left: 40.48%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 41.75%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.907692);" role="presentation" dir="ltr">лицо</span><span style="left: 45.8%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 47.05%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.904909);" role="presentation" dir="ltr">или</span><span style="left: 50.13%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 51.38%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.920833);" role="presentation" dir="ltr">индивидуальный</span><span style="left: 65.61%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 66.88%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.897216);" role="presentation" dir="ltr">предприниматель,</span><span style="left: 82.04%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 83.3%; top: 40.37%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.892211);" role="presentation" dir="ltr">который</span><br role="presentation"><span style="left: 10.44%; top: 42.46%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.909026);" role="presentation" dir="ltr">зарегистрировался в личном кабинете сайта.</span><br role="presentation"><span style="left: 15.08%; top: 44.55%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.955089);" role="presentation" dir="ltr">Оператор</span><span style="left: 23.62%; top: 44.55%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 24.38%; top: 44.55%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.949141);" role="presentation" dir="ltr">– любое юридическое лицо, в том числе индивидуальный предприниматель,</span><br role="presentation"><span style="left: 10.44%; top: 46.29%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.972807);" role="presentation" dir="ltr">самостоятельно или совместно с другими лицами организующая обработку персональных</span><br role="presentation"><span style="left: 10.44%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.945953);" role="presentation" dir="ltr">данных,</span><span style="left: 17.2%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 18.83%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">а</span><span style="left: 19.7%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 21.35%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.891001);" role="presentation" dir="ltr">также</span><span style="left: 26.25%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 27.89%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.893641);" role="presentation" dir="ltr">определяющая</span><span style="left: 40.22%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 41.87%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.898212);" role="presentation" dir="ltr">цели</span><span style="left: 45.81%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 47.45%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.899847);" role="presentation" dir="ltr">обработки</span><span style="left: 56.08%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 57.72%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.918386);" role="presentation" dir="ltr">персональных</span><span style="left: 69.62%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 71.27%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.943759);" role="presentation" dir="ltr">данных,</span><span style="left: 78.02%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 79.66%; top: 48.03%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.90673);" role="presentation" dir="ltr">подлежащих</span><br role="presentation"><span style="left: 10.44%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.89112);" role="presentation" dir="ltr">обработке,</span><span style="left: 19.35%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 20.81%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.900825);" role="presentation" dir="ltr">действия</span><span style="left: 28.31%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 29.77%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.929257);" role="presentation" dir="ltr">(операции),</span><span style="left: 39.46%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 40.93%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.900743);" role="presentation" dir="ltr">совершаемые</span><span style="left: 52.22%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 53.68%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">с</span><span style="left: 54.55%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 56.01%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.912976);" role="presentation" dir="ltr">персональными</span><span style="left: 69.22%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 70.67%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.931421);" role="presentation" dir="ltr">данными.</span><span style="left: 78.74%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 80.2%; top: 49.77%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.889202);" role="presentation" dir="ltr">Оператором</span><br role="presentation"><span style="left: 10.44%; top: 51.52%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.887251);" role="presentation" dir="ltr">является</span><span style="left: 17.64%; top: 51.52%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 18.14%; top: 51.52%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.933996);" role="presentation" dir="ltr">ООО «Народные Страницы».</span><br role="presentation"><span style="left: 15.08%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.972614);" role="presentation" dir="ltr">Блокирование</span><span style="left: 27.87%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 30.09%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.990719);" role="presentation" dir="ltr">персональных</span><span style="left: 42.92%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 45.16%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(1.01264);" role="presentation" dir="ltr">данных</span><span style="left: 51.89%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 54.15%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">–</span><span style="left: 55.13%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 57.35%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.892881);" role="presentation" dir="ltr">временное</span><span style="left: 66.2%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 68.42%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.895627);" role="presentation" dir="ltr">прекращение</span><span style="left: 79.46%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 81.69%; top: 53.26%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.899642);" role="presentation" dir="ltr">обработки</span><br role="presentation"><span style="left: 10.44%; top: 55%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.958639);" role="presentation" dir="ltr">персональных данных (за исключением случаев, если обработка необходима для уточнения</span><br role="presentation"><span style="left: 10.44%; top: 56.74%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.936685);" role="presentation" dir="ltr">персональных данных).</span><br role="presentation"><span style="left: 15.08%; top: 58.48%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(1.02605);" role="presentation" dir="ltr">Уничтожение персональных данных</span><span style="left: 48.78%; top: 58.48%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 49.93%; top: 58.48%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.988069);" role="presentation" dir="ltr">– действия, в результате которых становится</span><br role="presentation"><span style="left: 10.44%; top: 60.23%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.957156);" role="presentation" dir="ltr">невозможным восстановить содержание персональных данных в информационной системе</span><br role="presentation"><span style="left: 10.44%; top: 61.97%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.962707);" role="presentation" dir="ltr">персональных данных и (или) в результате которых уничтожаются материальные носители</span><br role="presentation"><span style="left: 10.44%; top: 63.71%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.931795);" role="presentation" dir="ltr">персональных данных.</span><br role="presentation"><span style="left: 15.08%; top: 65.45%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(1.06755);" role="presentation" dir="ltr">Личный кабинет сайта</span><span style="left: 36.88%; top: 65.45%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 38%; top: 65.45%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.99935);" role="presentation" dir="ltr">- это личная страничка пользователя сайта, где он может</span><br role="presentation"><span style="left: 10.44%; top: 67.2%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.975647);" role="presentation" dir="ltr">хранить информацию о себе, настраивать отображение, задавать параметры, видеть свой</span><br role="presentation"><span style="left: 10.44%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.922944);" role="presentation" dir="ltr">статус</span><span style="left: 15.69%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 16.94%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">и</span><span style="left: 17.99%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 19.22%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.889807);" role="presentation" dir="ltr">т.д.,</span><span style="left: 22.39%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 23.63%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.913842);" role="presentation" dir="ltr">при</span><span style="left: 26.7%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 27.95%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.917491);" role="presentation" dir="ltr">помощи</span><span style="left: 34.72%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 35.95%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.877713);" role="presentation" dir="ltr">которой</span><span style="left: 42.57%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 43.83%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.88279);" role="presentation" dir="ltr">Пользователь</span><span style="left: 55.12%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 56.36%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.883808);" role="presentation" dir="ltr">может</span><span style="left: 61.58%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 62.82%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.88135);" role="presentation" dir="ltr">пользоваться</span><span style="left: 73.66%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 74.9%; top: 68.94%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.908492);" role="presentation" dir="ltr">дополнительными</span><br role="presentation"><span style="left: 10.44%; top: 70.68%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.926363);" role="presentation" dir="ltr">сервисами Сайта.</span><br role="presentation"><span style="left: 15.08%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(1.02722);" role="presentation" dir="ltr">Сайт</span><span style="left: 19.56%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 20.88%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">-</span><span style="left: 21.53%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 22.86%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.923591);" role="presentation" dir="ltr">совокупность</span><span style="left: 34.24%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 35.56%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.913302);" role="presentation" dir="ltr">программ</span><span style="left: 43.71%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 45.01%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.886694);" role="presentation" dir="ltr">для</span><span style="left: 47.89%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 49.21%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.912583);" role="presentation" dir="ltr">электронных</span><span style="left: 60.01%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 61.33%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.923195);" role="presentation" dir="ltr">вычислительных</span><span style="left: 75.44%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 76.76%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.92897);" role="presentation" dir="ltr">машин</span><span style="left: 82.47%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 83.78%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">и</span><span style="left: 84.83%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 86.13%; top: 72.42%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.916854);" role="presentation" dir="ltr">иной</span><br role="presentation"><span style="left: 10.44%; top: 74.17%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.958681);" role="presentation" dir="ltr">информации, содержащейся в информационной системе, доступ к которой обеспечивается</span><br role="presentation"><span style="left: 10.44%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.904443);" role="presentation" dir="ltr">посредством</span><span style="left: 21.02%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 23.11%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.903245);" role="presentation" dir="ltr">информационно-телекоммуникационной</span><span style="left: 57.22%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 59.31%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.905944);" role="presentation" dir="ltr">сети</span><span style="left: 62.97%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 65.05%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.911101);" role="presentation" dir="ltr">"Интернет"</span><span style="left: 74.59%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 76.68%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.892675);" role="presentation" dir="ltr">(далее</span><span style="left: 81.93%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 84.02%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">-</span><span style="left: 84.67%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 86.74%; top: 75.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.898492);" role="presentation" dir="ltr">сеть</span><br role="presentation"><span style="left: 10.44%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.921549);" role="presentation" dir="ltr">"Интернет")</span><span style="left: 20.63%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 22.77%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.912141);" role="presentation" dir="ltr">по</span><span style="left: 24.79%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 26.91%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.919378);" role="presentation" dir="ltr">доменным</span><span style="left: 35.61%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 37.74%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.914367);" role="presentation" dir="ltr">именам</span><span style="left: 44.04%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 46.18%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">и</span><span style="left: 47.23%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 49.34%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.956143);" role="presentation" dir="ltr">(или)</span><span style="left: 53.72%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 55.85%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.912141);" role="presentation" dir="ltr">по</span><span style="left: 57.88%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 60%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.912195);" role="presentation" dir="ltr">сетевым</span><span style="left: 66.97%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 69.09%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.907131);" role="presentation" dir="ltr">адресам,</span><span style="left: 76.33%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 78.46%; top: 77.65%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.90883);" role="presentation" dir="ltr">позволяющим</span><br role="presentation"><span style="left: 10.44%; top: 79.39%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.917279);" role="presentation" dir="ltr">идентифицировать сайты в сети "Интернет", а именно</span><span style="left: 55.8%; top: 79.39%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 56.34%; top: 79.39%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.913204);" role="presentation" dir="ltr">Stranicy.ru</span><br role="presentation"><span style="left: 39.17%; top: 82.93%; font-size: calc(var(--scale-factor)*14.00px); font-family: sans-serif; transform: scaleX(1.10526);" role="presentation" dir="ltr">1.</span><span style="left: 40.88%; top: 82.93%; font-size: calc(var(--scale-factor)*14.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 42.11%; top: 82.93%; font-size: calc(var(--scale-factor)*14.00px); font-family: sans-serif; transform: scaleX(0.967131);" role="presentation" dir="ltr">Общие Положения</span><br role="presentation"><span style="left: 10.39%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(1.10429);" role="presentation" dir="ltr">1.1.</span><span style="left: 13.33%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 13.92%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.906003);" role="presentation" dir="ltr">Настоящая</span><span style="left: 23.02%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 24.32%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.914867);" role="presentation" dir="ltr">Политика</span><span style="left: 32.41%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 33.71%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.875407);" role="presentation" dir="ltr">определяет</span><span style="left: 43.03%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 44.32%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.906559);" role="presentation" dir="ltr">порядок,</span><span style="left: 51.64%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 52.93%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.918329);" role="presentation" dir="ltr">условия</span><span style="left: 59.61%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 60.91%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.899642);" role="presentation" dir="ltr">обработки</span><span style="left: 69.54%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 70.84%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.917327);" role="presentation" dir="ltr">персональных</span><span style="left: 82.72%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 84.01%; top: 84.91%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.943595);" role="presentation" dir="ltr">данных</span><br role="presentation"><span style="left: 13.92%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.872454);" role="presentation" dir="ltr">пользователей</span><span style="left: 25.88%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 27.7%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.926425);" role="presentation" dir="ltr">Сайта</span><span style="left: 32.67%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 34.47%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr">и</span><span style="left: 35.52%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 37.33%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.901036);" role="presentation" dir="ltr">устанавливает</span><span style="left: 49.27%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 51.07%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.892838);" role="presentation" dir="ltr">требования</span><span style="left: 60.55%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 62.37%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.912141);" role="presentation" dir="ltr">по</span><span style="left: 64.4%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 66.21%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.907471);" role="presentation" dir="ltr">обеспечению</span><span style="left: 77.22%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif;" role="presentation" dir="ltr"> </span><span style="left: 79.04%; top: 87.01%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.904261);" role="presentation" dir="ltr">безопасности</span><br role="presentation"><span style="left: 13.92%; top: 89.09%; font-size: calc(var(--scale-factor)*12.00px); font-family: sans-serif; transform: scaleX(0.910717);" role="presentation" dir="ltr">персональных данных пользователей.</span></div><div class="annotationEditorLayer" tabindex="0" style="pointer-events: none; width: 1019px; height: 1319px;" data-main-rotation="0"></div></div><div class="page" style="width: 1020px; height: 1320px;" data-page-number="2" role="region" aria-label="Page 2" data-loaded="true"><div class="loadingIcon notVisible" role="img" aria-label="Loading…"></div><div style="width: 1020px; height: 1320px;" class="canvasWrapper"><canvas role="presentation" style="width: 1020px; height: 1320px;" width="1020" height="1320"></canvas></div><div class="textLayer"></div></div><div class="page" style="width: 1020px; height: 1320px;" data-page-number="3" role="region" aria-label="Page 3"><div class="loadingIcon notVisible" role="img" aria-label="Loading…"></div></div><div class="page" style="width: 1020px; height: 1320px;" data-page-number="4" role="region" aria-label="Page 4"><div class="loadingIcon notVisible" role="img" aria-label="Loading…"></div></div></div>
+        </div>
+      </div> <!-- mainContainer -->
+
+      <div id="dialogContainer">
+        <dialog id="passwordDialog">
+          <div class="row">
+            <label for="password" id="passwordText" data-l10n-id="password_label">Enter the password to open this PDF file.</label>
+          </div>
+          <div class="row">
+            <input type="password" id="password" class="toolbarField">
+          </div>
+          <div class="buttonRow">
+            <button id="passwordCancel" class="dialogButton"><span data-l10n-id="password_cancel">Cancel</span></button>
+            <button id="passwordSubmit" class="dialogButton"><span data-l10n-id="password_ok">OK</span></button>
+          </div>
+        </dialog>
+        <dialog id="documentPropertiesDialog">
+          <div class="row">
+            <span id="fileNameLabel" data-l10n-id="document_properties_file_name">File name:</span>
+            <p id="fileNameField" aria-labelledby="fileNameLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="fileSizeLabel" data-l10n-id="document_properties_file_size">File size:</span>
+            <p id="fileSizeField" aria-labelledby="fileSizeLabel">-</p>
+          </div>
+          <div class="separator"></div>
+          <div class="row">
+            <span id="titleLabel" data-l10n-id="document_properties_title">Title:</span>
+            <p id="titleField" aria-labelledby="titleLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="authorLabel" data-l10n-id="document_properties_author">Author:</span>
+            <p id="authorField" aria-labelledby="authorLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="subjectLabel" data-l10n-id="document_properties_subject">Subject:</span>
+            <p id="subjectField" aria-labelledby="subjectLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="keywordsLabel" data-l10n-id="document_properties_keywords">Keywords:</span>
+            <p id="keywordsField" aria-labelledby="keywordsLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="creationDateLabel" data-l10n-id="document_properties_creation_date">Creation Date:</span>
+            <p id="creationDateField" aria-labelledby="creationDateLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="modificationDateLabel" data-l10n-id="document_properties_modification_date">Modification Date:</span>
+            <p id="modificationDateField" aria-labelledby="modificationDateLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="creatorLabel" data-l10n-id="document_properties_creator">Creator:</span>
+            <p id="creatorField" aria-labelledby="creatorLabel">-</p>
+          </div>
+          <div class="separator"></div>
+          <div class="row">
+            <span id="producerLabel" data-l10n-id="document_properties_producer">PDF Producer:</span>
+            <p id="producerField" aria-labelledby="producerLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="versionLabel" data-l10n-id="document_properties_version">PDF Version:</span>
+            <p id="versionField" aria-labelledby="versionLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="pageCountLabel" data-l10n-id="document_properties_page_count">Page Count:</span>
+            <p id="pageCountField" aria-labelledby="pageCountLabel">-</p>
+          </div>
+          <div class="row">
+            <span id="pageSizeLabel" data-l10n-id="document_properties_page_size">Page Size:</span>
+            <p id="pageSizeField" aria-labelledby="pageSizeLabel">-</p>
+          </div>
+          <div class="separator"></div>
+          <div class="row">
+            <span id="linearizedLabel" data-l10n-id="document_properties_linearized">Fast Web View:</span>
+            <p id="linearizedField" aria-labelledby="linearizedLabel">-</p>
+          </div>
+          <div class="buttonRow">
+            <button id="documentPropertiesClose" class="dialogButton"><span data-l10n-id="document_properties_close">Close</span></button>
+          </div>
+        </dialog>
+      </div>  <!-- dialogContainer -->
+
+    </div> <!-- outerContainer -->
+    <div id="printContainer"></div>
+
+  
+
+</body></html>

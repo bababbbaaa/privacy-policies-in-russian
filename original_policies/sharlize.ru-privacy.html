@@ -1,0 +1,1179 @@
+<html prefix="og: https://ogp.me/ns#" lang="ru-RU"><head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Force latest IE rendering engine or ChromeFrame if installed -->
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+    <meta name="yandex-verification" content="6f6fb3570e28b8f2">
+    <link href="/bitrix/templates/sharlize/css/normalize.css" rel="stylesheet" type="text/css" media="all">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="1С-Битрикс, CMS, PHP, bitrix, система управления контентом">
+<meta name="description" content="1С-Битрикс: Управление сайтом">
+<link href="/bitrix/cache/css/s1/sharlize/template_8bda0cb5e2f941056eb8601df22dee73/template_8bda0cb5e2f941056eb8601df22dee73_v1.css?1673445213411353" type="text/css" data-template-style="true" rel="stylesheet">
+<script type="text/javascript" src="https://cloudparser.ru/widget/script?hash=17820ac1fd68b22540b4a76c24849312e7f79c58" async="async"></script><script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/watch.js"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://bitrix.info/ba.js"></script><script type="text/javascript" src="/bitrix/cache/js/s1/sharlize/template_6e75b43ad419f94036c3b609db7a0194/template_6e75b43ad419f94036c3b609db7a0194_v1.js?1673445213213510"></script>
+<script type="text/javascript">var _ba = _ba || []; _ba.push(["aid", "ab29be5b11851548f71e6ed32e9db22e"]); _ba.push(["host", "sharlize.ru"]); (function() {var ba = document.createElement("script"); ba.type = "text/javascript"; ba.async = true;ba.src = (document.location.protocol == "https:" ? "https://" : "http://") + "bitrix.info/ba.js";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ba, s);})();</script>
+
+
+    <!--[if lte IE 6]><link href="/bitrix/templates/sharlize/css/ie6.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
+    <!--[if IE 7]><link href="/bitrix/templates/sharlize/css/ie7.css" rel="stylesheet" type="text/css" media="all" /><![endif]-->
+    	 	 
+	 
+	 
+	 
+	 
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+	 <!--<script src="https://code.jquery.com/jquery-1.7.min.js></script>-->
+    
+                            	
+								
+	
+		
+                	 	  	   	   	<!--[if IE 7]>
+  		<link rel="stylesheet" href="/bitrix/templates/sharlize/css/font-awesome-ie7.min.css">
+		<![endif]-->
+	    <title>Политика конфиденциальности</title>
+	<link rel="icon" href="https://sharlize.ru/favicon.ico" type="image/x-icon">
+	<script type="text/javascript">
+	
+	/*
+	var msg;
+if (window.jQuery) {
+    msg = 'You are running jQuery version: ' + jQuery.fn.jquery;
+} else {
+    msg = 'jQuery is not installed';
+}
+alert(msg); */
+	
+	
+	/*
+        $(window).load(function() {
+            $('#slider').nivoSlider(
+                {
+                    effect: 'random',
+                    slices: 30,
+                    pauseTime: 6000,
+                    controlNav: true,
+                }
+            );
+
+        });
+*/
+/*
+        $(function () {
+        //    $('body').utils();
+        });*/
+    </script> 
+    <script type="text/javascript">
+
+        jQuery(function ($) {
+            // Load dialog on page load
+            //$('#basic-modal-content').modal();
+
+            // Load dialog on click
+           /* old quick view
+		   $('.addbasket .view-detail').click(function (e) {;
+                str='id='+(this.id);
+                $.post('/ajax_sale_order.php', str, function(data){    
+                    $('#basic-modal-content').html(data)});
+                $('#basic-modal-content').modal(
+                    {zIndex:10001, autoPosition:true,autoResize:true,position: ["5%"], minWidth:1000, close:true}
+                );
+
+                return false;
+            });
+			*/
+			/*
+            $('.sale_order').click(function (e) {;
+                str='id='+(this.id);
+                $.post('/ajax_sale_order.php', str, function(data){    
+                    $('#basic-modal-content').html(data)});
+                $('#basic-modal-content').modal(
+                    {zIndex:10001, autoPosition:true,autoResize:true,position: ["5%"], minWidth:1000, close:true}
+                );
+
+                return false;
+            });
+			*/
+			
+			// для кнопки быстрого просмотра
+			$('.sale_order2').click(function (e) {;
+			dimmod = this.id; 
+				newid=dimmod.substring(2);
+                str='id='+(newid);
+                $.post('/ajax_sale_order.php', str, function(data){    
+                    $('.quick-view-body').html(data)
+					});
+                $('#myModal').modal('show');
+
+                return false;
+            });
+			// ~ для кнопки быстрого просмотра
+        });
+		
+    </script>
+    <script type="text/javascript">
+	// button add to basket
+        function buySelect(id) {
+            var str = $('#p' + id).serialize();
+            //alert (str);
+            $.post('/add2basket.php', str, function(data) {    
+                $('#basket-top').html(data);
+                if(data != '') { 
+                    /*
+					$.prompt('Товар добавлен в корзину',{ overlayspeed: 'fast', timeout:0, zIndex:10020, top: '40%',  promptspeed: 'fast',
+                    submit: function(e,v,m,f){
+                            location.reload();}
+                    }); */
+					location.reload();
+                } else {
+                    $.prompt('Укажите количество товара',{ overlayspeed: 'fast', timeout:0, zIndex:10020, top: '40%',  promptspeed: 'fast' });
+                    $('#basket-top').load('/add2basket.php');
+            }});
+        }
+		// add otlozhennie
+		function add2favorit(p_id, th, cont) {
+           // var str = $('#p' + p_id).serialize();
+		   var str ="p_id="+p_id;
+            //alert (str);
+            $.post('/add2favorit.php', str, function(data) {    
+                if (cont=='no') {
+				$(th).toggleClass('in_wishlist_cart');
+				} else { 
+				$(th).toggleClass('in_wishlist');
+				}
+				$('#favorit').html(data);
+                });
+        }
+		// fishki
+		$(document).ready(function () {
+		
+			
+			//при нажатию на любую кнопку, имеющую класс .btn
+			/*
+  $(".btn").click(function() {
+    //открыть модальное окно с id="myModal"
+    $("#myModal").modal('show');
+  });*/
+			
+		});
+		
+		
+		//--
+		
+		
+		$(document).ready(function(){
+  
+});
+
+ 
+		
+		// dobavit razmer-ryad
+		function razRyad(kodrr) {
+strokaid = '.'+kodrr+' input.inputv';
+$( strokaid ).each(function( index ) {
+teknom = $( this ).val();
+countrr = Number(teknom) + 1;
+  $( this ).val(countrr) ;
+  });
+}
+
+        $(document).ready(function () {
+			// zakaz obratnogo zvonka
+            $( "#btnCallOrder" ).click(function() {
+                var str = $("form#OrderCall").serialize();
+                //alert (str);
+                $.post('/ajax_callback.php', str, function(data) {    
+                    $('#messagesCallErrorDiv').html(data);
+					$('#modal-callback').modal('hide');
+					});
+            });
+// ~zakaz obratnogo zvonka	
+	
+	
+		
+			
+            $('#basket-top').load('/add2basket.php');
+			
+
+
+
+
+
+			
+        });
+    </script>
+
+
+
+<link type="text/css" rel="stylesheet" href="https://turboparser.ru/template/std/css/widget-button.css?v=20230202204204"><link type="text/css" rel="stylesheet" href="https://turboparser.ru/template/std/css/widget-multi.css?v=20230202204204"><script charset="utf8" async="" src="https://web.redhelper.ru/container/main.js?version=3.1.539.1630063113454"></script><script charset="utf8" src="https://web.redhelper.ru/nx/start?version=3.1.539.1630063113454&amp;c=sharlize&amp;page=https%3A%2F%2Fsharlize.ru%2Fprivacy%2F" async=""></script><link id="cp_style" rel="stylesheet" type="text/css" href="https://cloudparser.ru/js/external/widget.min.css?v=638073833998244185"><script charset="utf8" type="text/javascript" src="https://web.redhelper.ru/connect/main.js?version=3.1.539.1630063113454"></script></head>
+<body itemscope="itemscope" itemtype="https://schema.org/WebPage" class="cat-astro darkBg">
+
+
+<div class="container">
+<div class="row verticalalign">
+	<div class="col-xs-12">	
+	<div class="b-header">
+	<div class="b-header__logo">
+		
+			<a href="/" title="На главную"><img src="/bitrix/templates/sharlize/img/logo.svg" alt="На главную" class=" hidden-xs hidden-sm hidden-md inner" width="210"></a>			<a href="/" title="На главную"><img src="/bitrix/templates/sharlize/img/logo.svg" alt="На главную" class=" hidden-lg inner" width="110"></a>			<div class="inscription  hidden-xs  inner house">Фабрика <br>трикотажа</div>
+		
+	</div>
+		
+	<div class="b-header__contacts hidden-xs hidden-sm " style="padding:0px"><img src="/bitrix/templates/sharlize/img/icon-phone.png" class="vstroku"><span class="numberphone vstroku">8 (800) 234 31 21</span><a href="#" class="vstroku phone_class" id="call_link">Заказать звонок</a></div>
+	<div class="b-header__buttons" style="padding:0px">
+		
+		<!-- 3 блок -->
+			
+				<a href="/personal/poned/" class="inner-block"><span class="vstroku hidden-xs" id="favorit">
+				4206				</span><img src="/bitrix/templates/sharlize/img/favorite_header_black.svg" class="vstroku" width="22"></a>
+				
+				
+				
+				                <a href="/auth/" class="inner-block greycol">
+					<img src="/bitrix/templates/sharlize/img/login_header_black.svg" class="vstroku" width="21"><span class="vstroku hidden-xs hidden-sm hidden-md">Личный кабинет</span>
+					
+				</a>
+                				
+				
+				
+				<a href="/personal/basket/" class="inner-block greycol cartlink"><span class="vstroku redcol " id="basket-top">        
+        </span><img src="/bitrix/templates/sharlize/img/basket_header_black.svg" class="vstroku" width="24"><span class="vstroku hidden-xs hidden-sm hidden-md">Корзина</span></a>
+				<!-- <div id='basket-top'><div class='basket'><span class='basket-top'><a href='/personal/basket/'>Корзина пуста</a></span></div></div> -->
+			<div class="inner-block"><div id="menu-button">Меню</div></div>
+			
+		<!-- 3 блок -->
+
+		 
+	</div>
+	</div>
+	</div>
+</div>
+
+<!-- Горизонтальное меню -->
+<div class="row">
+<div class="col-xs-12">
+
+<div id="cssmenu" class="my-clearfix"> 		
+<!-- Поиск -->
+<!-- Форма поиска -->
+<div class="search-form d7">
+<form action="/catalog/">
+	
+		
+			<input type="text" name="q" value="" size="15" maxlength="50">		
+		
+			<button name="s" type="submit" value="Поиск"></button>
+		
+	
+</form>
+</div> 
+<!-- ~Форма поиска -->
+<!-- Поиск -->
+<ul class="menuleft">
+
+
+	
+	
+					<li class="has-sub"><a href="/catalog/" class="root-item">Каталог</a>
+				 <div class="dropd">
+				<div class="dropdleftcol">
+	  <h2>Каталог</h2>
+				<ul class="columns">
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/termobele-optom/">Термобелье</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/bolshie-razmery-optom/">Большие размеры</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/novinki-optom/">Новинки</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/muzhskoy-trikotazh-optom/">Мужской трикотаж</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/nochnye-sorochki-optom/">Ночные сорочки</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/pizhamy-optom/">Пижамы</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/trikotazhnye-kostyumy-komplekty-optom/">Трикотажные костюмы, комплекты</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/khalaty-optom/">Халаты</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/tuniki-platya-sarafany-optom/">Туники, платья, сарафаны</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/tolstovki-kardigany-vodolazki-longslivy-optom/">Толстовки, кардиганы, водолазки, лонгсливы</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/futbolki-mayki-topy-optom/">Футболки, майки, топы</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/bryuki-bridzhi-shorty-yubki-optom/">Брюки, бриджи, шорты, юбки</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/kollektsii-optom/">Коллекции</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/rasprodazhi-optom/">Распродажи</a></li>
+			
+		
+	
+	
+
+			</ul></div><div class="price-list visible-lg"><div class="imgprice"></div><div style="margin-top:15px;  line-height: 1.5;">Скачать прайс-лист<br> <a href="/onlayn-katalog/price/price.xlsx" style="padding:15px 15px 15px 15px; display:block; width: 150px; margin: 0 auto; margin-top:15px;">Скачать</a></div></div>  </div><!--QQQ--></li>	
+	
+		
+							<li><a href="/o-kompanii/" class="root-item">О компании</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/news/" class="root-item">Новости</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/cooperation/" class="root-item">Условия сотрудничества</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/onlayn-katalog/" class="root-item">Презентации</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/razmernaya-setka/" class="root-item">Размерная сетка</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/otzyvy/" class="root-item">Отзывы</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/contacts/" class="root-item">Контакты</a></li>
+			
+		
+	
+	
+
+
+</ul>
+</div>
+<div class="menu-clear-left"></div>
+</div>
+</div>
+<!-- ~Горизонтальное меню -->
+</div>
+<div class="fon-grey">
+<div class="container">
+<!-- Банер -->
+ 
+ 
+    <link href="/bitrix/css/main/font-awesome.css?148084645928777" type="text/css" rel="stylesheet">
+<div class="row"><div class="col-xs-12"><div class="bx-breadcrumb">
+			<div class="bx-breadcrumb-item" id="bx_breadcrumb_0" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+				
+				<a href="/" title="Главная" itemprop="url">
+					<span itemprop="title">Главная</span>
+				</a>
+			</div>
+			<div class="bx-breadcrumb-item" id="bx_breadcrumb_1" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child">
+				<i class="fa fa-angle-right"></i>
+				<a href="/privacy/" title="Политика конфиденциальности" itemprop="url">
+					<span itemprop="title">Политика конфиденциальности</span>
+				</a>
+			</div><div style="clear:both"></div></div></div></div>
+
+
+     
+   <h2 style="color: #1f1f1f;"><strong>ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</strong></h2>
+<p style="color: #1f1f1f;">
+</p>
+<p style="color: #1f1f1f;">
+	 г.&nbsp;Иваново&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; «29» июля 2017&nbsp;г.
+</p>
+<p style="color: #1f1f1f;">
+	 Настоящая Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в отношении всей информации, которую Интернет-магазин «Шарлиз»,
+</p>
+<p style="color: #1f1f1f;">
+	 расположенный на доменном имени&nbsp;<a href="http://sharlize.ru">http://sharlize.ru</a>, может получить о Пользователе во время использования сайта Интернет-магазина, программ и продуктов Интернет-магазина.
+</p>
+<p style="color: #1f1f1f;">
+ <strong>1. ОПРЕДЕЛЕНИЕ ТЕРМИНОВ</strong>
+</p>
+<p style="color: #1f1f1f;">
+	 1.1 В настоящей Политике конфиденциальности используются следующие термины:
+</p>
+<p style="color: #1f1f1f;">
+	 1.1.1. «Администрация сайта Интернет-магазина (далее – Администрация сайта) » – уполномоченные сотрудники на управления сайтом, действующие от имени&nbsp;ИП Иванова Е.С., которые организуют и (или) осуществляет обработку персональных данных, а также определяет цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.
+</p>
+<p style="color: #1f1f1f;">
+	 1.1.2. «Персональные данные» - любая информация, относящаяся к прямо или косвенно определенному или определяемому физическому лицу (субъекту персональных данных).
+</p>
+<p style="color: #1f1f1f;">
+	 1.1.3. «Обработка персональных данных» - любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных.
+</p>
+<p style="color: #1f1f1f;">
+	 1.1.4. «Конфиденциальность персональных данных» - обязательное для соблюдения Оператором или иным получившим доступ к персональным данным лицом требование не допускать их распространения без согласия субъекта персональных данных или наличия иного законного основания.
+</p>
+<p style="color: #1f1f1f;">
+	 1.1.5. «Пользователь сайта Интернет-магазина (далее ? Пользователь)» – лицо, имеющее доступ к Сайту, посредством сети Интернет и использующее Сайт интернет-магазина.
+</p>
+<p style="color: #1f1f1f;">
+	 1.1.6. «Cookies» — небольшой фрагмент данных, отправленный веб-сервером и хранимый на компьютере пользователя, который веб-клиент или веб-браузер каждый раз пересылает веб-серверу в HTTP-запросе при попытке открыть страницу соответствующего сайта.
+</p>
+<p style="color: #1f1f1f;">
+	 1.1.7. «IP-адрес» — уникальный сетевой адрес узла в компьютерной сети, построенной по протоколу IP.
+</p>
+<p style="color: #1f1f1f;">
+ <strong>2. ОБЩИЕ ПОЛОЖЕНИЯ</strong>
+</p>
+<p style="color: #1f1f1f;">
+	 2.1. Использование Пользователем сайта Интернет-магазина означает согласие с настоящей Политикой конфиденциальности и условиями обработки персональных данных Пользователя.
+</p>
+<p style="color: #1f1f1f;">
+	 2.2. В случае несогласия с условиями Политики конфиденциальности Пользователь должен прекратить использование сайта Интернет-магазина.
+</p>
+<p style="color: #1f1f1f;">
+	 2.3.Настоящая Политика конфиденциальности применяется только к сайту Интернет-магазина Шарлиз. Интернет-магазин не контролирует и не несет ответственность за сайты третьих лиц, на которые Пользователь может перейти по ссылкам, доступным на сайте Интернет-магазина.
+</p>
+<p style="color: #1f1f1f;">
+	 2.4. Администрация сайта не проверяет достоверность персональных данных, предоставляемых Пользователем сайта Интернет-магазина.
+</p>
+<p style="color: #1f1f1f;">
+</p>
+<p style="color: #1f1f1f;">
+ <strong>3. ПРЕДМЕТ ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ</strong>
+</p>
+<p style="color: #1f1f1f;">
+</p>
+<p style="color: #1f1f1f;">
+	 3.1. Настоящая Политика конфиденциальности устанавливает обязательства Администрации сайта интернет-магазина по неразглашению и обеспечению режима защиты конфиденциальности персональных данных, которые Пользователь предоставляет по запросу Администрации сайта при регистрации на сайте интернет-магазина или при оформлении заказа для приобретения Товара.
+</p>
+<p style="color: #1f1f1f;">
+	 3.2. Персональные данные, разрешённые к обработке в рамках настоящей Политики конфиденциальности, предоставляются Пользователем путём заполнения регистрационной формы на Сайте интернет-магазина&nbsp;Шарлиз&nbsp;в разделе&nbsp;Название раздела&nbsp;и включают в себя следующую информацию:
+</p>
+<p style="color: #1f1f1f;">
+	 3.2.1. фамилию, имя, отчество Пользователя;
+</p>
+<p style="color: #1f1f1f;">
+	 3.2.2. контактный телефон Пользователя;
+</p>
+<p style="color: #1f1f1f;">
+	 3.2.3. адрес электронной почты (e-mail);
+</p>
+<p style="color: #1f1f1f;">
+	 3.2.4. адрес доставки Товара;
+</p>
+<p style="color: #1f1f1f;">
+	 3.2.5. место жительство Пользователя.
+</p>
+<p style="color: #1f1f1f;">
+	 3.3. Интернет-магазин защищает Данные, которые автоматически передаются в процессе просмотра рекламных блоков и при посещении страниц, на которых установлен статистический скрипт системы ("пиксель"):
+</p>
+<ul style="color: #1f1f1f;">
+	<li>IP адрес;</li>
+	<li>информация из cookies;</li>
+	<li>информация о браузере (или иной программе, которая осуществляет доступ к показу рекламы);</li>
+	<li>время доступа;</li>
+	<li>адрес страницы, на которой расположен рекламный блок;</li>
+	<li>реферер (адрес предыдущей страницы).</li>
+</ul>
+<p style="color: #1f1f1f;">
+	 3.3.1. Отключение cookies может повлечь невозможность доступа к частям сайта Интернет-магазина, требующим авторизации.
+</p>
+<p style="color: #1f1f1f;">
+	 3.3.2. Интернет-магазин осуществляет сбор статистики об IP-адресах своих посетителей. Данная информация используется с целью выявления и решения технических проблем, для контроля законности проводимых финансовых платежей.
+</p>
+<p style="color: #1f1f1f;">
+	 3.4. Любая иная персональная информация неоговоренная выше (история покупок, используемые браузеры и операционные системы и т.д.) подлежит надежному хранению и нераспространению, за исключением случаев, предусмотренных в п.п. 5.2. и 5.3. настоящей Политики конфиденциальности.
+</p>
+<p style="color: #1f1f1f;">
+ <strong>4. ЦЕЛИ СБОРА ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ ПОЛЬЗОВАТЕЛЯ</strong>
+</p>
+<p style="color: #1f1f1f;">
+	 4.1. Персональные данные Пользователя Администрация сайта интернет-магазина может использовать в целях:
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.1. Идентификации Пользователя, зарегистрированного на сайте Интернет-магазина, для оформления заказа и (или) заключения Договора купли-продажи товара дистанционным способом с&nbsp;ИП Иванова Е.С.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.2. Предоставления Пользователю доступа к персонализированным ресурсам Сайта интернет-магазина.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.3. Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования Сайта интернет-магазина, оказания услуг, обработка запросов и заявок от Пользователя.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.4. Определения места нахождения Пользователя для обеспечения безопасности, предотвращения мошенничества.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.5. Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.6. Создания учетной записи для совершения покупок, если Пользователь дал согласие на создание учетной записи.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.7. Уведомления Пользователя Сайта интернет-магазина о состоянии Заказа.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.8. Обработки и получения платежей, подтверждения налога или налоговых льгот, оспаривания платежа, определения права на получение кредитной линии Пользователем.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.9. Предоставления Пользователю эффективной клиентской и технической поддержки при возникновении проблем связанных с использованием Сайта интернет-магазина.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.10. Предоставления Пользователю с его согласия, обновлений продукции, специальных предложений, информации о ценах, новостной рассылки и иных сведений от имени Интернет-магазина или от имени партнеров Интернет-магазина.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.11. Осуществления рекламной деятельности с согласия Пользователя.
+</p>
+<p style="color: #1f1f1f;">
+	 4.1.12. Предоставления доступа Пользователю на сайты или сервисы партнеров Интернет-магазина с целью получения продуктов, обновлений и услуг.
+</p>
+<p style="color: #1f1f1f;">
+ <strong>5. СПОСОБЫ И СРОКИ ОБРАБОТКИ ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ</strong>
+</p>
+<p style="color: #1f1f1f;">
+	 5.1. Обработка персональных данных Пользователя осуществляется без ограничения срока, любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств.
+</p>
+<p style="color: #1f1f1f;">
+	 5.2. Пользователь соглашается с тем, что Администрация сайта вправе передавать персональные данные третьим лицам, в частности, курьерским службам, организациями почтовой связи, операторам электросвязи, исключительно в целях выполнения заказа Пользователя, оформленного на Сайте интернет-магазина «Шарлиз», включая доставку Товара.
+</p>
+<p style="color: #1f1f1f;">
+	 5.3. Персональные данные Пользователя могут быть переданы уполномоченным органам государственной власти Российской Федерации только по основаниям и в порядке, установленным законодательством Российской Федерации.
+</p>
+<p style="color: #1f1f1f;">
+	 5.4. При утрате или разглашении персональных данных Администрация сайта информирует Пользователя об утрате или разглашении персональных данных.
+</p>
+<p style="color: #1f1f1f;">
+	 5.5. Администрация сайта принимает необходимые организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.
+</p>
+<p style="color: #1f1f1f;">
+	 5.6. Администрация сайта совместно с Пользователем принимает все необходимые меры по предотвращению убытков или иных отрицательных последствий, вызванных утратой или разглашением персональных данных Пользователя.
+</p>
+<p style="color: #1f1f1f;">
+ <strong>6. ОБЯЗАТЕЛЬСТВА СТОРОН</strong>
+</p>
+<p style="color: #1f1f1f;">
+ <strong>6.1. Пользователь обязан:</strong>
+</p>
+<p style="color: #1f1f1f;">
+	 6.1.1. Предоставить информацию о персональных данных, необходимую для пользования Сайтом интернет-магазина.
+</p>
+<p style="color: #1f1f1f;">
+	 6.1.2. Обновить, дополнить предоставленную информацию о персональных данных в случае изменения данной информации.
+</p>
+<p style="color: #1f1f1f;">
+ <strong>6.2. Администрация сайта обязана:</strong>
+</p>
+<p style="color: #1f1f1f;">
+	 6.2.1. Использовать полученную информацию исключительно для целей, указанных в п. 4 настоящей Политики конфиденциальности.
+</p>
+<p style="color: #1f1f1f;">
+	 6.2.2. Обеспечить хранение конфиденциальной информации в тайне, не разглашать без предварительного письменного разрешения Пользователя, а также не осуществлять продажу, обмен, опубликование, либо разглашение иными возможными способами переданных персональных данных Пользователя, за исключением п.п. 5.2. и 5.3. настоящей Политики Конфиденциальности.
+</p>
+<p style="color: #1f1f1f;">
+	 6.2.3. Принимать меры предосторожности для защиты конфиденциальности персональных данных Пользователя согласно порядку, обычно используемого для защиты такого рода информации в существующем деловом обороте.
+</p>
+<p style="color: #1f1f1f;">
+	 6.2.4. Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента обращения или запроса Пользователя или его законного представителя либо уполномоченного органа по защите прав субъектов персональных данных на период проверки, в случае выявления недостоверных персональных данных или неправомерных действий.
+</p>
+<p style="color: #1f1f1f;">
+ <strong>7. ОТВЕТСТВЕННОСТЬ СТОРОН</strong>
+</p>
+<p style="color: #1f1f1f;">
+	 7.1. Администрация сайта, не исполнившая свои обязательства, несёт ответственность за убытки, понесённые Пользователем в связи с неправомерным использованием персональных данных, в соответствии с законодательством Российской Федерации, за исключением случаев, предусмотренных п.п. 5.2., 5.3. и 7.2. настоящей Политики Конфиденциальности.
+</p>
+<p style="color: #1f1f1f;">
+	 7.2. В случае утраты или разглашения Конфиденциальной информации Администрация сайта не несёт ответственность, если данная конфиденциальная информация:
+</p>
+<p style="color: #1f1f1f;">
+	 7.2.1. Стала публичным достоянием до её утраты или разглашения.
+</p>
+<p style="color: #1f1f1f;">
+	 7.2.2. Была получена от третьей стороны до момента её получения Администрацией сайта.
+</p>
+<p style="color: #1f1f1f;">
+	 7.2.3. Была разглашена с согласия Пользователя.
+</p>
+<p style="color: #1f1f1f;">
+ <strong>8. РАЗРЕШЕНИЕ СПОРОВ</strong>
+</p>
+<p style="color: #1f1f1f;">
+	 8.1. До обращения в суд с иском по спорам, возникающим из отношений между Пользователем сайта Интернет-магазина и Администрацией сайта, обязательным является предъявление претензии (письменного предложения о добровольном урегулировании спора).
+</p>
+<p style="color: #1f1f1f;">
+	 8.2 .Получатель претензии в течение 30 календарных дней со дня получения претензии, письменно уведомляет заявителя претензии о результатах рассмотрения претензии.
+</p>
+<p style="color: #1f1f1f;">
+	 8.3. При не достижении соглашения спор будет передан на рассмотрение в судебный орган в соответствии с действующим законодательством Российской Федерации.
+</p>
+<p style="color: #1f1f1f;">
+	 8.4. К настоящей Политике конфиденциальности и отношениям между Пользователем и Администрацией сайта применяется действующее законодательство Российской Федерации.
+</p>
+<p style="color: #1f1f1f;">
+ <strong>9. ДОПОЛНИТЕЛЬНЫЕ УСЛОВИЯ</strong>
+</p>
+<p style="color: #1f1f1f;">
+	 9.1. Администрация сайта вправе вносить изменения в настоящую Политику конфиденциальности без согласия Пользователя.
+</p>
+<p style="color: #1f1f1f;">
+	 9.2. Новая Политика конфиденциальности вступает в силу с момента ее размещения на Сайте интернет-магазина, если иное не предусмотрено новой редакцией Политики конфиденциальности.
+</p>
+<p style="color: #1f1f1f;">
+	 9.3. Действующая Политика конфиденциальности размещена на странице по адресу <a href="http://www.sharlize.ru">www.sharlize.ru</a>.
+</p>
+<p style="color: #1f1f1f;">
+</p>
+<p style="color: #1f1f1f;">
+	 Обновлено «29» июля 2017&nbsp;г.
+</p> 
+</div> <!-- //.container-->
+</div> <!-- //.div style f8f8f8 -->
+<div class="container">
+	<!-- Футер -->
+		<div class="row footr">
+			<div class="hidden-xs col-sm-6  col-md-6 col-lg-3 col-lg-push-3" style="height:200px;">
+				<ul>
+					<li><a href="/cooperation/#dostavka">Доставка</a></li>
+					<li><a href="/cooperation/#dostavka">Оплата</a></li>
+					<li><a href="/cooperation/#vozvrat">Возврат товара</a></li>
+					<li><a href="/rasprodazhi-optom/">Акции</a></li>
+					<li><a href="/cooperation/#money">Возврат денег</a></li>
+					<li><a href="/cooperation/#usloviya">Система скидок</a></li>
+					<li><a href="/cooperation/#documents">Сопроводительные документы</a></li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-6   col-md-6 col-lg-3 col-lg-push-3" style="height:200px;">
+				<h4>Офис</h4>
+				<p>г. Иваново, пр. Строителей, д. 6, оф. 14<br>ПН-ПТ: 8:30-17:00 (мск.вр.)<br>СБ, ВС - выходной</p>
+				<h4>Магазин</h4>
+				<p>г. Иваново, Кохомское шоссе, д. 1, маг. 61<br>ПН-ВС: 8:00-19:00 (мск.вр.)</p>
+				
+			</div>
+			<div class="col-xs-12 col-sm-6 col-sm-push-6  col-md-6  col-lg-3 col-lg-push-3" style="height:200px;">
+				<div class="phone-number">
+					8 (800) 234 31 21
+				</div>
+				<div class="email">opt@sharlize.ru</div>
+				
+					<a href="/onlayn-katalog/price/price.xlsx" class="download">Скачать прайс-лист</a>
+				
+				<div>
+				<a href="https://www.instagram.com/sharlize.ru/" class="footer-icon-item footer-icon-item--inst"></a>
+				<a href="https://ok.ru/sharlize" class="footer-icon-item footer-icon-item--ok"></a>
+				<a href="https://twitter.com/Sharlize_37" class="footer-icon-item footer-icon-item--tw"></a>
+				<a href="https://vk.com/sharlize_ivanovo" class="footer-icon-item footer-icon-item--vk"></a>
+				<a href="https://www.facebook.com/sharlize37/" class="footer-icon-item footer-icon-item--facebook"></a>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-sm-pull-6 col-md-6 col-lg-3 col-lg-pull-9" style="height:200px;">
+				<div><img src="/bitrix/templates/sharlize/img/logotm.png" width="150"></div>
+				<div>ИП Иванова Е.С. <br><a href="/privacy/">Политика конфиденциальности</a></div>
+			<div><img src="/bitrix/templates/sharlize/img/logo3h.png" width="250"></div>
+			</div>
+			
+		</div>
+	<!-- ~Футер -->
+	</div>
+<div id="basic-modal-content" style="display:none"></div>
+
+
+
+
+ 
+<!-- HTML-код модального окна -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Заголовок модального окна -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+        <h4 class="modal-title" style="display: none;">Заголовок модального окна</h4>
+      </div>
+      <!-- Основное содержимое модального окна -->
+      <div class="modal-body">
+        <div class="quick-view-body"></div>
+      </div>
+      <!-- Футер модального окна -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: none;">Закрыть</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- ~HTML-код модального окна -->
+<!-- Скрипт, вызывающий модальное окно после загрузки страницы -->
+	 
+<!-- Скрипт, привязывающий событие click, открывающее модальное окно, к элементам, имеющим класс .btn -->
+	<!-- HTML-код модального окна заказать звонок -->
+<div id="modal-callback" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Заголовок модального окна -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" style="display: none;">Заголовок модального окна</h4>
+      </div>
+      <!-- Основное содержимое модального окна -->
+      <div class="modal-body">
+        <div class="modal-callback form_messages">
+            <h2 class="modal-callback__header obratnaya-svyaz">Заказать обратный звонок</h2>
+            <form method="POST" id="OrderCall" name="OrderCall">
+                <input type="text" class="modal-callback__input textbox" name="name" placeholder="Ф.И.О*">
+                <input type="text" class="modal-callback__input textbox" name="phone" placeholder="Телефон*">
+                
+                    <input id="time" type="text" class="modal-callback__input textbox" name="time" value="" placeholder="Удобное время">
+                    
+                
+                <p class="required"><span>*</span> - поля, обязательные для заполнения</p>
+                <div>
+				<div class="my-clearfix"><input type="button" class="modal-callback__submit button_phone" id="btnCallOrder" value="Заказать"></div>
+                    <br>
+                    <br>
+                    <div id="messagesCallErrorDiv"></div>
+                </div>
+            </form>
+        </div>
+      </div>
+      <!-- Футер модального окна -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: none;">Закрыть</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- ~HTML-код модального окна заказать звонок -->
+
+	
+	
+<!-- ~HTML-код модального окна подарок -->
+<!-- Скрипт, вызывающий модальное окно после загрузки страницы -->
+	 
+<!-- Скрипт, привязывающий событие click, открывающее модальное окно, к элементам, имеющим класс .btn -->
+	<!-- HTML-код модального окна заказать звонок -->
+<div id="modal-podarok" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content nfoned">
+      <!-- Заголовок модального окна -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" style="display: none;">Заголовок модального окна</h4>
+      </div>
+      <!-- Основное содержимое модального окна -->
+      <div class="modal-body">
+        <div class="modal-podarok form_messages">
+           
+		   <a href="/news/2060491/"> <img src="/bitrix/templates/sharlize/img/okno.gif" alt="На главную" class="img-responsive" width="590"></a>
+		   <h2 class="modal-podarok__header "></h2>
+<div class="modal-podarok__contents">          
+		  <form method="POST" id="OrderPodarok" name="OrderPodarok">
+             
+              
+                 
+                <div>
+				<div class="my-clearfix"></div>
+                    <br>
+                    <br>
+                    <div id="messagesCallErrorDivPodarok"></div>
+                </div>
+            </form>
+		   </div>
+        </div>
+      </div>
+      <!-- Футер модального окна -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: none;">Закрыть</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- ~HTML-код модального окна подарок -->
+				
+<div id="toTop">Наверх</div>
+<script type="text/javascript">
+/*
+$(document).ready(function(){
+ $('.bx-filter-parameters-box').hover(
+		function () {
+			//show its submenu
+			$('.bx-filter-block', this).slideDown(150);
+		}, 
+		function () {
+			//hide its submenu
+			$('.bx-filter-block', this).slideUp(150);			
+		}
+	);
+ }); */
+ $(document).on('click', function(event) {
+  if (!$(event.target).closest('.bx-filter-parameters-box').length) {
+    // Hide the menus.
+	$('.bx-filter-block').hide();
+  }
+}); 
+$('.bx-filter-parameters-box').click(function(){
+  $('.bx-filter-block', this).show();
+  $('.bx-filter-block').not($('.bx-filter-block', this)).hide();
+});
+</script>
+<script type="text/javascript">var arJSFavorit=[1694890,1699649,1298480,852383,442072,2976,2099296,1882295,1085259,1085258,1755587,1027777,1944816,413,2099296,1551120,1085221,1241623,1298556,888219,976904,1841882,2155518,1882295,1207452,1207451,1876740,2029369,853730,1704273,1704273,1704273,1704273,1704273,2064773,2002387,2002386,1694871,1676330,1207452,1242139,2045336,1551120,2068752,1551118,1551119,2030055,1678956,2073815,1428082,1977988,1977581,853730,1241624,1241623,1142649,1142648,976904,1681608,1681607,1704273,2027096,1223833,1981729,1965857,883882,2080534,2085252,1046917,1681576,1681634,1578213,1681634,1704273,1704273,1734608,852383,1263249,346265,0,1986597,2069739,2002386,1678957,1944816,1967662,1865222,2033154,1428082,1977987,1977988,1926442,1977585,1480211,1267991,1464522,1581455,1852198,2079798,2080534,1944816,1328939,2077809,0,1085221,1263249,1841882,2085256,1581428,2098712,2079110,1573239,1962042,1242139,1852198,1962434,1581505,1681559,2079798,1693371,1693372,2064773,1912972,1914748,1914749,1142648,1781486,1085259,1681559,2029369,1581455,1551120,2050911,1852198,1242141,2079798,2080534,2155518,1525307,2085413,1986600,631515,1681579,1730634,1011405,1242138,1676330,1050884,2064773,1977987,1982078,1982077,1220406,1238117,400,1207451,2108097,2108099,1085258,1085423,1242142,1930423,1918905,1926442,1926441,1966630,2104057,1848235,1704306,1962434,1681559,1820986,1820988,1581505,1156871,1454323,2078260,1011406,2108097,2108099,1454323,2085413,1734608,2078260,1704273,2083861,1241623,1977579,1681652,1681653,1142648,1772208,1935841,1681634,1730634,1578213,2163689,1681634,1981947,1821025,1730634,1704273,1886281,2099296,2083861,2085413,1772208,400,1002093,93825,1681626,1967666,1494777,302084,1835025,1730634,874862,1420490,558197,1011405,1841882,2105449,2077807,2082826,1730572,1494777,1897767,1841932,1086874,1086873,1681568,1693336,875969,1887779,1897766,1886281,1886261,1886259,1886260,1897768,93825,1897884,1257872,511789,1681634,2083861,0,0,1990243,2083861,2085413,2167039,1223833,400,329498,2083861,853538,1494777,1681652,2163689,2078516,2085255,1990657,1516276,1432897,1312392,1494782,1516275,1046917,1259645,1730634,1704273,2029452,1423758,2155246,2155518,1681634,1897884,2163689,2155518,400,1914748,976904,1930422,1766280,346265,1086875,1086876,1432897,1291109,645133,2155518,2155518,1772208,2079798,1982863,1704273,1730634,1573239,1704273,631394,1011405,2108097,1085260,1926442,1432899,1930423,1772191,1704273,1986597,1986598,1771104,1795935,1244051,1432897,1841932,2117356,1977990,1766281,1981945,1967666,1967663,1267991,195922,1704273,1876869,1704273,2078260,400,1734608,1897767,1830240,1516276,93825,1678231,1011402,1704273,2033155,2155518,1432899,1704273,1327638,2108099,1982078,874862,1578213,2003813,1990282,1432897,2078260,1578213,1965856,0,1681634,1428099,1441495,1306124,509012,1052497,6081,2163689,1841931,1503014,1454323,2085413,2078260,1841932,1681637,93825,413,1897884,346269,1897767,874862,1887779,1981729,1986596,1772191,400,1681576,1704273,1478786,1681665,1896492,1704272,1704273,1478750,1772206,1967666,1816699,884793,1681568,1993975,1704273,1242139,1704273,1242139,1841882,1771104,2054687,1241624,976904,1914749,1766280,1241623,6081,2078260,1681608,1681674,976905,853545,1897884,1441495,874862,1990282,1947624,2000092,1684064,1927698,1681653,1011402,1581455,2105450,2078516,2085255,2082826,2080534,2163687,1811418,2167039,930734,930735,1993976,1086873,1420490,1681576,1704306,1693371,2000092,1833,2000092,2098712,1982078,1982077,1811418,1993974,1772206,2045336,2000092,1897766,2045337,1242141,1242142,1242139,1963891,2069740,2069739,1977987,1977581,1977988,883882,1238117,884793,1841882,1011197,876294,876293,2000092,1681634,346269,2185039,0,1478778,1478646,390,2174039,1207452,1977986,976904,2000092,2079797,2000092,1027777,2000092,1306124,1914748,1914749,2185032,2000092,2162470,2077810,2085255,1694891,1981729,1681640,2085252,2000092,1681634,93825,2085413,1027773,1306126,1841931,1096988,2074421,2163689,2185033,2185034,2185041,2185042,2976,6081,553590,553589,1230932,93825,346269,1502332,1693347,771666,852383,889434,509012,1681634,2108097,1967666,2000092,2174039,1887779,1876611,2099296,1681634,2185033,883882,1662180,1986599,1986600,2027096,2078260,1976183,1478765,1990657,2000092,1977989,930732,1681634,2050912,1693372,369817,874861,4300,4044,1833,421,1963891,2167039,1897762,1581455,2000092,2000092,1156871,2105450,2002386,1827430,1475666,1693347,2185041,2000092,1848519,1876868,1897761,2105449,1578213,2068752,1681576,1551120,1328941,1841931,1551118,1328942,2050911,1503014,1454323,1962042,2085413,2045336,1852198,1962434,1581505,2045337,1681559,1156871,2079798,1930423,1693371,1693372,1977987,2000092,1966629,1947624,888219,1684064,1658573,1478786,1478751,1478750,1881898,1876785,1693346,1927698,1969722,1263247,1876648,631515,1207451,1901690,1684386,1705561,1681581,1681579,1681578,1693347,369817,874861,1471194,2185038,2163689,1897761,1983243,1503014,2048526,2045337,1977990,1930422,883643,1494782,1046917,2185032,2167039,2082826,2108099,1242141,1962434,2000092,2174039,2000092,2000092,1986598,1306126,2073814,1694889,1306126,2105450,2105449,1002093,400,1475666,1263242,1983247,2185038,1841882,1734608,2073814,1578213,2185041,1681634,2085413,2155246,0,0,1882295,1816699,884462,2185036,2000092,884459,2083863,1480211,2000092,2000092,1681634,511789,2000092,1606067,1494782,2170849,2000092,2000092,1986600,2000092,1681634,2163688,2163687,2000092,1681634,2078260,1876868,1876609,1636854,1478765,2185038,2000092,2000092,2000092,2106272,1503014,2085254,1981945,2029372,2078260,1990282,1636854,93825,1693347,1606067,1478732,876294,6081,1897762,2000092,1976183,1085259,1085260,2000092,2045336,1930286,1242141,2045337,1678957,1930423,1694871,1050884,2002386,2064773,1050883,1085221,2033154,2029452,1977986,1977987,1977988,1977581,1926441,1977585,2029455,1966629,1965856,1816699,1298557,888219,884459,1681607,400,1207451,1428066,1291109,1787179,1795935,2054687,1803648,2099296,2000092,1681634,1681634,2000092,2170849,2117356,2098712,2099296,2045336,1930423,1525307,2033154,2085252,2069739,1977986,1977987,1977585,1551120,1981729,1681634,1681576,1327638,2083863,1328942,1887912,2050911,1551119,2030055,2069739,2050912,1681639,2080534,2002725,1027776,1223833,883643,1681634,1694889,2000092,2185034,1841932,2163689,1882295,1983244,2163687,2162470,1027776,2117357,1914748,1914749,93825,1420495,1876609,1636854,1516276,1897766,1924346,553589,553590,1464522,369817,1267991,2033155,2002734,1990656,1848235,1966629,2000092,2173651,1693372,1207452,1965857,2029371,2054034,2029455,1993975,1965856,1681634,0,2163687,2163688,2000092,2003813,1887779,1432899,1990657,2000092,0,2000092,2000092,1755587,1471194,2185041,2162470,2105450,1681634,973135,2085413,1475681,2000092,2079798,1475681,1962433,413,558198,889434,509012,876294,1914748,1863350,1887779,1897766,1780871,93825,553590,2976,2000092,1681634,874862,1263249,2000092,0,1981037,2000092,0,1681634,2170849,2082826,1681634,2000092,1926442,874862,1865222,2000092,1464522,2000092,1241623,1766280,1781486,1291109,976905,1002093,1766281,1681608,976904,1977986,2029452,1977987,1681634,2000092,1962434,1267991,1976184,1734608,1693372,1693371,1662185,1995905,1681559,1704306,1824577,2079797,1969722,1263247,1681568,1011402,2104057,2105450,2029372,1516276,6081,2085256,1581429,1852198,2082826,1581505,1156871,2079798,1912972,1914748,1914749,1927698,1876868,1086875,1086876,1420495,2185040,2085413,1986596,2185032,1881898,1876785,1684064,1636854,884459,1681634,1927698,369817,1681634,2000092,1981945,2155246,2155518,1681634,2000092,1681634,2099476,1841882,2000092,2000092,2170849,2173651,2033154,2033155,1977987,2000092,2170849,1723350,2170849,1821025,1242138,1704306,1693371,1693372,1986594,1755587,2000092,2163687,553589,2054034,1982863,1986600,2085413,1986599,1986598,883882,1986596,1772191,2068752,1681576,1242138,1551120,2045336,1242139,1841931,1930286,1678957,1328942,1085221,1977986,2029452,1977987,1468520,1423758,1816699,1298557,888219,1428016,1327636,1327638,1977581,1516276,1267991,1699649,1464522,1259645,1681559,1475681,1681640,1085259,2163687,1986595,893034,1432897,1011406,1085258,1242142,889434,1283118,1230932,2170849,2050618,2185036,1962433,1085259,1681571,1897766,400,874862,2167039,400,2000092,2099476,1681571,1681634,1684064,1263247,2000092,876294,2104057,1848235,1912972,2000092,1924346,400,1441494,1755587,1327636,1471194,2185753,1983246,2079797,2033154,1969722,1263247,1478786,1881898,1896492,1475666,1478660,2029452,1977581,2029369,1468520,1982078,1423758,1790627,1882295,2050618,1965856,930732,1283841,1986594,1986596,1772191,1681581,1085260,2105450,1865222,1011195,1967666,1267991,1914749,1935841,1863349,1772210,1086875,1086876,1242142,1704306,1926441,2108098,1914748,1681634,1681634,2080534,2080534,2029371,1926442,388,1824577,1852198,1693371,1693372,1734608,973135,2054034,1982865,1982863,1982864,2002725,1681634,0,2163689,1863349,2068752,1050883,2116324,1986599,1986600,1986596,1681581,1681579,1681578,2107410,1480211,2085256,1581428,2079110,1573239,2080534,2032079,2073815,2033155,1876611,369817,930732,874862,874861,1684064,1723204,1478660,1471194,2155246,1096988,1085259,1085258,1085423,1581430,1085260,1962434,1678957,1930423,1734608,2064773,1525307,1977987,1983244,2029372,1816699,883882,1142648,1298557,884462,1681640,638130,883643,1681607,1207451,1327636,2000092,1772207,1772206,2000092,1681634,2000092,2170849,1944816,0,2162470,1085258,1242141,1085259,1678957,2000092,440610,1242138,1876819,2000092,1841882,2117357,2000092,1678957,1977986,1207451,2104057,2000092,1852712,2105450,1011197,1897766,1977987,1468520,1990243,0,1772206,2000092,1876609,1681653,1681590,1772210,2162470,1681634,2000092,2185041,2185753,1478660,1901690,1681571,1704273,1704271,1291038,1291037,1283118,2000092,1681634,2000092,2000092,1693347,2000092,2170849,2170849,1681581,1046917,2030055,2173651,1967666,1636854,2185032,2163689,1897766,1841882,2000092,1684064,1927698,440610,1897766,1827430,1475666,1478778,2185034,1238117,1681665,2000092,2000092,1962435,2105450,1085259,1085258,1242142,1242141,2045337,1976183,1242138,2045336,1242139,1930286,1676330,1050884,2064773,1050883,1085221,2029452,1977987,1468520,1816699,1298557,888219,1681607,400,1441494,1678955,1327636,1327638,2105449,1820986,1464522,2185038,1681639,893034,1096988,1681576,2080534,1525307,2003813,1983244,1986598,1350598,1977585,2000092,2163687,2105450,2029372,1876819,1681639,1011197,346265,1516276,1312392,1027776,413,1011406,1734608,2054034,2000092,1882295,2000092,2000092,2085254,1681634,2085413,1876609,1011197,2050911,1525307,1912972,2000092,2000092,2000092,2078260,2077810,1681634,2173651,2173650,2116324,1790627,2000092,2173650,2003813,1993974,1986596,1969722,1986597,1694889,1966629,1428066,369817,1681634,2000092,2000092,2029371,2002734,1464522,0,1681653,1464522,1962434,2079797,1787179,2163688,2073814,1912972,2078260,1834550,1772207,1772206,1011197,1848235,1863350,1863349,1772210,1681568,1886281,1924346,400,976905,1441494,1428016,1755587,1780871,1636854,1002092,2078260,1681634,0,1876820,2000092,2000092,1328941,1962042,2000092,2000092,553590,553589,1986598,883882,1876611,883813,1901690,1963891,2003812,973135,0,2054034,1990282,1263249,2170849,1681634,1263247,2170849,2170849,2108097,1681576,1328940,1882295,2000092,2000092,1681634,2170849,638130,2000092,1681634,853543,1085258,1242138,1242139,1242142,2045337,973135,1977987,1983247,1983246,1766280,1816699,1876610,1876869,1876611,1990282,2000092,1681634,2000092,1927698,1772191,2000092,1298557,1704273,883813,2029453,2029455,1681674,400,1681634,2000092,2085413,1983243,1993974,2000092,2105449,1350598,1780871,400,1636854,1827430,1693347,1581505,2000092,1993974,883813,400,2085413,1734608,1914748,509012,2000092,2069740,2079797,2173650,1977987,1982078,1816699,2085256,1681634,1981677,1694871,1468520,2000092,1704306,1693371,1693372,2000092,1681634,2000092,2000092,1681634,1876609,400,1428099,2163689,1681634,2000092,2185036,388,1704306,1962434,1662185,1734608,1693372,1525307,973135,2069739,2069740,2054034,1982863,1982865,1982864,1926441,2003813,2003812,1990242,2002725,1981947,1981945,1986599,1986600,1986597,1986598,2027096,1965856,1965857,883882,1684064,1658573,1478786,1478751,1478750,1881898,1263247,1969722,1876649,1876648,1986596,1976184,1967666,1935841,1874862,1863349,1681571,638130,631515,1821025,1046917,1432897,1901690,1694890,1684386,1681579,1681578,1694889,1291038,1291037,1244055,1244052,1693347,1478660,874862,369817,874861,930732,1478646,1306126,1283118,930734,2000092,1681634,1983247,2104057,2000092,1242138,1930286,1242141,1678957,1676330,973135,0,1966630,1816699,883882,1298557,1350598,1827430,1420490,1982077,1816699,1207451,2002387,400,2000092,1662185,2045336,883815,1795935,1220406,2085413,2085413,1816699,1983247,2085256,388,2077809,1816699,1848235,1011195,2155518,2155246,1681634,1480211,1581429,2033155,1914748,1927698,1681634,1681634,0,1478660,1478662,1723204,1681634,1681634,1242141,2045336,1816699,1002093,2000092,2054034,2000092,2108099,2170849,1681634,2000092,1681634,1704273,1982078,2099296,4300,1704273,1441494,1704273,1681634,1704273,1681634,1257753,1502514,1820986,1681634,1242138,1242141,1676330,2002386,1986597,883882,1967662,1865222,1011406,874861,930732,421,2165180,1693372,1581430,2054034,1876868,2165180,1704273,1681634,1704273,1704273,1704271,1965857,2165180,1853519,1852712,1940461,973135,1704306,1930423,1207452,1693371,1693372,1694871,1704273,1704273,2045337,1573239,2165180,1475666,1471194,1085258,1242141,1432899,1428066,1428040,1993974,1684064,1681634,2163688,2167039,1475545,346265,1263247,1982864,2003812,1242139,2045336,1678957,1694871,1676330,1050884,2002386,1050883,1966629,1986601,1993975,1986600,1965857,1423758,1241623,1238117,1207451,1464522,1027775,1027773,1027777,390,2198677,1681634,1704273,638130,1257753,2185039,1681634,1704273,2165180,2106272,1693372,1681634,1914748,2163689,1990282,1986596,2085254,1207452,1678957,1478750,1681634,1704273,1982864,1704273,2165180,1704273,0,1678957,1207452,1694871,1977988,1241623,884459,1207451,1327636,1052497,2047988,1990656,1681634,2099296,1986595,1986597,1986598,1990282,883882,1681581,1694889,645133,2163687,2163687,1935841,2192061,1156871,1704273,2165180,1681634,1681634,1441494,2027096,1306126,2185032,4300,1207451,1681576,2192061,853730,1704273,1982863,2003813,1423758,1298557,1142648,884459,1876820,1876611,1967666,1011197,1263249,1257753,1312392,1678955,930734,2173650,2165180,1704273,2033155,4044,1734608,1772206,1772207,1841932,1699649,1755587,511789,566483,2185032,1230932,0,1704273,1704273,2165180,2163687,1681634,1876609,2170849,2167039,1969722,1704273,976905,1242138,2079797,1704273,1681634,1704273,1704273,2077809,6081,2163687,1704273,1606067,1704273,1704273,2054034,1662185,1995905,1981037,1241623,1876739,1027775,1766281,1766280,1704273,1681634,1704273,884793,2033155,2033154,1257753,2003813,2003812,1990242,2198677,1930423,1428066,2170849,2085254,2155246,1944816,1899151,2105449,2033155,1573239,973135,1962041,1982078,1965856,1790627,2069740,1914748,884462,2029372,883882,1876610,1876740,1876869,1876611,1257753,1027776,1420489,1704273,883643,884457,884793,2199169,1681667,1704273,1986597,1694889,1428066,1704273,1704273,1772191,1962434,1704305,1678957,2054034,1681653,1086875,1704273,1704273,2198674,1142648,2191484,1475545,2080534,1283841,1983244,2199168,1142650,2068752,1704273,1681667,2104057,1428099,2199168,1704305,2107410,1581429,2198675,853730,1681559,2198675,2106272,2170849,2192061,2192062,2199173,2192065,2198674,1678955,1863349,2198675,1704273,2198675,1704273,2105450,2192061,1468520,853730,853729,1681667,1704273,1432897,1478750,2054034,1704273,2198675,1096988,1704273,1704273,1704273,1681667,1704273,1704273,1816698,1027776,1986597,1704273,2192061,2192062,1704273,1681667,1704273,1986597,1986598,1244054,2198675,2198674,2192062,1704273,1704273,1704273,1263249,1681667,1841882,195922,1011195,876293,1503014,1982865,1986600,1986599,883882,1963906,930734,1723349,1704273,1096988,1704273,1772191,2199169,2199167,2199168,1242138,2045336,1242139,1816792,1734608,2165180,2184702,1704273,1967666,1963906,1993974,1982865,1681667,1704273,1681655,1681655,1930423,976905,1681667,1681655,883643,1681667,1772191,2198675,1681655,2167039,1681667,1681655,1681655,2167039,1876609,1658573,1681667,1011406,1658573,0,1658573,1816793,1551118,1658573,1966629,2184702,1914748,1257753,2104057,1658573,1658573,1658573,2106272,2184702,2192063,1581429,1581430,1852198,1156871,1086876,2033154,1914749,2079110,1573239,1257753,2173650,1475681,1096988,2083863,1658573,1681630,1432899,1962434,2108098,1220406,2107410,1581428,1573239,1257753,1263247,2098712,1881898,1901690,1896492,2085252,2108097,1658573,1658573,1658573,1681667,1816698,1681667,2198675,1658573,1658573,1681667,0,1926323,2199169,1982865,1963960,511789,1734608,1681653,1681652,1573239,2079110,1969722,1263247,1681667,853730,1242139,2192061,1468520,853730,1681607,884457,1678956,2054034,1982864,2003813,1986595,1986597,1986598,1244055,558352,1966630,1085423,1085260,1085259,1085258,1242142,1901690,1896492,1681667,1881790,1658573,1681667,1658573,973135,1681667,1658573,1291038,1291037,1963960,1881898,1876785,1693346,2163687,2105450,720033,2167039,1658036,1658573,1681667,1658573,1990282,1658573,1977990,1658573,2198675,1658573,2192062,1962434,1681667,1723349,1681667,1658573,1681667,853729,1681608,1694871,396,1658573,1658573,1658573,1658573,1658573,1581430,1681667,973135,1681667,2198675,2104057,1962434,1963960,2192062,2211667,2033155,2199163,2184702,1986597,1681667,1990656,1681667,1986596,1681667,1658573,2211667,1658573,2167039,2185032,1681667,1658573,1291038,1658573,1658573,1291038,1816699,2198675,1681667,1965856,1781486,1291109,1876823,1914749,1897761,1428099,1681667,1207452,1681667,1681667,1658573,2199169,1681667,1918905,1658573,1658573,1658573,1658573,2085252,2203801,1658573,1658573,0,2192063,2192064,2184702,2211667,1011406,2199169,1982077,1656737,1681667,2006329,2006329,1681652,2203801,1328939,1263249,346265,1977988,1223833,1052497,1142650,1780881,1241624,976904,2198675,1967665,2006329,1681667,1993975,1244055,1085260,1681608,1298557,1790627,1220406,976904,2006329,1242141,853730,1223833,2078260,2050911,2006329,1693372,2199164,2002387,1694871,1876648,1990243,1581428,2032079,1865222,2047988,1990656,1993974,1986598,2006329,2175484,1658573,2006329,2006329,1693372,1876649,1967665,1263242,388,396,1011406,2015784,2006329,771666,2205158,2203801,2205153,2205155,2205156,1656737,1362013,1238117,1220406,1790627,1328942,1982078,1982077,1990656,1993974,2015784,1967665,1681667,2029369,2085254,2173650,1257753,558352,2205154,2205153,1328941,2198674,0,1681667,2205154,2205153,2205154,2205154,2205154,638130,1914748,2079798,1681667,2205154,1656737,2199167,2199172,2199168,2192062,2191484,2106272,2085256,1982078,1581428,1982077,1551119,2015784,1257753,1503014,2104057,1853519,1681630,2198677,1790627,1328940,1502514,2192062,1085258,1977585,2205154,1681667,2205154,396,2063539,1681667,2205154,1876869,1876611,1876609,1494777,1963891,1771104,1478662,2054034,1257753,2099476,2205154,2205154,369817,1963891,421,2205154,1876868,1050883,1926323,1581561,1046917,1944816,1441494,1428016,4300,4044,1681634,1771104,1259645,413,720033,1027773,1573239,1027774,1002094,1259643,1259640,930732,1283841,853543,1306126,417,421,2185032,1983247,1897761,1897762,4300,973135,1244056,1259645,1503014,1681653,2198677,1693372,2205154,1821025,2202268,2069739,2069740,2054034,2027095,1494777,1821024,1681651,1684064,1681608,883882,1882295,1882294,1967665,1821024,1853519,1982864,1821025,1263242,1930422,1494787,1046917,2167039,1841910,4044,1821025,1291037,1821024,1681570,1896492,1478662,2205154,1865222,2027095,2167039,930732,2054687,1656737,2205158,1821024,1841910,1841909,1841908,1678956,1306125,1876609,396,1926323,1912972,1723349,1551120,1420495,1454323,1944816,1027774,1420489,876294,876293,2205155,2211667,1432899,1428040,2063539,883643,883815,1876740,1494787,2079110,1983243,2027095,1681627,1428016,1027774,1914749,2205156,1428040,2205154,1681667,1002094,976910,1327638,2045336,2165180,1983243,1990282,1259645,1990656,1693346,1681667,2205154,2205154,1085221,1662185,2205154,2205154,2205154,1306126,1981945,1244052,1494782,1259643,2108097,1853519,0,2033154,1983247,558352,2205154,973135,2163687,2205154,2203801,2205154,2205156,369817,1876823,2205156,2205154,638130,720033,421,874861,2205155,2054034,973135,2205155,2205156,2205158,2205153,2205154,2205154,1876820,2205158,1432897,2205153,2205156,2198677,2205154,1912972,1681665,2205153,2205154,1681667,2205154,1892754,2205154,2205154,1681667,1924346,2205154,1681667,2002725,2205154,1734608,2205154,1912972,2002387,1678957,1428040,2116757,1977585,2002734,1981677,1011197,1981037,2027095,1781486,645133,1681570,1944816,1027774,1684064,1420489,876294,553589,566483,1027775,1241623,645133,1977990,1681667,1681667,2029369,1678957,884459,1977987,1551119,1257753,1681630,2205154,2205154,2205154,1681667,1841908,1420489,2027095,1876868,1405662,1882294,2205154,1965856,1259643,1494777,2205154,1681667,2205154,2050911,1681652,2205155,2205156,973135,2205154,1918905,1238117,2199171,1841909,1841908,2198674,1328942,1328940,2199169,2199167,1242139,1085220,2002387,1241624,1977987,2068752,1242142,645133,1681667,2205154,2205154,2205154,1478751,1765851,2205154,1926524,2205154,1681667,2199167,1494782,2205154,2205158,1405662,2029371,2080534,2032079,2002734,1981677,1882294,1912972,2078260,1298556,1646476,1681581,1327636,976910,1327638,1420489,2203801,973135,1681576,1965857,1965856,930732,1863349,2033154,2085252,2054034,1821025,2003813,2003812,1990242,2027095,1986598,1924346,1771104,1046917,1787179,1795935,1050883,400,888219,1865222,1967662,1298556,2085254,1096988,1681627,1681628,1327636,1327638,976910,195922,853543,884461,2000093,1478750,1478751,1881898,1892754,1681571,1681570,2211667,973135,2116757,1085423,2192065,1085259,1085258,1085260,2199172,2199171,2199173,1242141,2045336,1242139,2155519,2002387,883643,1694871,1781486,1977585,2029455,883815,1876739,884462,2033155,2047988,1965857,884459,1983247,2203801,2050618,2205154,2205156,0,1681667,2205154,2205153,1681667,1681667,2205155,2205154,2205154,2205154,2205154,2205154,1681667,1681667,1681667,1681667,893034,1011197,2163687,2205154,1681667,1405662,1681667,1681667,2205154,1681667,1681667,1085220,2205155,2205155,2205158,2201648,1681667,1876649,2073814,976910,1841910,771666,1681667,2165180,973135,1662185,1681667,2205155,2205155,1681667,0,1681667,1681640,2198677,1693371,2192063,2085256,2108099,2205155,2198674,2205155,0,1047160,1011197,4044,2167039,1963891,930735,1681667,2976,1681667,1432897,1876819,2105450,1027776,1963906,2002734,2080534,1882294,1263247,1876609,2167039,0,2205158,2205155,2205155,2205155,1723349,1681667,1681667,2205155,2205155,2205155,1681667,2205155,884462,2205155,1694889,2175948,2205155,2205155,1926442,2108097,421,1963891,874861,2199165,2029369,1876739,1047160,2205158,2205155,2163688,1263249,1047160,2200595,2211668,2205156,1494777,1027776,1853519,1827430,2027095,2104057,2079797,1681667,2155246,2211509,2114850,2211509,1681667,1681667,1681667,2211509,1681667,2205155,2211509,2205155,1681667,2211509,1990245,2214218,2203801,2205153,973135,2027096,1841910,1841909,1841908,1291037,1283118,1824577,2205158,2205153,2029369,1312392,853729,2163687,2199169,1242139,1242138,2211509,2211509,2211509,1681652,1863349,2199165,2199164,884462,2155518,1967662,1494787,1930422,1816794,1926539,1676330,2064773,400,852383,2192061,884457,1965857,930732,1882294,2205153,2211667,1428040,1441492,396,1841910,2163687,1047160,1581561,1962433,884457,1681667,1881898,1681667,2211509,884457,2211509,1681667,2211509,1678957,2211509,2211509,2211509,1681667,2211509,2211509,0,2211509,1681667,2192061,1771104,1420489,400,1050883,2002734,1882294,1914748,1914749,2078260,1927698,1662185,1263247,1681651,566483,2107410,2041129,1852198,1086875,2185040,1874862,1912972,1841910,1841909,1841908,2199164,1478764,2205158,1681667,2165180,1876740,2205158,1142646,1046917,1681667,413,2205153,2199167,1242138,2201648,2029452,1468520,2192061,853730,2191484,1085221,1983246,2211509,1681667,1142649,1027776,2167039,2211509,1681667,1681667,2098712,2205923,1267991,2082826,2080534,1882294,883643,2199167,0,2211509,2029452,2211509,2054687,1723349,2211509,1681667,1704271,2211509,2205155,1986599,2205923,1853519,2211509,0,2173652,1468520,2198677,1681667,2211509,1787179,2211509,1327636,1986595,2211509,1085260,1990245,1977585,1142650,853730,884461,1681667,1681628,0,2163688,0,1924346,2211509,2211509,2211509,2211509,1681640,2063539,1581428,1681667,2211509,2211509,2211509,1681667,0,1263247,1681667,1986599,1681667,2211509,1681667,2211509,2211509,2211509,1681667,1693371,2211509,2211509,1681667,1681667,1238117,1681667,884457,1681667,1681667,2211509,2211509,2211509,2211509,2199168,2199167,1242138,1242139,884459,853730,1790627,884462,1787179,2199169,771666,1977987,1977986,2192061,2211509,2211509,1681667,1681667,2218444,2211509,2211509,1220406,2203801,2211509,2205154,1681667,1681667,1681667,2205154,1681667,1259640,2068752,1551120,1551119,1681667,2218444,2205154,2006329,1681665,1478661,1478662,2205154,2205154,2205154,2205154,2205154,2205154,1914748,1914749,1967662,1841909,1841908,2163688,1263249,1047160,1257753,1926323,1420489,2205154,2218444,884462,1551120,2030055,1730331,1681630,2175677,1052497,2173652,2173651,2085254,1944816,2192062,1156871,1086875,638130,1263242,2199169,1551120,1962436,1681559,2205154,2205154,2205154,2218444,1990245,2205154,1681667,2205154,1681667,1681667,2218444,2205154,2205154,2173652,2211668,1681667,1681667,1681667,1681667,1914749,1986600,1494782,1257753,720033,2205154,1876648,1267991,1681559,1432897,1328940,1681667,2192065,1681667,1681667,2205154,2198677,1681667,1681667,2205154,888219,2205154,2205154,0,1803648,1730331,1551120,1976183,1551119,2030055,1965857,1965856,1766281,1681667,1681667,1681667,2198677,2205154,2205154,2205154,2205154,1681667,2205154,1882295,771666,1681667,1681667,2205154,2205154,2205154,0,1681667,2205154,2205154,2205154,2210585,2211508,2205154,1681667,1681667,1681667,1681667,2218444,2211509,2211509,1681667,2211509,2211509,2211509,1142646,883813,1965857,1681667,2211509,1478647,2211509,1681667,2102953,2211509,1681667,1681667,1681667,2211509,1681667,2211509,2211668,2209020,1681667,2211509,2211509,2211509,2211509,1863349,1863350,1681667,2211509,2211509,1681667,1681667,1681667,1681667,1681667,2235292,1681667,2211509,2211509,2211509,2211509,2211509,2211509,2211509,1681667,1990242,1681667,1681667,2211509,2228662,2229119,2229109,1298534,1298556,2199169,2199168,1242138,2045336,1242139,1085221,1681667,2211509,2199173,1681667,2211509,1681667,2235292,2211509,1681667,1681667,2175948,1681667,2211509,2235292,1681667,1011197,2105449,388,1963891,1772191,645133,2203800,2201648,2211509,2211509,2211509,2211509,2211509,645133,2211509,2235291,1328941,1681576,1328942,1551120,2175677,1551118,2079110,1876611,2211509,2173651,2211509,2211509,2235292,1681667,2211509,1681651,2211509,1681667,1263249,1011406,1142646,2173652,1944816,2211509,1897762,2211509,1681667,1681667,2211509,2205153,2211509,1681667,2211509,2211509,2211509,1977584,1142650,1468520,1002091,2214218,1027777,2002725,2080534,1993974,1986601,2054034,2203800,2211509,2211509,2211509,2211509,1681667,1681666,2211509,0,2211509,2211509,2050911,1011406,1011197,1882294,2211509,2211509,2211509,0,852383,2976,853543,645133,1993974,2003813,2003812,2235593,2228662,2235291,2229119,2229109,2228661,2228664,2175948,2211668,2198674,1897762,388,1362013,2054034,2210585,2205153,1011406,2211509,2198674,1002091,1681609,1681608,2002387,884459,1328942,1328940,2068752,1551120,2175677,2050911,1551119,2030055,1047160,1011406,645133,2105450,883813,1441494,1428016,2167039,1694890,413,720033,390,852383,2054034,1821025,1420489,1306125,1052497,2102954,2102953,1922319,1926323,2235291,1882295,1977584,2205153,2054687,1986601,1681614,1765851,1646476,2211509,2211509,2211509,1551119,2218444,2211509,1428066,2211509,2211509,400,1926442,1926441,2108097,2108099,1981677,2002734,2002725,1882294,1863350,2029454,1876868,1765851,1681614,1646476,1441494,1428016,1876609,2167039,1327636,195922,2027096,883882,1981945,1681581,1681579,1681578,1420489,1306125,1052497,1681667,0,2211509,2027095,1981945,2203800,2003813,1983244,1986597,1142646,1046917,2027096,1681667,2032079,1962433,1967662,1681651,2054034,1982863,2211509,2211509,1681667,2211509,1681667,2211509,1723350,2054034,1965735,1681667,2201648,930735,1681667,2211509,2211509,2073816,1693371,2211509,1772191,2192061,1983247,1977990,1027777,853543,852383,2976,2175677,884461,1681667,2085255,2082826,1681667,1011406,1263249,1681667,1046917,1983246,2228661,1882294,1965856,1965857,1478764,1965857,2228664,1327636,2211509,2211509,2211509,2006329,2002387,1002091,1681609,1241624,2211509,1965735,2063539,1362013,1086875,1086876,1912972,1914749,1263247,2099476,2173652,2173651,2085254,2029369,1142649,1142648,1142650,1681609,1241624,1551119,1052497,2167039,4044,1681667,2211509,1990245,1468520,0,2229119,1681667,2211509,1681667,2211509,2211509,1681667,1681667,2211509,1681667,1990245,884462,2199163,2205922,1681667,1681667,2211509,1852712,1291038,2235291,2228661,1283841,1283893,2198674,1328942,1328940,1965857,2235593,1681667,1646476,2211509,1681667,2211509,2211509,2032079,2211509,0,2211509,2211509,1982863,1924346,1681667,1681667,2211509,2211509,1328940,1298534,2228661,1298556,2192065,2199173,1965856,2155519,1086876,1432897,2054687,645133,1912972,1914748,1993974,1986600,2211509,1676330,2229119,1681667,1681667,2211509,2211509,2211509,1681667,1551120,1730331,1976183,2116324,893034,2211509,2211509,1328940,2228661,2229109,1283841,2211668,1085260,1441492,874862,645133,1965856,2211509,2211509,2054687,1681667,2211509,2211509,2211509,2211509,2211509,2211509,1681667,1298534,2201648,1734608,2077808,1876823,1803648,2211509,2163687,1681667,1681667,2211509,720033,1085423,2211509,2211509,1681667,1969722,1786168,2155518,1681667,1502514,0,1681667,2235593,2211509,2077813,2211509,2211509,1047160,1965735,1962433,1681667,1876649,2211509,2211509,2211509,2211509,1681614,1242138,1693372,1681667,2045336,2211509,2073816,1047160,2235593,1681667,1841910,2218444,1681667,1298534,2054034,2108099,884462,874861,1852198,1912972,1914749,1478646,1681653,1681667,2167039,2235291,1990245,1897762,1965856,1914748,1478764,2235593,2211509,2211509,2211509,2211509,2211509,1965735,1291038,1681667,1786168,1981037,1681667,1478662,1478646,1478647,1965857,2211509,1983243,1986598,2105449,1876611,1897762,1963891,421,1876868,1841908,0,2211509,2211509,1965735,2235593,2211509,1681667,1681667,1581561,2211509,2211509,2211509,1681667,2211509,2211509,1681667,1786168,1011197,2054034,2027095,1982864,1912972,1681667,1876609,2027096,1678957,1990656,1681667,1298534,2048527,2155518,2211509,2211509,1681667,645133,1962042,1876648,2211509,2211509,1047160,1581505,1454323,1503014,1930423,2079110,2098712,2192064,1573239,1581430,1914749,1914748,1986599,2003813,2003812,1983244,1986597,2033155,2211509,1876649,2211509,2211509,1983247,2211509,2228662,2229109,1086875,1681667,1993974,1918905,2211509,2211509,1681667,2211509,1681667,2211509,2211509,1681667,2027095,2211509,1897762,2235593,1681667,2211509,1995905,1662185,1882295,2185040,1912972,1914748,1914749,1876868,1681651,1681653,2167039,1681667,1882294,2211509,2211509,2211509,2235593,2211509,1420489,1681667,2198677,2211509,1983243,2198677,1930422,1803648,2210585,2198677,1803648,1328941,2235291,1772191,2198677,874862,874861,1876648,2082826,1876868,1965857,1965856,1981677,1882295,2114850,1926323,1263249,1965735,1986597,1291037,1821025,1982864,1967667,2199163,1876649,2077809,2077807,1963891,4044,2167039,2209020,2006329,1681665,1478764,1478662,1478647,1962042,1882294,1882295,2185040,1772210,1863349,1912972,1914748,1914749,1927698,1876868,1503014,2085254,1967662,1865222,1011197,1432898,1852712,1962435,1681651,1681652,1755587,2167039,2054034,2048526,1681667,1681667,2211509,1766280,2211509,2211509,2198677,2211509,1730331,1876610,2073815,2085256,1263249,1965857,1965856,1581505,1156871,1011406,2079798,2032079,2155518,1086875,1086876,2114850,1432897,1935841,1874862,1772210,1863350,2033154,2054687,645133,1993974,1881898,1892754,1681571,1681570,1312392,2105450,1981037,1475681,1046917,1944816,883813,1405662,2167039,1681627,1803648,1786168,2211509,2029454,2211509,0,1967662,1681667,2211509,2211509,1681667,2228760,2211509,2211509,2211509,2211509,1242138,2192062,2108098,2155518,0,2211509,2228661,2235291,1420489,1962433,1046917,883813,2167039,2027095,883882,1306125,1926323,2045336,2192062,874862,1912972,2211509,1681667,2211509,1882295,1114941,638130,2211509,1027777,1086876,1086873,1681667,883815,1876649,1298534,2192062,1681652,2211509,2211509,1681667,874862,2209020,1096988,2027095,2198677,1681667,1267991,2211509,2192065,2211509,1681667,2211509,1263249,1965734,2199166,2211509,2003813,1002091,1977585,2175484,2235292,2240555,2205154,1678957,1242139,0,1328941,2192062,2099296,1803648,1681671,2205154,2205154,2205154,0,1681671,2205154,2205154,2205154,2205154,1681671,1995905,2108099,2108098,2205154,1263249,1730331,1086875,1969722,2235291,1966630,2006329,2205154,1824577,2002734,1912972,2205154,1876610]; </script><script type="text/javascript">
+
+        
+
+			console.log( "документ загружен" );
+            $('a#call_link').click(function (e) {
+                  $('#modal-callback').modal('show');
+                return false;
+            });
+			
+			$('a#paramet_izd').click(function (e) {
+                $('#par_iz').modal({autoPosition:true,autoResize:true,minHeight:260,minWidth:600,close:true});
+                return false;
+            });
+            
+        
+		
+		$("img.lazyload").lazyload();
+		
+		$('.cltest').click(function(){
+  
+  $('.cltest').not($(this)).prop('checked', false);
+  $('#set_filter').click();
+});
+
+// button plus and minus in basket
+$('.minus').click(function () {
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+				
+				$('.calc').click();
+				
+				return false;
+			});
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				$('.calc').click();
+				return false;
+			});
+// ~button plus and minus in basket// button plus and minus in basket
+
+
+// button plus and minus in cart
+$('.cart-minus').click(function () {
+
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+				return false;
+			});
+			
+			
+			$('.cart-plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				
+				return false;
+			});
+// ~button plus and minus in basket// button plus and minus in basket
+// button plus and minus in quick cart
+$('#myModal').on('click', '#tablzakaza td .cart-plus',function() {
+			
+			// прибавляем количество
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+			
+			var namecvet=	$(this).parent().attr("class");
+			var idcveta = "#"+namecvet;
+				$( idcveta ).click();
+				//$(idcveta).trigger('click');
+				
+				
+				
+				return false;
+				
+			});
+			
+$('#myModal').on('click', '#tablzakaza td .cart-minus',function() {
+			
+			// убавляем количество
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+			
+			var namecvet=	$(this).parent().attr("class");
+			var idcveta = "#"+namecvet;
+				$( idcveta ).click();
+				//$(idcveta).trigger('click');
+				
+				
+				
+				return false;
+				
+			});
+			// button plus and minus in quick cart
+// IZBRANNIE
+if (arJSFavorit.length > 0) {
+$.each(arJSFavorit, function(index, value) {
+	
+		$('[data-favorites="'+value+'"]').addClass("in_wishlist");
+	
+});
+}
+//~
+
+		//dima});
+		/* smena slaydov pri nazhatii na cvet v tablice */
+	$('#tablzakaza td').click(function () {
+				//alert('Нажато');
+			var namecvet=	$(this).attr("class");
+			var idcveta = "#"+namecvet;
+				$( idcveta ).click();
+				return false;
+			});
+			
+
+    </script>
+	<script>
+/*	
+   jQuery(function(){
+	  $(".card-product-foto").imagezoomsl();
+   });
+  */ 
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89043439-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter24053260 = new Ya.Metrika({id:24053260,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/24053260" style="position:absolute; left:-9999px;" alt="Яндекс метрика" /></div></noscript>
+<!-- /Yandex.Metrika counter -->  
+<script src="/bitrix/templates/sharlize/js/slick.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+     
+    $(document).on('ready', function() {
+      $(".popularslid").slick({
+        dots: false,
+        infinite: true,
+        slidesToShow: 5,
+        slidesToScroll: 5,
+		autoplay: true,
+				  			autoplaySpeed: 7000,
+				  			prevArrow: '<div class="main_new_prods_crsl_lft"></div>',
+				  			nextArrow: '<div class="main_new_prods_crsl_rgt"></div>'
+      });
+	  
+	  
+	 
+		
+	  
+      
+    });
+  </script>
+  
+  
+ 
+  
+  <script type="text/javascript">
+     
+  function hideShowDiv(){
+      $('#razmsetka').toggle('slow');
+}
+function hideShowDiv1(){
+      $('#razmsetka1').toggle('slow');
+}
+function filtrclk() {
+	$('#set_filter').click();
+}
+
+
+function filtrdlt() {
+	$('#del_filter').click();
+}
+  </script>
+ 
+  <script>
+!function (d, id, did, st) {
+  var js = d.createElement("script");
+  js.src = "https://sharlize.ru/bitrix/templates/sharlize/js/connect.js";
+  js.onload = js.onreadystatechange = function () {
+  if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+    if (!this.executed) {
+      this.executed = true;
+      setTimeout(function () {
+        OK.CONNECT.insertGroupWidget(id,did,st);
+      }, 0);
+    }
+  }}
+  d.documentElement.appendChild(js);
+}(document,"ok_group_widget","54215923400819",'{"width":239,"height":335}');
+</script>
+
+  
+<!-- RedHelper -->
+<script id="rhlpscrtg" type="text/javascript" charset="utf-8" async="async" src="https://web.redhelper.ru/service/main.js?c=sharlize"></script>
+<!--/Redhelper -->
+<!-- BEGIN TURBOPARSER CODE -->
+<script type="text/javascript">(function(a,b,c,d){var s = document.createElement(a); s.type = b; s.async = true; s.src = c; var ss = document.getElementsByTagName(d)[0]; ss.parentNode.insertBefore(s, ss);})('script', 'text/javascript', 'https://turboparser.ru/parser/widget/loader?hash=1b4868f8bcdd0a97e71f038d8c198407&ts='+Date.now(), 'script');</script>
+<!-- END TURBOPARSER CODE -->
+
+<script type="text/javascript" async="" src="https://turboparser.ru/parser/widget/loader?hash=1b4868f8bcdd0a97e71f038d8c198407&amp;ts=1676608924259"></script><div id="turboparser_widget_button" class="turboparser_widget_button_position-right widget-site-sharlizeru widget-mobile-on"><div class="widget__small" style="color:#dd0a35"> <div class="widget__small-upload"> <svg width="30" height="210" viewBox="245 100.243 30 210"><path fill="currentColor" d="M244.803,104.905c0,17.26,30,27.051,30,44.524c0,17.475,0,101.368,0,119.772 c0,18.405-30,26.246-30,43.907C244.803,330.77,244.803,87.646,244.803,104.905z"></path> <g fill="#fff"> <path d="M253.068,248.561v-3.229c0-1.517,0.227-2.613,0.68-3.291s1.17-1.017,2.148-1.017c0.678,0,1.236,0.189,1.676,0.567 c0.44,0.378,0.726,0.929,0.855,1.654h0.078c0.297-1.736,1.209-2.604,2.734-2.604c1.021,0,1.818,0.345,2.391,1.036 c0.573,0.691,0.859,1.656,0.859,2.897v3.987H253.068z M257.959,247.233v-2.19c0-0.938-0.146-1.613-0.44-2.025 s-0.788-0.618-1.485-0.618c-0.639,0-1.101,0.229-1.384,0.688s-0.425,1.189-0.425,2.19v1.956H257.959z M259.084,247.233h4.266 v-2.386c0-0.923-0.178-1.618-0.534-2.084c-0.356-0.466-0.913-0.7-1.673-0.7c-0.707,0-1.227,0.238-1.56,0.716 c-0.333,0.477-0.499,1.203-0.499,2.178V247.233z"></path> <path d="M264.49,228.813v1.297h-8.563v-1.297H264.49z M259.459,237.092v-2.337c0-1.089,0.202-1.896,0.606-2.419 c0.404-0.523,1.008-0.786,1.812-0.786c0.86,0,1.512,0.278,1.952,0.833s0.661,1.372,0.661,2.45v3.557h-8.563v-1.297H259.459z M260.584,237.092h2.813v-2.197c0-1.376-0.48-2.064-1.441-2.064c-0.478,0-0.825,0.159-1.044,0.477 c-0.218,0.318-0.327,0.86-0.327,1.626V237.092z"></path> <path d="M257.037,220.906v3.866h7.453v1.297h-8.563v-5.163H257.037z"></path> <path d="M264.646,215.23c0,0.558-0.104,1.067-0.309,1.529c-0.205,0.461-0.521,0.849-0.949,1.161v0.094 c0.5-0.063,0.975-0.094,1.422-0.094h3.523v1.297h-12.406v-1.055l1.172-0.18v-0.063c-0.469-0.333-0.807-0.722-1.016-1.165 c-0.208-0.443-0.313-0.951-0.313-1.525c0-1.136,0.389-2.014,1.164-2.631c0.776-0.618,1.865-0.927,3.266-0.927 c1.406,0,2.499,0.314,3.277,0.942C264.258,213.243,264.646,214.115,264.646,215.23z M256.881,215.417c0,0.876,0.242,1.51,0.725,1.9 c0.483,0.392,1.253,0.592,2.308,0.603h0.288c1.2,0,2.059-0.201,2.576-0.603c0.518-0.401,0.775-1.045,0.775-1.932 c0-0.741-0.299-1.321-0.896-1.741c-0.598-0.419-1.421-0.629-2.471-0.629c-1.064,0-1.882,0.21-2.451,0.629 C257.166,214.065,256.881,214.656,256.881,215.417z"></path> <path d="M255.928,210.773v-1.391l4.883-1.875c1.115-0.411,1.92-0.667,2.414-0.766v-0.063c-0.266-0.067-0.72-0.209-1.363-0.426 c-0.643-0.216-2.621-0.923-5.934-2.121v-1.391l9.75,3.68c0.963,0.365,1.646,0.791,2.051,1.277c0.403,0.487,0.605,1.085,0.605,1.793 c0,0.396-0.045,0.787-0.133,1.172h-1.039c0.063-0.286,0.094-0.606,0.094-0.961c0-0.891-0.5-1.526-1.5-1.906l-1.219-0.477 L255.928,210.773z"></path> <path d="M259.475,199.715c0-1.622-0.445-2.433-1.336-2.433c-0.838,0-1.258,0.657-1.258,1.971c0,0.402,0.037,0.767,0.109,1.095 c0.073,0.329,0.219,0.759,0.438,1.291l-1.059,0.461c-0.398-0.886-0.598-1.853-0.598-2.901c0-0.985,0.201-1.762,0.605-2.33 c0.402-0.568,0.953-0.853,1.65-0.853c0.957,0,1.584,0.534,1.881,1.604h0.063c0.192-0.657,0.468-1.137,0.824-1.439 c0.357-0.302,0.805-0.453,1.342-0.453c0.792,0,1.408,0.319,1.85,0.958c0.439,0.639,0.66,1.521,0.66,2.647 c0,1.236-0.187,2.19-0.559,2.862h-1.191c0.448-0.954,0.672-1.919,0.672-2.894c0-0.751-0.129-1.318-0.386-1.702 s-0.627-0.575-1.11-0.575c-0.992,0-1.488,0.811-1.488,2.433v1.189h-1.109V199.715z"></path> <path d="M255.928,192.406h5.43l1.422,0.055l0.445,0.023l-7.297-4.633v-1.617h8.563v1.211h-5.234l-1.031-0.023l-1.016-0.039 l7.281,4.625v1.617h-8.563V192.406z"></path> <path d="M257.037,177.71v2.781h7.453v1.297h-7.453v2.75h-1.109v-6.828H257.037z"></path> <path d="M259.459,174.718v-2.641c0-2.188,0.806-3.281,2.418-3.281c0.845,0,1.492,0.285,1.94,0.855s0.673,1.405,0.673,2.504v3.859 h-8.563v-1.297H259.459z M260.584,174.718h2.813v-2.5c0-0.688-0.119-1.213-0.358-1.578c-0.239-0.364-0.6-0.547-1.083-0.547 c-0.473,0-0.819,0.168-1.04,0.504s-0.331,0.89-0.331,1.66V174.718z"></path> </g></svg></div> <div class="widget__small-update"> <svg width="34" height="34" viewBox="72.096 24.671 34 34"> <path fill="currentColor" d="M82.704,36.367h4.271v2.1h-4.268v6.138h1.58v0.015c0.512,0.073,0.577,0.495,0.577,1.007 c0,0.513-0.065,0.934-0.577,1.008v0.027h-1.583c-1.163,0-2.106-0.908-2.106-2.027V38.46C80.598,37.339,81.541,36.367,82.704,36.367 z M95.511,38.467h-1.744v-0.132c-0.323-0.173-0.434-0.448-0.434-0.829s0.11-0.814,0.434-0.987v-0.151h1.612 c1.163,0,2.215,0.972,2.215,2.093v6.174c0,1.119-1.052,2.027-2.215,2.027h-4.137v-2.057h4.269V38.467z M91.241,50.167l-4.863-4.549 l4.863-4.547V50.167z M86.975,41.562l5.021-4.063l-5.021-4.325V41.562z"></path></svg> </div> </div> </div><div id="turboparser_widget_holder" style="background-color:#dd0a35;display:none;" class="turboparser_widget_holder_position-right turboparser_widget_holder_position_mode-auth turboparser_widget_holder_mobile-on widget-site-sharlizeru"><div id="turboparser_widget_closer"></div></div><div id="cp_testEl"></div></body><script src="https://sharlize.ru/bitrix/templates/sharlize/js/connect.js"></script></html>

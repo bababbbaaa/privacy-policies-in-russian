@@ -1,0 +1,1784 @@
+<html class="no-js ya-page_js_yes" ng-app="bazium" lang="ru"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<!-- Hello  -->
+<!-- Google Tag Manager -->
+<script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/watch.js"></script><script type="text/javascript" async="" charset="utf-8" src="https://site.yandex.net/v2.0/js/all.js"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-TNHWRFM"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TNHWRFM');</script>
+<!-- End Google Tag Manager -->
+
+<meta name="yandex-verification" content="0a99079c5f4547b4">
+<meta name="google-site-verification" content="_yc8VAqQOoVQMMSc2rIAN33j4fB13C89HTkvRgcqzDU">
+<meta name="yandex-verification" content="442c74335a26ffc5">
+
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(91804286, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/91804286" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script>
+var metricsFn = function () {
+    console.log(ActiveScore.timer);
+    console.log(ActiveScore.need);
+    var c1 = this.getCookie(this.cookieName);
+    console.log(c1);
+    if (ActiveScore.timer >= ActiveScore.need) {
+        console.log("событие отправилось");
+        /* Тут перечислять все что нужно будет вызвать по достижению цели */
+        ym(91804286, "reachGoal", this.cookieName.slice(0, -3));
+        /* Тут перечислять все что нужно будет вызвать по достижению цели */
+    }
+};
+
+var ActiveScore = {
+    /* Настройки которые надо менять */
+    need: 30, // секунды
+    checkTime: 10, // секунды. период проверки
+    loop: true, // Повторять набор?
+    /* Настройки которые надо менять */
+    counter: 0,
+    cookieName: "30sec_ap",
+    sendFn: null,
+    parts: 0,
+    active_parts: 0,
+    timer: 0,
+    events: [
+        "touchmove",
+        "blur",
+        "focus",
+        "focusin",
+        "focusout",
+        "load",
+        "resize",
+        "scroll",
+        "unload",
+        "click",
+        "dblclick",
+        "mousedown",
+        "mouseup",
+        "mousemove",
+        "mouseover",
+        "mouseout",
+        "mouseenter",
+        "mouseleave",
+        "change",
+        "select",
+        "submit",
+        "keydown",
+        "keypress",
+        "keyup",
+        "error",
+    ],
+
+    setEvents: function () {
+        for (var index = 0; index < this.events.length; index++) {
+            var eName = this.events[index];
+            window.addEventListener(eName, function (e) {
+                if (e.isTrusted && ActiveScore.period.events == false) {
+                    ActiveScore.period.events = true;
+                }
+            });
+        }
+    },
+
+    period: {
+        start: 0,
+        end: 0,
+        events: false,
+    },
+
+    init: function (fn) {
+        this.calcParts();
+        this.setEvents();
+        if (this.checkCookie()) {
+            this.sendFn = fn;
+            this.start();
+        }
+    },
+
+    calcParts: function () {
+        this.parts = Math.ceil(this.need / this.checkTime);
+    },
+
+    setPeriod: function () {
+        this.period.start = this.microtime();
+        this.period.end = this.period.start + this.checkTime;
+        this.period.events = false;
+    },
+
+    microtime: function () {
+        var now = new Date().getTime() / 1000;
+        var s = parseInt(now);
+        return s;
+    },
+
+    start: function () {
+        this.setPeriod();
+        this.runPeriod();
+    },
+
+    timeoutId: null,
+
+    checkPeriod: function () {
+        if (this.period.events == true) {
+            this.active_parts = this.active_parts + 1;
+            // console.log('В этой секции были действия');
+        } else {
+            // console.log('В этой секции НЕБЫЛО действия');
+        }
+        this.timer = this.active_parts * this.checkTime;
+        console.log(
+            this.active_parts + " / " + this.parts + " [" + this.timer + "]"
+        );
+
+        if (this.checkSecs()) {
+        } else {
+            this.start();
+        }
+        this.setCookie(this.cookieName, this.active_parts);
+    },
+
+    checkSecs: function () {
+        if (this.timer >= this.need) {
+            this.send();
+            if (this.loop == true) {
+                this.counter++;
+                this.timer = 0;
+                this.active_parts = 0;
+                this.cookieName = (this.counter + 1) * this.need + "sec_ap";
+                return false;
+            } else {
+                // console.log('Завершили проверку активности');
+                return true;
+            }
+        }
+        return false;
+    },
+
+    timeoutFn: function () {
+        ActiveScore.checkPeriod();
+    },
+
+    runPeriod: function () {
+        this.timeoutId = setTimeout(this.timeoutFn, this.checkTime * 1000);
+    },
+
+    send: function () {
+        this.setCookie(this.cookieName, this.active_parts * this.active_parts);
+        this.sendFn();
+    },
+
+    checkCookie: function () {
+        var c = this.getCookie(this.cookieName);
+
+        if (c == null) {
+            return true;
+        } else {
+            c = parseInt(c);
+            if (c >= this.parts) {
+                // console.log('Скрипт даже не запустился...');
+                if (this.loop == true) {
+                    return true;
+                }
+                return false;
+            } else {
+                this.active_parts = c;
+                return true;
+            }
+        }
+    },
+
+    setCookie: function (name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    },
+    getCookie: function (name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == " ") c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    },
+    eraseCookie: function (name) {
+        document.cookie =
+            name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    },
+};
+
+ActiveScore.init(metricsFn);
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<meta name="yandex-verification" content="1ff20fa5ff413e45">
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<link href="/images/005/845/636/5845636/32x32/6_(1).png" rel="icon">
+<link href="/images/005/845/636/5845636/180x180/6_(1).png" rel="apple-touch-icon" sizes="180x180">
+
+
+<link rel="stylesheet" media="screen" href="/css.css?at=1676178923&amp;index%5B%5D=0&amp;index%5B%5D=&amp;index%5B%5D=1000&amp;index%5B%5D=2000&amp;name%5B%5D=politika-konfidentsialnosti&amp;name%5B%5D=design&amp;name%5B%5D=shapka&amp;name%5B%5D=podval&amp;type%5B%5D=page&amp;type%5B%5D=design&amp;type%5B%5D=page&amp;type%5B%5D=page&amp;v=21">
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="nPEZlp6HsyQeDEqiZul85VmNxqw5j+zCctaRvv9mtASVNwiMClSzU3AiM91MERXYw73mW8TnLbZjwJvPTbRQ8w==">
+<title>Политика конфиденциальности food2000.ru</title>
+<meta content="Пользовательское соглашение определяет условия использования Пользователями материалов и сервисов сайта www.food2000.ru
+Пользователь подтверждает, что ознакомлен со всеми пунктами настоящего Соглашения и безусловно принимает их." name="description">
+<link href="https://food2000.ru/images/004/178/383/4178383/960x/324652146.jpg" rel="image_src">
+<meta content="summary" name="twitter:card">
+<meta content="https://food2000.ru/politika-konfidentsialnosti" name="twitter:url">
+<meta content="Политика конфиденциальности www.food2000.ru" name="twitter:title">
+<meta content="Политика конфиденциальности определяет условия использования Пользователями материалов и сервисов сайта www.food2000.ru
+Пользователь подтверждает, что ознакомлен со всеми пунктами настоящего Соглашения и безусловно принимает их." name="twitter:description">
+<meta content="https://food2000.ru/images/004/178/383/4178383/960x/324652146.jpg" name="twitter:image">
+<meta content="Политика конфиденциальности www.food2000.ru" name="og:title">
+<meta content="WebPage" property="og:type">
+<meta content="https://food2000.ru/politika-konfidentsialnosti" name="og:url">
+<meta content="Политика конфиденциальности определяет условия использования Пользователями материалов и сервисов сайта www.food2000.ru
+Пользователь подтверждает, что ознакомлен со всеми пунктами настоящего Соглашения и безусловно принимает их." name="og:description">
+<meta content="https://food2000.ru/images/004/178/383/4178383/960x/324652146.jpg" name="og:image">
+<meta content="Политика конфиденциальности www.food2000.ru" itemprop="name">
+<meta content="Политика конфиденциальности определяет условия использования Пользователями материалов и сервисов сайта www.food2000.ru
+Пользователь подтверждает, что ознакомлен со всеми пунктами настоящего Соглашения и безусловно принимает их." itemprop="description">
+<meta content="https://food2000.ru/images/004/178/383/4178383/960x/324652146.jpg" itemprop="image">
+<link href="https://food2000.ru/politika-konfidentsialnosti" rel="canonical">
+
+
+
+
+
+<style>
+  [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+  }
+</style>
+
+<script>
+  function afterAll(){
+    angular.module('bazium').constant('yandexMetrikaId',  "42442189");
+  
+  
+    
+    angular.module('bazium').constant('appConfig', {
+      pageId: "355"
+    });
+  
+  
+    angular.module('bazium').constant('cartMessagesConfig', {
+        successMessageType: "modal"
+    });
+    if(Array.isArray(window.extInits)){
+       window.extInits.forEach(function(init){
+         if(init instanceof Function){
+           init();
+         }
+       });
+    }
+    moment.locale('ru');
+  }
+  
+  var script = document.createElement('script');
+  script.defer = true;
+  script.onload = afterAll;
+  
+  script.src = "/assets/sites/templates/template-01-a13ab220e5269c4ab2cfe43b8ac82050d397ed42b88860e7f4d26564777d2857.js";
+  document.head.appendChild(script);
+</script><script defer="" src="/assets/sites/templates/template-01-a13ab220e5269c4ab2cfe43b8ac82050d397ed42b88860e7f4d26564777d2857.js"></script>
+
+
+<script>
+  window.I18n = {t: {"sites":{"settings":{"navigations":{"edit":{"stranitsa":"Страница","landing":"Лендинг","main_page":"Главная страница","product_section":"Раздел продукции","product":"Продукт","blog":"Блог","url":"URL"}},"roles":{"edit":{"base":{"zaprecheno":"Запрещено","razresheno":"Разрешено","tolko_svoi":"Только свои"}}},"site_users":{"edit":{"base":{"zaprecheno":"Запрещено","razresheno":"Разрешено","tolko_svoi":"Только свои","razresheno_sozdanie":"Разрешено создание","tolko_prosmotr":"Только просмотр","razresheny":"Разрешены","zaprecheny":"Запрещены"}}},"fields":{"edit":{"base":{"tekstovoe_pole":"Текстовое поле","vypadayuschiy_spisok":"Выпадающий список","proizvolnye":"Произвольные","radioknopka":"Радиокнопка","chekboks":"Чекбокс","data":"Дата","ssylka":"Ссылка","chislo":"Число","fayl":"Файл"}}}},"common":{"factories":{"common_form_settings":{"standartnye":"Стандартные","proizvolnye":"Произвольные","imya":"Имя","email":"E-mail","telefon":"Телефон","adres":"Адрес","tekstovoe_pole":"Текстовое поле","vypadayuschiy_spisok":"Выпадающий список","radioknopka":"Радиокнопка","chekboks":"Чекбокс","data":"Дата","fayl":"Файл","skrytoe_pole":"Скрытое поле"}},"directives":{"image_uploader":{"image_uploader":{"zagruzit":"Загрузить","izobrazhenie":"изображение","ili_video":"или видео","otmena":"Отмена","galerei":"Галереи"},"icons":{"zagruzit_esche":"Загрузить еще"}}}},"building":{"design":{"design_config":{"tekst":"Текст","net":"Нет","logotip":"Логотип","sotsseti":"Социальные сети","knopka_s_formoy":"Кнопка с формой","knopka":"Кнопка","ne_ispolzovat":"Не использовать","net_paralaksa":"Нет паралакса","pri_dvizhenii_kursora":"При движении курсора","pri_prokrutke":"При прокрутке","izmenenie_skorosti_pri_prokrut":"Изменение скорости при прокрутке","kontent":"Контент","ekran":"Экран","srazu":"Сразу","pri_navedenii":"При наведении","sverhu":"Сверху","snizu":"Снизу","sleva":"Слева","sprava":"Справа","po_kliku":"По клику","konteyneru":"Контейнеру","ekranu":"Экрану","levo":"Лево","pravo":"Право","tsentr":"Центр","verh":"Верх","niz":"Низ","tire":"Тире","krug":"Круг","galochka":"Галочка","pole_dlya_vvoda":"Поле для ввода","konpki__i_":"Кнопки + и -","vypadayuschiy_spisok_s_obvodko":"Выпадающий список с обводкой","vypadayuschiy_spisok":"Выпадающий список","srazu_pokazyvaem_vse":"Сразу показываем все","_levoverh":"↖ Лево-верх","_tsentrverh":"↑ Центр-верх","_pravoverh":"↗ Право-верх","_levotsentr":"← Лево-центр","_pravotsentr":"→ Право-центр","_levoniz":"↙ Лево-низ","_tsentrniz":"↓ Центр-низ","_pravoniz":"↘ Право-низ","izobrazhenie_412_informatsiya_":"Изображение 4/12, информация 8/12.","izobrazhenie_512_informatsiya_":"Изображение 5/12, информация 7/12.","izobrazhenie_612_informatsiya_":"Изображение 6/12, информация 6/12.","izobrazhenie_712_informatsiya_":"Изображение 7/12, информация 5/12.","izobrazhenie_812_informatsiya_":"Изображение 8/12, информация 4/12.","tekst_sverhu_izobrazhenie_snizu":"Текст сверху, изображение снизу","izobrazhenie_sverhu_tekst_snizu":"Изображение сверху, текст снизу","tekst_23_izobrazhenie_13":"2/3 текст + 1/3 изображение","tekst_13_izobrazhenie_23":"1/3 текст + 2/3 изображение","tekst_12_izobrazhenie_12":"1/2 текст + 1/2 изображение","tekst_34_izobrazhenie_14":"3/4 текст + 1/4 изображение","izobrazhenie_13_tekst_23":"1/3 изображение + 2/3 текст","izobrazhenie_23_tekst_13":"2/3 изображение + 1/3 текст","izobrazhenie_12_tekst_12":"1/2 изображение + 1/2 текст","izobrazhenie_14_tekst_34":"1/4 изображение + 3/4 текст","otmetka_stoit":"Отметка стоит","otmetka_snyata":"Отметка снята","bez_teni":"Без тени","klassicheskaya_knopka":"Классическая кнопка","podcherknutaya_ssylka":"Подчёркнутая ссылка со стрелкой","css_kod_knopki_prostoy":"CSS-код кнопки, простой","css_kod_knopki_rasshirennyy":"CSS-код кнопки, расширенный","blik":"Блик","pulsirovanie":"Пульсирование","luch":"Луч","stil_1":"Стиль №1","stil_2":"Стиль №2","stil_3":"Стиль №3","stil_4":"Стиль №4","unikalnaya":"Уникальная","nastroit_unikalnoe":"Настроить уникальное","stil_5":"Стиль №5","otsutstvuet":"Отсутствует","proizvolnyy":"Произвольный","bez_effektov":"Без эффектов","vraschenie":"Вращение","dvizhenie":"Движение","polnyy_krug":"Полный круг","90_gradusov_i_obratno":"90 градусов и обратно","45_gradusov_i_obratno":"45 градусов и обратно","15_gradusov_i_obratno":"15 градусов и обратно","tsentr_elementa":"Центр элемента","verhlevo":"Верх-лево","verhpravo":"Верх-право","nizlevo":"Низ-лево","nizpravo":"Низ-право","tudaobratno_ravnomerno":"Туда-обратно, равномерно","tudaobratno_s_uskoreniem_v_ser":"Туда-обратно, с ускорением в середине","tudaobratno_s_zamedleniem_v_se":"Туда-обратно, с замедлением в середине","v_odnu_storonu_ravnomerno":"В одну сторону, равномерно","v_odnu_storonu_s_uskoreniem":"В одну сторону, с ускорением","v_odnu_storonu_s_zamedleniem":"В одну сторону, с замедлением","poyavlenie_sleva":"Появление слева","poyavlenie_sprava":"Появление справа","poyavlenie_sverhu":"Появление сверху","poyavlenie_snizu":"Появление снизу","po_tsentru":"По центру","polnyy_vyvod_na_mobilnyh":"Полный вывод на мобильных","sokraschennyy_vyvod_na_mobilny":"Сокращенный вывод на мобильных","tonkiy":"Тонкий","normalnyy":"Нормальный","zhirnyy":"Жирный","molniya":"Молния","flazhok":"Флажок","strelka":"Стрелка","serdechko":"Сердечко","plyusik":"Плюсик","zvezdochka":"Звездочка","bez_ikonki":"Без иконки","po_vremeni":"По времени","perekluchenie":"Переключение","s_zatuhaniem":"С затуханием","so_smenoy_sleva":"Со сменой слева","treugolnik_obychnyi":"Треугольник, обычный","treugolnik_malyi":"Треугольник, малый","strelka_obychnaya":"Стрелка, обычная","strelka_malaya":"Стрелка, малая"}},"pages":{"show":{"sections":{"header_21":{"_menu":{"otsutstvuet":"Отсутствует","menu_1_6_stolbtsov":"Меню в 1-6 столбцов","menu_1_4_stolbtsa":"Меню в 1-4 столбца c иконками и описанием","ssylki_s_izobrazheniyami":"Ссылки с изображениями и текстом","menu_i_bloki":"Меню и блоки из изображений и ссылок","menu_s_meniayushimisia":"Меню с меняющимися изображениями","ssylka":"Ссылка","izobrazhenie_s_tekstom":"Изображение с текстом и ссылкой","tonkaya":"Тонкая","sredniaya":"Средняя","tolstaya":"Толстая"}}},"page-modal":{"page-modal":{"sohranit":"Сохранить"}}}}},"builder":{"mailings":{"letters":{"edit":{"sozdaite_pismo":"Создайте письмо..."}}},"blog_authors":{"index":{"blog_authots":{"ne_ukazyvat_authora":"Не указывать автора"}}},"discounts":{"edit":{"discount_config":{"zakazy_ot":"Заказы от...","vse_zakazy":"Все заказы","v_valyute":"В валюте","v_protsentah":"В процентах"}}},"product_sections":{"edit":{"top_level":"Верхний уровень"}},"products":{"edit":{"product":{"zagruzit_faily":"Загрузить файлы","failov":"Файлов:","grupp_vybrano":"Групп выбрано:","vybrat_gruppy":"Выбрать группы","svoia":"Своя"},"product_variant_files":{"product_variant_files-modal":{"fayly_dlya_prodazhi":"Файлы для продажи","vybrat_fayly":"Выбрать файлы","sohranit":"Сохранить","maksimalnyyy_razmer_zagruzhaem":"максимальный размер загружаемого файла: 200 мегабайт"}},"additional-products":{"additional-products-modal_mobile":{"tovary_dlya_bloka_smotrite_tak":"Товары для блока «Смотрите также»"}}}}}}}}
+</script>
+
+<style type="text/css">#ya-site-form0,#ya-site-form0 .ya-site-form__form,#ya-site-form0 .ya-site-form__input,#ya-site-form0 .ya-site-form__input-text,#ya-site-form0 .ya-site-form__search-precise,#ya-site-form0 .ya-site-form__submit{font-size:12px!important;color:#000!important}#ya-site-form0 .ya-site-form__form-form{display:block;margin:0;padding:0}#ya-site-form0 .ya-site-form__input{margin:0;padding:0}#ya-site-form0 .ya-site-form__search-precise{margin:0}#ya-site-form0 .ya-site-form__search-precise__radio{padding:0}#ya-site-form0 .ya-site-form__gap,#ya-site-form0 .ya-site-form__gap-i,#ya-site-form0 .ya-site-form__logo-img{margin:0;padding:0}#ya-site-form0{margin:0!important;padding:0!important}#ya-site-form0 .ya-site-form__logo-wrap{width:65px;vertical-align:top;border-collapse:collapse}#ya-site-form0 .ya-site-form__logo{display:block;width:52px;margin:0;padding:0 6px 0 0;text-decoration:none}#ya-site-form0 .ya-site-form__logo-img{width:52px;height:21px;border:0!important}#ya-site-form0 .ya-site-form__search-wrap{border-collapse:collapse}#ya-site-form0 .ya-site-form__search{font-size:12px!important;width:100%}#ya-site-form0 .ya-site-form__search-input{padding:6px}#ya-site-form0 .ya-site-form__search-input-layout,#ya-site-form0 .ya-site-form__search-input-layout-l,#ya-site-form0 .ya-site-form__search-input-layout-r{font-size:12px!important;padding:0;vertical-align:middle;border:0;border-collapse:collapse}#ya-site-form0 .ya-site-form__search-input-layout,#ya-site-form0 .ya-site-form__search-input-layout-l{width:100%}#ya-site-form0 .ya-site-form__search-precise{padding:0 18px 5px 6px;text-align:left;vertical-align:top}#ya-site-form0 .ya-site-form__search-precise-i{white-space:nowrap}#ya-site-form0 .ya-site-form__search-precise__radio{width:auto;margin:0 .3em 0 0;vertical-align:middle;background:0 0}#ya-site-form0 .ya-site-form__search-precise__label{margin:0 .4em 0 0;padding:0;vertical-align:middle}#ya-site-form0 .ya-site-form__input-text{width:100%;margin:0!important;cursor:text;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background-color:#fff;border:1px solid #7f9db9;outline-style:none;-webkit-appearance:textfield}#ya-site-form0 .ya-site-form__input-text_type_hint{background-repeat:no-repeat;background-position:.2em 50%}#ya-site-form0 .ya-site-form__submit{display:block;width:auto;margin:0 0 0 5px}#ya-site-form0 .ya-site-form__arrow-wrap{overflow:hidden;width:30px;padding:0;vertical-align:middle}#ya-site-form0 .ya-site-form__arrow{position:relative}#ya-site-form0 .ya-site-form__arrow-a{position:absolute;top:50%;right:0;width:0;height:0;margin-top:-59px;border:solid transparent;border-width:59px 0 59px 30px;-moz-border-end-style:dotted}#ya-site-form0 .ya-site-form__wrap{width:100%;table-layout:fixed;border-collapse:collapse}#ya-site-form0 .ya-site-form__gap{border:0}#ya-site-form0 .ya-site-form__gap-i{width:9em}#ya-site-form0.ya-site-form_arrow_yes .ya-site-form__search-input{padding-right:0}#ya-site-form0.ya-site-form_logo_left .ya-site-form__logo{margin-top:4px;margin-left:5px}#ya-site-form0.ya-site-form_logo_top .ya-site-form__logo{display:block;margin:6px 0 0 6px}#ya-site-form0 .ya-site-form__submit_type_image{width:19px;height:15px;outline:0;cursor:pointer;border:0}#ya-site-form0 .ya-site-form__submit_type_image { background: url(https://site.yandex.net/v2.0/i/search.png) no-repeat }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text::-webkit-input-placeholder{color:#000000;}#ya-site-form0 .ya-site-form__form .ya-site-form__input-text:-moz-placeholder{color:#000000;}#ya-site-form0 .ya-site-form__form .ya-site-form__input-text::-moz-placeholder{color:#000000;}#ya-site-form0 .ya-site-form__form .ya-site-form__input-text:-ms-input-placeholder{color:#000000;}#ya-site-form0 .ya-site-form__form * { font-size: 12px !important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { font-style: normal!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { font-weight: normal!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { color: #000000!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { border-color: #7f9db9!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text:focus { border-color: #7f9db9!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { background-color: #ffffff!important }#ya-site-form0 .ya-site-form__search, #ya-site-form0 .ya-site-form__search td, #ya-site-form0 .yaform__precise-i { background-color: #00cc66 !important }#ya-site-form0 .ya-site-form__search-precise__label { color:#000000 !important }#ya-site-form0 .ya-site-form__arrow-a { border-left-color: #00cc66 }</style><link title="Поиск по food2000.ru" rel="search" type="application/opensearchdescription+xml" href="https://yandex.ru/search/site/opensearch.xml?ShortName=%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%20%D0%BF%D0%BE%20food2000.ru&amp;InputEncoding=utf-8&amp;Image=&amp;Url-results=https%3A%2F%2Ffood2000.ru%2Fpoisk%3Fsearchid%3D2696478%26web%3D0%26text%3D%7BsearchTerms%7D&amp;Url-suggest=https%3A%2F%2Fsitesearch-suggest.yandex.ru%2Fv1%2Fsuggest%3F%26site%3D2696478%26lang%3Dru%26part%3D%7BsearchTerms%7D&amp;Url-opensearchdescr=https%3A%2F%2Fyandex.ru%2Fsearch%2Fsite%2Fopensearch.xml%3FShortName%3D%25D0%259F%25D0%25BE%25D0%25B8%25D1%2581%25D0%25BA%2520%25D0%25BF%25D0%25BE%2520food2000.ru%26InputEncoding%3Dutf-8%26Image%3D%26Url-results%3Dhttps%253A%252F%252Ffood2000.ru%252Fpoisk%253Fsearchid%253D2696478%2526web%253D0%2526text%253D%257BsearchTerms%257D%26Url-suggest%3Dhttps%253A%252F%252Fsitesearch-suggest.yandex.ru%252Fv1%252Fsuggest%253F%2526site%253D2696478%2526lang%253Dru%2526part%253D%257BsearchTerms%257D"><style type="text/css">#ya-site-form0 .ya-site-suggest{position:relative;margin:0}#ya-site-form0 .ya-site-suggest-popup{position:absolute;width:100%}#ya-site-form0 .ya-site-suggest__opera-gap{position:absolute;height:25em;border:1px solid transparent}#ya-site-form0 .ya-site-suggest-list{position:absolute;z-index:9999;overflow:hidden;min-width:25em;width:100%;margin-top:-1px;border-collapse:separate;-webkit-box-shadow:0 1px 7px #9a9a9a;-moz-box-shadow:0 1px 7px #9a9a9a;box-shadow:0 1px 7px #9a9a9a;border:1px solid #dedede;border-color:rgba(154,154,154,.4) rgba(154,154,154,.5) rgba(154,154,154,.6);box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}#ya-site-form0 .ya-site-suggest__iframe{position:absolute;z-index:-1;min-width:25em;width:100%;height:100%;background:#fff}#ya-site-form0 .ya-site-suggest-items{font-size:16px;min-width:25em;width:100%;margin:0;padding:0 1px 0 0;list-style:none}#ya-site-form0 .ya-site-suggest-items li{margin:0;padding:0;line-height:normal}#ya-site-form0 .ya-site-suggest-elem{display:block;padding:.25em .3em;cursor:pointer;background:url()}#ya-site-form0 a.ya-site-suggest-elem:link,#ya-site-form0 a.ya-site-suggest-elem:visited{text-decoration:none}html body #ya-site-form0 .ya-site-suggest-elem-link,html body #ya-site-form0 .ya-site-suggest-elem:link{color:#000!important}#ya-site-form0 .ya-site-suggest-elem:hover,html body #ya-site-form0 .ya-site-suggest-elem_state_hover{background:#fef6d7}#ya-site-form0 .ya-site-suggest-elem_nav:hover,#ya-site-form0 .ya-site-suggest-elem_translate:hover{text-decoration:none;color:#000!important}#ya-site-form0 .ya-site-suggest-elem_nav .ya-site-suggest__link{text-decoration:underline;color:#1a3dc1}#ya-site-form0 .ya-site-suggest-elem_translate .ya-site-suggest__link{text-decoration:underline;color:#000}#ya-site-form0 .ya-site-suggest-elem .ya-site-suggest__info{white-space:nowrap;color:#666}#ya-site-form0 .ya-site-suggest-elem_selected{background:#fdedaf}#ya-site-form0 .ya-site-suggest__fact{color:#555}#ya-site-form0 .ya-site-suggest__highlight{font-weight:700}</style><style></style><style type="text/css"></style><style id="keyframesjs-stylesheet"></style></head>
+<body class=" device-desktop " id="main-body">
+<div class="ng-view"></div>
+<div ng-controller="FormsController as fc">
+<div class="quick-order-wrapper" ng-cloak="" ng-controller="QuickOrderController as vm" ng-init="vm.init()">
+<div ng-if="vm.isQuickOrderPopupVisible" ng-include="&quot;/templates/sites/quick_order/quick_order&quot;"></div>
+<div class="product-quick-order-modal-container" ng-if="vm.isLoaderVisible">
+<svg class="product-quick-order-modal-loader" viewBox="0 0 128 128">
+<g>
+<path d="M75.4 126.63a11.43 11.43 0 0 1-2.1-22.65 40.9 40.9 0 0 0 30.5-30.6 11.4 11.4 0 1 1 22.27 4.87h.02a63.77 63.77 0 0 1-47.8 48.05v-.02a11.38 11.38 0 0 1-2.93.37z"></path>
+<animateTransform attributeName="transform" dur="2200ms" from="0 64 64" repeatCount="indefinite" to="360 64 64" type="rotate"></animateTransform>
+</g>
+</svg>
+</div>
+</div>
+<div class="product-popup-wrapper" ng-cloak="" ng-controller="ProductPopupController as vm" ng-init="vm.init()">
+<div ng-if="vm.isProductPopupVisible" ng-include="vm.partialPath"></div>
+<div class="product-popup-modal-container" ng-if="vm.isLoaderVisible">
+<div class="product-popup-modal-overlay"></div>
+<svg class="product-popup-modal-loader" viewBox="0 0 128 128">
+<g>
+<path d="M75.4 126.63a11.43 11.43 0 0 1-2.1-22.65 40.9 40.9 0 0 0 30.5-30.6 11.4 11.4 0 1 1 22.27 4.87h.02a63.77 63.77 0 0 1-47.8 48.05v-.02a11.38 11.38 0 0 1-2.93.37z"></path>
+<animateTransform attributeName="transform" dur="2200ms" from="0 64 64" repeatCount="indefinite" to="360 64 64" type="rotate"></animateTransform>
+</g>
+</svg>
+</div>
+</div>
+</div>
+<div ng-controller="ProductCartController as cart">
+<div class="add-to-cart-sidepanel" ng-class="{&quot;add-to-cart-sidepanel_size_big&quot; : cart.model.see_also_products_in_cart.length > 2}" ng-cloak="" ng-if="cart.model.isSuccessPopupVisible">
+<div class="add-to-cart-sidepanel__inner">
+<div class="add-to-cart-sidepanel__title">Товар добавлен в корзину</div>
+<a class="add-to-cart-sidepanel__cart-link button" href="/product_cart"><div class="button__inner"><span class="button__text">Оформить заказ</span></div></a>
+<div ng-if="cart.model.see_also_products_in_cart_grouped.length">
+<hr class="add-to-cart-sidepanel__hr">
+<div class="add-to-cart-sidepanel__list-title">Смотрите также</div>
+<div class="add-to-cart-sidepanel__list add-to-cart-sidepanel-list" collection="cart.model.see_also_products_in_cart_grouped" see-also-sidepanel-carousel="">
+<div class="add-to-cart-sidepanel-list__nav">
+<button class="add-to-cart-sidepanel-list__nav-button add-to-cart-sidepanel-list__nav-button_prev" type="button">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-left-half-arrow"></use>
+</svg>
+</button>
+<button class="add-to-cart-sidepanel-list__nav-button add-to-cart-sidepanel-list__nav-button_next" type="button">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-right-half-arrow"></use>
+</svg>
+</button>
+</div>
+<div class="add-to-cart-sidepanel-list__items">
+<div class="add-to-cart-sidepanel__group" ng-repeat="group in cart.model.see_also_products_in_cart_grouped">
+<div class="add-to-cart-modal-item add-to-cart-modal__item" ng-repeat="product in group">
+<a class="add-to-cart-modal-item__img" href="" ng-href="{{product.path}}" ng-if="product.section_image.filename">
+<img ng-src="{{product.section_image.path}}100x100crop/{{product.section_image.filename}}" src="">
+</a>
+<div class="add-to-cart-modal-item__name">
+<a href="" ng-bind="product.list_name" ng-href="{{product.path}}"></a>
+</div>
+<div class="add-to-cart-modal-item__price" ng-if="product.multi_price || product.formated_price">
+<div class="add-to-cart-modal-item__current-price" ng-if="product.multi_price">
+от
+<span ng-bind="product.formated_min_price"></span>
+</div>
+<div class="add-to-cart-modal-item__old-price" ng-if="!product.multi_price &amp;&amp; product.has_old_price">
+<del ng-bind="product.formated_old_price"></del>
+</div>
+<div class="add-to-cart-modal-item__current-price" ng-bind="product.formated_price" ng-if="!product.multi_price"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<button class="add-to-cart-sidepanel__close-btn" ng-click="cart.model.hideSuccessPopup()" title="Закрыть" type="button">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-cross"></use>
+</svg>
+</button>
+</div>
+</div>
+</div>
+
+<div class="page" ng-controller="FormsController as fc" page="{&quot;edit-mode&quot;: false}">
+<div id="top"></div>
+<div class="page__header">
+<div class="page-section">
+<div class="menu-01 menu-01_align_center page_section_1000 section section_container-width_1200" id="">
+
+<div class="menu-01__inner section__content">
+<ul class="menu-01-list">
+<li class="menu-01-list__item menu-01-item">
+<a class="menu-01-item__link" href="">Все услуги</a>
+<ul class="menu-01-item__sub menu-01-item-sub">
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/tu">Готовые ТУ и СТО</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/razrabotka-tu">Разработка ТУ</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/gotovye-ti-k-gost">Готовые ТИ к ГОСТ</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/ti-gost">Разработка ТИ к ГОСТ</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/ttk">Разработка ТТК</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/ppk">Программа производственного контроляПрограмма производственного контроля</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/haccp">ХАССП для пищевых предприятий</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/hassp-dlya-shkol-i-detskih-sadov">ХАССП для детских учреждений</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/proektirovanie-pop">Проектирование общественного питания</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/proektirovanie">Проектирование пищевых предприятий</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/razrabotka-menyu-i-ratsionov-pitaniya-dlya-detskih-uchrezhdeniy">Разработка меню для детских учреждений</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/gotovye-ratsiony-pitaniya-dlya-detey">Готовое меню для детей</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/menyu-i-ratsiony">Разработка меню общепита</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/seminar-hassp">Семинар ХАССП – принципы разработки и внедрения</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/video-seminar-hassp-printsipy-razrabotki-i-vnedreniya">Видео-семинар Семинар ХАССП – принципы разработки и внедрения</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/seminar-markirovka">Семинар Маркировка пищевой продукции</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/markirovka-pischevoy-produktsii-v-rf-sovremennye-trebovaniya">Видео-семинар «Маркировка пищевой продукции в РФ. Современные требования»</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/kriticheskie-tochki-hassp">Семинар Критические точки ХАССП</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/seminar-proizvodstvo-salatov-dlitelnogo-hraneniya">Семинар Производство салатов длительного хранения</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/etiketka">Разработка этикетки</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/tehnologicheskiy-audit">Технологический аудит</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/sertifikatsiya">Сертификация и декларация</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/stati">Статьи</a>
+</li>
+<li class="menu-01-item-sub__item">
+<a class="menu-01-item-sub__link" href="/blog">Блог</a>
+</li>
+</ul>
+</li>
+<li class="menu-01-list__item menu-01-item">
+<a class="menu-01-item__link" href="/company">О компании</a>
+</li>
+<li class="menu-01-list__item menu-01-item">
+<a class="menu-01-item__link" href="/missiya">Миссия</a>
+</li>
+<li class="menu-01-list__item menu-01-item">
+<a class="menu-01-item__link" href="/otzyvy">Отзывы</a>
+</li>
+<li class="menu-01-list__item menu-01-item">
+<a class="menu-01-item__link" href="/kontakty">Контакты</a>
+</li>
+<li class="menu-01-list__item menu-01-item">
+<a class="menu-01-item__link" href="/blog">Блог</a>
+</li>
+<li class="menu-01-list__item menu-01-item">
+<a class="menu-01-item__link" href="http://online.anyflip.com/jshl/rhaz/">Альманах о нас</a>
+</li>
+</ul>
+</div>
+<div class="page-section-mobile-nav" mobile-nav="" style="background-color: #f2f2f2;">
+<div class="page-section-mobile-nav__left-gradient" ng-cloak="">
+<svg height="100%" preserveAspectRatio="none" viewBox="0 0 1 1" width="100%">
+<linearGradient id="page-section-mobile-nav-left-gradient_1000" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0" stop-color="#f2f2f2" stop-opacity="1"></stop>
+<stop offset="15%" stop-color="#f2f2f2" stop-opacity="1"></stop>
+<stop offset="1" stop-color="#f2f2f2" stop-opacity="0"></stop>
+</linearGradient>
+<rect fill="url(#page-section-mobile-nav-left-gradient_1000)" height="1" width="1" x="0" y="0"></rect>
+</svg>
+</div>
+<div class="page-section-mobile-nav__right-gradient" ng-cloak="">
+<svg height="100%" preserveAspectRatio="none" viewBox="0 0 1 1" width="100%">
+<linearGradient id="page-section-mobile-nav-right-gradient_1000" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0" stop-color="#f2f2f2" stop-opacity="0"></stop>
+<stop offset="85%" stop-color="#f2f2f2" stop-opacity="1"></stop>
+<stop offset="1" stop-color="#f2f2f2" stop-opacity="1"></stop>
+</linearGradient>
+<rect fill="url(#page-section-mobile-nav-right-gradient_1000)" height="1" width="1" x="0" y="0"></rect>
+</svg>
+</div>
+<button class="page-section-mobile-nav__scroll-btn page-section-mobile-nav__scroll-btn_left" ng-cloak="" type="button">
+<svg height="16" viewBox="0 0 192 320" width="10">
+<title>arrow-left</title>
+<path d="M41.5 160L192 300.7 171.3 320 0 160 171.3 0 192 19.4 41.5 160"></path>
+</svg>
+</button>
+<button class="page-section-mobile-nav__scroll-btn page-section-mobile-nav__scroll-btn_right" ng-cloak="" type="button">
+<svg height="16" viewBox="0 0 192 320" width="10">
+<title>arrow-right</title>
+<path d="M0 19.4L20.7 0 192 160 20.7 320 0 300.7 150.5 160 0 19.4"></path>
+</svg>
+</button>
+<div class="page-section-mobile-nav__list">
+<ul class="page-section-mobile-nav__list-inner">
+<li class="page-section-mobile-nav__item">
+<a class="page-section-mobile-nav__link page-section-mobile-nav__link_has-sub" href="" ng-class="{'page-section-mobile-nav__link_active' : mobileNav.activeSubIndex === 0}" ng-click="mobileNav.toggleSub(0)" style="">Все услуги</a>
+</li>
+<li class="page-section-mobile-nav__item">
+<a class="page-section-mobile-nav__link" href="/company" style="">О компании</a>
+</li>
+<li class="page-section-mobile-nav__item">
+<a class="page-section-mobile-nav__link" href="/missiya" style="">Миссия</a>
+</li>
+<li class="page-section-mobile-nav__item">
+<a class="page-section-mobile-nav__link" href="/otzyvy" style="">Отзывы</a>
+</li>
+<li class="page-section-mobile-nav__item">
+<a class="page-section-mobile-nav__link" href="/kontakty" style="">Контакты</a>
+</li>
+<li class="page-section-mobile-nav__item">
+<a class="page-section-mobile-nav__link" href="/blog" style="">Блог</a>
+</li>
+<li class="page-section-mobile-nav__item">
+<a class="page-section-mobile-nav__link" href="http://online.anyflip.com/jshl/rhaz/" style="">Альманах о нас</a>
+</li>
+</ul>
+</div>
+<div class="page-section-mobile-nav__subs">
+<div class="page-section-mobile-nav__sub" ng-cloak="" ng-if="mobileNav.activeSubIndex === 0">
+<ul class="page-section-mobile-nav__sub-inner">
+<li class="page-section-mobile-nav__sub-main-item">
+<a class="page-section-mobile-nav__sub-main-link" href="" style="">Все услуги</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/tu" style="">Готовые ТУ и СТО</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/razrabotka-tu" style="">Разработка ТУ</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/gotovye-ti-k-gost" style="">Готовые ТИ к ГОСТ</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/ti-gost" style="">Разработка ТИ к ГОСТ</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/ttk" style="">Разработка ТТК</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/ppk" style="">Программа производственного контроляПрограмма производственного контроля</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/haccp" style="">ХАССП для пищевых предприятий</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/hassp-dlya-shkol-i-detskih-sadov" style="">ХАССП для детских учреждений</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/proektirovanie-pop" style="">Проектирование общественного питания</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/proektirovanie" style="">Проектирование пищевых предприятий</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/razrabotka-menyu-i-ratsionov-pitaniya-dlya-detskih-uchrezhdeniy" style="">Разработка меню для детских учреждений</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/gotovye-ratsiony-pitaniya-dlya-detey" style="">Готовое меню для детей</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/menyu-i-ratsiony" style="">Разработка меню общепита</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/seminar-hassp" style="">Семинар ХАССП – принципы разработки и внедрения</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/video-seminar-hassp-printsipy-razrabotki-i-vnedreniya" style="">Видео-семинар Семинар ХАССП – принципы разработки и внедрения</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/seminar-markirovka" style="">Семинар Маркировка пищевой продукции</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/markirovka-pischevoy-produktsii-v-rf-sovremennye-trebovaniya" style="">Видео-семинар «Маркировка пищевой продукции в РФ. Современные требования»</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/kriticheskie-tochki-hassp" style="">Семинар Критические точки ХАССП</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/seminar-proizvodstvo-salatov-dlitelnogo-hraneniya" style="">Семинар Производство салатов длительного хранения</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/etiketka" style="">Разработка этикетки</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/tehnologicheskiy-audit" style="">Технологический аудит</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/sertifikatsiya" style="">Сертификация и декларация</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/stati" style="">Статьи</a>
+</li>
+<li class="page-section-mobile-nav__sub-item">
+<a class="page-section-mobile-nav__sub-link" href="/blog" style="">Блог</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+<div class="page-section">
+<div class="animated-section hr page_section_1001 section section_container-width_full" id="">
+
+<div class="hr__inner hr__inner_text-align_center section__content">
+<div class="hr-line hr__line"></div>
+</div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="page-header-20 page_section_1002 section section_container-width_1200" header-modules="" id="">
+
+<div class="page-header-20__inner section__content" nav-id="#kontakt-1" nav-link=".page-header-20-panel__cart-inner, .page-header-20-panel__btn, .page-header-20-panel-menu__item-link, .page-header-20-panel-menu__sub-item-link" ng-controller="ProductCartController as cart">
+<div class="page-header-20__content page-header-20__content_panel-position-right" ng-class="{&quot;page-header-20__content_active&quot; : navVisible}">
+<div class="page-header-20__head page-header-20__head_desktop-contacts-on">
+<div class="page-header-20__brand">
+<a class="page-header-20__brand-logo  hide-on-mobile" href="/">
+<img class="page-header-20__brand-logo-img" alt="безТД-removebg-preview" src="/images/006/575/151/6575151/172x/%D0%B1%D0%B5%D0%B7%D0%A2%D0%94-removebg-preview.png" width="86">
+</a>
+<a class="page-header-20__brand-logo  hide-on-desktop" href="/">
+<img class="page-header-20__brand-logo-img" alt="безТД-removebg-preview" src="/images/006/575/151/6575151/172x/%D0%B1%D0%B5%D0%B7%D0%A2%D0%94-removebg-preview.png" width="86">
+</a>
+<div class="page-header-20__brand-name wysiwyg-string"><a href="http://food2000.ru">Научно-внедренческая фирма<br>
+</a><a href="http://food2000.ru">«Центр пищевых технологий»</a></div>
+</div>
+<div class="page-header-20__info">
+<div class="page-header-20__contacts">
+<a class="page-header-20__phone bzm-calltracking" href="tel:8-800-555-70-73">
+<div class="page-header-20__phone-number">8-800-555-70-73</div>
+</a>
+<div class="page-header-20__socials">
+<a class="page-header-20__socials-item" href="https://t.me/FOOD2000RU" target="_blank">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-messengers-telegram"></use>
+</svg>
+</a>
+<a class="page-header-20__socials-item" href="https://wa.me/79137405090" target="_blank">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-messengers-whatsapp"></use>
+</svg>
+</a>
+<a class="page-header-20__socials-item" href="mailto:food2000@food2000.ru?subject=Вопрос с сайта food2000.ru" target="_blank">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-messengers-email"></use>
+</svg>
+</a>
+</div>
+</div>
+<div class="page-header-20__address-container">
+<div class="page-header-20__address wysiwyg-string">Работаем с&nbsp;2001 года<br>
+<span style="color: rgb(82, 128, 51);"><a href="mailto:admin@food2000.ru?subject=Вопрос с сайта food2000.ru" target="_blank">e-mail:&nbsp;admin@food2000.ru</a></span></div>
+</div>
+</div>
+</div>
+<div class="page-header-20__overlay" ng-click="hideNav()">
+<div class="page-header-20__overlay-panel"></div>
+</div>
+<div class="page-header-20__panels">
+<div class="page-header-20__panels-inner">
+<div class="page-header-20-panel page-header-20__panel" ng-cloak="">
+<div class="page-header-20-hamburger page-header-20-panel__hamburger page-header-20-panel__hamburger_menu" hide-on-scroll="{enabled: , after: 150}" ng-if="!navVisible" once="">
+<button class="page-header-20-hamburger__inner page-header-20-hamburger__inner_round" ng-click="toggleNav()" type="button">
+<svg class="page-header-20-hamburger__icon page-header-20-hamburger__icon_open" viewBox="0 0 24 14" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+<rect height="2" width="24"></rect>
+<rect height="2" width="24" y="6"></rect>
+<rect height="2" width="24" y="12"></rect>
+</svg>
+</button>
+</div>
+<div class="page-header-20-hamburger page-header-20-panel__hamburger page-header-20-panel__hamburger_close" ng-if="navVisible">
+<button class="page-header-20-hamburger__inner page-header-20-hamburger__inner_round" ng-click="toggleNav()" type="button">
+<svg class="page-header-20-hamburger__icon page-header-20-hamburger__icon_close" viewBox="0 0 18 18" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+<rect height="1.683" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.7284 9)" width="23.772" x="-2.886" y="8.159"></rect>
+<rect height="1.683" transform="matrix(0.7071 0.7071 -0.7071 0.7071 9.0002 -3.7278)" width="23.772" x="-2.886" y="8.159"></rect>
+</svg>
+</button>
+</div>
+<div class="page-header-20-panel__inner">
+<ul class="page-header-20-panel-menu page-header-20-panel-menu_text-align_center page-header-20-panel__menu">
+<li class="page-header-20-panel-menu__item" ng-class="{&quot;page-header-20-panel-menu__item_active&quot; : toggleActive}" toggle="">
+<div class="page-header-20-panel-menu__item-inner">
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_fantom">
+<svg></svg>
+</div>
+<a class="page-header-20-panel-menu__item-link" href="">Все услуги</a>
+<button class="page-header-20-panel-menu__toggle" ng-click="toggle()" type="button">
+<svg ng-if="!toggleActive" viewBox="0 0 128 128">
+<polygon points="127,59 69,59 69,1 59,1 59,59 1,59 1,69 59,69 59,127 69,127 69,69 127,69"></polygon>
+</svg>
+<svg ng-if="toggleActive" viewBox="0 0 128 128">
+<rect height="10" width="126" x="1" y="59"></rect>
+</svg>
+</button>
+</div>
+<ul class="page-header-20-panel-menu__sub" ng-if="toggleActive">
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/tu">Готовые ТУ и СТО</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/razrabotka-tu">Разработка ТУ</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/gotovye-ti-k-gost">Готовые ТИ к ГОСТ</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/ti-gost">Разработка ТИ к ГОСТ</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/ttk">Разработка ТТК</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/ppk">Программа производственного контроляПрограмма производственного контроля</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/haccp">ХАССП для пищевых предприятий</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/hassp-dlya-shkol-i-detskih-sadov">ХАССП для детских учреждений</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/proektirovanie-pop">Проектирование общественного питания</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/proektirovanie">Проектирование пищевых предприятий</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/razrabotka-menyu-i-ratsionov-pitaniya-dlya-detskih-uchrezhdeniy">Разработка меню для детских учреждений</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/gotovye-ratsiony-pitaniya-dlya-detey">Готовое меню для детей</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/menyu-i-ratsiony">Разработка меню общепита</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/seminar-hassp">Семинар ХАССП – принципы разработки и внедрения</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/video-seminar-hassp-printsipy-razrabotki-i-vnedreniya">Видео-семинар Семинар ХАССП – принципы разработки и внедрения</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/seminar-markirovka">Семинар Маркировка пищевой продукции</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/markirovka-pischevoy-produktsii-v-rf-sovremennye-trebovaniya">Видео-семинар «Маркировка пищевой продукции в РФ. Современные требования»</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/seminar-proizvodstvo-salatov-dlitelnogo-hraneniya">Семинар Производство салатов длительного хранения</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/kriticheskie-tochki-hassp">Семинар Критические точки ХАССП</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/etiketka">Разработка этикетки</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/seminar-markirovka">Обучение&nbsp;по маркировки</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/tehnologicheskiy-audit">Технологический аудит</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/sertifikatsiya">Сертификация и декларация</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/stati">Статьи</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__sub-item">
+<div class="page-header-20-panel-menu__sub-item-inner">
+<a class="page-header-20-panel-menu__sub-item-link" href="/blog">Блог</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+</ul>
+</li>
+<li class="page-header-20-panel-menu__item" ng-class="{&quot;page-header-20-panel-menu__item_active&quot; : toggleActive}" toggle="">
+<div class="page-header-20-panel-menu__item-inner">
+<a class="page-header-20-panel-menu__item-link" href="/company">О компании</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__item" ng-class="{&quot;page-header-20-panel-menu__item_active&quot; : toggleActive}" toggle="">
+<div class="page-header-20-panel-menu__item-inner">
+<a class="page-header-20-panel-menu__item-link" href="/sotrudniki-tspt-obschee">Сотрудники</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__item" ng-class="{&quot;page-header-20-panel-menu__item_active&quot; : toggleActive}" toggle="">
+<div class="page-header-20-panel-menu__item-inner">
+<a class="page-header-20-panel-menu__item-link" href="/missiya">Миссия</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__item" ng-class="{&quot;page-header-20-panel-menu__item_active&quot; : toggleActive}" toggle="">
+<div class="page-header-20-panel-menu__item-inner">
+<a class="page-header-20-panel-menu__item-link" href="/otzyvy">Отзывы</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__item" ng-class="{&quot;page-header-20-panel-menu__item_active&quot; : toggleActive}" toggle="">
+<div class="page-header-20-panel-menu__item-inner">
+<a class="page-header-20-panel-menu__item-link" href="/kontakty">Контакты</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__item" ng-class="{&quot;page-header-20-panel-menu__item_active&quot; : toggleActive}" toggle="">
+<div class="page-header-20-panel-menu__item-inner">
+<a class="page-header-20-panel-menu__item-link" href="/blog">Блог</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+<li class="page-header-20-panel-menu__item" ng-class="{&quot;page-header-20-panel-menu__item_active&quot; : toggleActive}" toggle="">
+<div class="page-header-20-panel-menu__item-inner">
+<a class="page-header-20-panel-menu__item-link" href="http://online.anyflip.com/jshl/rhaz/">Альманах о нас</a>
+<div class="page-header-20-panel-menu__toggle page-header-20-panel-menu__toggle_placeholder">
+<svg></svg>
+</div>
+</div>
+</li>
+</ul>
+<div class="page-header-20-panel__addresses">
+<div class="page-header-20-panel-address page-header-20-panel__address">
+<div class="page-header-20-panel-address__city wysiwyg-string">Наши контакты</div>
+<div class="page-header-20-panel-address__text wysiwyg-string">Адрес: <br>
+г. Новосибирск, пр. Карла Маркса, 30 офис 600А</div>
+</div>
+</div>
+<div class="page-header-20-panel__phones">
+<div class="page-header-20-panel-phone page-header-20-panel__phone">
+<a class="page-header-20-panel-phone__number bzm-calltracking" href="tel:8-800-555-70-73">8-800-555-70-73</a>
+<div class="page-header-20-panel-phone__text wysiwyg-string">Бесплатная линия по России</div>
+</div>
+<div class="page-header-20-panel-phone page-header-20-panel__phone">
+<a class="page-header-20-panel-phone__number bzm-calltracking" href="tel:+7 (383) 207-89-20">+7 (383) 207-89-20</a>
+<div class="page-header-20-panel-phone__text wysiwyg-string">Отдел по работе с клиентами</div>
+</div>
+<div class="page-header-20-panel-phone page-header-20-panel__phone">
+<a class="page-header-20-panel-phone__number bzm-calltracking" href="tel:+7 (495) 147-31-18">+7 (495) 147-31-18</a>
+<div class="page-header-20-panel-phone__text wysiwyg-string">Москва</div>
+</div>
+</div>
+<div class="page-header-20-panel__btn-container">
+<a class="page-header-20-panel__btn button" href="#kontakt-1"><div class="button__inner"><span class="button__text">Обратная связь</span></div></a>
+</div>
+<div class="page-header-20-panel__messengers">
+<a class="page-header-20-panel__messengers-item" href="https://t.me/FOOD2000RU" target="_blank">
+<svg style="height: 42px;">
+<use xlink:href="/assets/sites/template1/icons.svg#icon-messengers-mask-telegram"></use>
+</svg>
+</a>
+<a class="page-header-20-panel__messengers-item" href="https://wa.me/79137405090" target="_blank">
+<svg style="height: 42px;">
+<use xlink:href="/assets/sites/template1/icons.svg#icon-messengers-mask-whatsapp"></use>
+</svg>
+</a>
+<a class="page-header-20-panel__messengers-item" href="mailto:food2000@food2000.ru?subject=Вопрос с сайта food2000.ru" target="_blank">
+<svg style="height: 42px;">
+<use xlink:href="/assets/sites/template1/icons.svg#icon-messengers-mask-email"></use>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="animated-section html page_section_1004 section section_container-width_1000" id="">
+
+<div class="html__inner section__content"><div class="ya-site-form ya-site-form_arrow_yes ya-site-form_inited_yes" data-bem="{&quot;action&quot;:&quot;https://food2000.ru/poisk&quot;,&quot;arrow&quot;:true,&quot;bg&quot;:&quot;#00cc66&quot;,&quot;fontsize&quot;:12,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;ru&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Поиск по food2000.ru&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;ru&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2696478,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Поиск по food2000.ru&quot;,&quot;input_placeholderColor&quot;:&quot;#000000&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}" id="ya-site-form0"><div class="ya-site-form__form"><table class="ya-site-form__wrap" cellspacing="0" cellpadding="0"><tbody><tr><td class="ya-site-form__search-wrap"><table class="ya-site-form__search" cellspacing="0" cellpadding="0"><tbody><tr><td class="ya-site-form__search-input"><table class="ya-site-form__search-input-layout"><tbody><tr><td class="ya-site-form__search-input-layout-l"><div class="ya-site-form__input"><input name="text" type="search" value="" class="ya-site-form__input-text" placeholder="Поиск по food2000.ru" autocomplete="off"><div class="ya-site-suggest"><div class="ya-site-suggest-popup" style="display: none;"><i class="ya-site-suggest__opera-gap"></i><div class="ya-site-suggest-list"><div class="ya-site-suggest__iframe"></div><ul class="ya-site-suggest-items"></ul></div></div></div></div></td><td class="ya-site-form__search-input-layout-r"><input class="ya-site-form__submit" type="button" value="Найти"></td></tr></tbody></table></td></tr><tr><td class="ya-site-form__gap"><div class="ya-site-form__gap-i"></div></td></tr></tbody></table></td><td class="ya-site-form__arrow-wrap"><div class="ya-site-form__arrow"><div class="ya-site-form__arrow-a"></div></div></td></tr></tbody></table></div></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="animated-section hr page_section_1005 section section_container-width_full" id="">
+
+<div class="hr__inner hr__inner_text-align_center section__content">
+<div class="hr-line hr__line"></div>
+</div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="page_section_1008 section social-03 social-03_position_bottom" id="">
+<div class="social-03__inner section__content">
+<div accordion="" accordion-content=".social-03-box__content" accordion-toggle-class="social-03-box_expanded" accordion-toggle-speed="fast" accordion-toggle=".social-03-box__label" class="social-03-box social-03-box_animation social-03-box_shadow social-03__box" ng-cloak="" style="right: 66px; top: 128px; bottom: 128px;">
+<div class="social-03-box__label-container">
+<div class="social-03-label social-03-box__label">
+<svg class="social-03-label__icon social-03-label__icon_on" viewBox="0 0 167.975 167.975" xmlns="http://www.w3.org/2000/svg">
+<path d="M58.883,86.171c0,4.217-3.415,7.648-7.633,7.648c-4.218,0-7.633-3.431-7.633-7.648 c0-4.218,3.415-7.641,7.633-7.641C55.467,78.53,58.883,81.953,58.883,86.171z"></path>
+<path d="M91.628,86.171c0,4.217-3.415,7.648-7.633,7.648c-4.232,0-7.648-3.431-7.648-7.648 c0-4.218,3.416-7.641,7.648-7.641C88.212,78.53,91.628,81.953,91.628,86.171z"></path>
+<path d="M124.374,86.171c0,4.217-3.431,7.648-7.634,7.648c-4.232,0-7.648-3.431-7.648-7.648 c0-4.218,3.415-7.641,7.648-7.641C120.943,78.53,124.374,81.953,124.374,86.171z"></path>
+<path d="M7.9,148.906c-0.854,0-1.7-0.282-2.391-0.846c-1.233-0.995-1.715-2.658-1.21-4.166l8.784-26.182 C4.515,107.429,0,95.563,0,83.26c0-35.396,37.683-64.191,83.995-64.191c46.304,0,83.98,28.795,83.98,64.191 s-37.676,64.199-83.98,64.199c-18.274,0-36.176-4.604-50.707-12.987l-23.449,13.9C9.237,148.728,8.569,148.906,7.9,148.906z M33.295,126.245c0.691,0,1.381,0.186,1.99,0.564c13.685,8.413,30.986,13.046,48.71,13.046c42.116,0,76.376-25.387,76.376-56.595 c0-31.201-34.26-56.588-76.376-56.588c-42.124,0-76.391,25.387-76.391,56.588c0,11.086,4.359,21.838,12.608,31.082 c0.906,1.017,1.203,2.45,0.765,3.742l-6.215,18.533l16.595-9.838C31.951,126.423,32.627,126.245,33.295,126.245z"></path>
+</svg>
+<svg class="social-03-label__icon social-03-label__icon_off" viewBox="0 0 32 32" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+<path d="M 7.21875 5.78125 L 5.78125 7.21875 L 14.5625 16 L 5.78125 24.78125 L 7.21875 26.21875 L 16 17.4375 L 24.78125 26.21875 L 26.21875 24.78125 L 17.4375 16 L 26.21875 7.21875 L 24.78125 5.78125 L 16 14.5625 Z"></path>
+</svg>
+</div>
+<div class="social-03-plate social-03-box__plate">
+<div class="social-03-plate__inner">
+<div class="social-03-plate__mask"></div>
+<div class="social-03-plate__mask-pointer"></div>
+<div class="social-03-plate__text wysiwyg-string">Любим отвечать на ваши вопросы!</div>
+</div>
+</div>
+</div>
+<div class="social-03-box__content">
+<div class="social-03-box__content-inner">
+<a class="social-03-box__item" href="https://wa.me/79137405090" target="_blank">
+<div class="social-03-box__item-bg"></div>
+<svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+<title>Whatsapp</title>
+<g>
+<path d="M15.594,13.28c-0.197-0.098-1.162-0.574-1.344-0.638c-0.18-0.067-0.352-0.044-0.486,0.146  c-0.191,0.267-0.379,0.538-0.527,0.7c-0.119,0.127-0.314,0.143-0.479,0.074c-0.217-0.091-0.83-0.306-1.584-0.975  c-0.582-0.521-0.979-1.168-1.096-1.362c-0.113-0.199-0.01-0.314,0.082-0.422c0.1-0.122,0.195-0.211,0.293-0.325  c0.1-0.115,0.154-0.175,0.219-0.31c0.066-0.131,0.02-0.266-0.029-0.366c-0.047-0.1-0.443-1.066-0.607-1.461  C9.906,8.029,9.807,8.018,9.607,8.008C9.531,8.004,9.457,8.002,9.383,8c-0.26,0-0.529,0.076-0.691,0.244  C8.492,8.447,8,8.919,8,9.887c0,0.969,0.705,1.906,0.801,2.038c0.1,0.129,1.379,2.146,3.363,2.97  c1.553,0.643,2.012,0.584,2.367,0.508c0.516-0.111,1.162-0.492,1.326-0.954c0.162-0.46,0.162-0.853,0.113-0.936  C15.924,13.429,15.795,13.381,15.594,13.28z M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M12,19  c-1.357,0-2.619-0.393-3.691-1.061L5,19l1.094-3.253C5.404,14.663,5,13.38,5,12c0-3.866,3.133-7,7-7  c0.012,0,0.023,0.002,0.035,0.002C12.049,5.002,12.061,5,12.072,5c1.885,0,3.592,0.767,4.828,2.005C18.195,8.275,19,10.043,19,12  C19,15.866,15.865,19,12,19z" fill="#2BB641"></path>
+</g>
+</svg>
+</a>
+<a class="social-03-box__item" href="https://t.me/FOOD2000RU" target="_blank">
+<div class="social-03-box__item-bg"></div>
+<svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+<title>Telegram</title>
+<g>
+<path d="M15.439,8.379c-2.5,1.596-6.939,4.43-6.939,4.43l0.98,3.231l0.219-2.046c0,0,3.781-3.413,5.939-5.357  c0.063-0.058,0.07-0.154,0.02-0.221C15.605,8.35,15.51,8.333,15.439,8.379z M12,0C5.373,0,0,5.372,0,12c0,6.627,5.373,12,12,12  s12-5.373,12-12C24,5.372,18.627,0,12,0z M15.791,17.465c-0.047,0.225-0.207,0.409-0.422,0.491  c-0.215,0.081-0.457,0.048-0.645-0.085c-1.184-0.842-3.268-2.369-3.268-2.369s-1.096,1.035-1.805,1.704  c-0.125,0.119-0.305,0.165-0.473,0.121s-0.297-0.173-0.352-0.336c-0.441-1.3-1.289-3.858-1.289-3.858s-1.813-0.574-3.193-0.988  C4.146,12.085,4.008,11.906,4,11.7c-0.006-0.207,0.121-0.394,0.316-0.468c3.078-1.139,10.611-3.965,13.057-4.871  c0.158-0.057,0.336-0.026,0.465,0.082c0.129,0.109,0.188,0.279,0.152,0.443C17.529,9.053,16.299,15.083,15.791,17.465z" fill="#0087D0"></path>
+</g>
+</svg>
+</a>
+<a class="social-03-box__item" href="#Zakaz_kontakta" target="_blank">
+<div class="social-03-box__item-bg"></div>
+<svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+<title>E-mail</title>
+<g>
+<path d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M18.99,6.98L12,12.646L5.008,6.98  H18.99z M19,16.98H5V8.475l7,5.673l7-5.672V16.98z" fill="#A65CAC"></path>
+</g>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<main class="page__main">
+<div class="page-section">
+<div class="animated-section page_section_0 section section_container-width_1200 text-11" id="">
+
+<div class="text-11__inner section__content">
+<div class="text-11__title wysiwyg-string">
+<h1>Политика конфиденциальности сайта food2000.ru</h1>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="animated-section page_section_1 section section_container-width_1200 text-35" id="">
+
+<div class="text-35__inner section__content">
+<div class="text-35__title wysiwyg-string">
+<h2><strong></strong>Настоящее Пользовательское соглашение (далее – «Соглашение») определяет условия использования Пользователями материалов и сервисов сайта&nbsp;www.food2000.ru&nbsp;(далее&nbsp;— «Сайт»).</h2>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="animated-section page_section_2 section section_container-width_1200 text-26" id="">
+
+<div class="text-26__inner section__content">
+
+<div class="text-26__content">
+<div class="text-26-content">
+<div class="text-26-content__note wysiwyg-string"><strong>1. Общее положение</strong></div>
+<div class="text-26-content__text wysiwyg-content"><p>1.1. Использование материалов и сервисов Сайта регулируется нормами действующего законодательства Российской Федерации.</p>
+<p>1.2. Настоящее Соглашение является публичной офертой. Получая доступ к материалам Сайта Пользователь считается присоединившимся к настоящему Соглашению.</p>
+<p>1.3. Администрация Сайта вправе в любое время в одностороннем порядке изменять условия настоящего Соглашения. Такие изменения вступают в силу по истечении 3 (Трех) календарных дней с момента размещения новой версии Соглашения на сайте. При несогласии Пользователя с внесенными изменениями он обязан отказаться от доступа к Сайту, прекратить использование материалов и сервисов Сайта.<br></p></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="animated-section page_section_3 section section_container-width_1200 text-26" id="">
+
+<div class="text-26__inner section__content">
+
+<div class="text-26__content">
+<div class="text-26-content">
+<div class="text-26-content__note wysiwyg-string"><strong>2. Обязательство пользователя</strong></div>
+<div class="text-26-content__text wysiwyg-content"><p>2.1. Пользователь соглашается не предпринимать действий, которые могут рассматриваться как нарушающие российское законодательство или нормы международного права, в том числе в сфере&nbsp;<a href="http://copyright.ru/intellectual/" title="интеллектуальной собственности">интеллектуальной собственности</a>,&nbsp;<a href="http://copyright.ru/ru/documents/avtorskoe_pravo/avtorskie_prava/" title="авторских">авторских</a>&nbsp;и/или&nbsp;<a href="http://copyright.ru/ru/documents/avtorskoe_pravo/smegnie_prava/" title="смежных правах">смежных правах</a>, а также любых действий, которые приводят или могут привести к нарушению нормальной работы Сайта и сервисов Сайта.<br></p>
+
+
+
+<p>2.2. Использование материалов Сайта без согласия<a href="http://copyright.ru/documents/avtorskoe_pravo/pravoobladateli/" title="правообладателей">правообладателей</a>&nbsp;не допускается. Для правомерного использования материалов Сайта необходимо соответствующее согласие от&nbsp;Правообладателей.</p>
+
+<p>2.3. При&nbsp;<a href="http://copyright.ru/library/zakonodatelstvo/gk_rf_obschee_zakonodatel/grazhdanskii_kodeks_RF_4_chast/glava_70__avtorskoe_pravo/#20" title="цитировании">цитировании</a>&nbsp;материалов Сайта, включая охраняемые авторские произведения, ссылка на Сайт обязательна.</p>
+
+<p>2.4. Комментарии и иные записи Пользователя на Сайте не должны вступать в противоречие с требованиями законодательства Российской Федерации и общепринятых норм морали и нравственности.</p><p>2.5. Пользователь предупрежден о том, что Администрация Сайта не несет ответственности за посещение и использование им внешних ресурсов, ссылки на которые могут содержаться на сайте.</p>
+
+
+
+<p>2.6. Пользователь согласен с тем, что Администрация Сайта не несет ответственности и не имеет прямых или косвенных обязательств перед Пользователем в связи с любыми возможными или возникшими потерями или убытками, связанными с любым содержанием Сайта,&nbsp;<a href="http://copyright.ru/ru/documents/registraciy_avtorskih_prav/" title="регистрацией авторских прав">регистрацией авторских прав</a>&nbsp;и сведениями о такой регистрации, товарами или услугами, доступными на или полученными через внешние сайты или ресурсы либо иные контакты Пользователя, в которые он вступил, используя размещенную на Сайте информацию или ссылки на внешние ресурсы.</p>
+
+<p>2.7. Пользователь принимает положение о том, что все материалы и сервисы Сайта или любая их часть могут сопровождаться рекламой. Пользователь согласен с тем, что Администрация Сайта не несет какой-либо ответственности и не имеет каких-либо обязательств в связи с такой рекламой.<br></p>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="animated-section page_section_4 section section_container-width_1200 text-26" id="">
+
+<div class="text-26__inner section__content">
+
+<div class="text-26__content">
+<div class="text-26-content">
+<div class="text-26-content__note wysiwyg-string"><strong>3. Прочие условия</strong></div>
+<div class="text-26-content__text wysiwyg-content"><p>3.1. Все возможные споры, вытекающие из настоящего Соглашения или связанные с ним, подлежат разрешению в соответствии с действующим законодательством Российской Федерации.<br></p>
+<p>3.2. Ничто в Соглашении не может пониматься как установление между Пользователем и Администрации Сайта агентских отношений, отношений товарищества, отношений по совместной деятельности, отношений личного найма, либо каких-то иных отношений, прямо не предусмотренных Соглашением.</p>
+<p>3.3. Признание судом какого-либо положения Соглашения недействительным или не подлежащим принудительному исполнению не влечет недействительности иных положений Соглашения.</p>
+<p>3.4. Бездействие со стороны Администрации Сайта в случае нарушения кем-либо из Пользователей положений Соглашения не лишает Администрацию Сайта права предпринять позднее соответствующие действия в защиту своих интересов и&nbsp;<a href="http://copyright.ru/documents/zashita_avtorskih_prav/" title="защиту авторских прав">защиту авторских прав</a>&nbsp;на охраняемые в соответствии с законодательством материалы Сайта.</p>
+<p></p>
+<p><strong>Пользователь подтверждает, что ознакомлен со всеми пунктами настоящего Соглашения и безусловно принимает их.</strong></p></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div ng-cloak="" ng-controller="ProductSectionController as psc">
+<div class="modal-container" ng-cloak="" ng-if="psc.model.isAddToCartFormVisible">
+<div class="modal-overlay" ng-click="psc.model.hideAddToCartForm()"></div>
+<div class="modal form-modal">
+<div ng-hide="fc[('formadd_to_cart_from_section')].success">
+<div class="modal__title" ng-bind="psc.model.addToCartFormData.formHeader"></div>
+<div class="modal__text" html-value-or-default="psc.model.addToCartFormData.formContent"></div>
+<div class="form-modal__form"><form class="form" name="{{fc.getFormName(&quot;add_to_cart_from_section&quot;)}}" ng-cloak="" ng-init="fc.initFormData(&quot;add_to_cart_from_section&quot;, psc.model.addToCartFormData.formInputs)" ng-submit="fc.submit(&quot;add_to_cart_from_section&quot;)" novalidate="">
+<div class="form__item" ng-class="{'form__fieldset' : ['radio', 'checkbox', 'select'].indexOf(input.type) >= 0 || (input.type === 'address' &amp;&amp; input.full_format), 'form__item_hidden' : input.type === 'hidden'}" ng-repeat="(inputIndex, input) in psc.model.addToCartFormData.formInputs">
+<div class="form__input" ng-if="input.type === 'name'">
+<input class="text-input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="text">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'phone'">
+<input class="text-input" input-mask="ru" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="+7 (___) ___-__-__" type="text">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'email'">
+<input class="text-input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; (fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required || fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.email)}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="email">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; (fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required || fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.email)"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'text' &amp;&amp; !input.multiple_lines">
+<input class="text-input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="text">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'address' &amp;&amp; !input.full_format">
+<input class="text-input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="text">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</div>
+<fieldset class="fieldset" ng-if="input.type === 'address' &amp;&amp; input.full_format">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<div class="form__input">
+<input class="text-input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}_address1" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex + '_address1'].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value_address1" ng-required="input.required" placeholder="Адрес" type="text">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex + '_address1'].$error.required"></div>
+</div>
+<div class="form__input">
+<input class="text-input" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value_address2" placeholder="Адрес (дополнение)" type="text">
+</div>
+<div class="form__input">
+<input class="text-input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}_city" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex + '_city'].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value_city" ng-required="input.required" placeholder="Город" type="text">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex + '_city'].$error.required"></div>
+</div>
+<div class="form__inputs-group">
+<div class="form__inputs-group-item">
+<input class="text-input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}_zip" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex + '_zip'].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value_zip" ng-required="input.required" placeholder="Индекс" type="text">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex + '_zip'].$error.required"></div>
+</div>
+<div class="form__inputs-group-item">
+<input class="text-input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}_region" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value_region" placeholder="Область" type="text">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex + '_region'].$error.required"></div>
+</div>
+</div>
+<div class="form__input">
+<input class="text-input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}_country" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex + '_country'].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value_country" ng-required="input.required" placeholder="Страна" type="text">
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex + '_country'].$error.required"></div>
+</div>
+</fieldset>
+<div class="form__input" ng-if="input.type === 'text' &amp;&amp; input.multiple_lines">
+<textarea class="textarea" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-class="{'textarea_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}"></textarea>
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</div>
+<fieldset class="fieldset" ng-if="input.type === 'radio'">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<label class="fieldset__radio-item radio" ng-repeat="option in input.options">
+<input class="radio__input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" type="radio" value="{{option.name}}">
+<span class="radio__box"></span>
+<span class="radio__text" ng-bind="option.name"></span>
+</label>
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</fieldset>
+<fieldset class="fieldset" ng-if="input.type === 'checkbox'">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<label class="fieldset__checkbox-item checkbox" ng-repeat="option in input.options">
+<input class="checkbox__input" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].options[$index].value" ng-required="input.required &amp;&amp; !fc.isAnyChecked(fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].options)" type="checkbox" value="{{option.name}}">
+<span class="checkbox__box">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-check"></use>
+</svg>
+</span>
+<span class="checkbox__text" ng-bind="option.name"></span>
+</label>
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</fieldset>
+<fieldset class="fieldset" ng-if="input.type === 'select'">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<div class="form__input">
+<div class="form__select" ng-class="{'form__select_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required}">
+<div class="select" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" theme="selectize" ui-select="">
+<div ng-bind="$select.selected.name" placeholder="{{input.label}}" ui-select-match=""></div>
+<div repeat="option.name as option in input.options" ui-select-choices="">
+<div ng-bind="option.name"></div>
+</div>
+</div>
+</div>
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</div>
+</fieldset>
+<div class="form__input" ng-if="input.type === 'date' &amp;&amp; input.with_time">
+<div class="date-input">
+<input auto-close="true" class="date-input__input text-input" date-time="" format="DD.MM.YYYY HH:mm" min-view="hours" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="datetime" view="date">
+<svg class="date-input__icon">
+<use xlink:href="/assets/sites/template1/icons.svg#icon-calendar"></use>
+</svg>
+</div>
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'date' &amp;&amp; !input.with_time">
+<div class="date-input">
+<input auto-close="true" class="date-input__input text-input" date-time="" format="DD.MM.YYYY" min-view="date" name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="datetime" view="date">
+<svg class="date-input__icon">
+<use xlink:href="/assets/sites/template1/icons.svg#icon-calendar"></use>
+</svg>
+</div>
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</div>
+<div ng-if="input.type === 'hidden'">
+<input ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value" type="hidden">
+</div>
+<fieldset class="form__fieldset fieldset" ng-if="input.type === 'file'">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<div class="form__input">
+<div class="file-input">
+<input name="input{{&quot;add_to_cart_from_section&quot;}}_{{inputIndex}}" ng-model="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value.filename" ng-required="input.required" ng-show="!fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value.id &amp;&amp; !fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value.uploading" oi-file="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].uploadOptions" type="file">
+<div class="file-input__item" ng-show="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value.id || fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value.uploading">
+<span class="file-input__item-name" ng-bind="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value.filename"></span>
+<progress class="file-input__item-progress" max="100" ng-show="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value.uploading" value="{{fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value.progress}}">
+<div>
+<span style="width: 50%;"></span>
+</div>
+</progress>
+<span ng-show="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].value.id">OK</span>
+<button class="file-input__item-remove" ng-click="fc['form' + &quot;add_to_cart_from_section&quot; + 'inputs'][inputIndex].deleteFile()" type="button">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-cross"></use>
+</svg>
+</button>
+</div>
+</div>
+<div class="form__input-error" ng-bind="psc.model.addToCartFormData.formErrorMessage" ng-if="psc.model.addToCartFormData.formErrorMessage &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;].$submitted &amp;&amp; fc['form' + &quot;add_to_cart_from_section&quot;]['input' + &quot;add_to_cart_from_section&quot; + '_' + inputIndex].$error.required"></div>
+</div>
+</fieldset>
+</div>
+<div class="form__item" ng-if="psc.model.addToCartFormData.formCaptcha">
+<div class="form-captcha form__input">
+<div key="''" on-success="fc.recaptchaResponse(&quot;add_to_cart_from_section&quot;, response)" vc-recaptcha=""></div>
+</div>
+</div>
+
+<div class="form__submit">
+<button class="form__submit-btn button" type="submit"><div class="button__inner"><span class="button__text">{{psc.model.addToCartFormData.formSubmitButtonText}}</span></div></button>
+</div>
+</form>
+</div>
+</div>
+<button class="modal__close-btn" ng-click="psc.model.hideAddToCartForm()" title="Закрыть" type="button">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-cross"></use>
+</svg>
+</button>
+</div>
+</div>
+<div class="add-to-cart-sidepanel" ng-cloak="" ng-if="psc.model.isAddToCartPopupVisible">
+<div class="add-to-cart-sidepanel__inner">
+<div class="add-to-cart-sidepanel__title" ng-bind="psc.model.product.name"></div>
+<div class="add-to-cart-modal__product-variants add-to-cart-modal-product-variants">
+<div class="add-to-cart-modal-product-variants__item" ng-repeat="(parIdx, par) in psc.model.product.parameter_names track by parIdx">
+<div class="select" ng-change="psc.model.product.parameterChanged()" ng-model="psc.model.product.selectedOptions[parIdx]" theme="selectize" ui-select="">
+<div ng-bind="par + ': ' + $select.selected" placeholder="{{par}}:" ui-select-match=""></div>
+<div repeat="option in psc.model.product.parameterValuesFor(parIdx)" ui-select-choices="">
+<div ng-bind="option"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="add-to-cart-modal__product-price add-to-cart-modal-product-price">
+<div class="add-to-cart-modal-product-price__old-price" ng-if="psc.model.product.currentVariant.has_old_price">
+<del ng-bind="psc.model.product.currentVariant.formated_old_price"></del>
+</div>
+<div class="add-to-cart-modal-product-price__current-price" ng-bind="psc.model.product.currentVariant.formated_price"></div>
+</div>
+<button class="add-to-cart-sidepanel__cart-link button" type="button" ng-if="psc.model.product.currentVariant.cart_visible" ng-click="psc.model.addToCart(psc.model.product.currentVariant.id)"><div class="button__inner"><span class="button__text">Купить</span></div></button>
+<button class="add-to-cart-sidepanel__close-btn" ng-click="psc.model.cancelAddToCart()" title="Закрыть" type="button">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-cross"></use>
+</svg>
+</button>
+</div>
+</div>
+
+</div>
+
+
+</main>
+<div class="page__footer">
+<div class="page-section">
+<div class="animated-section hr page_section_2000 section section_container-width_full" id="">
+
+<div class="hr__inner hr__inner_text-align_center section__content">
+<div class="hr-line hr__line"></div>
+</div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="page-footer-03 page_section_2001 section section_container-width_1200" id="">
+
+<div class="page-footer-03__inner section__content">
+<div class="page-footer-03-content page-footer-03-content_desktop-align_center page-footer-03-content_mobile-align_center page-footer-03__content">
+<div class="page-footer-03-content__column">
+<div class="page-footer-03-brand page-footer-03__brand">
+<a class="page-footer-03-brand__brand-logo" href="/">
+<img alt="© 2001-2022 ООО НВФ &quot;Центр пищевых технологий&quot;" src="/images/006/576/110/6576110/110x/%D0%B1%D0%B5%D0%B7%D0%A2%D0%94-removebg-preview.png" width="55">
+</a>
+</div>
+<div class="page-footer-03-contacts page-footer-03__contacts">
+<div class="page-footer-03-contacts__phone">
+<div class="page-footer-03-contacts__phone-tel">
+<a class="bzm-calltracking" href="tel:+7 (383) 207-89-20">+7 (383) 207-89-20</a>
+</div>
+<div class="page-footer-03-contacts__phone-label wysiwyg-string">Отдел по работе с клиентами</div>
+</div>
+<div class="page-footer-03-contacts__phone">
+<div class="page-footer-03-contacts__phone-tel">
+<a class="bzm-calltracking" href="tel:8 800-555-70-73">8 800-555-70-73</a>
+</div>
+<div class="page-footer-03-contacts__phone-label wysiwyg-string">Бесплатная линия по России</div>
+</div>
+</div>
+</div>
+<div class="page-footer-03-content__column">
+<div class="page-footer-03-menu">
+<a class="page-footer-03-menu__title wysiwyg-string" href="">
+<h3>Услуги</h3>
+
+</a>
+<div class="page-footer-03-menu__list">
+<div class="page-footer-03-menu__list-item">
+<a href="/razrabotka-tu">Разработка Технических условий</a>
+</div>
+<div class="page-footer-03-menu__list-item">
+<a href="/tu">Готовые ТУ</a>
+</div>
+<div class="page-footer-03-menu__list-item">
+<a href="/haccp">ХАССП (HACCP)</a>
+</div>
+<div class="page-footer-03-menu__list-item">
+<a href="/proektirovanie">Проектирование предприятий пищевой промышленности</a>
+</div>
+</div>
+</div>
+</div>
+<div class="page-footer-03-content__column">
+<div class="page-footer-03-menu">
+<a class="page-footer-03-menu__title wysiwyg-string" href="">
+<h3><span style="color: rgb(38, 92, 2);">О нас</span></h3>
+
+</a>
+<div class="page-footer-03-menu__list">
+<div class="page-footer-03-menu__list-item">
+<a href="/company">О компании</a>
+</div>
+<div class="page-footer-03-menu__list-item">
+<a href="/otzyvy">Отзывы</a>
+</div>
+<div class="page-footer-03-menu__list-item">
+<a href="/kontakty">Контакты</a>
+</div>
+<div class="page-footer-03-menu__list-item">
+<a href="Блог">Блог</a>
+</div>
+</div>
+</div>
+</div>
+<div class="page-footer-03-content__column">
+<div class="page-footer-03-menu">
+<a class="page-footer-03-menu__title wysiwyg-string" href="">
+<h3>Информация</h3>
+
+</a>
+<div class="page-footer-03-menu__list">
+<div class="page-footer-03-menu__list-item">
+<a href="/politika-konfidentsialnosti">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
+</div>
+<div class="page-footer-03-menu__list-item">
+<a href="/polzovatelskoe-soglashenie">СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ</a>
+</div>
+<div class="page-footer-03-menu__list-item">
+<a href="/zakon-o-zaschite-prav-potrebitelya">ЗАКОН «О ЗАЩИТЕ ПРАВ ПОТРЕБИТЕЛЕЙ»</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="page-section">
+<div class="form-05 page_section_2002 section" make-scope="" modal-id="#Zakaz_kontakta">
+<div class="form-05__inner section__content">
+<div class="modal-container" ng-cloak="" ng-if="modalVisible">
+<div class="modal-overlay" ng-click="hideModal()"></div>
+<div class="modal form-modal">
+<div ng-hide="fc[('form' + 2002)].success">
+<div class="modal__title">Отправьте заявку</div>
+<div class="modal__text">Наши специалисты с вами свяжутся в самое ближайшее время</div>
+<div ng-init="page_form_2002 = {&quot;formAfterSendMessage&quot;:&quot;Спасибо! Ваше сообщение отправлено&quot;,&quot;formContent&quot;:null,&quot;formErrorMessage&quot;:&quot;Пожалуйста, заполните эти поля&quot;,&quot;formHeader&quot;:null,&quot;formInputs&quot;:[{&quot;type&quot;:&quot;name&quot;,&quot;label&quot;:&quot;Имя*&quot;,&quot;required&quot;:true},{&quot;type&quot;:&quot;email&quot;,&quot;label&quot;:&quot;E-mail*&quot;,&quot;required&quot;:true},{&quot;type&quot;:&quot;phone&quot;,&quot;label&quot;:&quot;Телефон&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;label&quot;:&quot;Комментарии и пожелания&quot;,&quot;multiple_lines&quot;:true},{&quot;type&quot;:&quot;radio&quot;,&quot;options&quot;:[{&quot;name&quot;:&quot;Согласен (согласна)&quot;}],&quot;label&quot;:&quot;Нажимая кнопку «Отправить», я даю свое согласие на обработку моих персональных данных, в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных», на условиях и для целей, определенных в соответствии с Пользовательским соглашением и Политикой конфиденциальности&quot;,&quot;required&quot;:true}],&quot;formSubmitButtonText&quot;:&quot;Отправить&quot;,&quot;formCaptcha&quot;:null}"><form class="form" name="{{fc.getFormName(2002)}}" ng-cloak="" ng-init="fc.initFormData(2002, page_form_2002.formInputs)" ng-submit="fc.submit(2002)" novalidate="">
+<div class="form__item" ng-class="{'form__fieldset' : ['radio', 'checkbox', 'select'].indexOf(input.type) >= 0 || (input.type === 'address' &amp;&amp; input.full_format), 'form__item_hidden' : input.type === 'hidden'}" ng-repeat="(inputIndex, input) in page_form_2002.formInputs">
+<div class="form__input" ng-if="input.type === 'name'">
+<input class="text-input" name="input{{2002}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="text">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'phone'">
+<input class="text-input" input-mask="ru" name="input{{2002}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="+7 (___) ___-__-__" type="text">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'email'">
+<input class="text-input" name="input{{2002}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; (fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required || fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.email)}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="email">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; (fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required || fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.email)"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'text' &amp;&amp; !input.multiple_lines">
+<input class="text-input" name="input{{2002}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="text">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'address' &amp;&amp; !input.full_format">
+<input class="text-input" name="input{{2002}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="text">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</div>
+<fieldset class="fieldset" ng-if="input.type === 'address' &amp;&amp; input.full_format">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<div class="form__input">
+<input class="text-input" name="input{{2002}}_{{inputIndex}}_address1" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex + '_address1'].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value_address1" ng-required="input.required" placeholder="Адрес" type="text">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex + '_address1'].$error.required"></div>
+</div>
+<div class="form__input">
+<input class="text-input" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value_address2" placeholder="Адрес (дополнение)" type="text">
+</div>
+<div class="form__input">
+<input class="text-input" name="input{{2002}}_{{inputIndex}}_city" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex + '_city'].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value_city" ng-required="input.required" placeholder="Город" type="text">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex + '_city'].$error.required"></div>
+</div>
+<div class="form__inputs-group">
+<div class="form__inputs-group-item">
+<input class="text-input" name="input{{2002}}_{{inputIndex}}_zip" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex + '_zip'].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value_zip" ng-required="input.required" placeholder="Индекс" type="text">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex + '_zip'].$error.required"></div>
+</div>
+<div class="form__inputs-group-item">
+<input class="text-input" name="input{{2002}}_{{inputIndex}}_region" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value_region" placeholder="Область" type="text">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex + '_region'].$error.required"></div>
+</div>
+</div>
+<div class="form__input">
+<input class="text-input" name="input{{2002}}_{{inputIndex}}_country" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex + '_country'].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value_country" ng-required="input.required" placeholder="Страна" type="text">
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex + '_country'].$error.required"></div>
+</div>
+</fieldset>
+<div class="form__input" ng-if="input.type === 'text' &amp;&amp; input.multiple_lines">
+<textarea class="textarea" name="input{{2002}}_{{inputIndex}}" ng-class="{'textarea_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}"></textarea>
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</div>
+<fieldset class="fieldset" ng-if="input.type === 'radio'">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<label class="fieldset__radio-item radio" ng-repeat="option in input.options">
+<input class="radio__input" name="input{{2002}}_{{inputIndex}}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" type="radio" value="{{option.name}}">
+<span class="radio__box"></span>
+<span class="radio__text" ng-bind="option.name"></span>
+</label>
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</fieldset>
+<fieldset class="fieldset" ng-if="input.type === 'checkbox'">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<label class="fieldset__checkbox-item checkbox" ng-repeat="option in input.options">
+<input class="checkbox__input" name="input{{2002}}_{{inputIndex}}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].options[$index].value" ng-required="input.required &amp;&amp; !fc.isAnyChecked(fc['form' + 2002 + 'inputs'][inputIndex].options)" type="checkbox" value="{{option.name}}">
+<span class="checkbox__box">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-check"></use>
+</svg>
+</span>
+<span class="checkbox__text" ng-bind="option.name"></span>
+</label>
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</fieldset>
+<fieldset class="fieldset" ng-if="input.type === 'select'">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<div class="form__input">
+<div class="form__select" ng-class="{'form__select_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required}">
+<div class="select" name="input{{2002}}_{{inputIndex}}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" theme="selectize" ui-select="">
+<div ng-bind="$select.selected.name" placeholder="{{input.label}}" ui-select-match=""></div>
+<div repeat="option.name as option in input.options" ui-select-choices="">
+<div ng-bind="option.name"></div>
+</div>
+</div>
+</div>
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</div>
+</fieldset>
+<div class="form__input" ng-if="input.type === 'date' &amp;&amp; input.with_time">
+<div class="date-input">
+<input auto-close="true" class="date-input__input text-input" date-time="" format="DD.MM.YYYY HH:mm" min-view="hours" name="input{{2002}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="datetime" view="date">
+<svg class="date-input__icon">
+<use xlink:href="/assets/sites/template1/icons.svg#icon-calendar"></use>
+</svg>
+</div>
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</div>
+<div class="form__input" ng-if="input.type === 'date' &amp;&amp; !input.with_time">
+<div class="date-input">
+<input auto-close="true" class="date-input__input text-input" date-time="" format="DD.MM.YYYY" min-view="date" name="input{{2002}}_{{inputIndex}}" ng-class="{'text-input_error': fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" ng-required="input.required" placeholder="{{input.label}}" type="datetime" view="date">
+<svg class="date-input__icon">
+<use xlink:href="/assets/sites/template1/icons.svg#icon-calendar"></use>
+</svg>
+</div>
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</div>
+<div ng-if="input.type === 'hidden'">
+<input ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value" type="hidden">
+</div>
+<fieldset class="form__fieldset fieldset" ng-if="input.type === 'file'">
+<legend class="fieldset__legend" ng-bind="input.label" ng-if="input.label"></legend>
+<div class="form__input">
+<div class="file-input">
+<input name="input{{2002}}_{{inputIndex}}" ng-model="fc['form' + 2002 + 'inputs'][inputIndex].value.filename" ng-required="input.required" ng-show="!fc['form' + 2002 + 'inputs'][inputIndex].value.id &amp;&amp; !fc['form' + 2002 + 'inputs'][inputIndex].value.uploading" oi-file="fc['form' + 2002 + 'inputs'][inputIndex].uploadOptions" type="file">
+<div class="file-input__item" ng-show="fc['form' + 2002 + 'inputs'][inputIndex].value.id || fc['form' + 2002 + 'inputs'][inputIndex].value.uploading">
+<span class="file-input__item-name" ng-bind="fc['form' + 2002 + 'inputs'][inputIndex].value.filename"></span>
+<progress class="file-input__item-progress" max="100" ng-show="fc['form' + 2002 + 'inputs'][inputIndex].value.uploading" value="{{fc['form' + 2002 + 'inputs'][inputIndex].value.progress}}">
+<div>
+<span style="width: 50%;"></span>
+</div>
+</progress>
+<span ng-show="fc['form' + 2002 + 'inputs'][inputIndex].value.id">OK</span>
+<button class="file-input__item-remove" ng-click="fc['form' + 2002 + 'inputs'][inputIndex].deleteFile()" type="button">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-cross"></use>
+</svg>
+</button>
+</div>
+</div>
+<div class="form__input-error" ng-bind="page_form_2002.formErrorMessage" ng-if="page_form_2002.formErrorMessage &amp;&amp; fc['form' + 2002].$submitted &amp;&amp; fc['form' + 2002]['input' + 2002 + '_' + inputIndex].$error.required"></div>
+</div>
+</fieldset>
+</div>
+<div class="form__item" ng-if="page_form_2002.formCaptcha">
+<div class="form-captcha form__input">
+<div key="''" on-success="fc.recaptchaResponse(2002, response)" vc-recaptcha=""></div>
+</div>
+</div>
+
+<div class="form__submit">
+<button class="form__submit-btn button" type="submit"><div class="button__inner"><span class="button__text">{{page_form_2002.formSubmitButtonText}}</span></div></button>
+</div>
+</form>
+</div>
+<div class="modal__info"><strong><a href="/polzovatelskoe-soglashenie" target="_blank">Политика конфиденциальности и пользовательское соглашение</a></strong></div>
+</div>
+<div ng-show="fc[('form' + 2002)].success">Спасибо! Ваше сообщение отправлено</div>
+<button class="modal__close-btn" ng-click="hideModal()" title="Закрыть" type="button">
+<svg>
+<use xlink:href="/assets/sites/template1/icons.svg#icon-cross"></use>
+</svg>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+<button class="on-top-button on-top-button_desktop" ng-cloak="" scroll-on-top="" type="button">
+<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+<title>scroll tol</title>
+<path d="M0 14h8v14h12V14h8L14 0 0 14"></path>
+</svg>
+</button>
+<button class="on-top-button on-top-button_mobile" ng-cloak="" scroll-on-top="" type="button">
+<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+<title>scroll tol</title>
+<path d="M0 14h8v14h12V14h8L14 0 0 14"></path>
+</svg>
+</button>
+
+</div>
+
+<link rel="stylesheet" media="screen" href="/fonts.css?f[]=bad_script_italic_400&amp;f[]=bad_script_italic_700&amp;f[]=bad_script_normal_400&amp;f[]=bad_script_normal_700&amp;f[]=comfortaa_italic_700&amp;f[]=comfortaa_normal_700&amp;f[]=fira_mono_italic_700&amp;f[]=fira_mono_normal_700&amp;f[]=merriweather_italic_900&amp;f[]=open_sans_italic_300&amp;f[]=open_sans_italic_400&amp;f[]=open_sans_italic_600&amp;f[]=open_sans_italic_700&amp;f[]=open_sans_italic_800&amp;f[]=open_sans_normal_300&amp;f[]=open_sans_normal_400&amp;f[]=open_sans_normal_600&amp;f[]=open_sans_normal_700&amp;f[]=open_sans_normal_800&amp;f[]=oswald_italic_700&amp;f[]=oswald_normal_700&amp;f[]=pt_serif_italic_400&amp;f[]=pt_serif_italic_700&amp;f[]=pt_serif_normal_400&amp;f[]=pt_serif_normal_700&amp;f[]=roboto_condensed_italic_400&amp;f[]=roboto_condensed_italic_700&amp;f[]=roboto_condensed_normal_400&amp;f[]=roboto_condensed_normal_700&amp;f[]=roboto_italic_100&amp;f[]=roboto_italic_300&amp;f[]=roboto_italic_400&amp;f[]=roboto_italic_500&amp;f[]=roboto_italic_700&amp;f[]=roboto_normal_100&amp;f[]=roboto_normal_300&amp;f[]=roboto_normal_400&amp;f[]=roboto_normal_500&amp;f[]=roboto_normal_700&amp;f[]=roboto_slab_italic_400&amp;f[]=roboto_slab_italic_700&amp;f[]=roboto_slab_normal_400&amp;f[]=roboto_slab_normal_700" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+
+<noscript>
+<link rel="stylesheet" media="screen" href="/fonts.css?f[]=bad_script_italic_400&amp;f[]=bad_script_italic_700&amp;f[]=bad_script_normal_400&amp;f[]=bad_script_normal_700&amp;f[]=comfortaa_italic_700&amp;f[]=comfortaa_normal_700&amp;f[]=fira_mono_italic_700&amp;f[]=fira_mono_normal_700&amp;f[]=merriweather_italic_900&amp;f[]=open_sans_italic_300&amp;f[]=open_sans_italic_400&amp;f[]=open_sans_italic_600&amp;f[]=open_sans_italic_700&amp;f[]=open_sans_italic_800&amp;f[]=open_sans_normal_300&amp;f[]=open_sans_normal_400&amp;f[]=open_sans_normal_600&amp;f[]=open_sans_normal_700&amp;f[]=open_sans_normal_800&amp;f[]=oswald_italic_700&amp;f[]=oswald_normal_700&amp;f[]=pt_serif_italic_400&amp;f[]=pt_serif_italic_700&amp;f[]=pt_serif_normal_400&amp;f[]=pt_serif_normal_700&amp;f[]=roboto_condensed_italic_400&amp;f[]=roboto_condensed_italic_700&amp;f[]=roboto_condensed_normal_400&amp;f[]=roboto_condensed_normal_700&amp;f[]=roboto_italic_100&amp;f[]=roboto_italic_300&amp;f[]=roboto_italic_400&amp;f[]=roboto_italic_500&amp;f[]=roboto_italic_700&amp;f[]=roboto_normal_100&amp;f[]=roboto_normal_300&amp;f[]=roboto_normal_400&amp;f[]=roboto_normal_500&amp;f[]=roboto_normal_700&amp;f[]=roboto_slab_italic_400&amp;f[]=roboto_slab_italic_700&amp;f[]=roboto_slab_normal_400&amp;f[]=roboto_slab_normal_700" />
+
+
+</noscript>
+<script>
+  /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+  (function(w){"use strict";if(!w.loadCSS){w.loadCSS=function(){}}
+  var rp=loadCSS.relpreload={};rp.support=(function(){var ret;try{ret=w.document.createElement("link").relList.supports("preload")}catch(e){ret=!1}
+  return function(){return ret}})();rp.bindMediaToggle=function(link){var finalMedia=link.media||"all";function enableStylesheet(){link.media=finalMedia}
+  if(link.addEventListener){link.addEventListener("load",enableStylesheet)}else if(link.attachEvent){link.attachEvent("onload",enableStylesheet)}
+  setTimeout(function(){link.rel="stylesheet";link.media="only x"});setTimeout(enableStylesheet,3000)};rp.poly=function(){if(rp.support()){return}
+  var links=w.document.getElementsByTagName("link");for(var i=0;i<links.length;i++){var link=links[i];if(link.rel==="preload"&&link.getAttribute("as")==="style"&&!link.getAttribute("data-loadcss")){link.setAttribute("data-loadcss",!0);rp.bindMediaToggle(link)}}};if(!rp.support()){rp.poly();var run=w.setInterval(rp.poly,500);if(w.addEventListener){w.addEventListener("load",function(){rp.poly();w.clearInterval(run)})}else if(w.attachEvent){w.attachEvent("onload",function(){rp.poly();w.clearInterval(run)})}}
+  if(typeof exports!=="undefined"){exports.loadCSS=loadCSS}
+  else{w.loadCSS=loadCSS}}(typeof global!=="undefined"?global:this))
+</script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNHWRFM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!-- Yandex.Metrika counter --><script type="text/javascript">
+   (function (d, w, c) {
+       (w[c] = w[c] || []).push(function() {
+           try {
+               w.yaCounter42442189 = new Ya.Metrika({
+                   id:42442189,
+                   clickmap:true,
+                   trackLinks:true,
+                   accurateTrackBounce:true,
+                   webvisor:true
+               });
+           } catch(e) { }
+       });
+
+       var n = d.getElementsByTagName("script")[0],
+           s = d.createElement("script"),
+           f = function () { n.parentNode.insertBefore(s, n); };
+       s.type = "text/javascript";
+       s.async = true;
+       s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+       if (w.opera == "[object Opera]") {
+           d.addEventListener("DOMContentLoaded", f, false);
+       } else { f(); }
+   })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/42442189"; style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-91665678-1"></script>;
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+
+ gtag('config', 'UA-91665678-1');
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","url":"https://food2000.ru","logo":"https://food2000.ru/images/005/844/851/5844851/1000xnoinc/6-removebg-preview.png","address":{"@type":"PostalAddress","addressLocality":"Новосибирск, Россия","postalCode":"630087","streetAddress":"Проспект Карла Маркса, 30"},"email":"admin@food2000.ru","name":"Цент пищевых технологий, FOOD2000","telephone":"8 800 333-06-41","sameAs":["https://t.me/FOOD2000RU"]}</script>
+
+
+</body></html>

@@ -1,0 +1,561 @@
+<html itemscope="" itemtype="http://schema.org/WebPage" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#  profile: http://ogp.me/ns/profile# fb: http://ogp.me/ns/fb#" lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+	<meta name="yandex-verification" content="73847969c7f85fef">	
+
+    <link rel="preload" as="font" type="font/woff2" href="https://fructberry.com/wp-content/themes/fruitberry/fonts/noto-serif-v11-latin_cyrillic-regular.woff2" crossorigin="">
+    <link rel="preload" as="font" type="font/woff2" href="https://fructberry.com/wp-content/themes/fruitberry/fonts/ibm-plex-sans-v8-latin_cyrillic-300.woff2" crossorigin="">
+            <link rel="preload" as="font" type="font/woff2" href="https://fructberry.com/wp-content/themes/fruitberry/fonts/ibm-plex-sans-v8-latin_cyrillic-700.woff2" crossorigin="">
+        <link rel="preload" as="font" type="font/woff2" href="https://fructberry.com/wp-content/plugins/rate-my-post/public/css/fonts/ratemypost.woff?9e18pt" crossorigin="">
+    
+            <link rel="preload" as="image" href="https://fructberry.com/wp-content/themes/fruitberry/img/header.webp" type="image/webp">
+    
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="preload" href="https://fructberry.com/wp-content/plugins/rate-my-post/public/css/fonts/ratemypost.ttf" type="font/ttf" as="font" crossorigin="anonymous">
+	<title>Политика конфиденциальности персональных данных</title>
+	<meta name="description" content="Настоящая Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в отношении всей информации, которую сайт">
+	<link rel="canonical" href="https://fructberry.com/privacy-policy">
+
+
+
+<link data-minify="1" rel="stylesheet" id="rate-my-post-css" href="https://fructberry.com/wp-content/cache/min/1/wp-content/plugins/rate-my-post/public/css/rate-my-post.css?ver=1676116927" type="text/css" media="all">
+<style id="rate-my-post-inline-css" type="text/css">
+.rmp-rating-widget .rmp-icon--ratings {  font-size: 20px;}
+</style>
+<link data-minify="1" rel="stylesheet" id="main-css" href="https://fructberry.com/wp-content/cache/min/1/wp-content/themes/fruitberry/css/main.css?ver=1676116946" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="tablepress-default-css" href="https://fructberry.com/wp-content/cache/min/1/wp-content/plugins/tablepress/css/default.min.css?ver=1676116927" type="text/css" media="all">
+<link rel="stylesheet" id="fancybox-css" href="https://fructberry.com/wp-content/plugins/easy-fancybox/css/jquery.fancybox.min.css" type="text/css" media="screen">
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://fructberry.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://fructberry.com/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js" defer=""></script>
+<style>.pseudo-clearfy-link { color: #008acf; cursor: pointer;}.pseudo-clearfy-link:hover { text-decoration: none;}</style><style type="text/css">.saboxplugin-wrap{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;border:1px solid #eee;width:100%;clear:both;display:block;overflow:hidden;word-wrap:break-word;position:relative}.saboxplugin-wrap .saboxplugin-gravatar{float:left;padding:0 20px 20px 20px}.saboxplugin-wrap .saboxplugin-gravatar img{max-width:100px;height:auto;border-radius:0;}.saboxplugin-wrap .saboxplugin-authorname{font-size:18px;line-height:1;margin:20px 0 0 20px;display:block}.saboxplugin-wrap .saboxplugin-authorname a{text-decoration:none}.saboxplugin-wrap .saboxplugin-authorname a:focus{outline:0}.saboxplugin-wrap .saboxplugin-desc{display:block;margin:5px 20px}.saboxplugin-wrap .saboxplugin-desc a{text-decoration:underline}.saboxplugin-wrap .saboxplugin-desc p{margin:5px 0 12px}.saboxplugin-wrap .saboxplugin-web{margin:0 20px 15px;text-align:left}.saboxplugin-wrap .sab-web-position{text-align:right}.saboxplugin-wrap .saboxplugin-web a{color:#ccc;text-decoration:none}.saboxplugin-wrap .saboxplugin-socials{position:relative;display:block;background:#fcfcfc;padding:5px;border-top:1px solid #eee}.saboxplugin-wrap .saboxplugin-socials a svg{width:20px;height:20px}.saboxplugin-wrap .saboxplugin-socials a svg .st2{fill:#fff; transform-origin:center center;}.saboxplugin-wrap .saboxplugin-socials a svg .st1{fill:rgba(0,0,0,.3)}.saboxplugin-wrap .saboxplugin-socials a:hover{opacity:.8;-webkit-transition:opacity .4s;-moz-transition:opacity .4s;-o-transition:opacity .4s;transition:opacity .4s;box-shadow:none!important;-webkit-box-shadow:none!important}.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color{box-shadow:none;padding:0;border:0;-webkit-transition:opacity .4s;-moz-transition:opacity .4s;-o-transition:opacity .4s;transition:opacity .4s;display:inline-block;color:#fff;font-size:0;text-decoration:inherit;margin:5px;-webkit-border-radius:0;-moz-border-radius:0;-ms-border-radius:0;-o-border-radius:0;border-radius:0;overflow:hidden}.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-grey{text-decoration:inherit;box-shadow:none;position:relative;display:-moz-inline-stack;display:inline-block;vertical-align:middle;zoom:1;margin:10px 5px;color:#444;fill:#444}.clearfix:after,.clearfix:before{content:' ';display:table;line-height:0;clear:both}.ie7 .clearfix{zoom:1}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-twitch{border-color:#38245c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-addthis{border-color:#e91c00}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-behance{border-color:#003eb0}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-delicious{border-color:#06c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-deviantart{border-color:#036824}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-digg{border-color:#00327c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-dribbble{border-color:#ba1655}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-facebook{border-color:#1e2e4f}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-flickr{border-color:#003576}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-github{border-color:#264874}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-google{border-color:#0b51c5}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-googleplus{border-color:#96271a}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-html5{border-color:#902e13}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-instagram{border-color:#1630aa}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-linkedin{border-color:#00344f}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-pinterest{border-color:#5b040e}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-reddit{border-color:#992900}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-rss{border-color:#a43b0a}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-sharethis{border-color:#5d8420}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-skype{border-color:#00658a}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-soundcloud{border-color:#995200}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-spotify{border-color:#0f612c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-stackoverflow{border-color:#a95009}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-steam{border-color:#006388}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-user_email{border-color:#b84e05}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-stumbleUpon{border-color:#9b280e}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-tumblr{border-color:#10151b}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-twitter{border-color:#0967a0}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-vimeo{border-color:#0d7091}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-windows{border-color:#003f71}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-whatsapp{border-color:#003f71}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-wordpress{border-color:#0f3647}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-yahoo{border-color:#14002d}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-youtube{border-color:#900}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-xing{border-color:#000202}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-mixcloud{border-color:#2475a0}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-vk{border-color:#243549}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-medium{border-color:#00452c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-quora{border-color:#420e00}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-meetup{border-color:#9b181c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-goodreads{border-color:#000}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-snapchat{border-color:#999700}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-500px{border-color:#00557f}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-mastodont{border-color:#185886}.sabox-plus-item{margin-bottom:20px}@media screen and (max-width:480px){.saboxplugin-wrap{text-align:center}.saboxplugin-wrap .saboxplugin-gravatar{float:none;padding:20px 0;text-align:center;margin:0 auto;display:block}.saboxplugin-wrap .saboxplugin-gravatar img{float:none;display:inline-block;display:-moz-inline-stack;vertical-align:middle;zoom:1}.saboxplugin-wrap .saboxplugin-desc{margin:0 10px 20px;text-align:center}.saboxplugin-wrap .saboxplugin-authorname{text-align:center;margin:10px 0 20px}}body .saboxplugin-authorname a,body .saboxplugin-authorname a:hover{box-shadow:none;-webkit-box-shadow:none}a.sab-profile-edit{font-size:16px!important;line-height:1!important}.sab-edit-settings a,a.sab-profile-edit{color:#0073aa!important;box-shadow:none!important;-webkit-box-shadow:none!important}.sab-edit-settings{margin-right:15px;position:absolute;right:0;z-index:2;bottom:10px;line-height:20px}.sab-edit-settings i{margin-left:5px}.saboxplugin-socials{line-height:1!important}.rtl .saboxplugin-wrap .saboxplugin-gravatar{float:right}.rtl .saboxplugin-wrap .saboxplugin-authorname{display:flex;align-items:center}.rtl .saboxplugin-wrap .saboxplugin-authorname .sab-profile-edit{margin-right:10px}.rtl .sab-edit-settings{right:auto;left:0}img.sab-custom-avatar{max-width:75px;}.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color {-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;-o-border-radius:50%;border-radius:50%;}.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color .st1 {display: none;}.saboxplugin-wrap {margin-top:1px; margin-bottom:1px; padding: 2px 0px }.saboxplugin-wrap .saboxplugin-authorname {font-size:18px; line-height:25px;}.saboxplugin-wrap .saboxplugin-desc p, .saboxplugin-wrap .saboxplugin-desc {font-size:12px !important; line-height:19px !important;}.saboxplugin-wrap .saboxplugin-web {font-size:14px;}.saboxplugin-wrap .saboxplugin-socials a svg {width:36px;height:36px;}</style><link rel="icon" href="https://fructberry.com/wp-content/uploads/2018/08/cropped-favikon1-3-32x32.png" sizes="32x32">
+<link rel="icon" href="https://fructberry.com/wp-content/uploads/2018/08/cropped-favikon1-3-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://fructberry.com/wp-content/uploads/2018/08/cropped-favikon1-3-180x180.png">
+<meta name="msapplication-TileImage" content="https://fructberry.com/wp-content/uploads/2018/08/cropped-favikon1-3-270x270.png">
+<style>
+.ai-viewports                 {--ai: 1;}
+.ai-viewport-3                { display: none !important;}
+.ai-viewport-2                { display: none !important;}
+.ai-viewport-1                { display: inherit !important;}
+.ai-viewport-0                { display: none !important;}
+@media (min-width: 768px) and (max-width: 979px) {
+.ai-viewport-1                { display: none !important;}
+.ai-viewport-2                { display: inherit !important;}
+}
+@media (max-width: 767px) {
+.ai-viewport-1                { display: none !important;}
+.ai-viewport-3                { display: inherit !important;}
+}
+</style>
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>
+    	
+	<!-- Yandex.RTB -->
+	<script type="rocketlazyloadscript">window.yaContextCb=window.yaContextCb||[]</script>
+	<script type="rocketlazyloadscript" src="https://yandex.ru/ads/system/context.js" async=""></script>
+</head>
+
+<body class="privacy-policy page-template-default page page-id-199">
+
+    <div class="site-container">
+
+        <header class="site-header">
+
+            <div class="header-top">
+
+                                    <a class="logo" href="https://fructberry.com">
+                        <img class="skip-lazy" src="https://fructberry.com/wp-content/themes/fruitberry/img/logo.png" alt="Логотип портала" width="66" height="93">
+                        <div class="h1">ФруктБерри</div>
+                        <div class="site-desc">Большая энциклопедия ягод и фруктов</div>
+                    </a>
+                
+                
+<div class="social">
+            <a target="_blank" rel="noopener" href="https://vk.com/fructberryru" class="vk"></a>
+                            <a target="_blank" rel="noopener" href="https://ok.ru/group/61025145389141" class="ok"></a>
+        </div>
+                <div class="header-author">
+                    <img class="skip-lazy" src="https://fructberry.com/wp-content/themes/fruitberry/img/author.png" alt="Авторы энциклопедии" width="80" height="80">
+                    <div class="h6">Мы - Денис и Ольга</div>
+                    <div class="text">Авторы проекта. Обожаем фрукты, ягоды и ведем здоровый образ жизни. Этим и делимся на страницах сайта.</div>
+                </div>
+
+            </div>
+
+            <nav class="header-menu mobile-menu" aria-label="Главное меню">
+                <input id="mobile-menu-toggle" type="checkbox">
+                <label class="mobile-menu-button" for="mobile-menu-toggle">
+                    <span></span>
+                </label>
+                <div class="primary-menu">
+                    <span class="cross"></span>
+                    <ul class="menu"><li id="menu-item-361" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-361"><a href="https://fructberry.com/">Главная</a></li>
+<li id="menu-item-1020" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1020"><a href="https://fructberry.com/frukty">Фрукты</a>
+<ul class="sub-menu">
+	<li id="menu-item-9946" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9946"><a href="https://fructberry.com/frukty/avokado">Авокадо</a></li>
+	<li id="menu-item-8928" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8928"><a href="https://fructberry.com/frukty/ayva">Айва</a></li>
+	<li id="menu-item-8634" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-8634"><a href="https://fructberry.com/frukty/apelsin">Апельсин</a>
+	<ul class="sub-menu">
+		<li id="menu-item-8635" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8635"><a href="https://fructberry.com/frukty/apelsin/sorta">Сорта</a></li>
+	</ul>
+</li>
+	<li id="menu-item-8636" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8636"><a href="https://fructberry.com/frukty/banan">Банан</a></li>
+	<li id="menu-item-9907" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9907"><a href="https://fructberry.com/frukty/granat">Гранат</a></li>
+	<li id="menu-item-9936" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-9936"><a href="https://fructberry.com/frukty/grusha">Груша</a>
+	<ul class="sub-menu">
+		<li id="menu-item-9945" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9945"><a href="https://fructberry.com/frukty/grusha/sorta-gru">Сорта</a></li>
+	</ul>
+</li>
+	<li id="menu-item-10155" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-10155"><a href="https://fructberry.com/frukty/slivy">Сливы</a>
+	<ul class="sub-menu">
+		<li id="menu-item-10156" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-10156"><a href="https://fructberry.com/frukty/slivy/raznovidnosti">Разновидности</a>
+		<ul class="sub-menu">
+			<li id="menu-item-10945" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10945"><a href="https://fructberry.com/frukty/slivy/raznovidnosti/alycha">Алыча</a></li>
+			<li id="menu-item-10510" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10510"><a href="https://fructberry.com/frukty/slivy/raznovidnosti/kitayskie">Китайские</a></li>
+			<li id="menu-item-10946" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10946"><a href="https://fructberry.com/frukty/slivy/raznovidnosti/kolonovidnye">Колоновидные</a></li>
+			<li id="menu-item-10157" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10157"><a href="https://fructberry.com/frukty/slivy/raznovidnosti/renklod">Ренклод</a></li>
+		</ul>
+</li>
+	</ul>
+</li>
+	<li id="menu-item-9982" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9982"><a href="https://fructberry.com/frukty/hurma">Хурма</a></li>
+	<li id="menu-item-10005" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-10005"><a href="https://fructberry.com/frukty/yabloki">Яблоки</a>
+	<ul class="sub-menu">
+		<li id="menu-item-10006" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10006"><a href="https://fructberry.com/frukty/yabloki/sorta-ya">Сорта</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-1021" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1021"><a href="https://fructberry.com/yagody">Ягоды</a>
+<ul class="sub-menu">
+	<li id="menu-item-16565" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-16565"><a href="https://fructberry.com/yagody/golubika">Голубика</a>
+	<ul class="sub-menu">
+		<li id="menu-item-16566" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16566"><a href="https://fructberry.com/yagody/golubika/vyraschivanie-g">Выращивание</a></li>
+		<li id="menu-item-16567" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16567"><a href="https://fructberry.com/yagody/golubika/raznovidnosti-g">Разновидности</a></li>
+	</ul>
+</li>
+	<li id="menu-item-16568" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-16568"><a href="https://fructberry.com/yagody/chernika">Черника</a>
+	<ul class="sub-menu">
+		<li id="menu-item-16569" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16569"><a href="https://fructberry.com/yagody/chernika/sorta-ch">Сорта</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-7242" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7242"><a href="https://fructberry.com/ovoschi">Овощи</a></li>
+</ul>                </div>
+                <div class="search-block">
+                    <div class="search-icon"></div>
+                </div>
+            </nav>
+
+                            <picture>
+                    <source srcset="https://fructberry.com/wp-content/themes/fruitberry/img/header.webp" type="image/webp">
+                    <img class="skip-lazy" src="https://fructberry.com/wp-content/themes/fruitberry/img/header.jpg" alt="" width="1600" height="401">
+                </picture>
+            
+        </header>
+
+        
+        <main class="content-sidebar-wrap">
+<div class="content-wrap">
+
+    <ul class="breadcrumbs" itemprop="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="https://fructberry.com/"><span itemprop="name">Главная</span></a>
+                <meta itemprop="position" content="1"></li></ul>
+    
+        
+<article class="post post-199 page type-page status-publish hentry">
+
+    <h1>
+        Политика конфиденциальности персональных данных    </h1>
+
+    <div class="post-content">
+        <main class="page-site__main page-site__main--inner">
+<div class="wrap">
+<article class="page-article">
+<div class="post">
+<p>Настоящая Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в отношении всей информации, которую сайт «Фруктбери», расположенный на доменном имени fructberry.com, может получить о Пользователе во время использования сайта.</p>
+<h2><span id="1">1. Определение терминов</span></h2>
+<p>1.1. В настоящей Политике конфиденциальности используются следующие термины:</p>
+<p>1.1.1. «Администрация сайта «Фруктбери» (далее – Администрация сайта)» – уполномоченные сотрудники на управления сайтом, которые организуют и (или) осуществляет обработку персональных данных, а также определяет цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.</p>
+<p>1.1.2. «Персональные данные» — любая информация, относящаяся к прямо или косвенно определенному, или определяемому физическому лицу (субъекту персональных данных).</p>
+<p>1.1.3. «Обработка персональных данных» — любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных.</p>
+<p>1.1.4. «Конфиденциальность персональных данных» — обязательное для соблюдения Оператором или иным получившим доступ к персональным данным лицом требование не допускать их распространения без согласия субъекта персональных данных или наличия иного законного основания.</p>
+<p>1.1.5. «Пользователь сайта «Фруктбери» (далее Пользователь)» – лицо, имеющее доступ к Сайту, посредством сети Интернет и использующее сайт fructberry.com.</p>
+<p>1.1.6. «Cookies» — небольшой фрагмент данных, отправленный веб-сервером и хранимый на компьютере пользователя, который веб-клиент или веб-браузер каждый раз пересылает веб-серверу в HTTP-запросе (HTTPS) при попытке открыть страницу соответствующего сайта.</p>
+<p>1.1.7. «IP-адрес» — уникальный сетевой адрес узла в компьютерной сети, построенной по протоколу IP.</p>
+<h2><span id="2">2. Общие положения</span></h2>
+<p>2.1. Использование Пользователем сайта fructberry.com означает согласие с настоящей Политикой конфиденциальности и условиями обработки персональных данных Пользователя.</p>
+<p>2.2. В случае несогласия с условиями Политики конфиденциальности Пользователь должен прекратить использование сайта fructberry.com.</p>
+<p>2.3. Настоящая Политика конфиденциальности применяется только к сайту fructberry.com. Администрация сайта не контролирует и не несет ответственность за сайты третьих лиц, на которые Пользователь может перейти по ссылкам, доступным на сайте fructberry.com.</p>
+<p>2.4. Администрация сайта не проверяет достоверность персональных данных, предоставляемых Пользователем сайта fructberry.com.</p>
+<h2><span id="3">3. Предмет политики конфиденциальности</span></h2>
+<p>3.1. Настоящая Политика конфиденциальности устанавливает обязательства Администрации сайта fructberry.com по неразглашению и обеспечению режима защиты конфиденциальности персональных данных, которые Пользователь предоставляет по запросу Администрации сайта при оформлении любой формы заявки на сайте.</p>
+<p>3.2. Персональные данные, разрешённые к обработке в рамках настоящей Политики конфиденциальности, предоставляются Пользователем путём заполнения форм заявок на сайте fructberry.com и включают в себя следующую информацию:</p>
+<p>3.2.1. фамилию, имя, отчество Пользователя;</p>
+<p>3.2.2. контактный телефон Пользователя;</p>
+<p>3.2.3. адрес электронной почты (e-mail) Пользователя;</p>
+<p>3.2.4. адрес Сайта Пользователя;</p>
+<p>3.2.5. текстовое сообщение Пользователя.</p>
+<p>3.3. Сайт fructberry.com защищает Данные, которые автоматически передаются в процессе просмотра рекламных блоков и при посещении страниц, на которых установлен статистический скрипт системы («пиксель»):</p>
+<ul>
+<li>IP адрес;</li>
+<li>информация из cookies;</li>
+<li>информация о браузере (или иной программе, которая осуществляет доступ к показу рекламы);</li>
+<li>время доступа;</li>
+<li>адрес страницы, на которой расположен рекламный блок;</li>
+<li>реферер (адрес предыдущей страницы).</li>
+</ul>
+<p>3.3.1. Отключение cookies может повлечь невозможность доступа к частям сайта fructberry.com, требующим заполнение заявки.</p>
+<p>3.3.2. Сайт fructberry.com осуществляет сбор статистики об IP-адресах своих посетителей. Данная информация используется с целью выявления и решения технических проблем.</p>
+<p>3.4. Любая иная персональная информация неоговоренная выше (история заявок, используемые браузеры и операционные системы и т. д.) подлежит надежному хранению и нераспространению, за исключением случаев, предусмотренных в п.п. 5.2. и 5.3. настоящей Политики конфиденциальности.</p>
+<h2><span id="4">4. Цели сбора персональной информации пользователя</span></h2>
+<p>4.1. Персональные данные Пользователя Администрация сайта fructberry.com может использовать в целях:</p>
+<p>4.1.1. Идентификации Пользователя, который оставил заявку на сайте fructberry.com.</p>
+<p>4.1.2. Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования сайта fructberry.com оказания услуг, обработка запросов и заявок от Пользователя.</p>
+<p>4.1.3. Определения места нахождения Пользователя для расчета стоимости услуг, которыми интересовался Пользователь.</p>
+<p>4.1.4. Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.</p>
+<p>4.1.5. Уведомления Пользователя сайта fructberry.com о состоянии Заявки.</p>
+<p>4.1.6. Осуществления рекламной деятельности с согласия Пользователя.</p>
+<h2><span id="5">5. Способы и сроки обработки персональной информации</span></h2>
+<p>5.1. Обработка персональных данных Пользователя осуществляется без ограничения срока, любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств.</p>
+<p>5.2. Пользователь соглашается с тем, что Администрация сайта вправе передавать персональные данные третьим лицам, в частности, курьерским службам, организациями почтовой связи, операторам электросвязи, исключительно в целях выполнения заявки Пользователя, оформленной на сайте fructberry.com.</p>
+<p>5.3. Персональные данные Пользователя могут быть переданы уполномоченным органам государственной власти Российской Федерации только по основаниям и в порядке, установленным законодательством Российской Федерации.</p>
+<p>5.4. При утрате или разглашении персональных данных Администрация сайта информирует Пользователя об утрате или разглашении персональных данных.</p>
+<p>5.5. Администрация сайта принимает необходимые организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.</p>
+<p>5.6. Администрация сайта совместно с Пользователем принимает все необходимые меры по предотвращению убытков или иных отрицательных последствий, вызванных утратой или разглашением персональных данных Пользователя.</p>
+<h2><span id="6">6. Обязательства сторон</span></h2>
+<p><strong>6.1. Пользователь обязан:</strong></p>
+<p>6.1.1. Предоставить информацию о персональных данных, необходимую для оформления заявки на сайте fructberry.com.</p>
+<p>6.1.2. Обновить, дополнить предоставленную информацию о персональных данных в случае изменения данной информации.</p>
+<p><strong>6.2. Администрация сайта обязана:</strong></p>
+<p>6.2.1. Использовать полученную информацию исключительно для целей, указанных в п. 4 настоящей Политики конфиденциальности.</p>
+<p>6.2.2. Обеспечить хранение конфиденциальной информации в тайне, не разглашать без предварительного письменного разрешения Пользователя, а также не осуществлять продажу, обмен, опубликование, либо разглашение иными возможными способами переданных персональных данных Пользователя, за исключением п.п. 5.2. и 5.3. настоящей Политики Конфиденциальности.</p>
+<p>6.2.3. Принимать меры предосторожности для защиты конфиденциальности персональных данных Пользователя согласно порядку, обычно используемого для защиты такого рода информации в существующем деловом обороте.</p>
+<p>6.2.4. Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента обращения или запроса Пользователя, или его законного представителя либо уполномоченного органа по защите прав субъектов персональных данных на период проверки, в случае выявления недостоверных персональных данных или неправомерных действий.</p>
+<h2><span id="7">7. Ответственность сторон</span></h2>
+<p>7.1. Администрация сайта, не исполнившая свои обязательства, несёт ответственность за убытки, понесённые Пользователем в связи с неправомерным использованием персональных данных, в соответствии с законодательством Российской Федерации, за исключением случаев, предусмотренных п.п. 5.2., 5.3. и 7.2. настоящей Политики Конфиденциальности.</p>
+<p>7.2. В случае утраты или разглашения Конфиденциальной информации Администрация сайта не несёт ответственность, если данная конфиденциальная информация:</p>
+<p>7.2.1. Стала публичным достоянием до её утраты или разглашения.</p>
+<p>7.2.2. Была получена от третьей стороны до момента её получения Администрацией сайта.</p>
+<p>7.2.3. Была разглашена с согласия Пользователя.</p>
+<h2><span id="8">8. Разрешение споров</span></h2>
+<p>8.1. До обращения в суд с иском по спорам, возникающим из отношений между Пользователем сайта fructberry.com и Администрацией сайта, обязательным является предъявление претензии (письменного предложения о добровольном урегулировании спора).</p>
+<p>8.2. Получатель претензии в течение 30 календарных дней со дня получения претензии, письменно уведомляет заявителя претензии о результатах рассмотрения претензии.</p>
+<p>8.3. При не достижении соглашения спор будет передан на рассмотрение в судебный орган в соответствии с действующим законодательством Российской Федерации.</p>
+<p>8.4. К настоящей Политике конфиденциальности и отношениям между Пользователем и Администрацией сайта применяется действующее законодательство Российской Федерации.</p>
+<h2><span id="9">9. Дополнительные условия</span></h2>
+<p>9.1. Администрация сайта вправе вносить изменения в настоящую Политику конфиденциальности без согласия Пользователя.</p>
+<p>9.2. Новая Политика конфиденциальности вступает в силу с момента ее размещения на Сайте, если иное не предусмотрено новой редакцией Политики конфиденциальности.</p>
+<p>9.3. Все предложения или вопросы по настоящей Политике конфиденциальности следует сообщать на email: <a href="mailto:info@fructberry.com">info@fructberry.com</a></p>
+</div>
+</article>
+</div>
+</main><footer class="footer-site page-site__footer">
+<div class="wrap">
+<div class="footer-site__left">
+<div class="logo footer-site__logo">&nbsp;</div>
+</div>
+</div>
+</footer>    </div>
+
+</article>
+	  
+    
+</div>
+
+
+<aside class="sidebar sidebar-primary" aria-label="Основной сайдбар" itemscope="itemscope" itemtype="https://schema.org/WPSideBar">
+
+                <div class="widget cats-widget">
+
+                <div class="widgettitle h3">Разделы</div>
+                <ul class="category-list">
+                    	<li class="cat-item cat-item-104"><a href="https://fructberry.com/ovoschi">Овощи</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://fructberry.com/frukty">Фрукты</a>
+<ul class="children">
+	<li class="cat-item cat-item-148"><a href="https://fructberry.com/frukty/avokado">Авокадо</a>
+</li>
+	<li class="cat-item cat-item-142"><a href="https://fructberry.com/frukty/ayva">Айва</a>
+	<ul class="children">
+	<li class="cat-item cat-item-143"><a href="https://fructberry.com/frukty/ayva/dekorativnaya">Декоративная</a>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-140"><a href="https://fructberry.com/frukty/apelsin">Апельсин</a>
+	<ul class="children">
+	<li class="cat-item cat-item-141"><a href="https://fructberry.com/frukty/apelsin/sorta">Сорта</a>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-139"><a href="https://fructberry.com/frukty/banan">Банан</a>
+</li>
+	<li class="cat-item cat-item-145"><a href="https://fructberry.com/frukty/granat">Гранат</a>
+</li>
+	<li class="cat-item cat-item-146"><a href="https://fructberry.com/frukty/grusha">Груша</a>
+	<ul class="children">
+	<li class="cat-item cat-item-147"><a href="https://fructberry.com/frukty/grusha/sorta-gru">Сорта</a>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-152"><a href="https://fructberry.com/frukty/slivy">Сливы</a>
+	<ul class="children">
+	<li class="cat-item cat-item-153"><a href="https://fructberry.com/frukty/slivy/raznovidnosti">Разновидности</a>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-149"><a href="https://fructberry.com/frukty/hurma">Хурма</a>
+</li>
+	<li class="cat-item cat-item-150"><a href="https://fructberry.com/frukty/yabloki">Яблоки</a>
+	<ul class="children">
+	<li class="cat-item cat-item-151"><a href="https://fructberry.com/frukty/yabloki/sorta-ya">Сорта</a>
+</li>
+	</ul>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-15"><a href="https://fructberry.com/yagody">Ягоды</a>
+<ul class="children">
+	<li class="cat-item cat-item-162"><a href="https://fructberry.com/yagody/golubika">Голубика</a>
+	<ul class="children">
+	<li class="cat-item cat-item-168"><a href="https://fructberry.com/yagody/golubika/vyraschivanie-g">Выращивание</a>
+</li>
+	<li class="cat-item cat-item-163"><a href="https://fructberry.com/yagody/golubika/raznovidnosti-g">Разновидности</a>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-174"><a href="https://fructberry.com/yagody/kryzhovnik">Крыжовник</a>
+	<ul class="children">
+	<li class="cat-item cat-item-180"><a href="https://fructberry.com/yagody/kryzhovnik/sorta-k">Сорта</a>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-160"><a href="https://fructberry.com/yagody/chernika">Черника</a>
+	<ul class="children">
+	<li class="cat-item cat-item-161"><a href="https://fructberry.com/yagody/chernika/sorta-ch">Сорта</a>
+</li>
+	</ul>
+</li>
+</ul>
+</li>
+                </ul>
+
+            </div>
+        <div class="widget advices-widget">
+            
+<div class="advice">
+
+                <div class="text" data-id="8469">
+                <p>Каждый фрукт имеет свои редкостные качества. Никакие химические препараты не способны заменить свойства свежих и консервированных плодов.</p>
+            </div>
+
+                
+    
+    <div class="button-next">Показать другой совет</div>
+
+</div>
+        </div><div class="widget reviews-widget">
+                        <small>Авторские обзоры</small>
+                                <a href="https://fructberry.com/yagody/kryzhovnik/sorta-k/krasnyy/kolobok" class="item">
+                                                    <div class="item-image">
+                                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20230'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image" alt="фото 18243_1" data-lazy-src="https://fructberry.com/wp-content/uploads/2023/02/foto-18243_1-400x230.jpg" width="400" height="230"><noscript><img width="400" height="230" src="https://fructberry.com/wp-content/uploads/2023/02/foto-18243_1-400x230.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="фото 18243_1" /></noscript>                            </div>
+                                                <div class="h5">
+                            Основные характеристики и правила посадки крыжовника Колобок                        </div>
+                        <div class="button-arrow">Читать далее</div>
+                    </a>
+            
+        </div><div class="widget vk-widget">            <div id="vk_groups"></div>
+
+            <script type="rocketlazyloadscript">
+                let ok = false;
+                window.addEventListener('scroll', function() {
+                    if (ok === false) {
+                        ok = true;
+                        setTimeout(() => {
+                            let script = document.createElement('script');
+                            script.src = 'https://vk.com/js/api/openapi.js?169';
+                            document.getElementById('vk_groups').after(script);
+                            script.onload = function() {
+                                VK.Widgets.Group("vk_groups", {
+                                    mode: 0,
+                                    width: '350',
+                                    color3: '41425A'
+                                }, 204820601);
+                            }
+                        }, 300)
+                    }
+                });
+            </script>
+
+        </div><div class="widget widget_block"><div id="ok_group_widget"></div>
+<script type="rocketlazyloadscript">
+!function (d, id, did, st) {
+  var js = d.createElement("script");
+  js.src = "https://connect.ok.ru/connect.js";
+  js.onload = js.onreadystatechange = function () {
+  if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+    if (!this.executed) {
+      this.executed = true;
+      setTimeout(function () {
+        OK.CONNECT.insertGroupWidget(id,did,st);
+      }, 0);
+    }
+  }}
+  d.documentElement.appendChild(js);
+}(document,"ok_group_widget","61025145389141",'{"width":380,"height":230}');
+</script></div>
+    <div class="sidebar-sticky">
+        <div class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><!-- Yandex.RTB R-A-913275-1 -->
+<div id="yandex_rtb_R-A-913275-1"></div>
+<script type="rocketlazyloadscript">window.yaContextCb.push(()=>{
+  Ya.Context.AdvManager.render({
+    renderTo: 'yandex_rtb_R-A-913275-1',
+    blockId: 'R-A-913275-1'
+  })
+})</script></div></div>    </div>
+
+</aside>
+
+</main> <!-- /.content-wrap -->
+
+<footer class="site-footer">
+
+    <div>
+        <div class="top">
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2034%2048'%3E%3C/svg%3E" alt="Логотип портала" data-lazy-src="https://fructberry.com/wp-content/themes/fruitberry/img/logo-footer.png" width="34" height="48"><noscript><img src="https://fructberry.com/wp-content/themes/fruitberry/img/logo-footer.png" alt="Логотип портала" width="34" height="48"></noscript>
+                <div class="h1">ФруктБерри</div>
+            </div>
+            
+<div class="social">
+            <a target="_blank" rel="noopener" href="https://vk.com/fructberryru" class="vk"></a>
+                            <a target="_blank" rel="noopener" href="https://ok.ru/group/61025145389141" class="ok"></a>
+        </div>        </div>
+        <div class="copyright">
+            <p>© 2021 Большая энциклопедия ягод и фруктов</p>
+            <p>Перепечатка материалов разрешена только с указанием первоисточника</p>
+        </div>
+    </div>
+
+    <div class="footer-menu">
+        <div class="h6">Инфо:</div>
+        <ul class="menu"><li id="menu-item-57" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-57"><a href="https://fructberry.com/sitemap">Карта сайта</a></li>
+<li id="menu-item-151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151"><a href="https://fructberry.com/o-sajte">О сайте</a></li>
+<li id="menu-item-9900" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9900"><a href="https://fructberry.com/kontakty">Контакты</a></li>
+<li id="menu-item-17620" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-199 current_page_item menu-item-17620"><a href="https://fructberry.com/privacy-policy" aria-current="page">Политика конфиденциальности</a></li>
+<li id="menu-item-17621" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17621"><a href="https://fructberry.com/polzovatelskoe-soglashenie">Пользовательское соглашение</a></li>
+</ul>    </div>
+
+    <div>
+                <a class="footer-design" href="https://seonica.ru" target="_blank" rel="noopener noreferrer">Сделано в 2021</a>
+    </div>
+
+    <div class="search-block">
+        <div class="search-icon"></div>
+    </div>
+
+</footer>
+
+</div> <!-- /.site-container -->
+
+<div id="searchform" class="popup-wrap">
+    <div class="popup-overlay"></div>
+    <div class="popup">
+        <span>Введите запрос и нажмите <i>Enter</i>:</span>
+        <form method="get" class="search-form" action="https://fructberry.com/">
+    <input type="search" placeholder="Поиск информации на портале" name="s" value="">
+    <button class="search-submit" aria-label="Поиск"></button>
+</form>    </div>
+</div>
+
+<div class="menu-overlay"><span></span></div>
+
+<div id="scroll-button">
+    <div id="scroll-button_up" class="scroll-action_up">
+        <svg class="svg-inline--fa fa-arrow-up fa-w-14" aria-hidden="true" data-prefix="far" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+            <path d="M6.101 261.899L25.9 281.698c4.686 4.686 12.284 4.686 16.971 0L198 126.568V468c0 6.627 5.373 12 12 12h28c6.627 0 12-5.373 12-12V126.568l155.13 155.13c4.686 4.686 12.284 4.686 16.971 0l19.799-19.799c4.686-4.686 4.686-12.284 0-16.971L232.485 35.515c-4.686-4.686-12.284-4.686-16.971 0L6.101 244.929c-4.687 4.686-4.687 12.284 0 16.97z" fill="' . $webnavoz_button_button_color . '"></path>
+        </svg>
+    </div>
+    <div id="scroll-button_middle">
+        <span class="scroll-action_perc">10</span>%
+    </div>
+    <div id="scroll-button_down" class="scroll-action_down">
+        <svg class="svg-inline--fa fa-arrow-down fa-w-14" aria-hidden="true" data-prefix="far" data-icon="arrow-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+            <path d="M441.9 250.1l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L250 385.4V44c0-6.6-5.4-12-12-12h-28c-6.6 0-12 5.4-12 12v341.4L42.9 230.3c-4.7-4.7-12.3-4.7-17 0L6.1 250.1c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z"></path>
+        </svg>
+    </div>
+</div>
+
+<script type="rocketlazyloadscript">var pseudo_links = document.querySelectorAll(".pseudo-clearfy-link");for (var i=0;i<pseudo_links.length;i++ ) { pseudo_links[i].addEventListener("click", function(e){   window.open( e.target.getAttribute("data-uri") ); }); }</script><script type="rocketlazyloadscript">document.addEventListener("copy", (event) => {var pagelink = "\nИсточник: https://fructberry.com/privacy-policy";event.clipboardData.setData("text", document.getSelection() + pagelink);event.preventDefault();});</script><script type="text/javascript" id="rate-my-post-js-extra">
+/* <![CDATA[ */
+var rmp_frontend = {"admin_ajax":"https:\/\/fructberry.com\/wp-admin\/admin-ajax.php","postID":"199","noVotes":"","cookie":"","afterVote":"","notShowRating":"1","social":"1","feedback":"1","cookieDisable":"1","emptyFeedback":"\u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043e\u0442\u0437\u044b\u0432","hoverTexts":"1","preventAccidental":"1","grecaptcha":"1","siteKey":"","votingPriv":"1","loggedIn":"","positiveThreshold":"2","ajaxLoad":"1","nonce":"ab43e5b869"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://fructberry.com/wp-content/cache/min/1/wp-content/plugins/rate-my-post/public/js/rate-my-post.js?ver=1676116927" id="rate-my-post-js" defer=""></script>
+<script type="text/javascript" id="toc-front-js-extra">
+/* <![CDATA[ */
+var tocplus = {"smooth_scroll":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://fructberry.com/wp-content/plugins/table-of-contents-plus/front.min.js" id="toc-front-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin|\/logout|\/wp-login.php","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/fructberry.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" id="main-js-extra">
+/* <![CDATA[ */
+var ajax_random = {"ajaxurl":"https:\/\/fructberry.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://fructberry.com/wp-content/cache/min/1/wp-content/themes/fruitberry/js/main.js?ver=1676116927" id="main-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://fructberry.com/wp-content/plugins/easy-fancybox/js/jquery.fancybox.min.js" id="jquery-fancybox-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="jquery-fancybox-js-after">
+var fb_timeout, fb_opts={'overlayShow':true,'hideOnOverlayClick':true,'showCloseButton':true,'margin':20,'centerOnScroll':false,'enableEscapeButton':true,'autoScale':true };
+if(typeof easy_fancybox_handler==='undefined'){
+var easy_fancybox_handler=function(){
+jQuery('.nofancybox,a.wp-block-file__button,a.pin-it-button,a[href*="pinterest.com/pin/create"],a[href*="facebook.com/share"],a[href*="twitter.com/share"]').addClass('nolightbox');
+/* IMG */
+var fb_IMG_select='a[href*=".jpg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpg"]:not(.nolightbox),a[href*=".jpeg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpeg"]:not(.nolightbox),a[href*=".png"]:not(.nolightbox,li.nolightbox>a),area[href*=".png"]:not(.nolightbox),a[href*=".webp"]:not(.nolightbox,li.nolightbox>a),area[href*=".webp"]:not(.nolightbox)';
+jQuery(fb_IMG_select).addClass('fancybox image');
+var fb_IMG_sections=jQuery('.gallery,.wp-block-gallery,.tiled-gallery,.wp-block-jetpack-tiled-gallery');
+fb_IMG_sections.each(function(){jQuery(this).find(fb_IMG_select).attr('rel','gallery-'+fb_IMG_sections.index(this));});
+jQuery('a.fancybox,area.fancybox,li.fancybox a').each(function(){jQuery(this).fancybox(jQuery.extend({},fb_opts,{'transitionIn':'elastic','easingIn':'easeOutBack','transitionOut':'elastic','easingOut':'easeInBack','opacity':false,'hideOnContentClick':false,'titleShow':true,'titlePosition':'over','titleFromAlt':true,'showNavArrows':true,'enableKeyboardNav':true,'cyclic':false}))});};
+jQuery('a.fancybox-close').on('click',function(e){e.preventDefault();jQuery.fancybox.close()});
+};
+var easy_fancybox_auto=function(){setTimeout(function(){jQuery('#fancybox-auto').trigger('click')},1000);};
+jQuery(easy_fancybox_handler);jQuery(document).on('post-load',easy_fancybox_handler);
+jQuery(easy_fancybox_auto);
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://fructberry.com/wp-content/plugins/easy-fancybox/js/jquery.easing.min.js" id="jquery-easing-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://fructberry.com/wp-content/plugins/easy-fancybox/js/jquery.mousewheel.min.js" id="jquery-mousewheel-js" defer=""></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://fructberry.com/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script>
+<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(50153050, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/50153050" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+
+</body></html>

@@ -1,0 +1,416 @@
+<html prefix="og: https://ogp.me/ns#" itemscope="" itemtype="http://schema.org/WebPage" class="flexgap" lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+
+    <link rel="preload" as="font" type="font/woff2" href="https://ladywow.club/wp-content/themes/ladywow/fonts/ibm-plex-sans-v13-latin_cyrillic-300.woff2" crossorigin="">
+    <link rel="preload" as="font" type="font/woff2" href="https://ladywow.club/wp-content/themes/ladywow/fonts/ibm-plex-sans-v13-latin_cyrillic-regular.woff2" crossorigin="">
+    <link rel="preload" as="font" type="font/woff2" href="https://ladywow.club/wp-content/themes/ladywow/fonts/ibm-plex-sans-v13-latin_cyrillic-500.woff2" crossorigin="">
+    <link rel="preload" as="font" type="font/woff2" href="https://ladywow.club/wp-content/themes/ladywow/fonts/ibm-plex-sans-v13-latin_cyrillic-600.woff2" crossorigin="">
+    <link rel="preload" as="font" type="font/woff2" href="https://ladywow.club/wp-content/themes/ladywow/fonts/ibm-plex-sans-v13-latin_cyrillic-700.woff2" crossorigin="">
+
+    
+    <link rel="preload" href="https://ladywow.club/wp-content/plugins/rate-my-post/public/css/fonts/ratemypost.ttf" type="font/ttf" as="font" crossorigin="anonymous">
+<!-- SEO от Rank Math - https://s.rankmath.com/home -->
+<title>Политика конфиденциальности - LadyWow.club</title>
+<meta name="description" content="Политика конфиденциальности сайта ladywow.club: общие понятия, сбор данных, использование полученной информации, пользование cookies, рекомендации.">
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+<link rel="canonical" href="https://ladywow.club/privacy-policy">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Политика конфиденциальности - LadyWow.club">
+<meta property="og:description" content="Политика конфиденциальности сайта ladywow.club: общие понятия, сбор данных, использование полученной информации, пользование cookies, рекомендации.">
+<meta property="og:url" content="https://ladywow.club/privacy-policy">
+<meta property="og:site_name" content="LadyWow">
+<meta property="article:publisher" content="https://www.facebook.com/Zenskij.Blog.Ladywow">
+<meta property="og:updated_time" content="2020-05-15T23:02:33+03:00">
+<meta property="og:image" content="https://ladywow.club/wp-content/uploads/2020/04/facebook.jpg">
+<meta property="og:image:secure_url" content="https://ladywow.club/wp-content/uploads/2020/04/facebook.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="facebook logo">
+<meta property="og:image:type" content="image/jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Политика конфиденциальности - LadyWow.club">
+<meta name="twitter:description" content="Политика конфиденциальности сайта ladywow.club: общие понятия, сбор данных, использование полученной информации, пользование cookies, рекомендации.">
+<meta name="twitter:image" content="https://ladywow.club/wp-content/uploads/2020/04/facebook.jpg">
+<meta name="twitter:label1" content="Время чтения">
+<meta name="twitter:data1" content="Меньше минуты">
+<!-- /Rank Math WordPress SEO плагин -->
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="//st.top100.ru">
+<link rel="dns-prefetch" href="//storage.mds.yandex.net">
+<link rel="dns-prefetch" href="//mc.yandex.ru">
+<link rel="dns-prefetch" href="//mc.webvisor.org">
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link data-minify="1" rel="stylesheet" id="rate-my-post-css" href="https://ladywow.club/wp-content/cache/min/1/wp-content/plugins/rate-my-post/public/css/rate-my-post.css?ver=1674791916" type="text/css" media="all">
+<style id="rate-my-post-inline-css" type="text/css">
+.rmp-icon--full-highlight {color: #fde12d;}.rmp-icon--half-highlight {  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #fde12d), color-stop(50%, #ccc));  background: linear-gradient(to right, #fde12d 50%, #ccc 50%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}.rmp-rating-widget .rmp-icon--ratings {  font-size: 20px;}
+</style>
+<link data-minify="1" rel="stylesheet" id="main-css" href="https://ladywow.club/wp-content/cache/min/1/wp-content/themes/ladywow/css/main.css?ver=1674791917" type="text/css" media="all">
+<link rel="stylesheet" id="fancybox-css" href="https://ladywow.club/wp-content/plugins/easy-fancybox/css/jquery.fancybox.min.css" type="text/css" media="screen">
+<script type="text/javascript" src="https://ladywow.club/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js" defer=""></script>
+<script type="text/javascript" src="https://ladywow.club/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js" defer=""></script>
+<meta name="yandex-verification" content="0c713b20bf4ffcf4">
+<!-- Yandex Native Ads -->
+<script type="rocketlazyloadscript">window.yaContextCb=window.yaContextCb||[]</script>
+<script type="rocketlazyloadscript" src="https://yandex.ru/ads/system/context.js" async=""></script>		<link rel="manifest" href="https://ladywow.club/wp-json/wp/v2/web-app-manifest">
+		<meta name="theme-color" content="#fff">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-touch-fullscreen" content="YES">
+							<link rel="apple-touch-startup-image" href="https://ladywow.club/wp-content/uploads/2019/04/cropped-512-logo-192x192.png">
+		
+				<meta name="apple-mobile-web-app-title" content="LadyWow">
+		<meta name="application-name" content="LadyWow">
+		<link rel="amphtml" href="https://ladywow.club/privacy-policy?amp"><link rel="icon" href="https://ladywow.club/wp-content/uploads/2019/04/cropped-512-logo-32x32.png" sizes="32x32">
+<link rel="icon" href="https://ladywow.club/wp-content/uploads/2019/04/cropped-512-logo-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://ladywow.club/wp-content/uploads/2019/04/cropped-512-logo-180x180.png">
+<meta name="msapplication-TileImage" content="https://ladywow.club/wp-content/uploads/2019/04/cropped-512-logo-270x270.png">
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>
+    </head>
+
+<body class="privacy-policy page-template-default page page-id-2938083">
+
+    <div class="site-container-wrap">
+
+        <div class="site-container">
+
+            <header class="site-header">
+
+                <div class="header-top">
+
+                                            <a class="logo" href="https://ladywow.club">
+                            <img class="skip-lazy" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2080%20100'%3E%3C/svg%3E" alt="Логотип портала" data-lazy-src="https://ladywow.club/wp-content/themes/ladywow/img/logo.png" width="80" height="100"><noscript><img class="skip-lazy" src="https://ladywow.club/wp-content/themes/ladywow/img/logo.png" alt="Логотип портала" width="80" height="100"></noscript>
+                        </a>
+                    
+                    <form method="get" class="search-form" action="https://ladywow.club/">
+    <input type="search" placeholder="Поиск информации на портале" name="s" value="">
+    <button class="search-submit" aria-label="Поиск"></button>
+</form>
+                    
+<div class="social-wrap">
+    <span>Присоединяйтесь к нам в социальных сетях</span>
+    <div class="social">
+                    <a target="_blank" rel="noopener" href="https://vk.com/happy_womans_world" class="vk"></a>
+                            <a target="_blank" rel="noopener" href="https://www.pinterest.ru/ladywowru/" class="pin"></a>
+                            <a target="_blank" rel="noopener" href="https://ok.ru/group/61726939086933" class="ok"></a>
+            </div>
+</div>
+                </div>
+
+                <nav class="header-menu mobile-menu" aria-label="Главное меню">
+                    <input id="mobile-menu-toggle" type="checkbox">
+                    <label class="mobile-menu-button" for="mobile-menu-toggle">
+                        <span></span>
+                    </label>
+                    <div class="primary-menu">
+                        <span class="cross"></span>
+                        <ul class="menu"><li id="menu-item-1757" class="cat-1 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1757"><a href="https://ladywow.club/uhod-za-telom">Уход за телом</a></li>
+<li id="menu-item-1756" class="cat-2 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1756"><a href="https://ladywow.club/uhod-za-licom">Лицо</a>
+<ul class="sub-menu">
+	<li id="menu-item-1752" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1752"><a href="https://ladywow.club/uhod-za-licom/makiyazh">Макияж</a>
+	<ul class="sub-menu">
+		<li id="menu-item-2939015" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939015"><a href="https://ladywow.club/uhod-za-licom/makiyazh/uroki">Уроки макияжа</a></li>
+		<li id="menu-item-2939014" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939014"><a href="https://ladywow.club/uhod-za-licom/makiyazh/kosmeticheskie-sredstva">Косметические средства для макияжа</a></li>
+	</ul>
+</li>
+	<li id="menu-item-2939802" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939802"><a href="https://ladywow.club/uhod-za-licom/procedury-dlya-lica">Процедуры</a></li>
+	<li id="menu-item-3057" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3057"><a href="https://ladywow.club/uhod-za-licom/kosmetika">Уходовая косметика</a></li>
+	<li id="menu-item-12887" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12887"><a href="https://ladywow.club/uhod-za-licom/maski-dlya-lica">Маски</a></li>
+	<li id="menu-item-4750" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4750"><a href="https://ladywow.club/uhod-za-licom/resnicy-brovi">Ресницы и брови</a></li>
+</ul>
+</li>
+<li id="menu-item-1760" class="cat-3 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1760"><a href="https://ladywow.club/uxod-za-volosami">Волосы</a>
+<ul class="sub-menu">
+	<li id="menu-item-10161" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10161"><a href="https://ladywow.club/uxod-za-volosami/strizhki-i-pricheski">Стрижки и прически</a></li>
+	<li id="menu-item-2939377" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939377"><a href="https://ladywow.club/uxod-za-volosami/procedury">Процедуры</a></li>
+	<li id="menu-item-2939375" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939375"><a href="https://ladywow.club/uxod-za-volosami/sredstva">Средства</a></li>
+	<li id="menu-item-14093" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-14093"><a href="https://ladywow.club/uxod-za-volosami/maski-dlya-volos">Маски</a></li>
+</ul>
+</li>
+<li id="menu-item-2960555" class="cat-4 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-2960555"><a href="https://ladywow.club/krasota">Красота</a>
+<ul class="sub-menu">
+	<li id="menu-item-2251" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-2251"><a href="https://ladywow.club/krasota/uxod-za-nogtyami">Ногти</a>
+	<ul class="sub-menu">
+		<li id="menu-item-2940211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2940211"><a href="https://ladywow.club/krasota/uxod-za-nogtyami/manikyur">Идеи маникюра</a></li>
+		<li id="menu-item-2948027" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2948027"><a href="https://ladywow.club/krasota/uxod-za-nogtyami/pedikyur">Педикюр</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-1754" class="cat-5 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1754"><a href="https://ladywow.club/stil-i-moda">Мода</a>
+<ul class="sub-menu">
+	<li id="menu-item-2938599" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2938599"><a href="https://ladywow.club/stil-i-moda/modnye-trendy">Модные тренды</a></li>
+</ul>
+</li>
+<li id="menu-item-1758" class="cat-6 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1758"><a href="https://ladywow.club/lyubov-i-otnosheniya">Отношения</a>
+<ul class="sub-menu">
+	<li id="menu-item-1759" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1759"><a href="https://ladywow.club/lyubov-i-otnosheniya/lyubovnye-istorii-iz-zhizni">Любовные истории</a></li>
+</ul>
+</li>
+</ul>                    </div>
+                </nav>
+
+                
+            </header>
+
+            
+            <main class="content-wrap">
+<div class="full-width">
+
+    <ul class="breadcrumbs" itemprop="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="https://ladywow.club/"><span itemprop="name">Главная</span></a>
+                <meta itemprop="position" content="1"></li></ul>
+    
+        <div class="top">
+            <h1>
+                Политика конфиденциальности                            </h1>
+        </div>
+
+        <article class="post post-2938083 page type-page status-publish hentry">
+            <div class="post-content">
+                <p>Владелец сайта ladywow.club (далее ladywow.club или Администрация) обязуется сохранять Вашу конфиденциальность в сети Интернет. Настоящая Политика Конфиденциальности, рассказывает о том, как собираются, обрабатываются и хранятся Ваши личные данные.</p>
+<p>Администрация уделяет большое внимание защите личной информации пользователей. Пользуюсь сайтом ladywow.club , пользователь тем самым дает согласие на применение правил сбора и использования данных, изложенных в настоящем документе.</p>
+<blockquote class="warning"><p>Если Вы не согласны с условиями нашей политики конфиденциальности, не используйте сайт ladywow.club!</p></blockquote>
+<p>Собираемая информация Администрация сайта может собирать следующую информацию о пользователях сайта:</p>
+<ul>
+<li>Фамилия, Имя, Отчество;</li>
+<li>Адрес электронной почты;</li>
+<li>IP-адрес;</li>
+<li>Прочая информация.</li>
+</ul>
+<p>Администрация сайта вправе использовать технологию «cookies». «Cookies» не содержат конфиденциальную информацию и не передаются третьим лицам.</p>
+<p>Администрация сайта получает информацию об ip-адресе Клиента и сведения о том, по ссылке с какого интернет-сайта он пришел. Данная информация не используется для установления личности посетителя.</p>
+<h2>Использование информации</h2>
+<p>Ниже описаны некоторые способы использования личной информации пользователя:</p>
+<ul>
+<li>для внутреннего отчета;</li>
+<li>для предоставления информации и услуг, которые запрашивает пользователь;</li>
+<li>для ответа на запросы пользователя;</li>
+<li>для формирования статистических данных.</li>
+</ul>
+<h2>Раскрытие информации</h2>
+<p>Администрация не продает личные данные пользователя и не передает их третьим лицам без согласия на то пользователя. Далее, описаны некоторые случаи передачи личной информации пользователя:</p>
+<p>в случаях, если это требуется правоохранительным органам или если это требует законодательство.</p>
+<h2>Защита информации</h2>
+<p>Администрация при обработке персональных данных принимает необходимые и достаточные организационные и технические меры для защиты персональных данных от неправомерного доступа к ним, а также от иных неправомерных действий в отношении персональных данных.</p>
+<h2>Cookie-файлы</h2>
+<p>Администрация вправе использовать технологию cookies (cookies — служебная информация, посылаемая веб-сервером на компьютер пользователя, для сохранения в браузере. Применяется для сохранения данных, специфичных для данного пользователя, и используемых веб-сервером для различных целей).</p>
+<p>Технология cookies&nbsp;позволяет получить информацию об IP-адресе (уникальный идентификатор устройства, подключённого к локальной сети и/или сети Интернет) посетителя Сайта. Данная информация не используется Компанией для установления личности посетителя.</p>
+<p>Администрация использует файлы cookies, чтобы повысить эффективность посещения пользователя Сайта, а также для выполнения определенных функций, включая анализ трафика.</p>
+<p>Администрация не использует файлы cookie для хранения каких-либо персональных данных пользователя, которые могут быть прочтены и поняты другими лицами.</p>
+<p>Администрация&nbsp;не использует файлы cookie для отслеживания использования сети интернет пользователем после посещения Сайта, за исключением демонстрации предложений Интернет-магазина при посещении пользователем других сайтов.</p>
+<p>Администрация может размещать свои файлы cookie на веб-сайтах партнеров, которые демонстрируют рекламу брендов и (или) продукции Компании. Эти файлы cookie в основном применяются для показа Пользователям соответствующего контента, который отвечает интересам пользователей, и для оценки эффективности контента Сайта (включая рекламу).</p>
+<p>Для того, чтобы ограничить получение файлов cookie или заблокировать все файлы cookie, пользователю необходимо изменить настройки своего браузера.</p>
+<h2>Прочая информация</h2>
+<p>Дети любых возрастов могут беспрепятственно пользоваться данным сайтом.</p>
+<p>Дата 15.05.2020</p>
+            </div>
+        </article>
+
+    
+</div>
+
+
+</main> <!-- /.content-wrap -->
+
+<footer class="site-footer">
+
+    <div class="footer-top">
+
+        <div>
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2080%20100'%3E%3C/svg%3E" alt="Логотип портала" data-lazy-src="https://ladywow.club/wp-content/themes/ladywow/img/logo.png" width="80" height="100"><noscript><img src="https://ladywow.club/wp-content/themes/ladywow/img/logo.png" alt="Логотип портала" width="80" height="100"></noscript>
+            </div>
+
+            <div class="copyright">
+                © 2023 – Женский сайт LadyWow
+                <br> Все права защищены
+            </div>
+        </div>
+
+        <div class="footer-menu primary-menu">
+            <ul class="menu"><li class="cat-1 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1757"><a href="https://ladywow.club/uhod-za-telom">Уход за телом</a></li>
+<li class="cat-2 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1756"><a href="https://ladywow.club/uhod-za-licom">Лицо</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1752"><a href="https://ladywow.club/uhod-za-licom/makiyazh">Макияж</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939015"><a href="https://ladywow.club/uhod-za-licom/makiyazh/uroki">Уроки макияжа</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939014"><a href="https://ladywow.club/uhod-za-licom/makiyazh/kosmeticheskie-sredstva">Косметические средства для макияжа</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939802"><a href="https://ladywow.club/uhod-za-licom/procedury-dlya-lica">Процедуры</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3057"><a href="https://ladywow.club/uhod-za-licom/kosmetika">Уходовая косметика</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12887"><a href="https://ladywow.club/uhod-za-licom/maski-dlya-lica">Маски</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4750"><a href="https://ladywow.club/uhod-za-licom/resnicy-brovi">Ресницы и брови</a></li>
+</ul>
+</li>
+<li class="cat-3 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1760"><a href="https://ladywow.club/uxod-za-volosami">Волосы</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10161"><a href="https://ladywow.club/uxod-za-volosami/strizhki-i-pricheski">Стрижки и прически</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939377"><a href="https://ladywow.club/uxod-za-volosami/procedury">Процедуры</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2939375"><a href="https://ladywow.club/uxod-za-volosami/sredstva">Средства</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-14093"><a href="https://ladywow.club/uxod-za-volosami/maski-dlya-volos">Маски</a></li>
+</ul>
+</li>
+<li class="cat-4 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-2960555"><a href="https://ladywow.club/krasota">Красота</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-2251"><a href="https://ladywow.club/krasota/uxod-za-nogtyami">Ногти</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2940211"><a href="https://ladywow.club/krasota/uxod-za-nogtyami/manikyur">Идеи маникюра</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2948027"><a href="https://ladywow.club/krasota/uxod-za-nogtyami/pedikyur">Педикюр</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li class="cat-5 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1754"><a href="https://ladywow.club/stil-i-moda">Мода</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2938599"><a href="https://ladywow.club/stil-i-moda/modnye-trendy">Модные тренды</a></li>
+</ul>
+</li>
+<li class="cat-6 menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1758"><a href="https://ladywow.club/lyubov-i-otnosheniya">Отношения</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1759"><a href="https://ladywow.club/lyubov-i-otnosheniya/lyubovnye-istorii-iz-zhizni">Любовные истории</a></li>
+</ul>
+</li>
+</ul>        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        
+<div class="social-wrap">
+    <span>Присоединяйтесь к нам в социальных сетях</span>
+    <div class="social">
+                    <a target="_blank" rel="noopener" href="https://vk.com/happy_womans_world" class="vk"></a>
+                            <a target="_blank" rel="noopener" href="https://www.pinterest.ru/ladywowru/" class="pin"></a>
+                            <a target="_blank" rel="noopener" href="https://ok.ru/group/61726939086933" class="ok"></a>
+            </div>
+</div>
+                <div class="footer-links">
+            <ul class="links"><li id="menu-item-2938086" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2938086"><a href="https://ladywow.club/o-nas">О нас</a></li>
+<li id="menu-item-2938085" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-2938083 current_page_item menu-item-2938085"><a href="https://ladywow.club/privacy-policy" aria-current="page">Политика конфиденциальности</a></li>
+<li id="menu-item-2968736" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2968736"><a href="https://ladywow.club/terms-and-conditions">Пользовательское соглашение</a></li>
+<li id="menu-item-2971429" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2971429"><a href="https://ladywow.club/politika-v-otnoshenii-reklamy">Политика в отношении рекламы</a></li>
+<li id="menu-item-2938087" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2938087"><a href="https://ladywow.club/sotrudnichestvo">Сотрудничество</a></li>
+<li id="menu-item-2977643" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2977643"><a href="https://ladywow.club/karta-sayta">Карта сайта</a></li>
+</ul>        </div>
+
+        <form method="get" class="search-form" action="https://ladywow.club/">
+    <input type="search" placeholder="Поиск информации на портале" name="s" value="">
+    <button class="search-submit" aria-label="Поиск"></button>
+</form>    </div>
+
+</footer>
+
+</div> <!-- /.site-container -->
+
+</div> <!-- /.site-container-wrap -->
+
+<div class="menu-overlay"><span></span></div>
+
+<div id="scroll-button">
+    <div id="scroll-button_up" class="scroll-action_up">
+        <svg class="svg-inline--fa fa-arrow-up fa-w-14" aria-hidden="true" data-prefix="far" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+            <path d="M6.101 261.899L25.9 281.698c4.686 4.686 12.284 4.686 16.971 0L198 126.568V468c0 6.627 5.373 12 12 12h28c6.627 0 12-5.373 12-12V126.568l155.13 155.13c4.686 4.686 12.284 4.686 16.971 0l19.799-19.799c4.686-4.686 4.686-12.284 0-16.971L232.485 35.515c-4.686-4.686-12.284-4.686-16.971 0L6.101 244.929c-4.687 4.686-4.687 12.284 0 16.97z" fill="' . $webnavoz_button_button_color . '"></path>
+        </svg>
+    </div>
+    <div id="scroll-button_middle">
+        <span class="scroll-action_perc">10</span>%
+    </div>
+    <div id="scroll-button_down" class="scroll-action_down">
+        <svg class="svg-inline--fa fa-arrow-down fa-w-14" aria-hidden="true" data-prefix="far" data-icon="arrow-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+            <path d="M441.9 250.1l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L250 385.4V44c0-6.6-5.4-12-12-12h-28c-6.6 0-12 5.4-12 12v341.4L42.9 230.3c-4.7-4.7-12.3-4.7-17 0L6.1 250.1c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z"></path>
+        </svg>
+    </div>
+</div>
+
+<!-- Yandex.Metrika counter --> <script type="rocketlazyloadscript" data-rocket-type="text/javascript"> (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym"); ym(13775941, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/13775941" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --><script type="rocketlazyloadscript">document.addEventListener("copy", (event) => {var pagelink = "\nИсточник: https://ladywow.club/privacy-policy";event.clipboardData.setData("text", document.getSelection() + pagelink);event.preventDefault();});</script><script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {var fb_timeout, fb_opts={'overlayShow':true,'hideOnOverlayClick':true,'showCloseButton':true,'margin':20,'centerOnScroll':true,'enableEscapeButton':true,'autoScale':true };
+if(typeof easy_fancybox_handler==='undefined'){
+var easy_fancybox_handler=function(){
+jQuery('.nofancybox,a.wp-block-file__button,a.pin-it-button,a[href*="pinterest.com/pin/create"],a[href*="facebook.com/share"],a[href*="twitter.com/share"]').addClass('nolightbox');
+/* IMG */
+var fb_IMG_select='a[href*=".jpg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpg"]:not(.nolightbox),a[href*=".jpeg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpeg"]:not(.nolightbox),a[href*=".png"]:not(.nolightbox,li.nolightbox>a),area[href*=".png"]:not(.nolightbox),a[href*=".webp"]:not(.nolightbox,li.nolightbox>a),area[href*=".webp"]:not(.nolightbox)';
+jQuery(fb_IMG_select).addClass('fancybox image');
+var fb_IMG_sections=jQuery('.gallery,.wp-block-gallery,.tiled-gallery,.wp-block-jetpack-tiled-gallery');
+fb_IMG_sections.each(function(){jQuery(this).find(fb_IMG_select).attr('rel','gallery-'+fb_IMG_sections.index(this));});
+jQuery('a.fancybox,area.fancybox,li.fancybox a').each(function(){jQuery(this).fancybox(jQuery.extend({},fb_opts,{'transitionIn':'elastic','easingIn':'easeOutBack','transitionOut':'elastic','easingOut':'easeInBack','opacity':false,'hideOnContentClick':false,'titleShow':true,'titlePosition':'inside','titleFromAlt':true,'showNavArrows':true,'enableKeyboardNav':true,'cyclic':false}))});};
+jQuery('a.fancybox-close').on('click',function(e){e.preventDefault();jQuery.fancybox.close()});
+};
+var easy_fancybox_auto=function(){setTimeout(function(){jQuery('#fancybox-auto').trigger('click')},1000);};
+jQuery(easy_fancybox_handler);jQuery(document).on('post-load',easy_fancybox_handler);
+jQuery(easy_fancybox_auto);});</script>	<script type="rocketlazyloadscript">
+		if ( navigator.serviceWorker ) {
+			window.addEventListener( 'load', function() {
+									{
+						navigator.serviceWorker.register(
+							"https:\/\/ladywow.club\/wp.serviceworker",
+							{"scope":"\/"}						).then( reg => {
+													} );
+					}
+							} );
+		}
+	</script>
+	<script type="text/javascript" id="rate-my-post-js-extra">
+/* <![CDATA[ */
+var rmp_frontend = {"admin_ajax":"https:\/\/ladywow.club\/wp-admin\/admin-ajax.php","postID":"2938083","noVotes":"","cookie":"","afterVote":"","notShowRating":"1","social":"1","feedback":"1","cookieDisable":"1","emptyFeedback":"","hoverTexts":"1","preventAccidental":"1","grecaptcha":"1","siteKey":"","votingPriv":"1","loggedIn":"","positiveThreshold":"2","ajaxLoad":"1","nonce":"a3b56f0180"};
+/* ]]> */
+</script>
+<script data-minify="1" type="text/javascript" src="https://ladywow.club/wp-content/cache/min/1/wp-content/plugins/rate-my-post/public/js/rate-my-post.js?ver=1674791916" id="rate-my-post-js" defer=""></script>
+<script type="text/javascript" id="toc-front-js-extra">
+/* <![CDATA[ */
+var tocplus = {"visibility_show":"\u041f\u043e\u043a\u0430\u0437\u0430\u0442\u044c","visibility_hide":"\u0421\u043a\u0440\u044b\u0442\u044c","width":"Auto"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://ladywow.club/wp-content/plugins/table-of-contents-plus/front.min.js" id="toc-front-js" defer=""></script>
+<script type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin|\/logout|\/wp-login.php","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/ladywow.club","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" id="main-js-extra">
+/* <![CDATA[ */
+var load_more = {"ajaxurl":"https:\/\/ladywow.club\/wp-admin\/admin-ajax.php"};
+var ajax_random = {"ajaxurl":"https:\/\/ladywow.club\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script data-minify="1" type="text/javascript" src="https://ladywow.club/wp-content/cache/min/1/wp-content/themes/ladywow/js/main.js?ver=1674791916" id="main-js" defer=""></script>
+<script type="text/javascript" src="https://ladywow.club/wp-includes/js/comment-reply.min.js" id="comment-reply-js" defer=""></script>
+<script type="text/javascript" src="https://ladywow.club/wp-content/plugins/easy-fancybox/js/jquery.fancybox.min.js" id="jquery-fancybox-js" defer=""></script>
+<script type="text/javascript" src="https://ladywow.club/wp-content/plugins/easy-fancybox/js/jquery.easing.min.js" id="jquery-easing-js" defer=""></script>
+<script type="text/javascript" src="https://ladywow.club/wp-content/plugins/easy-fancybox/js/jquery.mousewheel.min.js" id="jquery-mousewheel-js" defer=""></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://ladywow.club/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>
+
+
+
+
+</body></html>

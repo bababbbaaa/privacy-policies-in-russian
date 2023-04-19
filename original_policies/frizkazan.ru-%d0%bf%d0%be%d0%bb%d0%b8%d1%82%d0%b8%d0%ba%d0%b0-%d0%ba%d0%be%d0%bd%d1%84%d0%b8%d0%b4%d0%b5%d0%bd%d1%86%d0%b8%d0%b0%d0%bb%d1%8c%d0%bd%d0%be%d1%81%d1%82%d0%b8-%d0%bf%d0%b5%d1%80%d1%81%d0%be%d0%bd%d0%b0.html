@@ -1,0 +1,891 @@
+<html lang="ru-RU"><head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+	<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v16.9 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Политика конфиденциальности персональных данных - Фриз-Сервис ремонт холодильников</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;subset=cyrillic&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;subset=cyrillic&amp;display=swap" media="all" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;subset=cyrillic&#038;display=swap" /></noscript><link rel="stylesheet" href="https://frizkazan.ru/wp-content/cache/min/1/a89ac99424dfb6adcc08130f302490e7.css" media="all" data-minify="1">
+	<link rel="canonical" href="https://frizkazan.ru/политика-конфиденциальности-персона/">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Политика конфиденциальности персональных данных - Фриз-Сервис ремонт холодильников">
+	<meta property="og:description" content="Настоящая Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в отношении всей информации, которую сайт&nbsp;Фриз-Сервис, (далее – Сайт) расположенный на доменном имени&nbsp;frizkazan.ru&nbsp;(а также его субдоменах), может получить о Пользователе во время использования сайта frizkazan.ru (а также его субдоменов), его программ и его продуктов. 1. Определение терминов 1.1 В настоящей Политике конфиденциальности используются следующие термины:1.1.1. […]">
+	<meta property="og:url" content="https://frizkazan.ru/политика-конфиденциальности-персона/">
+	<meta property="og:site_name" content="Фриз-Сервис ремонт холодильников">
+	<meta property="article:modified_time" content="2021-08-23T05:57:59+00:00">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="Примерное время для чтения">
+	<meta name="twitter:data1" content="7 минут">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://frizkazan.ru/#website","url":"https://frizkazan.ru/","name":"\u0424\u0440\u0438\u0437-\u0421\u0435\u0440\u0432\u0438\u0441 \u0440\u0435\u043c\u043e\u043d\u0442 \u0445\u043e\u043b\u043e\u0434\u0438\u043b\u044c\u043d\u0438\u043a\u043e\u0432","description":"\u0420\u0435\u043c\u043e\u043d\u0442 \u0443 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 \u0445\u043e\u043b\u043e\u0434\u0438\u043b\u044c\u043d\u0438\u043a\u043e\u0432, \u043f\u043e\u0441\u0443\u0434\u043e\u043c\u043e\u0435\u043a, \u043a\u043e\u043d\u0434\u0438\u0446\u0438\u043e\u043d\u0435\u0440\u043e\u0432","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://frizkazan.ru/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":"WebPage","@id":"https://frizkazan.ru/%d0%bf%d0%be%d0%bb%d0%b8%d1%82%d0%b8%d0%ba%d0%b0-%d0%ba%d0%be%d0%bd%d1%84%d0%b8%d0%b4%d0%b5%d0%bd%d1%86%d0%b8%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%bf%d0%b5%d1%80%d1%81%d0%be%d0%bd%d0%b0/#webpage","url":"https://frizkazan.ru/%d0%bf%d0%be%d0%bb%d0%b8%d1%82%d0%b8%d0%ba%d0%b0-%d0%ba%d0%be%d0%bd%d1%84%d0%b8%d0%b4%d0%b5%d0%bd%d1%86%d0%b8%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%bf%d0%b5%d1%80%d1%81%d0%be%d0%bd%d0%b0/","name":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 - \u0424\u0440\u0438\u0437-\u0421\u0435\u0440\u0432\u0438\u0441 \u0440\u0435\u043c\u043e\u043d\u0442 \u0445\u043e\u043b\u043e\u0434\u0438\u043b\u044c\u043d\u0438\u043a\u043e\u0432","isPartOf":{"@id":"https://frizkazan.ru/#website"},"datePublished":"2021-08-02T10:40:35+00:00","dateModified":"2021-08-23T05:57:59+00:00","breadcrumb":{"@id":"https://frizkazan.ru/%d0%bf%d0%be%d0%bb%d0%b8%d1%82%d0%b8%d0%ba%d0%b0-%d0%ba%d0%be%d0%bd%d1%84%d0%b8%d0%b4%d0%b5%d0%bd%d1%86%d0%b8%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%bf%d0%b5%d1%80%d1%81%d0%be%d0%bd%d0%b0/#breadcrumb"},"inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://frizkazan.ru/%d0%bf%d0%be%d0%bb%d0%b8%d1%82%d0%b8%d0%ba%d0%b0-%d0%ba%d0%be%d0%bd%d1%84%d0%b8%d0%b4%d0%b5%d0%bd%d1%86%d0%b8%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%bf%d0%b5%d1%80%d1%81%d0%be%d0%bd%d0%b0/"]}]},{"@type":"BreadcrumbList","@id":"https://frizkazan.ru/%d0%bf%d0%be%d0%bb%d0%b8%d1%82%d0%b8%d0%ba%d0%b0-%d0%ba%d0%be%d0%bd%d1%84%d0%b8%d0%b4%d0%b5%d0%bd%d1%86%d0%b8%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%bf%d0%b5%d1%80%d1%81%d0%be%d0%bd%d0%b0/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"\u0413\u043b\u0430\u0432\u043d\u0430\u044f \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430","item":"https://frizkazan.ru/"},{"@type":"ListItem","position":2,"name":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445"}]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="//api-maps.yandex.ru">
+<link rel="preconnect" href="//api-maps.yandex.ru">
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="Фриз-Сервис ремонт холодильников » Лента" href="https://frizkazan.ru/feed/">
+<link rel="alternate" type="application/rss+xml" title="Фриз-Сервис ремонт холодильников » Лента комментариев" href="https://frizkazan.ru/comments/feed/">
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	
+
+
+
+
+
+
+
+
+<style id="elementor-frontend-inline-css" type="text/css">
+@font-face{font-family:eicons;src:url(https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0);src:url(https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.eot?5.10.0#iefix) format("embedded-opentype"),url(https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff2?5.10.0) format("woff2"),url(https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.woff?5.10.0) format("woff"),url(https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.ttf?5.10.0) format("truetype"),url(https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/eicons/fonts/eicons.svg?5.10.0#eicon) format("svg");font-weight:400;font-style:normal}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://frizkazan.ru/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" id="jquery-core-js" defer=""></script>
+<script type="text/javascript" src="https://frizkazan.ru/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://frizkazan.ru/wp-json/"><link rel="alternate" type="application/json" href="https://frizkazan.ru/wp-json/wp/v2/pages/11"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://frizkazan.ru/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://frizkazan.ru/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.8">
+<link rel="shortlink" href="https://frizkazan.ru/?p=11">
+<link rel="alternate" type="application/json+oembed" href="https://frizkazan.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ffrizkazan.ru%2F%25d0%25bf%25d0%25be%25d0%25bb%25d0%25b8%25d1%2582%25d0%25b8%25d0%25ba%25d0%25b0-%25d0%25ba%25d0%25be%25d0%25bd%25d1%2584%25d0%25b8%25d0%25b4%25d0%25b5%25d0%25bd%25d1%2586%25d0%25b8%25d0%25b0%25d0%25bb%25d1%258c%25d0%25bd%25d0%25be%25d1%2581%25d1%2582%25d0%25b8-%25d0%25bf%25d0%25b5%25d1%2580%25d1%2581%25d0%25be%25d0%25bd%25d0%25b0%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://frizkazan.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ffrizkazan.ru%2F%25d0%25bf%25d0%25be%25d0%25bb%25d0%25b8%25d1%2582%25d0%25b8%25d0%25ba%25d0%25b0-%25d0%25ba%25d0%25be%25d0%25bd%25d1%2584%25d0%25b8%25d0%25b4%25d0%25b5%25d0%25bd%25d1%2586%25d0%25b8%25d0%25b0%25d0%25bb%25d1%258c%25d0%25bd%25d0%25be%25d1%2581%25d1%2582%25d0%25b8-%25d0%25bf%25d0%25b5%25d1%2580%25d1%2581%25d0%25be%25d0%25bd%25d0%25b0%2F&amp;format=xml">
+<style type="text/css">@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/cyrillic-ext.woff2') format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/cyrillic.woff2') format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/greek-ext.woff2') format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/greek.woff2') format('woff2');unicode-range:U+0370-03FF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/vietnamese.woff2') format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/latin-ext.woff2') format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/cyrillic-ext2.woff2') format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/cyrillic2.woff2') format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/greek-ext2.woff2') format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/greek2.woff2') format('woff2');unicode-range:U+0370-03FF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/vietnamese2.woff2') format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/latin-ext2.woff2') format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/latin2.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}.ti-widget.ti-goog{width:100%;display:block;overflow:hidden;text-align:left;direction:ltr;box-sizing:border-box}.ti-widget.ti-goog *{box-sizing:border-box}.ti-widget.ti-goog:before{display:none !important}.ti-widget.ti-goog a{text-decoration:underline !important;color:inherit}.ti-widget.ti-goog a.ti-header{text-decoration:none !important}.ti-widget.ti-goog a[href="#"],.ti-widget.ti-goog a:not([href]){text-decoration:none !important;pointer-events:none}.ti-widget.ti-goog strong,.ti-widget.ti-goog strong *{font-weight:bold !important}.ti-widget.ti-goog .ti-widget-container,.ti-widget.ti-goog .ti-widget-container *{font-family:'Open sans';font-size:14px;line-height:1.4em;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.ti-widget.ti-goog .ti-widget-container{color:#000000;margin-bottom:15px}.ti-widget.ti-goog .ti-widget-container .ti-name{font-weight:bold;font-size:15px;overflow:hidden;padding-right:25px;white-space:nowrap;text-overflow:ellipsis;color:#000000;margin-bottom:2px}.ti-widget.ti-goog .ti-widget-container .ti-date{color:#000000;opacity:0.5;font-size:12px !important}.ti-widget.ti-goog .ti-profile-img{margin:0 15px 0 0 !important}.ti-widget.ti-goog .ti-profile-img img{width:40px !important;height:40px !important;padding:0px !important;display:block;border-radius:30px;min-width:initial !important;max-width:initial !important;object-fit:cover;object-position:top}.ti-widget.ti-goog .ti-profile-img-sprite{display:inline-block;float:left;background:white;background-repeat:no-repeat;width:40px;height:40px;border-radius:30px}.ti-widget.ti-goog .ti-profile-details{-webkit-box-flex:1;-ms-flex:1;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}.ti-widget.ti-goog .ti-stars{margin-top:3px;white-space:nowrap}.ti-widget.ti-goog .ti-star{width:16px;height:16px;display:inline-block;margin-right:1px;background-size:contain;background-repeat:no-repeat}.ti-widget.ti-goog .ti-star:before,.ti-widget.ti-goog .ti-star:after{content:none !important}.ti-widget.ti-goog .star-lg .ti-star{width:30px;height:30px}.ti-widget.ti-goog .ti-d-none{display:none !important}.ti-widget.ti-goog.ti-icon-size1 .ti-review-header:after{width:25px;height:25px}.ti-widget.ti-goog.ti-icon-size1 .ti-widget-container .ti-name{padding-left:30px}.ti-widget.ti-goog.ti-icon-size2 .ti-review-header:after{width:30px;height:30px}.ti-widget.ti-goog.ti-icon-size2 .ti-widget-container .ti-name{padding-left:35px}.ti-widget.ti-goog .ti-rating-text,.ti-widget.ti-goog .ti-rating-text strong,.ti-widget.ti-goog .ti-rating-text strong a,.ti-widget.ti-goog .ti-rating-text strong span,.ti-widget.ti-goog .ti-rating-text span strong,.ti-widget.ti-goog .ti-rating-text span,.ti-widget.ti-goog .ti-footer,.ti-widget.ti-goog .ti-footer strong,.ti-widget.ti-goog .ti-footer span,.ti-widget.ti-goog .ti-footer strong a{font-size:14px;color:#000000}.ti-widget.ti-goog .ti-large-logo{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;height:50px;margin-bottom:0 !important}.ti-widget.ti-goog .ti-large-logo .ti-v-center{-ms-flex-item-align:center !important;align-self:center !important;text-align:center;-ms-flex-preferred-size:0;flex-basis:0;-ms-flex-positive:1;flex-grow:1;max-width:100%}.ti-widget.ti-goog .ti-large-logo img{margin:auto;padding:0 !important;display:block !important;position:relative}.ti-widget.ti-goog .nowrap{white-space:nowrap;display:inline-block;margin:0 2px}.ti-widget.ti-goog .nowrap:first-of-type{margin-left:0}.ti-widget.ti-goog .nowrap:last-of-type{margin-right:0}.ti-widget.ti-goog .ti-reviews-container-wrapper [class$=inner]>.ti-stars{margin-bottom:6px;margin-top:15px}.ti-widget.ti-goog .ti-reviews-container{position:relative}.ti-widget.ti-goog .ti-read-more{display:none}.ti-widget.ti-goog .ti-review-item{padding:0 8px;transition:transform 300ms ease-out}.ti-widget.ti-goog .ti-review-item .ti-read-more{font-weight:bold;white-space:nowrap;font-size:12.6px;color:#000000;text-decoration:none !important;display:block;text-align:center;padding:7px 0 0;text-align:left;transition:opacity 300ms ease-out}.ti-widget.ti-goog .ti-review-item .ti-read-more:hover{opacity:0.5}.ti-widget.ti-goog .ti-review-item [class$=inner]{border-radius:4px}.ti-widget.ti-goog .ti-review-item>[class$=inner]{border-style:solid !important;border-color:#ffffff !important;background:#ffffff !important;border-radius:4px !important;padding:15px !important;margin:0 !important;display:block}.ti-widget.ti-goog .ti-review-item .ti-polarity .ti-polarity-icon{position:relative;margin:0;text-indent:3px;display:inline-block;width:15px;height:15px}.ti-widget.ti-goog .ti-review-item .ti-recommendation .ti-recommendation-icon{position:relative;margin:0 5px;margin-bottom:-3px;text-indent:3px;display:inline-block;width:15px;height:15px}.ti-widget.ti-goog .ti-review-item .ti-recommendation .ti-recommendation-icon:first-child{margin-left:0}.ti-widget.ti-goog .ti-review-item .ti-recommendation .ti-recommendation-title{font-weight:700;font-size:13px !important;opacity:0.8;position:relative;top:-1px}.ti-widget.ti-goog .ti-review-item .ti-recommendation+.ti-dummy-stars{display:none}.ti-widget.ti-goog .ti-review-content{line-height:20.3px !important;font-size:14px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden !important}.ti-widget.ti-goog .ti-review-content .ti-stars{margin-bottom:5px}.ti-widget.ti-goog .ti-review-content strong{font-size:inherit;color:inherit}.ti-widget.ti-goog .ti-review-header{display:-ms-flexbox;display:flex;-ms-flex-wrap:nowrap;flex-wrap:nowrap;position:relative}.ti-widget.ti-goog .ti-review-header:after{content:"";display:block;width:20px;height:20px;position:absolute;right:0px;background-repeat:no-repeat;background-position:center center}.ti-widget.ti-goog .ti-highlight{padding:1px 2px;margin:0;box-decoration-break:clone;-webkit-box-decoration-break:clone;border-radius:1px;-webkit-border-radius:1px;-moz-border-radius:1px;background-color:transparent;background-image:linear-gradient(#fbe049, #fbe049);background-size:100% 19px;background-position:bottom;background-repeat:no-repeat;color:#000 !important}@media (max-width:479px){.ti-widget.ti-goog .ti-reviews-container-wrapper{margin-right:0;margin-left:0}.ti-widget.ti-goog .ti-review-item{padding:0}}@media (min-width:480px){.ti-widget.ti-goog .ti-review-item:hover{-webkit-transform:translate(0, -5px);-ms-transform:translate(0, -5px);transform:translate(0, -5px)}}.ti-widget.ti-goog ::-webkit-scrollbar{width:4px;border-radius:3px}.ti-widget.ti-goog ::-webkit-scrollbar-track{background:rgba(85, 85, 85, 0.1)}.ti-widget.ti-goog ::-webkit-scrollbar-thumb{background:rgba(85, 85, 85, 0.6)}.ti-widget.ti-goog ::-webkit-scrollbar-thumb:hover{background:#555}.ti-verified-review{display:inline-block;background:url('https://cdn.trustindex.io/assets/icon/trustindex-verified-icon.svg');background-size:contain;width:15px;height:15px;margin-left:7px;position:relative;z-index:2}.ti-verified-review .ti-verified-tooltip{color:#fff !important;background-color:#3B404B !important;padding:0 10px;border-radius:4px;font-size:11px !important;line-height:22px !important;font-weight:500;display:inline-block;position:absolute;left:0;margin-left:25px;top:-4px;white-space:nowrap;opacity:0;transition:all 0.3s ease-in-out}.ti-verified-review .ti-verified-tooltip:before{width:0;height:0;border-style:solid;border-width:5px 5px 5px 0;border-color:transparent #3B404B transparent transparent;content:"";position:absolute;left:-5px;top:50%;margin-top:-5px}.ti-verified-review:hover .ti-verified-tooltip{opacity:1;margin-left:20px}.ti-recommendation+.ti-verified-review{top:2px}.ti-widget .source-Google .ti-review-header:after{background-image:url("https://cdn.trustindex.io/assets/platform/Google/icon.svg");background-size:100% 100%}.ti-widget .source-Google .ti-star.f{background-image:url("https://cdn.trustindex.io/assets/platform/Google/star/f.svg")}.ti-widget .source-Google .ti-star.e{background-image:url("https://cdn.trustindex.io/assets/platform/Google/star/e.svg")}.ti-widget .source-Google .ti-star.h{background-image:url("https://cdn.trustindex.io/assets/platform/Google/star/h.svg")}.ti-widget .source-Google .ti-small-logo img{width:57px !important;height:18px !important;top:2px}.ti-widget .star-lg .ti-star{width:30px;height:30px}.ti-widget .ti-header .ti-star{width:20px;height:20px}.ti-widget.ti-goog.ti-no-logo .ti-review-header:after{background:none !important}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-star.f{background-image:url('https://cdn.trustindex.io/assets/platform/Trustindex/star/f.svg') !important}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-star.e{background-image:url('https://cdn.trustindex.io/assets/platform/Trustindex/star/e.svg') !important}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-star.h{background-image:url('https://cdn.trustindex.io/assets/platform/Trustindex/star/h.svg') !important}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-recommendation{display:none}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-recommendation+.ti-dummy-stars{display:inline}.ti-widget.ti-goog{overflow:visible !important}.ti-widget.ti-goog .ti-review-item>.ti-inner{border-top-width:2px !important;border-bottom-width:2px !important;border-left-width:2px !important;border-right-width:2px !important;background-color:white !important;backdrop-filter:blur(0px)}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/cyrillic-ext.woff2') format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/cyrillic.woff2') format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/greek-ext.woff2') format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/greek.woff2') format('woff2');unicode-range:U+0370-03FF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/vietnamese.woff2') format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/latin-ext.woff2') format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Open Sans Regular'), local('OpenSans-Regular'), url('https://cdn.trustindex.io/assets/fonts/opensans/latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/cyrillic-ext2.woff2') format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/cyrillic2.woff2') format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/greek-ext2.woff2') format('woff2');unicode-range:U+1F00-1FFF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/greek2.woff2') format('woff2');unicode-range:U+0370-03FF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/vietnamese2.woff2') format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/latin-ext2.woff2') format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF}@font-face{font-family:'Open Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Open Sans Bold'), local('OpenSans-Bold'), url('https://cdn.trustindex.io/assets/fonts/opensans/latin2.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}.ti-widget.ti-goog{width:100%;display:block;direction:ltr;overflow:visible;text-align:center;color:#000000;text-align:center}.ti-widget.ti-goog .ti-widget-container{margin:auto;display:inline-block}.ti-widget.ti-goog a{text-decoration:underline !important;transition:all 300ms ease-out;color:inherit}.ti-widget.ti-goog a.ti-header{text-decoration:none !important}.ti-widget.ti-goog a[href="#"],.ti-widget.ti-goog a:not([href]){text-decoration:none !important;pointer-events:none}.ti-widget.ti-goog:before,.ti-widget.ti-goog:after{content:none !important}.ti-widget.ti-goog strong,.ti-widget.ti-goog strong *{font-weight:700 !important;font-weight:bold !important}.ti-widget.ti-goog .ti-widget-container,.ti-widget.ti-goog .ti-widget-container *{font-family:'Open sans';font-size:13px;line-height:1.4em;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.ti-widget.ti-goog .ti-header{display:-ms-flexbox;display:flex;background-color:#ffffff;border:0 solid #ffffff;border-radius:4px;padding:15px;transition:all 0.3s ease-in-out;text-align:center;-ms-flex-wrap:wrap;flex-wrap:wrap;color:#000000;-ms-flex-pack:center !important;justify-content:center !important}@media (min-width:480px){.ti-widget.ti-goog .ti-header:hover{-webkit-transform:translate(0px, -5px);-ms-transform:translate(0px, -5px);transform:translate(0px, -5px)}}.ti-widget.ti-goog .ti-header .nowrap{white-space:nowrap;display:inline-block;margin:0 3px;color:#000000}.ti-widget.ti-goog .ti-header span,.ti-widget.ti-goog .ti-header strong{font-size:13px;color:#000000 !important}.ti-widget.ti-goog .ti-header span{height:20px}.ti-widget.ti-goog .ti-header .ti-stars{margin:1px 3px 0px 3px;display:inline-block}.ti-widget.ti-goog .ti-header .ti-stars .ti-star{width:16px;height:16px;display:inline-block;margin-right:1px;background-repeat:no-repeat}.ti-widget.ti-goog .ti-mob-row{display:-ms-flexbox;display:flex;-ms-flex-wrap:nowrap;flex-wrap:nowrap;white-space:nowrap}.ti-widget.ti-goog .ti-mob-row p:empty{display:none}.ti-widget.ti-goog a.ti-header:hover{background-color:#f2f2f2;border-color:#f2f2f2}.ti-widget.ti-goog .ti-small-logo{vertical-align:middle;display:inline;line-height:1em}.ti-widget.ti-goog .ti-small-logo img{display:inline;width:auto;position:relative;margin-left:3px}.ti-widget.ti-goog .ti-separator:before{margin-left:5px;margin-right:5px;position:relative;top:-1px;display:inline-block;font-weight:normal;content:' | ';height:15px;opacity:0.6}.ti-widget .source-Google .ti-review-header:after{background-image:url("https://cdn.trustindex.io/assets/platform/Google/icon.svg");background-size:100% 100%}.ti-widget .source-Google .ti-star.f{background-image:url("https://cdn.trustindex.io/assets/platform/Google/star/f.svg")}.ti-widget .source-Google .ti-star.e{background-image:url("https://cdn.trustindex.io/assets/platform/Google/star/e.svg")}.ti-widget .source-Google .ti-star.h{background-image:url("https://cdn.trustindex.io/assets/platform/Google/star/h.svg")}.ti-widget .source-Google .ti-small-logo img{width:57px !important;height:18px !important;top:2px}.ti-widget .star-lg .ti-star{width:30px;height:30px}.ti-widget .ti-header .ti-star{width:20px;height:20px}.ti-widget.ti-goog.ti-no-logo .ti-review-header:after{background:none !important}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-star.f{background-image:url('https://cdn.trustindex.io/assets/platform/Trustindex/star/f.svg') !important}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-star.e{background-image:url('https://cdn.trustindex.io/assets/platform/Trustindex/star/e.svg') !important}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-star.h{background-image:url('https://cdn.trustindex.io/assets/platform/Trustindex/star/h.svg') !important}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-recommendation{display:none}.ti-widget.ti-goog.ti-no-stars .ti-review-item .ti-recommendation+.ti-dummy-stars{display:inline}.ti-widget.ti-goog{overflow:visible !important}.ti-widget.ti-goog .ti-review-item>.ti-inner{border-top-width:2px !important;border-bottom-width:2px !important;border-left-width:2px !important;border-right-width:2px !important;background-color:white !important;backdrop-filter:blur(0px)}.ti-widget.ti-goog{text-align:left}.ti-widget.ti-goog .ti-widget-container{display:block}.ti-widget.ti-goog .ti-header{background-color:transparent !important;border-color:transparent !important}.ti-widget.ti-goog .ti-header strong,.ti-widget.ti-goog .ti-header span{color:#000000 !important;font-size:13px !important}.ti-widget.ti-goog .ti-review-item{margin-bottom:15px;padding:0 !important}.ti-widget.ti-goog .ti-review-content{overflow:inherit !important}.ti-widget.ti-goog .ti-review-content .ti-inner{padding:0px;font-size:14px;line-height:20.3px;display:-webkit-box;-webkit-box-orient:vertical;color:#000000 !important;max-height:81.2px !important;-webkit-line-clamp:4 !important;overflow:hidden !important}</style><link rel="icon" href="https://frizkazan.ru/wp-content/uploads/2021/08/cropped-main_logo1-32x32.png" sizes="32x32">
+<link rel="icon" href="https://frizkazan.ru/wp-content/uploads/2021/08/cropped-main_logo1-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://frizkazan.ru/wp-content/uploads/2021/08/cropped-main_logo1-180x180.png">
+<meta name="msapplication-TileImage" content="https://frizkazan.ru/wp-content/uploads/2021/08/cropped-main_logo1-270x270.png">
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript></head>
+<body data-rsssl="1" class="page-template-default page page-id-11 elementor-default elementor-kit-7">
+
+<style>
+.text-glow .elementor-heading-title{
+  color: #fff;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 40px #333DDA,
+    0 0 80px #333DDA,
+    0 0 90px #333DDA,
+    0 0 100px #333DDA,
+    0 0 150px #333DDA;
+}
+
+	.text-glow .elementor-text-editor{
+  color: #fff;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 40px #333DDA,
+    0 0 80px #333DDA,
+    0 0 90px #333DDA,
+    0 0 100px #333DDA,
+    0 0 150px #333DDA;
+
+}
+
+		.text-glow .elementor-headline-dynamic-letter{
+  color: #fff;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #333DDA,
+    0 0 15px #333DDA,
+    0 0 20px #333DDA;
+
+}
+	.text-glow .elementor-headline-animation-type-typing{
+  padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 10px;
+	padding-left: 10px;
+
+}
+	.text-glow .elementor-headline-dynamic-wrapper{
+	padding-right: 5px;
+	padding-left: 5px;
+
+}
+
+
+	.text-glow .elementor-headline-plain-text{
+  padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 0px;
+	padding-left: 0px;
+
+}
+
+</style>
+		<div data-elementor-type="header" data-elementor-id="40" class="elementor elementor-40 elementor-location-header" data-elementor-settings="[]">
+		<div class="elementor-section-wrap">
+					<section class="elementor-section elementor-top-section elementor-element elementor-element-d7995b5 elementor-section-full_width elementor-hidden-desktop elementor-hidden-tablet elementor-section-height-default elementor-section-height-default" data-id="d7995b5" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-455dfbd" data-id="455dfbd" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-e791fd9 elementor-widget elementor-widget-image" data-id="e791fd9" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="/">
+							<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20800%20659'%3E%3C/svg%3E" class="attachment-large size-large" alt="" data-lazy-srcset="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png 1024w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-600x494.png 600w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-300x247.png 300w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-768x632.png 768w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1.png 1251w" data-lazy-sizes="(max-width: 800px) 100vw, 800px" data-lazy-src="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png" width="800" height="659"><noscript><img width="800" height="659" src="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png" class="attachment-large size-large" alt="" srcset="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png 1024w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-600x494.png 600w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-300x247.png 300w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-768x632.png 768w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1.png 1251w" sizes="(max-width: 800px) 100vw, 800px" /></noscript>								</a>
+														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-c1a772a elementor-hidden-desktop" data-id="c1a772a" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-13c786e elementor-widget elementor-widget-heading" data-id="13c786e" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="/">"Фриз-Сервис"  сервисная компания</a></h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-6065e6a elementor-widget elementor-widget-heading" data-id="6065e6a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="tel:+79033887083">8 (903) 388-70-83</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-951f2a7 elementor-hidden-tablet elementor-hidden-phone" data-id="951f2a7" data-element_type="column">
+			<div class="elementor-column-wrap">
+							<div class="elementor-widget-wrap">
+								</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-9e57543 elementor-hidden-phone elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="9e57543" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;sticky&quot;:&quot;top&quot;,&quot;sticky_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;sticky_offset&quot;:0,&quot;sticky_effects_offset&quot;:0}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-854bed4" data-id="854bed4" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-32976c5 elementor-widget elementor-widget-image" data-id="32976c5" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="/">
+							<img src="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png" class="attachment-large size-large lazyloaded" alt="" sizes="(max-width: 800px) 100vw, 800px" srcset="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png 1024w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-600x494.png 600w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-300x247.png 300w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-768x632.png 768w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1.png 1251w" data-ll-status="loaded" width="800" height="659"><noscript><img width="800" height="659" src="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png" class="attachment-large size-large" alt="" srcset="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png 1024w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-600x494.png 600w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-300x247.png 300w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-768x632.png 768w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1.png 1251w" sizes="(max-width: 800px) 100vw, 800px" /></noscript>								</a>
+														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-de547a4" data-id="de547a4" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-47a017f elementor-widget elementor-widget-heading" data-id="47a017f" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="/">"Фриз-Сервис"  сервисная компания</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-3d8135e" data-id="3d8135e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-4656ee6 elementor-icon-list--layout-inline elementor-mobile-align-center elementor-hidden-phone elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="4656ee6" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items elementor-inline-items">
+							<li class="elementor-icon-list-item elementor-inline-item">
+					<a href="tel:+79033887083">						<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-phone"></i>						</span>
+										<span class="elementor-icon-list-text">+79033887083</span>
+											</a>
+									</li>
+						</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-15c7bcd" data-id="15c7bcd" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-41bd2c2 elementor-hidden-phone elementor-widget elementor-widget-button" data-id="41bd2c2" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjI1IiwidG9nZ2xlIjpmYWxzZX0%3D" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">Оставить заявку</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-220f09f elementor-section-full_width elementor-hidden-desktop elementor-hidden-tablet elementor-section-height-default elementor-section-height-default" data-id="220f09f" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;sticky&quot;:&quot;top&quot;,&quot;sticky_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;sticky_offset&quot;:0,&quot;sticky_effects_offset&quot;:0}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-00c18d4" data-id="00c18d4" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-4de38b8 elementor-nav-menu--stretch elementor-nav-menu__align-left elementor-nav-menu--dropdown-tablet elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="4de38b8" data-element_type="widget" data-settings="{&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;fas fa-caret-down&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav migration_allowed="1" migrated="0" role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-fade"><ul id="menu-1-4de38b8" class="elementor-nav-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1069"><a href="https://frizkazan.ru/" class="elementor-item">Главная</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d1%85%d0%be%d0%bb%d0%be%d0%b4%d0%b8%d0%bb%d1%8c%d0%bd%d0%b8%d0%ba%d0%be%d0%b2/" class="elementor-item">Холодильное оборудование</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d1%81%d0%b5%d1%80%d0%b2%d0%b8%d1%81-%d0%b7%d0%b0%d0%bf%d1%80%d0%b0%d0%b2%d0%ba%d0%b0-%d1%87%d0%b8%d1%81%d1%82%d0%ba%d0%b0-%d1%81%d0%bf%d0%bb%d0%b8%d1%82-%d1%81/" class="elementor-item">Кондиционирование, вентиляция</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1067"><a href="https://frizkazan.ru/%d1%8d%d0%bb%d0%b5%d0%ba%d1%82%d1%80%d0%be%d0%bc%d0%be%d0%bd%d1%82%d0%b0%d0%b6%d0%bd%d1%8b%d0%b5-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d1%8b/" class="elementor-item">Электромонтажные  работы</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-62"><a href="https://frizkazan.ru/%d0%be%d0%b1%d1%81%d0%bb%d1%83%d0%b6%d0%b8%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b8-%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%be%d0%b1%d0%be%d1%80%d1%83%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-%d0%b4/" class="elementor-item">Оборудование для общепита</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-64"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%bf%d0%be%d0%b4%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-%d0%be%d0%b1%d1%81%d0%bb%d1%83%d0%b6%d0%b8%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%bf%d0%b0%d1%80/" class="elementor-sub-item">Ремонт пароконвектоматов</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%b8-%d0%bf%d0%be%d0%b4%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-%d0%bf%d0%be%d1%81%d1%83%d0%b4%d0%be%d0%bc%d0%be%d0%b5%d1%87%d0%bd%d1%8b%d1%85-%d0%bc/" class="elementor-sub-item">Ремонт промышленных посудомоечных машин</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-63"><a href="https://frizkazan.ru/%d0%be%d0%b1%d1%81%d0%bb%d1%83%d0%b6%d0%b8%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b8-%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%bf%d1%80%d0%b0%d1%87%d0%b5%d1%87%d0%bd%d1%8b%d1%85-%d0%b8-%d1%85%d0%b8%d0%bc/" class="elementor-item">Прачечное оборудование</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-61"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d1%81%d1%83%d1%88%d0%b8%d0%bb%d1%8c%d0%bd%d1%8b%d1%85-%d0%bc%d0%b0%d1%88%d0%b8%d0%bd/" class="elementor-sub-item">Ремонт сушильных машин</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%b1%d1%8b%d1%82%d0%be%d0%b2%d1%8b%d1%85-%d0%b8-%d0%bf%d1%80%d0%be%d0%bc%d1%8b%d1%88%d0%bb%d0%b5%d0%bd%d0%bd%d1%8b%d1%85-%d1%81%d1%82%d0%b8%d1%80%d0%b0%d0%bb/" class="elementor-sub-item">Ремонт промышленных стиральных машин</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2938"><a href="https://securepayments.sberbank.ru/shortlink/aGvDdQ2x" class="elementor-item">Онлайн оплата</a></li>
+</ul></nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i class="eicon-menu-bar" aria-hidden="true" role="presentation"></i>
+			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true"><ul id="menu-2-4de38b8" class="elementor-nav-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1069"><a href="https://frizkazan.ru/" class="elementor-item" tabindex="-1">Главная</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d1%85%d0%be%d0%bb%d0%be%d0%b4%d0%b8%d0%bb%d1%8c%d0%bd%d0%b8%d0%ba%d0%be%d0%b2/" class="elementor-item" tabindex="-1">Холодильное оборудование</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d1%81%d0%b5%d1%80%d0%b2%d0%b8%d1%81-%d0%b7%d0%b0%d0%bf%d1%80%d0%b0%d0%b2%d0%ba%d0%b0-%d1%87%d0%b8%d1%81%d1%82%d0%ba%d0%b0-%d1%81%d0%bf%d0%bb%d0%b8%d1%82-%d1%81/" class="elementor-item" tabindex="-1">Кондиционирование, вентиляция</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1067"><a href="https://frizkazan.ru/%d1%8d%d0%bb%d0%b5%d0%ba%d1%82%d1%80%d0%be%d0%bc%d0%be%d0%bd%d1%82%d0%b0%d0%b6%d0%bd%d1%8b%d0%b5-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d1%8b/" class="elementor-item" tabindex="-1">Электромонтажные  работы</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-62"><a href="https://frizkazan.ru/%d0%be%d0%b1%d1%81%d0%bb%d1%83%d0%b6%d0%b8%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b8-%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%be%d0%b1%d0%be%d1%80%d1%83%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-%d0%b4/" class="elementor-item" tabindex="-1">Оборудование для общепита</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-64"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%bf%d0%be%d0%b4%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-%d0%be%d0%b1%d1%81%d0%bb%d1%83%d0%b6%d0%b8%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%bf%d0%b0%d1%80/" class="elementor-sub-item" tabindex="-1">Ремонт пароконвектоматов</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%b8-%d0%bf%d0%be%d0%b4%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-%d0%bf%d0%be%d1%81%d1%83%d0%b4%d0%be%d0%bc%d0%be%d0%b5%d1%87%d0%bd%d1%8b%d1%85-%d0%bc/" class="elementor-sub-item" tabindex="-1">Ремонт промышленных посудомоечных машин</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-63"><a href="https://frizkazan.ru/%d0%be%d0%b1%d1%81%d0%bb%d1%83%d0%b6%d0%b8%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b8-%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%bf%d1%80%d0%b0%d1%87%d0%b5%d1%87%d0%bd%d1%8b%d1%85-%d0%b8-%d1%85%d0%b8%d0%bc/" class="elementor-item" tabindex="-1">Прачечное оборудование</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-61"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d1%81%d1%83%d1%88%d0%b8%d0%bb%d1%8c%d0%bd%d1%8b%d1%85-%d0%bc%d0%b0%d1%88%d0%b8%d0%bd/" class="elementor-sub-item" tabindex="-1">Ремонт сушильных машин</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%b1%d1%8b%d1%82%d0%be%d0%b2%d1%8b%d1%85-%d0%b8-%d0%bf%d1%80%d0%be%d0%bc%d1%8b%d1%88%d0%bb%d0%b5%d0%bd%d0%bd%d1%8b%d1%85-%d1%81%d1%82%d0%b8%d1%80%d0%b0%d0%bb/" class="elementor-sub-item" tabindex="-1">Ремонт промышленных стиральных машин</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2938"><a href="https://securepayments.sberbank.ru/shortlink/aGvDdQ2x" class="elementor-item" tabindex="-1">Онлайн оплата</a></li>
+</ul></nav>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-21ac5c1" data-id="21ac5c1" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-1030bb2 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="1030bb2" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-58d97e5" data-id="58d97e5" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-53d38da elementor-view-default elementor-widget elementor-widget-icon" data-id="53d38da" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="tel:+79033887083">
+			<i aria-hidden="true" class="fas fa-mobile-alt"></i>			</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-de67472" data-id="de67472" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-5c81234 elementor-widget elementor-widget-heading" data-id="5c81234" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="tel:+79033887083">Позвонить</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-dd37709" data-id="dd37709" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-0ec837c elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="0ec837c" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-f50ae64" data-id="f50ae64" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-07b76df elementor-view-default elementor-widget elementor-widget-icon" data-id="07b76df" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjI1IiwidG9nZ2xlIjpmYWxzZX0%3D">
+			<i aria-hidden="true" class="far fa-comments"></i>			</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-bc2b2c9" data-id="bc2b2c9" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-46f147f elementor-widget elementor-widget-heading" data-id="46f147f" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjI1IiwidG9nZ2xlIjpmYWxzZX0%3D">Сообщение</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-7195b364 elementor-section-content-middle elementor-hidden-tablet elementor-hidden-phone elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7195b364" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-no">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-473806e" data-id="473806e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-88b5716 elementor-nav-menu--stretch elementor-hidden-tablet elementor-hidden-phone elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="88b5716" data-element_type="widget" data-settings="{&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;dropdown&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;fas fa-caret-down&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i class="eicon-menu-bar" aria-hidden="true" role="presentation"></i>
+			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true"><ul id="menu-2-88b5716" class="elementor-nav-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1069"><a href="https://frizkazan.ru/" class="elementor-item" tabindex="-1">Главная</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-68"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d1%85%d0%be%d0%bb%d0%be%d0%b4%d0%b8%d0%bb%d1%8c%d0%bd%d0%b8%d0%ba%d0%be%d0%b2/" class="elementor-item" tabindex="-1">Холодильное оборудование</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d1%81%d0%b5%d1%80%d0%b2%d0%b8%d1%81-%d0%b7%d0%b0%d0%bf%d1%80%d0%b0%d0%b2%d0%ba%d0%b0-%d1%87%d0%b8%d1%81%d1%82%d0%ba%d0%b0-%d1%81%d0%bf%d0%bb%d0%b8%d1%82-%d1%81/" class="elementor-item" tabindex="-1">Кондиционирование, вентиляция</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1067"><a href="https://frizkazan.ru/%d1%8d%d0%bb%d0%b5%d0%ba%d1%82%d1%80%d0%be%d0%bc%d0%be%d0%bd%d1%82%d0%b0%d0%b6%d0%bd%d1%8b%d0%b5-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d1%8b/" class="elementor-item" tabindex="-1">Электромонтажные  работы</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-62"><a href="https://frizkazan.ru/%d0%be%d0%b1%d1%81%d0%bb%d1%83%d0%b6%d0%b8%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b8-%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%be%d0%b1%d0%be%d1%80%d1%83%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-%d0%b4/" class="elementor-item" tabindex="-1">Оборудование для общепита</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-64"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%bf%d0%be%d0%b4%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-%d0%be%d0%b1%d1%81%d0%bb%d1%83%d0%b6%d0%b8%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%bf%d0%b0%d1%80/" class="elementor-sub-item" tabindex="-1">Ремонт пароконвектоматов</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%b8-%d0%bf%d0%be%d0%b4%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-%d0%bf%d0%be%d1%81%d1%83%d0%b4%d0%be%d0%bc%d0%be%d0%b5%d1%87%d0%bd%d1%8b%d1%85-%d0%bc/" class="elementor-sub-item" tabindex="-1">Ремонт промышленных посудомоечных машин</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-63"><a href="https://frizkazan.ru/%d0%be%d0%b1%d1%81%d0%bb%d1%83%d0%b6%d0%b8%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b8-%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%bf%d1%80%d0%b0%d1%87%d0%b5%d1%87%d0%bd%d1%8b%d1%85-%d0%b8-%d1%85%d0%b8%d0%bc/" class="elementor-item" tabindex="-1">Прачечное оборудование</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-61"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d1%81%d1%83%d1%88%d0%b8%d0%bb%d1%8c%d0%bd%d1%8b%d1%85-%d0%bc%d0%b0%d1%88%d0%b8%d0%bd/" class="elementor-sub-item" tabindex="-1">Ремонт сушильных машин</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-66"><a href="https://frizkazan.ru/%d1%80%d0%b5%d0%bc%d0%be%d0%bd%d1%82-%d0%b1%d1%8b%d1%82%d0%be%d0%b2%d1%8b%d1%85-%d0%b8-%d0%bf%d1%80%d0%be%d0%bc%d1%8b%d1%88%d0%bb%d0%b5%d0%bd%d0%bd%d1%8b%d1%85-%d1%81%d1%82%d0%b8%d1%80%d0%b0%d0%bb/" class="elementor-sub-item" tabindex="-1">Ремонт промышленных стиральных машин</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2938"><a href="https://securepayments.sberbank.ru/shortlink/aGvDdQ2x" class="elementor-item" tabindex="-1">Онлайн оплата</a></li>
+</ul></nav>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-5c6ec337" data-id="5c6ec337" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-07dbcc0 elementor-nav-menu__align-left elementor-nav-menu--stretch elementor-hidden-tablet elementor-hidden-phone elementor-nav-menu--dropdown-tablet elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="07dbcc0" data-element_type="widget" data-settings="{&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;fas fa-caret-down&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav migration_allowed="1" migrated="0" role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-background e--animation-fade"><ul id="menu-1-07dbcc0" class="elementor-nav-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1513"><a href="https://frizkazan.ru/" class="elementor-item">Главная</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1514"><a href="https://frizkazan.ru/%d1%81%d1%82%d0%b0%d1%82%d1%8c%d0%b8/" class="elementor-item">Статьи</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1515"><a href="https://frizkazan.ru/%d0%bd%d0%b0%d1%88%d0%b8-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d1%8b/" class="elementor-item">Наши работы</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2309"><a href="/о-нас/" class="elementor-item">О нас</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1733"><a href="#cont" class="elementor-item elementor-item-anchor">Контакты</a></li>
+</ul></nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i class="eicon-menu-bar" aria-hidden="true" role="presentation"></i>
+			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true"><ul id="menu-2-07dbcc0" class="elementor-nav-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1513"><a href="https://frizkazan.ru/" class="elementor-item" tabindex="-1">Главная</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1514"><a href="https://frizkazan.ru/%d1%81%d1%82%d0%b0%d1%82%d1%8c%d0%b8/" class="elementor-item" tabindex="-1">Статьи</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1515"><a href="https://frizkazan.ru/%d0%bd%d0%b0%d1%88%d0%b8-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d1%8b/" class="elementor-item" tabindex="-1">Наши работы</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2309"><a href="/о-нас/" class="elementor-item" tabindex="-1">О нас</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1733"><a href="#cont" class="elementor-item elementor-item-anchor" tabindex="-1">Контакты</a></li>
+</ul></nav>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				</div>
+		</div>
+		
+<main class="site-main post-11 page type-page status-publish hentry" role="main">
+			<header class="page-header">
+			<h1 class="entry-title">Политика конфиденциальности персональных данных</h1>		</header>
+		<div class="page-content">
+		
+<p>Настоящая Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в отношении всей информации, которую сайт&nbsp;<strong>Фриз-Сервис</strong>, (далее – Сайт) расположенный на доменном имени&nbsp;<strong>frizkazan.ru</strong>&nbsp;(а также его субдоменах), может получить о Пользователе во время использования сайта frizkazan.ru (а также его субдоменов), его программ и его продуктов.</p>
+
+
+
+<h2>1. Определение терминов</h2>
+
+
+
+<p><strong>1.1 В настоящей Политике конфиденциальности используются следующие термины:<strong>1.1.1. «Администрация сайта» (далее – Администрация) – уполномоченные сотрудники на управление сайтом&nbsp;Фриз-Холод, которые организуют и (или) осуществляют обработку персональных данных, а также определяет цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.1.1.2. «Персональные данные» – любая информация, относящаяся к прямо или косвенно определенному, или определяемому физическому лицу (субъекту персональных данных).1.1.3. «Обработка персональных данных» – любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных.1.1.4. «Конфиденциальность персональных данных» – обязательное для соблюдения Оператором или иным получившим доступ к персональным данным лицом требование не допускать их распространения без согласия субъекта персональных данных или наличия иного законного основания.1.1.5. «Сайт&nbsp;Фриз-Сервис» – это совокупность связанных между собой веб-страниц, размещенных в сети Интернет по уникальному адресу (URL):&nbsp;frizkazan.ru, а также его субдоменах.1.1.6. «Субдомены» – это страницы или совокупность страниц, расположенные на доменах третьего уровня, принадлежащие сайту Фриз-Холод, а также другие временные страницы, внизу который указана контактная информация Администрации1.1.5. «Пользователь сайта&nbsp;Фриз- <strong><strong>Сервис</strong></strong> &nbsp;» (далее Пользователь) – лицо, имеющее доступ к сайту&nbsp;Фриз-Сервис, посредством сети Интернет и использующее информацию, материалы и продукты сайта&nbsp;Фриз- <strong><strong>Сервис</strong></strong> .1.1.7. «Cookies» — небольшой фрагмент данных, отправленный веб-сервером и хранимый на компьютере пользователя, который веб-клиент или веб-браузер каждый раз пересылает веб-серверу в HTTP-запросе при попытке открыть страницу соответствующего сайта.1.1.8. «IP-адрес» — уникальный сетевой адрес узла в компьютерной сети, через который Пользователь получает доступ на Сайт.2. Общие положения2.1. Использование сайта Фриз- <strong><strong>Сервис</strong></strong>  Пользователем означает согласие с настоящей Политикой конфиденциальности и условиями обработки персональных данных Пользователя.2.2. В случае несогласия с условиями Политики конфиденциальности Пользователь должен прекратить использование сайта Фриз- <strong><strong>Сервис</strong></strong>  .2.3. Настоящая Политика конфиденциальности применяется к сайту Фриз- <strong><strong>Сервис</strong></strong> . Сайт не контролирует и не несет ответственность за сайты третьих лиц, на которые Пользователь может перейти по ссылкам, доступным на сайте Фриз- <strong><strong>Сервис</strong></strong> .2.4. Администрация не проверяет достоверность персональных данных, предоставляемых Пользователем.3. Предмет политики конфиденциальности3.1. Настоящая Политика конфиденциальности устанавливает обязательства Администрации по неразглашению и обеспечению режима защиты конфиденциальности персональных данных, которые Пользователь предоставляет по запросу Администрации при регистрации на сайте Фриз- <strong><strong>Сервис</strong></strong>  или при подписке на информационную e-mail рассылку.3.2. Персональные данные, разрешённые к обработке в рамках настоящей Политики конфиденциальности, предоставляются Пользователем путём заполнения форм на сайте Фриз- <strong><strong>Сервис</strong></strong>  и включают в себя следующую информацию:<br>3.2.1. фамилию, имя, отчество Пользователя;<br>3.2.2. контактный телефон Пользователя;<br>3.2.3. адрес электронной почты (e-mail)<br>3.2.4. место жительство Пользователя (при необходимости)<br>3.2.5. фотографию (при необходимости)3.3. Сайт защищает Данные, которые автоматически передаются при посещении страниц:<br>– IP адрес;<br>– информация из cookies;<br>– информация о браузере<br>– время доступа;<br>– реферер (адрес предыдущей страницы).3.3.1. Отключение cookies может повлечь невозможность доступа к частям сайта&nbsp;, требующим авторизации.3.3.2. Сайт осуществляет сбор статистики об IP-адресах своих посетителей. Данная информация используется с целью предотвращения, выявления и решения технических проблем.3.4. Любая иная персональная информация неоговоренная выше (история посещения, используемые браузеры, операционные системы и т.д.) подлежит надежному хранению и нераспространению, за исключением случаев, предусмотренных в п.п. 5.2. настоящей Политики конфиденциальности.4. Цели сбора персональной информации пользователя4.1. Персональные данные Пользователя Администрация может использовать в целях:<br>4.1.1. Идентификации Пользователя, зарегистрированного на сайте Фриз-Холод для его дальнейшей авторизации.<br>4.1.2. Предоставления Пользователю доступа к персонализированным данным сайта Фриз-Холод.<br>4.1.3. Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования сайта Фриз-Холод, обработки запросов и заявок от Пользователя.<br>4.1.4. Определения места нахождения Пользователя для обеспечения безопасности, предотвращения мошенничества.<br>4.1.5. Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.<br>4.1.6. Создания учетной записи для использования частей сайта Фриз-Холод, если Пользователь дал согласие на создание учетной записи.<br>4.1.7. Уведомления Пользователя по электронной почте.<br>4.1.8. Предоставления Пользователю эффективной технической поддержки при возникновении проблем, связанных с использованием сайта Фриз-Холод.<br>4.1.9. Предоставления Пользователю с его согласия специальных предложений, новостной рассылки и иных сведений от имени сайта Фриз-Холод.5. Способы и сроки обработки персональной информации5.1. Обработка персональных данных Пользователя осуществляется без ограничения срока, любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств.5.2. Персональные данные Пользователя могут быть переданы уполномоченным органам государственной власти Российской Федерации только по основаниям и в порядке, установленным законодательством Российской Федерации.5.3. При утрате или разглашении персональных данных Администрация вправе не информировать Пользователя об утрате или разглашении персональных данных.5.4. Администрация принимает необходимые организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.5.5. Администрация совместно с Пользователем принимает все необходимые меры по предотвращению убытков или иных отрицательных последствий, вызванных утратой или разглашением персональных данных Пользователя.6. Права и обязанности сторон6.1. Пользователь вправе:6.1.1. Принимать свободное решение о предоставлении своих персональных данных, необходимых для использования сайта Фриз-Холод, и давать согласие на их обработку.6.1.2. Обновить, дополнить предоставленную информацию о персональных данных в случае изменения данной информации.6.1.3. Пользователь имеет право на получение у Администрации информации, касающейся обработки его персональных данных, если такое право не ограничено в соответствии с федеральными законами. Пользователь вправе требовать от Администрации уточнения его персональных данных, их блокирования или уничтожения в случае, если персональные данные являются неполными, устаревшими, неточными, незаконно полученными или не являются необходимыми для заявленной цели обработки, а также принимать предусмотренные законом меры по защите своих прав. Для этого достаточно уведомить Администрацию по указаному E-mail адресу.6.2. Администрация обязана:6.2.1. Использовать полученную информацию исключительно для целей, указанных в п. 4 настоящей Политики конфиденциальности.6.2.2. Обеспечить хранение конфиденциальной информации в тайне, не разглашать без предварительного письменного разрешения Пользователя, а также не осуществлять продажу, обмен, опубликование, либо разглашение иными возможными способами переданных персональных данных Пользователя, за исключением п.п. 5.2. настоящей Политики Конфиденциальности.6.2.3. Принимать меры предосторожности для защиты конфиденциальности персональных данных Пользователя согласно порядку, обычно используемого для защиты такого рода информации в существующем деловом обороте.6.2.4. Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента обращения или запроса Пользователя, или его законного представителя либо уполномоченного органа по защите прав субъектов персональных данных на период проверки, в случае выявления недостоверных персональных данных или неправомерных действий.Ответственность сторон7.1. Администрация, не исполнившая свои обязательства, несёт ответственность за убытки, понесённые Пользователем в связи с неправомерным использованием персональных данных, в соответствии с законодательством Российской Федерации, за исключением случаев, предусмотренных п.п. 5.2. и 7.2. настоящей Политики Конфиденциальности.7.2. В случае утраты или разглашения Конфиденциальной информации Администрация не несёт ответственность, если данная конфиденциальная информация:<br>7.2.1. Стала публичным достоянием до её утраты или разглашения.<br>7.2.2. Была получена от третьей стороны до момента её получения Администрацией Ресурса.<br>7.2.3. Была разглашена с согласия Пользователя.7.3. Пользователь несет полную ответственность за соблюдение требований законодательства РФ, в том числе законов о рекламе, о защите авторских и смежных прав, об охране товарных знаков и знаков обслуживания, но не ограничиваясь перечисленным, включая полную ответственность за содержание и форму материалов.7.4. Пользователь признает, что ответственность за любую информацию (в том числе, но не ограничиваясь: файлы с данными, тексты и т. д.), к которой он может иметь доступ как к части сайта Фриз-Холод, несет лицо, предоставившее такую информацию.7.5. Пользователь соглашается, что информация, предоставленная ему как часть сайта Фриз-Холод, может являться объектом интеллектуальной собственности, права на который защищены и принадлежат другим Пользователям, партнерам или рекламодателям, которые размещают такую информацию на сайте Фриз-Холод.<br>Пользователь не вправе вносить изменения, передавать в аренду, передавать на условиях займа, продавать, распространять или создавать производные работы на основе такого Содержания (полностью или в части), за исключением случаев, когда такие действия были письменно прямо разрешены собственниками такого Содержания в соответствии с условиями отдельного соглашения.7.6. В отношение текстовых материалов (статей, публикаций, находящихся в свободном публичном доступе на сайте Фриз-Холод) допускается их распространение при условии, что будет дана ссылка на Сайт.7.7. Администрация не несет ответственности перед Пользователем за любой убыток или ущерб, понесенный Пользователем в результате удаления, сбоя или невозможности сохранения какого-либо Содержания и иных коммуникационных данных, содержащихся на сайте Фриз-Холод или передаваемых через него.7.8. Администрация не несет ответственности за любые прямые или косвенные убытки, произошедшие из-за: использования либо невозможности использования сайта, либо отдельных сервисов; несанкционированного доступа к коммуникациям Пользователя; заявления или поведение любого третьего лица на сайте.7.9. Администрация не несет ответственность за какую-либо информацию, размещенную пользователем на сайте Фриз-Холод, включая, но не ограничиваясь: информацию, защищенную авторским правом, без прямого согласия владельца авторского права.8. Разрешение споров8.1. До обращения в суд с иском по спорам, возникающим из отношений между Пользователем и Администрацией, обязательным является предъявление претензии (письменного предложения или предложения в электронном виде о добровольном урегулировании спора).8.2. Получатель претензии в течение 30 календарных дней со дня получения претензии, письменно или в электронном виде уведомляет заявителя претензии о результатах рассмотрения претензии.8.3. При не достижении соглашения спор будет передан на рассмотрение Арбитражного суда г. Казань.8.4. К настоящей Политике конфиденциальности и отношениям между Пользователем и Администрацией применяется действующее законодательство Российской Федерации.9. Дополнительные условия9.1. Администрация вправе вносить изменения в настоящую Политику конфиденциальности без согласия Пользователя.9.2. Новая Политика конфиденциальности вступает в силу с момента ее размещения на сайте Фриз- <strong><strong>Сервис</strong></strong> , если иное не предусмотрено новой редакцией Политики конфиденциальности.9.3. Все предложения или вопросы касательно настоящей Политики конфиденциальности следует сообщать по адресу: frizservice@yandex.ru9.4. Действующая Политика конфиденциальности размещена на странице по адресу https://frizkazan.ru/politika.html</strong></strong></p>
+		<div class="post-tags">
+					</div>
+			</div>
+
+	<section id="comments" class="comments-area">
+
+	
+
+
+</section><!-- .comments-area -->
+</main>
+
+			<div data-elementor-type="footer" data-elementor-id="1103" class="elementor elementor-1103 elementor-location-footer" data-elementor-settings="[]">
+		<div class="elementor-section-wrap">
+					<footer class="elementor-section elementor-top-section elementor-element elementor-element-1b6840f0 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="1b6840f0" data-element_type="section" id="cont" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;shape_divider_top&quot;:&quot;waves-pattern&quot;}">
+					<div class="elementor-shape elementor-shape-top" data-negative="false">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1047.1 3.7" preserveAspectRatio="xMidYMin slice">
+	<path class="elementor-shape-fill" d="M1047.1,0C557,0,8.9,0,0,0v1.6c0,0,0.6-1.5,2.7-0.3C3.9,2,6.1,4.1,8.3,3.5c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3C13.8,2,16,4.1,18.2,3.5c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3C23.6,2,25.9,4.1,28,3.5c0.9-0.2,1.5-1.9,1.5-1.9	c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3C63,2,65.3,4.1,67.4,3.5	C68.3,3.3,69,1.6,69,1.6s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3	C82.7,2,85,4.1,87.1,3.5c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3C92.6,2,94.8,4.1,97,3.5c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9	c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9c0,0,0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2	c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.7-0.3	c1.2,0.7,3.5,2.8,5.6,2.2c0.9-0.2,1.5-1.9,1.5-1.9s0.6-1.5,2.6-0.4V0z M2.5,1.2C2.5,1.2,2.5,1.2,2.5,1.2C2.5,1.2,2.5,1.2,2.5,1.2z M2.7,1.4c0.1,0,0.1,0.1,0.1,0.1C2.8,1.4,2.8,1.4,2.7,1.4z"></path>
+</svg>		</div>
+					<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-418ca70d" data-id="418ca70d" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-28cd6fc elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="28cd6fc" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-9a27182" data-id="9a27182" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-7e1a7b3 elementor-view-default elementor-widget elementor-widget-icon" data-id="7e1a7b3" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="/sitemap_index.xml">
+			<i aria-hidden="true" class="fas fa-sitemap"></i>			</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-7e353b9" data-id="7e353b9" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-f55206d elementor-widget elementor-widget-heading" data-id="f55206d" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="/sitemap_index.xml">Карта сайта</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-1aec21f elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="1aec21f" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-11c7932" data-id="11c7932" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-ebd901c elementor-view-default elementor-widget elementor-widget-icon" data-id="ebd901c" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="/%d0%bf%d0%be%d0%bb%d0%b8%d1%82%d0%b8%d0%ba%d0%b0-%d0%ba%d0%be%d0%bd%d1%84%d0%b8%d0%b4%d0%b5%d0%bd%d1%86%d0%b8%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%bf%d0%b5%d1%80%d1%81%d0%be%d0%bd%d0%b0/">
+			<i aria-hidden="true" class="far fa-file-alt"></i>			</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-dc01b24" data-id="dc01b24" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-6239a0a elementor-widget elementor-widget-heading" data-id="6239a0a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="/%d0%bf%d0%be%d0%bb%d0%b8%d1%82%d0%b8%d0%ba%d0%b0-%d0%ba%d0%be%d0%bd%d1%84%d0%b8%d0%b4%d0%b5%d0%bd%d1%86%d0%b8%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%bf%d0%b5%d1%80%d1%81%d0%be%d0%bd%d0%b0/">Политика конфиденциальности</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-38a91bf" data-id="38a91bf" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-8a3cfee elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="8a3cfee" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-30e122a" data-id="30e122a" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-cac316e elementor-view-default elementor-widget elementor-widget-icon" data-id="cac316e" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="tel:+79033887083">
+			<i aria-hidden="true" class="fas fa-mobile-alt"></i>			</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-4091c57" data-id="4091c57" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-e05f5ed elementor-widget elementor-widget-heading" data-id="e05f5ed" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="tel:+79033887083">+79033887083</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-d1a0779 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="d1a0779" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-c5cf6a3" data-id="c5cf6a3" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-2712246 elementor-view-default elementor-widget elementor-widget-icon" data-id="2712246" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="tel:+79033887083">
+			<i aria-hidden="true" class="far fa-envelope"></i>			</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-c4416a4" data-id="c4416a4" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-a8ab989 elementor-widget elementor-widget-heading" data-id="a8ab989" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="mailto:frizservice@yandex.ru">frizservice@yandex.ru</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-4cf12cd elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="4cf12cd" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-a81ab2b" data-id="a81ab2b" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-249d58a elementor-view-default elementor-widget elementor-widget-icon" data-id="249d58a" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="fas fa-map-marker-alt"></i>			</div>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-a0b69c5" data-id="a0b69c5" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-c3c2888 elementor-widget elementor-widget-heading" data-id="c3c2888" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default"><a href="https://yandex.ru/maps/?whatshere%5Bpoint%5D=49.246030,55.753635&amp;whatshere%5Bzoom%5D=17">Казань, ул. Салиха Батыева, д.13, 1007 офис</a></h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-7cce527 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="7cce527" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-65f07fa" data-id="65f07fa" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-de0edb8 elementor-view-default elementor-widget elementor-widget-icon" data-id="de0edb8" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="far fa-clock"></i>			</div>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-04aecf7" data-id="04aecf7" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-e710c47 elementor-widget elementor-widget-heading" data-id="e710c47" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Пн-Вс: 8:00 - 20:00</h2>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-276ddcb" data-id="276ddcb" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-5bccbe1 elementor-hidden-phone elementor-widget elementor-widget-image" data-id="5bccbe1" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+												<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20800%20659'%3E%3C/svg%3E" class="attachment-large size-large" alt="" data-lazy-srcset="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png 1024w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-600x494.png 600w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-300x247.png 300w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-768x632.png 768w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1.png 1251w" data-lazy-sizes="(max-width: 800px) 100vw, 800px" data-lazy-src="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png" width="800" height="659"><noscript><img width="800" height="659" src="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png" class="attachment-large size-large" alt="" srcset="https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-1024x843.png 1024w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-600x494.png 600w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-300x247.png 300w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1-768x632.png 768w, https://frizkazan.ru/wp-content/uploads/2021/08/main_logo1.png 1251w" sizes="(max-width: 800px) 100vw, 800px" /></noscript>														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</footer>
+				</div>
+		</div>
+		
+		<div data-elementor-type="popup" data-elementor-id="25" class="elementor elementor-25 elementor-location-popup" data-elementor-settings="{&quot;entrance_animation&quot;:&quot;fadeInLeft&quot;,&quot;entrance_animation_duration&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:1.2,&quot;sizes&quot;:[]},&quot;triggers&quot;:[],&quot;timing&quot;:[]}">
+		<div class="elementor-section-wrap">
+					<section class="elementor-section elementor-top-section elementor-element elementor-element-1264d914 elementor-section-height-full elementor-section-items-stretch elementor-section-content-middle elementor-section-boxed elementor-section-height-default" data-id="1264d914" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2f73c6a7" data-id="2f73c6a7" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-2dec2f0c elementor-widget elementor-widget-heading" data-id="2dec2f0c" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">ЗАКАЗАТЬ ЗВОНОК</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-9c9f4de eael-contact-form-align-default eael-contact-form-btn-align-default elementor-widget elementor-widget-eael-contact-form" data-id="9c9f4de" data-element_type="widget" data-widget_type="eael-contact-form.default">
+				<div class="elementor-widget-container">
+			
+
+			<div class="eael-contact-form-container">
+			<div role="form" class="wpcf7" id="wpcf7-f20-o1" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%BF%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0/#wpcf7-f20-o1" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="20">
+<input type="hidden" name="_wpcf7_version" value="5.4.2">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f20-o1">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<p><label> Ваше имя<br>
+    <span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span> </label></p>
+<p><label> Ваш телефон (обязательное поле)<br>
+<span class="wpcf7-form-control-wrap tel-642"><input type="tel" name="tel-642" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel" aria-required="true" aria-invalid="false"></span></label></p>
+<p><label> Ваш вопрос<br>
+<span class="wpcf7-form-control-wrap textarea-719"><textarea name="textarea-719" cols="60" rows="2" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false"></textarea></span> </label></p>
+<p><span class="wpcf7-form-control-wrap acceptance-515"><span class="wpcf7-form-control wpcf7-acceptance"><span class="wpcf7-list-item"><label><input type="checkbox" name="acceptance-515" value="1" aria-invalid="false"><span class="wpcf7-list-item-label">Согласен на обработку персональных данных</span></label></span></span></span></p>
+<p>[b24_trace]</p>
+<p><input type="submit" value="Отправить!" class="wpcf7-form-control wpcf7-submit"></p>
+<div class="wpcf7-response-output" aria-hidden="true"></div></form></div>		</div>
+	
+			</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				</div>
+		</div>
+				<div data-elementor-type="popup" data-elementor-id="1302" class="elementor elementor-1302 elementor-location-popup" data-elementor-settings="{&quot;entrance_animation&quot;:&quot;slideInRight&quot;,&quot;entrance_animation_mobile&quot;:&quot;fadeInUp&quot;,&quot;entrance_animation_duration&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:1.2,&quot;sizes&quot;:[]},&quot;timing&quot;:[]}">
+		<div class="elementor-section-wrap">
+					<section class="elementor-section elementor-top-section elementor-element elementor-element-2573c6d9 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="2573c6d9" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-56eab838" data-id="56eab838" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-da3a8cf elementor-grid-1 elementor-shape-rounded e-grid-align-center elementor-widget elementor-widget-social-icons" data-id="da3a8cf" data-element_type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-social-icons-wrapper elementor-grid">
+							<div class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-youtube elementor-repeater-item-c8af397" href="http://youtube.com/channel/UCwGYUQ7gcVYDUCE2SJGrwBQ" target="_blank">
+						<span class="elementor-screen-only">Youtube</span>
+						<i class="fab fa-youtube"></i>					</a>
+				</div>
+							<div class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-2c0db5f" href="http://www.instagram.com/friz_service/" target="_blank">
+						<span class="elementor-screen-only">Instagram</span>
+						<i class="fab fa-instagram"></i>					</a>
+				</div>
+							<div class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-vk elementor-repeater-item-3c05e85" href="http://vk.com/frizkazan" target="_blank">
+						<span class="elementor-screen-only">Vk</span>
+						<i class="fab fa-vk"></i>					</a>
+				</div>
+							<div class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-whatsapp elementor-repeater-item-0c2c75e" href="https://api.whatsapp.com/send?phone=+79033887083" target="_blank">
+						<span class="elementor-screen-only">Whatsapp</span>
+						<i class="fab fa-whatsapp"></i>					</a>
+				</div>
+					</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				</div>
+		</div>
+				<div data-elementor-type="popup" data-elementor-id="1295" class="elementor elementor-1295 elementor-location-popup" data-elementor-settings="{&quot;entrance_animation&quot;:&quot;slideInRight&quot;,&quot;prevent_close_on_background_click&quot;:&quot;yes&quot;,&quot;entrance_animation_duration&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:1.2,&quot;sizes&quot;:[]},&quot;triggers&quot;:{&quot;page_load&quot;:&quot;yes&quot;,&quot;page_load_delay&quot;:0},&quot;timing&quot;:[]}">
+		<div class="elementor-section-wrap">
+					<section class="elementor-section elementor-top-section elementor-element elementor-element-264f1acf elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="264f1acf" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-44a7fff0" data-id="44a7fff0" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-037e014 elementor-widget elementor-widget-heading" data-id="037e014" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Мы в соцсетях</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-d367660 elementor-view-stacked elementor-shape-circle elementor-widget elementor-widget-icon" data-id="d367660" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<a class="elementor-icon" href="#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjEzMDIiLCJ0b2dnbGUiOmZhbHNlfQ%3D%3D">
+			<i aria-hidden="true" class="far fa-comment-dots"></i>			</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				</div>
+		</div>
+		
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7" id="regenerator-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" id="wp-polyfill-js"></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/frizkazan.ru\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1666079070" id="contact-form-7-js" defer=""></script>
+<script type="text/javascript" id="trustindex-frontend-js-google-js-extra">
+/* <![CDATA[ */
+var WidgetCssgoogle = {"ajaxurl":"https:\/\/frizkazan.ru\/wp-admin\/admin-ajax.php","security":"05047536f6","action":"widget_css_google","selector":".ti-widget.ti-goog"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/cache/min/1/wp-content/plugins/wp-reviews-plugin-for-google/static/js/frontend.js?ver=1666079070" id="trustindex-frontend-js-google-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/frizkazan.ru","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" src="https://frizkazan.ru/wp-includes/js/wp-embed.min.js?ver=5.8" id="wp-embed-js" defer=""></script>
+<script type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.0.1" id="smartmenus-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.3.1" id="elementor-pro-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.2.5" id="elementor-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.2.5" id="elementor-frontend-modules-js" defer=""></script>
+<script type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min.js?ver=3.3.1" id="elementor-sticky-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/frizkazan.ru\/wp-admin\/admin-ajax.php","nonce":"af4dc61f66","urls":{"assets":"https:\/\/frizkazan.ru\/wp-content\/plugins\/elementor-pro\/assets\/"},"i18n":{"toc_no_headings_found":"No headings were found on this page."},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"google":{"title":"Google+","has_counter":true},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"ru_RU","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/frizkazan.ru\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.3.1" id="elementor-pro-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2" id="elementor-waypoints-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-includes/js/jquery/ui/core.min.js?ver=1.12.1" id="jquery-ui-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/swiper/swiper.min.js?ver=5.3.6" id="swiper-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/share-link/share-link.min.js?ver=3.2.5" id="share-link-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor/assets/lib/dialog/dialog.min.js?ver=4.8.1" id="elementor-dialog-js" defer=""></script>
+<script type="text/javascript" id="elementor-frontend-js-extra">
+/* <![CDATA[ */
+var mihdan_elementor_yandex_maps_config = {"plugin_url":"https:\/\/frizkazan.ru\/wp-content\/plugins\/mihdan-elementor-yandex-maps","api_key":"baa51aeb-42f7-4fde-bc0e-a515df428b1e"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u0432 Facebook","shareOnTwitter":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u0432 Twitter","pinIt":"\u0417\u0430\u043f\u0438\u043d\u0438\u0442\u044c","download":"\u0421\u043a\u0430\u0447\u0430\u0442\u044c","downloadImage":"\u0421\u043a\u0430\u0447\u0430\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435","fullscreen":"\u0412\u043e \u0432\u0435\u0441\u044c \u044d\u043a\u0440\u0430\u043d","zoom":"\u0423\u0432\u0435\u043b\u0438\u0447\u0435\u043d\u0438\u0435","share":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f","playVideo":"\u041f\u0440\u043e\u0438\u0433\u0440\u0430\u0442\u044c \u0432\u0438\u0434\u0435\u043e","previous":"\u041d\u0430\u0437\u0430\u0434","next":"\u0414\u0430\u043b\u0435\u0435","close":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"\u0422\u0435\u043b\u0435\u0444\u043e\u043d","value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"\u041c\u043e\u0431\u0438\u043b\u044c\u043d\u044b\u0435 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u043d\u044b\u0435","value":880,"direction":"max","is_enabled":false},"tablet":{"label":"\u041f\u043b\u0430\u043d\u0448\u0435\u0442","value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"\u041f\u043b\u0430\u043d\u0448\u0435\u0442 \u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u043d\u044b\u0439","value":1365,"direction":"max","is_enabled":false},"laptop":{"label":"\u041d\u043e\u0443\u0442\u0431\u0443\u043a","value":1620,"direction":"max","is_enabled":false},"widescreen":{"label":"\u0428\u0438\u0440\u043e\u043a\u043e\u0444\u043e\u0440\u043c\u0430\u0442\u043d\u044b\u0435","value":2400,"direction":"min","is_enabled":false}}},"version":"3.2.5","is_static":false,"experimentalFeatures":{"form-submissions":true,"video-playlist":true},"urls":{"assets":"https:\/\/frizkazan.ru\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":11,"title":"%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20%D0%BF%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D1%85%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%E2%80%93%20%D0%A4%D1%80%D0%B8%D0%B7-%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%81%20%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82%20%D1%85%D0%BE%D0%BB%D0%BE%D0%B4%D0%B8%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2","excerpt":"","featuredImage":false}};
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.2.5" id="elementor-frontend-js" defer=""></script>
+<script type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor-pro/assets/js/preloaded-elements-handlers.min.js?ver=3.3.1" id="pro-preloaded-elements-handlers-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://frizkazan.ru/wp-content/plugins/elementor/assets/js/preloaded-modules.min.js?ver=3.2.5" id="preloaded-modules-js" defer=""></script>
+
+<!--Start VDZ Yandex Metrika Plugin-->
+<!-- Yandex.Metrika counter --><script type="rocketlazyloadscript" data-rocket-type="text/javascript">(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");ym(20036485, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true, ecommerce:"dataLayer"});</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/20036485" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter --><!--START ADD EVENTS FROM CF7--><script type="rocketlazyloadscript" data-rocket-type="text/javascript">document.addEventListener( 'wpcf7submit', function( event ) {
+					  //event.detail.contactFormId;
+					  if(ym){
+				          //console.log(event.detail);
+						  ym(20036485, 'reachGoal', 'VDZ_SEND_CONTACT_FORM_7');
+						  ym(20036485, 'params', {
+						      page_url: window.location.href, 
+						      status: event.detail.status, 
+						      locale: event.detail.contactFormLocale, 
+						      form_id: event.detail.contactFormId, 
+						  });
+					  }
+					}, false );
+				</script><!--END ADD EVENTS FROM CF7-->
+<!--End VDZ Yandex Metrika Plugin-->
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://frizkazan.ru/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script>
+
+
+
+</body></html>

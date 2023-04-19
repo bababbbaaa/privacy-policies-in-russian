@@ -1,0 +1,438 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Доставка и оплата — интернет-магазин «Невский презент»</title>
+<meta name="description" content="Отделом доставки нашего интернет-магазина «Невский презент» предусмотрено три варианта доставки ваших заказов.">
+<meta name="keywords" content="доставка, доставка заказов интернет магазина">
+
+<link rel="stylesheet" href="data/nevsky/style.css?v=1" type="text/css" media="screen">
+
+<link rel="icon" href="data/nevsky/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="data/nevsky/favicon.ico" type="image/x-icon">
+<script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/watch.js"></script><script type="text/javascript">
+<!--
+var confirmUnsubscribe_act1 =  'Вы уверены, что хотите отменить регистрацию в магазине?';
+var validate_act1 =  'Пожалуйста, вводите email правильно';
+var validate_disc_act1 =  'Пожалуйста, введите Ваш псевдоним';
+var validate_disc_act2 =  'Пожалуйста, введите тему сообщения';
+var validate_search_act1 =  'Цена должна быть положительным числом';
+var doCL_act1 =  'В папке';
+var doCL_act2 =  'нет товаров';
+var doCL_act3 =  'Папка сравнения успешно очищена!';
+var renbox_act1 =  'Добавление в папку сравнения...';
+var renboxCL_act1 =  'Идёт очистка сравнения...';
+var doreset_act1 =  'Идет добавление товара в корзину...';
+var printcart_act1 =  'Идет добавление товара в корзину...';
+
+var doCart_act1 =  'В корзине';
+var doCart_act2 =  'товар(ов)';
+var doCart_act3 =  'На сумму';
+var doCart_act4 =  'Оформить заказ';
+var doCart_act5 =  'Товар успешно добавлен!';
+
+var doCpr_act1 =  'В папке';
+var doCpr_act2 =  'товар(ов)';
+var doCpr_act3 =  'Сравнить';
+var doCpr_act4 =  'Очистить';
+var doCpr_act5 =  'Товар успешно добавлен!';
+
+function doCart(req) {
+    if(document.getElementById('cart') && req["shopping_cart_value"] > 0){
+        document.getElementById('cart').innerHTML = '<b>' + doCart_act1 + ':<\/b>&nbsp;&nbsp;' + req["shopping_cart_items"] +
+        '&nbsp;' + doCart_act2 + '<div style="padding-top: 4px;"><b>' + doCart_act3 + ':<\/b>&nbsp;&nbsp;' + req["shopping_cart_value_shown"] +
+        '<\/div><div style="padding-top: 10px;" align="center"><table cellspacing="0" cellpadding="0" class="fsttab"><tr><td><table cellspacing="0" cellpadding="0" class="sectb"><tr><td><a href="cart.html">' + doCart_act4 + '<\/a><\/td><\/tr><\/table><\/td><\/tr><\/table><\/div>';
+        document.getElementById('axcrt').innerHTML = doCart_act5;
+    }}
+	
+
+function doCart2(req) {
+    if(document.getElementById('cart2') && req["shopping_cart_value"] > 0){
+        document.getElementById('cart2').innerHTML = '<a href="cart.html">Товаров: ' + req["shopping_cart_items"] + '<br>' + req["shopping_cart_value_shown"] + '</a>';
+        document.getElementById('axcrt').innerHTML = doCart_act5;
+    }}	
+
+function doCpr(req) {
+    if(document.getElementById('cprbox') && req["cpr_value"] > 0){
+        document.getElementById('cprbox').innerHTML = doCpr_act1 + '&nbsp;' + req["cpr_value"] +
+        '&nbsp;' + doCpr_act2 + '<div style="padding-top: 10px;" align="center"><table cellspacing="0" cellpadding="0"><tr><td><table cellspacing="0" cellpadding="0" class="fsttab"><tr><td><table cellspacing="0" cellpadding="0" class="sectb"><tr><td><a href="compare.html">' + doCpr_act3 + '<\/a><\/td><\/tr><\/table><\/td><\/tr><\/table><\/td><td>&nbsp;&nbsp;<\/td><td><table cellspacing="0" cellpadding="0" class="fsttab"><tr><td><table cellspacing="0" cellpadding="0" class="sectb"><tr><td><a href="#" onclick="doLoadcprCL(\'clear=yes\'); return false">' + doCpr_act4 + '<\/a><\/td><\/tr><\/table><\/td><\/tr><\/table><\/td><\/tr><\/table><\/div>';
+        document.getElementById('axcrt').innerHTML = doCpr_act5;
+    }}
+
+//-->
+</script>
+<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript" src="data/nevsky/jquery.maskedinput.min.js"></script>
+<script type="text/javascript" src="data/nevsky/user.js"></script>
+<link rel="alternate" href="rss.php" title="rss" type="application/rss+xml">
+
+<!--[if lte IE 6]>
+<style type="text/css">
+#axcrt {
+top: expression(document.documentElement.scrollTop + Math.ceil((document.documentElement.clientHeight-100)/2)+ "px") !important;
+left: expression(Math.ceil((document.documentElement.clientWidth-300)/2)+ "px") !important;
+}
+body {behavior:url("data/{$smarty.const.TPL}/csshover.htc");}
+.semafor{background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='data/nevsky/best.png', sizingMethod='image');}
+</style>
+<![endif]-->
+
+<style id="abu-collapse-styles" type="text/css"></style></head><body>
+<div class="dd" onclick="closeAll();return false" style="background:#000;z-index:9;opacity:0.7; position:fixed; width:105%; height:105%; display:none; left:-10px; top:-10px;"></div>
+<div class="open_error" style="position:fixed;z-index:10; background:#fff; border-radius:6px; width:350px; left:50%; top:20%; margin-left:-175px; padding:15px; display:none;">
+	<table width="100%">
+		<tbody><tr>
+			<td align="left"><h2 style="margin:0;padding:0;">Предзаказ</h2></td>
+			<td style="text-align:right;" align="right"><a href="#" onclick="closeAll();return false"><h2 style="margin:0;padding:0;">X</h2></a></td>
+		</tr>
+	</tbody></table>
+	<p>Запрос отправлен, спасибо за обращение!</p>
+</div>
+<div class="open_error2" style="position:fixed;z-index:10; background:#fff; border-radius:6px; width:350px; left:50%; top:20%; margin-left:-175px; padding:15px; display:none;">
+	<table width="100%">
+		<tbody><tr>
+			<td align="left"><h2 style="margin:0;padding:0;">Предзаказ</h2></td>
+			<td style="text-align:right;" align="right"><a href="#" onclick="closeAll();return false"><h2 style="margin:0;padding:0;">X</h2></a></td>
+		</tr>
+	</tbody></table>
+	<p>Во время отправки возникла ошибка. Пожалуйста, повторите попытку позже.</p>
+</div>
+<div class="open_window" style="position:fixed;z-index:10; background:#fff; border-radius:6px; width:350px; left:50%; top:20%; margin-left:-175px; padding:15px; display:none;">
+	<table width="100%">
+		<tbody><tr>
+			<td align="left"><h2 style="margin:0;padding:0;">Предзаказ</h2></td>
+			<td style="text-align:right;" align="right"><a href="#" onclick="closeAll();return false"><h2 style="margin:0;padding:0;">X</h2></a></td>
+		</tr>
+	</tbody></table>
+		<form action="" method="POST">
+		<p><span style="font-family: Verdana;">Заполните, пожалуйста, данную форму, и менеджер свяжется с Вами.<br>Обратите внимание: форма предзаказа позволяет забронировать товар, если он поступит на склад в указанные сроки. Поступление товара не гарантируется.</span></p>
+		<input type="text" name="pName" id="pname" placeholder="Ваше имя*" style="width:98%; height: 20px; padding:1%; float:left; margin: 5px 0; clear:both;">
+		<span id="valid2" style="clear:both"></span><br>
+		<input type="text" name="pMail" id="pemail" placeholder="E-mail*" style="width:98%; height: 20px; padding:1%; float:left; margin: 5px 0; clear:both;">
+		<span id="valid" style="clear:both"></span><br>
+		<input type="text" name="pPhone" class="pPhone" placeholder="Контактный телефон*" style="width:98%; height: 20px; padding:1%; float:left; margin: 5px 0; clear:both;">
+		<span id="valid3" style="clear:both"></span><br>
+		<input type="text" name="pActual" id="pactual" placeholder="Срок актуальности*" style="width:98%; height: 20px; padding:1%; float:left; margin: 5px 0; clear:both;">
+		<span id="valid4" style="clear:both"></span><br>
+		<textarea name="pText" placeholder="комментарии и пожелания" style="width:98%; height: 50px; padding:1%; float:left; margin: 5px 0; clear:both;"></textarea>
+		<input type="text" name="sendCode" placeholder="Введите код" id="protected" style="float: left; width:40%; padding: 5px; text-transform:uppercase;">
+		<input type="text" disabled="" value="101101" style="text-decoration: line-through; border: 0; background: #fff; font-size: 24px; float: left; width: 40%; margin-left: 10px; padding: 5px;">
+		<span id="valid5" style="clear:both"></span><br>
+		<input type="hidden" name="protect" id="testProtect" value="101101">
+		<input type="submit" id="sends" value="Отправить" style="cursor: pointer; width: 100%; height: 28px; border: 1px solid #dedede;">
+		<input type="hidden" name="pSend" value="yes">
+		<input type="hidden" name="pProductID" id="pProductID" value="">
+		<table>
+			<tbody><tr>
+				<td class="hdbot">
+					<input type="checkbox" id="check_pred" checked="checked"> Нажимая на кнопку «Отправить», Вы соглашаетесь на <a href="/page_4.html" target="_blank">обработку персональных данных</a> и подтверждаете ознакомление с <a href="/page_3.html" target="_blank">Политикой конфиденциальности</a>
+				</td>
+			</tr>
+		</tbody></table>
+		  
+		  <script>
+		  $('#check_pred').click(function(){
+			if($('#check_pred').prop('checked')) {
+				//alert('1');
+				$("#sends").removeAttr("disabled");
+			} else {
+				//alert('2');
+				$("#sends").attr("disabled", "disabled");
+				alert('Вы не приняли политику конфиденциальности и не дали согласие на обработку данных');
+			}
+		  })
+		  </script>
+		  
+	</form>
+</div>
+
+
+
+
+<div class="wrap">
+	<div class="head">
+		<div class="s_logo nom">
+			<a href="/"><img src="data/nevsky/images/logo1.png"></a>
+		</div>
+		<div class="logo">
+			<a href="/"><img src="data/nevsky/images/nevsky-prezent.png"></a>
+		</div>
+		<div class="l_head">
+			<div class="phone"><a href="tel:+79531632592"><img src="data/nevsky/images/tel_mobile.png"> +7 (953) 163-25-92</a></div>
+			<div class="nom">Подарки и сувениры на все случаи жизни!</div>
+		</div>
+	</div>
+	<div class="menu">
+		<ul class="main">
+			<li class="mob"><a href="#" id="mmenu"><img src="data/nevsky/images/white-menu-icon.png"></a>
+				<ul class="inner">
+					<li><a href="index.html">Главная</a></li>
+										<li><a href="price.html">Прайс-лист</a></li>
+					<li><a href="/page_2.html">О магазине</a></li>
+					<li><a href="/page_3.html">Доставка и оплата</a></li>
+					<li><a href="cart.html">Корзина</a></li>
+					<li><a href="feedback.html">Контакты</a></li>
+				</ul>
+			</li>
+		</ul>		
+		<div class="search">
+			<form action="index.php" method="get" name="formpoisk" id="formpoisk">
+								<input type="text" name="searchstring" class="pform" value="" placeholder="Поиск...">
+				<input type="button" onclick="document.getElementById('formpoisk').submit(); return false;">	
+			</form>
+		</div>
+		<div class="m_cart nop" id="cart2">
+			
+
+	Ваша корзина<br>
+	пуста
+  	
+		</div>
+	</div>
+	<div class="page">
+		<div class="lb">
+							
+
+
+
+<div class="box">
+	<h3>Каталог
+</h3>
+	<div style="padding: 10px;">
+	
+<div align="left">
+          
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_39.html"><img src="data/nevsky/arrow2.gif">Сувенирное холодное и огнестрельное оружие</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_7.html"><img src="data/nevsky/arrow2.gif">Модели кораблей и морская тематика</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_59.html"><img src="data/nevsky/arrow2.gif">Предметы интерьера дома и дачи</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_268.html"><img src="data/nevsky/arrow2.gif">Глобус бар</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_52.html"><img src="data/nevsky/arrow2.gif">Бизнес-подарки (сувениры для офиса и кабинета)</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_47.html"><img src="data/nevsky/arrow2.gif">Восточные сувениры, фэн-шуй</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_101.html"><img src="data/nevsky/arrow2.gif">Изделия из кожи</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_68.html"><img src="data/nevsky/arrow2.gif">Ретро</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_28.html"><img src="data/nevsky/arrow2.gif">Фигурки и статуэтки, куклы и скульптуры</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_94.html"><img src="data/nevsky/arrow2.gif">Фотография</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_100.html"><img src="data/nevsky/arrow2.gif">Хобби, отдых, развлечения</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_102.html"><img src="data/nevsky/arrow2.gif">Часы</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_96.html"><img src="data/nevsky/arrow2.gif">Шкатулки и сундуки</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_226.html"><img src="data/nevsky/arrow2.gif">Подарки и сувениры в ассортименте</a></td>
+    </tr>
+  </tbody></table>
+    <div style="background: url('data/nevsky/pix_horiz_b.jpg') repeat-x top left;"><img src="data/nevsky/pixel.gif" alt="" width="100%" height="1"></div>
+    
+        
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tbody><tr class="dtree">
+	              <td class="dtree"><a href="category_138.html"><img src="data/nevsky/arrow2.gif">Уценка и распродажа, скидки, акции</a></td>
+    </tr>
+  </tbody></table>
+    
+    </div>
+
+	</div>
+</div>	
+<div class="clear">&nbsp;</div>
+
+
+
+<div class="box">
+	<h3>Сейчас на сайте
+</h3>
+	<div style="padding: 10px;">
+	
+На данный момент<br>в магазине находится:<br><br>4 посетитель(ей)	</div>
+</div>	
+<div class="clear">&nbsp;</div>
+					</div>
+		<div class="content">
+			  			  
+
+			  			  
+<div class="box">
+<h3>Доставка и оплата
+</h3>
+<div class="padding new"><h2>Отделом доставки нашего <nobr>интернет-магазина</nobr> предусмотрено три основных варианта доставки ваших заказов:</h2> <h2>Доставка курьером</h2> <div style="text-align: justify;"><span style="font-family: Verdana;">Курьерская доставка по&nbsp;<nobr>Санкт-Петербургу</nobr> и&nbsp;Ленинградской области, по&nbsp;Москве и&nbsp;Московской области. Сроки курьерской доставки зависят от&nbsp;текущей загруженности и&nbsp;составляют от&nbsp;одного до&nbsp;трёх дней с&nbsp;момента подтверждения заказа. В&nbsp;некоторых случаях возможна доставка в&nbsp;день заказа. Курьерская доставка возможна как в&nbsp;будние, так и&nbsp;в&nbsp;выходные и&nbsp;праздничные дни.<br> <br> <strong>Доставка курьером по&nbsp;Москве и&nbsp;</strong><nobr><strong>Санкт-Петербургу</strong></nobr><strong> бесплатна при заказе на&nbsp;сумму от&nbsp;3000&nbsp;рублей</strong>*. Если стоимость заказанных товаров не&nbsp;превышает 2750&nbsp;рублей, доставка оплачивается отдельно и&nbsp;составляет 250&nbsp;рублей**.<br> <br> Стоимость курьерской доставки заказов по&nbsp;Московской и&nbsp;Ленинградской областям, а&nbsp;также в&nbsp;отдалённые районы*** и&nbsp;т. н. «новую Москву» обговаривается индивидуально и&nbsp;варьируется в&nbsp;зависимости от&nbsp;дальности и&nbsp;труднодоступности месторасположения покупателя. Оплата производится наличными курьеру после получения и&nbsp;проверки товара покупателем.</span></div> <h2>Почта России</h2> <div style="text-align: justify;"><span style="font-family: Verdana;">Данный способ подходит для доставки небольших, нетяжёлых товаров в&nbsp;отдаленные пригороды и&nbsp;регионы. Доставка до&nbsp;почтового отделения производится на&nbsp;следующий день после поступления оплаты, которая включает в&nbsp;себя стоимость заказанных товаров, стоимость услуг «Почты России» (рассчитывается индивидуально для каждого заказа в&nbsp;соответствии с&nbsp;тарифами «Почты России»), стоимость курьерской доставки до&nbsp;почтового отделения, если общая стоимость заказанных товаров не&nbsp;превышает 3000&nbsp;рублей**. В&nbsp;некоторых случаях возможна отправка посылки с&nbsp;наложенным платежом (получением и&nbsp;оплатой в&nbsp;почтовом отделении). Просим обратить внимание на&nbsp;тарифы «Почты России» в&nbsp;случае выбора наложенного платежа в&nbsp;качестве способа оплаты. Рассчитать стоимость услуг «Почты России», в том числе обработки наложенного платежа, можно <a href="http://postcalc.ru/" target="_blank">здесь</a>.<br> <br> Доставка в&nbsp;ваш регион может занимать от&nbsp;<nobr>4-х</nobr> до&nbsp;<nobr>30-ти</nobr> дней в&nbsp;связи с&nbsp;особенностями работы «Почты России». Вы&nbsp;получите уникальный цифровой идентификатор почтового отправления, с&nbsp;помощью которого сможете отслеживать состояние вашей посылки на&nbsp;сайте «Почты России» в&nbsp;разделе «Отслеживание почтовых отправлений». Если вы&nbsp;выбираете данный способ доставки, рекомендуем указывать в&nbsp;комментарии к&nbsp;заказу всю информацию, необходимую для осуществления почтового отправления (ФИО получателя, полный адрес с&nbsp;указанием почтового индекса).<br> </span></div> <h2>Транспортные компании</h2> <div style="text-align: justify;"><span style="font-family: Verdana;">Доставка транспортной компанией&nbsp;— отличный способ быстрой и&nbsp;экономичной доставки крупногабаритных товаров, например, глобус баров или больших моделей кораблей, напольных фонтанов или предметов мебели до&nbsp;филиала транспортной компании вашего города. Мы&nbsp;работаем со всеми основными ТК: «Деловые линии», «ПЭК», «КИТ», «ЖелдорАльянс» и др., а&nbsp;также с&nbsp;некоторыми курьерскими службами, которые могут доставить товар по&nbsp;указанному вами адресу. Если филиалы данных организаций отсутствуют в&nbsp;вашем городе, есть возможность подобрать <nobr>какую-либо</nobr> другую компанию. Сроки доставки зависят от&nbsp;отдаленности региона и&nbsp;составляют, как правило, от&nbsp;<nobr>2-х</nobr> до&nbsp;<nobr>14-ти</nobr> суток. Доставка до&nbsp;филиала транспортной компании производится на&nbsp;следующий день после поступления оплаты, которая включает в&nbsp;себя стоимость заказанных товаров, стоимость курьерской доставки до&nbsp;филиала транспортной компании, если общая стоимость заказанных товаров не&nbsp;превышает 3000&nbsp;рублей**. Вы&nbsp;получите цифровой или <nobr>буквенно-цифровой</nobr> идентификатор груза, с&nbsp;помощью которого сможете отслеживать стадию доставки на&nbsp;сайте или с&nbsp;помощью оператора транспортной компании по&nbsp;телефону. Стоимость услуг транспортной компании оплачивается покупателем либо непосредственно при получении груза, либо при осуществлении предоплаты.<br> <h2>Предзаказ</h2> <div style="text-align: justify;"><span style="font-family: Verdana;">Если товара, который вас заинтересовал, нет в&nbsp;наличии, вы&nbsp;можете оставить предварительный заказ, для чего необходимо заполнить небольшую форму. Если товар появится в&nbsp;наличии в&nbsp;течение срока актуальности запроса, то&nbsp;автоматически будет поставлен в&nbsp;резерв для вас. В&nbsp;любом случае с&nbsp;вами свяжется менеджер и&nbsp;расскажет о&nbsp;возможных перспективах поставки данного товара и&nbsp;приблизительных ценах.</span></div> <h2>Оплата</h2> <div style="text-align: justify;"><span style="font-family: Verdana;">Если покупатель физическое лицо и выбрана доставка курьером или отправка с наложенным платежом, оплата производится наличными в момент получения товара. При курьерской доставке или получении в «Boxberry» покупатель обязан проверить комплектацию заказа на предмет соответствия и отсутствия дефектов. <strong>При отказе от проверки товара претензии не принимаются</strong>.&nbsp;Если выбрана доставка транспортной компанией, взимается предоплата в размере 100% суммы заказа на расчётный счёт организации.<br> <br> Если покупатель юридическое лицо, оплата производстся путём перечисления средств на расчётный счёт организации.</span></div> <h2>Отказ от покупки и возврат</h2> <div style="text-align: justify;"><span style="font-family: Verdana;">При отказе от покупки по причине, не связанной с качеством товара или ошибочной комплектацией, покупатель оплачивает стоимость доставки в размере 450 руб. для Москвы и Санкт-Петербурга и на усмотрение курьерской службы для областей и крупногабаритных товаров в&nbsp;соответствии со статьёй 497 ГК&nbsp;РФ, при этом в случае отправки товара в регионы покупатель оплачивает услуги обратной пересылки товара.<br> <br> Претензии по качеству товара в случае выявления скрытого брака принимаются в течение 14-ти календарных дней после получения товара. Возврат товара также можно осуществить в течение 14-ти календарных дней.<br> <h2>Прочая информация</h2> Доставка каждого заказа обговаривается индивидуально, и&nbsp;если среди предложенных способов доставки отсутствует такой, который&nbsp;бы подошел покупателю, мы&nbsp;всегда готовы пойти навстречу и&nbsp;рассмотреть другие варианты. Также просим вас отнестись с&nbsp;пониманием к&nbsp;возможным трудностям при доставке, по&nbsp;возможности оставлять заказы заблаговременно, особенно если речь идет о&nbsp;<nobr>какой-либо</nobr> знаменательной дате, либо о&nbsp;доставке в&nbsp;период, предполагающий интенсивную работу (Новый год и&nbsp;Рождество, 23 февраля, 8&nbsp;марта, 9&nbsp;мая <nobr>и т. п.</nobr>) Со&nbsp;своей стороны мы&nbsp;гарантируем самое ответственное отношение к&nbsp;каждому заказу, бережное обращение с&nbsp;продукцией, стараемся не&nbsp;допустить получения покупателем бракованного или не&nbsp;соответствующего предложенному на&nbsp;сайте товара.<br> <br> Для оптовых и&nbsp;постоянных клиентов нашего интернет магазина предусмотрена выгодная система скидок, подробности вы&nbsp;можете узнать у&nbsp;наших операторов или написав нам через форму раздела «<a href="https://nevsky-prezent.ru/feedback.html">Контакты</a>». Также действуют интересные <a href="https://nevsky-prezent.ru/index.php">спецпредложения</a>, с&nbsp;которыми вы&nbsp;можете ознакомиться на&nbsp;главной странице нашего интернет магазина, а&nbsp;также в&nbsp;некоторых категориях товаров.<br> <br> В&nbsp;разделе «<a href="https://nevsky-prezent.ru/category_138.html" target="_blank">Распродажа</a>» вы&nbsp;найдёте сувениры, которые по&nbsp;разным причинам были уценены.<br> <br> Некоторые товары мы можем отправить в любой город, где есть представительство «Boxberry», с оплатой при получении в пункте выдачи заказов. Проверить, есть ли у вас ПВЗ, можно <a href="http://boxberry.ru/find_an_office/" target="_blank">здесь</a>.<br> <br> Обращаем ваше внимание на то, что данный интернет-сайт носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями Статьи 437 (2) Гражданского кодекса Российской Федерации. Для получения подробной информации о наличии и стоимости указанных товаров, пожалуйста, обращайтесь к менеджерам отдела клиентского обслуживания с помощью специальной формы связи или по указанным телефонам.<br> <br> </span></div> <hr> <br> ×Доставка товаров из категории «Напольные фонтаны» и «Водные стенки и пристенные водопады» бесплатна по Москве. Для Санкт-Петербурга и&nbsp;других регионов требуется оплатить услуги перевозки крупногабаритного груза транспортной компанией.<br> <br> **Если стоимость заказанных товаров составляет от&nbsp;2750 до&nbsp;3000&nbsp;руб., стоимость доставки высчитывается в&nbsp;виде разницы между значением 3000 и&nbsp;суммой заказа. Например:<br> —&nbsp;если заказанный товар стоит 2760&nbsp;руб., стоимость доставки составит 240&nbsp;руб.;<br> —&nbsp;если заказанный товар стоит 2990&nbsp;руб., стоимость доставки составит всего 10&nbsp;руб.<br> <br> ***Понятие «отдалённости» района определяет служба доставки по&nbsp;своему усмотрению. Как правило, в&nbsp;Москве отдалёнными считаются такие районы, как Солнцево и&nbsp;<nobr>Ново-Переделкино</nobr>, Капотня, Косино, Восточный, Северный, Куркино <nobr>и т. п.</nobr>; в&nbsp;<nobr>Санкт-Петербурге</nobr> Курортный, Кронштадский, Петродворцовый, Пушкинский и&nbsp;Колпинский районы, часть Красносельского района, а&nbsp;также муниципальные округа, промзоны и&nbsp;прочие места в&nbsp;городе, такие как Левашово, Юнтолово, <nobr>Лахта-Ольгино</nobr>, Лисий Нос, Турухтанные острова, Угольная гавань, территория торгового порта, Обухово, Ржевка, Канонерский остров, Авиагородок, Уткина Заводь и&nbsp;др.</span></div></div>
+</div>
+			  			  
+		</div>
+		<div class="rb">
+							
+
+
+
+<div class="box">
+	<h3>Корзина
+</h3>
+	<div style="padding: 10px;">
+	
+<div id="cart" align="center">
+  В корзине нет товаров</div>	</div>
+</div>	
+<div class="clear">&nbsp;</div>
+					</div>
+	</div>
+</div>	
+<div class="footer">
+	<div class="wrap">
+		© 2012 - <a href="/" class="copy">«Невский презент»</a><br>
+		<a href="/page_5.html" target="_blank">Обработка персональных данных</a>|<a href="/page_4.html" target="_blank">Политика конфиденциальности</a>
+		<div style="float: right;">
+			
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='//www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t38.12;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet' "+
+"border='0' width='31' height='31'><\/a>")
+//--></script><a href="//www.liveinternet.ru/click" target="_blank"><img src="//counter.yadro.ru/hit?t38.12;r;s1366*768*24;uhttps%3A//nevsky-prezent.ru/page_3.html;0.0669623216449653" alt="" title="LiveInternet" width="31" height="31" border="0"></a><!--/LiveInternet-->
+
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">//<![CDATA[
+(function(w,n,d,r,s){(new Image).src='//dc.c3.b3.a2.top.mail.ru/counter?id=2309226;js=13'+
+((r=d.referrer)?';r='+escape(r):'')+((s=w.screen)?';s='+s.width+'*'+s.height:'')+';_='+Math.random();})(window,navigator,document);//]]>
+</script><noscript><a href="//top.mail.ru/jump?from=2309226"><img src="//dc.c3.b3.a2.top.mail.ru/counter?id=2309226;js=na"
+border="0" height="1" width="1" alt="Рейтинг@Mail.ru" /></a></noscript>
+<!-- //Rating@Mail.ru counter -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter20160283 = new Ya.Metrika({id:20160283,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/20160283" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script defer="">
+	$('#subscription_form .fsttab').click(function () {
+		yaCounter20160283.reachGoal('novosti');return true;
+	});
+</script>
+
+
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">printcart();</script><div id="axcrt" class="bf" style="position: fixed; display: none; z-index: 100; visibility: hidden; left: 527px; top: 292px;" align="center">Идет добавление товара в корзину...</div>
+<script type="text/javascript" src="data/nevsky/script.js"></script>
+
+</body></html>

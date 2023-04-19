@@ -1,0 +1,1310 @@
+<html lang="ru"><head><meta charset="utf-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="theme-color" content="#041C2C">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="facebook-domain-verification" content="w3lmathbi2wufbb5nvus8u2mrggv6s">
+
+<title>Согласие на обработку персональных данных физических лиц tvoiekino.ru</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;family=Prata&amp;family=Roboto:wght@500&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;family=Prata&amp;family=Roboto:wght@500&amp;display=swap" media="all" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&#038;family=Prata&#038;family=Roboto:wght@500&#038;display=swap" /></noscript><link rel="stylesheet" href="https://tvoiekino.ru/wp-content/cache/min/1/6eecadf03a5e1dc3652180fac4477517.css" media="all" data-minify="1">
+
+<link rel="apple-touch-icon" sizes="57x57" href="/wp-content/themes/custom/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/wp-content/themes/custom/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/wp-content/themes/custom/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/wp-content/themes/custom/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/wp-content/themes/custom/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/wp-content/themes/custom/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/wp-content/themes/custom/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/wp-content/themes/custom/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/wp-content/themes/custom/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/wp-content/themes/custom/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/wp-content/themes/custom/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/wp-content/themes/custom/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/wp-content/themes/custom/favicon/favicon-16x16.png">
+<link rel="manifest" href="/wp-content/themes/custom/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/wp-content/themes/custom/favicon/ms-icon-144x144.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+
+
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-55220901-4', 'tvoiekino.ru');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+
+<!-- Facebook Pixel Code -->
+<script type="rocketlazyloadscript">
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1564347217198713');
+fbq('track', "PageView");
+fbq('track', 'Lead');</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1564347217198713&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+
+
+<!-- BEGIN Metadata added by the Add-Meta-Tags WordPress plugin -->
+<meta name="description" content="Пользователь, оставляя заявку на интернет-сайте tvoiekino.ru, принимает настоящее Согласие на обработку персональных данных (далее – Согласие).">
+<meta name="keywords" content="согласие на обработку персональных данных физических лиц,закон о персональных данных">
+<!-- END Metadata added by the Add-Meta-Tags WordPress plugin -->
+
+<meta name="robots" content="max-image-preview:large">
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	
+
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+
+
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://tvoiekino.ru/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" id="jquery-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://tvoiekino.ru/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js" defer=""></script>
+<script type="text/javascript" id="ct_public_functions-js-extra">
+/* <![CDATA[ */
+var ctPublicFunctions = {"_ajax_nonce":"b21e7d0ded","_rest_nonce":"f007a885ce","_ajax_url":"\/wp-admin\/admin-ajax.php","_rest_url":"https:\/\/tvoiekino.ru\/wp-json\/","data__cookies_type":"none","data__ajax_type":"rest","text__wait_for_decoding":"Wait for decoding...","cookiePrefix":""};
+var ctPublic = {"settings__forms__check_internal":"1","settings__forms__check_external":"1","blog_home":"https:\/\/tvoiekino.ru\/","pixel__setting":"0","pixel__enabled":"","pixel__url":null,"data__email_check_before_post":"1","data__cookies_type":"none","data__visible_fields_required":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-cfasync="false" data-pagespeed-no-defer="" src="https://tvoiekino.ru/wp-content/plugins/cleantalk-spam-protect/js/apbct-public-bundle.min.js?ver=5.182" id="ct_public_functions-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://tvoiekino.ru/wp-content/cache/min/1/wp-content/plugins/cr3ativ-portfolio/includes/js/filterable.js?ver=1676295626" id="creativ_filter_js-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://tvoiekino.ru/wp-json/"><link rel="alternate" type="application/json" href="https://tvoiekino.ru/wp-json/wp/v2/pages/3796"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://tvoiekino.ru/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://tvoiekino.ru/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 6.0.3">
+<link rel="canonical" href="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<link rel="shortlink" href="https://tvoiekino.ru/?p=3796">
+<link rel="alternate" type="application/json+oembed" href="https://tvoiekino.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftvoiekino.ru%2Fsoglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://tvoiekino.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftvoiekino.ru%2Fsoglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits%2F&amp;format=xml">
+		<style type="text/css" id="wp-custom-css">
+			.film__get {margin-top: -6rem}
+.film__desc {    text-align: justify; font-size: 1.5rem;}
+.how__cite { margin: 0 0 4rem;}
+
+
+body > div.app > main > div.movies > div > div.movies__tabs > div.movies__tabs-wrapper > div.movies__tabs-content.is-active > ul > li:nth-child(1) {display:none}		</style>
+		<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript></head>
+<body data-rsssl="1" class="is-page-dark">
+
+<script type="rocketlazyloadscript">
+(function(w, d, s, h, id) {
+ w.roistatProjectId = id; w.roistatHost = h;
+ var p = d.location.protocol == "https:" ? "https://" : "http://";
+ var u = /^.*roistat_visit=[^;]+(.*)?$/.test(d.cookie) ? "/dist/module.js" : "/api/site/1.0/"+id+"/init?referrer="+encodeURIComponent(d.location.href);
+ var js = d.createElement(s); js.charset="UTF-8"; js.async = 1; js.src = p+h+u; var js2 = d.getElementsByTagName(s)[0]; js2.parentNode.insertBefore(js, js2);
+})(window, document, 'script', 'cloud.roistat.com', 'df084465d4ff6f85117ddae689f20da6');
+</script>
+    <!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(75666694, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/75666694" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQCL79"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->	
+
+<!-- Sprite :: Start--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none"><symbol fill="none" viewBox="0 0 21 8" id="icon-arrow-faq" xmlns="http://www.w3.org/2000/svg"><path d="M20.354 4.354a.5.5 0 000-.708L17.172.464a.5.5 0 10-.707.708L19.293 4l-2.828 2.828a.5.5 0 10.707.708l3.182-3.182zM0 4.5h20v-1H0v1z" fill="#AF2123"></path></symbol><symbol fill="none" viewBox="0 0 21 8" id="icon-arrow-list" xmlns="http://www.w3.org/2000/svg"><path d="M20.354 4.354a.5.5 0 000-.708L17.172.464a.5.5 0 10-.707.708L19.293 4l-2.828 2.828a.5.5 0 10.707.708l3.182-3.182zM0 4.5h20v-1H0v1z" fill="#fff"></path></symbol><symbol fill="none" viewBox="0 0 21 8" id="icon-arrow-nav" xmlns="http://www.w3.org/2000/svg"><path d="M20.354 4.354a.5.5 0 000-.708L17.172.464a.5.5 0 10-.707.708L19.293 4l-2.828 2.828a.5.5 0 10.707.708l3.182-3.182zM0 4.5h20v-1H0v1z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 41 8" id="icon-arrow-right" xmlns="http://www.w3.org/2000/svg"><path d="M40.354 4.354a.5.5 0 000-.708L37.172.464a.5.5 0 10-.707.708L39.293 4l-2.828 2.828a.5.5 0 10.707.708l3.182-3.182zM0 4.5h40v-1H0v1z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 133 8" id="icon-arrow-right-large" xmlns="http://www.w3.org/2000/svg"><path d="M132.354 4.354a.5.5 0 000-.708L129.172.464a.501.501 0 00-.708.708L131.293 4l-2.829 2.828a.5.5 0 00.708.708l3.182-3.182zM0 4.5h132v-1H0v1z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 21 9" id="icon-arrow-right-small" xmlns="http://www.w3.org/2000/svg"><path d="M20.354 4.854a.5.5 0 000-.708L17.172.964a.5.5 0 10-.707.708L19.293 4.5l-2.828 2.828a.5.5 0 10.707.708l3.182-3.182zM0 5h20V4H0v1z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 8 16" id="icon-arrow-select" xmlns="http://www.w3.org/2000/svg"><path d="M3.646 15.354a.5.5 0 00.708 0l3.182-3.182a.5.5 0 10-.708-.708L4 14.293l-2.828-2.829a.5.5 0 10-.708.708l3.182 3.182zM3.5 0v15h1V0h-1z" fill="#F9F9F9"></path></symbol><symbol fill="none" viewBox="0 0 34 34" id="icon-call" xmlns="http://www.w3.org/2000/svg"><path d="M26.235 2.823a1.44 1.44 0 012.156-.134l2.198 2.199c1.026 1.028 1.404 2.484.956 3.761a37.331 37.331 0 01-8.857 14.042 37.334 37.334 0 01-14.042 8.857c-1.277.448-2.732.07-3.76-.957l-2.198-2.197a1.442 1.442 0 01.134-2.157l4.902-3.812a1.44 1.44 0 011.233-.259l4.653 1.162a3.707 3.707 0 003.521-.975l5.22-5.221a3.708 3.708 0 00.977-3.521l-1.165-4.654a1.441 1.441 0 01.26-1.232l3.812-4.902zm3.76-1.737a3.708 3.708 0 00-5.55.347l-3.812 4.9c-.699.899-.945 2.07-.67 3.175l1.163 4.653a1.441 1.441 0 01-.378 1.367l-5.221 5.22a1.44 1.44 0 01-1.368.379l-4.652-1.162a3.71 3.71 0 00-3.175.669l-4.9 3.812a3.707 3.707 0 00-.346 5.548l2.197 2.197c1.573 1.573 3.923 2.264 6.114 1.492a39.596 39.596 0 0014.895-9.392 39.596 39.596 0 009.392-14.894c.77-2.189.08-4.54-1.493-6.113l-2.198-2.198h.003z" fill="#fff"></path></symbol><symbol fill="none" viewBox="0 0 8 8" id="icon-checked" xmlns="http://www.w3.org/2000/svg"><path d="M1 4l2.5 2.5 4-5.5" stroke="currentCOlor"></path></symbol><symbol fill="none" viewBox="0 0 12 12" id="icon-close" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0)" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 0L0 12M0 0l12 12"></path></g></symbol><symbol fill="none" viewBox="0 0 66 66" id="icon-done" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M64.9 33c0 17.618-14.282 31.9-31.9 31.9S1.1 50.618 1.1 33 15.382 1.1 33 1.1 64.9 15.382 64.9 33zm1.1 0c0 18.225-14.775 33-33 33S0 51.225 0 33 14.775 0 33 0s33 14.775 33 33zM28.164 44.939l22.55-22.55-.778-.778-22.161 22.161-9.236-9.236-.778.778 9.625 9.625.389.389.389-.39z" fill="#AF2123"></path></symbol><symbol fill="none" viewBox="0 0 21 8" id="icon-nav-back" xmlns="http://www.w3.org/2000/svg"><path d="M.646 4.354a.5.5 0 010-.708L3.828.464a.5.5 0 11.708.708L1.707 4l2.829 2.828a.5.5 0 11-.708.708L.646 4.354zM21 4.5H1v-1h20v1z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 20 20" id="icon-nav-close" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 10a9 9 0 11-18 0 9 9 0 0118 0zm1 0c0 5.523-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0s10 4.477 10 10zm-6.844 3.864l-3.224-3.225-3.225 3.225L6 13.156l3.225-3.224L6 6.707 6.707 6l3.225 3.225L13.156 6l.708.707-3.225 3.225 3.225 3.224-.708.708z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 34 22" id="icon-nav-open" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 .846C0 .38.362 0 .81 0h32.38c.448 0 .81.379.81.846 0 .467-.362.846-.81.846H.81c-.448 0-.81-.379-.81-.846zM6.476 11c0-.467.363-.846.81-.846H33.19c.448 0 .81.379.81.846 0 .467-.362.846-.81.846H7.287c-.447 0-.81-.379-.81-.846zm5.667 9.308c-.447 0-.81.378-.81.846 0 .467.363.846.81.846H33.19c.448 0 .81-.379.81-.846 0-.468-.362-.846-.81-.846H12.143z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 65 8" id="icon-next" xmlns="http://www.w3.org/2000/svg"><path d="M64.354 4.354a.5.5 0 000-.708L61.172.464a.5.5 0 10-.707.708L63.293 4l-2.828 2.828a.5.5 0 10.707.708l3.182-3.182zM0 4.5h64v-1H0v1z" fill="#AF2123"></path></symbol><symbol fill="none" viewBox="0 0 41 8" id="icon-next-small" xmlns="http://www.w3.org/2000/svg"><path d="M40.354 4.354a.5.5 0 000-.708L37.172.464a.5.5 0 10-.707.708L39.293 4l-2.828 2.828a.5.5 0 10.707.708l3.182-3.182zM0 4.5h40v-1H0v1z" fill="#AF2123"></path></symbol><symbol fill="none" viewBox="0 0 100 100" id="icon-play" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" stroke="currentColor" stroke-width="4"></circle><path d="M75 50L37.5 71.65v-43.3L75 50z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 65 8" id="icon-prev" xmlns="http://www.w3.org/2000/svg"><path d="M.646 4.354a.5.5 0 010-.708L3.828.464a.5.5 0 11.708.708L1.707 4l2.829 2.828a.5.5 0 11-.708.708L.646 4.354zM65 4.5H1v-1h64v1z" fill="#AF2123"></path></symbol><symbol fill="none" viewBox="0 0 41 8" id="icon-prev-small" xmlns="http://www.w3.org/2000/svg"><path d="M.646 4.354a.5.5 0 010-.708L3.828.464a.5.5 0 11.708.708L1.707 4l2.829 2.828a.5.5 0 11-.708.708L.646 4.354zM41 4.5H1v-1h40v1z" fill="#AF2123"></path></symbol><symbol fill="none" viewBox="0 0 25 20" id="icon-quotes" xmlns="http://www.w3.org/2000/svg"><path d="M0 15.245c0-3.916 1.41-7.46 4.233-10.63C7.055 1.538 8.995 0 10.053 0c.97 0 1.455.093 1.455.28 0 .28-.926 1.538-2.778 3.776-1.94 2.33-2.91 4.15-2.91 5.454 0 1.4.617 2.658 1.852 3.777 1.146 1.119 1.72 1.958 1.72 2.517C9.392 18.601 8.069 20 5.423 20c-1.322 0-2.557-.466-3.703-1.399C.573 17.67 0 16.551 0 15.245zm13.36 0c0-3.916 1.455-7.46 4.365-10.63C20.547 1.538 22.619 0 23.942 0 24.647 0 25 .14 25 .42a65.347 65.347 0 01-1.323 1.678 34.196 34.196 0 00-1.72 1.958C20.107 6.2 19.18 7.972 19.18 9.37c0 1.492.617 2.797 1.852 3.916 1.146 1.119 1.72 1.958 1.72 2.517 0 2.797-1.28 4.196-3.837 4.196-1.322 0-2.557-.466-3.703-1.399-1.235-.932-1.852-2.05-1.852-3.356z" fill="#5A5757"></path></symbol><symbol fill="none" viewBox="0 0 40 40" id="icon-scrolltop" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39 20c0 10.493-8.507 19-19 19S1 30.493 1 20 9.507 1 20 1s19 8.507 19 19zm1 0c0 11.046-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0s20 8.954 20 20zm-13.354 2.354a.5.5 0 00.708-.708l-7.072-7.07a.5.5 0 00-.707 0l-7.07 7.07a.5.5 0 00.706.708l6.718-6.718 6.717 6.718z" fill="#AF2123"></path></symbol><symbol fill="none" viewBox="0 0 15 15" id="icon-search" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13 7A6 6 0 111 7a6 6 0 0112 0zm-1.41 5.286a7 7 0 11.696-.696.505.505 0 01.068.056l2 2a.5.5 0 01-.708.708l-2-2a.505.505 0 01-.057-.068z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 7 17" id="icon-social-fb" xmlns="http://www.w3.org/2000/svg"><path d="M1.885 16.2V8.976H.2V6.373h1.685V4.15C1.885 2.404 2.88.8 5.173.8 6.102.8 6.79.9 6.79.9l-.055 2.43s-.7-.007-1.464-.007c-.827 0-.96.432-.96 1.15v1.899H6.8l-.108 2.602H4.31V16.2H1.885z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 14 13" id="icon-social-instagram" xmlns="http://www.w3.org/2000/svg"><path d="M6.828 4.518c-1.15 0-2.09.89-2.09 1.98 0 1.091.94 1.981 2.09 1.981 1.152 0 2.091-.89 2.091-1.98 0-1.091-.94-1.981-2.09-1.981zm6.271 1.98c0-.82.008-1.633-.04-2.451-.049-.951-.278-1.795-1.012-2.49-.736-.698-1.625-.913-2.629-.96C8.552.553 7.694.56 6.83.56c-.866 0-1.724-.007-2.588.039-1.004.046-1.895.263-2.629.958-.736.697-.963 1.54-1.012 2.49C.553 4.868.561 5.68.561 6.5c0 .818-.008 1.633.04 2.452.049.95.278 1.795 1.012 2.49.736.697 1.625.912 2.629.958.866.047 1.724.04 2.588.04.866 0 1.724.007 2.588-.04 1.004-.046 1.895-.262 2.629-.958.736-.697.963-1.54 1.012-2.49.05-.82.04-1.632.04-2.452zM6.83 9.547c-1.78 0-3.218-1.36-3.218-3.047S5.048 3.45 6.828 3.45s3.217 1.361 3.217 3.048c0 1.686-1.436 3.047-3.217 3.047zm3.348-5.508c-.415 0-.751-.318-.751-.712 0-.394.336-.712.751-.712.416 0 .752.318.752.712a.68.68 0 01-.22.504.787.787 0 01-.532.208z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 9 15" id="icon-social-ok" xmlns="http://www.w3.org/2000/svg"><path d="M4.49 7.724C2.554 7.724.944 6.175.944 4.343c0-1.896 1.61-3.445 3.548-3.445 2.004 0 3.548 1.549 3.548 3.445a3.331 3.331 0 01-1.041 2.395 3.598 3.598 0 01-2.496.986h-.011zm0-4.834c-.82 0-1.444.663-1.444 1.454 0 .789.624 1.39 1.445 1.39.854 0 1.445-.601 1.445-1.39 0-.792-.591-1.454-1.445-1.454zm1.413 7.646l2.005 1.865c.394.41.394 1.01 0 1.39-.427.41-1.084.41-1.413 0l-2.004-1.896-1.938 1.896c-.197.19-.46.284-.756.284-.23 0-.492-.095-.723-.284-.394-.38-.394-.98 0-1.39l2.037-1.865a9.438 9.438 0 01-2.1-.884C.516 9.4.418 8.768.68 8.293c.33-.474.92-.6 1.446-.284.713.419 1.53.64 2.365.64.835 0 1.653-.221 2.365-.64.526-.316 1.15-.19 1.445.284.296.475.164 1.106-.296 1.36-.624.379-1.346.663-2.102.884z" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 17 11" id="icon-social-vk" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.047 1.52c.118-.361 0-.624-.52-.624H13.8c-.436 0-.637.23-.755.476 0 0-.889 2.105-2.13 3.47-.403.394-.587.526-.805.526-.118 0-.269-.132-.269-.493V1.504c0-.428-.134-.625-.503-.625H6.619c-.269 0-.436.197-.436.395 0 .41.62.51.688 1.66v2.5c0 .543-.1.642-.32.642-.586 0-2.012-2.12-2.868-4.537-.166-.48-.335-.66-.771-.66H1.167c-.503 0-.587.23-.587.477 0 .444.587 2.68 2.734 5.639C4.74 9.016 6.77 10.102 8.6 10.102c1.107 0 1.241-.246 1.241-.657v-1.53c0-.492.1-.575.453-.575.252 0 .705.132 1.728 1.102 1.174 1.15 1.376 1.677 2.03 1.677h1.728c.503 0 .738-.247.604-.724-.151-.476-.722-1.167-1.46-1.989-.402-.46-1.006-.97-1.19-1.216-.252-.33-.185-.46 0-.757-.018 0 2.096-2.926 2.314-3.914" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 20 20" id="icon-social-whatsapp" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.582 11.985c-.25-.124-1.473-.723-1.7-.806-.228-.082-.394-.123-.56.125-.166.247-.643.805-.788.97-.145.166-.29.186-.539.063-.248-.125-1.05-.386-2.001-1.23-.74-.656-1.24-1.467-1.384-1.715-.145-.248-.016-.382.109-.505.112-.111.248-.29.373-.434.125-.145.166-.248.249-.414.084-.165.042-.309-.021-.433-.062-.124-.56-1.343-.767-1.84-.202-.482-.407-.416-.56-.424a10.826 10.826 0 00-.477-.009.914.914 0 00-.663.31c-.229.248-.87.847-.87 2.066 0 1.219.89 2.396 1.015 2.562.125.165 1.754 2.666 4.25 3.739.595.255 1.058.408 1.419.52.596.19 1.139.163 1.567.1.477-.072 1.472-.6 1.68-1.178.207-.579.207-1.075.145-1.178-.062-.103-.228-.165-.477-.289zm-4.54 6.17h-.003a8.295 8.295 0 01-4.214-1.15l-.301-.177-3.133.818.836-3.04-.197-.312a8.189 8.189 0 01-1.265-4.383c.002-4.542 3.715-8.237 8.28-8.237 2.211 0 4.29.859 5.852 2.415a8.154 8.154 0 012.422 5.827c-.002 4.542-3.715 8.238-8.277 8.238zm7.044-15.248A9.896 9.896 0 0013.856.75 9.934 9.934 0 0010.041 0C4.553 0 .085 4.446.084 9.91a9.85 9.85 0 001.329 4.954L0 20l5.279-1.378a9.987 9.987 0 004.76 1.206h.003c5.488 0 9.956-4.445 9.958-9.91a9.812 9.812 0 00-2.914-7.011" fill="currentColor"></path></symbol><symbol fill="none" viewBox="0 0 16 11" id="icon-social-youtube" xmlns="http://www.w3.org/2000/svg"><path d="M15.103 1.868a1.885 1.885 0 00-.49-.844 1.906 1.906 0 00-.851-.49C12.577.22 7.83.22 7.83.22S3.083.219 1.9.533a1.903 1.903 0 00-.851.489 1.882 1.882 0 00-.491.845C.24 3.044.24 5.499.24 5.499s0 2.455.317 3.63c.175.65.69 1.16 1.342 1.334 1.184.316 5.931.316 5.931.316s4.747 0 5.932-.316a1.892 1.892 0 001.341-1.334c.317-1.175.317-3.63.317-3.63s0-2.455-.317-3.63zm-8.78 5.884V3.246l3.93 2.236-3.93 2.27z" fill="currentColor"></path></symbol><symbol viewBox="0 0 28 28" id="icon-social-zen" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M16.7 16.7c-2.2 2.27-2.36 5.1-2.55 11.3 5.78 0 9.77-.02 11.83-2.02 2-2.06 2.02-6.24 2.02-11.83-6.2.2-9.03.35-11.3 2.55M0 14.15c0 5.59.02 9.77 2.02 11.83 2.06 2 6.05 2.02 11.83 2.02-.2-6.2-.35-9.03-2.55-11.3-2.27-2.2-5.1-2.36-11.3-2.55M13.85 0C8.08 0 4.08.02 2.02 2.02.02 4.08 0 8.26 0 13.85c6.2-.2 9.03-.35 11.3-2.55 2.2-2.27 2.36-5.1 2.55-11.3m2.85 11.3C14.5 9.03 14.34 6.2 14.15 0c5.78 0 9.77.02 11.83 2.02 2 2.06 2.02 6.24 2.02 11.83-6.2-.2-9.03-.35-11.3-2.55"></path><path fill="#fff" d="M28 14.15v-.3c-6.2-.2-9.03-.35-11.3-2.55-2.2-2.27-2.36-5.1-2.55-11.3h-.3c-.2 6.2-.35 9.03-2.55 11.3-2.27 2.2-5.1 2.36-11.3 2.55v.3c6.2.2 9.03.35 11.3 2.55 2.2 2.27 2.36 5.1 2.55 11.3h.3c.2-6.2.35-9.03 2.55-11.3 2.27-2.2 5.1-2.36 11.3-2.55"></path></symbol><symbol viewBox="0 0 28 28" id="icon-social-zen-red" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M16.7 16.7c-2.2 2.27-2.36 5.1-2.55 11.3 5.78 0 9.77-.02 11.83-2.02 2-2.06 2.02-6.24 2.02-11.83-6.2.2-9.03.35-11.3 2.55M0 14.15c0 5.59.02 9.77 2.02 11.83 2.06 2 6.05 2.02 11.83 2.02-.2-6.2-.35-9.03-2.55-11.3-2.27-2.2-5.1-2.36-11.3-2.55M13.85 0C8.08 0 4.08.02 2.02 2.02.02 4.08 0 8.26 0 13.85c6.2-.2 9.03-.35 11.3-2.55 2.2-2.27 2.36-5.1 2.55-11.3m2.85 11.3C14.5 9.03 14.34 6.2 14.15 0c5.78 0 9.77.02 11.83 2.02 2 2.06 2.02 6.24 2.02 11.83-6.2-.2-9.03-.35-11.3-2.55"></path><path fill="#AF2123" d="M28 14.15v-.3c-6.2-.2-9.03-.35-11.3-2.55-2.2-2.27-2.36-5.1-2.55-11.3h-.3c-.2 6.2-.35 9.03-2.55 11.3-2.27 2.2-5.1 2.36-11.3 2.55v.3c6.2.2 9.03.35 11.3 2.55 2.2 2.27 2.36 5.1 2.55 11.3h.3c.2-6.2.35-9.03 2.55-11.3 2.27-2.2 5.1-2.36 11.3-2.55"></path></symbol><symbol fill="none" viewBox="0 0 66 66" id="icon-success" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M64.9 33c0 17.618-14.282 31.9-31.9 31.9S1.1 50.618 1.1 33 15.382 1.1 33 1.1 64.9 15.382 64.9 33zm1.1 0c0 18.225-14.775 33-33 33S0 51.225 0 33 14.775 0 33 0s33 14.775 33 33zM28.164 44.939l22.55-22.55-.778-.778-22.161 22.161-9.236-9.236-.778.778 9.625 9.625.389.389.389-.39z" fill="#AF2123"></path></symbol><symbol fill="none" viewBox="0 0 68 60" id="icon-video" xmlns="http://www.w3.org/2000/svg"><circle cx="35" cy="30" r="29" stroke="#fff" stroke-width="2"></circle><path d="M50 30L27.5 42.99V17.01L50 30z" fill="#fff"></path></symbol><symbol fill="none" viewBox="0 0 14 9" id="icon-views" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 0c4.375 0 7 4.5 7 4.5S11.375 9 7 9 0 4.5 0 4.5 2.625 0 7 0zM2.479 2.828c-.543.51-1.03 1.07-1.453 1.672.423.601.91 1.161 1.452 1.672C3.606 7.226 5.145 8.182 7 8.182c1.854 0 3.394-.956 4.522-2.01a10.99 10.99 0 001.282-1.436c.064-.086.12-.165.17-.236a10.924 10.924 0 00-1.452-1.672C10.394 1.774 8.855.818 7 .818c-1.855 0-3.395.956-4.521 2.01zm2.974-.356c.41-.383.967-.599 1.547-.599s1.137.216 1.547.6c.41.383.64.903.64 1.446a1.98 1.98 0 01-.64 1.446c-.41.384-.967.6-1.547.6s-1.137-.216-1.547-.6a1.98 1.98 0 01-.64-1.446c0-.543.23-1.063.64-1.447zm-.619-.578a2.773 2.773 0 00-.896 2.025c0 .76.322 1.488.896 2.025A3.174 3.174 0 007 6.782c.812 0 1.591-.301 2.166-.838a2.773 2.773 0 00.896-2.025c0-.76-.322-1.488-.896-2.025A3.174 3.174 0 007 1.055c-.812 0-1.591.302-2.166.839z" fill="#7E7E7E"></path></symbol><symbol viewBox="0 0 512 512" id="icon-zoom" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="M289.8 200.2h-49.3v-49.3c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v49.3h-49.3c-11.3 0-20.4 9.1-20.4 20.4 0 11.3 9.1 20.4 20.4 20.4h49.3v49.3c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V241h49.3c11.3 0 20.4-9.1 20.4-20.4 0-11.3-9.2-20.4-20.4-20.4z"></path><path d="M220.2 388.7C127.3 388.7 52 313.5 52 220.6S127.3 52.5 220.2 52.5s168.1 75.3 168.1 168.1S313 388.7 220.2 388.7zm274.8 78L381.7 353.4c29.7-36.1 47.6-82.4 47.6-132.8 0-115.5-93.6-209.2-209.2-209.2S11 105.1 11 220.6s93.6 209.2 209.2 209.2c50.4 0 96.6-17.8 132.7-47.5l113.3 113.3c5.2 5.3 21.1 7.9 28.9 0 7.9-8 7.9-20.9-.1-28.9z"></path></g></symbol></svg>
+<!-- Sprite :: End-->
+
+<div class="app">
+<div id="grid"></div>
+<!-- Header :: Start-->
+<header class="header">
+  <div class="container-fluid"><a class="header__logo" href="/"> 
+      <figure class="header__logo-image"><img src="/wp-content/themes/custom/images/logo-new.png" alt="" data-lazy-src="/wp-content/themes/custom/images/logo-new.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img src="/wp-content/themes/custom/images/logo-new.png" alt=""></noscript></figure>
+      <p class="header__logo-text"><b>ТvоёКино</b> видеостудия</p></a>
+    <nav class="header__nav">
+      <button class="header__nav-open"> 
+        <svg class="icon-nav-open">
+          <use xlink:href="#icon-nav-open"></use>
+        </svg>
+      </button>
+      <div class="header__nav-offcanvas"> 
+        <button class="header__nav-close"> 
+          <svg class="icon-nav-close">
+            <use xlink:href="#icon-nav-close"></use>
+          </svg>
+        </button>
+        <figure class="header__nav-logo"> <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="/wp-content/themes/custom/images/logo-new.png"><noscript><img src="/wp-content/themes/custom/images/logo-new.png" alt=""></noscript></figure>
+        <ul id="menu-glavnoe-menyu" class="header__nav-menu"><li><a class="header__nav-link" href="#">О нас <svg class="icon-arrow-right-small"><use xlink:href="#icon-arrow-right-small"></use></svg></a><div class="header__nav-dropdown"><button class="header__nav-back"><svg class="icon-nav-back"><use xlink:href="#icon-nav-back"></use></svg></button>
+<ul class="header__nav-submenu">
+	<li><a class="header__nav-sublink" href="https://tvoiekino.ru/about/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Обо мне</a></li>
+	<li><a class="header__nav-sublink" href="https://tvoiekino.ru/komanda/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Команда</a></li>
+</ul>
+</div></li>
+<li><a class="header__nav-link" href="https://tvoiekino.ru/services/">Услуги <svg class="icon-arrow-right-small"><use xlink:href="#icon-arrow-right-small"></use></svg></a><div class="header__nav-dropdown"><button class="header__nav-back"><svg class="icon-nav-back"><use xlink:href="#icon-nav-back"></use></svg></button>
+<ul class="header__nav-submenu">
+	<li><a class="header__nav-sublink" href="#"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Поздравительные фильмы</a><div class="header__nav-dropdown"><button class="header__nav-back"><svg class="icon-nav-back"><use xlink:href="#icon-nav-back"></use></svg></button>
+	<ul class="header__nav-submenu">
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/pozdravitelnij-film/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Поздравительный фильм</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/postanovochniy-film/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Игровой фильм</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/biograficheskie-filmi/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Биографический фильм</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/muzykalnye-klipy/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Музыкальный клип</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/viezdnaya-kinostudia/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Выездная киностудия на мероприятие</a></li>
+	</ul>
+</div></li>
+	<li><a class="header__nav-sublink" href="#"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Детские фильмы</a><div class="header__nav-dropdown"><button class="header__nav-back"><svg class="icon-nav-back"><use xlink:href="#icon-nav-back"></use></svg></button>
+	<ul class="header__nav-submenu">
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/biograficheskiy-detskiy-film/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Биографический детский фильм</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/postanovochniy-detskiy-film/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Игровой детский фильм</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/videosyemka-detskogo-prazdnika/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Видеосъёмка детского праздника</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/viezdnaya-detskaya-kinostudia/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Выездная детская киностудия</a></li>
+	</ul>
+</div></li>
+	<li><a class="header__nav-sublink" href="#"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Фильмы школьникам</a><div class="header__nav-dropdown"><button class="header__nav-back"><svg class="icon-nav-back"><use xlink:href="#icon-nav-back"></use></svg></button>
+	<ul class="header__nav-submenu">
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/documentalniy-film-o-klasse/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Фильмы выпускникам</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/videosyemka-vipusknogo/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Видеосъёмка выпускного</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/shkolnie-kinoekskursii/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Детская экскурсия со съёмками в кино</a></li>
+	</ul>
+</div></li>
+	<li><a class="header__nav-sublink" href="#"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Свадебный фильм</a><div class="header__nav-dropdown"><button class="header__nav-back"><svg class="icon-nav-back"><use xlink:href="#icon-nav-back"></use></svg></button>
+	<ul class="header__nav-submenu">
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/film-k-svadbe/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Фильм к свадьбе</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/love-story/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Свадебная видеосъёмка Love Story</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/svadebnyj-film/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Видеосъёмка свадьбы</a></li>
+	</ul>
+</div></li>
+	<li><a class="header__nav-sublink" href="#"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Семейные фильмы</a><div class="header__nav-dropdown"><button class="header__nav-back"><svg class="icon-nav-back"><use xlink:href="#icon-nav-back"></use></svg></button>
+	<ul class="header__nav-submenu">
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/film-pamyati/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Фильм памяти</a></li>
+		<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/videosemka-meropriyatiy/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Видеосъёмка мероприятий</a></li>
+	</ul>
+</div></li>
+	<li><a class="header__nav-sublink" href="https://tvoiekino.ru/services/podarochnye-sertifikaty-2/"><svg class="icon-arrow-nav"><use xlink:href="#icon-arrow-nav"></use></svg>Подарочный сертификат</a></li>
+</ul>
+</div></li>
+<li><a class="header__nav-link" href="https://tvoiekino.ru/faq/">ЧаВо</a></li>
+<li><a class="header__nav-link" href="https://tvoiekino.ru/testimonials/">Отзывы</a></li>
+<li><a class="header__nav-link" href="https://tvoiekino.ru/blog/">Блог</a></li>
+<li><a class="header__nav-link" href="https://tvoiekino.ru/contacts/">Контакты</a></li>
+</ul>        <div class="header__nav-group">
+          <div class="row">
+            <div class="col col-md-12">
+              <p class="header__nav-call"><a class="header__nav-call-phone" href="tel:+74993482360">+7 (499) 348-23-60</a><a class="header__nav-call-btn" href="#callOrder" data-fancybox="">Заказать звонок
+                  <svg class="icon-arrow-right-small">
+                    <use xlink:href="#icon-arrow-right-small"></use>
+                  </svg></a></p>
+            </div>
+            <div class="col-auto col-md-12"> 
+              <ul class="header__nav-social"> 
+                <li> <a class="header__nav-social-link" href="http://vk.com/tvoiekino">
+                    <svg class="icon-social-vk">
+                      <use xlink:href="#icon-social-vk"></use>
+                    </svg></a></li>
+                <li> <a class="header__nav-social-link" href="https://www.youtube.com/user/Tvoiekino/">
+                    <svg class="icon-social-youtube">
+                      <use xlink:href="#icon-social-youtube"></use>
+                    </svg></a></li>
+				  <li> <a class="header__nav-social-link" href="https://instagram.com/tvoiekino/">
+                   <svg class="icon-social-instagram">
+                     <use xlink:href="#icon-social-instagram"></use>
+                   </svg></a></li>
+                <li> <a class="header__nav-social-link" href="https://zen.yandex.ru/id/5e83aa271a056b3af3daf7b6">
+                    <svg class="icon-social-zen">
+                      <use xlink:href="#icon-social-zen"></use>
+                    </svg></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <p class="header__call"><a class="header__call-phone roistatphone" href="tel:+74993482360">+7 (499) 348-23-60</a><a class="header__call-btn" href="#callOrder" data-fancybox="">Заказать звонок
+        <svg class="icon-arrow-right-small">
+          <use xlink:href="#icon-arrow-right-small"></use>
+        </svg></a></p>
+  </div>
+</header>
+<!-- Header :: End-->
+<!-- Main :: Start-->
+<main class="main">
+
+
+<!-- Breadcrumbs :: Start-->
+<div class="breadcrumbs"> 
+  <div class="container-fluid">
+    <ul class="breadcrumbs__menu"> 
+      <li><a class="breadcrumbs__link" href="/">Главная</a></li>
+      <li><span class="breadcrumbs__link is-active">Согласие на обработку персональных данных физических лиц</span></li>
+    </ul>
+  </div>
+</div>
+<!-- Breadcrumbs :: End-->
+
+<!-- Wysiwyg :: Start-->
+<div class="ui-wysiwyg" style="padding: 0 0 70px;">
+  <div class="container-fluid">
+    <h1>Согласие на обработку персональных данных физических лиц</h1>
+    <p>Пользователь, оставляя заявку на интернет-сайте https://tvoiekino.ru, принимает настоящее Согласие на обработку персональных данных (далее – Согласие). Действуя свободно, своей волей и в своем интересе, а также подтверждая свою дееспособность, Пользователь дает свое согласие Индивидуальному предпринимателю Кашицыной Олеси Александровной (ИНН 770501529769), почтовый адрес 115172, г. Москва, Новоспасский пер, дом № 3, корпус 1, кв. 30, на обработку своих персональных данных со следующими условиями:</p>
+<ol>
+<li>Данное Согласие дается на обработку персональных данных, как без использования средств автоматизации, так и с их использованием.</li>
+<li>Согласие дается на обработку следующих моих персональных данных:<br>
+ 2.1. Персональные данные, не являющиеся специальными или биометрическими: номера контактных телефонов; адреса электронной почты; место работы и занимаемая должность; пользовательские данные (сведения о местоположении; тип и версия ОС; тип и версия Браузера; тип устройства и разрешение его экрана; источник откуда пришел на сайт пользователь; с какого сайта или по какой рекламе; язык ОС и Браузера; какие страницы открывает и на какие кнопки нажимает пользователь; ip-адрес.</li>
+<li>Персональные данные не являются общедоступными.</li>
+<li>Цель обработки персональных данных: обработка входящих запросов физических лиц с целью оказания консультирования; аналитики действий физического лица на веб-сайте и функционирования веб-сайта; проведение рекламных и новостных рассылок.</li>
+<li>Основанием для обработки персональных данных является: ст. 24 Конституции Российской Федерации; ст.6 Федерального закона №152-ФЗ «О персональных данных»; настоящее согласие на обработку персональных данных.</li>
+<li>В ходе обработки с персональными данными будут совершены следующие действия: сбор; запись; систематизация; накопление; хранение; уточнение (обновление, изменение); извлечение; использование; передача (распространение, предоставление, доступ); блокирование; удаление; уничтожение.</li>
+<li>Обработка персональных данных может быть прекращена по запросу субъекта персональных данных. Хранение персональных данных, зафиксированных на бумажных носителях осуществляется согласно Федеральному закону №125-ФЗ «Об архивном деле в Российской Федерации» и иным нормативно правовым актам в области архивного дела и архивного хранения.</li>
+<li>Согласие может быть отозвано субъектом персональных данных или его представителем путем направления письменного заявления Индивидуальному предпринимателю Кашицыной Олеси Александровной по адресу, указанному в начале данного Согласия.</li>
+<li>В случае отзыва субъектом персональных данных или его представителем согласия на обработку персональных данных Индивидуальный предприниматель Кашицына Олеся Александровна вправе продолжить обработку персональных данных без согласия субъекта персональных данных при наличии оснований, указанных в пунктах 2 – 11 части 1 статьи 6, части 2 статьи 10 и части 2 статьи 11 Федерального закона №152-ФЗ «О персональных данных» от 27.07.2006 г.</li>
+<li>Настоящее согласие действует все время до момента прекращения обработки персональных данных, указанных в п.7 и п.8 данного Согласия.</li>
+</ol>
+  </div>
+</div>
+
+</main>
+<!-- Main :: End-->
+
+<!-- Footer :: Start-->
+<footer class="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-12 col-xl-3 order-xl-2"><noindex><a class="footer__discount" href="https://yandex.ru/profile/126305249339" target="_blank">Оставьте отзыв, покажите нам скрин и получите скидку 5%</a></noindex></div>
+      <div class="col-6 col-md-8 col-xl-5 order-xl-1">
+        <div class="row">
+          <div class="col-12 col-md-6 col-xl-7">
+            <ul class="footer__contacts"> 
+              <li> <a href="tel:+74993482360" class="roistatphone">+7 (499) 348-23-60</a></li>
+              <li> <a href="mailto:hello@tvoiekino.ru" class="footer-mail footmails">hello@tvoiekino.ru</a></li>
+            </ul>
+            <address class="footer__address">Москва, Павелецкая <br> Набережная 2 с 1</address>
+          </div>
+          <div class="col-12 col-md-6 col-xl-5">
+            <ul id="menu-nizhnee-menyu" class="footer__menu"><li><a class="footer__menu-link" href="https://tvoiekino.ru/faq/">Чаво</a></li>
+<li><a class="footer__menu-link" href="https://tvoiekino.ru/contacts/">Контакты</a></li>
+</ul>            <p class="footer__copyright">© @tvoiekino<br>Все права защищены 2021</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-xl-4 order-xl-3">
+        <div class="row"> 
+          <div class="col-xl-auto order-xl-2">
+            <noindex><ul class="footer__social"> 
+              <li> <a class="footer__social-link" href="https://www.youtube.com/user/Tvoiekino/ " target="_blank">
+                  <svg class="icon-social-youtube">
+                    <use xlink:href="#icon-social-youtube"></use>
+                  </svg></a></li>
+              <li> <a class="footer__social-link" href="https://zen.yandex.ru/id/5e83aa271a056b3af3daf7b6" target="_blank">
+                  <svg class="icon-social-zen-red">
+                    <use xlink:href="#icon-social-zen-red"></use>
+                  </svg></a></li>				
+              <!--li> <a class="footer__social-link" href="https://instagram.com/tvoiekino/" target="_blank">
+                  <svg class="icon-social-instagram">
+                    <use xlink:href="#icon-social-instagram"></use>
+                  </svg></a></li-->
+              <li> <a class="footer__social-link" href="http://vk.com/tvoiekino" target="_blank">
+                  <svg class="icon-social-vk">
+                    <use xlink:href="#icon-social-vk"></use>
+                  </svg></a></li>
+              <!--li> <a class="footer__social-link" href="https://ok.ru/tvoiekino" target="_blank">
+                  <svg class="icon-social-ok">
+                    <use xlink:href="#icon-social-ok"></use>
+                  </svg></a></li-->
+              <!--li> <a class="footer__social-link" href="https://www.facebook.com/pages/ТвоёКино/505050289653335" target="_blank">
+                  <svg class="icon-social-fb">
+                    <use xlink:href="#icon-social-fb"></use>
+                  </svg></a></li-->
+            </ul></noindex>
+          </div>
+          <div class="col-xl order-xl-1">
+            <div class="footer__action"> <a class="ui-btn ui-btn--white_outline" href="https://pavilion.tvoiekino.ru/" target="_blank">В киностудию
+                <svg class="icon-arrow-right-small">
+                  <use xlink:href="#icon-arrow-right-small"></use>
+                </svg></a></div>
+           <noindex> <ul class="footer__apps">
+              <!--<li> <a class="footer__apps-link" href="https://itunes.apple.com/ru/app/%D1%82%D0%B2%D0%BE%D0%B5%D0%BA%D0%B8%D0%BD%D0%BE/id1320619678?l=ru&mt=8"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="/wp-content/uploads/2022/03/5PtA0Q-jM2ZLGjHDLp3IJQ.png"><noscript><img src="/wp-content/uploads/2022/03/5PtA0Q-jM2ZLGjHDLp3IJQ.png" alt=""></noscript></a></li>-->
+              <!--li> <a class="footer__apps-link" href="https://play.google.com/store/apps/details?id=com.adaptivi.tvoiekino"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="/wp-content/uploads/2022/03/50eb86d8695e44ff924a900abfa2c778-1.png"><noscript><img src="/wp-content/uploads/2022/03/50eb86d8695e44ff924a900abfa2c778-1.png" alt=""></noscript></a></li-->
+            </ul> </noindex>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Footer :: End-->
+
+<!-- Popups :: Start-->
+<div id="callOrder" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Заказать звонок
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f126-o1" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f126-o1" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="126">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f126-o1">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="menu-108"><select name="menu-108" class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false"><option value="Сегодня в любое время">Сегодня в любое время</option><option value="Завтра">Завтра</option><option value="В течение недели">В течение недели</option></select></span>
+<span class="wpcf7-form-control-wrap" data-name="text-266"><input type="text" name="text-266" value="" size="40" class="wpcf7-form-control wpcf7-text ui-input" aria-invalid="false" placeholder="Комментарий"></span>
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox">
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--red ui-btn--fullwidth wpcf7-form-control wpcf7-submit wpcf7-submit-126" onclick="yaCounter30754673.reachGoal('zakaz'); return true;">Заказать
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button><input type="hidden" id="ct_checkjs_cf7_d61e4bbd6393c9111e6526ea173a7c8b" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_15487" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_15487" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="15487"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="_wpcf7_ak_js" value="207"><script type="rocketlazyloadscript">document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="offerForm" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Заказать по акции
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f52669-o2" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f52669-o2" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="52669">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f52669-o2">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email ui-input" aria-required="true" aria-invalid="false" placeholder="Email"></span>
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox">
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--red ui-btn--fullwidth wpcf7-form-control wpcf7-submit wpcf7-submit-52669" onclick="yaCounter30754673.reachGoal('zakaz'); return true;">Заказать
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button><input type="hidden" id="ct_checkjs_cf7_5e388103a391daabe3de1d76a6739ccd" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_34127" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_34127" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="34127"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_2" name="_wpcf7_ak_js" value="11"><script type="rocketlazyloadscript">document.getElementById( "ak_js_2" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="filmOrder" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Оставить заявку
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f128-o3" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f128-o3" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="128">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f128-o3">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email ui-input" aria-invalid="false" placeholder="Email"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea ui-textarea" aria-invalid="false" placeholder="Сообщение"></textarea></span>
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox">
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--red ui-btn--fullwidth wpcf7-form-control wpcf7-submit wpcf7-submit-128" onclick="yaCounter30754673.reachGoal('zakaz'); return true;">Отправить
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button><input type="hidden" id="ct_checkjs_cf7_e07413354875be01a996dc560274708e" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_97701" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_97701" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="97701"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_3" name="_wpcf7_ak_js" value="72"><script type="rocketlazyloadscript">document.getElementById( "ak_js_3" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="10sOrder" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Оставить заявку
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f54644-o4" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f54644-o4" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="54644">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f54644-o4">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email ui-input" aria-invalid="false" placeholder="Email"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea ui-textarea" aria-invalid="false" placeholder="Сообщение"></textarea></span>
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox">
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--red ui-btn--fullwidth wpcf7-form-control wpcf7-submit wpcf7-submit-128" onclick="yaCounter30754673.reachGoal('zakaz'); return true;">Отправить
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button>
+
+<script type="rocketlazyloadscript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+  var id = event.detail.contactFormId;
+  if ( id == 54644 ) {
+  window.open('/wp-content/uploads/2022/07/10-idej-pozdravitelnogo-filma-1.pdf', '_blank');
+  }
+}, false );
+</script><input type="hidden" id="ct_checkjs_cf7_98b297950041a42470269d56260243a1" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_37108" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_37108" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="37108"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_4" name="_wpcf7_ak_js" value="221"><script type="rocketlazyloadscript">document.getElementById( "ak_js_4" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="subscribe" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Подписаться на рассылку
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f34930-o5" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f34930-o5" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="34930">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f34930-o5">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email ui-input" aria-required="true" aria-invalid="false" placeholder="Email"></span>
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox">
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--red ui-btn--fullwidth wpcf7-form-control wpcf7-submit wpcf7-submit-34930">Подписаться
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button><input type="hidden" id="ct_checkjs_cf7_a8ecbabae151abacba7dbde04f761c37" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_93865" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_93865" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="93865"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_5" name="_wpcf7_ak_js" value="56"><script type="rocketlazyloadscript">document.getElementById( "ak_js_5" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="certificate" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Заказать сертификат
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f54269-o6" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f54269-o6" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="54269">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f54269-o6">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email ui-input" aria-invalid="false" placeholder="Email"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea ui-textarea" aria-invalid="false" placeholder="Сообщение"></textarea></span>
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox">
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--red ui-btn--fullwidth wpcf7-form-control wpcf7-submit wpcf7-submit-128" onclick="yaCounter30754673.reachGoal('zakaz'); return true;">Заказать
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button><input type="hidden" id="ct_checkjs_cf7_428fca9bc1921c25c5121f9da7815cde" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_70493" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_70493" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="70493"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_6" name="_wpcf7_ak_js" value="17"><script type="rocketlazyloadscript">document.getElementById( "ak_js_6" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="costOrder" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Узнать стоимость
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f52670-o7" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f52670-o7" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="52670">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f52670-o7">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email ui-input" aria-invalid="false" placeholder="Email"></span>
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox">
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--red ui-btn--fullwidth wpcf7-form-control wpcf7-submit wpcf7-submit-52670">Отправить запрос
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button><input type="hidden" id="ct_checkjs_cf7_13f9896df61279c928f19721878fac41" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_10181" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_10181" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="10181"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_7" name="_wpcf7_ak_js" value="189"><script type="rocketlazyloadscript">document.getElementById( "ak_js_7" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="order_promotion" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Заказать по акции
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f52669-o8" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f52669-o8" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="52669">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f52669-o8">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email ui-input" aria-required="true" aria-invalid="false" placeholder="Email"></span>
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox">
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--red ui-btn--fullwidth wpcf7-form-control wpcf7-submit wpcf7-submit-52669" onclick="yaCounter30754673.reachGoal('zakaz'); return true;">Заказать
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button><input type="hidden" id="ct_checkjs_cf7_0f28b5d49b3020afeecd95b4009adf4c" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_42920" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_42920" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="42920"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_8" name="_wpcf7_ak_js" value="179"><script type="rocketlazyloadscript">document.getElementById( "ak_js_8" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="getDiscount" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Получите скидку
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f52676-o9" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f52676-o9" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="52676">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f52676-o9">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email ui-input" aria-invalid="false" placeholder="Email"></span>
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox">
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--red ui-btn--fullwidth wpcf7-form-control wpcf7-submit wpcf7-submit-52676" onclick="yaCounter30754673.reachGoal('zakaz'); return true;">Отправить запрос
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button><input type="hidden" id="ct_checkjs_cf7_35f4a8d465e6e1edc05f3d8ab658c551" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_63153" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_63153" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="63153"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_9" name="_wpcf7_ak_js" value="141"><script type="rocketlazyloadscript">document.getElementById( "ak_js_9" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="getPresentation" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Получить презентацию
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f54304-o10" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f54304-o10" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="54304">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f54304-o10">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="email-463"><input type="email" name="email-463" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email ui-input" aria-invalid="false" placeholder="Email"></span>
+
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox"> 
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--fullwidth ui-btn--red wpcf7-form-control wpcf7-submit wpcf7-submit-54304">Получить
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button>
+
+<script type="rocketlazyloadscript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+  var id = event.detail.contactFormId;
+  if ( id == 54304 ) {
+  window.open('Presentation_Tvoiekino.pdf', '_blank');
+  }
+}, false );
+</script><input type="hidden" id="ct_checkjs_cf7_555d6702c950ecb729a966504af0a635" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_692" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_692" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="692"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_10" name="_wpcf7_ak_js" value="123"><script type="rocketlazyloadscript">document.getElementById( "ak_js_10" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+
+<div id="getExcursion" class="fancybox-is-hidden popup">
+  <button class="popup__close" data-fancybox-close="">
+    <svg class="icon-close">
+      <use xlink:href="#icon-close"></use>
+    </svg>
+  </button><span class="popup__title">
+    Получить презентацию
+  </span>
+  <div class="popup__form">
+    <div role="form" class="wpcf7" id="wpcf7-f54438-o11" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/#wpcf7-f54438-o11" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="54438">
+<input type="hidden" name="_wpcf7_version" value="5.6.1">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f54438-o11">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div hidden="">
+<span class="wpcf7-form-control-wrap" data-name="utm_source"><input type="text" name="utm_source" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_campaign"><input type="text" name="utm_campaign" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_medium"><input type="text" name="utm_medium" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_term"><input type="text" name="utm_term" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+<span class="wpcf7-form-control-wrap" data-name="utm_content"><input type="text" name="utm_content" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span>
+</div>
+
+
+<span class="wpcf7-form-control-wrap" data-name="your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required ui-input" aria-required="true" aria-invalid="false" placeholder="Имя"></span>
+<span class="wpcf7-form-control-wrap" data-name="your-tel"><input type="tel" name="your-tel" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel ui-input js-mask-tel" aria-required="true" aria-invalid="false" placeholder="Телефон"></span>
+<span class="wpcf7-form-control-wrap" data-name="email-463"><input type="email" name="email-463" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email ui-input" aria-invalid="false" placeholder="Email"></span>
+
+
+<div class="ui-check">
+<input class="ui-check__input" type="checkbox" checked="checked" style="pointer-events: none"><span class="ui-check__checkbox"> 
+<svg class="icon-checked">
+<use xlink:href="#icon-checked"></use>
+</svg></span><span class="ui-check__text">Я принимаю <a href="/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/" target="_blank">условия обработки персональных данных</a></span>
+
+</div>
+
+<input type="hidden" name="roistat-promo-code" value=""><input type="hidden" name="thesource" value="https://tvoiekino.ru/soglasie-na-obrabotku-personalnyh-dannyh-fizicheskih-lits/">
+<button class="ui-btn ui-btn--fullwidth ui-btn--red wpcf7-form-control wpcf7-submit wpcf7-submit-54304">Получить
+<svg class="icon-arrow-right-small">
+<use xlink:href="#icon-arrow-right-small"></use>
+</svg>
+</button>
+
+<script type="rocketlazyloadscript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+  var id = event.detail.contactFormId;
+  if ( id == 54438 ) {
+  window.open('/wp-content/uploads/2022/04/SHkolnaya-kinoekskursiya-_compressed.pdf', '_blank');
+  }
+}, false );
+</script><input type="hidden" id="ct_checkjs_cf7_9dcb88e0137649590b755372b040afad" name="ct_checkjs_cf7" value="0"><input id="apbct__email_id__wp_contact_form_7_44417" class="apbct_special_field apbct__email_id__wp_contact_form_7" autocomplete="off" name="apbct__email_id__wp_contact_form_7_44417" type="text" value="" size="30" maxlength="200"><input id="apbct_event_id" class="apbct_special_field" name="apbct_event_id" type="hidden" value="44417"><p style="display: none !important;"><label>Δ<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_11" name="_wpcf7_ak_js" value="216"><script type="rocketlazyloadscript">document.getElementById( "ak_js_11" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>  </div>
+</div>
+<!-- Popups :: End-->
+
+<!-- Photoswipe :: Start-->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="pswp__bg"></div>
+  <div class="pswp__scroll-wrap">
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <div class="pswp__counter"></div>
+        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        <button class="pswp__button pswp__button--share" title="Share"></button>
+        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"> </div>
+      </div>
+      <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+      <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Photoswipe :: End-->
+
+</div>
+
+<!-- Scripts :: Start-->
+<script type="rocketlazyloadscript" src="/wp-content/themes/custom/js/plugins.min.js" defer=""></script>
+<script type="rocketlazyloadscript" src="/wp-content/themes/custom/js/app.min.js?ver=1.01" defer=""></script>
+<script type="rocketlazyloadscript" src="/wp-content/themes/custom/js/jquery.maskedinput.min.js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://tvoiekino.ru/wp-content/cache/min/1/wp-content/themes/custom/script.js?ver=1676295626" defer=""></script>
+<!-- Scripts :: End-->
+
+
+
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">				
+                    window.addEventListener('DOMContentLoaded', function () {
+                        setTimeout(function(){
+                            if( document.querySelectorAll('[name^=ct_checkjs]').length > 0 ) {
+                                apbct_public_sendREST(
+                                    'js_keys__get',
+                                    { callback: apbct_js_keys__set_input_value }
+                                )
+                            }
+                        },0)					    
+                    })				
+                </script><!-- Instagram Feed JS -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+var sbiajaxurl = "https://tvoiekino.ru/wp-admin/admin-ajax.php";
+</script>
+<style>.roistat-multiwidget-pulsator-phone{display: none}</style>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+var links = document.getElementsByTagName('a');
+Array.prototype.forEach.call(links, function(link){
+	if(link.href.indexOf("new.tvoiekino.ru") > 0 && link.href.indexOf("#") < 0) {
+		//link.href += location.search;
+	}
+});
+</script>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '126' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('zvonok'); 
+		    fbq('track', 'Lead', { content_name: 'Заказать звонок'});
+		    roistat.event.send('call_order');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '128' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('film'); 
+		    fbq('track', 'Lead', { content_name: 'Заказать фильм'}); 
+			roistat.event.send('film_order_send');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '514' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('svjazatsja'); 
+		    fbq('track', 'Contact_Form', { content_name: 'Связаться со мной'});
+		    roistat.event.send('talk_to_me');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '1534' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('napisatpismo'); 
+		    fbq('track', 'Lead', { content_name: 'Написать письмо'});
+		    roistat.event.send('mail_send');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '1711' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('skidka_video'); 
+		    fbq('track', 'Lead', { content_name: 'Забронировать скидку'});
+		    roistat.event.send('videosjomka_order');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '2220' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('podarok'); 
+		    fbq('track', 'Lead', { content_name: 'Получить подарок'});
+		    roistat.event.send('present_send');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '2311' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('ChildrenHolidayOrder'); 
+		    fbq('track', 'Lead', { content_name: 'Забронировать скидку'});
+		    roistat.event.send('landing_order');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '2863' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('svjazatsja'); 
+		    fbq('track', 'Contact_Form', { content_name: 'Связаться со мной'});
+			roistat.event.send('team_talk_to_me_send');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '3127' == event.detail.contactFormId ) {
+		    roistat.event.send('quetion_send');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '4375' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('callme'); 
+		    fbq('track', 'Lead', { content_name: 'Перезвоните мне'});
+		    roistat.event.send('call_me_send');
+		
+          /*	var name = ' ';
+        	var phone = $(".your-phone-4375").val();
+        	var email = ' ';
+
+        	if (typeof phone != 'undefined' && phone != '') {
+            	roistatGoal.reach({
+                	leadName: 'Перезвоните мне',
+                	name : name,
+                	phone: phone,
+                	email: email,
+					fields: {
+						285551: 'Перезвоните мне',
+						338117: '{source}',
+						82471: '{utmMedium}',
+						82469: '{utmSource}',
+						82467: '{utmCampaign}',
+						82473: '{utmTerm}',
+						82475: '{utmContent}'
+					}
+           	  });
+        	} */
+           setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+});</script>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '5846' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('RegToCourses'); 
+		    fbq('track', 'Lead', { content_name: 'Зарегистрироваться на курс'});
+		    roistat.event.send('reg_courses_send');
+		    ga('send', 'event', 'onClick','RegToCourses');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '10399' == event.detail.contactFormId ) {
+		    fbq('track', 'Lead', { content_name: 'Кино на смартфон'});
+		    roistat.event.send('book_order');
+            setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+</script>
+
+
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+    if ( '17019' == event.detail.contactFormId ) {
+            yaCounter30754673.reachGoal('film'); 
+		    fbq('track', 'Lead', { content_name: 'Заказать фильм'}); 
+			roistat.event.send('film_order_send');
+		
+        	/*var name = $('.name-user-17019').val();
+        	var phone = $(".phone-17019").val();
+        	var email = $('.email-17019').val();
+
+        	if (typeof phone != 'undefined' && phone != '') {
+            	roistatGoal.reach({
+                	leadName: 'Заказать фильм',
+                	name : name,
+                	phone: phone,
+                	email: email,
+					fields: {
+						285551: 'Заказать фильм',
+						338117: '{source}',
+						82471: '{utmMedium}',
+						82469: '{utmSource}',
+						82467: '{utmCampaign}',
+						82473: '{utmTerm}',
+						82475: '{utmContent}'
+					}
+           	  });
+        	} */
+           setTimeout("window.location.replace('https://tvoiekino.ru/bid-thanks/')", 1000);
+    }
+}, false );
+});</script>
+
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://tvoiekino.ru/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9" id="regenerator-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://tvoiekino.ru/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" id="wp-polyfill-js"></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/tvoiekino.ru\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://tvoiekino.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1676295626" id="contact-form-7-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/vhod\/|\/wp-admin\/|\/logout\/|\/vhod\/|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/tvoiekino.ru","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" data-minify="1" defer="" data-rocket-type="text/javascript" src="https://tvoiekino.ru/wp-content/cache/min/1/wp-content/plugins/akismet/_inc/akismet-frontend.js?ver=1676295626" id="akismet-frontend-js"></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://tvoiekino.ru/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+	$(".footmails").bind({ 
+		copy : function(){ 
+			ga('send', 'event', 'onCopy','Email');
+		},
+		click : function(){ 
+			ga('send', 'event', 'onClick','Email');
+		}
+	});
+});</script>
+
+<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+function getCookie(name) {
+         var cookie = " " + document.cookie;
+         var search = " " + name + "=";
+         var setStr = null;
+         var offset = 0;
+         var end = 0;
+         if (cookie.length > 0) {
+             offset = cookie.indexOf(search);
+             if (offset != -1) {
+                        offset += search.length;
+             end = cookie.indexOf(";", offset)
+                        if (end == -1) {
+                            end = cookie.length;
+             }
+                        setStr = unescape(cookie.substring(offset, end)); //После отправки заявки из формы
+             }
+         }
+    return(setStr);
+}
+ 
+(function(d){
+    setTimeout(function(){
+        document.getElementsByName('roistat-promo-code')[0].value = getCookie('roistat_visit');
+		document.getElementsByName('roistat-promo-code')[1].value = getCookie('roistat_visit');
+		$('input[name="roistat-promo-code"]').val(getCookie('roistat_visit'));
+ }, 3000);
+})(document);
+});</script> 
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+    return false;
+};
+
+var utm_source = getUrlParameter('utm_source');
+var utm_medium = getUrlParameter('utm_medium');
+var utm_campaign = getUrlParameter('utm_campaign');
+var utm_content = getUrlParameter('utm_content');
+var utm_term = getUrlParameter('utm_term');
+</script>
+
+<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter30754673 = new Ya.Metrika2({
+                    id:30754673,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks2");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/30754673" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+location = '/bid-thanks/';
+}, false );
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1655820-cbK4N"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1655820-cbK4N" style="position:fixed; left:-999px;" alt=""/></noscript>
+
+
+
+</body></html>

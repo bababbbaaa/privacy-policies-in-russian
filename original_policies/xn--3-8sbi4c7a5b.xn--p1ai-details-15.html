@@ -1,0 +1,670 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Детальный просмотр</title>
+  
+  <!-- BOOTS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  
+
+
+
+  <link rel="stylesheet" href="/static_root/css/bootstrap-grid.css">
+  <link rel="stylesheet" href="/static_root/css/bootstrap.css">
+  <link rel="stylesheet" href="/static_root/scss/style.css">
+  <link rel="stylesheet" href="/static_root/css/animate.css">
+  
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&amp;display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static_root/css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/static_root/owlcarousel/owl.carousel.min.css">
+  <!-- components scss files -->
+  
+    
+      
+        <link rel="stylesheet" href="/static_root/scss/components/main-page-slider-v1/component.css">
+      
+        <link rel="stylesheet" href="/static_root/scss/components/main-menu-v1/component.css">
+      
+        <link rel="stylesheet" href="/static_root/scss/components/attestat-carousel-v1/component.css">
+      
+    
+  
+  <!-- components scss files -->
+  <link rel="stylesheet" href="/static_root/owlcarousel/owl.theme.default.min.css">
+
+  
+    <style>
+      body {
+        font-family: Ubuntu, sans-serif;
+      }
+    </style>
+  
+
+  
+
+  <!-- HEADER -->
+</head>
+
+<body>
+
+
+  <!-- Include Modal -->
+  
+<!-- Модальное окно - Оставить заявку -->
+<div class="modal fade" id="modal-statement" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_order_head">
+                Оставить заявку <br> на наши услуги
+                </h5>
+                <div class="row">
+                    <div class="col col-sm-10 col-xl-6">
+                        <p class="modal__title__small__text">Введите свои контактные данные, выберите одну или несколько
+                            заявок
+                            для прохождения аттестации, и наш специалист свяжется с вами в ближайшее время.
+                        </p>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><img src="/static_root/img/close2.png" title="Закрыть окно" alt=""></span>
+                </button>
+            </div>
+
+            <form id="order_form">
+                <input type="hidden" name="csrfmiddlewaretoken" value="msa1cXRtZ0Srbw17SwwNlPxF2QbFEpnVjQwcWFhSmVigUlI6WJKdZ2j41Oim68nO">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="id_name" class="col-form-label col-form-label-sm">Имя</label>
+                                <input type="text" name="name" class="form-control form-control-sm" required="" placeholder="Ваше имя" id="id_name" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="id_phone" class="col-form-label col-form-label-sm">Номер телефона</label>
+                                <input type="text" name="phone" class="form-control form-control-sm" required="" placeholder="Ваш телефон" id="id_phone" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="id_email" class="col-form-label col-form-label-sm">E-mail</label>
+                                <input type="text" name="email" class="form-control form-control-sm" required="" placeholder="Ваш адрес эл. почты" id="id_email" maxlength="254">
+                            </div>
+                        </div>
+                        <div class="col-xl-9">
+                            <div class="form-group">
+                                <label for="" class="col-form-label col-form-label-sm">Вид заявки(-ок)</label>
+                                <div class="choose__item">
+                                    <ul class="items">
+                                        
+                                            
+                                                <li data-selected="0" data-guid="3" data-order="attsp">Аттестация персонала в области сварки</li>
+                                            
+                                                <li data-selected="0" data-guid="3" data-order="attso">Аттестация сварочного оборудования</li>
+                                            
+                                                <li data-selected="0" data-guid="3" data-order="attst">Аттестация сварочных технологий</li>
+                                            
+                                                <li data-selected="0" data-guid="3" data-order="labnk">Лаборатория НК и ТД</li>
+                                            
+
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="custom-control-checkbox custom-checkbox d-inline-block">
+                        <input type="checkbox" class="custom-control-input" id="soglasie" required="">
+                        <label class="custom-control-label" for="soglasie"><small>Я даю <a id="soglasie" href="#">Страница еще не создана (SOGLASIE)</a></small></label>
+                        <div id="order_captcha_check">
+                            <img src="/captcha/image/548ec4587e424ce1311fbe1a6e667c8d168150a3/" alt="captcha" class="captcha">
+<input type="hidden" name="captcha_0" value="548ec4587e424ce1311fbe1a6e667c8d168150a3" required="" id="id_captcha_0"><input type="text" name="captcha_1" required="" spellcheck="false" autocomplete="off" autocapitalize="none" id="id_captcha_1" autocorrect="off">
+                            <div id="order_captcha_message"></div>
+                            <small><a id="refresh_captcha" href="#" class="d-block captcha_refresh">Заменить картинку</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="order_service_button" type="submit" class="button__to__send_zayavka__formmodal d-inline-block">Отправить
+                        заявку</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Набор в группу аттестации -->
+
+<!-- Модальное окно - Задать вопрос -->
+<div class="modal fade" id="modal-question" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header-feedback">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Задать вопрос</h5>
+                    <div class="row">
+                        <div class="col col-sm-10 col-xl-8">
+                            <p class="modal__title__small__text">Есть вопросы по аттестации? <br>
+                                Оставляйте заявку на вопрос, и наш специалист ответит в ближайшее время.
+                            </p>
+                        </div>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><img src="/static_root/img/close2.png" alt=""></span>
+                    </button>
+                </div>
+            </div>
+
+            <form>
+                <div class="modal-body px-3 px-sm-5">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="" class="col-form-label col-form-label-sm">Имя</label>
+                                <input type="text" class="form-control form-control-sm" id="" required="">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="" class="col-form-label col-form-label-sm">Номер телефона</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="" id="phone2" required="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-control-checkbox custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="sogl" required="">
+                        <label class="custom-control-label" for="sogl"><small>Я даю <a href="#" target="_blank">согласие
+                                    на обработку персональных данных</a></small></label>
+                    </div>
+
+                </div>
+                <div class="modal-footer pb-5 px-3 px-sm-5">
+                    <button type="submit" class="button__to__send_zayavka__formmodal">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Задать вопрос -->
+  
+  <!-- End Include Modal -->
+
+  
+
+
+<!--include components order by number in admin panel -->
+  
+    
+    
+  
+    
+    
+      
+<div class="main_menu__background">
+<div class="container">
+	<div class="row align-items-center">
+	    <div class="col-xl-12 no-otstup">
+	            <div class="menu__navbar">
+	                <!--Navbar-->
+	                <nav class="navbar navbar-expand-lg navbar-dark">
+
+	                    <!-- Navbar brand -->
+
+	                    <!-- Collapse button -->
+	                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+	                        <span class="navbar-toggler-icon"></span>
+	                    </button>
+
+	                    <!-- Collapsible content -->
+	                    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+	                        <!-- Links -->
+	                        
+	                        <ul class="navbar-nav mr-auto">
+	                            <li class="nav-item active">
+	                                <a class="nav-link" href="/">Главная
+	                                    <span class="sr-only">(current)</span>
+	                                </a>
+	                            </li>
+
+								
+
+	                            <!-- Dropdown -->
+	                            <li class="nav-item active">
+	                                <a href="/details/8" class="nav-link">
+	                                    О компании
+	                                    <span class="sr-only">(current)</span>
+	                                </a>
+	                            </li>
+	                            <li class="nav-item dropdown">
+	                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                    Услуги
+	                                </a>
+	                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	                                    
+
+											<a data-pk="1" class="dropdown-item" href="/service_details/1">Аттестация персонала в области сварки</a>
+
+
+												
+	                                    
+
+											<a data-pk="3" class="dropdown-item" href="/service_details/3">Аттестация сварочного оборудования</a>
+
+
+												
+	                                    
+
+											<a data-pk="4" class="dropdown-item" href="/service_details/4">Аттестация сварочных технологий</a>
+
+
+												
+	                                    
+
+											<a data-pk="2" class="dropdown-item" href="/service_details/2">Лаборатория НК и ТД</a>
+
+
+												
+	                                    
+
+	                                </div>
+	                            </li>
+
+								
+
+	                            <li class="nav-item active">
+	                                <a class="nav-link" href="/doc/">Разрешительные документы
+	                                    <span class="sr-only">(current)</span>
+	                                </a>
+	                            </li>
+	                            <li class="nav-item active">
+                                    
+                                    <a class="nav-link" href="/cok/">Оценка квалификации в области сварки и контроля
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+	                            </li>
+	                            <li class="nav-item active">
+	                                <a class="nav-link" href="/contacts/">Контакты
+	                                    <span class="sr-only">(current)</span>
+	                                </a>
+	                            </li>
+	                        </ul>
+	                        
+
+	                    </div>
+	                    <div class="header_phone_mob">
+	                        <a href="tel: +7 (861) 224-57-68" title="Позвонить">
+	                            <p class="text_phone_mob">
+	                                <img src="/static_root/img/phone.png" alt="">
+	                            </p>
+	                        </a>
+	                    </div>
+	                </nav>
+
+	                <!--/.Navbar-->
+	            </div>
+	        </div>
+	    </div>
+
+	</div>
+</div>
+
+    
+  
+    
+    
+  
+
+
+  <!-- Include main-banner on main page -->
+  
+
+
+
+  
+<div class="bg_header_inner_page" id="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3">
+                <div class="headline_bg_inner_page">
+                    Политика конфиденциальности
+                </div>
+                <button class="back_to_home_page">
+                    <a href="/" class="link_to_home_page">
+                        <img src="/static_root/img/back_to_page.png" class="img_back_to_page" alt="">На главную
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box_content_in_pages">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="box_info_content">
+                    <div class="headline_content_box_content">
+                        Политика конфиденциальности
+                    </div>
+
+                    
+                        
+                            <div>
+                                
+
+                                <button class="request_page_details">
+                                    <a href="" data-toggle="modal" data-target="#modal-statement" class="request_button_page_details">Подать
+                                        заявку</a>
+                                </button>
+                            </div>
+                        
+                    
+                    <div class="line_center"></div>
+                    <div class="content_text_page_details">
+                        <p>Политика компании в отношении и обработки персональных данных ЮРГАЦ: <a href="http://www.xn--3-8sbi4c7a5b.xn--p1ai/images/files/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%B8%20%D0%B2%20%D0%BE%D1%82%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B8%20%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8%20%D0%BF%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D1%85%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%AE%D0%A0%D0%93%D0%90%D0%A6%202021.pdf.pdf">открыть</a></p>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <h3></h3>
+                <div class="headline_side_panel">
+        
+</div>
+
+                 
+                    
+                
+            </div>
+            <div class="container">
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    
+      
+    
+      
+    
+      
+    
+
+  
+
+  
+    
+<div class="box_content_include">
+    <div class="container">
+            <div class="row">
+                    <div class="col-xl-12">
+                    
+                        <div class="head_box_content">
+                            <p class="headline_name_box">
+                               Партнеры
+                            </p>
+                            </div>
+                    
+                    </div>
+                </div>
+
+        <div class="row align-items-center">
+            <div id="owl" class="owl-carousel owl-theme owl-loaded owl-drag">
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+            <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1264px, 0px, 0px); transition: all 0s ease 0s; width: 3640px; padding-left: 50px; padding-right: 50px;"><div class="owl-item cloned" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/partner_1_tn.jpg" alt="тн">
+                </div></div><div class="owl-item cloned" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/naks_logo.png" alt="НАКС">
+                </div></div><div class="owl-item cloned" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/rhi.jpeg" alt="ренессанс">
+                </div></div><div class="owl-item cloned" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/ssk_zvezda.png" alt="сск звезда">
+                </div></div><div class="owl-item cloned" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/partner_1_tn.jpg" alt="тн">
+                </div></div><div class="owl-item active" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/naks_logo.png" alt="НАКС">
+                </div></div><div class="owl-item active" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/rhi.jpeg" alt="ренессанс">
+                </div></div><div class="owl-item active" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/ssk_zvezda.png" alt="сск звезда">
+                </div></div><div class="owl-item active" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/partner_1_tn.jpg" alt="тн">
+                </div></div><div class="owl-item cloned active" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/naks_logo.png" alt="НАКС">
+                </div></div><div class="owl-item cloned" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/rhi.jpeg" alt="ренессанс">
+                </div></div><div class="owl-item cloned" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/ssk_zvezda.png" alt="сск звезда">
+                </div></div><div class="owl-item cloned" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/partner_1_tn.jpg" alt="тн">
+                </div></div><div class="owl-item cloned" style="width: 242.8px; margin-right: 10px;"><div class="img-item img-fluid">
+                        <img src="/media/upload/naks_logo.png" alt="НАКС">
+                </div></div></div></div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div><div class="owl-dots disabled"><button role="button" class="owl-dot active"><span></span></button></div></div>
+
+        </div>
+    </div>
+</div>
+  
+
+  <!-- Include Modal -->
+  
+
+<div class="box_footer_bg">
+    <div class="container">
+        <div class="footer_box_info_all">
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="logo_footer ">
+                        <img class="img-fluid" src="
+                        
+                            /media/upload/logo_yur3gac_gray.png
+                        
+                        " alt="">
+                    </div>
+                    <p class="footer_text_company ">
+                        Общество с ограниченной ответственностью "Южный региональный головной аттестационный центр №3 НАКС"<br>
+                        <strong>350090, город Краснодар, проезд Репина, дом 12</strong>
+                    </p>
+
+                    
+                    <div class="rsps_logo d-inline-block">
+                        <a href="http://www.rsps.site" target="_blank">
+                            <img src="/static_root/img/rsps_logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-1">
+
+                </div>
+                <div class="col-sm-4 col-md-4 col-xl-2">
+                    <div class="head_info_footer">
+                        <p class="name_info_block">
+                            Новости
+                        </p>
+                    </div>
+                    
+                    <div class="box_footer_news">
+                        <a href="/details_news/6">
+                            <p class="footer_news">
+                                Конференция НАКС
+                            </p>
+                        </a>
+                        <p class="date_news_footer">
+                            02 Дек. 2021
+                        </p>
+                    </div>
+                    
+                    <div class="box_footer_news">
+                        <a href="/details_news/5">
+                            <p class="footer_news">
+                                Конференция НАКС
+                            </p>
+                        </a>
+                        <p class="date_news_footer">
+                            02 Дек. 2021
+                        </p>
+                    </div>
+                    
+                    <div class="box_footer_news">
+                        <a href="/details_news/4">
+                            <p class="footer_news">
+                                Общее собрание
+                            </p>
+                        </a>
+                        <p class="date_news_footer">
+                            02 Дек. 2021
+                        </p>
+                    </div>
+                    
+
+                    
+
+
+                </div>
+                <div class="col-sm-4 col-md-4 col-xl-2">
+                    <div class="head_info_footer">
+                        <p class="name_info_block">
+                            Информация
+                        </p>
+                    </div>
+                    <div class="box_footer_info">
+                        <a href="http://naks.ru" target="_blank" class="point_grey">
+                            <p class="footer_info_link">
+                                Национальное Агентство
+                                Контроля Сварки
+                            </p>
+                        </a>
+                    </div>
+                    <div class="box_footer_info">
+                        <a href="http://bewelder.ru" target="_blank" class="point_grey">
+                            <p class="footer_info_link">
+                                Поиск работы <br> в области сварки
+                            </p>
+                        </a>
+                    </div>
+                    <div class="box_footer_info">
+                        <a href="http://svarka.naks.ru" target="_blank" class="point_grey">
+                            <p class="footer_info_link">
+                                Журнал сварка <br> и диагностика
+                            </p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6 offset-xl-1 col-xl-3">
+                    <div class="basement_number ">
+                    
+                        <a href="tel:+7 (861) 224-57-68">+7 (861) 224-57-68</a>
+                    
+                    </div>
+                    <div class="basement_number_text">
+                        ООО "Южный региональный головной аттестационный центр №3 НАКС"
+                    </div>
+                                <div class="basement_mail ">
+                                    <a href="mailto:yur3gac@naks.ru" title="Написать письмо">yur3gac@naks.ru</a>
+                                </div>
+                    <div class="enter_system_edo">
+                        <a href="https://ac.naks.ru/" class="enter_system_link" target="_blank">
+                            Войти в систему ЭДО</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="basement_footer">
+        <div class="container">
+            <div class="line_footer_basement"></div>
+            <div class="box_basement">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-xl-4 col-md-4">
+                        <p class="basement_text_prava_kompany">
+                            © ООО "Южный региональный головной аттестационный центр №3 НАКС" <br> Все права защищены
+                        </p>
+                    </div>
+                    <div class="col-xl-3 col-md-4">
+                    
+                        <div class="political_konf" target="_blank">
+                            <a href="/details/15 ">Политика конфиденциальности</a>
+                        </div>
+                    
+
+                    </div>
+
+                    <div class="col-xl-5">
+                        <div class="razrabotano_basement_footer">
+                            <a href="http://www.naks.ru/naksmedia/" target="_blank" class="razrabotano__v__naks__media">
+                                Разработано в - НАКС Медиа</a>
+
+                        </div>
+                        <p>
+                            city: 
+                            region 
+                            country: 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  <!-- End Include Modal -->
+
+  <!-- Include main-banner on main page -->
+
+  <script src="/static_root/js/jquery-3.3.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+
+  <script src="/static_root/js/script.js"></script>
+  <script src="/static_root/js/bootstrap.js"></script>
+  <script src="/static_root/js/jquery.fancybox.js"></script>
+  <script src="/static_root/js/jquery.maskedinput.js"></script>
+  <script src="/static_root/js/jquery.maskedinput.min.js"></script>
+  <script src="/static_root/js/jquery.counterup.min.js"></script>
+  <script src="/static_root/js/jquery.counterup.js"></script>
+
+  <!--components js files -->
+   
+      
+        
+      
+        
+      
+        
+      
+    
+  <!--components js files -->
+  <script src="/static_root/owlcarousel/owl.carousel.min.js"></script>
+
+
+
+
+</div></body></html>

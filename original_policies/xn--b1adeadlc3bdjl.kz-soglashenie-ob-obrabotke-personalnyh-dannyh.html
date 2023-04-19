@@ -1,0 +1,330 @@
+<html class="no-js" lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script> <meta name="viewport" content="width=device-width"><meta name="author" content="Продвижение.kz"><link rel="profile" href="//gmpg.org/xfn/11"> <!--[if lt IE 9]> <script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script> <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> <![endif]--><link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"><link rel="manifest" href="//xn--b1adeadlc3bdjl.kz/favicon/site.webmanifest"><link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5"><link rel="shortcut icon" href="/favicon/favicon.ico"><meta name="msapplication-TileColor" content="#00aba9"><meta name="msapplication-config" content="/favicon/browserconfig.xml"><meta name="theme-color" content="#ffffff"> <script type="rocketlazyloadscript">(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script> <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><link rel="alternate" hreflang="ru" href="https://xn--b1adeadlc3bdjl.kz/soglashenie-ob-obrabotke-personalnyh-dannyh/"><meta property="og:title" content="Соглашение об обработке персональных данных"><meta property="og:description" content=""><meta property="og:image" content="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2021/10/pro.jpg"><meta property="og:image:width" content="150"><meta property="og:image:height" content="150"><meta property="og:image:type" content="image/jpeg"><meta property="og:type" content="article"><meta property="og:article:published_time" content="2014-02-13 16:37:03"><meta property="og:article:modified_time" content="2014-02-13 16:37:03"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Соглашение об обработке персональных данных"><meta name="twitter:description" content=""><meta name="twitter:image" content="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2021/10/pro.jpg"><meta name="author" content="admin"><link media="all" href="https://xn--b1adeadlc3bdjl.kz/wp-content/cache/autoptimize/css/autoptimize_11ffe3276313000bbdd223198e09dc4b.css" rel="stylesheet"><title>Соглашение об обработке персональных данных - «Продвижение.kz»</title><link rel="canonical" href="https://xn--b1adeadlc3bdjl.kz/soglashenie-ob-obrabotke-personalnyh-dannyh/"><meta property="og:url" content="https://xn--b1adeadlc3bdjl.kz/soglashenie-ob-obrabotke-personalnyh-dannyh/"><meta property="og:site_name" content="«Продвижение.kz»"><meta property="article:publisher" content="https://www.facebook.com/pro3292260"><meta property="og:image" content="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2018/11/cropped-logo.png"><meta property="og:image:width" content="248"><meta property="og:image:height" content="104"><meta name="twitter:site" content="@prodvizhenie_kz"> <script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://xn--b1adeadlc3bdjl.kz/#organization","name":"\u041f\u0440\u043e\u0434\u0432\u0438\u0436\u0435\u043d\u0438\u0435.kz","url":"https://xn--b1adeadlc3bdjl.kz/","sameAs":["https://www.facebook.com/pro3292260","https://www.instagram.com/kz3292260/","https://twitter.com/prodvizhenie_kz"],"logo":{"@type":"ImageObject","@id":"https://xn--b1adeadlc3bdjl.kz/#logo","inLanguage":"ru-RU","url":"https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2018/11/cropped-logo.png","contentUrl":"https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2018/11/cropped-logo.png","width":248,"height":104,"caption":"\u041f\u0440\u043e\u0434\u0432\u0438\u0436\u0435\u043d\u0438\u0435.kz"},"image":{"@id":"https://xn--b1adeadlc3bdjl.kz/#logo"}},{"@type":"WebSite","@id":"https://xn--b1adeadlc3bdjl.kz/#website","url":"https://xn--b1adeadlc3bdjl.kz/","name":"\u00ab\u041f\u0440\u043e\u0434\u0432\u0438\u0436\u0435\u043d\u0438\u0435.kz\u00bb","description":"\u041f\u0440\u043e\u0434\u0432\u0438\u0436\u0435\u043d\u0438\u0435, \u0440\u0435\u043a\u043b\u0430\u043c\u0430 \u0442\u043e\u0432\u0430\u0440\u043e\u0432 \u0438 \u0443\u0441\u043b\u0443\u0433 \u0432 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442. \u0420\u0435\u043d\u0442\u0430\u0431\u0435\u043b\u044c\u043d\u043e \u0442\u0435\u043b. \u0410\u043b\u043c\u0430\u0442\u044b 8 (727) 3292260.","publisher":{"@id":"https://xn--b1adeadlc3bdjl.kz/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://xn--b1adeadlc3bdjl.kz/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":"WebPage","@id":"https://xn--b1adeadlc3bdjl.kz/soglashenie-ob-obrabotke-personalnyh-dannyh/#webpage","url":"https://xn--b1adeadlc3bdjl.kz/soglashenie-ob-obrabotke-personalnyh-dannyh/","name":"\u0421\u043e\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0435 \u043e\u0431 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0435 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 - \u00ab\u041f\u0440\u043e\u0434\u0432\u0438\u0436\u0435\u043d\u0438\u0435.kz\u00bb","isPartOf":{"@id":"https://xn--b1adeadlc3bdjl.kz/#website"},"datePublished":"2014-02-13T10:37:03+00:00","dateModified":"2014-02-13T10:37:03+00:00","breadcrumb":{"@id":"https://xn--b1adeadlc3bdjl.kz/soglashenie-ob-obrabotke-personalnyh-dannyh/#breadcrumb"},"inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://xn--b1adeadlc3bdjl.kz/soglashenie-ob-obrabotke-personalnyh-dannyh/"]}]},{"@type":"BreadcrumbList","@id":"https://xn--b1adeadlc3bdjl.kz/soglashenie-ob-obrabotke-personalnyh-dannyh/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"\u0413\u043b\u0430\u0432\u043d\u0430\u044f \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430","item":"https://xn--b1adeadlc3bdjl.kz/"},{"@type":"ListItem","position":2,"name":"\u0421\u043e\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0435 \u043e\u0431 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0435 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445"}]}]}</script> <link rel="dns-prefetch" href="//www.google.com"> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js" defer=""></script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js" defer=""></script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/themes/glavnaya/js/jquery.mask.min.js" id="masked-input-js" defer=""></script> <script type="text/javascript" id="wbcr_clearfy-css-lazy-load-js-extra">var wbcr_clearfy_async_links = {"wbcr_clearfy-font-awesome":"https:\/\/xn--b1adeadlc3bdjl.kz\/wp-content\/themes\/glavnaya\/css\/font-awesome.min.css"};</script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/plugins/clearfy/assets/js/css-lazy-load.min.js" id="wbcr_clearfy-css-lazy-load-js" defer=""></script> <script src="https://xn--b1adeadlc3bdjl.kz/wp-content/cache/autoptimize/js/autoptimize_5644df9be7ff67a8440a5310afee7f46.js"></script></head><body class="page-template-default page page-id-2752 wp-custom-logo"><header><div class="top_menu"><div class="header_part_lft"></div><div class="header_part_rht hidden-xs"></div><div class=""><div class="container"><div class="row"><div class="col-lg-4 col-md-4 col-sm-4 hidden-xs"> <a href="https://xn--b1adeadlc3bdjl.kz" class="top_header_logo"><noscript><img width="293" height="48" src="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2016/11/logo.png" class="img-responsive" title="«Продвижение.kz»" alt="«Продвижение.kz»"/></noscript><img src="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2016/11/logo.png" data-src="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2016/11/logo.png" class=" img-responsive lazyloading" title="«Продвижение.kz»" alt="«Продвижение.kz»" width="293" height="48"></a></div><div class="col-md-2 col-sm-2 hidden-xs"> <a rel="nofollow" href="javascript:;" class="top_header_btn btn fnt_prxim_nv_semibold" data-toggle="modal" data-target="#mdl_onlineapp">Обратный звонок</a></div><div class="col-lg-6 col-md-6 col-sm-7 col-xs-12 mbl_back"><div class="row info-row-col"><div class="col-md-3"><div class="dropdown_header_algn dropdown fnt_prxim_nv_semibold"> <button class="dropdown_header dropdown-toggle" type="button" data-toggle="dropdown">Выбрать город<span class="caret"></span></button><ul class="dropdown-menu" id="cities_hdr"><li class="active"><a href="javascript:;" data-pid="Алматы" data-phone="8 (727) 979-37-60">Алматы</a></li><li><a href="javascript:;" data-pid="Астана" data-phone="8 (7172) 46-91-79">Астана</a></li></ul></div><div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"><div class="fnt_prxim_nv_semibold name_txt" id="cityname_hdr">Алматы</div></div></div><div class="col-md-5"><div class="col-lg-12 col-md-12 col-sm-12"> <a rel="nofollow" href="tel:87279793760" class="tel_nmbr fnt_prxim_nv_regular" id="phonenmbr_hdr">8 (727) 979-37-60</a> <br><a rel="nofollow" href="tel:87084593760" class="tel_nmbr fnt_prxim_nv_regular" id="phonenmbr_hdr2">8 (708) 459-37-60</a></div></div><div class="col-md-3"> <span class="callback-top hd"> <a class="header-wa" href="https://wa.me/77073292260" target="_blank">WhatsApp</a> <span class="header-schedule">09.00-20.00</span> </span></div></div></div></div><div class="row"><div class="col-xs-12"><nav class="navbar navbar-default fnt_prxim_nv_semibold"><div class="navbar-header visible-xs"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="https://xn--b1adeadlc3bdjl.kz"><noscript><img width="293" height="48" src="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2016/11/logo.png" class="img-responsive" title="«Продвижение.kz»" alt="«Продвижение.kz»"/></noscript><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20293%2048%22%3E%3C/svg%3E" data-src="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2016/11/logo.png" class="lazyload img-responsive" title="«Продвижение.kz»" alt="«Продвижение.kz»" width="293" height="48"></a></div><div id="navbar" class="navbar-collapse collapse"><ul id="menu-primary-menu" class="nav navbar-nav navbar-center"><li id="menu-item-13761" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children dropdown menu-item-13761"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" href="#">О компании <b class="caret"></b></a><ul class="dropdown-menu drop_menu"><li id="menu-item-6360" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6360"><a href="https://xn--b1adeadlc3bdjl.kz/o-nas/">О нас</a></li><li id="menu-item-36" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-36"><a href="/klienty/">Клиенты</a></li><li id="menu-item-6361" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6361"><a href="https://xn--b1adeadlc3bdjl.kz/vakansii/">Вакансии</a></li></ul></li><li id="menu-item-13760" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13760"><a href="https://xn--b1adeadlc3bdjl.kz/portfolio/">Портфолио</a></li><li id="menu-item-38" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children dropdown menu-item-38"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" href="#">Услуги <b class="caret"></b></a><ul class="dropdown-menu drop_menu"><li id="menu-item-230" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-230"><a href="https://xn--b1adeadlc3bdjl.kz/prodvizhenie-sajtov/">Продвижение  сайтов</a></li><li id="menu-item-13710" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown-submenu menu-item-13710"><a href="https://xn--b1adeadlc3bdjl.kz/sozdanie-sajtov/">Создание сайтов</a><ul class="dropdown-menu drop_menu"><li id="menu-item-6932" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6932"><a href="https://xn--b1adeadlc3bdjl.kz/sozdanie-sajtov/korporativnye-sajty/">Корпоративные сайты</a></li><li id="menu-item-6933" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6933"><a href="https://xn--b1adeadlc3bdjl.kz/sozdanie-sajtov/internet-magaziny/">Разработка интернет-магазинов</a></li><li id="menu-item-6934" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6934"><a href="https://xn--b1adeadlc3bdjl.kz/sozdanie-sajtov/lendingi/">Разработка лендингов</a></li></ul></li><li id="menu-item-337" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-337"><a href="https://xn--b1adeadlc3bdjl.kz/kontekstnaya-reklama/">Контекстная реклама</a></li><li id="menu-item-7817" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7817"><a href="https://xn--b1adeadlc3bdjl.kz/naruzhnaja-reklama/">Наружная реклама</a></li><li id="menu-item-8107" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8107"><a href="https://xn--b1adeadlc3bdjl.kz/shirokoformatnaja-pechat/">Широкоформатная печать</a></li><li id="menu-item-6364" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6364"><a href="https://xn--b1adeadlc3bdjl.kz/smo-i-smm/">SMM продвижение</a></li><li id="menu-item-6366" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6366"><a href="https://xn--b1adeadlc3bdjl.kz/napisanie-tekstov/">Написание текста</a></li></ul></li><li id="menu-item-6385" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6385"><a href="https://xn--b1adeadlc3bdjl.kz/gotovye-predlozheniya/">Цены</a></li><li id="menu-item-6386" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6386"><a href="https://xn--b1adeadlc3bdjl.kz/novosti/">Новости</a></li><li id="menu-item-8028" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8028"><a href="https://xn--b1adeadlc3bdjl.kz/blog/">Блог</a></li><li id="menu-item-331" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-331"><a href="https://xn--b1adeadlc3bdjl.kz/kontakty/">Контакты</a></li><li id="menu-item-wpml-ls-2-ru" class="menu-item wpml-ls-slot-2 wpml-ls-item wpml-ls-item-ru wpml-ls-current-language wpml-ls-menu-item wpml-ls-first-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-wpml-ls-2-ru"><a title="RU" href="https://xn--b1adeadlc3bdjl.kz/soglashenie-ob-obrabotke-personalnyh-dannyh/"><noscript><img width="18" height="12"
+ class="wpml-ls-flag"
+ src="https://xn--b1adeadlc3bdjl.kz/wp-content/plugins/sitepress-multilingual-cms/res/flags/ru.png"
+ alt="" 
+ /></noscript><img class=" wpml-ls-flag lazyloading" src="https://xn--b1adeadlc3bdjl.kz/wp-content/plugins/sitepress-multilingual-cms/res/flags/ru.png" data-src="https://xn--b1adeadlc3bdjl.kz/wp-content/plugins/sitepress-multilingual-cms/res/flags/ru.png" alt="" width="18" height="12"><span class="wpml-ls-display">RU</span></a></li></ul></div></nav></div></div></div></div></div></header><div id="primary" class="content-area container"><main id="main" class="site-main" role="main"><article id="post-2752" class="post-2752 page type-page status-publish hentry"><div class="y_breadcrumb"><p id="breadcrumbs"><span><span><a href="https://xn--b1adeadlc3bdjl.kz/">Главная страница</a> » </span></span></p></div><header class="entry-header"><h1 class="entry-title">Соглашение об обработке персональных данных</h1></header><div class="entry-content"><p>Мы понимаем всю важность соблюдения конфиденциальности личной информации, которую мы получаем от своих посетителей и собираем в дальнейшем. Подчеркиваем, что все сведения личного и персонального характера пользователи предоставляют нам исключительно на добровольной основе. Вы всегда можете самостоятельно принять решение в отношении предоставляемых нам данных.<br> <strong>Общедоступная информация</strong><br> Если вы не зарегистрированы на сайте и не являетесь нашим клиентом, то вне зависимости от того, сколько времени вы его просматриваете, никакая информация о вас нам не известна и, соответственно, не может быть использована.<br> Если вы заказываете любую из предоставляемых нами услуг, включая и те, которые относятся к бесплатным, то сообщаете нам некоторый минимум информации, включающий данные персонального характера – имя, телефонный номер, адрес электронной почты. Это необходимо, чтобы мы могли идентифицировать вас и переслать ответ на ваш запрос.<br> <strong>Цели сбора и обработки персональной информации клиентов</strong><br> Ваше имя, телефон и адрес электронной почты не показывается другим посетителям сайта, в том числе и нашим клиентам. Мы оставляем за собой право сохранять отправленные нашими посетителями данные и запросы только с одной целью – обрабатывать запросы клиентов, давать на них ответы, а также совершенствовать нашу работу.<br> Ваше добровольное согласие получить ответ на интересующий ваш вопрос, находящийся в нашей компетенции, подтверждается путем ввода в предлагаемую на сайте форму вашего имени и адреса электронной почты.<br> Ваше имя мы используем для того, чтобы обращаться к вам лично, а ваш электронный адрес – для отправки вам письма с запрашиваемой вами информацией, а в дальнейшем – для отправки вам новых условий, предложений воспользоваться льготными условиями, рекламой проводимых акций и т.п.<br> <strong>Условия обработки персональной информации и передача ее третьим лицам</strong><br> Ваши персональные данные (имя, телефонный номер, адрес электронной почты и пр.) используются строго в соответствии с политикой конфиденциальности личной информации нашего сервиса и хранятся строго на защищенных серверах.<br> Ваши персональные данные, сообщенные нам, ни при каких обстоятельствах и условиях не будут переданы третьим лицам. Исключение составляют случаи, оговоренные действующим законодательством.<br> Вы в любой момент имеете право потребовать, чтобы ваше имя, электронный адрес, телефон и другая ранее сообщенная информация были полностью удалены из нашей базы данных.<br> <strong>Изменение политики конфиденциальности</strong><br> На данной странице вы можете узнать о любых изменениях, которые мы внесли в свою политику конфиденциальности. В особых случаях на указанный вами адрес электронной почты будет отправлена соответствующая информация.<br> <strong>Обратная связь</strong><br> Любые вопросы, касающиеся проводимой нашей компанией политики конфиденциальности в отношении персональных данных и информации личного характера, предоставляемых нашими клиентами, вы можете задать, используя форму обратной связи на странице Контакты.<br> Мы гарантируем, что принимаем все необходимые меры для защиты всей предоставляемой нашими клиентами персональной информации от любого раскрытия, неправомерного доступа или изменения. К личным данным клиентов имеет доступ строго ограниченный круг сотрудников нашей компании, которым они необходимы для выполнения очерченного круга профессиональных обязанностей. Сбор и обработка персональной информации клиентов и заказчиков осуществляется в полном соответствии с действующим законодательством Казахстана.</p></div></article></main></div> <section class="section_elevan"><div class="container"><div class="row"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><div class="section_elevan_cnt"><div class="section_elevan_cnt_head fnt_prxim_nv_regular"><div class="hreplace">Полезное</div></div><div class="head_cnt"><div class="sc_date_ttl fnt_prxim_nv_bold htwo" style="margin-bottom:10px;"><div class="sc_date fnt_prxim_nv_semibold" style="display: inline-block; padding-right: 5px;">28.02.2022</div> <a href="https://xn--b1adeadlc3bdjl.kz/google-ads-s-ogranichennym-bjudzhetom/">Как эффективно запустить контекстную рекламу Google Ads с ограниченным бюджетом?</a></div><div class="sc_date_ttl fnt_prxim_nv_bold htwo" style="margin-bottom:10px;"><div class="sc_date fnt_prxim_nv_semibold" style="display: inline-block; padding-right: 5px;">24.02.2022</div> <a href="https://xn--b1adeadlc3bdjl.kz/seo-prodvizhenie-medicinskih-sajtov/">SEO-продвижение сайтов медицинских центров в Казахстане</a></div><div class="sc_date_ttl fnt_prxim_nv_bold htwo" style="margin-bottom:10px;"><div class="sc_date fnt_prxim_nv_semibold" style="display: inline-block; padding-right: 5px;">21.02.2022</div> <a href="https://xn--b1adeadlc3bdjl.kz/kontekstnaja-reklama-v-kazahstane-v-2022/">Контекстная реклама в Казахстане в 2022 году: тренды, изменения и рекомендации</a></div><div class="sc_date_ttl fnt_prxim_nv_bold htwo" style="margin-bottom:10px;"><div class="sc_date fnt_prxim_nv_semibold" style="display: inline-block; padding-right: 5px;">14.02.2022</div> <a href="https://xn--b1adeadlc3bdjl.kz/kraud-marketing-v-kazahstane/">Крауд-маркетинг в Казахстане: эффективный способ продвижения</a></div><div class="sc_date_ttl fnt_prxim_nv_bold htwo" style="margin-bottom:10px;"><div class="sc_date fnt_prxim_nv_semibold" style="display: inline-block; padding-right: 5px;">31.01.2022</div> <a href="https://xn--b1adeadlc3bdjl.kz/kak-vybrat-domen-sajta-kz-com-ili-net/">Как правильно выбрать домен при создании сайта? Что лучше: .kz, .com или .net?</a></div><div class="sc_date_a fnt_prxim_nv_black hthree"><a rel="nofollow" href="https://xn--b1adeadlc3bdjl.kz/blog/">Все статьи</a></div></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><div class="section_elevan_cnt"><div class="section_elevan_cnt_head fnt_prxim_nv_regular"><div class="hreplace">Отзывы</div></div> <script type="rocketlazyloadscript" src="https://apps.elfsight.com/p/platform.js" defer=""></script> <div class="elfsight-app-35c798ca-c7d0-44c5-94c6-fd2a2516468e"></div></div></div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><div class="section_elevan_cnt"><div class="section_elevan_cnt_head fnt_prxim_nv_regular"><div class="hreplace">Цены, предложения</div></div><div class="head_cnt"><ul class="head_cnt_ul fnt_prxim_nv_semibold"><li><a href="https://xn--b1adeadlc3bdjl.kz/reklama-internet-magazina/">Продвижение интернет-магазина. Реклама магазина.</a></li><li><a href="https://xn--b1adeadlc3bdjl.kz/reklama-medicinskix-uslug/">Реклама медицинских услуг. Как раскрутить медцентр</a></li><li><a href="https://xn--b1adeadlc3bdjl.kz/reklama-restorana/">Раскрутка ресторана и кафе</a></li><li><a href="https://xn--b1adeadlc3bdjl.kz/reklama-mebelnogo-magazina/">Продвижение мебельного магазина. Как увеличить продажи мебели?</a></li><li><a href="https://xn--b1adeadlc3bdjl.kz/reklama-stroitelnyx-materialov/">Ведение рекламы строительных материалов</a></li><li><a href="https://xn--b1adeadlc3bdjl.kz/reklama-stroitelnoj-kompanii/">Настройка рекламы для строительных компании</a></li><li><a href="https://xn--b1adeadlc3bdjl.kz/reklama-produktov-pitaniya/">Реклама продуктов питания</a></li></ul></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="row"><div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"><div class="h6"><a href="https://xn--b1adeadlc3bdjl.kz"><noscript><img width="293" height="48" src="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2016/11/footer_logo.png" class="img-responsive" title="«Продвижение.kz»" alt="«Продвижение.kz»"/></noscript><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20293%2048%22%3E%3C/svg%3E" data-src="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2016/11/footer_logo.png" class="lazyload img-responsive" title="«Продвижение.kz»" alt="«Продвижение.kz»" width="293" height="48"></a></div><div class="cnt_info fnt_prxim_nv_semibold"><ul> <i class="info-k"> <span class="info-h">Наши контакты:</span> <br> ИП «Продвижение.kz»<br> г. Алматы, ул. Валиханова 5<br> kz3292260@gmail.com<br> </i> <i class="info-k"> <span class="info-h">Режим работы:</span><br> Понедельник-Пятница 09.00-18.00<br> Суббота 09.00-15.00 </i></ul></div></div><div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 ftr_contact"><div class="dropdown_header_algn dropdown fnt_prxim_nv_semibold"> <button class="dropdown_header dropdown-toggle" type="button" data-toggle="dropdown">Выберите город<span class="caret"></span></button><ul class="dropdown-menu" id="cities_hdr"><li class="active"><a href="javascript:;" data-pid="Алматы" data-phone="8 (727) 979-37-60">Алматы</a></li><li><a href="javascript:;" data-pid="Астана" data-phone="8 (7172) 46-91-79">Астана</a></li></ul></div> <a href="javascript:;" class="tel_nmbr fnt_prxim_nv_regular" id="phonenmbr_ftr">8 (727) 979-37-60</a> <span class="callback-top ft"> <a class="header-wa" href="https://wa.me/77073292260" target="_blank">WhatsApp</a> <span class="header-schedule">c 09.00-20.00</span> </span></div><div class="col-lg-3 col-md-3 hidden-sm col-xs-12 ftr_mbl_back"><ul id="menu-footer-menu" class="ftr_ul fnt_prxim_nv_semibold"><li id="menu-item-6394" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-6394"><a href="https://xn--b1adeadlc3bdjl.kz/">Реклама</a></li><li id="menu-item-62" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-62"><a href="/uslugi/">Услуги</a></li><li id="menu-item-6396" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6396"><a href="https://xn--b1adeadlc3bdjl.kz/o-nas/">О компании</a></li><li id="menu-item-13762" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13762"><a href="https://xn--b1adeadlc3bdjl.kz/portfolio/">Портфолио</a></li><li id="menu-item-6401" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6401"><a href="/klienty/">Клиенты</a></li><li id="menu-item-6397" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6397"><a href="https://xn--b1adeadlc3bdjl.kz/gotovye-predlozheniya/">Цены</a></li><li id="menu-item-6398" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6398"><a href="https://xn--b1adeadlc3bdjl.kz/novosti/">Новости</a></li><li id="menu-item-6399" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6399"><a href="https://xn--b1adeadlc3bdjl.kz/kontakty/">Контакты</a></li></ul></div><div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"><div class="fnt_prxim_nv_semibold ftr_scial_ttl hreplace">Мы в соц.сетях:</div><ul class="ftr_social_ul"><li><a rel="nofollow" target="_blank" href="https://vk.com/prodvijenie_kz"><i class="fa fa-vk" aria-hidden="true"></i></a></li><li><a rel="nofollow" target="_blank" href="https://www.instagram.com/kz3292260/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li><li><a rel="nofollow" target="_blank" href="https://twitter.com/prodvizhenie_kz"><i class="fa fa-twitter" aria-hidden="true"></i></a></li><li><a rel="nofollow" target="_blank" href="https://ok.ru/profile/65305946858/statuses"><i class="fa fa-odnoklassniki" aria-hidden="true"></i></a></li><li><a rel="nofollow" target="_blank" href="https://www.facebook.com/pro3292260/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li></ul><div class="fnt_prxim_nv_semibold ftr_copy_right">© Продвижение.kz 2010-2021.<br> All rights reserved.</div></div></div></div><div id="whatsapp" class="animated pulse"> <a rel="nofollow" target="_blank" href="https://wa.me/77073292260"> <noscript><img width="63" height="63" src="/wp-content/uploads/2018/04/whtsp.png" alt="WhatsApp"></noscript><img class=" lazyloading" src="/wp-content/uploads/2018/04/whtsp.png" data-src="/wp-content/uploads/2018/04/whtsp.png" alt="WhatsApp" width="63" height="63"> </a></div><div class="cnt_info fnt_prxim_nv_semibold" style="text-align: center;display: block;">Отправляя любую форму на сайте, вы соглашаетесь с <a href="/soglashenie-ob-obrabotke-personalnyh-dannyh/">политикой конфиденциальности</a></div></footer><div class="modal fade" id="mdl_onlineapp"><div class="modal-dialog" role="document"><div class="modal-content modal_content fnt_prxim_nv_semibold"><div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button><div class="modal-title fnt_prxim_nv_bold">Обратный звонок</div></div><div class="modal-body"><p>Отправьте заявку и мы свяжемся с Вами в ближайшее время</p><div role="form" class="wpcf7" id="wpcf7-f6729-o1" dir="ltr" lang="ru-RU"><div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p><ul></ul></div><form action="/soglashenie-ob-obrabotke-personalnyh-dannyh/#wpcf7-f6729-o1" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init"><div style="display: none;"> <input type="hidden" name="_wpcf7" value="6729"> <input type="hidden" name="_wpcf7_version" value="5.5.4"> <input type="hidden" name="_wpcf7_locale" value="ru_RU"> <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f6729-o1"> <input type="hidden" name="_wpcf7_container_post" value="0"> <input type="hidden" name="_wpcf7_posted_data_hash" value=""> <input type="hidden" name="_wpcf7_recaptcha_response" value=""></div><div class="form-group"> <span class="wpcf7-form-control-wrap YourPhone"><input type="text" name="YourPhone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control tel phonepettern" aria-required="true" aria-invalid="false" placeholder="+7 (123) 456-78-90"></span><br> <span id="wpcf7-63eea701731af-wrapper" class="wpcf7-form-control-wrap mailpass-780-wrap" style="display:none !important; visibility:hidden !important;"><label for="wpcf7-63eea701731af-field" class="hp-message">Please leave this field empty.</label><input id="wpcf7-63eea701731af-field" placeholder="mailphone" class="wpcf7-form-control wpcf7-text" type="text" name="mailpass-780" value="" size="40" tabindex="-1" autocomplete="new-password"></span></div><div class="form-group"> <input type="submit" value="Отправить" class="wpcf7-form-control has-spinner wpcf7-submit btn_sbmt btn btn-block"></div><div class="wpcf7-response-output" aria-hidden="true"></div></form></div></div></div></div></div><div class="modal fade" id="mdl_bookpro"><div class="modal-dialog" role="document"><div class="modal-content modal_content fnt_prxim_nv_semibold"><div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button><div class="modal-title fnt_prxim_nv_bold">Продвижение в сети</div></div><div class="modal-body"><p>Отправьте заявку и мы свяжемся с Вами в ближайшее время</p><div role="form" class="wpcf7" id="wpcf7-f6729-o2" dir="ltr" lang="ru-RU"><div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p><ul></ul></div><form action="/soglashenie-ob-obrabotke-personalnyh-dannyh/#wpcf7-f6729-o2" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init"><div style="display: none;"> <input type="hidden" name="_wpcf7" value="6729"> <input type="hidden" name="_wpcf7_version" value="5.5.4"> <input type="hidden" name="_wpcf7_locale" value="ru_RU"> <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f6729-o2"> <input type="hidden" name="_wpcf7_container_post" value="0"> <input type="hidden" name="_wpcf7_posted_data_hash" value=""> <input type="hidden" name="_wpcf7_recaptcha_response" value=""></div><div class="form-group"> <span class="wpcf7-form-control-wrap YourPhone"><input type="text" name="YourPhone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control tel phonepettern" aria-required="true" aria-invalid="false" placeholder="+7 (123) 456-78-90"></span><br> <span id="wpcf7-63eea7017373d-wrapper" class="wpcf7-form-control-wrap mailpass-780-wrap" style="display:none !important; visibility:hidden !important;"><label for="wpcf7-63eea7017373d-field" class="hp-message">Please leave this field empty.</label><input id="wpcf7-63eea7017373d-field" placeholder="mailphone" class="wpcf7-form-control wpcf7-text" type="text" name="mailpass-780" value="" size="40" tabindex="-1" autocomplete="new-password"></span></div><div class="form-group"> <input type="submit" value="Отправить" class="wpcf7-form-control has-spinner wpcf7-submit btn_sbmt btn btn-block"></div><div class="wpcf7-response-output" aria-hidden="true"></div></form></div></div></div></div></div><div class="modal fade" id="mdl_sitecreate"><div class="modal-dialog" role="document"><div class="modal-content modal_content fnt_prxim_nv_semibold"><div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button><div class="modal-title fnt_prxim_nv_bold">Создание Сайта</div></div><div class="modal-body"><p>Отправьте заявку и мы свяжемся с Вами в ближайшее время</p><div role="form" class="wpcf7" id="wpcf7-f6916-o3" dir="ltr" lang="ru-RU"><div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p><ul></ul></div><form action="/soglashenie-ob-obrabotke-personalnyh-dannyh/#wpcf7-f6916-o3" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init"><div style="display: none;"> <input type="hidden" name="_wpcf7" value="6916"> <input type="hidden" name="_wpcf7_version" value="5.5.4"> <input type="hidden" name="_wpcf7_locale" value="ru_RU"> <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f6916-o3"> <input type="hidden" name="_wpcf7_container_post" value="0"> <input type="hidden" name="_wpcf7_posted_data_hash" value=""> <input type="hidden" name="_wpcf7_recaptcha_response" value=""></div><div class="form-group"> <span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Ваше Имя"></span></div><div class="form-group"> <span class="wpcf7-form-control-wrap YourPhone"><input type="text" name="YourPhone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control tel phonepettern" aria-required="true" aria-invalid="false" placeholder="+7 (123) 456-78-90"></span></div><div class="form-group"> <span class="wpcf7-form-control-wrap email-289"><input type="email" name="email-289" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email form-control" aria-invalid="false" placeholder="Ваш ящик"></span><br> <span id="wpcf7-63eea701740e9-wrapper" class="wpcf7-form-control-wrap mailpass-789-wrap" style="display:none !important; visibility:hidden !important;"><label for="wpcf7-63eea701740e9-field" class="hp-message">Please leave this field empty.</label><input id="wpcf7-63eea701740e9-field" placeholder="mailphone" class="wpcf7-form-control wpcf7-text" type="text" name="mailpass-789" value="" size="40" tabindex="-1" autocomplete="new-password"></span></div><div class="form-group"> <input type="submit" value="Отправить заявку" class="wpcf7-form-control has-spinner wpcf7-submit btn_sbmt btn btn-block"></div><div class="wpcf7-response-output" aria-hidden="true"></div></form></div></div></div></div></div><div class="modal fade" id="mdl_success"><div class="modal-dialog modal_dialog" role="document"><div class="modal-content modal_content fnt_prxim_nv_semibold"><div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button><div class="h6"><noscript><img width="293" height="48" src="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2016/11/logo.png" class="img-responsive center-block" title="«Продвижение.kz»" alt="«Продвижение.kz»"/></noscript><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20293%2048%22%3E%3C/svg%3E" data-src="https://xn--b1adeadlc3bdjl.kz/wp-content/uploads/2016/11/logo.png" class="lazyload img-responsive center-block" title="«Продвижение.kz»" alt="«Продвижение.kz»" width="293" height="48"></div><div class="modal-title fnt_prxim_nv_bold">Благодарим за обращение в нашу компанию</div></div><div class="modal-footer modal_footer"><div class="h6">С вами свяжутся в ближайшее время</div></div></div></div></div> <script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+document.addEventListener( 'wpcf7mailsent', function( event ) {
+jQuery('.modal').modal('hide'); jQuery('#mdl_success').modal('show');jQuery('#loading').hide();jQuery('.wpcf7-response-output').hide();lstats.reachGoal('ORDER'); yaCounter45847806.reachGoal('success'); gtag('event', 'contact', { event_category: 'zakaz', event_action: 'zakaz'}); fbq('track', 'Lead', {value: 100.00, currency: 'USD' });
+}, false );
+});</script> <script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+jQuery( function($){
+$(".data").mask("99/99/9999");
+$(".tel").mask("+7 (000) 000-00-00");
+$(".cpf").mask("999.999.999-99");
+$(".cnpj").mask("99.999.999/9999-99");
+$("#billing_phone").mask("+7 (000) 000-00-00");
+// $(“.wpcf7-tel”).mask("+7 (000) 000-00-00");
+
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:38,
+    nav:true,
+		dots: false,
+    responsive:{
+        0:{
+            items:1
+        },
+        575:{
+            items:2
+        },
+        992:{
+            items:3
+        }
+    }
+})
+});
+
+});</script> <noscript><style>.lazyload{display:none;}</style></noscript><script type="rocketlazyloadscript" data-noptimize="1">window.lazySizesConfig=window.lazySizesConfig||{};window.lazySizesConfig.loadMode=1;</script><script async="" data-noptimize="1" src="https://xn--b1adeadlc3bdjl.kz/wp-content/plugins/autoptimize/classes/external/js/lazysizes.min.js?ao_version=2.9.5.1"></script><script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-includes/js/dist/vendor/regenerator-runtime.min.js" id="regenerator-runtime-js" defer=""></script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-includes/js/dist/vendor/wp-polyfill.min.js" id="wp-polyfill-js"></script> <script type="text/javascript" id="contact-form-7-js-extra">var wpcf7 = {"api":{"root":"https:\/\/xn--b1adeadlc3bdjl.kz\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};</script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/plugins/contact-form-7/includes/js/index.js" id="contact-form-7-js" defer=""></script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/plugins/testimonials/js/jquery.flexslider-min.js" id="flexslider-js" defer=""></script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/plugins/testimonials/js/jquery.flexslider.manualDirectionControls.js" id="flexslider-manualDirectionControls-js" defer=""></script> <script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();</script> <script type="text/javascript" id="rocket-preload-links-js-extra">var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/xn--b1adeadlc3bdjl.kz","onHoverDelay":"100","rateThrottle":"3"};</script> <script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());</script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/themes/glavnaya/js/bootstrap.min.js" id="glavnya-bootstrap-js" defer=""></script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/themes/glavnaya/js/bootstrap-select.min.js" id="glavnya-bootstrap-select-js" defer=""></script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/themes/glavnaya/js/masonry.pkgd.min.js" id="glavnya-masonry-js-js" defer=""></script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/themes/glavnaya/js/owl.carousel.min.js" id="glavnya-slider-js-js" defer=""></script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/themes/glavnaya/js/main.js" id="main-js" defer=""></script> <script type="rocketlazyloadscript" src="https://www.google.com/recaptcha/api.js?render=6LcRulccAAAAAJ15KRIX4-sIsD9x1jiPlFObDUuI&amp;ver=3.0" id="google-recaptcha-js"></script> <script type="text/javascript" id="wpcf7-recaptcha-js-extra">var wpcf7_recaptcha = {"sitekey":"6LcRulccAAAAAJ15KRIX4-sIsD9x1jiPlFObDUuI","actions":{"homepage":"homepage","contactform":"contactform"}};</script> <script type="rocketlazyloadscript" src="https://xn--b1adeadlc3bdjl.kz/wp-content/plugins/contact-form-7/modules/recaptcha/index.js" id="wpcf7-recaptcha-js" defer=""></script> <script type="rocketlazyloadscript" data-no-optimize="">window.addEventListener('DOMContentLoaded', function() {
+    var admin_ajaxurl = "https://xn--b1adeadlc3bdjl.kz/wp-admin/admin-ajax.php";
+    jQuery(document).ready(function($){
+
+
+        var hashvalue = decodeURIComponent(window.location.hash.substr(1));
+
+        if(hashvalue=="Astana"||hashvalue=="Almaty") {
+            if(hashvalue=="Astana") hashvalue="Астана";
+            else hashvalue="Алматы";
+
+            $('#cityname_hdr').text(hashvalue);
+            $('.filter-option').text(hashvalue);
+                // alert($('.ftr_contact .dropdown-toggle .filter-option'));
+
+                $('.ftr_contact .dropdown-toggle .filter-option').text(hashvalue);
+                var phone_string=$('[data-pid=' + hashvalue + ']').data('phone');
+                $('#phonenmbr_hdr').text(phone_string);
+                $('#phonenmbr_hdr').attr("href",'tel: '+phone_string);
+                $('#phonenmbr_ftr').text(phone_string);
+                $('#phonenmbr_ftr').attr('href','tel: '+phone_string);
+
+            }
+
+
+
+            $('ul#cities_hdr li a').click(function(e){
+                var sel = $(this).text();
+                $('ul#cities_hdr li.active').removeClass('active');
+                $(this).closest('li').addClass('active');
+                $('#cityname_hdr').text($(this).text());
+                var phone_string=$(this).data('phone');
+                $('#phonenmbr_hdr').text(phone_string);
+                $('#phonenmbr_hdr').attr("href",'tel: '+phone_string);
+                $('#phonenmbr_ftr').text(phone_string);
+                $('#phonenmbr_ftr').attr('href','tel: '+phone_string);
+
+                $('.ftr_contact .dropdown-toggle .filter-option').text(sel);
+                var hash_string="";
+                var pid=jQuery(this).data('pid');
+                if(pid=="Алматы")hash_string="Almaty";
+                else if(pid=="Астана")hash_string="Astana";
+
+                window.location.hash = hash_string;
+            });
+
+
+            $('#cities_ftr').on('change', function(){
+                //var selected = $(this).find("option:selected").text();
+
+                var selected = $(this).find('option:selected');
+                $('#cityname_hdr').text(selected.data('ppid'));
+                var phone_string=$(this).val();
+                $('#phonenmbr_hdr').text(phone_string);
+                $('#phonenmbr_hdr').attr("href",'tel: '+phone_string);
+                $('#phonenmbr_ftr').text(phone_string);
+                $('#phonenmbr_ftr').attr('href','tel: '+phone_string);
+
+                var hash_string="";
+                var pid=selected.data('ppid');
+                if(pid=="Алматы")hash_string="Almaty";
+                else if(pid=="Астана")hash_string="Astana";
+
+                window.location.hash = hash_string;
+
+            });
+
+            $(".phonepettern").on("blur", function() {
+                var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+
+                if( last.length == 3 ) {
+                    var move = $(this).val().substr( $(this).val().indexOf("-") - 1, 1 );
+                    var lastfour = move + last;
+
+                    var first = $(this).val().substr( 0, 9 );
+
+                    $(this).val( first + '-' + lastfour );
+                }
+            });
+
+            $('.btn_sbmt').click(function(e){
+
+                $('.wpcf7-response-output').hide();
+            });
+
+
+
+            $('#findout_form').click(function(e){
+
+                submit_FormData($(this));
+            });
+
+            $('#wpbookpro_form').click(function(e){
+
+                submit_FormData($(this));
+            });
+
+            $('#cadiscount_sbmt').click(function(e){
+
+                submit_FormData($(this));
+            });
+
+            $('#cabookpro_sbmt').click(function(e){
+
+                submit_FormData($(this));
+            });
+
+            var trigger = $(".data_model_popup").find('[data-toggle="modal"]');
+            trigger.click(function () {
+                var theModal = $(this).data("target");
+                var value = $(this).data("value");
+
+                //bookpro_frmtype
+                if(value)
+                {
+                   $(theModal + ' #bookbpro_frmtype').val(value);
+               }
+
+               $(theModal).on('hidden.bs.modal', function () {
+                $(theModal + ' #bookbpro_frmtype').val('');
+            });
+
+           });
+            //
+           /*setTimeout(function(){
+           var hashvalue = window.location.hash.substr(1);
+               window.location.hash="";
+            if(hashvalue){
+                //alert(hashvalue);
+               // $('#cityname_hdr').text(hashvalue);
+                 //$('.filter-option').text(hashvalue);
+                // alert($('.ftr_contact .dropdown-toggle .filter-option'));
+
+                 $('.ftr_contact .dropdown-toggle .filter-option').text(hashvalue);
+                 $('#phonenmbr_hdr').text($('[data-pid='+hashvalue+']').data('phone'));
+                 $('#phonenmbr_ftr').text($('[data-pid='+hashvalue+']').data('phone'));
+
+             }
+         },3000);*/
+
+
+            //
+        });
+
+ function Form_validation(curForm){
+
+            //var curStepBtn = curForm.attr("id");
+            var curInputs = curForm.find("input[type='email'],input[type='tel'],input[type='text'],input[type='password']");
+            var isValid = true;
+            jQuery(".form-group").removeClass("has-error");
+            for(var i=0; i<curInputs.length; i++){
+                if (!curInputs[i].validity.valid){
+                    isValid = false;
+                    jQuery(curInputs[i]).closest(".form-group").addClass("has-error");
+                }
+            }
+            if (isValid)
+            {
+              return true;
+          }else{
+              return false;
+          }
+      }
+
+      function submit_FormData(curData){
+
+        var curForm = curData.closest("form");
+        if (Form_validation(curForm))
+        {
+
+            jQuery('#loading').show();
+
+            var form = document.getElementById(curForm.attr("id"));
+            var formData = new FormData(form);
+            formData.append('action', 'form_submit');
+
+            jQuery.ajax({
+              url:admin_ajaxurl,
+              type:'POST',
+              data:formData,
+                      contentType: false,       // The content type used when sending data to the server.
+                      cache: false,             // To unable request pages to be cached
+                      processData:false,
+                      success:function(result){
+                        if(result != '')
+                        {
+                                //alert(result);
+                                jQuery('.modal').modal('hide');
+                                jQuery('#mdl_success').modal('show');
+                                form.reset();
+
+                            }
+                            jQuery('#loading').hide();
+                        }
+                    });
+        }
+    }
+
+});</script> <script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+ function getTimeRemaining(endtime) {
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    var seconds = Math.floor((t / 1000) % 60);
+    var minutes = Math.floor((t / 1000 / 60) % 60);
+    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+    var days = Math.floor(t / (1000 * 60 * 60 * 24));
+    return {
+      'total': t,
+      'days': days,
+      'hours': hours,
+      'minutes': minutes,
+      'seconds': seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+    var clock = document.getElementById(id);
+    var daysSpan = clock.querySelector('.days');
+    var hoursSpan = clock.querySelector('.hours');
+    var minutesSpan = clock.querySelector('.minutes');
+    var secondsSpan = clock.querySelector('.seconds');
+
+    function updateClock() {
+      var t = getTimeRemaining(endtime);
+
+      daysSpan.innerHTML = t.days;
+      hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+      minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+      secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+      if (t.total <= 0) {
+        clearInterval(timeinterval);
+    }
+}
+
+updateClock();
+var timeinterval = setInterval(updateClock, 1000);
+}
+
+var date_h = jQuery("#clock-hdr").data('date');
+var date_f = jQuery("#clock-ftr").data('date');
+var date_wph = jQuery("#wp-clockhdr").data('date');
+var date_wpf = jQuery("#wp-clockftr").data('date');
+var date_cah = jQuery("#ca-clockhdr").data('date');
+var date_caf = jQuery("#ca-clockftr").data('date');
+
+        //var deadline = new Date(Date.parse('6 Dec 2016 19:30:00 GMT+0600'));
+        //var deadline = new Date(Date.parse(new Date()) + 1 * 24 * 60 * 60 * 1000);
+        if(date_h){
+            var deadline1 = new Date(Date.parse(date_h));
+            initializeClock('clock-hdr', deadline1);
+        }
+        if(date_f){
+            var deadline = new Date(Date.parse(date_f));
+            initializeClock('clock-ftr', deadline);
+        }
+        if(date_wph){
+            var deadline2 = new Date(Date.parse(date_wph));
+            initializeClock('wp-clockhdr', deadline2);
+        }
+        if(date_wpf){
+            var deadline3 = new Date(Date.parse(date_wpf));
+            initializeClock('wp-clockftr', deadline3);
+        }
+        if(date_cah){
+            var deadline4 = new Date(Date.parse(date_cah));
+            initializeClock('ca-clockhdr', deadline4);
+        }
+        if(date_caf){
+            var deadline5 = new Date(Date.parse(date_caf));
+            initializeClock('ca-clockftr', deadline5);
+        }
+
+    });</script> <script type="rocketlazyloadscript" data-no-optimize="">window.addEventListener('DOMContentLoaded', function() {
+        jQuery(function($) {
+         $(window).scroll(function(){
+             if($(this).scrollTop()>350){
+                 $('nav.navbar').addClass('navbar-fixed');
+             }
+             else if ($(this).scrollTop()<350){
+                 $('nav.navbar').removeClass('navbar-fixed');
+             }
+         });
+     });
+ });</script>  <script type="rocketlazyloadscript">var _emv = _emv || [];
+    _emv['campaign'] = '83aa658c240d1b2d12d2c6ab';
+    
+    (function() {
+        var em = document.createElement('script'); em.type = 'text/javascript'; em.async = true;
+        em.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'leadback.ru/js/leadback.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(em, s);
+    })();</script> 
+</body></html>

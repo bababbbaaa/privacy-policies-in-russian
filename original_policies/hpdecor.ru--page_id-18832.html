@@ -1,0 +1,898 @@
+<html class="no-touchevents cssanimations backgroundcliptext csstransitions chrome chrome73 platform-linux" lang="ru-RU"><head>
+    <meta charset="UTF-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="profile" href="https://gmpg.org/xfn/11">-->
+    <link rel="pingback" href="https://hpdecor.ru/web/xmlrpc.php">
+    <title>Персональные данные — HPDecor — Бутик только стильных предметов интерьера</title>
+<meta name="robots" content="max-image-preview:large">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="alternate" type="application/rss+xml" title="HPDecor - Бутик только стильных предметов интерьера » Лента" href="https://hpdecor.ru/?feed=rss2">
+<link rel="alternate" type="application/rss+xml" title="HPDecor - Бутик только стильных предметов интерьера » Лента комментариев" href="https://hpdecor.ru/?feed=comments-rss2">
+<script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/tNAc29ZZrpcOCErva2nr4BS9/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-VQkqyzWECBbjdnrmLsMeQdf0TTXr6rfxgJXnIIszVBecGcFa03Tl4VBO4n2inOOm"></script><script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/hpdecor.ru\/web\/wp-includes\/js\/wp-emoji.js?ver=6.1.1","twemoji":"https:\/\/hpdecor.ru\/web\/wp-includes\/js\/twemoji.js?ver=6.1.1"}};
+/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
+
+( function( window, document, settings ) {
+	var src, ready, ii, tests;
+
+	// Create a canvas element for testing native browser support of emoji.
+	var canvas = document.createElement( 'canvas' );
+	var context = canvas.getContext && canvas.getContext( '2d' );
+
+	/**
+	 * Checks if two sets of Emoji characters render the same visually.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @private
+	 *
+	 * @param {number[]} set1 Set of Emoji character codes.
+	 * @param {number[]} set2 Set of Emoji character codes.
+	 *
+	 * @return {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( set1, set2 ) {
+		var stringFromCharCode = String.fromCharCode;
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set1 ), 0, 0 );
+		var rendered1 = canvas.toDataURL();
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set2 ), 0, 0 );
+		var rendered2 = canvas.toDataURL();
+
+		return rendered1 === rendered2;
+	}
+
+	/**
+	 * Detects if the browser supports rendering emoji or flag emoji.
+	 *
+	 * Flag emoji are a single glyph made of two characters, so some browsers
+	 * (notably, Firefox OS X) don't support them.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @private
+	 *
+	 * @param {string} type Whether to test for support of "flag" or "emoji".
+	 *
+	 * @return {boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var isIdentical;
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for Transgender flag compatibility. This flag is shortlisted for the Emoji 13 spec,
+				 * but has landed in Twemoji early, so we can add support for it, too.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (white flag emoji + transgender symbol).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0x1F3F3, 0xFE0F, 0x200D, 0x26A7, 0xFE0F ],
+					[ 0x1F3F3, 0xFE0F, 0x200B, 0x26A7, 0xFE0F ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDDFA, 0xD83C, 0xDDF3 ],
+					[ 0xD83C, 0xDDFA, 0x200B, 0xD83C, 0xDDF3 ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather an five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDFF4, 0xDB40, 0xDC67, 0xDB40, 0xDC62, 0xDB40, 0xDC65, 0xDB40, 0xDC6E, 0xDB40, 0xDC67, 0xDB40, 0xDC7F ],
+					[ 0xD83C, 0xDFF4, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC62, 0x200B, 0xDB40, 0xDC65, 0x200B, 0xDB40, 0xDC6E, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC7F ]
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * Why can't we be friends? Everyone can now shake hands in emoji, regardless of skin tone!
+				 *
+				 * To test for Emoji 14.0 support, try to render a new emoji: Handshake: Light Skin Tone, Dark Skin Tone.
+				 *
+				 * The Handshake: Light Skin Tone, Dark Skin Tone emoji is a ZWJ sequence combining 🫱 Rightwards Hand,
+				 * 🏻 Light Skin Tone, a Zero Width Joiner, 🫲 Leftwards Hand, and 🏿 Dark Skin Tone.
+				 *
+				 * 0x1FAF1 == Rightwards Hand
+				 * 0x1F3FB == Light Skin Tone
+				 * 0x200D == Zero-Width Joiner (ZWJ) that links the code points for the new emoji or
+				 * 0x200B == Zero-Width Space (ZWS) that is rendered for clients not supporting the new emoji.
+				 * 0x1FAF2 == Leftwards Hand
+				 * 0x1F3FF == Dark Skin Tone.
+				 *
+				 * When updating this test for future Emoji releases, ensure that individual emoji that make up the
+				 * sequence come from older emoji standards.
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[0x1FAF1, 0x1F3FB, 0x200D, 0x1FAF2, 0x1F3FF],
+					[0x1FAF1, 0x1F3FB, 0x200B, 0x1FAF2, 0x1F3FF]
+				);
+
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Adds a script to the head of the document.
+	 *
+	 * @ignore
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param {Object} src The url where the script is located.
+	 * @return {void}
+	 */
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.defer = script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	tests = Array( 'flag', 'emoji' );
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	/*
+	 * Tests the browser support for flag emojis and other emojis, and adjusts the
+	 * support settings accordingly.
+	 */
+	for( ii = 0; ii < tests.length; ii++ ) {
+		settings.supports[ tests[ ii ] ] = browserSupportsEmoji( tests[ ii ] );
+
+		settings.supports.everything = settings.supports.everything && settings.supports[ tests[ ii ] ];
+
+		if ( 'flag' !== tests[ ii ] ) {
+			settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && settings.supports[ tests[ ii ] ];
+		}
+	}
+
+	settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && ! settings.supports.flag;
+
+	// Sets DOMReady to false and assigns a ready function to settings.
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	// When the browser can not render everything we need to load a polyfill.
+	if ( ! settings.supports.everything ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		/*
+		 * Cross-browser version of adding a dom ready event.
+		 */
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+</script><script src="https://hpdecor.ru/web/wp-includes/js/twemoji.js?ver=6.1.1" type="text/javascript" defer=""></script><script src="https://hpdecor.ru/web/wp-includes/js/wp-emoji.js?ver=6.1.1" type="text/javascript" defer=""></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="sbi_styles-css" href="https://hpdecor.ru/web/wp-content/plugins/instagram-feed/css/sbi-styles.min.css?ver=6.1.1" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="https://hpdecor.ru/web/wp-includes/css/dist/block-library/style.css?ver=6.1.1" media="all">
+<link rel="stylesheet" id="wc-blocks-vendors-style-css" href="https://hpdecor.ru/web/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-vendors-style.css?ver=1676446572" media="all">
+<link rel="stylesheet" id="wc-blocks-style-css" href="https://hpdecor.ru/web/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style.css?ver=1676446572" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="https://hpdecor.ru/web/wp-includes/css/classic-themes.css?ver=1" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="contact-form-7-css" href="https://hpdecor.ru/web/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.7.3" media="all">
+<style id="woocommerce-inline-inline-css" type="text/css">
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+<link rel="stylesheet" id="protect-link-css-css" href="https://hpdecor.ru/web/wp-content/plugins/wp-copy-protect-with-color-design/css/protect_style.css?ver=6.1.1" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="https://hpdecor.ru/web/wp-content/themes/airi/assets/css/font-awesome.min.css?ver=1.1.9" media="all">
+<style id="font-awesome-inline-css" type="text/css">
+@font-face{
+                font-family: 'FontAwesome';
+                src: url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/fontawesome-webfont.eot');
+                src: url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/fontawesome-webfont.eot') format('embedded-opentype'),
+                     url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/fontawesome-webfont.woff2') format('woff2'),
+                     url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/fontawesome-webfont.woff') format('woff'),
+                     url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/fontawesome-webfont.ttf') format('truetype'),
+                     url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/fontawesome-webfont.svg') format('svg');
+                font-weight:normal;
+                font-style:normal
+            }
+</style>
+<link rel="stylesheet" id="animate-css-css" href="https://hpdecor.ru/web/wp-content/themes/airi/assets/css/animate.min.css?ver=1.1.9" media="all">
+<link rel="stylesheet" id="airi-theme-css" href="https://hpdecor.ru/web/wp-content/themes/airi/style.css?ver=1.1.9" media="all">
+<style id="airi-theme-inline-css" type="text/css">
+.site-loading .la-image-loading {opacity: 1;visibility: visible}.la-image-loading.spinner-custom .content {width: 100px;margin-top: -50px;height: 100px;margin-left: -50px;text-align: center}.la-image-loading.spinner-custom .content img {width: auto;margin: 0 auto}.site-loading #page.site {opacity: 0;transition: all .3s ease-in-out}#page.site {opacity: 1}.la-image-loading {opacity: 0;position: fixed;z-index: 999999;left: 0;top: 0;right: 0;bottom: 0;background: #fff;overflow: hidden;transition: all .3s ease-in-out;-webkit-transition: all .3s ease-in-out;visibility: hidden}.la-image-loading .content {position: absolute;width: 50px;height: 50px;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px}.la-loader.spinner1 {width: 40px;height: 40px;margin: 5px;display: block;box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);-webkit-animation: la-rotateplane 1.2s infinite ease-in-out;animation: la-rotateplane 1.2s infinite ease-in-out;border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px}.la-loader.spinner2 {width: 40px;height: 40px;margin: 5px;box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);border-radius: 100%;-webkit-animation: la-scaleout 1.0s infinite ease-in-out;animation: la-scaleout 1.0s infinite ease-in-out}.la-loader.spinner3 {margin: 15px 0 0 -10px;width: 70px;text-align: center}.la-loader.spinner3 [class*="bounce"] {width: 18px;height: 18px;box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);border-radius: 100%;display: inline-block;-webkit-animation: la-bouncedelay 1.4s infinite ease-in-out;animation: la-bouncedelay 1.4s infinite ease-in-out;-webkit-animation-fill-mode: both;animation-fill-mode: both}.la-loader.spinner3 .bounce1 {-webkit-animation-delay: -.32s;animation-delay: -.32s}.la-loader.spinner3 .bounce2 {-webkit-animation-delay: -.16s;animation-delay: -.16s}.la-loader.spinner4 {margin: 5px;width: 40px;height: 40px;text-align: center;-webkit-animation: la-rotate 2.0s infinite linear;animation: la-rotate 2.0s infinite linear}.la-loader.spinner4 [class*="dot"] {width: 60%;height: 60%;display: inline-block;position: absolute;top: 0;border-radius: 100%;-webkit-animation: la-bounce 2.0s infinite ease-in-out;animation: la-bounce 2.0s infinite ease-in-out;box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);-webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15)}.la-loader.spinner4 .dot2 {top: auto;bottom: 0;-webkit-animation-delay: -1.0s;animation-delay: -1.0s}.la-loader.spinner5 {margin: 5px;width: 40px;height: 40px}.la-loader.spinner5 div {width: 33%;height: 33%;float: left;-webkit-animation: la-cubeGridScaleDelay 1.3s infinite ease-in-out;animation: la-cubeGridScaleDelay 1.3s infinite ease-in-out}.la-loader.spinner5 div:nth-child(1), .la-loader.spinner5 div:nth-child(5), .la-loader.spinner5 div:nth-child(9) {-webkit-animation-delay: .2s;animation-delay: .2s}.la-loader.spinner5 div:nth-child(2), .la-loader.spinner5 div:nth-child(6) {-webkit-animation-delay: .3s;animation-delay: .3s}.la-loader.spinner5 div:nth-child(3) {-webkit-animation-delay: .4s;animation-delay: .4s}.la-loader.spinner5 div:nth-child(4), .la-loader.spinner5 div:nth-child(8) {-webkit-animation-delay: .1s;animation-delay: .1s}.la-loader.spinner5 div:nth-child(7) {-webkit-animation-delay: 0s;animation-delay: 0s}@-webkit-keyframes la-rotateplane {0% {-webkit-transform: perspective(120px)}50% {-webkit-transform: perspective(120px) rotateY(180deg)}100% {-webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)}}@keyframes la-rotateplane {0% {transform: perspective(120px) rotateX(0deg) rotateY(0deg)}50% {transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)}100% {transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg)}}@-webkit-keyframes la-scaleout {0% {-webkit-transform: scale(0)}100% {-webkit-transform: scale(1);opacity: 0}}@keyframes la-scaleout {0% {transform: scale(0);-webkit-transform: scale(0)}100% {transform: scale(1);-webkit-transform: scale(1);opacity: 0}}@-webkit-keyframes la-bouncedelay {0%, 80%, 100% {-webkit-transform: scale(0)}40% {-webkit-transform: scale(1)}}@keyframes la-bouncedelay {0%, 80%, 100% {transform: scale(0)}40% {transform: scale(1)}}@-webkit-keyframes la-rotate {100% {-webkit-transform: rotate(360deg)}}@keyframes la-rotate {100% {transform: rotate(360deg);-webkit-transform: rotate(360deg)}}@-webkit-keyframes la-bounce {0%, 100% {-webkit-transform: scale(0)}50% {-webkit-transform: scale(1)}}@keyframes la-bounce {0%, 100% {transform: scale(0)}50% {transform: scale(1)}}@-webkit-keyframes la-cubeGridScaleDelay {0% {-webkit-transform: scale3d(1, 1, 1)}35% {-webkit-transform: scale3d(0, 0, 1)}70% {-webkit-transform: scale3d(1, 1, 1)}100% {-webkit-transform: scale3d(1, 1, 1)}}@keyframes la-cubeGridScaleDelay {0% {transform: scale3d(1, 1, 1)}35% {transform: scale3d(0, 0, 1)}70% {transform: scale3d(1, 1, 1)}100% {transform: scale3d(1, 1, 1)}}.la-loader.spinner1, .la-loader.spinner2, .la-loader.spinner3 [class*="bounce"], .la-loader.spinner4 [class*="dot"], .la-loader.spinner5 div{background-color: #826251}.show-when-logged{display: none !important}.section-page-header{color: rgba(0,0,0,0.7);background-repeat: repeat;background-position: left top}.section-page-header .page-title{color: #262626}.section-page-header a{color: rgba(0,0,0,0.7)}.section-page-header a:hover{color: #cf987e}.section-page-header .page-header-inner{padding-top: 25px;padding-bottom: 25px}@media(min-width: 768px){.section-page-header .page-header-inner{padding-top: 25px;padding-bottom: 25px}}@media(min-width: 992px){.section-page-header .page-header-inner{padding-top: 40px;padding-bottom: 40px}}@media(min-width: 1440px){.section-page-header .page-header-inner{padding-top: 20px;padding-bottom: 20px}}.site-main{padding-top:70px;padding-bottom:30px}body.airi-body{font-size: 12px;background-repeat: repeat;background-position: left top}body.airi-body.body-boxed #page.site{width: 1230px;max-width: 100%;margin-left: auto;margin-right: auto;background-repeat: repeat;background-position: left top}body.airi-body.body-boxed .site-header .site-header-inner{max-width: 1230px}body.airi-body.body-boxed .site-header.is-sticky .site-header-inner{left: calc( (100% - 1230px)/2 );left: -webkit-calc( (100% - 1230px)/2 )}#masthead_aside,.site-header .site-header-inner{background-repeat: repeat;background-position: left top;background-color: #fff}.enable-header-transparency .site-header:not(.is-sticky) .site-header-inner{background-repeat: repeat;background-position: left top;background-color: rgba(0,0,0,0)}.footer-top{background-image: url(//hpdecor.ru/web/wp-content/uploads/2018/11/footer-bg.jpg);background-repeat: no-repeat;background-position: center bottom;background-size: cover;padding-top:50px;padding-bottom:20px}.open-newsletter-popup .lightcase-inlineWrap{background-image: url(//hpdecor.ru/web/wp-content/uploads/2020/09/o1cn01djdqgo1fhnj7ze8rq_178593982.jpg);background-repeat: repeat;background-position: left top;background-size: cover}.header-v6 #masthead_aside .mega-menu > li > a,.header-v7 #header_aside .mega-menu > li > a,.site-main-nav .main-menu > li > a{font-size: 14px}.mega-menu .popup{font-size: 12px}.mega-menu .mm-popup-wide .inner > ul.sub-menu > li li > a,.mega-menu .mm-popup-narrow li.menu-item > a{font-size: 12px}.mega-menu .mm-popup-wide .inner > ul.sub-menu > li > a{font-size: 12px}.site-header .site-branding a{height: 120px;line-height: 120px}.site-header .header-component-inner{padding-top: 40px;padding-bottom: 40px}.site-header .header-main .la_com_action--dropdownmenu .menu,.site-header .mega-menu > li > .popup{margin-top: 60px}.site-header .header-main .la_com_action--dropdownmenu:hover .menu,.site-header .mega-menu > li:hover > .popup{margin-top: 40px}.site-header.is-sticky .site-branding a{height: 95px;line-height: 95px}.site-header.is-sticky .header-component-inner{padding-top: 27.5px;padding-bottom: 27.5px}.site-header.is-sticky .header-main .la_com_action--dropdownmenu .menu,.site-header.is-sticky .mega-menu > li > .popup{margin-top: 47.5px}.site-header.is-sticky .header-main .la_com_action--dropdownmenu:hover .menu,.site-header.is-sticky .mega-menu > li:hover > .popup{margin-top: 27.5px}@media(max-width: 1300px) and (min-width: 992px){.site-header .site-branding a{height: 100px;line-height: 100px}.site-header .header-component-inner{padding-top: 30px;padding-bottom: 30px}.site-header .header-main .la_com_action--dropdownmenu .menu,.site-header .mega-menu > li > .popup{margin-top: 50px}.site-header .header-main .la_com_action--dropdownmenu:hover .menu,.site-header .mega-menu > li:hover > .popup{margin-top: 30px}.site-header.is-sticky .site-branding a{height: 80px;line-height: 80px}.site-header.is-sticky .header-component-inner{padding-top: 20px;padding-bottom: 20px}.site-header.is-sticky .header-main .la_com_action--dropdownmenu .menu,.site-header.is-sticky .mega-menu > li > .popup{margin-top: 40px}.site-header.is-sticky .header-main .la_com_action--dropdownmenu:hover .menu,.site-header.is-sticky .mega-menu > li:hover > .popup{margin-top: 20px}}@media(max-width: 991px){.site-header-mobile .site-branding a{height: 70px;line-height: 70px}.site-header-mobile .header-component-inner{padding-top: 15px;padding-bottom: 15px}.site-header-mobile.is-sticky .site-branding a{height: 70px;line-height: 70px}.site-header-mobile.is-sticky .header-component-inner{padding-top: 15px;padding-bottom: 15px}}.header-v5 #masthead_aside{background-repeat: repeat;background-position: left top;background-color: #fff}.header-v5.enable-header-transparency #masthead_aside{background-repeat: repeat;background-position: left top;background-color: rgba(0,0,0,0)}img.lahb-logo,.site-header .site-branding img{width: 115px}.widget_recent_entries .pr-item .pr-item--right a, .single_post_quote_wrap .quote-wrapper .format-content, .la_testimonials--style-2 .loop__item__desc, .la_testimonials--style-3 .loop__item__desc, .la_testimonials--style-4 .loop__item__desc, .la_testimonials--style-5 .loop__item__desc, .la_testimonials--style-7 .loop__item__desc, .la_testimonials--style-9 .loop__item__desc, .la-sc-icon-boxes.icon-type-number .type-number, .member--style-1 .loop__item__meta, .member--style-2 .member__item__role, .member--style-3 .member__item__role, .banner-type-5 .b-title1, .la-blockquote.style-2 p, .la-blockquote.style-3 p,.la_testimonials--style-1 .loop__item__desc,.la_testimonials--style-1 .testimonial_item--role,.la_testimonials--style-8 .loop__item__desc,.products-grid-5 .product_item .product_item--writer,.products-grid-4 .product_item .product_item--writer,.elm-countdown.elm-countdown-style-3 .countdown-period,.elm-countdown.elm-countdown-style-4 .countdown-period,.la-blockquote.style-4 p,.la__tta .tab--7 .vc_tta-tabs-list,.three-font-family,.highlight-font-family {font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif; }h1,.h1, h2,.h2, h3,.h3, h4,.h4, h5,.h5, h6,.h6, .la-service-box.service-type-3 .b-title1, .heading-font-family {font-family: "Playfair Display", "Helvetica Neue", Arial, sans-serif; }body, .la-blockquote.style-1 footer {font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif; }.background-color-primary, .slick__nav_style1 .slick-slider .slick-arrow:hover, .item--link-overlay:before, .dl-menu .tip.hot,.mega-menu .tip.hot,.menu .tip.hot, .comment-form .form-submit input:hover, .la_testimonials--style-4 .loop__item__desc:after, .pf-default.pf-style-1 .loop__item__info:after, .pf-default.pf-style-2 .loop__item__info, .pf-default.pf-style-4 .loop__item__info:after, .pf-default.pf-style-5 .loop__item__thumbnail--linkoverlay:before, .member--style-4 .loop__item__thumbnail .item--social a:hover, .member--style-7 .loop__item__thumbnail .item--social a:hover, .pricing.style-1:hover .pricing__action a, .pricing.style-4:hover .pricing__action a, .pricing.style-5:hover .pricing__action a, .banner-type-10 .banner--link-overlay:hover .hidden, .woocommerce > .return-to-shop .button:hover, .la-newsletter-popup .yikes-easy-mc-form .yikes-easy-mc-submit-button:hover, .la_hotspot_sc[data-style="color_pulse"] .la_hotspot, .la_hotspot_sc .la_hotspot_wrap .nttip, .single-release-content .lastudio-release-buttons .lastudio-release-button a, .social-media-link.style-round a:hover, .social-media-link.style-square a:hover, .social-media-link.style-circle a:hover, .social-media-link.style-outline a:hover, .social-media-link.style-circle-outline a:hover, .la-timeline-wrap.style-1 .timeline-block .timeline-dot, .products-list .product_item .product_item--thumbnail .product_item--action .quickview:hover,.products-grid-5 .product_item_thumbnail_action .button:hover,.products-grid-4 .product_item_thumbnail_action .button:hover,.products-grid-3 .product_item_thumbnail_action .button:hover,.products-grid-2 .product_item_thumbnail_action .button:hover,.products-grid-1 .product_item_thumbnail_action .button:hover, .woocommerce.special_offers .product_item--info .la-custom-badge, .la-woo-product-gallery > .woocommerce-product-gallery__trigger, .product--summary .single_add_to_cart_button:hover, .wc_tabs_at_bottom .wc-tabs li.active > a:after, .custom-product-wrap .block_heading--title span:after, .woocommerce-MyAccount-navigation li:hover a, .woocommerce-MyAccount-navigation li.is-active a, .registration-form .button, .socials-color a:hover {background-color: #826251; }.background-color-secondary, .la-pagination ul .page-numbers.current, .la-pagination ul .page-numbers:hover, .slick-slider .slick-dots button, .wc-toolbar .wc-ordering ul li:hover a, .wc-toolbar .wc-ordering ul li.active a, .widget_layered_nav.widget_layered_nav--borderstyle li:hover a, .widget_layered_nav.widget_layered_nav--borderstyle li.active a, .showposts-loop.showposts-list .btn-readmore:hover, .showposts-loop.grid-3 .btn-readmore:hover, .showposts-loop.grid-4 .btn-readmore:hover, .comment-form .form-submit input, .pf-default.pf-style-3 .loop__item__info:after, .pricing.style-1 .pricing__action a, .woocommerce > .return-to-shop .button, .la-newsletter-popup .yikes-easy-mc-form .yikes-easy-mc-submit-button, .single-release-content .lastudio-release-buttons .lastudio-release-button a:hover, .social-media-link.style-round a, .social-media-link.style-square a, .social-media-link.style-circle a, .product--summary .single_add_to_cart_button {background-color: #262626; }.background-color-secondary, .socials-color a {background-color: #262626; }.background-color-body {background-color: rgba(0,0,0,0.7); }.background-color-border {background-color: #e8e8e8; }a:hover, .elm-loadmore-ajax a:hover, .search-form .search-button:hover, .slick-slider .slick-dots li:hover span,.slick-slider .slick-dots .slick-active span, .slick-slider .slick-arrow:hover,.la-slick-nav .slick-arrow:hover, .vertical-style ul li:hover a, .vertical-style ul li.active a, .widget.widget_product_tag_cloud a.active,.widget.widget_product_tag_cloud .active a,.widget.product-sort-by .active a,.widget.widget_layered_nav .active a,.widget.la-price-filter-list .active a, .product_list_widget a:hover, #header_aside .btn-aside-toggle:hover, .dl-menu .tip.hot .tip-arrow:before,.mega-menu .tip.hot .tip-arrow:before,.menu .tip.hot .tip-arrow:before, .showposts-loop.showposts-list.list-2 .loop__item__meta__top, .showposts-loop.grid-5 .loop__item__meta__top, .la_testimonials--style-2 .entry-title, .la_testimonials--style-3 .entry-title, ul.list-icon-checked li:before,ol.list-icon-checked li:before,.list-icon-checked .wpb_wrapper > ol li:before,.list-icon-checked .wpb_wrapper > ul li:before, ul.list-icon-checked2 li:before,ol.list-icon-checked2 li:before,.list-icon-checked2 .wpb_wrapper > ol li:before,.list-icon-checked2 .wpb_wrapper > ul li:before, ul.list-icon-dots li:before,ol.list-icon-dots li:before,.list-icon-dots .wpb_wrapper > ol li:before,.list-icon-dots .wpb_wrapper > ul li:before, .vc_custom_heading.heading__button2 a:hover, .member--style-5 .entry-title, .member--style-7 .loop__item__meta, .wpb-js-composer .la__tta .vc_active .vc_tta-panel-heading .vc_tta-panel-title, .la__ttaac > .vc_tta.accordion--1 .vc_tta-panel.vc_active .vc_tta-title-text, .la-service-box.service-type-4 .box-inner:hover .b-title1, .easy_mc__style1 .yikes-easy-mc-form .yikes-easy-mc-submit-button:hover, .easy_mc__style3 .yikes-easy-mc-form .yikes-easy-mc-submit-button:hover, .la-lists-icon .la-sc-icon-item > span, ul.list-dots.primary > li:before,ul.list-checked.primary > li:before, body .vc_toggle.vc_toggle_default.vc_toggle_active .vc_toggle_title h4, .la-timeline-wrap.style-1 .timeline-block .timeline-subtitle, .product_item--thumbnail .elm-countdown .countdown-amount, .product_item .price ins, .product--summary .social--sharing a:hover, .product--summary .add_compare:hover,.product--summary .add_wishlist:hover, .cart-collaterals .woocommerce-shipping-calculator .button:hover,.cart-collaterals .la-coupon .button:hover, #customer_login .woocommerce-privacy-policy-text a, p.lost_password {color: #826251; }.text-color-primary {color: #826251 !important; }.swatch-wrapper:hover, .swatch-wrapper.selected, .member--style-2 .loop__item__thumbnail:after, .member--style-3 .loop__item__info:after, .member--style-3 .loop__item__info:before, .la__tta .tab--2 .vc_tta-tabs-list .vc_active a, .la__tta .tab--4 .vc_tta-tabs-list .vc_active .vc_tta-title-text, .banner-type-7 .box-inner:hover .banner--btn,.banner-type-7 .banner--btn:hover, .la-service-box.service-type-4 .box-inner:hover, .social-media-link.style-outline a:hover, .social-media-link.style-circle-outline a:hover {border-color: #826251; }.border-color-primary {border-color: #826251 !important; }.border-top-color-primary {border-top-color: #826251 !important; }.border-bottom-color-primary {border-bottom-color: #826251 !important; }.border-left-color-primary {border-left-color: #826251 !important; }.border-right-color-primary {border-right-color: #826251 !important; }.woocommerce-message,.woocommerce-error,.woocommerce-info, .form-row label, .wc-toolbar .woocommerce-result-count,.wc-toolbar .wc-view-toggle .active, .wc-toolbar .wc-view-count li.active, div.quantity, .widget_recent_entries .pr-item .pr-item--right a:not(:hover), .widget_recent_comments li.recentcomments a, .product_list_widget a, .product_list_widget .amount, .sf-fields .search-field:focus, #header_aside .btn-aside-toggle, .widget.widget_product_tag_cloud .tagcloud, .sidebar-inner .dokan-category-menu #cat-drop-stack > ul li.parent-cat-wrap, .showposts-loop .loop__item__meta--footer, .author-info__name,.author-info__link, .post-navigation .blog_pn_nav-title, .post-navigation .blog_pn_nav-text, .commentlist .comment-meta .comment-author, .woocommerce-Reviews .woocommerce-review__author, .woocommerce-Reviews .woocommerce-Reviews-title,.comments-container .comments-title h3,.comment-respond .comment-reply-title, .portfolio-nav, .pf-info-wrapper .pf-info-label, .pf-info-wrapper .social--sharing a:hover, .la_testimonials--style-1 .loop__item__desc, .la_testimonials--style-2 .testimonial_item, .la_testimonials--style-3 .loop__item__desc, .la_testimonials--style-4, .la_testimonials--style-7 .loop__item__inner, .la_testimonials--style-9 .loop__item__inner2, .la_testimonials--style-10 .loop__item__inner2, .ib-link-read_more .icon-boxes-inner > a:not(:hover), .vc_custom_heading.heading__button a, .vc_custom_heading.heading__button2 a, .vc_custom_heading.heading__button_intab a, .pf-default.pf-style-6 .loop__item__info, .pf-special.pf-style-1 .loop__item__info, .member--style-2 .member__item__role, .member--style-3 .member__item__role, .member--style-3 .item--social, .member--style-5 .loop__item__info, .pricing.style-2 .pricing__price-box, .pricing.style-3 .pricing__title, .pricing.style-3 .pricing__price-box, .elm-countdown.elm-countdown-style-1 .countdown-amount, .elm-countdown.elm-countdown-style-3 .countdown-amount, .elm-countdown.elm-countdown-style-4, .la__tta .tab--1 .vc_tta-tabs-list .vc_active a, .la__tta .tab--2 .vc_tta-tabs-list li a, .la__tta .tab--3 .vc_tta-tabs-list .vc_active a, .la__tta .tab--4 .vc_tta-tabs-list .vc_active a, .la-service-box.service-type-1 .banner--info, .la-service-box.service-type-3 .b-title1, .la-service-box.service-type-4 .b-title1, .la-service-box.service-type-5, .easy_mc__style1 .yikes-easy-mc-form .yikes-easy-mc-email:focus, .easy_mc__style1 .yikes-easy-mc-form .yikes-easy-mc-submit-button, .easy_mc__style3 .yikes-easy-mc-form .yikes-easy-mc-submit-button, .single-release-content .release-info-container .release-meta-container strong, .la-blockquote.style-4, .la-blockquote.style-3, ul.list-dots.secondary > li:before,ul.list-checked.secondary > li:before, .product_item--info .elm-countdown .countdown-amount, .product_item .price > .amount, .products-list .product_item .price, .products-list .product_item .product_item--info .add_compare,.products-list .product_item .product_item--info .add_wishlist, .products-list-mini .product_item .price, .products-list .product_item .product_item--thumbnail .product_item--action .quickview,.products-grid-5 .product_item_thumbnail_action .button,.products-grid-4 .product_item_thumbnail_action .button,.products-grid-3 .product_item_thumbnail_action .button,.products-grid-2 .product_item_thumbnail_action .button,.products-grid-1 .product_item_thumbnail_action .button, .la-woo-thumbs .slick-arrow, .product--summary .entry-summary > .stock.in-stock, .product--summary .product-nextprev, .product--summary .single-price-wrapper .price ins .amount,.product--summary .single-price-wrapper .price > .amount, .product--summary .product_meta, .product--summary .product_meta_sku_wrapper, .product--summary .product-share-box, .product--summary .group_table td, .product--summary .variations td, .product--summary .add_compare,.product--summary .add_wishlist, .wc-tabs li:hover > a,.wc-tabs li.active > a, .wc-tab .wc-tab-title, #tab-description .tab-content, .shop_table td.product-price,.shop_table td.product-subtotal, .cart-collaterals .shop_table, .cart-collaterals .woocommerce-shipping-calculator .button,.cart-collaterals .la-coupon .button, .woocommerce > p.cart-empty, table.woocommerce-checkout-review-order-table, .wc_payment_methods .wc_payment_method label, .woocommerce-order ul strong, .blog-main-loop__btn-loadmore {color: #262626; }.text-color-secondary {color: #262626 !important; }input:focus, select:focus, textarea:focus, .showposts-loop.showposts-list .btn-readmore:hover, .showposts-loop.grid-3 .btn-readmore:hover, .showposts-loop.grid-4 .btn-readmore:hover, .vc_custom_heading.heading__button a:hover, .vc_custom_heading.heading__button_intab a:hover {border-color: #262626; }.border-color-secondary {border-color: #262626 !important; }.border-top-color-secondary {border-top-color: #262626 !important; }.border-bottom-color-secondary {border-bottom-color: #262626 !important; }.border-left-color-secondary {border-left-color: #262626 !important; }.border-right-color-secondary {border-right-color: #262626 !important; }h1,.h1, h2,.h2, h3,.h3, h4,.h4, h5,.h5, h6,.h6, table th, .sidebar-inner ul.menu li, .sidebar-inner .dokan-category-menu .widget-title, .product--summary .social--sharing a, .extradiv-after-frm-cart {color: #262626; }.text-color-heading {color: #262626 !important; }.border-color-heading {border-color: #262626 !important; }.border-top-color-heading {border-top-color: #262626 !important; }.border-bottom-color-heading {border-bottom-color: #262626 !important; }.border-left-color-heading {border-left-color: #262626 !important; }.border-right-color-heading {border-right-color: #262626 !important; }.text-color-three {color: #9d9d9d !important; }.border-color-three {border-color: #9d9d9d !important; }.border-top-color-three {border-top-color: #9d9d9d !important; }.border-bottom-color-three {border-bottom-color: #9d9d9d !important; }.border-left-color-three {border-left-color: #9d9d9d !important; }.border-right-color-three {border-right-color: #9d9d9d !important; }body, .la__tta .tab--3 .vc_tta-tabs-list, .easy_mc__style1 .yikes-easy-mc-form .yikes-easy-mc-email, table.woocommerce-checkout-review-order-table .variation,table.woocommerce-checkout-review-order-table .product-quantity {color: rgba(0,0,0,0.7); }.text-color-body {color: rgba(0,0,0,0.7) !important; }.border-color-body {border-color: rgba(0,0,0,0.7) !important; }.border-top-color-body {border-top-color: rgba(0,0,0,0.7) !important; }.border-bottom-color-body {border-bottom-color: rgba(0,0,0,0.7) !important; }.border-left-color-body {border-left-color: rgba(0,0,0,0.7) !important; }.border-right-color-body {border-right-color: rgba(0,0,0,0.7) !important; }input, select, textarea, table, table th,table td, .share-links a, .select2-container .select2-selection--single, .swatch-wrapper, .widget_shopping_cart_content .total, .calendar_wrap caption, .widget-border.widget, .widget-border-bottom.widget, .easy_mc__style1 .yikes-easy-mc-form .yikes-easy-mc-email, .social-media-link.style-outline a, body .vc_toggle.vc_toggle_default, .la-timeline-wrap.style-1 .timeline-line, .la-timeline-wrap.style-2 .timeline-title:after, .shop_table.woocommerce-cart-form__contents td, .showposts-loop.main-search-loop .btn-readmore {border-color: #e8e8e8; }.border-color {border-color: #e8e8e8 !important; }.border-top-color {border-top-color: #e8e8e8 !important; }.border-bottom-color {border-bottom-color: #e8e8e8 !important; }.border-left-color {border-left-color: #e8e8e8 !important; }.border-right-color {border-right-color: #e8e8e8 !important; }.products-list .product_item .product_item--info .add_to_cart_button,.btn {color: #fff;background-color: #262626; }.products-list .product_item .product_item--info .add_to_cart_button:hover,.btn:hover {background-color: #826251;color: #fff; }.btn.btn-primary {background-color: #826251;color: #fff; }.btn.btn-primary:hover {color: #fff;background-color: #262626; }.btn.btn-outline {border-color: #e8e8e8;color: #262626; }.btn.btn-outline:hover {color: #fff;background-color: #826251;border-color: #826251; }.btn.btn-style-flat.btn-color-primary {background-color: #826251; }.btn.btn-style-flat.btn-color-primary:hover {background-color: #262626; }.btn.btn-style-flat.btn-color-white {background-color: #fff;color: #262626; }.btn.btn-style-flat.btn-color-white:hover {color: #fff;background-color: #826251; }.btn.btn-style-flat.btn-color-white2 {background-color: #fff;color: #262626; }.btn.btn-style-flat.btn-color-white2:hover {color: #fff;background-color: #262626; }.btn.btn-style-flat.btn-color-gray {background-color: rgba(0,0,0,0.7); }.btn.btn-style-flat.btn-color-gray:hover {background-color: #826251; }.btn.btn-style-outline:hover {border-color: #826251;background-color: #826251;color: #fff; }.btn.btn-style-outline.btn-color-black {border-color: #262626;color: #262626; }.btn.btn-style-outline.btn-color-black:hover {border-color: #826251;background-color: #826251;color: #fff; }.btn.btn-style-outline.btn-color-primary {border-color: #826251;color: #826251; }.btn.btn-style-outline.btn-color-primary:hover {border-color: #262626;background-color: #262626;color: #fff; }.btn.btn-style-outline.btn-color-white {border-color: #fff;color: #fff; }.btn.btn-style-outline.btn-color-white:hover {border-color: #826251;background-color: #826251;color: #fff; }.btn.btn-style-outline.btn-color-white2 {border-color: rgba(255, 255, 255, 0.5);color: #fff; }.btn.btn-style-outline.btn-color-white2:hover {border-color: #262626;background-color: #262626;color: #fff; }.btn.btn-style-outline.btn-color-gray {border-color: rgba(35, 35, 36, 0.2);color: #262626; }.btn.btn-style-outline.btn-color-gray:hover {border-color: #826251;background-color: #826251;color: #fff !important; }.woocommerce.add_to_cart_inline a {border-color: #e8e8e8;color: #262626; }.woocommerce.add_to_cart_inline a:hover {background-color: #262626;border-color: #262626;color: #fff; }.elm-loadmore-ajax a {color: #262626; }.elm-loadmore-ajax a:hover {color: #826251;border-color: #826251; }form.track_order .button,.place-order .button,.wc-proceed-to-checkout .button,.widget_shopping_cart_content .button,.woocommerce-MyAccount-content form .button,.lost_reset_password .button,form.register .button,.checkout_coupon .button,.woocomerce-form .button {background-color: #262626;border-color: #262626;color: #fff;min-width: 150px; }form.track_order .button:hover,.place-order .button:hover,.wc-proceed-to-checkout .button:hover,.widget_shopping_cart_content .button:hover,.woocommerce-MyAccount-content form .button:hover,.lost_reset_password .button:hover,form.register .button:hover,.checkout_coupon .button:hover,.woocomerce-form .button:hover {background-color: #826251;border-color: #826251;color: #fff; }.shop_table.cart td.actions .button {background-color: transparent;color: #262626;border-color: #e8e8e8; }.shop_table.cart td.actions .button:hover {color: #fff;background-color: #262626;border-color: #262626; }.widget_price_filter .button {color: #fff;background-color: #262626; }.widget_price_filter .button:hover {color: #fff;background-color: #826251; }#header_menu_burger,#masthead_aside,#header_aside {background-color: #fff;color: #262626; }#header_menu_burger h1,#header_menu_burger .h1,#header_menu_burger h2,#header_menu_burger .h2,#header_menu_burger h3,#header_menu_burger .h3,#header_menu_burger h4,#header_menu_burger .h4,#header_menu_burger h5,#header_menu_burger .h5,#header_menu_burger h6,#header_menu_burger .h6,#masthead_aside h1,#masthead_aside .h1,#masthead_aside h2,#masthead_aside .h2,#masthead_aside h3,#masthead_aside .h3,#masthead_aside h4,#masthead_aside .h4,#masthead_aside h5,#masthead_aside .h5,#masthead_aside h6,#masthead_aside .h6,#header_aside h1,#header_aside .h1,#header_aside h2,#header_aside .h2,#header_aside h3,#header_aside .h3,#header_aside h4,#header_aside .h4,#header_aside h5,#header_aside .h5,#header_aside h6,#header_aside .h6 {color: #262626; }#header_menu_burger ul:not(.sub-menu) > li > a,#masthead_aside ul:not(.sub-menu) > li > a,#header_aside ul:not(.sub-menu) > li > a {color: #262626; }#header_menu_burger ul:not(.sub-menu) > li:hover > a,#masthead_aside ul:not(.sub-menu) > li:hover > a,#header_aside ul:not(.sub-menu) > li:hover > a {color: #826251; }.header--aside .header_component--dropdown-menu .menu {background-color: #fff; }.header--aside .header_component > a {color: #262626; }.header--aside .header_component:hover > a {color: #826251; }ul.mega-menu .popup li > a {color: rgba(0,0,0,0.7);background-color: rgba(0,0,0,0); }ul.mega-menu .popup li:hover > a {color: #262626;background-color: rgba(0,0,0,0); }ul.mega-menu .popup li.active > a {color: #262626;background-color: rgba(0,0,0,0); }ul.mega-menu .mm-popup-wide .popup li.mm-item-level-2 > a {color: rgba(0,0,0,0.7);background-color: rgba(0,0,0,0); }ul.mega-menu .mm-popup-wide .popup li.mm-item-level-2:hover > a {color: #262626;background-color: rgba(0,0,0,0); }ul.mega-menu .mm-popup-wide .popup li.mm-item-level-2.active > a {color: #262626;background-color: rgba(0,0,0,0); }ul.mega-menu .popup > .inner,ul.mega-menu .mm-popup-wide .inner > ul.sub-menu > li li ul.sub-menu,ul.mega-menu .mm-popup-narrow ul ul {background-color: #fff; }ul.mega-menu .mm-popup-wide .inner > ul.sub-menu > li li li:hover > a,ul.mega-menu .mm-popup-narrow li.menu-item:hover > a {color: #262626;background-color: rgba(0,0,0,0); }ul.mega-menu .mm-popup-wide .inner > ul.sub-menu > li li li.active > a,ul.mega-menu .mm-popup-narrow li.menu-item.active > a {color: #262626;background-color: rgba(0,0,0,0); }ul.mega-menu .mm-popup-wide .popup > .inner {background-color: #fff; }ul.mega-menu .mm-popup-wide .inner > ul.sub-menu > li > a {color: #262626; }.site-main-nav .main-menu > li > a {color: #262626;background-color: rgba(0,0,0,0); }.site-main-nav .main-menu > li.active > a,.site-main-nav .main-menu > li:hover > a {color: #826251;background-color: rgba(0,0,0,0); }.site-header .header_component > .component-target {color: #262626; }.site-header .header_component--linktext:hover > a .component-target-text,.site-header .header_component--linktext:hover > a > i,.site-header .header_component:not(.la_com_action--linktext):hover > a {color: #826251; }.enable-header-transparency .site-header:not(.is-sticky) .header_component > .component-target {color: #fff; }.enable-header-transparency .site-header:not(.is-sticky) .header_component > a {color: #fff; }.enable-header-transparency .site-header:not(.is-sticky) .header_component:hover > a {color: #826251; }.enable-header-transparency .site-header:not(.is-sticky) .site-main-nav .main-menu > li > a {color: #fff;background-color: rgba(0,0,0,0); }.enable-header-transparency .site-header:not(.is-sticky) .site-main-nav .main-menu > li.active > a,.enable-header-transparency .site-header:not(.is-sticky) .site-main-nav .main-menu > li:hover > a {color: #826251;background-color: rgba(0,0,0,0); }.enable-header-transparency .site-header:not(.is-sticky) .site-main-nav .main-menu > li.active:before,.enable-header-transparency .site-header:not(.is-sticky) .site-main-nav .main-menu > li:hover:before {background-color: rgba(0,0,0,0); }.site-header-mobile .site-header-inner {background-color: #fff; }.site-header-mobile .header_component > .component-target {color: rgba(0,0,0,0.7); }.site-header-mobile .mobile-menu-wrap {background-color: #fff; }.site-header-mobile .mobile-menu-wrap .dl-menuwrapper ul {background: #fff;border-color: rgba(140, 140, 140, 0.2); }.site-header-mobile .mobile-menu-wrap .dl-menuwrapper li {border-color: rgba(140, 140, 140, 0.2); }.site-header-mobile .mobile-menu-wrap .dl-menu > li > a {color: #262626;background-color: rgba(0,0,0,0); }.site-header-mobile .mobile-menu-wrap .dl-menu > li:hover > a {color: #826251;background-color: rgba(0,0,0,0); }.site-header-mobile .mobile-menu-wrap .dl-menu ul > li > a {color: #262626;background-color: rgba(0,0,0,0); }.site-header-mobile .mobile-menu-wrap .dl-menu ul > li:hover > a {color: #fff;background-color: #826251; }.enable-header-transparency .site-header-mobile:not(.is-sticky) .site-header-inner {background-color: #fff; }.enable-header-transparency .site-header-mobile:not(.is-sticky) .header_component > .component-target {color: #8A8A8A; }.site-header .site-header-top {background-color: rgba(0,0,0,0);color: rgba(255,255,255,0.2); }.site-header .site-header-top .header_component .component-target {color: rgba(255,255,255,0.2); }.site-header .site-header-top .header_component a.component-target {color: #fff; }.site-header .site-header-top .header_component:hover a .component-target-text {color: #826251; }.enable-header-transparency .site-header .site-header-top {background-color: rgba(0,0,0,0);color: rgba(255,255,255,0.2); }.enable-header-transparency .site-header .site-header-top .header_component .component-target {color: rgba(255,255,255,0.2); }.enable-header-transparency .site-header .site-header-top .header_component a.component-target {color: #fff; }.enable-header-transparency .site-header .site-header-top .header_component:hover a .component-target-text {color: #826251; }.cart-flyout {background-color: #fff;color: #262626; }.cart-flyout .cart-flyout__heading {color: #262626;font-family: "Playfair Display", "Helvetica Neue", Arial, sans-serif; }.cart-flyout .product_list_widget a {color: #262626; }.cart-flyout .product_list_widget a:hover {color: #826251; }.cart-flyout .widget_shopping_cart_content .total {color: #262626; }.footer-top {color: rgba(255,255,255,0.7); }.footer-top a {color: rgba(255,255,255,0.7); }.footer-top a:hover {color: #826251; }.footer-top .widget .widget-title {color: #262626; }.footer-bottom {background-color: #000;color: #fff; }.footer-bottom a {color: #fff; }.footer-bottom a:hover {color: #fff; }.site-header-mobile .mobile-menu-wrap .dl-menu {border-width: 1px 0 0;border-style: solid;box-shadow: 0 6px 12px rgba(0, 0, 0, 0.076);-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.076); }.site-header-mobile .mobile-menu-wrap .dl-menu li {border-width: 1px 0 0;border-style: solid; }.site-header-mobile .mobile-menu-wrap .dl-menuwrapper li.dl-subviewopen,.site-header-mobile .mobile-menu-wrap .dl-menuwrapper li.dl-subview,.site-header-mobile .mobile-menu-wrap .dl-menuwrapper li:first-child {border-top-width: 0; }.wpb-js-composer [class*="vc_tta-la-"] .vc_tta-panel-heading .vc_tta-panel-title .vc_tta-icon {margin-right: 10px; }.la-myaccount-page .la_tab_control li.active a,.la-myaccount-page .la_tab_control li:hover a,.la-myaccount-page .ywsl-label {color: #262626; }.la-myaccount-page .btn-create-account:hover {color: #fff;background-color: #262626;border-color: #262626; }.btn.btn-style-outline-bottom:hover {background: none !important;color: #826251 !important;border-color: #826251 !important; }@media (max-width: 767px) {.la-advanced-product-filters {background-color: #fff;color: #262626; }.la-advanced-product-filters .widget-title {color: #262626; }.la-advanced-product-filters a {color: #262626; }.la-advanced-product-filters a:hover {color: #826251; } }.nav-menu-burger {color: #262626; }.header-v7 #header_aside,.header-v6 #masthead_aside {color: #262626; }.header-v7 #header_aside .header_component > a,.header-v6 #masthead_aside .header_component > a {color: #262626; }.header-v7 #header_aside .header_component:hover > a,.header-v6 #masthead_aside .header_component:hover > a {color: #826251; }.header-v7 #header_aside .main-menu > li > a,.header-v6 #masthead_aside .main-menu > li > a {color: #262626;background-color: rgba(0,0,0,0); }.header-v7 #header_aside .main-menu > li:hover > a, .header-v7 #header_aside .main-menu > li.open > a, .header-v7 #header_aside .main-menu > li.active > a,.header-v6 #masthead_aside .main-menu > li:hover > a,.header-v6 #masthead_aside .main-menu > li.open > a,.header-v6 #masthead_aside .main-menu > li.active > a {color: #826251;background-color: rgba(0,0,0,0); }.header-v7.enable-header-transparency #header_aside,.header-v6.enable-header-transparency #masthead_aside {color: #fff; }.header-v7.enable-header-transparency #header_aside .header_component > a,.header-v6.enable-header-transparency #masthead_aside .header_component > a {color: #fff; }.header-v7.enable-header-transparency #header_aside .header_component:hover > a,.header-v6.enable-header-transparency #masthead_aside .header_component:hover > a {color: #826251; }.header-v7.enable-header-transparency #header_aside .main-menu > li > a,.header-v6.enable-header-transparency #masthead_aside .main-menu > li > a {color: #fff;background-color: rgba(0,0,0,0); }.header-v7.enable-header-transparency #header_aside .main-menu > li:hover a,.header-v7.enable-header-transparency #header_aside .main-menu > li.open a, .header-v7.enable-header-transparency #header_aside .main-menu > li.active a,.header-v6.enable-header-transparency #masthead_aside .main-menu > li:hover > a,.header-v6.enable-header-transparency #masthead_aside .main-menu > li.open > a,.header-v6.enable-header-transparency #masthead_aside .main-menu > li.active > a {color: #826251;background-color: rgba(0,0,0,0); }.header-v8 .site-header__nav-primary .site-category-nav .toggle-category-menu {color: #262626;background-color: rgba(0,0,0,0); }.header-v8 .site-header__nav-primary .site-category-nav:hover .toggle-category-menu {color: #826251;background-color: rgba(0,0,0,0); }.la__tta .tab--5 .vc_tta-tabs-list .vc_active a {color: #262626;border-color: #262626}.vc_custom_heading.heading__button3 a:hover{color: #826251}.la_testimonials--style-10 .loop__item__desc{font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif; }.box_hover_bg_primary:before{background-color: #826251}.la__tta .tab--6 .vc_tta-tabs-list li.vc_active a,.vc_custom_heading.heading__underline a {color: #262626}.vc_custom_heading.heading__underline a:hover {color: #826251}.products-grid-4 .product_item--info .product_item--action .add_to_cart_button:hover{background-color: #826251}.m25_banner_1.banner-type-7 .b-title2,.m25_banner_1.banner-type-7 .b-title3,.showposts-loop.grid-6 .entry-title,.bookstore-countdown.elm-countdown.elm-countdown-style-3 .countdown-amount {font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif}.showposts-loop.grid-6 .loop__item__meta,.bookstore-countdown.elm-countdown.elm-countdown-style-3 .countdown-period,.bookstore-countdown.elm-countdown.elm-countdown-style-3 .countdown-amount {color: #262626}.social-media-link.writer-social-profile a{background-color: #fff;color: #262626}.social-media-link.writer-social-profile a:hover{color: #fff;background-color: #826251}.easy_mc__style7 .yikes-easy-mc-form .yikes-easy-mc-submit-button:hover,.easy_mc__style8 .yikes-easy-mc-form .yikes-easy-mc-submit-button:hover,.lahb-header-woo-cart-toggle .la-cart-modal-icon .la-cart-count,.m25_banner_1.banner-type-7 .banner--btn,.banner-type-14 .b-title1 {background-color: #826251}.lahb-modal-login #user-logged .author-avatar img{border-color: #826251}.lahb-wrap .lahb-nav-wrap .menu li.current ul li a:hover,.lahb-wrap .lahb-nav-wrap .menu ul.sub-menu li.current > a,.lahb-wrap .lahb-nav-wrap .menu ul li.menu-item:hover > a,.lahb-nav-wrap .menu > li.current > a{color: #826251}
+@font-face{
+                font-family: 'dl-icon';
+                src: url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/dl-icon.eot');
+                src: url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/dl-icon.eot') format('embedded-opentype'),
+                     url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/dl-icon.woff') format('woff'),
+                     url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/dl-icon.ttf') format('truetype'),
+                     url('//hpdecor.ru/web/wp-content/themes/airi/assets/fonts/dl-icon.svg') format('svg');
+                font-weight:normal;
+                font-style:normal
+            }
+</style>
+<link rel="stylesheet" id="airi-google_fonts-css" href="//fonts.googleapis.com/css?family=Libre+Franklin:300,regular%7CPlayfair+Display:regular,italic,700italic%7COpen+Sans:300,regular" media="all">
+<script src="https://hpdecor.ru/web/wp-includes/js/jquery/jquery.js?ver=3.6.1" id="jquery-core-js"></script>
+<script src="https://hpdecor.ru/web/wp-includes/js/jquery/jquery-migrate.js?ver=3.3.2" id="jquery-migrate-js"></script>
+<script src="https://hpdecor.ru/web/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.6.3" async="" id="tp-tools-js" defer=""></script> 
+<script src="https://hpdecor.ru/web/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.6.3" async="" id="revmin-js" defer=""></script> 
+<!--[if lt IE 9]>
+<script src='https://hpdecor.ru/web/wp-content/themes/airi/assets/js/enqueue/min/respond.js?ver=6.1.1' id='respond-js'></script>
+<![endif]-->
+<link rel="https://api.w.org/" href="https://hpdecor.ru/index.php?rest_route=/"><link rel="alternate" type="application/json" href="https://hpdecor.ru/index.php?rest_route=/wp/v2/pages/18832"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://hpdecor.ru/web/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://hpdecor.ru/web/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.1.1">
+<meta name="generator" content="WooCommerce 7.4.0">
+<link rel="canonical" href="https://hpdecor.ru/?page_id=18832">
+<link rel="shortlink" href="https://hpdecor.ru/?p=18832">
+<link rel="alternate" type="application/json+oembed" href="https://hpdecor.ru/index.php?rest_route=%2Foembed%2F1.0%2Fembed&amp;url=https%3A%2F%2Fhpdecor.ru%2F%3Fpage_id%3D18832">
+<link rel="alternate" type="text/xml+oembed" href="https://hpdecor.ru/index.php?rest_route=%2Foembed%2F1.0%2Fembed&amp;url=https%3A%2F%2Fhpdecor.ru%2F%3Fpage_id%3D18832&amp;format=xml">
+		
+		<script type="text/javascript">
+			jQuery(function($){
+				$('.protect_contents-overlay').css('background-color', '#000000');
+			});
+		</script>
+
+		
+						<script type="text/javascript">
+				jQuery(function($){
+					$('img').attr('onmousedown', 'return false');
+					$('img').attr('onselectstart','return false');
+				    $(document).on('contextmenu',function(e){
+
+							
+								// ブラウザ全体を暗くする
+								$('.protect_contents-overlay, .protect_alert').fadeIn();
+
+								
+								$('.protect_contents-overlay, .protect_alert').click(function(){	
+									// ブラウザ全体を明るくする
+									$('.protect_contents-overlay, .protect_alert').fadeOut();
+								});
+							
+
+				        return false;
+				    });
+				});
+				</script>
+
+									<style>
+					* {
+					   -ms-user-select: none; /* IE 10+ */
+					   -moz-user-select: -moz-none;
+					   -khtml-user-select: none;
+					   -webkit-user-select: none;
+					   -webkit-touch-callout: none;
+					   user-select: none;
+					   }
+
+					   input,textarea,select,option {
+					   -ms-user-select: auto; /* IE 10+ */
+					   -moz-user-select: auto;
+					   -khtml-user-select: auto;
+					   -webkit-user-select: auto;
+					   user-select: auto;
+				       }
+					</style>
+					
+														
+					
+								
+				
+								
+				
+				
+				
+
+<!-- Saphali genprice curency Version -->
+<meta name="generator" content="Saphali genprice curency 2.0">
+
+<link rel="apple-touch-icon" sizes="16x16" href="https://hpdecor.ru/web/wp-content/uploads/2018/12/logo_hp_2016-e1544186352829.png"><link rel="apple-touch-icon" sizes="57x57" href="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016.png"><link rel="apple-touch-icon" sizes="72x72" href="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016.png"><link rel="shortcut icon" type="image/png" sizes="72x72" href="https://hpdecor.ru/web/wp-content/uploads/2018/12/logo_hp_2016-e1544186352829.png"><link rel="shortcut icon" type="image/png" sizes="57x57" href="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016.png"><link rel="shortcut icon" type="image/png" sizes="16x16" href="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016.png">	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+<meta name="generator" content="Powered by Slider Revolution 6.6.3 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+<script>function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+				try {
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) || (e.l=="fullwidth" || e.layout=="fullwidth") ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+					if(e.layout==="fullscreen" || e.l==="fullscreen")
+						newh = Math.max(e.mh,window.RSIH);
+					else{
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,
+							sl;
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}
+			//});
+		  };</script>
+<style id="airi-extra-custom-css">.mega-menu > li > a {
+    padding: 5px 4px;
+}
+.site-main {
+	padding-top: 0px;
+}
+
+.product_item .product_item--title {
+    font-weight: 400;
+}
+
+.grecaptcha-badge {display: none;}</style><script>try{  }catch (ex){}</script><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
+<script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?169",t.onload=function(){VK.Retargeting.Init("VK-RTRG-1067951-eO5xd"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><script type="text/javascript" async="" src="https://vk.com/js/api/openapi.js?169"></script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1067951-eO5xd" style="position:fixed; left:-999px;" alt=""/></noscript>
+<style id="abu-collapse-styles" type="text/css"></style></head>
+
+<body data-rsssl="1" class="privacy-policy page-template-default page page-id-18832 theme-airi woocommerce-js ltr airi-body lastudio-airi header-v9 header-mb-v2 footer-v3col444 body-col-2cl page-title-v1 enable-main-fullwidth wpb-js-composer js-comp-ver-6.10.0 vc_responsive body-loaded">
+
+
+<div id="page" class="site">
+    <div class="site-inner">
+<header id="masthead" class="site-header">
+        
+    <div class="site-header-outer">
+        <div class="site-header-inner">
+            <div class="container">
+                <div class="header-main clearfix">
+                    <div class="header-component-outer header-left">
+                        <div class="header-component-inner clearfix">
+                            <div class="header_component header_component--link la_compt_iem la_com_action--link "><a rel="nofollow" class="component-target" href="http://instagram.com/hpdecor"><i class="fa fa-instagram"></i></a></div><div class="header_component header_component--link la_compt_iem la_com_action--link "><a rel="nofollow" class="component-target" href="https://vk.com/hpdecor"><i class="fa fa-vk"></i></a></div><div class="header_component header_component--link la_compt_iem la_com_action--link "><a rel="nofollow" class="component-target" href="https://twitter.com/hp_decor"><i class="fa fa-twitter"></i></a></div><div class="header_component header_component--link la_compt_iem la_com_action--link "><a rel="nofollow" class="component-target" href="http://www.houzz.ru/pro/hpdecor/hpdecor"><i class="fa fa-houzz"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="header-component-outer header-middle">
+                        <div class="site-branding">
+                            <a href="https://hpdecor.ru/" rel="home">
+                                <figure class="logo--normal"><img src="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016.png" alt="HPDecor - Бутик только стильных предметов интерьера" srcset="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016-1.png 2x" onmousedown="return false" onselectstart="return false"></figure>
+                                <figure class="logo--transparency"><img src="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016-1.png" alt="HPDecor - Бутик только стильных предметов интерьера" srcset="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016-1.png 2x" onmousedown="return false" onselectstart="return false"></figure>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-component-outer header-right">
+                        <div class="header-component-inner clearfix">
+                                                            <div class="searchform-wrapper">
+                                    <form method="get" class="search-form" action="https://hpdecor.ru/">
+    <div class="sf-fields">
+        <div class="sf-field sf-field-input">
+            <input autocomplete="off" type="search" class="search-field" placeholder="Search here…" name="s" title="Search for:">
+                            <input type="hidden" name="post_type" value="product">
+                    </div>
+        <button class="search-button" type="submit"><i class="dl-icon-search1"></i></button>
+    </div>
+</form>
+<!-- .search-form -->                                </div>
+                                                        <div class="header_component header_component--dropdown-menu la_compt_iem la_com_action--dropdownmenu "><a rel="nofollow" class="component-target" href="javascript:;"><i class="dl-icon-user4"></i></a><ul id="menu-user" class="menu submenu-inited" style="left: -80px;"><li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21"><a href="https://hpdecor.ru/?page_id=8">Мой аккаунт</a></li>
+<li id="menu-item-14893" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14893"><a href="https://hpdecor.ru/web/my-account/edit-account/">Детали учетной записи</a></li>
+<li id="menu-item-14891" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14891"><a href="https://hpdecor.ru/web/my-account/orders/">Заказы</a></li>
+<li id="menu-item-14892" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14892"><a href="https://hpdecor.ru/web/my-account/edit-address/">Адреса</a></li>
+<li id="menu-item-14895" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14895"><a href="https://hpdecor.ru/web/my-account/lost-password/">Забыли свой пароль?</a></li>
+</ul></div><div class="header_component header_component--cart la_compt_iem la_com_action--cart "><a rel="nofollow" class="component-target" href="https://hpdecor.ru/?page_id=6"><i class="dl-icon-cart15"></i><span class="component-target-badget la-cart-count">0</span><span class="la-cart-total-price"><span class="woocommerce-Price-amount amount"><bdi>0&nbsp;<span class="woocommerce-Price-currencySymbol">₽</span></bdi></span></span></a></div>                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-header__nav site-header__nav-primary">
+                <div class="container">
+                    <div class="header-main clearfix">
+                        <nav class="site-main-nav clearfix" data-container="#masthead .site-header__nav-primary .header-main">
+                            <ul id="menu-osn" class="main-menu mega-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home mm-item mm-popup-narrow mm-item-level-0 menu-item-17"><a href="https://hpdecor.ru/"><span class="mm-text">Главная</span></a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children mm-item mm-item-has-sub mm-popup-narrow mm-item-level-0 menu-item-14848"><a href="https://hpdecor.ru/?product_cat=mebel"><span class="mm-text">Мебель</span></a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14849" data-column="1"><a href="https://hpdecor.ru/?product_cat=stul-ja"><span class="mm-text">Стулья</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14850" data-column="1"><a href="https://hpdecor.ru/?product_cat=kresla"><span class="mm-text">Кресла</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14851" data-column="1"><a href="https://hpdecor.ru/?product_cat=pufy-i-ottomanki"><span class="mm-text">Пуфы и оттоманки</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14853" data-column="1"><a href="https://hpdecor.ru/?product_cat=divany"><span class="mm-text">Диваны</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14854" data-column="1"><a href="https://hpdecor.ru/?product_cat=krovati"><span class="mm-text">Изголовья для кровати</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14855" data-column="1"><a href="https://hpdecor.ru/?product_cat=komody"><span class="mm-text">Комоды и шкафы</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14856" data-column="1"><a href="https://hpdecor.ru/?product_cat=tumbochki"><span class="mm-text">Тумбы</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14857" data-column="1"><a href="https://hpdecor.ru/?product_cat=tualetnye-stoliki-i-konsoli"><span class="mm-text">Туалетные столики и консоли</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14858" data-column="1"><a href="https://hpdecor.ru/?product_cat=zhurnalnye-i-kofejnye-stoliki"><span class="mm-text">Журнальные и кофейные столики</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14859" data-column="1"><a href="https://hpdecor.ru/?product_cat=obedennye-i-rabochie-stoly"><span class="mm-text">Обеденные и рабочие столы</span></a></li>
+</ul></div></div>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children mm-item mm-item-has-sub mm-popup-narrow mm-item-level-0 menu-item-14860"><a href="https://hpdecor.ru/?product_cat=svet"><span class="mm-text">Свет</span></a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14861" data-column="1"><a href="https://hpdecor.ru/?product_cat=liustry"><span class="mm-text">Люстры</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14862" data-column="1"><a href="https://hpdecor.ru/?product_cat=torshery"><span class="mm-text">Торшеры</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14863" data-column="1"><a href="https://hpdecor.ru/?product_cat=nastolnye-lampy"><span class="mm-text">Настольные лампы</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14864" data-column="1"><a href="https://hpdecor.ru/?product_cat=bra"><span class="mm-text">Бра</span></a></li>
+</ul></div></div>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-popup-narrow mm-item-level-0 menu-item-14865"><a href="https://hpdecor.ru/?product_cat=zerkala"><span class="mm-text">Зеркала</span></a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children mm-item mm-item-has-sub mm-popup-narrow mm-item-level-0 menu-item-14866"><a href="https://hpdecor.ru/?product_cat=dekor"><span class="mm-text">Декор</span></a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-16625" data-column="1"><a href="https://hpdecor.ru/?product_cat=statuetki"><span class="mm-text">Предметы декора</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14867" data-column="1"><a href="https://hpdecor.ru/?product_cat=podsvechniki"><span class="mm-text">Подсвечники</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14870" data-column="1"><a href="https://hpdecor.ru/?product_cat=vazy"><span class="mm-text">Вазы</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14871" data-column="1"><a href="https://hpdecor.ru/?product_cat=nastennyj-dekor"><span class="mm-text">Настенный декор</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14872" data-column="1"><a href="https://hpdecor.ru/?product_cat=podnosy"><span class="mm-text">Подносы</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14873" data-column="1"><a href="https://hpdecor.ru/?product_cat=aksessuary-dlja-hranenija-ukrashenij"><span class="mm-text">Боксы, шкатулки и коробки</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14874" data-column="1"><a href="https://hpdecor.ru/?product_cat=aksessuary-dlja-vannoj-komnaty"><span class="mm-text">Аксессуары для ванной комнаты</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14875" data-column="1"><a href="https://hpdecor.ru/?product_cat=postery"><span class="mm-text">Картины</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-16130" data-column="1"><a href="https://hpdecor.ru/?product_cat=postery-dlja-skachivanija"><span class="mm-text">Постеры для скачивания</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14876" data-column="1"><a href="https://hpdecor.ru/?product_cat=chemodany-i-drugoe-hranenie"><span class="mm-text">Чемоданы и другое хранение</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14877" data-column="1"><a href="https://hpdecor.ru/?product_cat=dlja-tebja"><span class="mm-text">Для тебя</span></a></li>
+</ul></div></div>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children mm-item mm-item-has-sub mm-popup-narrow mm-item-level-0 menu-item-14878"><a href="https://hpdecor.ru/?product_cat=posuda"><span class="mm-text">Посуда</span></a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14879" data-column="1"><a href="https://hpdecor.ru/?product_cat=tarelki"><span class="mm-text">Тарелки и блюда</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14880" data-column="1"><a href="https://hpdecor.ru/?product_cat=chajnye-servizy"><span class="mm-text">Чайные сервизы</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14881" data-column="1"><a href="https://hpdecor.ru/?product_cat=chajnye-pary-i-kruzhki"><span class="mm-text">Чайные пары и кружки</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14882" data-column="1"><a href="https://hpdecor.ru/?product_cat=chajniki-saharnicy-molochniki"><span class="mm-text">Чайники, сахарницы, молочники и другие аксессуары</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14883" data-column="1"><a href="https://hpdecor.ru/?product_cat=hranenie"><span class="mm-text">Хранение</span></a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-item-level-1 menu-item-14884" data-column="1"><a href="https://hpdecor.ru/?product_cat=stolovye-servizy"><span class="mm-text">Столовые сервизы</span></a></li>
+</ul></div></div>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-popup-narrow mm-item-level-0 menu-item-14885"><a href="https://hpdecor.ru/?product_cat=baby"><span class="mm-text">Baby</span></a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-popup-narrow mm-item-level-0 menu-item-14886"><a href="https://hpdecor.ru/?product_cat=podushki"><span class="mm-text">Подушки</span></a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-popup-narrow mm-item-level-0 menu-item-14887"><a href="https://hpdecor.ru/?product_cat=pledy"><span class="mm-text">Пледы</span></a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-popup-narrow mm-item-level-0 menu-item-14888"><a href="https://hpdecor.ru/?product_cat=kovry"><span class="mm-text">Ковры</span></a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat mm-item mm-popup-narrow mm-item-level-0 menu-item-24629"><a href="https://hpdecor.ru/?product_cat=sale"><span class="mm-text">SALE</span></a></li>
+</ul>                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="la-header-sticky-height" style="height: 175px;"></div>
+    </div>
+</header>
+<!-- #masthead -->
+<div class="site-header-mobile" style="">
+    <div class="site-header-outer">
+        <div class="site-header-inner">
+            <div class="container">
+                <div class="header-main clearfix">
+                    <div class="header-component-outer header-component-outer_logo">
+                        <div class="site-branding">
+                            <a href="https://hpdecor.ru/" rel="home">
+                                <figure class="logo--normal"><img src="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016-1.png" alt="HPDecor - Бутик только стильных предметов интерьера" srcset="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016-1.png 2x" onmousedown="return false" onselectstart="return false"></figure>
+                                <figure class="logo--transparency"><img src="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016-1.png" alt="HPDecor - Бутик только стильных предметов интерьера" srcset="https://hpdecor.ru/web/wp-content/uploads/2018/11/logo_hp_2016-1.png 2x" onmousedown="return false" onselectstart="return false"></figure>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-component-outer header-component-outer_1">
+                        <div class="header-component-inner clearfix">
+                            <div class="header_component header_component--searchbox la_compt_iem la_com_action--searchbox searchbox__01 "><a class="component-target" href="javascript:;"><i class="dl-icon-search1"></i></a></div><div class="header_component header_component--primary-menu la_compt_iem la_com_action--primary-menu "><a rel="nofollow" class="component-target" href="javascript:;"><i class="dl-icon-menu1"></i></a></div>                        </div>
+                    </div>
+                                    </div>
+            </div>
+            <div class="mobile-menu-wrap">
+                <div id="la_mobile_nav" class="dl-menuwrapper"><ul class="dl-menu dl-menuopen"><li id="menu-item-17" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-17"><a href="https://hpdecor.ru/">Главная</a></li>
+<li id="menu-item-14848" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-14848"><a href="https://hpdecor.ru/?product_cat=mebel">Мебель</a>
+<ul class="sub-menu dl-submenu"><li class="dl-back"><a href="#">Back</a></li>
+	<li id="menu-item-14849" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14849"><a href="https://hpdecor.ru/?product_cat=stul-ja">Стулья</a></li>
+	<li id="menu-item-14850" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14850"><a href="https://hpdecor.ru/?product_cat=kresla">Кресла</a></li>
+	<li id="menu-item-14851" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14851"><a href="https://hpdecor.ru/?product_cat=pufy-i-ottomanki">Пуфы и оттоманки</a></li>
+	<li id="menu-item-14853" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14853"><a href="https://hpdecor.ru/?product_cat=divany">Диваны</a></li>
+	<li id="menu-item-14854" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14854"><a href="https://hpdecor.ru/?product_cat=krovati">Изголовья для кровати</a></li>
+	<li id="menu-item-14855" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14855"><a href="https://hpdecor.ru/?product_cat=komody">Комоды и шкафы</a></li>
+	<li id="menu-item-14856" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14856"><a href="https://hpdecor.ru/?product_cat=tumbochki">Тумбы</a></li>
+	<li id="menu-item-14857" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14857"><a href="https://hpdecor.ru/?product_cat=tualetnye-stoliki-i-konsoli">Туалетные столики и консоли</a></li>
+	<li id="menu-item-14858" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14858"><a href="https://hpdecor.ru/?product_cat=zhurnalnye-i-kofejnye-stoliki">Журнальные и кофейные столики</a></li>
+	<li id="menu-item-14859" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14859"><a href="https://hpdecor.ru/?product_cat=obedennye-i-rabochie-stoly">Обеденные и рабочие столы</a></li>
+</ul>
+<a href="javascript:;" class="trigger-dlmenu"></a></li>
+<li id="menu-item-14860" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-14860"><a href="https://hpdecor.ru/?product_cat=svet">Свет</a>
+<ul class="sub-menu dl-submenu"><li class="dl-back"><a href="#">Back</a></li>
+	<li id="menu-item-14861" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14861"><a href="https://hpdecor.ru/?product_cat=liustry">Люстры</a></li>
+	<li id="menu-item-14862" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14862"><a href="https://hpdecor.ru/?product_cat=torshery">Торшеры</a></li>
+	<li id="menu-item-14863" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14863"><a href="https://hpdecor.ru/?product_cat=nastolnye-lampy">Настольные лампы</a></li>
+	<li id="menu-item-14864" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14864"><a href="https://hpdecor.ru/?product_cat=bra">Бра</a></li>
+</ul>
+<a href="javascript:;" class="trigger-dlmenu"></a></li>
+<li id="menu-item-14865" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14865"><a href="https://hpdecor.ru/?product_cat=zerkala">Зеркала</a></li>
+<li id="menu-item-14866" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-14866"><a href="https://hpdecor.ru/?product_cat=dekor">Декор</a>
+<ul class="sub-menu dl-submenu"><li class="dl-back"><a href="#">Back</a></li>
+	<li id="menu-item-16625" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-16625"><a href="https://hpdecor.ru/?product_cat=statuetki">Предметы декора</a></li>
+	<li id="menu-item-14867" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14867"><a href="https://hpdecor.ru/?product_cat=podsvechniki">Подсвечники</a></li>
+	<li id="menu-item-14870" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14870"><a href="https://hpdecor.ru/?product_cat=vazy">Вазы</a></li>
+	<li id="menu-item-14871" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14871"><a href="https://hpdecor.ru/?product_cat=nastennyj-dekor">Настенный декор</a></li>
+	<li id="menu-item-14872" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14872"><a href="https://hpdecor.ru/?product_cat=podnosy">Подносы</a></li>
+	<li id="menu-item-14873" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14873"><a href="https://hpdecor.ru/?product_cat=aksessuary-dlja-hranenija-ukrashenij">Боксы, шкатулки и коробки</a></li>
+	<li id="menu-item-14874" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14874"><a href="https://hpdecor.ru/?product_cat=aksessuary-dlja-vannoj-komnaty">Аксессуары для ванной комнаты</a></li>
+	<li id="menu-item-14875" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14875"><a href="https://hpdecor.ru/?product_cat=postery">Картины</a></li>
+	<li id="menu-item-16130" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-16130"><a href="https://hpdecor.ru/?product_cat=postery-dlja-skachivanija">Постеры для скачивания</a></li>
+	<li id="menu-item-14876" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14876"><a href="https://hpdecor.ru/?product_cat=chemodany-i-drugoe-hranenie">Чемоданы и другое хранение</a></li>
+	<li id="menu-item-14877" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14877"><a href="https://hpdecor.ru/?product_cat=dlja-tebja">Для тебя</a></li>
+</ul>
+<a href="javascript:;" class="trigger-dlmenu"></a></li>
+<li id="menu-item-14878" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-14878"><a href="https://hpdecor.ru/?product_cat=posuda">Посуда</a>
+<ul class="sub-menu dl-submenu"><li class="dl-back"><a href="#">Back</a></li>
+	<li id="menu-item-14879" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14879"><a href="https://hpdecor.ru/?product_cat=tarelki">Тарелки и блюда</a></li>
+	<li id="menu-item-14880" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14880"><a href="https://hpdecor.ru/?product_cat=chajnye-servizy">Чайные сервизы</a></li>
+	<li id="menu-item-14881" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14881"><a href="https://hpdecor.ru/?product_cat=chajnye-pary-i-kruzhki">Чайные пары и кружки</a></li>
+	<li id="menu-item-14882" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14882"><a href="https://hpdecor.ru/?product_cat=chajniki-saharnicy-molochniki">Чайники, сахарницы, молочники и другие аксессуары</a></li>
+	<li id="menu-item-14883" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14883"><a href="https://hpdecor.ru/?product_cat=hranenie">Хранение</a></li>
+	<li id="menu-item-14884" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14884"><a href="https://hpdecor.ru/?product_cat=stolovye-servizy">Столовые сервизы</a></li>
+</ul>
+<a href="javascript:;" class="trigger-dlmenu"></a></li>
+<li id="menu-item-14885" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14885"><a href="https://hpdecor.ru/?product_cat=baby">Baby</a></li>
+<li id="menu-item-14886" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14886"><a href="https://hpdecor.ru/?product_cat=podushki">Подушки</a></li>
+<li id="menu-item-14887" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14887"><a href="https://hpdecor.ru/?product_cat=pledy">Пледы</a></li>
+<li id="menu-item-14888" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14888"><a href="https://hpdecor.ru/?product_cat=kovry">Ковры</a></li>
+<li id="menu-item-24629" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-24629"><a href="https://hpdecor.ru/?product_cat=sale">SALE</a></li>
+</ul></div>            </div>
+        </div>
+        <div class="la-header-sticky-height-mb"></div>
+    </div>
+</div>
+<!-- .site-header-mobile --><section id="section_page_header" class="wpb_row section-page-header">
+    <div class="container">
+        <div class="page-header-inner">
+            <div class="row">
+                <div class="col-xs-12">
+                    <header><h1 class="page-title">Персональные данные</h1></header>                    
+		<div class="la-breadcrumbs"><div>
+		<div class="la-breadcrumb-content">
+		<div class="la-breadcrumb-wrap"><div class="la-breadcrumb-item"><a href="https://hpdecor.ru/" class="la-breadcrumb-item-link is-home" rel="home" title="Главная">Главная</a></div>
+			 <div class="la-breadcrumb-item"><div class="la-breadcrumb-item-sep">/</div></div> <div class="la-breadcrumb-item"><span class="la-breadcrumb-item-target">Персональные данные</span></div>
+		</div>
+		</div></div>
+		</div>                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- #page_header -->
+<div id="main" class="site-main">
+    <div class="container">
+        <div class="row">
+            <main id="site-content" class="col-md-9 col-xs-12 site-content">
+                <div class="site-content-inner">
+
+                    
+                    <div class="page-content">
+                        <div class="not-active-fullpage"><p>Политика Индивидуального Предпринимателя в отношении обработки персональных данных<br>
+Введение<br>
+Обеспечение конфиденциальности и безопасности обработки персональных данных в Компании является одной из приоритетных задач организации.</p>
+<p>В Компании для этих целей введен в действие комплект организационно-распорядительной документации, обязательный к исполнению всеми сотрудниками, допущенными к обработке персональных данных.</p>
+<p>Обработка, хранение и обеспечение конфиденциальности и безопасности персональных данных осуществляется в соответствии с действующим законодательством РФ в сфере защиты персональных данных, и в соответствии с локальными актами Компании.</p>
+<p>Настоящая Политика определяет принципы, порядок и условия обработки персональных данных работников Компании и потребителей услуг Компании, чьи персональные данные обрабатываются организацией, с целью обеспечения защиты прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну, а также устанавливает ответственность должностных лиц Компании, имеющих доступ к персональным данным, за невыполнение требований норм, регулирующих обработку и защиту персональных данных.</p>
+<p>Настоящая Политика в отношении обработки персональных данных в Компании (далее — Политика) разработана в соответствии с Федеральным законом от 27 июля 2006 г. № 152-ФЗ «О персональных данных».</p>
+<p>1.  ПОНЯТИЕ И СОСТАВ ПЕРСОНАЛЬНЫХ ДАННЫХ<br>
+Перечень персональных данных, подлежащих защите в Компании определятся следующими нормативными актами Российской Федерации:</p>
+<p>Федеральный закон от 27 июля 2006 г. № 152-ФЗ «О персональных данных»;<br>
+Федеральный закон от 30 декабря 2001 года № 197-ФЗ «Трудовой кодекс Российской федерации»;<br>
+Федеральный закон от 06 декабря 2001 года № 402-ФЗ «О бухгалтерском учёте»;<br>
+Налоговый кодекс Российской Федерации;<br>
+Гражданский Кодекс Российской Федерации;<br>
+Федеральный закон от 01 апреля1996 N 27-ФЗ «Об индивидуальном (персонифицированном) учете в системе обязательного пенсионного страхования»;<br>
+Трудовой кодекс РФ и другими нормативно-правовыми актами.<br>
+Сведениями, составляющими персональные данные, в Компании является любая информация, относящаяся к прямо или косвенно определенному или определяемому физическому лицу (субъекту персональных данных).</p>
+<p>2.  ЦЕЛИ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ<br>
+Компания осуществляет обработку персональных данных в следующих целях:</p>
+<p>организации кадрового учета компании;<br>
+обеспечения соблюдения законов и иных нормативно-правовых актов;<br>
+ведения кадрового делопроизводства;<br>
+исполнения требований налогового законодательства в связи с исчислением и уплатой налога на доходы физических лиц, а также единого социального налога, пенсионного законодательства при формировании и представлении персонифицированных данных о каждом получателе доходов, учитываемых при начислении страховых взносов на обязательное пенсионное страхование и обеспечение;<br>
+заполнения первичной статистической документации, в соответствии с Трудовым кодексом РФ, Налоговым кодексом РФ, федеральными законами, в частности: «Об индивидуальном (персонифицированном) учете в системе обязательного пенсионного страхования», «О персональных данных» и других нормативно-правовых актов;<br>
+исполнения договорных обязательств, в том числе гарантийного обслуживания потребителей услуг Компании;<br>
+иной деятельности в соответствии с Уставом Компании, действующим законодательством Российской федерации.<br>
+3.  СРОКИ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ<br>
+Сроки обработки персональных данных определяются в соответствие со сроком действия договора (соглашением) с субъектом персональных данных, Приказом Минкультуры РФ от 25.08.2010 № 558 «Об утверждении «Перечня типовых управленческих архивных документов, образующихся в процессе деятельности государственных органов, органов местного самоуправления и организаций, с указанием сроков хранения», сроком исковой давности, а также иными требованиями законодательства РФ.</p>
+<p>В Компании создаются и хранятся документы, содержащие сведения о субъектах персональных данных. Требования к использованию в Компании данных типовых форм документов установлены Постановлением Правительства РФ от 15.09.2008 № 687 «Об утверждении Положения об особенностях обработки персональных данных, осуществляемой без использования средств автоматизации».</p>
+<p>4.  ПРАВА И ОБЯЗАННОСТИ<br>
+Компания как оператор персональных данных в праве:</p>
+<p>отстаивать свои интересы в суде;<br>
+предоставлять персональные данные субъектов третьим лицам, если это предусмотрено действующим законодательством (налоговые, правоохранительные органы и др.) или соглашением субъекта персональных данных;<br>
+отказывать в предоставлении персональных данных в случаях предусмотренных действующим законодательством;<br>
+использовать персональные данные субъекта без его согласия, в случаях предусмотренных законодательством.<br>
+Субъект персональных данных имеет право:</p>
+<p>требовать уточнения своих персональных данных, их блокирования или уничтожения в случае, если персональные данные являются неполными, устаревшими, недостоверными, незаконно полученными или не являются необходимыми для заявленной цели обработки, а также принимать предусмотренные законом меры по защите своих прав;<br>
+требовать перечень своих персональных данных, обрабатываемых Компанией и источник их получения;<br>
+получать информацию о сроках обработки своих персональных данных, в том числе о сроках их хранения;<br>
+требовать извещения всех лиц, которым ранее были сообщены неверные или неполные его персональные данные, обо всех произведенных в них исключениях, исправлениях или дополнениях;<br>
+обжаловать в уполномоченный орган по защите прав субъектов персональных данных или в судебном порядке неправомерные действия или бездействия при обработке его персональных данных.<br>
+5.  ПРИНЦИПЫ И УСЛОВИЯ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ<br>
+Обработка персональных данных в Компании производится на основе соблюдения принципов:</p>
+<p>законности целей и способов обработки персональных данных;<br>
+соответствия целей обработки персональных данных целям, заранее определенным и заявленным при сборе персональных данных;<br>
+соответствия объема и характера обрабатываемых персональных данных, способов обработки персональных данных целям обработки персональных данных;<br>
+достоверности персональных данных, их достаточности для целей обработки, недопустимости обработки персональных данных, избыточных по отношению к целям, заявленным при сборе персональных данных;<br>
+недопустимости объединения созданных для несовместимых между собой целей баз данных, содержащих персональные данные;<br>
+хранения персональных данных в форме, позволяющей определить субъекта персональных данных, не дольше, чем этого требуют цели их обработки;<br>
+уничтожения по достижении целей обработки персональных данных или в случае утраты необходимости в их достижении.<br>
+Отказ потребителя услуг Компании от предоставления согласия на обработку его персональных данных влечет за собой невозможность достижения целей обработки.</p>
+<p>6.  ОБЕСПЕЧЕНИЕ БЕЗОПАСНОСТИ ПЕРСОНАЛЬНЫХ ДАННЫХ<br>
+Компания предпринимает необходимые организационные и технические меры для обеспечения безопасности персональных данных от случайного или несанкционированного доступа, уничтожения, изменения, блокирования доступа и других несанкционированных действий.</p>
+<p>В целях координации действий по обеспечению безопасности персональных данных в Компании назначен ответственный за организацию защиты персональных данных.</p>
+<p>7.  ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ<br>
+Настоящая Политика предназначена для размещения в информационных ресурсах общественного пользования Компании.</p>
+<p>Настоящая Политика подлежит изменению, дополнению в случае появления новых законодательных актов и специальных нормативных документов по обработке и защите персональных данных, но не реже одного раза в три года.</p>
+<p>Контроль исполнения требований настоящей Политики осуществляется ответственным за организацию обработки персональных данных Компании.</p>
+<p>Ответственность должностных лиц Компании, имеющих доступ к персональным данным, за невыполнение требований норм, регулирующих обработку и защиту персональных данных, определяется в соответствии с законодательством Российской Федерации и внутренними документами Компании.</p>
+</div>                    </div>
+
+                                    </div>
+            </main>
+            <!-- #site-content -->
+                <aside id="sidebar_primary" class="col-md-3 col-xs-12">
+        <div class="sidebar-inner">
+                    </div>
+    </aside>
+        </div>
+    </div>
+</div>
+<!-- .site-main -->
+<div class="clearfix">
+    <div class="backtotop-container">
+        <a href="#page" class="btn-backtotop btn btn-secondary"><span class="fa fa-angle-up"></span></a>
+    </div>
+</div>
+<footer id="colophon" class="site-footer la-footer-3col444">
+        <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="footer-column footer-column-1 col-xs-12 col-sm-6 col-md-4"><div class="footer-column-inner"><div id="text-4" class="widget widget_text"><div class="widget-inner">			<div class="textwidget"><h4 style="color: #fff;">О компании</h4>
+</div>
+		</div></div><div id="nav_menu-3" class="widget widget_nav_menu"><div class="widget-inner"><div class="menu-o-kompanii-container"><ul id="menu-o-kompanii" class="menu"><li id="menu-item-15754" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15754"><a href="https://hpdecor.ru/?page_id=15688">Контакты</a></li>
+<li id="menu-item-14979" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14979"><a href="https://hpdecor.ru/?page_id=758">О Нас</a></li>
+<li id="menu-item-15025" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-15025"><a href="https://hpdecor.ru/?cat=1">Блог</a></li>
+<li id="menu-item-18835" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-18832 current_page_item menu-item-18835"><a href="https://hpdecor.ru/?page_id=18832" aria-current="page">Персональные данные</a></li>
+</ul></div></div></div></div></div><div class="footer-column footer-column-2 col-xs-12 col-sm-6 col-md-4"><div class="footer-column-inner"><div id="text-2" class="widget widget_text"><div class="widget-inner">			<div class="textwidget"><h4 style="color: #fff;">Информация</h4>
+</div>
+		</div></div><div id="nav_menu-2" class="widget widget_nav_menu"><div class="widget-inner"><div class="menu-info-container"><ul id="menu-info" class="menu"><li id="menu-item-14974" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14974"><a href="https://hpdecor.ru/?page_id=760">Условия покупки</a></li>
+<li id="menu-item-14975" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14975"><a href="https://hpdecor.ru/?page_id=759">Условия доставки</a></li>
+</ul></div></div></div></div></div><div class="footer-column footer-column-3 col-xs-12 col-sm-6 col-md-4"><div class="footer-column-inner"></div></div>            </div>
+        </div>
+    </div>
+            <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-inner">
+                    <div class="row"><div class="col-xs-12"><div class="small  text-center">© 2014-2021 HPDecor - Бутик только стильных предметов интерьера. Все права защищены. </div></div></div>
+<div class="row"><div class="col-xs-12"><div class="small  text-center">This site is protected by reCAPTCHA and the Google
+<a href="https://policies.google.com/privacy">Privacy Policy</a>
+and <a href="https://policies.google.com/terms">Terms of Service</a> apply. </div></div></div>
+<div class="row" hidden="true"><div class="col-xs-12"><div class="small  text-center">Разработка и поддержка сайта - <a href="https://itarget.one">iTarget.One</a></div></div></div>                </div>
+            </div>
+        </div>
+    </footer>
+<!-- #colophon --></div><!-- .site-inner --></div><!-- #page-->
+<div class="searchform-fly-overlay la-ajax-searchform has-init">
+    <a href="javascript:;" class="btn-close-search"><i class="dl-icon-close"></i></a>
+    <div class="searchform-fly">
+        <p>Start typing and press Enter to search</p>
+        <form method="get" class="search-form" action="https://hpdecor.ru/">
+	<input autocomplete="off" type="search" class="search-field" placeholder="Search entire store…" value="" name="s" title="Search for:">
+	<button class="search-button" type="submit"><i class="dl-icon-search10"></i></button>
+	<input type="hidden" name="post_type" value="product">
+</form>
+<!-- .search-form -->        <div class="search-results">
+            <div class="loading"><div class="la-loader spinner3"><div class="dot1"></div><div class="dot2"></div><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>
+            <div class="results-container"></div>
+            <div class="view-more-results text-center">
+                <a href="#" class="button search-results-button">View more</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- .search-form -->
+
+<div class="cart-flyout">
+    <div class="cart-flyout--inner">
+        <a href="javascript:;" class="btn-close-cart"><i class="dl-icon-close"></i></a>
+        <div class="cart-flyout__content">
+            <div class="cart-flyout__heading">Shopping Cart</div>
+            <div class="cart-flyout__loading"><div class="la-loader spinner3"><div class="dot1"></div><div class="dot2"></div><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>
+            <div class="widget_shopping_cart_content">
+
+	<p class="woocommerce-mini-cart__empty-message">Корзина пуста.</p>
+
+
+</div>
+                    </div>
+    </div>
+</div>
+<div class="la-overlay-global"></div>
+
+
+		<script>
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = false;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+		<div class="protect_contents-overlay" style="background-color: rgb(0, 0, 0);"></div><div class="protect_alert"><span class="protect_alert_word" style="color:black;">Не копируйте текст!</span></div><!-- Instagram Feed JS -->
+<script type="text/javascript">
+var sbiajaxurl = "https://hpdecor.ru/web/wp-admin/admin-ajax.php";
+</script>
+	<script type="text/javascript">
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<style id="core-block-supports-inline-css" type="text/css">
+/**
+ * Core styles: block-supports
+ */
+
+</style>
+<link rel="stylesheet" id="rs-plugin-settings-css" href="https://hpdecor.ru/web/wp-content/plugins/revslider/public/assets/css/rs6.css?ver=6.6.3" media="all">
+<style id="rs-plugin-settings-inline-css" type="text/css">
+#rs-demo-id {}
+</style>
+<script src="https://hpdecor.ru/web/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=5.7.3" id="swv-js"></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/hpdecor.ru\/index.php?rest_route=\/","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script src="https://hpdecor.ru/web/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.7.3" id="contact-form-7-js" defer=""></script> 
+<script src="https://hpdecor.ru/web/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.js?ver=2.7.0-wc.7.4.0" id="jquery-blockui-js" defer=""></script> 
+<script type="text/javascript" id="wc-add-to-cart-js-extra">
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/web\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_view_cart":"\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440 \u043a\u043e\u0440\u0437\u0438\u043d\u044b","cart_url":"https:\/\/hpdecor.ru\/?page_id=6","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script>
+<script src="https://hpdecor.ru/web/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.js?ver=7.4.0" id="wc-add-to-cart-js" defer=""></script> 
+<script src="https://hpdecor.ru/web/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.js?ver=2.1.4-wc.7.4.0" id="js-cookie-js" defer=""></script> 
+<script type="text/javascript" id="woocommerce-js-extra">
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/web\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script>
+<script src="https://hpdecor.ru/web/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.js?ver=7.4.0" id="woocommerce-js" defer=""></script> 
+<script type="text/javascript" id="wc-cart-fragments-js-extra">
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/web\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_6ad87a195c4d83e3fd0e93367ea4ec7e","fragment_name":"wc_fragments_6ad87a195c4d83e3fd0e93367ea4ec7e","request_timeout":"5000"};
+/* ]]> */
+</script>
+<script src="https://hpdecor.ru/web/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.js?ver=7.4.0" id="wc-cart-fragments-js" defer=""></script> 
+<script src="https://www.google.com/recaptcha/api.js?render=6LcaiZAUAAAAAKTm6qqa5QOkwWvRdJ8HvqLrlCds&amp;ver=3.0" id="google-recaptcha-js"></script>
+<script src="https://hpdecor.ru/web/wp-includes/js/dist/vendor/regenerator-runtime.js?ver=0.13.9" id="regenerator-runtime-js"></script>
+<script src="https://hpdecor.ru/web/wp-includes/js/dist/vendor/wp-polyfill.js?ver=3.15.0" id="wp-polyfill-js"></script>
+<script type="text/javascript" id="wpcf7-recaptcha-js-extra">
+/* <![CDATA[ */
+var wpcf7_recaptcha = {"sitekey":"6LcaiZAUAAAAAKTm6qqa5QOkwWvRdJ8HvqLrlCds","actions":{"homepage":"homepage","contactform":"contactform"}};
+/* ]]> */
+</script>
+<script src="https://hpdecor.ru/web/wp-content/plugins/contact-form-7/modules/recaptcha/index.js?ver=5.7.3" id="wpcf7-recaptcha-js"></script>
+<script src="https://hpdecor.ru/web/wp-content/themes/airi/assets/js/enqueue/min/modernizr-custom.js?ver=1.1.9" id="airi-modernizr-custom-js" defer=""></script> 
+<script src="https://hpdecor.ru/web/wp-content/themes/airi/assets/js/plugins/min/plugins-full.js?ver=1.1.9" id="airi-plugins-js" defer=""></script> 
+<script type="text/javascript" id="airi-theme-js-extra">
+/* <![CDATA[ */
+var la_theme_config = {"security":{"favorite_posts":"067f61cf73","wishlist_nonce":"1f8cd3a7b0","compare_nonce":"5c6c34a61c"},"fullpage":[],"product_single_design":"1","product_gallery_column":"{\"xlg\":\"3\",\"lg\":\"3\",\"md\":\"3\",\"sm\":\"3\",\"xs\":\"2\",\"mb\":\"2\"}","single_ajax_add_cart":"yes","i18n":{"backtext":"Back","compare":{"view":"View List Compare","success":"has been added to comparison list.","error":"An error occurred ,Please try again !"},"wishlist":{"view":"View List Wishlist","success":"has been added to your wishlist.","error":"An error occurred, Please try again !"},"addcart":{"view":"View Cart","success":"has been added to your cart","error":"An error occurred, Please try again !"},"global":{"error":"An error occurred ,Please try again !","comment_author":"Please enter Name !","comment_email":"Please enter Email Address !","comment_rating":"Please select a rating !","comment_content":"Please enter Comment !","continue_shopping":"Continue Shopping","cookie_disabled":"We are sorry, but this feature is available only if cookies are enabled on your browser"}},"popup":{"max_width":"790","max_height":"530"},"js_path":"https:\/\/hpdecor.ru\/web\/wp-content\/themes\/airi\/assets\/js\/plugins\/min\/","theme_path":"https:\/\/hpdecor.ru\/web\/wp-content\/themes\/airi\/","ajax_url":"https:\/\/hpdecor.ru\/web\/wp-admin\/admin-ajax.php","mm_mb_effect":"1","header_height":{"desktop":{"normal":"120","sticky":"95"},"tablet":{"normal":"100","sticky":"80"},"mobile":{"normal":"70","sticky":"70"}},"la_extension_available":{"swatches":false,"360":false,"content_type":true},"polyfills":{"css_vars":"css-vars-ponyfill.js","method":"request"},"mobile_bar":"always"};
+/* ]]> */
+</script>
+<script src="https://hpdecor.ru/web/wp-content/themes/airi/assets/js/min/app.js?ver=1.1.9" id="airi-theme-js" defer=""></script> 
+<script>try{  }catch (ex){}</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(26496369, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/26496369" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; position: fixed; visibility: hidden; display: block; transition: right 0.3s ease 0s; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcaiZAUAAAAAKTm6qqa5QOkwWvRdJ8HvqLrlCds&amp;co=aHR0cHM6Ly9ocGRlY29yLnJ1OjQ0Mw..&amp;hl=en&amp;v=tNAc29ZZrpcOCErva2nr4BS9&amp;size=invisible&amp;cb=t768w65tl5wn" role="presentation" name="a-36cpheboaczu" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" width="256" height="60" frameborder="0"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-100000" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div></body></html>

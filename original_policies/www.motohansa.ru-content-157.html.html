@@ -1,0 +1,513 @@
+<html class="" lang="ru"><head>
+<title>Интернет-магазин мотоэкипировки и мотозапчастей MотоГанза</title>
+<meta name="yandex-verification" content="7a6fff1dc2262efe">
+
+<link rel="stylesheet" type="text/css" href="/creditline/css/style.css" media="screen">
+<link rel="icon" href="/templates/default/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/templates/default/favicon.ico" type="image/x-icon">
+<script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/watch.js"></script><script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/tNAc29ZZrpcOCErva2nr4BS9/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-VQkqyzWECBbjdnrmLsMeQdf0TTXr6rfxgJXnIIszVBecGcFa03Tl4VBO4n2inOOm"></script><script type="text/javascript" src="/templates/default/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="/creditline/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/creditline/js/jquery.checkbox.js"></script>
+<script type="text/javascript" src="/creditline/js/jquery.maskedinput.js"></script>
+
+<!--   <script type="text/javascript" src="creditline/js/jquery.reveal.js"></script>
+<script type="text/javascript" src="creditline/js/creditline.js"></script>  -->
+<link rel="stylesheet" href="/templates/default/js/slider/css/jslider.plastic.css" type="text/css">
+
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css" href="/fancybox/jquery.fancybox.css?v=2.1.5" media="screen">
+<link rel="stylesheet" type="text/css" href="/templates/default/css/template.css" media="screen">
+
+<!-- Add Thumbnail helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7">
+<script type="text/javascript" src="/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+<!-- bin/jquery.slider.min.css -->
+<link rel="stylesheet" href="/templates/default/js/slider/css/jslider.css" type="text/css">
+<link rel="stylesheet" href="/templates/default/js/slider/css/jslider.blue.css" type="text/css">
+<link rel="stylesheet" href="/templates/default/js/slider/css/jslider.plastic.css" type="text/css">
+
+
+<!-- bin/jquery.slider.min.js -->
+<script type="text/javascript" src="/templates/default/js/slider/jshashtable-2.1_src.js"></script>
+<script type="text/javascript" src="/templates/default/js/slider/jquery.numberformatter-1.2.3.js"></script>
+<script type="text/javascript" src="/templates/default/js/slider/tmpl.js"></script>
+<script type="text/javascript" src="/templates/default/js/slider/jquery.dependClass-0.1.js"></script>
+<script type="text/javascript" src="/templates/default/js/slider/draggable-0.1.js"></script>
+<script type="text/javascript" src="/templates/default/js/slider/jquery.slider.js"></script>
+
+
+<script>
+window.dataLayer = Array();
+$(document).ready(function() {
+	$("#basket_float span").mouseover(function() {
+		if ($("#basket_desc").css('display') == 'none')
+			$("#basket_desc").slideDown();
+	});
+	$("#basket_desc").mouseleave(function() {
+		$("#basket_desc").slideUp();
+	});
+	$('.fancybox-thumbs').fancybox({
+				prevEffect : 'none',
+				nextEffect : 'none',
+
+				closeBtn  : false,
+				arrows    : false,
+				nextClick : true,
+
+				helpers : {
+					thumbs : {
+						width  : 50,
+						height : 50
+					}
+				}
+	});
+});
+function add_to_cart(obj, itemid,count,size,itemname,price,credit) {
+	width = $('.mainpic').width();
+	height = $('.mainpic').height();
+	if (obj.left != undefined) {
+		alert(obj);
+		left = $(obj).offset().left;
+		xtop = $(obj).offset().top;
+	}
+	else {
+		left = $('.mainpic').offset().left;
+		xtop = $('.mainpic').offset().top;
+	}
+	if (credit != 1)
+		credit = 0;
+	$("#mainlink").prepend('<div class="tobasket" style="width:'+width+'px; height:'+height+'px; left:'+left+'px; top:'+xtop+'px;"></div>');
+	$("#img"+itemid).prepend('<div class="tobasket" style="width:'+width+'px; height:'+height+'px; left:'+left+'px; top:'+xtop+'px;"></div>');
+	$(".tobasket").animate({left:"0", top:"0", width:"100px", height:"40px"},1000);
+	$.post("/components/catalog/basket.php",{userid:"853043", type:"additem", itemid:itemid, size:size, count:count, credit:credit}, refreshBasket);
+	//yandex ecommerce
+	window.dataLayer.push({
+	    "ecommerce": {
+	        "add": {
+	            "products": [
+	                {
+	                    "id": itemid,
+	                    "name": itemname,
+	                    "brand": "Motohansa",
+                		"quantity": count,
+                		"price": price
+	                }
+	            ]
+	        }
+	    }
+	});
+}
+function del_from_cart(itemid,itemname) {
+	$.post("/components/catalog/basket.php",{userid:"853043", type:"delitem", deleteid:itemid}, refreshBasket);
+	//yandex ecommerce
+	dataLayer.push({
+	    "ecommerce": {
+	        "remove": {
+	            "products": [
+	                {
+	                    "id": itemid,
+	                    "name": itemname,
+	                    "brand": "Motohansa"
+	                }
+	            ]
+	        }
+	    }
+	});
+}
+function increase_item_count(itemid) {
+	$.post("/components/catalog/basket.php",{userid:"853043", type:"incitem", incid:itemid}, refreshBasket);
+}
+function decrease_item_count(itemid) {
+	$.post("/components/catalog/basket.php",{userid:"853043", type:"decitem", decid:itemid}, refreshBasket);
+}
+function refreshBasket(data) {
+	var obj = $.parseJSON(data);
+	if (obj.count > 0) {
+        $(".basket_count").text(obj.count);
+        $(".basket_sum").text(obj.money+' рублей');
+        if (obj.iscredit == 1) {
+        	$(".crdt a b").text('от '+obj.credit_min_sum+' руб.');
+        	$(".crdt a").css("display", "block");
+        	}
+        else
+        	$(".crdt a").css("display", "none");
+
+		element = null;
+		$("#basket_desc").html('<table border="0"><tbody></tbody></table><img src="/templates/default/images/basket_arrow_up.png" alt="Скрыть корзину">');
+		for (var i = 0; i < obj.items.length; i++) {
+			element = obj.items[i];
+			$("#basket_desc table tbody").html($("#basket_desc table tbody").html()+'<tr><td><a href="/catalog/category/'+element.itemid+'.html">'+element.name+'</a></td><td><button onclick="decrease_item_count('+element.id+')" class="basket_desc_but_dec"></button><span>'+element.count+' шт.</span><button onclick="increase_item_count('+element.id+')" class="basket_desc_but_inc"></button></td><td>'+element.size+'</td><td>'+element.price+' руб.</td><td><button onclick="del_from_cart('+element.id+',\''+element.name+'\')" class="basket_desc_but_del"></button></td></tr>');
+		}
+
+		$("#basket_float").show();
+		$("body").css('padding-top','40px');
+	}
+	else  {
+		$("#basket_float").hide();
+		$("#basket_desc").hide();
+		$(".tobasket").hide();
+		$("body").css('padding-top','0px');
+	}
+}
+</script>
+<!-- recaptcha -->
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<style type="text/css">.fancybox-margin{margin-right:12px;}</style><style id="abu-collapse-styles" type="text/css"></style></head>
+
+
+<body style="">
+<div style="display:none;" id="basket_float"><div class="basket_pic"></div>
+	<span>Товаров в корзине: <b class="basket_count">0</b> Общая сумма: <b class="basket_sum"> рублей</b></span>
+	<a href="/basket/" class="basket_button" title="Перейти к оформлению заказа">Оформить заказ</a>
+	<b class="crdt"><a style="display:none;" href="/basket/?credit=1" class="basket_credit">Оформить в кредит <b></b></a></b>
+</div>
+<div id="basket_desc"><table><tbody><tr><td>Ваша корзина пуста</td></tr></tbody></table><img src="/templates/default/images/basket_arrow_up.png" alt="Свернуть корзину"></div>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter17080915 = new Ya.Metrika({
+                    id:17080915,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    triggerEvent: true,
+                    ecommerce:"dataLayer"
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/17080915" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<div id="all" style="">
+<div id="all2" style="">
+
+<div id="top" style=" "><div id="top2" style=" "><div id="top3" style=" "></div></div></div>
+<!--/top -->
+<div id="logo_bar" style=" ">
+<div id="logo_bar2" style=" ">
+<div id="logo_bar3" style=" ">
+<div id="logo_bar4" style=" ">
+
+<div id="logo" style=" "><a href="/" title="На главную"><span>На главную</span></a></div><!--/logo -->
+
+<a href="tel:+79637779666"><div id="telephone" style="" title="Нажмите для звонка">
+</div></a><!--/tel -->
+
+<div id="vkontakte" style="">
+<a href="http://vkontakte.ru/club19899563" title="Мы в контакте">
+<span>Мы в контакте</span>
+</a>
+</div><!--/vkontakte -->
+<div id="facebook" style="">
+<a href="http://www.facebook.com/motoganza" title="Мы в facebook">
+<span>Мы в facebook</span>
+</a>
+</div><!--/facebook -->
+<div id="instagram" style="">
+<a href="https://www.instagram.com/moto_hansa/" title="Мы в Instagram">
+<span>Мы в Instagram</span>
+</a>
+</div><!--/instagram -->
+
+<div id="bar_menu" style="  ">
+<div id="bar_menu2" style=" ">
+<div id="bar_menu3" style=" ">
+<div id="bar_menu4" style=" ">
+<ul id="bar_menu_ul" style=" ">
+<li><a href="/content/3.html" title="">ИНФОРМАЦИЯ</a><span class="separator"></span></li>
+<li><a href="/content/2.html" title="">ДОСТАВКА И ОПЛАТА</a><span class="separator"></span></li>
+<li><a href="/articlelist/" title="">ОБЗОРЫ</a><span class="separator"></span></li>
+<li><a href="/content/4.html" title="">КРЕДИТ</a><span class="separator"></span></li>
+<li><a href="/contacts/" title="">СВЯЗЬ</a><span class="separator"></span></li>
+<li class="mobile"><a href="/sitemap/" title="">КАРТА САЙТА</a><span class="separator"></span></li>
+
+</ul><!--/ber_menu_ul -->
+</div>
+</div>
+</div>
+</div><!--/bar_menu -->
+
+
+
+</div>
+</div>
+</div>
+</div><!--/logo_bar -->
+
+<div id="h_conteiner" style="">
+<div id="h_menu" style=" ">
+<div id="h_menu_pad" style="">
+<div id="h_menu_bg" style="">
+<ul id="h_menu_ul"><li><a href="/catalog/motozapchasti/">Мотозапчасти</a><div class="submenu_conteiner">
+			<div class="submenu2">
+			<div class="submenu4">
+			<div class="submenu5"></div>
+			</div></div><!--/submenu2 -->
+			<ul><li><a href="/catalog/motozapchasti/akkumulyatory/">аккумуляторы</a></li><li><a href="/catalog/motozapchasti/amortizatory/">амортизаторы</a></li><li><a href="/catalog/motozapchasti/vozdushnye_philtry/">воздушные фильтры</a></li><li><a href="/catalog/motozapchasti/masla_i_zhidkosti/">масла и жидкости</a></li><li><a href="/catalog/motozapchasti/maslyanye_philtry/">Масляные фильтры</a></li><li><a href="/catalog/motozapchasti/podshipniki-1/">подшипники</a></li><li><a href="/catalog/motozapchasti/pokryshki/">покрышки</a></li><li><a href="/catalog/motozapchasti/prochee/">прочее</a></li><li><a href="/catalog/motozapchasti/salniki__pylniki/">Сальники, пыльники</a></li><li><a href="/catalog/motozapchasti/svechi/">свечи</a></li><li><a href="/catalog/motozapchasti/sceplenie/">сцепление</a></li><li><a href="/catalog/motozapchasti/tormoznye_diski-1/">тормозные диски</a></li><li><a href="/catalog/motozapchasti/tormoznye_kolodki/">тормозные колодки</a></li><li><a href="/catalog/motozapchasti/cepi_i_zvezdy/">цепи и звезды</a></li><li><div class="clear"></div></li>
+			</ul>
+			<div class="submenu1">
+			<div class="submenu3">
+			<div class="submenu5"></div>
+			</div></div>
+			</div><!--/submenu_conteiner --></li><li><a href="/catalog/motoekipirovka/">Мотоэкипировка</a><div class="submenu_conteiner">
+			<div class="submenu2">
+			<div class="submenu4">
+			<div class="submenu5"></div>
+			</div></div><!--/submenu2 -->
+			<ul><li><a href="/catalog/motoekipirovka/boty/">боты</a></li><li><a href="/catalog/motoekipirovka/zashhita/">защита</a></li><li><a href="/catalog/motoekipirovka/kurtki/">куртки</a></li><li><a href="/catalog/motoekipirovka/perchatki/">перчатки</a></li><li><a href="/catalog/motoekipirovka/prochee-1/">прочее</a></li><li><a href="/catalog/motoekipirovka/shtany/">штаны</a></li><li><div class="clear"></div></li>
+			</ul>
+			<div class="submenu1">
+			<div class="submenu3">
+			<div class="submenu5"></div>
+			</div></div>
+			</div><!--/submenu_conteiner --></li><li><a href="/catalog/motoshlemy/">Мотошлемы</a><div class="submenu_conteiner">
+			<div class="submenu2">
+			<div class="submenu4">
+			<div class="submenu5"></div>
+			</div></div><!--/submenu2 -->
+			<ul><li><a href="/catalog/motoshlemy/agv_shlemy/">AGV</a></li><li><a href="/catalog/motoshlemy/handsfree/">Bluetooth гарнитуры</a></li><li><a href="/catalog/motoshlemy/caberg/">CABERG</a></li><li><a href="/catalog/motoshlemy/hjc/">HJC</a></li><li><a href="/catalog/motoshlemy/motoshlemy_ls2/">LS2</a></li><li><a href="/catalog/motoshlemy/motoshlemy_shoei/">SHOEI</a></li><li><a href="/catalog/motoshlemy/simpson/">Simpson</a></li><li><div class="clear"></div></li>
+			</ul>
+			<div class="submenu1">
+			<div class="submenu3">
+			<div class="submenu5"></div>
+			</div></div>
+			</div><!--/submenu_conteiner --></li><li><a href="/catalog/aksessuary/">Аксессуары</a><div class="submenu_conteiner">
+			<div class="submenu2">
+			<div class="submenu4">
+			<div class="submenu5"></div>
+			</div></div><!--/submenu2 -->
+			<ul><li><a href="/catalog/aksessuary/national_cycle/">NATIONAL CYCLE</a></li><li><a href="/catalog/aksessuary/ztechnik/">ZTECHNIK</a></li><li><a href="/catalog/aksessuary/slajdery/">Дуги и защита</a></li><li><a href="/catalog/aksessuary/zerkala/">зеркала</a></li><li><a href="/catalog/aksessuary/kophry_i_sumki/">кофры и сумки</a></li><li><a href="/catalog/aksessuary/lobovye_stekla-1/">лобовые стекла</a></li><li><a href="/catalog/aksessuary/optika-1/">оптика</a></li><li><a href="/catalog/aksessuary/podnozhki-1/">подножки</a></li><li><a href="/catalog/aksessuary/prochee-1-1/">прочее</a></li><li><a href="/catalog/aksessuary/chehly/">чехлы</a></li><li><div class="clear"></div></li>
+			</ul>
+			<div class="submenu1">
+			<div class="submenu3">
+			<div class="submenu5"></div>
+			</div></div>
+			</div><!--/submenu_conteiner --></li><li><a href="/catalog/sertiphikaty/">Сертификаты</a></li></ul><!--/h_menu_ul -->
+
+</div></div></div><!--/h_menu -->
+
+<div id="search" style="">
+<form action="/index.php" method="get" class="forms" style=" padding-top:28px; padding-left:12px;">
+<input type="hidden" name="page" value="search">
+<input name="keyword" type="text" autocomplete="off" id="searchkey_field" style="width:180px;">
+<div id="searchkey_div" style="display:none; width:290px; padding:5px; position:absolute; background-color:#fff;"></div>
+<input id="search_btn" type="submit" value="" style="vertical-align: bottom;">
+
+</form>
+<script>
+$(document).ready(function() {
+	$("#searchkey_field").keyup(function() {
+		if ($("#searchkey_field").val() == "") {
+			$("#searchkey_div").slideUp();
+		}
+		else {
+			$("#searchkey_div").load("/components/search/ajax.search.php",{keyword: $('#searchkey_field').val()}, function(data) {
+				if (data != "")
+					$("#searchkey_div").slideDown();
+			});
+		}
+	});
+	$("#search_field").click(function() {
+		if ($("#search_field").val() == "") {
+			$("#category_id").attr("value","");
+            $("#search_div").slideUp();
+		}
+	});
+	$("#search_field").blur(function() {
+			$("#search_div").slideUp();
+	});
+});
+</script>
+</div><!--/search -->
+
+</div><!--/h_conteiner -->
+
+
+<div id="cont" style=" ">
+<div id="cont2" style=" ">
+<div id="cont3" style="">
+<div id="cont4" style="">
+
+<div id="l_col" style="">
+<div id="l_col2" style="">
+<div id="l_col3" style="">
+<div id="l_col4" style="">
+
+
+<div class="l_menu" style="">
+<div class="l_menu2" style="">
+
+</div></div><!--/l_menu -->
+
+<div id="authorize" style="">
+<div id="authorize2" style="">
+<div id="authorize3" style="">
+<div id="authorize4" style="">
+<h4 id="auth_title" style="">
+<span>Авторизация</span>
+</h4>
+<form class="forms" method="post" name="login" id="form-login">
+			<span id="form-login-username">
+			<label for="modlgn_username">Логин</label><br>
+			<input id="modlgn_username" type="text" name="login" class="inputbox">
+		</span>
+		<span id="form-login-password">
+			<label for="modlgn_passwd">Пароль</label><br>
+			<input id="modlgn_passwd" type="password" name="password" class="inputbox">
+		</span>
+
+	<table style="width:100%; border:none;">
+	  <tbody><tr>
+	 <td><input type="submit" name="Submit" id="auth_btn" value=""><br> 
+	Может вы <a href="/remindme/">забыли пароль</a>? <br>
+	</td>
+	  </tr>
+	</tbody></table>
+	</form>
+</div></div></div>
+</div><br><div class="h">Просмотренное</div>
+ <br>
+<div class="h">Анонсы</div>
+<a href="index.php?page=catalog&amp;category=31x" target="_blank"><img src="/images/banners/gifts.jpg" title="Лучший подарок байкеру и мотоциклисту!"></a>
+
+</div>
+</div>
+</div>
+</div><!--/l_col -->
+
+<div id="content" style="width:85%;">
+<div id="content_pad" style="">
+<div id="content2" style="">
+<div id="content3" style="">
+<div id="content4" style="">
+
+<!--РєРѕРЅС‚РµРЅС‚ -->
+
+<div class="itempage"><div class="category_title">ПОЛИТИКА ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ</div>
+			<div class="itempage_desc"><span style="color: #444444; font-family: Roboto, Tahoma, sans-serif; font-size: 12px; text-align: justify; text-transform: uppercase;">НАСТОЯЩИЙ ДОКУМЕНТ (ДАЛЕЕ «ПОЛИТИКА») ОПИСЫВАЕТ УСЛОВИЯ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ, ПЕРЕДАВАЕМЫХ ВАМИ В КАЧЕСТВЕ СУБЪЕКТА ПЕРСОНАЛЬНЫХ ДАННЫХ (ДАЛЕЕ «СУБЪЕКТ ПД») В АДРЕС ИП МИТРОФАНОВА СОФЬЯ ВЯЧЕСЛАВОВНА (ИНН 501801590928) В КАЧЕСТВЕ ОПЕРАТОРА ПЕРСОНАЛЬНЫХ ДАННЫХ (ДАЛЕЕ «ОПЕРАТОР ПД»). ПОЛОЖЕНИЯ ПОЛИТИКИ ДЕЙСТВУЮТ ТОЛЬКО ПРИ ПОСЕЩЕНИИ СУБЪЕКТОМ ПД ИНТЕРНЕТ-САЙТА ОПЕРАТОРА ПД MOTOHANSA.RU (MOTOGANZA.RU, МОТОГАНЗА.РФ)</span><br>
+<div>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">1. ОБРАБОТКА И ЗАЩИТА ПЕРСОНАЛЬНЫХ ДАННЫХ</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">1.1. ОПЕРАТОР ПД МОЖЕТ ОСУЩЕСТВЛЯТЬ СБОР, СИСТЕМАТИЗАЦИЮ, НАКОПЛЕНИЕ, ХРАНЕНИЕ, УТОЧНЕНИЕ (ОБНОВЛЕНИЕ, ИЗМЕНЕНИЕ), ИЗВЛЕЧЕНИЕ, ИСПОЛЬЗОВАНИЕ, БЛОКИРОВАНИЕ, УДАЛЕНИЕ ПЕРСОНАЛЬНЫХ ДАННЫХ СУБЪЕКТА ПД В СООТВЕТСТВИИ С ДЕЙСТВУЮЩИМ ЗАКОНОДАТЕЛЬСТВОМ РФ: СТ. 24 КОНСТИТУЦИИ РОССИЙСКОЙ ФЕДЕРАЦИИ, СТ. 6 ФЕДЕРАЛЬНОГО ЗАКОНА №152-ФЗ «О ПЕРСОНАЛЬНЫХ ДАННЫХ».</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">1.2. ОБРАБОТКА И ХРАНЕНИЕ ПЕРСОНАЛЬНЫХ ДАННЫХ ОСУЩЕСТВЛЯЮТСЯ В ЭЛЕКТРОННОМ ВИДЕ С ИСПОЛЬЗОВАНИЕМ СРЕДСТВ АВТОМАТИЗАЦИИ С ОБЕСПЕЧЕНИЕМ КОНФИДЕНЦИАЛЬНОСТИ И СОБЛЮДЕНИЕМ ПОЛОЖЕНИЙ О ЗАЩИТЕ ПЕРСОНАЛЬНЫХ ДАННЫХ, ПРЕДУСМОТРЕННЫХ ЗАКОНОДАТЕЛЬСТВОМ РФ.</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">1.3. УСЛОВИЯ ПЕРЕДАЧИ ПЕРСОНАЛЬНЫХ ДАННЫХ:</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">- СУБЪЕКТ ПД ДОЛЖЕН ПОДТВЕРДИТЬ СВОЕ СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ, ПЕРЕДАВАЕМЫХ ЧЕРЕЗ ЛЮБЫЕ ВЕБ-ФОРМЫ НА САЙТЕ ОПЕРАТОРА ПД, ЛИБО ПУТЕМ ЗАПОЛНЕНИЯ СПЕЦИАЛЬНОГО ПОЛЯ ПЕРЕД ОТПРАВКОЙ ПЕРСОНАЛЬНЫХ ДАННЫХ, ЛИБО САМИМ ФАКТОМ ОТПРАВКИ ДАННЫХ, ЕСЛИ СПЕЦИАЛЬНОЕ ПОЛЕ ОТСУТСТВУЕТ.</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">ПЕРЕД ОТПРАВКОЙ СВОИХ ПЕРСОНАЛЬНЫХ ДАННЫХ СУБЪЕКТ ПД ДОЛЖЕН ОЗНАКОМИТЬСЯ С СОДЕРЖАНИЕМ ПОЛИТИКИ.</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">ОПЕРАТОР ПД РАЗМЕЩАЕТ В ВЕБ-ФОРМАХ НА СВОЕМ САЙТЕ ССЫЛКУ НА ТЕКСТ ПОЛИТИКИ, ДЛЯ ТОГО ЧТОБЫ СУБЪЕКТ ПД ИМЕЛ ВОЗМОЖНОСТЬ ОЗНАКОМИТЬСЯ С СОДЕРЖАНИЕМ ПОЛИТИКИ ПЕРЕД ОТПРАВКОЙ СВОИХ ПЕРСОНАЛЬНЫХ ДАННЫХ.</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">- СУБЪЕКТ ПД ДАЕТ СОГЛАСИЕ НА ОБРАБОТКУ ОПЕРАТОРОМ ПД СВОИХ ПЕРСОНАЛЬНЫХ ДАННЫХ, НЕ ЯВЛЯЮЩИХСЯ СПЕЦИАЛЬНЫМИ ИЛИ БИОМЕТРИЧЕСКИМИ, В ТОМ ЧИСЛЕ НОМЕРА КОНТАКТНЫХ ТЕЛЕФОНОВ, АДРЕС ПРОЖИВАНИЯ, АДРЕСА ЭЛЕКТРОННОЙ ПОЧТЫ, СВЕДЕНИЯ О МЕСТОПОЛОЖЕНИИ, ТИП И ВЕРСИЯ ОПЕРАЦИОННОЙ СИСТЕМЫ, ТИП И ВЕРСИЯ БРАУЗЕРА, ТИП УСТРОЙСТВА И РАЗРЕШЕНИЕ ЕГО ЭКРАНА, ИСТОЧНИК ПЕРЕХОДА НА САЙТ, ВКЛЮЧАЯ АДРЕС САЙТА-ИСТОЧНИКА И ТЕКСТ РАЗМЕЩЕННОГО НА НЕМ РЕКЛАМНОГО ОБЪЯВЛЕНИЯ, ЯЗЫК ОПЕРАЦИОННОЙ СИСТЕМЫ И БРАУЗЕРА, СПИСОК ПОСЕЩЕННЫХ СТРАНИЦ И ВЫПОЛНЕННЫХ НА НИХ ДЕЙСТВИЙ, IP-АДРЕС.</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">- ОПЕРАТОР ПД НЕ ОБРАБАТЫВАЕТ ПЕРСОНАЛЬНЫЕ ДАННЫЕ СПЕЦИАЛЬНОЙ КАТЕГОРИИ, В ТОМ ЧИСЛЕ ДАННЫЕ О ПОЛИТИЧЕСКИХ, РЕЛИГИОЗНЫХ И ИНЫХ УБЕЖДЕНИЯХ, О ЧЛЕНСТВЕ В ОБЩЕСТВЕННЫХ ОБЪЕДИНЕНИЯХ И ПРОФСОЮЗНОЙ ДЕЯТЕЛЬНОСТИ, О ЧАСТНОЙ И ИНТИМНОЙ ЖИЗНИ СУБЪЕКТА ПД.</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">1.4. СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ ДЕЙСТВУЕТ БЕССРОЧНО С МОМЕНТА ПРЕДОСТАВЛЕНИЯ ДАННЫХ СУБЪЕКТОМ ПД ОПЕРАТОРУ ПД И МОЖЕТ БЫТЬ ОТОЗВАНО ПУТЕМ ПОДАЧИ ЗАЯВЛЕНИЯ ОПЕРАТОРУ ПД С УКАЗАНИЕМ СВЕДЕНИЙ, ОПРЕДЕЛЕННЫХ СТ. 14 ФЕДЕРАЛЬНОГО ЗАКОНА «О ПЕРСОНАЛЬНЫХ ДАННЫХ». ОТЗЫВ СОГЛАСИЯ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ МОЖЕТ БЫТЬ ОСУЩЕСТВЛЕН ПУТЕМ НАПРАВЛЕНИЯ СУБЪЕКТОМ ПД СООТВЕТСТВУЮЩЕГО ЗАЯВЛЕНИЯ ОПЕРАТОРУ ПД В СВОБОДНОЙ ПИСЬМЕННОЙ ФОРМЕ ПО АДРЕСУ 141080, Московская обл., г. Королев, пр. Космонавтов, 30-319</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">2. ПЕРЕДАЧА ПЕРСОНАЛЬНЫХ ДАННЫХ</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">2.1 ОПЕРАТОР ПД ПРЕДОСТАВЛЯЕТ ДОСТУП К ПЕРСОНАЛЬНЫМ ДАННЫМ ТОЛЬКО СУБЪЕКТУ ПД ЛИБО ЕГО ЗАКОННОМУ ПРЕДСТАВИТЕЛЮ В СООТВЕТСТВИИ С ТРЕБОВАНИЕМ ЗАКОНОДАТЕЛЬСТВА РФ.</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">2.2 ОПЕРАТОР ПД НЕ ПЕРЕДАЕТ ПЕРСОНАЛЬНЫЕ ДАННЫЕ, ПОЛУЧЕННЫЕ ОТ СУБЪЕКТА ПД, ТРЕТЬИМ ЛИЦАМ, КРОМЕ СЛУЧАЕВ, ПРЕДУСМОТРЕННЫХ ДЕЙСТВУЮЩИМ ЗАКОНОДАТЕЛЬСТВОМ РФ.</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">3. ПРАВА СУБЪЕКТА ПД</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">3.1. СУБЪЕКТ ПД ИЛИ ЕГО ЗАКОННЫЙ ПРЕДСТАВИТЕЛЬ ВПРАВЕ ТРЕБОВАТЬ УТОЧНЕНИЯ ПЕРСОНАЛЬНЫХ ДАННЫХ В СЛУЧАЕ, ЕСЛИ ОНИ ИЗМЕНИЛИСЬ ИЛИ ЕСЛИ ПРИ ИХ ПРЕДОСТАВЛЕНИИ БЫЛИ ДОПУЩЕНЫ НЕТОЧНОСТИ.</p>
+<p style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 12px; line-height: 1.5; text-align: justify;">3.2. СУБЪЕКТ ПД ИЛИ ЕГО ЗАКОННЫЙ ПРЕДСТАВИТЕЛЬ ВПРАВЕ ТРЕБОВАТЬ БЛОКИРОВКИ ИЛИ УНИЧТОЖЕНИЯ ПРЕДОСТАВЛЕННЫХ ПЕРСОНАЛЬНЫХ ДАННЫХ В СЛУЧАЕ ОТКАЗА ОТ ДАЛЬНЕЙШЕГО ОБСЛУЖИВАНИЯ ОПЕРАТОРОМ ПД И ПОСЕЩЕНИЯ ЕГО ИНТЕРНЕТ-САЙТА.</p>
+</div></div>
+		</div></div>
+
+<!--/РєРѕРЅС‚РµРЅС‚ -->
+</div>
+</div>
+</div>
+
+
+
+</div>
+
+
+
+</div><!--/content -->
+
+<div style="width:14%; float:left; margin-top:10px; padding:5px; text-align:center;" class="mobile">
+<div class="h">Новинки</div><br><img src="/images/cat/mini/macna_equator_women_black.jpg" alt="MACNA EQUATOR NIGHT EYE Куртка тканевая женская черно-серая" width="120"><br><span style="color:#d0d0d0; font-size:16pt">35140 руб.</span><br><a target="_blank" href="/catalog/motoekipirovka/kurtki/macna_kurtki/743724.html">MACNA EQUATOR NIGHT EYE Куртка тканевая женская черно-серая</a><br><br><img src="/images/cat/mini/hjc_i90_davan_mc4hsf.jpg" alt="HJC Шлем i90 DAVAN MC4HSF" width="120"><br><span style="color:#d0d0d0; font-size:16pt">28450 руб.</span><br><a target="_blank" href="/catalog/motoshlemy/hjc/728387.html">HJC Шлем i90 DAVAN MC4HSF</a><br><br><img src="/images/cat/mini/kappa_kr2143.jpg" alt="KAPPA KR2143 Крепеж центрального кофра YAMAHA NIKEN 900 2019" width="120"><br><span style="color:#d0d0d0; font-size:16pt">10000 руб.</span><br><a target="_blank" href="/catalog/aksessuary/kophry_i_sumki/kappa_krepleniya_kophrov/1623158.html">KAPPA KR2143 Крепеж центрального кофра YAMAHA NIKEN 900 2019</a><br><br><img src="/images/cat/mini/kappa_kr5105m.jpg" alt="KAPPA KR5105M Крепеж центрального кофра BMW C600 SPORT" width="120"><br><span style="color:#d0d0d0; font-size:16pt">11400 руб.</span><br><a target="_blank" href="/catalog/aksessuary/kophry_i_sumki/kappa_krepleniya_kophrov/1623141.html">KAPPA KR5105M Крепеж центрального кофра BMW C600 SPORT</a><br><br><img src="/images/cat/mini/hjc_rpha_70_sampra_mc2sf.jpg" alt="HJC Шлем RPHA 70 SAMPRA MC2SF" width="120"><br><span style="color:#d0d0d0; font-size:16pt">54000 руб.</span><br><a target="_blank" href="/catalog/motoshlemy/hjc/678298.html">HJC Шлем RPHA 70 SAMPRA MC2SF</a><br><br></div>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="clear"></div>
+
+</div>
+</div>
+</div>
+</div><!--/cont -->
+
+
+
+
+<div id="bot" style="">
+<div id="bot2" style=" ">
+<div id="bot3" style=" ">
+<div id="bot4" style="">
+<div id="copy" style=" ">
+© Интернет-Магазин мотозапчастей "МОТОГАНЗА". <a href="/content/157.html">Политика конфиденциальности</a> <br><br>
+
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-73944926-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='https://www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t21.4;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet: показано число просмотров за 24"+
+" часа, посетителей за 24 часа и за сегодня' "+
+"border='0' width='88' height='31'><\/a>")
+//--></script><a href="https://www.liveinternet.ru/click" target="_blank"><img src="//counter.yadro.ru/hit?t21.4;r;s1366*768*24;uhttps%3A//www.motohansa.ru/content/157.html;0.9677117150438628" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" width="88" height="31" border="0"></a><!--/LiveInternet-->
+
+<!-- Yandex.Metrika informer -->
+<a href="https://metrika.yandex.ru/stat/?id=17080915&amp;from=informer" target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/17080915/3_0_FFC520FF_FFA500FF_0_pageviews" style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:17080915,lang:'ru'});return false}catch(e){}"></a>
+<!-- /Yandex.Metrika informer -->
+
+<script type="text/javascript">
+  window.dataLayer = window.dataLayer || [];
+</script>
+<script src="//code-ya.jivosite.com/widget/90QQPeXzRG" async=""></script>
+</div><!--/copy -->
+
+</div>
+</div>
+</div>
+</div><!--/bot -->
+
+
+</div>
+<!--/all -->
+<!-- callback from pozvonim.com 
+<script crossorigin="anonymous" async type="text/javascript" src="//api.pozvonim.com/widget/callback/v3/bf6d23d1d597218c01a501713081f2b4/connect" id="check-code-pozvonim"></script>
+-->
+
+
+
+</body></html>

@@ -1,0 +1,2652 @@
+<html class="js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths linux-magic svg-magic" lang="ru"><head><style id="magiczoom-reset-css" type="text/css"></style><script type="text/javascript" async="" charset="utf-8" src="https://tracker.convead.io/widgets/1676505600/widget-901b51c7d57f1a69066843ef40e2a3ad.js"></script><style>
+  .fc.old-theme-fix {
+    overflow: visible;
+  }
+  .fc.old-theme-fix:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
+  .tt-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+
+  }
+  .twitter-typeahead {
+    display: inherit !important;
+  }
+  .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+  }
+  .tt-suggestion, .tt-footer {
+    display: block;
+    padding: 1px 0px 1px 10px;
+  }
+  .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+    color: #fff;
+  }
+  .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion p, .tt-footer p {
+    margin: 0;
+  }
+</style><style>
+  .spinner-container, .spinner {
+    position: absolute;
+    left:     0;
+    bottom:   0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .spinner-container {
+    z-index:  900;
+    overflow: hidden;
+
+    &.animate .spinner {
+      &.slide-up {
+        opacity: 0;
+      }
+
+      &.fade-in {
+        opacity: 0;
+      }
+    }
+  }
+
+  .spinner {
+    height:   100%;
+    opacity:  0.6;
+    background: #fff;
+
+    &.slide-up {
+      @include transition-property(opacity, bottom);
+      @include transition-duration(0.3s);
+    }
+
+    &.fade-in {
+      @include transition-property(opacity);
+      @include transition-duration(1s);
+    }
+
+    .spin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+
+  .spinner {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  .spinner-screen {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+  }
+</style><link media="all" onload="this.media=&quot;all&quot;" rel="stylesheet" type="text/css" href="/served_assets/public/jquery.modal-b7e3fb6a3704c0a2359a33962d371838618774b855128cef059add49182581c0.css"><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot;\u0026nbsp;&quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;р&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;р&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;\u0026nbsp;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:true,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:false},&quot;vk&quot;:{&quot;pixel_active&quot;:false,&quot;price_list_id&quot;:&quot;30542&quot;},&quot;new_ya_metrika&quot;:false,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;account_id&quot;:293220,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:false,&quot;minimum_items_price&quot;:1,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:false,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Нажимая кнопку подтверждаю, что я даю согласие \u003ca href=' https://health-tehnika.ru/page/soglasie-na-obrabotku-personalnyh-dannyh'\u003e\u003cu\u003eна обработку персональных данных\u003c/u\u003e\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:2,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]"><script async="" src="//connect.facebook.net/en_US/fbevents.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-WT7MPDW"></script><script type="text/javascript" async="" src="/javascripts/insales_counter.js?6"></script><script src="/packs/js/shop_bundle-8a1e792bc7fc3e09587c.js"></script><style type="text/css"></style>
+        <!--InsalesCounter -->
+        <script type="text/javascript">
+        if (typeof(__id) == 'undefined') {
+          var __id=293220;
+
+          (function() {
+            var ic = document.createElement('script'); ic.type = 'text/javascript'; ic.async = true;
+            ic.src = '/javascripts/insales_counter.js?6';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ic, s);
+          })();
+        }
+        </script>
+        <!-- /InsalesCounter -->
+    <script type="text/javascript">
+      (function() {
+        (function(w,c){w[c]=w[c]||function(){(w[c].q=w[c].q||[]).push(arguments)};})(window,'convead');
+
+function ready(fn) {
+  if (document.readyState != 'loading'){
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+
+function ajaxRequest(url, success, fail, complete) {
+  success = success || function() {};
+  fail = fail || function() {};
+  complete = complete || function() {};
+  const xhr = new XMLHttpRequest()
+  xhr.open('GET', url, true);
+  xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200) {
+        var data;
+        try {
+          data = JSON.parse(xhr.responseText)
+        } catch (e) {
+          console.warn(e)
+        }
+        success(data);
+        complete(xhr);
+      } else {
+        fail(xhr);
+        complete(xhr);
+      }
+    }
+  }
+  xhr.send();
+}
+
+ready(function(){
+  
+  function set_current_cart_info() {
+    ConveadCookies.set('convead_cart_info', JSON.stringify({
+      count: window.convead_cart_info.items_count, 
+      price: window.convead_cart_info.items_price
+    }), {path: '/'}); 
+  }
+
+  function is_success_order_page() {
+    var regex = new RegExp('^/orders/');
+    return regex.exec(window.location.pathname) != null;
+  }
+
+  function update_cart_legacy(callback) {
+    // Update cart
+    var json = ConveadCookies.get('convead_cart_info')
+    var current_cart_info = (json && JSON.parse(json)) || null;
+    var insales_cart_items = [];
+    
+    ajaxRequest('/cart_items.json', function (cart) {
+      if (!cart) return
+
+      for (var order_line of cart.order_lines) {
+        insales_cart_items.push({
+          product_id: order_line.product_id,
+          qnt: order_line.quantity,
+          price: order_line.sale_price
+        });
+      };
+      window.convead_cart_info = {
+        items_count: cart.items_count,
+        items_price: cart.items_price,
+        items: insales_cart_items
+      };
+      if (current_cart_info == null) {
+        set_current_cart_info(); 
+      } else {
+        if ((current_cart_info.count != window.convead_cart_info.items_count) || (current_cart_info.price != window.convead_cart_info.items_price)) {
+          set_current_cart_info();
+          if (!is_success_order_page()) {
+            window.convead('event', 'update_cart', {items: window.convead_cart_info.items});
+          }
+        }
+      }
+
+    }, null, callback);
+  }
+
+  function update_cart_common() {
+    var skipFirst = true;
+    var send_cart = function($data) {
+      var items = [];
+      for (var k in $data.order_lines) {
+        var offer = $data.order_lines[k];
+        items.push({
+          product_id: offer.product_id,
+          qnt: offer.quantity,
+          price: offer.sale_price
+        });
+      }
+      window.convead('event', 'update_cart', {items: items});
+    }
+    Events('onCart_Update').subscribe(function( $data ) {
+      if (skipFirst) skipFirst = false;
+      else {
+        send_cart($data);
+      }
+    })
+    Events('addToCart').subscribe(function() {
+      new InSales.Cart({ draw: function( $data ) {
+        send_cart($data);
+      } })
+    })
+  }
+
+  function send_view_product() {
+    if (typeof(window.convead_product_info) == 'undefined') return;
+
+    window.convead('event', 'view_product', window.convead_product_info);
+  }
+
+  function send_link() {
+    window.convead('event', 'link', {}, window.ConveadSettings.visitor_info);
+  }
+
+  // Initialize Convead settings
+  window.ConveadSettings = window.ConveadSettings || {};
+  window.ConveadSettings.app_key = '901b51c7d57f1a69066843ef40e2a3ad';
+  window.ConveadSettings.onload = function() {
+    if (typeof window.Events === 'function') {
+      update_cart_common();
+      send_view_product();
+    } else {
+      // Must call update cart event before link event when it is legacy api
+      window.ConveadSettings.disable_auto_event_link = true;
+      update_cart_legacy(function() {
+        send_link();
+        send_view_product();
+      });
+    }
+  }
+
+  // Get current visitor info
+  ajaxRequest(
+    "/client_account/contacts.json",
+    function(data, textStatus) {
+      if (data && data.status == 'ok') {
+        window.ConveadSettings.visitor_uid = data.client.id;
+        if (typeof window.ConveadSettings.visitor_info == 'undefined') window.ConveadSettings.visitor_info = {};
+        window.ConveadSettings.visitor_info.first_name = data.client.name;
+        window.ConveadSettings.visitor_info.last_name = data.client.surname;
+        window.ConveadSettings.visitor_info.email = data.client.email;
+        window.ConveadSettings.visitor_info.phone = data.client.phone;
+      }
+    },
+    null,
+    function() {
+      (function(d){var ts = (+new Date()/86400000|0)*86400;var s = d.createElement('script');s.type = 'text/javascript';s.async = true;s.charset = 'utf-8';s.src = 'https://tracker.convead.io/widgets/'+ts+'/widget-901b51c7d57f1a69066843ef40e2a3ad.js';var x = d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);})(document);
+    }
+  );
+
+});
+
+      })();
+    </script>
+
+    <script type="text/javascript">
+      (function() {
+        var fileref = document.createElement('script');
+        fileref.setAttribute("type","text/javascript");
+        fileref.setAttribute("src", 'https://sberbank.pimentos.net/js/notifications.min.js');
+        document.getElementsByTagName("head")[0].appendChild(fileref);
+      })();
+    </script><script type="text/javascript" src="https://sberbank.pimentos.net/js/notifications.min.js"></script>
+
+    
+    
+    <title>
+          
+      
+
+            Политика конфиденциальности
+
+      
+      
+    </title>
+    
+    
+<link rel="icon" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/favicon.png" type="image/png">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="yandex-verification" content="a5f1eb3f3e8d6c22">
+<meta name="google-site-verification" content="JISKPkFNBhEqzhNSn7qSONNkXAx-jrOuuOTi370-U1M">
+<meta name="wmail-verification" content="083ace6518fbecc0fc527a4ffdd2fbf6"> 
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WT7MPDW');</script>
+
+<script>/*(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WTTP9XV');*/</script>
+<!-- End Google Tag Manager -->
+
+<script type="text/javascript" src="//c.retailcrm.pro/widget/loader.js"></script></head><body><div id="referer_code_block" style="display: none;">5747</div>
+
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="
+    
+          
+      
+
+            Политика конфиденциальности
+
+      
+      
+    
+    ">
+    <meta property="og:image" content="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/social-logo.jpg">
+	<meta property="og:url" content="https://health-tehnika.ru/page/politika-konfidentsialnosti">
+  
+
+
+<meta name="keywords" content="Политика конфиденциальности">
+
+
+<meta name="description" content="Политика конфиденциальности">
+
+
+
+
+<link rel="alternate" type="application/rss+xml" title="Блог..." href="/blogs/sovety-po-vyboru-tehniki.atom">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/apple-touch-icon-152x152.png">
+<link rel="icon" type="image/png" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/favicon-196x196.png" sizes="196x196">
+<link rel="icon" type="image/png" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/favicon-128.png" sizes="128x128">
+<meta name="application-name" content="Healthtehnika">
+<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileImage" content="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/mstile-144x144.png">
+<meta name="msapplication-square70x70logo" content="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/mstile-70x70.png">
+<meta name="msapplication-square150x150logo" content="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/mstile-150x150.png">
+<meta name="msapplication-wide310x150logo" content="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/mstile-310x150.png">
+<meta name="msapplication-square310x310logo" content="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/mstile-310x310.png">
+
+
+
+
+  	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/cookies.js"></script>
+
+<link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/template.css">
+<link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/custom_uzer.css">
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&amp;subset=cyrillic-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/style.min.css">
+<link rel="stylesheet" href="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/custom.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+    <script>
+      function playVideo(){
+        $('iframe').each(function(){
+          this.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*')
+        });
+      }
+    </script>
+    
+    
+    
+  
+
+  
+
+
+<!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WT7MPDW"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- End Google Tag Manager (noscript) -->
+<script>
+  Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{value:function(r,e){if(null==this)throw new TypeError('"this" is null or not defined');var t=Object(this),n=t.length>>>0;if(0===n)return!1;var i,o,a=0|e,u=Math.max(0<=a?a:n-Math.abs(a),0);for(;u<n;){if((i=t[u])===(o=r)||"number"==typeof i&&"number"==typeof o&&isNaN(i)&&isNaN(o))return!0;u++}return!1}});
+</script>
+<script type="text/javascript">
+       var google_tag_params = {
+       ecomm_pagetype: 'home',
+       };
+</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-940468161"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-940468161');
+</script>
+
+
+
+
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+
+<noscript>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/940468161/?value=0&amp;guid=ON&amp;script=0"/>
+	</div>
+</noscript>
+
+<script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/md5.js"></script>
+
+
+
+
+  <!-- Facebook Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','//connect.facebook.net/en_US/fbevents.js');
+  // Insert Your Facebook Pixel ID below. 
+  fbq('init', '326958884514356');
+  fbq('track', 'PageView');
+  </script>
+  <!-- Insert Your Facebook Pixel ID below. --> 
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=326958884514356&amp;ev=PageView&amp;noscript=1"
+  /></noscript>
+  <!-- End Facebook Pixel Code -->
+
+
+
+
+
+<script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/md5.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  
+  
+  
+  
+  
+  
+  
+  
+        dataLayer.push( {
+          ecomm_pagetype: 'other'
+        } );
+       
+      
+     document.addEventListener("DOMContentLoaded", function(event) {
+       
+        $('#order_form').submit(function(e){
+                    
+          if (!window.dataLayer) window.dataLayer = []
+          dataLayer.push({
+            'ecommerce': {
+              'checkout': {
+                'actionField': {'step': '2', 'option': ', '},
+                'products': [
+                  
+                ]
+              }
+            },
+            'event': 'gtm-ee-event',
+            'gtm-ee-event-category': 'Enhanced Ecommerce',
+            'gtm-ee-event-action': 'Checkout Step 2',
+            'gtm-ee-event-non-interaction': 'False',
+          });    
+      
+        });
+     });
+     
+    
+</script>
+
+
+<script type="text/javascript">
+
+  function getCid() {
+      var cname = '_ga';
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return decodeURIComponent(c.substring(name.length, c.length));
+          }
+      }
+      return "";
+  }
+
+  document.addEventListener("DOMContentLoaded", function(event) {
+    $.get('https://health-tehnika1.ru/cid.php?cid=' + getCid())
+    $('.top-header__user-code span').html(getCid().slice(-5))
+
+    doneCollector();
+  })
+
+window.gifts = [];
+
+
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  setTimeout(function(){
+    addGiftsToWidget()
+    addGiftsToCheckout()
+  }, 3000)
+
+})
+
+function addGiftsToWidget(){
+
+  // window.gifts.forEach(function(giftProduct){
+  //   var widgetHtml = `<li class="basket_item">
+
+  //           <a href="${giftProduct.url}" class="basket_item-image">
+  //             <img style="width: 30px;" src="${giftProduct.image}">
+  //           </a>
+
+  //           <a href="${giftProduct.url}" class="basket_item-title">
+  //             Подарок: ${giftProduct.title}</a>
+  //             <div class="basket_item-details right"></div>
+  //         </li>`
+  //   $('.cart_widget-dropdown .basket_list-items').append(widgetHtml)
+  // })
+
+}
+
+function addGiftsToCheckout(){
+  window.gifts.forEach(function(giftProduct){
+    var html = '<div class="co-basket_item">' +
+                  '<div class="co-basket_item-image_container">' +
+                    '<div class="co-basket_item-image">' +
+                      '<img alt="image" src="'+giftProduct.image+'">' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="co-basket_item-description">' +
+                    'Подарок: ' + giftProduct.title +
+                  '</div>' +
+                  '<div class="co-basket_item-total">' +
+                    '<span class="co-basket_item-count"></span>' +
+                    '<span class="co-basket_item-price co-price--current"></span>' +
+                  '</div>' +
+                '</div>';
+    $('.co-basket .co-basket_item-list').append(html)
+  })
+
+}
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return decodeURIComponent(c.substring(name.length, c.length));
+        }
+    }
+    return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+  if (location.href.split('?')[1] && location.href.split('?')[1] == 'dev') {
+        alert(cname);
+        alert(cvalue);
+      }
+
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + encodeURIComponent(cvalue) + ";" + expires + ";path=/;domain=health-tehnika.ru;";
+}
+
+//When nothing in cart, close collector entries
+function doneCollector(){
+
+  var id = localStorage.getItem('l_id')
+  if (!id) return false
+  //Get order content
+  $.get('/cart_items.json', function(data){
+    if (!data.order_lines.length) {
+      $.get('https://health-tehnika1.ru/collector.php?id='+id+'&done=1', function(data){
+        localStorage.removeItem('l_id')
+      })
+    }
+  })
+}
+
+
+(function(){
+  "use strict";
+
+  function escapeHtml() {
+    return this.replace(/[&<>"'\/]/g, function (s) {
+      var entityMap = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': '&quot;',
+          "'": '&#39;',
+          "/": '&#x2F;'
+        };
+
+      return entityMap[s];
+    });
+  }
+
+  if (typeof(String.prototype.escapeHtml) !== 'function') {
+    String.prototype.escapeHtml = escapeHtml;
+  }
+})();
+ 
+ $(document).on('submit', '#new_client', function(e) {
+        if ( $('#client_human_type').val() === 'juridical') {
+            e.preventDefault();
+            $('.error_message').remove();
+            $('.textfield').removeClass('error_field');
+
+            let error = 0;
+            if ($('#client_field_6568538').val() === '') {
+                error = 1;
+                $('#client_field_6568538').addClass('error_field').after('<span class="error_message">Введите имя</span>');
+            }
+
+            if ($('#client_phone').val() === '') {
+                error = 1;
+                $('#client_phone').addClass('error_field').after('<span class="error_message">Введите телефон</span>');
+            }
+
+            if ($('#client_email').val() === '') {
+                error = 1;
+                $('#client_email').addClass('error_field').after('<span class="error_message">Введите email</span>');
+            }
+
+            if ($('#client_name').val() === '') {
+                error = 1;
+                $('#client_name').addClass('error_field').after('<span class="error_message">Введите наименование юр. лица</span>');
+            }
+
+            if (!($('#client_inn').val().length === 10 || $('#client_inn').val().length === 12)) {
+                error = 1;
+                $('#client_inn').addClass('error_field').after('<span class="error_message">ИНН должен содержать 10 или 12 цифр</span>');
+            }
+
+            if (!($('#client_settlement_account').val().length === 20)) {
+                error = 1;
+                $('#client_settlement_account').addClass('error_field').after('<span class="error_message">Р/С должен содержать 20 цифр</span>');
+            }
+
+            if (!($('#client_correspondent_account').val().length === 20)) {
+                error = 1;
+                $('#client_correspondent_account').addClass('error_field').after('<span class="error_message">К/С должен содержать 20 цифр</span>');
+            }
+
+            if ($('#client_bank_name').val() === '') {
+                error = 1;
+                $('#client_bank_name').addClass('error_field').after('<span class="error_message">Введите наименование банка</span>');
+            }
+
+            if ($('#client_ogrn').val() === '') {
+                error = 1;
+                $('#client_ogrn').addClass('error_field').after('<span class="error_message">Введите ОГРН</span>');
+            }
+
+            if (!($('#client_bik').val().length === 9)) {
+                error = 1;
+                $('#client_bik').addClass('error_field').after('<span class="error_message">БИК должен содержать 9 цифр</span>');
+            }
+
+            if ($('#client_password').val() === '') {
+                error = 1;
+                $('#client_password').addClass('error_field').after('<span class="error_message">Введите пароль</span>');
+            } else if ($('#client_password_confirmation').val() === '') {
+                error = 1;
+                $('#client_password_confirmation').addClass('error_field').after('<span class="error_message">Введите повторный пароль</span>');
+            } else {
+                if ($('#client_password_confirmation').val() !== $('#client_password').val()) {
+                    error = 1;
+                    $('#client_password_confirmation').after('<span class="error_message">Пароли не совпадают</span>');
+                }
+            }
+
+            setTimeout(function() {
+                $('#new_client input[type=submit]').prop('disabled', false);
+            }, 2000);
+
+
+            if (error === 0) {
+                $('#new_client').submit();
+            }
+        }
+
+        if ( $('#client_human_type').val() === 'individual') {
+            e.preventDefault();
+            $('.error_message').remove();
+            $('.textfield').removeClass('error_field');
+
+            let error = 0;
+            if ($('#client_name').val() === '') {
+                error = 1;
+                $('#client_name').addClass('error_field').after('<span class="error_message">Введите имя</span>');
+            }
+
+            if ($('#client_phone').val() === '') {
+                error = 1;
+                $('#client_phone').addClass('error_field').after('<span class="error_message">Введите телефон</span>');
+            }
+
+            if ($('#client_email').val() === '') {
+                error = 1;
+                $('#client_email').addClass('error_field').after('<span class="error_message">Введите email</span>');
+            }
+
+
+
+            if ($('#client_password').val() === '') {
+                error = 1;
+                $('#client_password').addClass('error_field').after('<span class="error_message">Введите пароль</span>');
+            } else if ($('#client_password_confirmation').val() === '') {
+                error = 1;
+                $('#client_password_confirmation').addClass('error_field').after('<span class="error_message">Введите повторный пароль</span>');
+            } else {
+                if ($('#client_password_confirmation').val() !== $('#client_password').val()) {
+                    error = 1;
+                    $('#client_password_confirmation').after('<span class="error_message">Пароли не совпадают</span>');
+                }
+            }
+
+            setTimeout(function() {
+                $('#new_client input[type=submit]').prop('disabled', false);
+            }, 2000);
+
+
+            if (error === 0) {
+                $('#new_client').submit();
+            }
+        }
+
+    });
+
+</script>
+
+
+
+<!-- Integration with CRM -->
+<script type="text/javascript">
+
+  document.addEventListener("DOMContentLoaded", function(){
+      function getRetailCrmCookie(name) {
+          var matches = document.cookie.match(new RegExp(
+              '(?:^|; )' + name + '=([^;]*)'
+          ));
+
+          return matches ? decodeURIComponent(matches[1]) : '';
+      }
+
+      function check_ga() {
+        if (typeof ga === 'function') {
+          console.log('Loaded :'+ ga);
+          ga('set', 'dimension1', getRetailCrmCookie('_ga'));
+        } else {
+          console.log('Not loaded');
+          setTimeout(check_ga,500);
+        }
+      }
+      check_ga();
+  })
+
+</script>
+<!-- End Integration with CRM -->
+
+
+  <div class="top-header__outer">
+	<div class="top-header">
+		<ul class="top-header__menu">
+			<li class="top-header__menu-item">
+				<a href="/compares">Сравнить товар</a>
+			</li>
+			<li class="top-header__menu-item">
+				<a href="/page/otzyvy-o-nas">Отзывы</a>
+			</li>
+			<li class="top-header__menu-item">
+				<a href="/client_account/login">Личный кабинет</a>
+			</li>
+			<li class="top-header__menu-item">
+				<a href="/page/optovikam">Оптовикам</a>
+			</li>
+          <li class="top-header__menu-item">
+			<a href="/blogs/sovety-po-vyboru-tehniki">Журнал</a>
+			</li>
+          <li class="top-header__menu-item">
+				<a href="/blogs/chasto-zadavaemye-voprosy">FAQ</a>
+			</li>
+		</ul>
+
+		<div class="top-header__user-code">Ваш код: <span></span></div>
+	</div>
+</div>
+
+<div class="main-header__outer">
+	<header class="main-header">
+		<div class="main-header__logos-block">
+			<a href="/" title="Техника здоровья">
+				<svg class="main-header__logo" width="44" height="59" viewBox="0 0 44 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M22.413 16.6923C22.447 16.9642 22.4172 17.2779 22.4742 17.5345C22.5099 17.6943 22.5804 17.8363 22.7274 17.9331C23.1099 18.1796 23.6887 17.8694 24.1825 17.815C24.3559 17.7963 24.5301 17.7708 24.7026 17.7496C25.131 17.6943 25.5568 17.6323 25.9809 17.5575C26.0846 17.5405 26.1781 17.5388 26.2673 17.5396C26.5937 17.5473 26.8512 17.6782 27.0161 17.9884C27.2192 18.3726 27.5328 18.6335 27.911 18.8451C28.5774 17.8754 29.457 17.0841 30.4931 16.5257C30.839 16.3379 31.2019 16.1832 31.5733 16.0497C31.7458 15.9886 31.7569 15.6647 31.5776 15.5661C30.1302 14.7689 28.2561 14.3848 26.2359 14.6032C24.757 14.763 23.398 15.2228 22.2549 15.8866C22.3518 16.0973 22.3433 16.3379 22.3943 16.5648C22.4028 16.6081 22.407 16.6464 22.413 16.6923Z" fill="#C40406"></path>
+					<path d="M10.1539 15.3426C10.2168 15.3307 10.278 15.3188 10.3409 15.3077C10.278 15.3188 10.2168 15.3315 10.1539 15.3426C11.0149 15.567 11.8716 15.8874 12.6493 16.3047C12.7716 16.3242 12.9578 16.4109 13.2238 16.5835C13.5204 16.0625 14.242 15.5449 15.9801 15.3766C16.0073 15.374 16.031 15.3621 16.0574 15.3604C16.2869 15.3485 16.5096 15.3842 16.7305 15.4488C16.96 15.5296 17.1733 15.6435 17.4232 15.6715C17.4547 15.6137 17.492 15.5525 17.5201 15.4964C16.2733 14.6287 14.6975 14.0235 12.9569 13.828C11.3132 13.6453 9.76635 13.8603 8.46599 14.3737C8.03253 14.5454 7.59398 14.9712 7.76651 14.978C7.98579 14.9865 8.20932 15.0035 8.43709 15.029C8.99548 15.0868 9.57682 15.193 10.1539 15.3426ZM14.2649 15.4106C14.2063 15.3961 14.1476 15.3876 14.0899 15.3732C14.1476 15.3876 14.2063 15.397 14.2649 15.4106ZM12.141 15.165C11.9566 15.1624 11.7721 15.1658 11.5903 15.1735C11.7721 15.1658 11.9557 15.1624 12.141 15.165ZM11.348 15.1845C11.122 15.199 10.9001 15.2202 10.6817 15.2508C10.8993 15.2202 11.1211 15.1981 11.348 15.1845Z" fill="#C40406"></path>
+					<path d="M43.4832 22.883C43.2155 20.8985 42.3392 19.2267 40.789 18.0683C39.311 16.9634 37.2788 16.388 35.3002 16.4917C34.7248 16.5214 34.1528 16.6022 33.6004 16.7535C32.7122 16.994 31.2028 17.3696 30.1838 17.9042C29.9075 18.0479 28.8299 18.704 28.8766 18.7422C28.9429 18.7958 29.1868 19.0703 29.2191 19.1069C29.3967 19.3023 30.1107 19.7868 30.0104 19.9236C30.0095 19.9245 30.0087 19.9253 30.0087 19.9262C30.0597 19.9602 30.109 19.9976 30.1566 20.0367C30.9427 20.3826 32.776 20.9614 33.4168 21.7135C34.7818 23.3088 35.5773 25.6758 35.6563 28.4652C35.6181 29.0143 35.528 29.7579 35.3334 30.6708C35.2475 31.0745 35.1396 31.5071 35.0096 31.9711C34.8506 32.5261 34.6772 33.127 34.4886 33.767C34.3143 34.4223 34.1061 35.1311 33.8426 35.9181C33.8086 36.0184 33.7772 36.1119 33.744 36.2113C33.4134 37.261 33.042 38.3956 32.6162 39.6271C31.2224 43.6481 30.3886 46.4171 29.6432 48.6005C29.5548 48.9676 29.4605 49.3119 29.3423 49.5949C29.3457 49.5473 29.3483 49.5005 29.3508 49.4529C29.3305 49.5473 29.3084 49.6382 29.2837 49.7309C29.2098 49.9076 29.1248 50.0802 29.0474 50.2544C28.9191 50.5893 28.7899 50.9122 28.6565 51.2284C28.6607 51.1944 28.6641 51.1604 28.6667 51.1281C28.6488 51.1944 28.6318 51.2616 28.614 51.327C28.4746 51.6517 28.331 51.9687 28.1805 52.2772C27.7539 53.1569 27.2711 53.9906 26.6753 54.849L26.5087 55.0403L26.1841 55.4117L25.9342 55.6998C26.5971 55.7618 27.8661 55.8791 27.9723 55.8885C33.0233 56.3644 34.384 53.4441 35.3308 50.0402C35.8297 48.2495 36.2929 46.4698 36.8037 44.7019C37.606 41.9236 38.4848 39.5268 39.7028 36.8624C40.8875 34.2693 41.9542 31.7773 42.7514 29.0729C43.3506 27.0484 43.7602 24.9474 43.4832 22.883ZM38.8503 25.1276C37.2618 19.9236 32.2941 20.1497 32.7947 19.6338C33.1788 19.3992 33.5911 19.2471 34.0084 19.1714C36.202 18.7788 38.2911 20.4123 38.9294 23.1431C39.073 23.7601 39.1554 24.4027 39.1903 25.0613C39.2132 25.5067 38.9795 25.5492 38.8503 25.1276Z" fill="#C40406"></path>
+					<path d="M16.1262 56.5565C16.1797 56.5565 15.7556 56.2097 15.7904 56.2242C15.6069 56.0338 15.4284 55.8383 15.2601 55.6301C14.9745 55.1975 14.7493 54.7649 14.5683 54.3204C14.3286 53.7356 14.1654 53.1297 14.0405 52.4854C13.8773 51.6406 13.7796 50.7244 13.6614 49.685C13.5407 48.6166 13.3962 47.414 13.1311 46.0151C12.8345 44.447 12.384 42.6154 11.6335 40.4141C10.5397 37.204 9.76542 34.5973 9.22488 32.5406C8.90361 31.3184 8.66988 30.3104 8.50075 29.4851C8.28148 28.421 8.17354 27.6842 8.12084 27.2031C8.13444 24.4035 9.15264 21.8733 11.3063 21.0379C12.1409 20.7106 13.0563 20.6953 14.0116 20.8738C14.0566 20.8815 14.1008 20.8942 14.145 20.9036C14.2334 20.9087 14.3226 20.9155 14.411 20.9214C14.0847 20.7523 13.7328 20.5747 13.3537 20.3902C13.3554 20.3902 13.3121 20.1658 13.2509 19.8556C13.1132 19.1544 12.888 18.0079 12.9024 18.0003C13.0401 17.945 12.6611 17.3645 12.905 16.6693C12.6135 16.5495 12.4146 16.5019 12.2914 16.507C11.455 16.2452 10.5558 16.0956 9.67108 16.0421C8.83477 15.9911 8.00865 16.0251 7.25903 16.1432C7.0882 16.1704 6.92332 16.2121 6.75588 16.2469C5.60085 16.4874 4.50872 16.903 3.55002 17.5133C0.560029 19.4171 -0.425018 22.4691 0.161421 25.9163C0.429993 27.5057 1.01898 29.1188 1.79155 30.6402C2.64401 32.317 3.37494 33.931 4.02682 35.5229C5.55581 39.2549 6.63435 42.9384 7.78173 46.7315C8.4982 49.0985 9.32262 52.2041 11.0335 54.2099C12.339 55.7423 14.1578 56.7545 16.6157 56.9704C16.45 56.8361 16.2834 56.7027 16.1262 56.5565ZM2.79275 22.3382C3.91718 19.9389 6.0768 18.2977 8.59679 18.0598C9.14583 18.0071 9.71103 18.0198 10.2864 18.1082C10.5686 18.1516 10.7828 18.6539 10.708 18.9641C10.691 19.0372 10.6629 19.1026 10.6111 19.146C8.61039 20.8092 5.00847 20.7718 3.03922 23.206C2.60492 23.7414 2.38309 23.2094 2.79275 22.3382Z" fill="#C40406"></path>
+					<path d="M30.709 22.3663C30.0953 21.7059 29.4213 21.2614 28.7117 21.0005C28.6726 20.9835 28.6352 20.9648 28.5952 20.9512C28.54 20.9333 28.483 20.9206 28.4269 20.9044C28.3844 20.9027 28.3411 20.8985 28.2986 20.8951C28.1414 20.8891 27.9833 20.8772 27.8295 20.8806C27.7921 20.8815 27.7564 20.8815 27.7207 20.8832C27.719 20.8832 27.719 20.8832 27.719 20.8866C25.1922 20.9775 23.115 22.3408 22.2285 23.3352C21.4806 24.1732 20.8262 24.3993 20.3009 24.361C19.3677 24.3806 18.8017 23.5485 18.8017 23.5485C18.8017 23.5485 18.3444 23.1329 17.3279 22.4173C17.1129 22.266 16.8724 22.1011 16.6055 21.9252C16.4321 21.8096 16.2486 21.6906 16.0522 21.5648C15.9366 21.5232 15.816 21.4892 15.6953 21.4543C15.6562 21.4416 15.6188 21.428 15.5797 21.4169C14.7544 21.2045 13.9563 21.1781 13.2161 21.4501C11.308 22.1504 10.3238 24.5217 10.2057 27.1963C10.2329 27.6587 10.2983 28.3658 10.4496 29.3942C10.5661 30.1889 10.7309 31.1637 10.963 32.3468C11.3556 34.3373 11.9319 36.8615 12.7622 39.979C13.3325 42.1182 13.6546 43.8886 13.8535 45.3997C14.0303 46.7477 14.1102 47.9053 14.1756 48.9311C14.2385 49.9281 14.2887 50.8077 14.3992 51.6236C14.4841 52.2449 14.6023 52.8322 14.7884 53.4025C14.9295 53.8351 15.1088 54.2592 15.3417 54.685C15.4802 54.8924 15.629 55.087 15.7811 55.2766C15.7854 55.2825 15.7888 55.2893 15.7939 55.2944C15.8066 55.297 15.8219 55.3012 15.8355 55.3055C15.8627 55.3131 16.1075 55.6106 16.0607 55.6097C16.1925 55.7568 16.3327 55.8919 16.4729 56.0262C17.8617 57.3682 19.6695 58.1365 21.5903 58.0524C23.5459 57.9699 25.3307 57.0214 26.6353 55.5341L26.7331 55.3879L26.9294 55.0921L27.1835 54.708L27.3136 54.5125C27.7674 53.6447 28.1252 52.8093 28.4303 51.9347C28.5383 51.627 28.6394 51.3134 28.7363 50.9913C28.7465 50.9267 28.7576 50.863 28.7669 50.7967C28.7678 50.8273 28.7669 50.8604 28.7661 50.8944C28.8587 50.5833 28.9462 50.2629 29.0329 49.9332C29.1103 49.6365 29.1868 49.3331 29.2624 49.0161C29.3176 48.7866 29.372 48.5478 29.4273 48.3039C29.9134 46.163 30.4327 43.4526 31.3438 39.503C31.6226 38.2928 31.8606 37.1811 32.0697 36.151C32.2439 35.2917 32.3969 34.4988 32.5337 33.761C32.6501 33.1347 32.7564 32.5457 32.8524 32.0034C32.9323 31.5513 32.9935 31.1289 33.0377 30.7371C33.1397 29.8515 33.1618 29.1358 33.1541 28.6097C32.8813 25.9572 32.0136 23.7686 30.709 22.3663ZM27.2481 26.8572C25.9936 26.6983 24.9822 27.0153 23.857 27.5524C22.8039 28.0564 21.9209 28.5995 20.5729 28.7168C19.6856 28.795 18.8 28.6828 17.9416 28.4312C17.6475 28.3437 17.3611 28.24 17.0755 28.1244C15.3952 27.4309 13.3121 26.1399 12.7852 29.1486C12.4673 27.0289 13.5773 25.0112 15.5907 25.5016C16.1355 25.6342 16.6693 25.839 17.1231 26.0277C17.4061 26.1441 17.6943 26.2461 17.9875 26.3328C18.8467 26.5852 19.7315 26.6983 20.6197 26.6184C21.614 26.5317 22.4461 26.2198 23.33 25.743C24.9245 24.8803 26.7365 24.6976 28.2867 25.7753C29.2284 26.428 29.9678 27.5312 30.3826 28.7406C29.6007 27.6221 28.4601 27.0119 27.2481 26.8572Z" fill="#E41428"></path>
+					<path d="M29.9407 19.3618C29.9007 19.327 29.8625 19.2879 29.82 19.2539C29.7469 19.1969 29.6729 19.1383 29.5956 19.0873C29.5404 19.0491 29.4928 19.0083 29.4409 18.9675C29.061 18.6802 28.7593 18.3504 28.5936 17.9017C28.4576 17.5388 28.1983 17.3569 27.8456 17.2991C27.7487 17.2838 27.6468 17.2736 27.532 17.2753C27.062 17.2897 26.5929 17.2897 26.1212 17.2846C25.9308 17.2812 25.7379 17.2812 25.5475 17.2744C25.0044 17.2566 24.3329 17.5022 23.9539 17.1758C23.8094 17.0492 23.7516 16.8843 23.7363 16.7041C23.7108 16.4169 23.7873 16.0846 23.789 15.7811C23.789 15.7318 23.7907 15.6894 23.7873 15.6426C23.7644 15.3902 23.8077 15.1293 23.7329 14.8862C23.7091 14.8097 23.6751 14.7341 23.6216 14.661C23.4609 13.811 23.5017 12.9586 23.6148 12.107C23.7049 12.0347 23.7414 11.9429 23.7499 11.8367C23.7576 11.7432 23.7559 11.6429 23.7533 11.5443C23.7533 11.4976 23.7533 11.4534 23.7499 11.4075C23.7482 11.2919 23.7814 11.1789 23.7219 11.0718C24.1944 7.94921 25.1574 5.00172 27.2643 2.46983C27.5099 2.17746 27.7436 1.87829 27.9714 1.57317C28.0666 1.44909 28.2102 1.3097 28.076 1.14737C27.9357 0.977386 27.7504 1.07428 27.6145 1.14992C26.9855 1.49583 26.3549 1.84005 25.7557 2.22761C25.3248 2.50298 24.9423 2.84719 24.5369 3.15996C24.4468 3.33759 24.2089 3.37669 24.1171 3.55347C24.089 3.61636 24.0567 3.6801 24.0329 3.7583C24.0372 3.66226 24.089 3.59596 24.1196 3.52117C24.2284 3.41493 24.2658 3.2815 24.2913 3.14211C24.808 2.15791 25.6529 1.42359 26.4535 0.656969C26.5572 0.55328 26.6694 0.45809 26.7594 0.347602C26.83 0.260061 26.8555 0.151272 26.7739 0.056082C26.6983 -0.0314589 26.5903 0.00168765 26.5121 0.0339843C26.241 0.148722 25.9869 0.303406 25.7081 0.396047C22.6042 1.43209 21.0599 3.7209 20.1004 6.48991C20.1335 6.48566 20.1599 6.48651 20.1871 6.48906C20.4429 6.49671 20.4387 6.67009 20.4149 6.88852C20.3044 7.95176 20.1004 8.998 19.8259 10.0298C19.4638 11.3888 19.2479 12.7512 19.1553 14.1179C19.1408 14.3499 19.123 14.5811 19.1162 14.8105C19.1162 14.8224 19.1145 14.8326 19.1145 14.8428C19.1094 14.9695 19.1111 15.0919 19.1094 15.216C19.0966 16.0965 19.14 16.9753 19.2318 17.8575C19.3023 18.5153 19.3916 19.174 19.5208 19.8361C19.6372 20.4446 19.7111 21.0642 19.7162 21.6863C19.7188 21.8504 19.7664 22.0518 19.4715 22.0764C19.1213 22.1113 18.8425 22.0637 18.6292 21.9337C18.5187 21.8691 18.4295 21.7773 18.3521 21.6651C18.2612 21.5274 18.1906 21.3591 18.149 21.1492C17.9153 19.9797 17.6841 18.8136 17.7555 17.6144C17.7997 16.8903 17.7461 16.1645 17.8524 15.4386C17.8685 15.3307 17.8719 15.2431 17.866 15.1684C17.8651 15.1437 17.8609 15.1208 17.8541 15.1004C17.8107 14.91 17.6535 14.8641 17.3297 14.8921C17.3127 14.893 17.2957 14.8896 17.2787 14.8921C17.0033 14.8998 16.756 14.8105 16.4968 14.7612C16.2486 14.7247 16.0013 14.7239 15.7556 14.7714C15.7267 14.7774 15.7029 14.7952 15.6732 14.802C13.8161 15.2601 13.1107 15.935 12.8651 16.5478C12.5651 17.2948 12.9509 17.9476 12.798 18.0028C12.7818 18.0079 12.973 19.2709 13.0895 20.0451C13.1413 20.386 13.1779 20.6341 13.1753 20.6316C13.5807 20.8543 13.9555 21.0684 14.3057 21.2707C14.3592 21.3005 14.4102 21.3319 14.4638 21.3617C14.7086 21.5053 14.9397 21.6438 15.1565 21.7739C15.4905 21.9753 15.7922 22.164 16.0616 22.3374C17.3365 23.1541 17.9085 23.6301 17.9085 23.6301C17.9085 23.6301 18.6181 24.582 19.7885 24.559C20.4463 24.6015 21.2656 24.344 22.2039 23.3853C23.3139 22.2498 25.918 20.6919 29.084 20.5874C29.084 20.5848 29.084 20.5831 29.0865 20.5831C29.1307 20.5823 29.1766 20.5823 29.2233 20.5806C29.4163 20.5755 29.6135 20.5891 29.8098 20.5976C29.8642 20.5993 29.9177 20.6035 29.9713 20.6069C30.0308 20.6103 30.0894 20.6129 30.1497 20.6188C30.1531 20.6171 30.154 20.6137 30.1565 20.6095C30.1565 20.6086 30.1574 20.6069 30.1582 20.6061C30.2534 20.4463 30.3214 20.2755 30.3631 20.097C30.318 19.7902 30.1506 19.559 29.9407 19.3618Z" fill="#52AE33"></path>
+				</svg>
+				<img src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/logo-caption.svg" alt="Техника здоровья - умная техника для здоровой кухни">
+			</a>
+		</div>
+		<ul class="main-header__static-menu">
+			<li class="main-header__static-menu-item main-header__static-menu-item--about">
+				<a href="/page/o-nas">О нас</a>
+			</li>
+			<li class="main-header__static-menu-item main-header__static-menu-item--delivery">
+				<a href="/page/delivery">Доставка и оплата</a>
+			</li>
+			<li class="main-header__static-menu-item main-header__static-menu-item--base">
+				<a href="/page/kontakty">Контакты</a>
+			</li>
+			<li class="main-header__static-menu-item main-header__static-menu-item--guarantee">
+				<a href="/page/garantii-vozvrat">Гарантия и возврат</a>
+			</li>
+		</ul>
+
+		<div class="main-header__cart-block">
+			<a href="/cart_items" class="main-header__cart-icon">
+				<span class="main-header__cart-count">0</span>
+			</a>
+			<div class="main-header__cart-info">
+				<span class="main-header__cart-sum">Сумма: <span>0&nbsp;р</span></span>
+				<span class="main-header__cart-count-text">В корзине: 0 товар(а)</span>
+			</div>
+
+			<div class="main-header__cart-dropdown">
+				
+					<p class="no_items"><strong>Корзина пуста</strong> Добавьте интересующий Вас товар и перейдите к
+						оформлению заказа</p>
+
+				
+			</div>
+		</div>
+
+      <div class="main-header__contacts">
+			<span class="main-header__contact-phone"><pre>+7 (499) 703 39 71</pre></span>
+			<div class="main-header__work-hours">
+				<span class="main-header__work-hours-item"><p><span style="font-family: tahoma, arial, helvetica, sans-serif;"><strong>Пн - Вс:&nbsp;</strong>9:00 - 21:00</span></p></span>
+			</div>
+		</div>
+	</header>
+</div>
+  <div class="mobile-header">
+  <div class="mobile-header__logos-block">
+    <a href="/" title="Техника здоровья">
+      <svg class="mobile-header__logo" width="44" height="59" viewBox="0 0 44 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22.413 16.6923C22.447 16.9642 22.4172 17.2779 22.4742 17.5345C22.5099 17.6943 22.5804 17.8363 22.7274 17.9331C23.1099 18.1796 23.6887 17.8694 24.1825 17.815C24.3559 17.7963 24.5301 17.7708 24.7026 17.7496C25.131 17.6943 25.5568 17.6323 25.9809 17.5575C26.0846 17.5405 26.1781 17.5388 26.2673 17.5396C26.5937 17.5473 26.8512 17.6782 27.0161 17.9884C27.2192 18.3726 27.5328 18.6335 27.911 18.8451C28.5774 17.8754 29.457 17.0841 30.4931 16.5257C30.839 16.3379 31.2019 16.1832 31.5733 16.0497C31.7458 15.9886 31.7569 15.6647 31.5776 15.5661C30.1302 14.7689 28.2561 14.3848 26.2359 14.6032C24.757 14.763 23.398 15.2228 22.2549 15.8866C22.3518 16.0973 22.3433 16.3379 22.3943 16.5648C22.4028 16.6081 22.407 16.6464 22.413 16.6923Z" fill="#C40406"></path>
+        <path d="M10.1539 15.3426C10.2168 15.3307 10.278 15.3188 10.3409 15.3077C10.278 15.3188 10.2168 15.3315 10.1539 15.3426C11.0149 15.567 11.8716 15.8874 12.6493 16.3047C12.7716 16.3242 12.9578 16.4109 13.2238 16.5835C13.5204 16.0625 14.242 15.5449 15.9801 15.3766C16.0073 15.374 16.031 15.3621 16.0574 15.3604C16.2869 15.3485 16.5096 15.3842 16.7305 15.4488C16.96 15.5296 17.1733 15.6435 17.4232 15.6715C17.4547 15.6137 17.492 15.5525 17.5201 15.4964C16.2733 14.6287 14.6975 14.0235 12.9569 13.828C11.3132 13.6453 9.76635 13.8603 8.46599 14.3737C8.03253 14.5454 7.59398 14.9712 7.76651 14.978C7.98579 14.9865 8.20932 15.0035 8.43709 15.029C8.99548 15.0868 9.57682 15.193 10.1539 15.3426ZM14.2649 15.4106C14.2063 15.3961 14.1476 15.3876 14.0899 15.3732C14.1476 15.3876 14.2063 15.397 14.2649 15.4106ZM12.141 15.165C11.9566 15.1624 11.7721 15.1658 11.5903 15.1735C11.7721 15.1658 11.9557 15.1624 12.141 15.165ZM11.348 15.1845C11.122 15.199 10.9001 15.2202 10.6817 15.2508C10.8993 15.2202 11.1211 15.1981 11.348 15.1845Z" fill="#C40406"></path>
+        <path d="M43.4832 22.883C43.2155 20.8985 42.3392 19.2267 40.789 18.0683C39.311 16.9634 37.2788 16.388 35.3002 16.4917C34.7248 16.5214 34.1528 16.6022 33.6004 16.7535C32.7122 16.994 31.2028 17.3696 30.1838 17.9042C29.9075 18.0479 28.8299 18.704 28.8766 18.7422C28.9429 18.7958 29.1868 19.0703 29.2191 19.1069C29.3967 19.3023 30.1107 19.7868 30.0104 19.9236C30.0095 19.9245 30.0087 19.9253 30.0087 19.9262C30.0597 19.9602 30.109 19.9976 30.1566 20.0367C30.9427 20.3826 32.776 20.9614 33.4168 21.7135C34.7818 23.3088 35.5773 25.6758 35.6563 28.4652C35.6181 29.0143 35.528 29.7579 35.3334 30.6708C35.2475 31.0745 35.1396 31.5071 35.0096 31.9711C34.8506 32.5261 34.6772 33.127 34.4886 33.767C34.3143 34.4223 34.1061 35.1311 33.8426 35.9181C33.8086 36.0184 33.7772 36.1119 33.744 36.2113C33.4134 37.261 33.042 38.3956 32.6162 39.6271C31.2224 43.6481 30.3886 46.4171 29.6432 48.6005C29.5548 48.9676 29.4605 49.3119 29.3423 49.5949C29.3457 49.5473 29.3483 49.5005 29.3508 49.4529C29.3305 49.5473 29.3084 49.6382 29.2837 49.7309C29.2098 49.9076 29.1248 50.0802 29.0474 50.2544C28.9191 50.5893 28.7899 50.9122 28.6565 51.2284C28.6607 51.1944 28.6641 51.1604 28.6667 51.1281C28.6488 51.1944 28.6318 51.2616 28.614 51.327C28.4746 51.6517 28.331 51.9687 28.1805 52.2772C27.7539 53.1569 27.2711 53.9906 26.6753 54.849L26.5087 55.0403L26.1841 55.4117L25.9342 55.6998C26.5971 55.7618 27.8661 55.8791 27.9723 55.8885C33.0233 56.3644 34.384 53.4441 35.3308 50.0402C35.8297 48.2495 36.2929 46.4698 36.8037 44.7019C37.606 41.9236 38.4848 39.5268 39.7028 36.8624C40.8875 34.2693 41.9542 31.7773 42.7514 29.0729C43.3506 27.0484 43.7602 24.9474 43.4832 22.883ZM38.8503 25.1276C37.2618 19.9236 32.2941 20.1497 32.7947 19.6338C33.1788 19.3992 33.5911 19.2471 34.0084 19.1714C36.202 18.7788 38.2911 20.4123 38.9294 23.1431C39.073 23.7601 39.1554 24.4027 39.1903 25.0613C39.2132 25.5067 38.9795 25.5492 38.8503 25.1276Z" fill="#C40406"></path>
+        <path d="M16.1262 56.5565C16.1797 56.5565 15.7556 56.2097 15.7904 56.2242C15.6069 56.0338 15.4284 55.8383 15.2601 55.6301C14.9745 55.1975 14.7493 54.7649 14.5683 54.3204C14.3286 53.7356 14.1654 53.1297 14.0405 52.4854C13.8773 51.6406 13.7796 50.7244 13.6614 49.685C13.5407 48.6166 13.3962 47.414 13.1311 46.0151C12.8345 44.447 12.384 42.6154 11.6335 40.4141C10.5397 37.204 9.76542 34.5973 9.22488 32.5406C8.90361 31.3184 8.66988 30.3104 8.50075 29.4851C8.28148 28.421 8.17354 27.6842 8.12084 27.2031C8.13444 24.4035 9.15264 21.8733 11.3063 21.0379C12.1409 20.7106 13.0563 20.6953 14.0116 20.8738C14.0566 20.8815 14.1008 20.8942 14.145 20.9036C14.2334 20.9087 14.3226 20.9155 14.411 20.9214C14.0847 20.7523 13.7328 20.5747 13.3537 20.3902C13.3554 20.3902 13.3121 20.1658 13.2509 19.8556C13.1132 19.1544 12.888 18.0079 12.9024 18.0003C13.0401 17.945 12.6611 17.3645 12.905 16.6693C12.6135 16.5495 12.4146 16.5019 12.2914 16.507C11.455 16.2452 10.5558 16.0956 9.67108 16.0421C8.83477 15.9911 8.00865 16.0251 7.25903 16.1432C7.0882 16.1704 6.92332 16.2121 6.75588 16.2469C5.60085 16.4874 4.50872 16.903 3.55002 17.5133C0.560029 19.4171 -0.425018 22.4691 0.161421 25.9163C0.429993 27.5057 1.01898 29.1188 1.79155 30.6402C2.64401 32.317 3.37494 33.931 4.02682 35.5229C5.55581 39.2549 6.63435 42.9384 7.78173 46.7315C8.4982 49.0985 9.32262 52.2041 11.0335 54.2099C12.339 55.7423 14.1578 56.7545 16.6157 56.9704C16.45 56.8361 16.2834 56.7027 16.1262 56.5565ZM2.79275 22.3382C3.91718 19.9389 6.0768 18.2977 8.59679 18.0598C9.14583 18.0071 9.71103 18.0198 10.2864 18.1082C10.5686 18.1516 10.7828 18.6539 10.708 18.9641C10.691 19.0372 10.6629 19.1026 10.6111 19.146C8.61039 20.8092 5.00847 20.7718 3.03922 23.206C2.60492 23.7414 2.38309 23.2094 2.79275 22.3382Z" fill="#C40406"></path>
+        <path d="M30.709 22.3663C30.0953 21.7059 29.4213 21.2614 28.7117 21.0005C28.6726 20.9835 28.6352 20.9648 28.5952 20.9512C28.54 20.9333 28.483 20.9206 28.4269 20.9044C28.3844 20.9027 28.3411 20.8985 28.2986 20.8951C28.1414 20.8891 27.9833 20.8772 27.8295 20.8806C27.7921 20.8815 27.7564 20.8815 27.7207 20.8832C27.719 20.8832 27.719 20.8832 27.719 20.8866C25.1922 20.9775 23.115 22.3408 22.2285 23.3352C21.4806 24.1732 20.8262 24.3993 20.3009 24.361C19.3677 24.3806 18.8017 23.5485 18.8017 23.5485C18.8017 23.5485 18.3444 23.1329 17.3279 22.4173C17.1129 22.266 16.8724 22.1011 16.6055 21.9252C16.4321 21.8096 16.2486 21.6906 16.0522 21.5648C15.9366 21.5232 15.816 21.4892 15.6953 21.4543C15.6562 21.4416 15.6188 21.428 15.5797 21.4169C14.7544 21.2045 13.9563 21.1781 13.2161 21.4501C11.308 22.1504 10.3238 24.5217 10.2057 27.1963C10.2329 27.6587 10.2983 28.3658 10.4496 29.3942C10.5661 30.1889 10.7309 31.1637 10.963 32.3468C11.3556 34.3373 11.9319 36.8615 12.7622 39.979C13.3325 42.1182 13.6546 43.8886 13.8535 45.3997C14.0303 46.7477 14.1102 47.9053 14.1756 48.9311C14.2385 49.9281 14.2887 50.8077 14.3992 51.6236C14.4841 52.2449 14.6023 52.8322 14.7884 53.4025C14.9295 53.8351 15.1088 54.2592 15.3417 54.685C15.4802 54.8924 15.629 55.087 15.7811 55.2766C15.7854 55.2825 15.7888 55.2893 15.7939 55.2944C15.8066 55.297 15.8219 55.3012 15.8355 55.3055C15.8627 55.3131 16.1075 55.6106 16.0607 55.6097C16.1925 55.7568 16.3327 55.8919 16.4729 56.0262C17.8617 57.3682 19.6695 58.1365 21.5903 58.0524C23.5459 57.9699 25.3307 57.0214 26.6353 55.5341L26.7331 55.3879L26.9294 55.0921L27.1835 54.708L27.3136 54.5125C27.7674 53.6447 28.1252 52.8093 28.4303 51.9347C28.5383 51.627 28.6394 51.3134 28.7363 50.9913C28.7465 50.9267 28.7576 50.863 28.7669 50.7967C28.7678 50.8273 28.7669 50.8604 28.7661 50.8944C28.8587 50.5833 28.9462 50.2629 29.0329 49.9332C29.1103 49.6365 29.1868 49.3331 29.2624 49.0161C29.3176 48.7866 29.372 48.5478 29.4273 48.3039C29.9134 46.163 30.4327 43.4526 31.3438 39.503C31.6226 38.2928 31.8606 37.1811 32.0697 36.151C32.2439 35.2917 32.3969 34.4988 32.5337 33.761C32.6501 33.1347 32.7564 32.5457 32.8524 32.0034C32.9323 31.5513 32.9935 31.1289 33.0377 30.7371C33.1397 29.8515 33.1618 29.1358 33.1541 28.6097C32.8813 25.9572 32.0136 23.7686 30.709 22.3663ZM27.2481 26.8572C25.9936 26.6983 24.9822 27.0153 23.857 27.5524C22.8039 28.0564 21.9209 28.5995 20.5729 28.7168C19.6856 28.795 18.8 28.6828 17.9416 28.4312C17.6475 28.3437 17.3611 28.24 17.0755 28.1244C15.3952 27.4309 13.3121 26.1399 12.7852 29.1486C12.4673 27.0289 13.5773 25.0112 15.5907 25.5016C16.1355 25.6342 16.6693 25.839 17.1231 26.0277C17.4061 26.1441 17.6943 26.2461 17.9875 26.3328C18.8467 26.5852 19.7315 26.6983 20.6197 26.6184C21.614 26.5317 22.4461 26.2198 23.33 25.743C24.9245 24.8803 26.7365 24.6976 28.2867 25.7753C29.2284 26.428 29.9678 27.5312 30.3826 28.7406C29.6007 27.6221 28.4601 27.0119 27.2481 26.8572Z" fill="#E41428"></path>
+        <path d="M29.9407 19.3618C29.9007 19.327 29.8625 19.2879 29.82 19.2539C29.7469 19.1969 29.6729 19.1383 29.5956 19.0873C29.5404 19.0491 29.4928 19.0083 29.4409 18.9675C29.061 18.6802 28.7593 18.3504 28.5936 17.9017C28.4576 17.5388 28.1983 17.3569 27.8456 17.2991C27.7487 17.2838 27.6468 17.2736 27.532 17.2753C27.062 17.2897 26.5929 17.2897 26.1212 17.2846C25.9308 17.2812 25.7379 17.2812 25.5475 17.2744C25.0044 17.2566 24.3329 17.5022 23.9539 17.1758C23.8094 17.0492 23.7516 16.8843 23.7363 16.7041C23.7108 16.4169 23.7873 16.0846 23.789 15.7811C23.789 15.7318 23.7907 15.6894 23.7873 15.6426C23.7644 15.3902 23.8077 15.1293 23.7329 14.8862C23.7091 14.8097 23.6751 14.7341 23.6216 14.661C23.4609 13.811 23.5017 12.9586 23.6148 12.107C23.7049 12.0347 23.7414 11.9429 23.7499 11.8367C23.7576 11.7432 23.7559 11.6429 23.7533 11.5443C23.7533 11.4976 23.7533 11.4534 23.7499 11.4075C23.7482 11.2919 23.7814 11.1789 23.7219 11.0718C24.1944 7.94921 25.1574 5.00172 27.2643 2.46983C27.5099 2.17746 27.7436 1.87829 27.9714 1.57317C28.0666 1.44909 28.2102 1.3097 28.076 1.14737C27.9357 0.977386 27.7504 1.07428 27.6145 1.14992C26.9855 1.49583 26.3549 1.84005 25.7557 2.22761C25.3248 2.50298 24.9423 2.84719 24.5369 3.15996C24.4468 3.33759 24.2089 3.37669 24.1171 3.55347C24.089 3.61636 24.0567 3.6801 24.0329 3.7583C24.0372 3.66226 24.089 3.59596 24.1196 3.52117C24.2284 3.41493 24.2658 3.2815 24.2913 3.14211C24.808 2.15791 25.6529 1.42359 26.4535 0.656969C26.5572 0.55328 26.6694 0.45809 26.7594 0.347602C26.83 0.260061 26.8555 0.151272 26.7739 0.056082C26.6983 -0.0314589 26.5903 0.00168765 26.5121 0.0339843C26.241 0.148722 25.9869 0.303406 25.7081 0.396047C22.6042 1.43209 21.0599 3.7209 20.1004 6.48991C20.1335 6.48566 20.1599 6.48651 20.1871 6.48906C20.4429 6.49671 20.4387 6.67009 20.4149 6.88852C20.3044 7.95176 20.1004 8.998 19.8259 10.0298C19.4638 11.3888 19.2479 12.7512 19.1553 14.1179C19.1408 14.3499 19.123 14.5811 19.1162 14.8105C19.1162 14.8224 19.1145 14.8326 19.1145 14.8428C19.1094 14.9695 19.1111 15.0919 19.1094 15.216C19.0966 16.0965 19.14 16.9753 19.2318 17.8575C19.3023 18.5153 19.3916 19.174 19.5208 19.8361C19.6372 20.4446 19.7111 21.0642 19.7162 21.6863C19.7188 21.8504 19.7664 22.0518 19.4715 22.0764C19.1213 22.1113 18.8425 22.0637 18.6292 21.9337C18.5187 21.8691 18.4295 21.7773 18.3521 21.6651C18.2612 21.5274 18.1906 21.3591 18.149 21.1492C17.9153 19.9797 17.6841 18.8136 17.7555 17.6144C17.7997 16.8903 17.7461 16.1645 17.8524 15.4386C17.8685 15.3307 17.8719 15.2431 17.866 15.1684C17.8651 15.1437 17.8609 15.1208 17.8541 15.1004C17.8107 14.91 17.6535 14.8641 17.3297 14.8921C17.3127 14.893 17.2957 14.8896 17.2787 14.8921C17.0033 14.8998 16.756 14.8105 16.4968 14.7612C16.2486 14.7247 16.0013 14.7239 15.7556 14.7714C15.7267 14.7774 15.7029 14.7952 15.6732 14.802C13.8161 15.2601 13.1107 15.935 12.8651 16.5478C12.5651 17.2948 12.9509 17.9476 12.798 18.0028C12.7818 18.0079 12.973 19.2709 13.0895 20.0451C13.1413 20.386 13.1779 20.6341 13.1753 20.6316C13.5807 20.8543 13.9555 21.0684 14.3057 21.2707C14.3592 21.3005 14.4102 21.3319 14.4638 21.3617C14.7086 21.5053 14.9397 21.6438 15.1565 21.7739C15.4905 21.9753 15.7922 22.164 16.0616 22.3374C17.3365 23.1541 17.9085 23.6301 17.9085 23.6301C17.9085 23.6301 18.6181 24.582 19.7885 24.559C20.4463 24.6015 21.2656 24.344 22.2039 23.3853C23.3139 22.2498 25.918 20.6919 29.084 20.5874C29.084 20.5848 29.084 20.5831 29.0865 20.5831C29.1307 20.5823 29.1766 20.5823 29.2233 20.5806C29.4163 20.5755 29.6135 20.5891 29.8098 20.5976C29.8642 20.5993 29.9177 20.6035 29.9713 20.6069C30.0308 20.6103 30.0894 20.6129 30.1497 20.6188C30.1531 20.6171 30.154 20.6137 30.1565 20.6095C30.1565 20.6086 30.1574 20.6069 30.1582 20.6061C30.2534 20.4463 30.3214 20.2755 30.3631 20.097C30.318 19.7902 30.1506 19.559 29.9407 19.3618Z" fill="#52AE33"></path>
+      </svg>
+      <img src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/logo-caption.svg" alt="Техника здоровья - умная техника для здоровой кухни">
+    </a>
+  </div>
+  <div class="mobile-header__nav-block">
+    <div class="mobile-header__menu-toggler">
+      <input class="mobile-header__menu-toggler-trigger" type="checkbox" id="menu-trigger">
+      <label for="menu-trigger">
+        <span class="mobile-header__menu-icon">
+          <span class="mobile-header__menu-icon-part"></span>
+          <span class="mobile-header__menu-icon-part"></span>
+          <span class="mobile-header__menu-icon-part"></span>
+        </span>
+      </label>
+    </div>
+
+    <span class="mobile-header__user-code"></span>
+
+    <ul class="mobile-header__buttons">
+      <li class="mobile-header__button mobile-header__button--place">
+        
+        <a href="/page/kontakty" class="mobile-header__location-toggler">Контакты</a>
+      </li>
+      <li class="mobile-header__button mobile-header__button--search">
+        <a href="javascript:void(0);">Поиск по сайту</a>
+        <button type="submit" class="search__loupe-btn">Найти</button>
+      </li>
+      <li class="mobile-header__button mobile-header__button--phone">
+        <a href="tel:+7(499)703-39-71">Позвонить</a>
+      </li>
+      <li class="mobile-header__button mobile-header__button--cart">
+        <a href="/cart_items">
+          <span class="mobile-header__cart-icon">
+            <span class="mobile-header__cart-count">0</span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="mobile-header__slide-menu">
+    <ul class="accordion accordion--mini">
+
+      
+
+
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/brendy1">Товары по брендам</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/degidratory-sushilki">Дегидраторы и сушилки</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/sokovyzhimalki">Шнековые соковыжималки</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/blendery">Блендеры и миксеры</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/su-vid">Сувиды</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/morozhenitsy">Мороженицы</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__parent-item">
+    
+    
+      
+      <input type="checkbox" class="accordion__toggler" name="CATEGORY_5813172" id="CATEGORY_5813172">
+      <label for="CATEGORY_5813172" class="accordion__label">
+        <span class="accordion__label-title">Вакуумная упаковка и хранение</span>
+      </label>
+
+      <div class="accordion__item-content">
+        <ul class="accordion__content-list">
+        
+        
+          <li class="accordion__content-item">
+            <a href="/collection/beskamernye-vakuumnye-upakovschiki">Вакуумные упаковщики и вакууматоры</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/ruchnye-vakuumnye-upakovschiki">Вакуумные крышки для банок, контейнеры и насосы</a>
+          </li>
+        
+        </ul>
+      </div>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/proraschivateli">Проращиватели</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/melnitsy-i-zernodavilki">Мельницы для зерна и зернодавилки</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/hlebopechi">Хлебопечки</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/multivarki">Йогуртницы (ферментаторы)</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/maslopressy">Маслопрессы</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/ionizatory">Генераторы водородной воды, ионизаторы и активаторы</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/ekotestery">Экотестеры и дозиметры</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/meditsinskie-pribory">Озонаторы и стерилизаторы</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/koptilni-elektricheskie">Коптильни и мясорубки</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__content-item">
+      <a href="/collection/izmelchiteli">Быстрая нарезка и очистка</a>
+    </li>
+  
+  
+
+
+  
+
+  
+    <li class="accordion__parent-item">
+    
+    
+      
+      <input type="checkbox" class="accordion__toggler" name="CATEGORY_9248901" id="CATEGORY_9248901">
+      <label for="CATEGORY_9248901" class="accordion__label">
+        <span class="accordion__label-title">Сопутствующие товары</span>
+      </label>
+
+      <div class="accordion__item-content">
+        <ul class="accordion__content-list">
+        
+        
+          <li class="accordion__content-item">
+            <a href="/collection/komplektuyuschieaksessuary">Поддоны и листы для пастилы в сушилках и дегидраторах</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/nasadki-dlya-sokovyzhimalok">Насадки для соковыжималок</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/komplektuyuschie">Чаши и ножи для блендеров</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/aksessuary-dlya-vakuumnyh-upakovschikov">Пакеты и пленка для вакуумного упаковщика</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/ruchnye-proraschivateli">Аксессуары для проращивателей</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/semena-dlya-proraschivaniya">Семена для проращивания</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/zdorovyy-son">Здоровый сон</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/knigi">Книги о здоровье</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/skovorody">Сковороды</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/uvlazhniteli-ochistiteli-vozduha">Очистка воздуха</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/massazhery">Массажеры</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/stulya">Коленные ортопедические стулья</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/formy-dlya-duhovki">Тажины/ Формы для духовки</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/konteynery">Контейнеры для еды</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/posuda">Приятные мелочи</a>
+          </li>
+        
+          <li class="accordion__content-item">
+            <a href="/collection/produkty-dlya-zdorovya">Суперфуды</a>
+          </li>
+        
+        </ul>
+      </div>
+    </li>
+  
+  
+
+
+
+    </ul>
+
+    <span class="mobile-header__usercode">Ваш код: 95941</span>
+
+    <ul class="mobile-header__slide-nav-top">
+      <li class="mobile-header__slide-nav-item">
+        <a href="/page/kontakty">Контакты</a>
+      </li>
+      <li class="mobile-header__slide-nav-item">
+        <a href="/page/delivery">Доставка и оплата</a>
+      </li>
+      <li class="mobile-header__slide-nav-item">
+        <a href="/page/garantii-vozvrat">Гарантия и возврат</a>
+      </li>
+      <li class="mobile-header__slide-nav-item">
+        <a href="/page/blog-pro-zdorovie-i-bytovuyu-tehniku">Журнал</a>
+      </li>
+      <li class="mobile-header__slide-nav-item">
+        <a href="/page/o-nas">О нас</a>
+      </li>
+      <li class="mobile-header__slide-nav-item">
+        <a href="/blogs/chasto-zadavaemye-voprosy">FAQ</a>
+      </li>
+    </ul>
+
+    <ul class="mobile-header__slide-nav-bottom">
+      <li class="mobile-header__slide-nav-item">
+        <a href="/compares">Сравнить товар</a>
+      </li>
+      <li class="mobile-header__slide-nav-item">
+        <a href="/client_account/login">Личный кабинет</a>
+      </li>
+      <li class="mobile-header__slide-nav-item">
+        <a href="/page/otzyvy-o-nas">Отзывы</a>
+      </li>
+      <li class="mobile-header__slide-nav-item">
+        <a href="/page/optovikam">Оптовикам</a>
+      </li>
+    </ul>
+
+    <div class="mobile-header__social">
+      <ul class="mobile-header__social-icons">
+        <li class="mobile-header__social-item mobile-header__social-item--inst">
+          <a href="https://www.instagram.com/health_tehnika/">Instagram</a>
+        </li>
+        <li class="mobile-header__social-item mobile-header__social-item--ytb">
+          <a href="https://www.youtube.com/channel/UCE7VnebSlRvMr-PymwWnm7A">Youtube</a>
+        </li>
+        <li class="mobile-header__social-item mobile-header__social-item--fb">
+          <a href="https://www.facebook.com/health.tehnika/">Facebook</a>
+        </li>
+        <li class="mobile-header__social-item mobile-header__social-item--vk">
+          <a href="https://vk.com/ht_zozh">Вконтакте</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <form class="search mobile-header__search" method="get" action="/search">
+    <button type="submit" class="custom-hide-on-mobile search__loupe-btn">Найти</button>
+    <input type="search" placeholder="Поиск" class="search__main-field" name="q">
+    <button onclick="javascript:void(0);" class="search__close mobile-header__search-close">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0)">
+          <path d="M11.8583 0.142223C11.669 -0.047082 11.3621 -0.047082 11.1728 0.142223L0.142223 11.1727C-0.047082 11.362 -0.047082 11.6689 0.142223 11.8583C0.236863 11.9529 0.360941 12.0002 0.484996 12.0002C0.609051 12.0002 0.733105 11.9529 0.827769 11.8582L11.8583 0.827723C12.0476 0.638441 12.0476 0.331527 11.8583 0.142223Z" fill="#464646"></path>
+          <path d="M11.858 11.1726L0.827478 0.14207C0.638197 -0.0472346 0.33126 -0.0472346 0.141979 0.14207C-0.0473262 0.331351 -0.0473262 0.638265 0.141979 0.827569L11.1725 11.8581C11.2672 11.9528 11.3912 12.0001 11.5153 12.0001C11.6393 12.0001 11.7634 11.9528 11.858 11.8581C12.0473 11.6688 12.0473 11.3619 11.858 11.1726Z" fill="#464646"></path>
+        </g>
+        <defs>
+          <clipPath id="clip0">
+            <rect width="12" height="12" fill="white"></rect>
+          </clipPath>
+        </defs>
+      </svg>
+
+    </button>
+  </form>
+</div>
+
+  <div class="intro">
+
+			<div class="intro__sidebar catalog-menu__outer">
+				<div class="catalog-menu__wrapper">
+					<a class="catalog-menu__trigger " href="javascript:void(0);">
+						<svg class="catalog-menu__trigger-icon" width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M20 1L-5.87665e-07 1" stroke="white" stroke-width="1.5"></path>
+							<path d="M20 6L-5.87665e-07 6" stroke="white" stroke-width="1.5"></path>
+							<path d="M20 11L-5.87665e-07 11" stroke="white" stroke-width="1.5"></path>
+						</svg>
+						Каталог товаров
+					</a>
+
+					<nav class="catalog-menu__dropdown  catalog-menu__dropdown--absolute">
+						<a href="javascript:void(0);" class="catalog-menu__close">Закрыть</a>
+						<ul class="catalog-menu__content">
+
+							
+
+
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/brendy1">Товары по брендам</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/degidratory-sushilki">Дегидраторы и сушилки</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/sokovyzhimalki">Шнековые соковыжималки</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/blendery">Блендеры и миксеры</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/su-vid">Сувиды</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/morozhenitsy">Мороженицы</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item-has-children">
+    <a href="/collection/vakuumnye-upakovschiki">Вакуумная упаковка и хранение</a>
+    
+    
+      
+      <ul class="catalog-menu__secondary-dropdown catalog-menu__item-hidden">
+        <li class="catalog-menu__back-btn"><a href="javascript:void(0);">Назад</a></li>
+        
+        
+          <li>
+            <a href="/collection/beskamernye-vakuumnye-upakovschiki" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/318/2105662/compact_beskamernye-vakuumnye-upakovshchiki.jpg" alt="Вакуумные упаковщики и вакууматоры">
+              Вакуумные упаковщики и вакууматоры</a>
+          </li>
+        
+          <li>
+            <a href="/collection/ruchnye-vakuumnye-upakovschiki" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/7184/83336208/compact_vakuumnye-kryshki-dlya-banok-kontejnery-i-nasosy.jpg" alt="Вакуумные крышки для банок, контейнеры и насосы">
+              Вакуумные крышки для банок, контейнеры и насосы</a>
+          </li>
+        
+      </ul>
+
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/proraschivateli">Проращиватели</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/melnitsy-i-zernodavilki">Мельницы для зерна и зернодавилки</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/hlebopechi">Хлебопечки</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/multivarki">Йогуртницы (ферментаторы)</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/maslopressy">Маслопрессы</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/ionizatory">Генераторы водородной воды, ионизаторы и активаторы</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/ekotestery">Экотестеры и дозиметры</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/meditsinskie-pribory">Озонаторы и стерилизаторы</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/koptilni-elektricheskie">Коптильни и мясорубки</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item">
+    <a href="/collection/izmelchiteli">Быстрая нарезка и очистка</a>
+    
+    
+  </li>
+
+
+  
+
+  <li class="catalog-menu__item-has-children">
+    <a href="/collection/komplektuyuschie-i-aksessuary">Сопутствующие товары</a>
+    
+    
+      
+      <ul class="catalog-menu__secondary-dropdown catalog-menu__item-hidden">
+        <li class="catalog-menu__back-btn"><a href="javascript:void(0);">Назад</a></li>
+        
+        
+          <li>
+            <a href="/collection/komplektuyuschieaksessuary" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/5745/71095921/compact_komplektuyushchie-i-aksessuary.jpg" alt="Поддоны и листы для пастилы в сушилках и дегидраторах">
+              Поддоны и листы для пастилы в сушилках и дегидраторах</a>
+          </li>
+        
+          <li>
+            <a href="/collection/nasadki-dlya-sokovyzhimalok" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/5834/71096010/compact_nasadki-dlya-sokovyzhimalok.jpg" alt="Насадки для соковыжималок">
+              Насадки для соковыжималок</a>
+          </li>
+        
+          <li>
+            <a href="/collection/komplektuyuschie" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/4279/2035895/compact_komplektuyushchie-dlya-blenderov-1.jpg" alt="Чаши и ножи для блендеров">
+              Чаши и ножи для блендеров</a>
+          </li>
+        
+          <li>
+            <a href="/collection/aksessuary-dlya-vakuumnyh-upakovschikov" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/7009/70466401/compact_pakety-i-plenka-dlya-vakuumnogo-upakovshchika-1.png" alt="Пакеты и пленка для вакуумного упаковщика">
+              Пакеты и пленка для вакуумного упаковщика</a>
+          </li>
+        
+          <li>
+            <a href="/collection/ruchnye-proraschivateli" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/5672/71120424/compact_aksessuary-dlya-prorashchivatelej.jpg" alt="Аксессуары для проращивателей">
+              Аксессуары для проращивателей</a>
+          </li>
+        
+          <li>
+            <a href="/collection/semena-dlya-proraschivaniya" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/5686/71120438/compact_semena-dlya-prorashchivaniya.jpg" alt="Семена для проращивания">
+              Семена для проращивания</a>
+          </li>
+        
+          <li>
+            <a href="/collection/zdorovyy-son" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/1704/2385576/compact_zdorovyj-son.jpg" alt="Здоровый сон">
+              Здоровый сон</a>
+          </li>
+        
+          <li>
+            <a href="/collection/knigi" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/6359/2037975/compact_knigi-1.jpg" alt="Книги о здоровье">
+              Книги о здоровье</a>
+          </li>
+        
+          <li>
+            <a href="/collection/skovorody" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/632/10003064/compact_skovorody.jpg" alt="Сковороды">
+              Сковороды</a>
+          </li>
+        
+          <li>
+            <a href="/collection/uvlazhniteli-ochistiteli-vozduha" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/5063/2036679/compact_ochistka-vozduha-1.jpg" alt="Очистка воздуха">
+              Очистка воздуха</a>
+          </li>
+        
+          <li>
+            <a href="/collection/massazhery" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/8003/72884035/compact_massazhery.jpg" alt="Массажеры">
+              Массажеры</a>
+          </li>
+        
+          <li>
+            <a href="/collection/stulya" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/5531/2135451/compact_stulya.jpg" alt="Коленные ортопедические стулья">
+              Коленные ортопедические стулья</a>
+          </li>
+        
+          <li>
+            <a href="/collection/formy-dlya-duhovki" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/6335/2037951/compact_tazhiny-formy-dlya-duhovki-1.jpg" alt="Тажины/ Формы для духовки">
+              Тажины/ Формы для духовки</a>
+          </li>
+        
+          <li>
+            <a href="/collection/konteynery" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/5747/71095923/compact_kontejnery-dlya-edy-2.jpg" alt="Контейнеры для еды">
+              Контейнеры для еды</a>
+          </li>
+        
+          <li>
+            <a href="/collection/posuda" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/7024/70466416/compact_priyatnye-melochi-1.png" alt="Приятные мелочи">
+              Приятные мелочи</a>
+          </li>
+        
+          <li>
+            <a href="/collection/produkty-dlya-zdorovya" class="catalog-menu__image-item">
+              
+              <img src="https://img.health-tehnika.ru/images/collections/1/4076/72577004/compact_chai-i-superfudy.jpg" alt="Суперфуды">
+              Суперфуды</a>
+          </li>
+        
+      </ul>
+
+    
+  </li>
+
+
+
+
+						</ul> <!-- .catalog-menu__content -->
+					</nav> <!-- .catalog-menu__dropdown -->
+				</div> <!-- .catalog-menu__wrapper -->
+			</div>
+
+			<div class="intro__body">
+				<div class="secondary-header">
+					<form class="search secondary-header__search" method="get" action="/search">
+                      	<input type="search" placeholder="Поиск" class="search__main-field" name="q">
+						<button type="submit" class="search__loupe-btn">Найти</button>						
+					</form>
+					<div class="secondary-header__social">
+						<ul class="secondary-header__social-icons">
+							<li class="secondary-header__social-item secondary-header__social-item--inst">
+								<a href="https://www.instagram.com/health_tehnika/" target="_blank">Instagram</a>
+							</li>
+							<li class="secondary-header__social-item secondary-header__social-item--ytb">
+								<a href="https://www.youtube.com/channel/UCE7VnebSlRvMr-PymwWnm7A" target="_blank">Youtube</a>
+							</li>
+							<li class="secondary-header__social-item secondary-header__social-item--fb">
+								<a href="https://www.facebook.com/health.tehnika/" target="_blank">Facebook</a>
+							</li>
+							<li class="secondary-header__social-item secondary-header__social-item--vk">
+								<a href="https://vk.com/ht_zozh" target="_blank">Вконтакте</a>
+							</li>
+                          	<li class="secondary-header__social-item secondary-header__social-item--telegram">
+								<a href="https://t.me/health_tehnika" target="_blank">Telegram</a>
+							</li>
+						</ul>
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+  
+  
+    <div class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+  
+  <span itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item">
+    <a itemprop="item" href="/">
+      <span itemprop="name">Главная</span>
+      <meta itemprop="position" content="1">
+    </a>
+  </span>
+  
+
+
+  
+      <span itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumb__item--current">
+        <a itemprop="item" href="/page/politika-konfidentsialnosti">
+          <span itemprop="name">Политика конфиденциальности</span>
+          <meta itemprop="position" content="2">
+        </a>
+      </span>
+
+    
+</div>
+
+  
+
+  
+
+  <article class="article">
+    <h1 class="article__title">Политика конфиденциальности</h1>
+    <!-- Текст, заполненный контент-менеджером -->
+    <div class="article__content">
+
+      
+      
+      
+        <p><strong>ПОЛИТИКА</strong></p>
+<p><strong>В ОТНОШЕНИИ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ</strong></p>
+<p><span style="font-weight: 400;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">Дата опубликования: </span><span style="font-weight: 400;">18 марта 2018 года</span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">Политика в отношении обработки и защиты персональных данных (далее — Политика) разработана </span><span style="font-weight: 400;">Индивидуальным предпринимателем Лебедь Ольга Генриевна (Оператор)</span><span style="font-weight: 400;">. </span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">Политика является неотъемлемой частью Оферты, размещенной по адресу: </span><a href="https://health-tehnika.ru/page/publichnaya-oferta"><span style="font-weight: 400;">https://health-tehnika.ru/page/publichnaya-oferta</span></a><span style="font-weight: 400;">.</span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">Политика используется совместно с согласием на обработку персональных данных (далее — Согласие), размещенным в соответствующих формах на официальном сайте Оператора в сети интернет </span><a href="https://health-tehnika.ru"><span style="font-weight: 400;">https://health-tehnika.ru</span></a> <span style="font-weight: 400;">(далее — Сайт).</span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">Использование </span><span style="font-weight: 400;">Сайта (включая поддомены) </span><span style="font-weight: 400;">означает безоговорочное согласие с Политикой и указанными в ней условиями обработки персональных данных. В случае несогласия с Политикой, использование Сайта должно быть немедленно прекращено.</span></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">Термины Политики толкуются в значении, определенном в Оферте, а также </span><span style="font-weight: 400;">применяются следующие термины:</span></span></p>
+<div class="table-responsive" style="max-width: 100%; overflow: auto;">
+<div class="js_table-wrapper"><table style="border-spacing: 3px; margin-left: auto; margin-right: auto; width: 807.6px;">
+<tbody>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 269px; padding: 3px;">
+<p style="text-align: center;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>Термин Политики</strong></span></p>
+</td>
+<td style="height: 40px; width: 513.6px; padding: 3px;">
+<p style="text-align: center;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>Толкование</strong></span></p>
+</td>
+</tr>
+<tr style="height: 57px;">
+<td style="height: 57px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Субъект персональных&nbsp; &nbsp;данных</strong></span></p>
+</td>
+<td style="height: 57px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;физическое лицо, использующее Сайт.</span></p>
+</td>
+</tr>
+<tr style="height: 79px;">
+<td style="height: 79px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Персональные данные</strong></span></p>
+</td>
+<td style="height: 79px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;любая информация, относящаяся прямо или косвенно к&nbsp; &nbsp;определенному или определяемому Субъекту персональных&nbsp; &nbsp;данных.</span></p>
+</td>
+</tr>
+<tr style="height: 213px;">
+<td style="height: 213px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Обработка Персональных&nbsp; &nbsp;данных</strong> <strong>(Обработка)</strong></span></p>
+</td>
+<td style="height: 213px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;любое действие (операция) или совокупность действий&nbsp; &nbsp;(операций)&nbsp; с Персональными данными, совершаемых с&nbsp; &nbsp;использованием&nbsp; средств автоматизации или без их&nbsp; &nbsp;использования.&nbsp; Обработка включает в себя, в том числе: сбор,&nbsp; &nbsp;запись, систематизацию,&nbsp; накопление, хранение, уточнение&nbsp; &nbsp;(обновление, изменение),&nbsp; извлечение, использование, передачу&nbsp; &nbsp;(распространение,&nbsp; предоставление, доступ), обезличивание,&nbsp; &nbsp;блокирование,&nbsp; удаление, уничтожение.</span></p>
+</td>
+</tr>
+<tr style="height: 60px;">
+<td style="height: 60px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Автоматизированная&nbsp; &nbsp;Обработка</strong></span></p>
+</td>
+<td style="height: 60px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;обработка Персональных данных с помощью средств&nbsp; &nbsp;вычислительной техники.</span></p>
+</td>
+</tr>
+<tr style="height: 79px;">
+<td style="height: 79px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Распространение&nbsp; &nbsp;Персональных данных</strong></span></p>
+</td>
+<td style="height: 79px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;действия, направленные на раскрытие Персональных данных&nbsp; &nbsp;неопределенному кругу лиц.</span></p>
+</td>
+</tr>
+<tr style="height: 79px;">
+<td style="height: 79px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Предоставление&nbsp; &nbsp;Персональных данных</strong></span></p>
+</td>
+<td style="height: 79px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;действия, направленные на раскрытие Персональных данных&nbsp; &nbsp;определенному лицу или определенному кругу лиц.</span></p>
+</td>
+</tr>
+<tr style="height: 79px;">
+<td style="height: 79px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Блокирование Персональных&nbsp; &nbsp;данных</strong></span></p>
+</td>
+<td style="height: 79px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;временное прекращение обработки Персональных данных (за&nbsp; &nbsp;исключением случаев, если обработка необходима для их&nbsp; &nbsp;уточнения).</span></p>
+</td>
+</tr>
+<tr style="height: 117px;">
+<td style="height: 117px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Уничтожение Персональных&nbsp; &nbsp;данных</strong></span></p>
+</td>
+<td style="height: 117px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;действия, в результате которых становится невозможным&nbsp; &nbsp;восстановить содержание Персональных данных и (или) в&nbsp; &nbsp;результате которых уничтожаются материальные носители&nbsp; &nbsp;Персональных данных.</span></p>
+</td>
+</tr>
+<tr style="height: 98px;">
+<td style="height: 98px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Обезличивание&nbsp; &nbsp;Персональных данных</strong></span></p>
+</td>
+<td style="height: 98px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;действия, в результате которых становится невозможным без&nbsp; &nbsp;использования дополнительной информации определить&nbsp; &nbsp;принадлежность Персональных данных конкретному субъекту.</span></p>
+</td>
+</tr>
+<tr style="height: 117px;">
+<td style="height: 117px; width: 269px; padding: 3px;">
+<p style="text-align: left;"><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;"><strong>&nbsp;Трансграничная передача&nbsp; &nbsp;Персональных данных</strong></span></p>
+</td>
+<td style="height: 117px; width: 513.6px; padding: 3px;">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt;">&nbsp;передача Персональных данных на территорию иностранного&nbsp; &nbsp;государства, органу власти иностранного государства,&nbsp; &nbsp;иностранному физическому лицу или иностранному&nbsp; &nbsp;юридическому лицу.</span></p>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>1.Общие положения</strong></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">1.1 Политика </span><span style="font-weight: 400;">определяет порядок Обработки Персональных данных </span><span style="font-weight: 400;">как с применением средств автоматизации, так и без их применения</span></span></p>
+<p><span style="font-size: 12pt;">1.2 </span><span style="font-size: 12pt;"><span style="font-weight: 400;">Правовыми основаниями Обработки являются Согласие на обработку Персональных данных и акцепт </span><a href="https://health-tehnika.ru/page/publichnaya-oferta"><span style="font-weight: 400;">Оферты</span></a><span style="font-weight: 400;">.</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">1.3 Цель Политики - обеспечение защиты прав и свобод человека и гражданина при обработке его Персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну, четкое и неукоснительное соблюдение требований российского законодательства в области Персональных данных.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">1.4 Политика является локальным документом Оператора, разработана в соответствии с Федеральным законом от 27.07.2006 г. №152-ФЗ «О персональных данных» (далее - Закон), другими нормативными правовыми актами в области персональных данных.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">1.5 Оператор публикует Политику на Сайте, а также предоставляет неограниченный доступ к ней любому, лично обратившемуся лицу. </span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">1.6 Оператор</span><span style="font-weight: 400;"> вправе вносить изменения в Политику. В актуальной редакции указывается дата последнего обновления. Новая редакция Политики вступает в силу с момента ее размещения на Сайте.</span></span><span style="font-size: 12pt;"><span style="font-weight: 400;"></span></span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>2. Субъектами персональных данных <span style="font-weight: 400;">являются лица</span>:</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">2.1 воспользовавшихся формами обратной связи на Сайте;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">2.2 прошедшие процедуру регистрации;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">2.3 заполнившие форму оформления Заказа;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">2.4 обратившиеся к Оператору через социальные сети и/или мессенджеры, по электронной почте;</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">2.5 указанные в качестве получателей Товара. Субъект персональных данных гарантирует, что получил согласие лица, указанного им в качестве получателя Товара, на обработку его персональных данных </span><span style="font-weight: 400;">Оператором</span><span style="font-weight: 400;">;</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">2.6 просматривающие Сайт.</span><span style="font-weight: 400; font-size: 12pt;"></span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>3. Цели сбора Персональных данных</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">3.1 Оператор осуществляет связанные с Обработкой процессы в целях выполнения договорных обязательств.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">3.2 Такими обязательствами Оператора являются:</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">3.2.1 предоставление доступа к функционалу Личного кабинета;</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">3.2.2 оформление Заказа на </span><span style="font-weight: 400;">Товар</span><span style="font-weight: 400;">, при необходимости внесение в него изменений;</span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">3.2.3 доставка и передача </span><span style="font-weight: 400;">Товара</span><span style="font-weight: 400;">;</span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">3.2.4 установление и поддержание связи с </span><span style="font-weight: 400;">Субъектом персональных данных</span><span style="font-weight: 400;">, в том числе для ответа на его запросы;</span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">3.2.5 направление на номер телефона и/или адрес электронной почты (если указана) сообщений информационного характера: во исполнение оферты (статус заказа, чек и пр.), о скидочных купонах на следующие покупки, </span><span style="font-weight: 400;">приглашений на мероприятия Интернет-магазина и другой информации рекламно-новостного содержания, а также с целью подтверждения личности Субъекта персональных данных при посещении мероприятий Интернет-магазина. </span><span style="font-weight: 400;">Сообщения рекламного характера направляются с согласия Субъекта персональных данных;</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">3.2.6 предотвращения случаев мошенничества и других злоупотреблений, а также для расследования таких случаев;</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">3.2.7 проведения статистических и маркетинговых исследований покупательского спроса, </span><span style="font-weight: 400;">а также для таргетинга (выделения целевой аудитории) рекламы, размещаемой на сайте, </span><span style="font-weight: 400;">на основе обезличенных данных;</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">3.2.8 разрешения споров, сбора отзывов и выявления неисправностей;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">3.2.9 улучшения качества работы Сайта, удобства его использования и разработки нового функционала;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">3.2.10 исполнения требований российского законодательства.</span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>4. Состав обрабатываемых данных</strong></span></p>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">4.1 В целях оформления Заказа и </span></em><em><span style="font-weight: 400;">предоставления доступа к Личному кабинету </span></em><span style="font-weight: 400;">Оператор</span><span style="font-weight: 400;"> осуществляет Обработку данных,</span><span style="font-weight: 400;"> введенных в соответствующие формы Сайта (фамилия, имя, номер телефона, адрес электронной почты, адрес доставки).</span></span></p>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">4.2 В целях </span></em><em><span style="font-weight: 400;">установления и поддержания связи с Субъектом персональных данных, направления ему сообщений</span></em><span style="font-weight: 400;"> осуществляется Обработка </span><span style="font-weight: 400;">имени, </span><span style="font-weight: 400;">номера телефона, адреса электронной почты.</span></span></p>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">4.3 В иных целях</span></em><span style="font-weight: 400;">, указанных в Политике, могут быть использованы любые данные Субъекта персональных данных, введенные им в формы Сайта или сообщенные иным способом, в том числе по телефону, электронной почте.</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">4.4 Техническая информация, если ее можно соотнести с Субъектом персональных данных: IP-адрес, вид операционной системы, тип браузера, географическое положение, поставщик услуг сети Интернет.</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">4.5 Сведения о поведении Субъекта персональных данных на Сайте (в том числе </span><span style="font-weight: 400;">дата, время и количество посещений,</span> <span style="font-weight: 400;">сведения о посещенных страницах, просматриваемых Товарах, о переходе с других ресурсов, просмотренной рекламе, о направленных запросах, отзывах и вопросах).</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">4.6 Информация, автоматически получаемая при доступе к Сайту, в том числе с использованием файлов cookies.</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">4.7 Данные об осуществлении онлайн платежа.</span><span style="font-weight: 400;"> При осуществлении Субъектом персональных данных онлайн платежей </span><span style="font-weight: 400;">Оператор</span><span style="font-weight: 400;"> &nbsp;осуществляет Обработку только данных о времени, способе и сумме оплаты. Прочие данные, включая сведения о банковской карте, обрабатываются на стороне банка и в соответствии с его правилами.</span></span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>5. Принципы Обработки</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.1 Главный принцип, которого придерживается &nbsp;Оператор при Обработке - достаточность. Персональные данные не будут обработаны, если этого не требуется.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2 Обработка осуществляется в соответствии со следующими принципами: </span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.1 Законность и справедливость Обработки.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.2 Обработка в соответствии с конкретными, заранее определенными и законными целями.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.3 Недопущение объединения баз данных, содержащих Персональные данные, Обработка которых осуществляется в целях, несовместимых между собой.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.4 Обработке только тех Персональных данных, которые отвечают целям их Обработки.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.5 Соответствие содержания и объема Персональных данных заявленным целям Обработки.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.6 Точность, достаточность, актуальность и достоверность Персональных данных.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.7 Законность технических мер, направленных на Обработку.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.8 Разумность и целесообразность Обработки.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.9 Хранение Персональных данных в позволяющей определить их субъект форме не дольше, чем того требуют цели Обработки, или в течение срока Согласия.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">5.2.10 Обрабатываемые Персональные данные подлежат уничтожению или обезличиванию незамедлительно в указанных в Политике случаях. </span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>6. Условия Обработки </strong></span></p>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">6.1 Сбор Персональных данных</span></em> <span style="font-weight: 400;">осуществляется следующими способами:</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">6.1.1 Предоставление персональных данных их субъектом при заполнении форм на Сайте, по электронной почте, указанной на Сайте, по телефону, при обращении к оператору через социальные сети, мессенджеры или в магазинах Оператора, указанных на сайте <a href="https://health-tehnika.ru/page/kontakty">https://health-tehnika.ru/page/kontakty</a>. Оператор не проверяет достоверность предоставленных персональных данных и дееспособность Субъекта персональных данных. Субъект персональных данных гарантирует, что все данные являются достоверными, актуальными и не нарушают права третьих лиц и законодательство РФ.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">6.1.2 Автоматический сбор информации с помощью технологий и сервисов: веб-протоколы, файлов <span>«</span>cookie<span>»</span>, веб-отметки, которые запускаются только при вводе вами своих данных</span></p>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">6.2 Хранение Персональных данных</span></em> <span style="font-weight: 400;">осуществляется:</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">6.2.1 На электронных носителях с применением Автоматизированной обработки, за исключением случаев, когда неавтоматизированная Обработка необходима в связи с исполнением требований законодательства РФ.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">6.2.2 С использованием баз данных, находящихся на территории Российской Федерации.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">6.2.3 Хранение Персональных данных, в том числе в целях обработки заказов &nbsp;осуществляется на ресурсе ООО «РитейлДрайвер».</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">6.2.4 В форме, позволяющей определить Субъекта персональных данных, не дольше, чем этого требуют цели Обработки, если срок хранения не установлен законом, договором, стороной которого является Субъект персональных данных. Срок размещения Персональных данных в личном кабинете неограничен и определяется Субъектом персональных данных самостоятельно. </span></p>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">6.3 Передача Персональных данных</span></em></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">6.3.1 Оператор</span> <span style="font-weight: 400;">не Распространяет и не Предоставляет Персональные данные третьим лицам без Согласия, за исключением случаев, когда они являются общедоступными или это необходимо в целях предупреждения угрозы жизни и здоровью, </span><span style="font-weight: 400;">предупреждения, пресечения незаконных действий Субъекта персональных данных, защиты законных интересов </span><span style="font-weight: 400;">Оператора</span><span style="font-weight: 400;"> и третьих лиц, </span><span style="font-weight: 400;">а также в случаях, установленных законодательством РФ.</span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">6.3.2 Оператор вправе Предоставить Персональные данные третьим лицам, в том числе </span><span style="font-weight: 400;">ООО</span><span style="font-weight: 400;"> «РитейлДрайвер» (ОГРН 5147746272339), </span><span style="font-weight: 400;">ООО «Конвид» (ОГРН 1157746981050) и службам доставки,</span><span style="font-weight: 400;"> для осуществления обработки персональных данных по поручению Оператора в целях выполнения договорных обязательств.</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">6.3.3 По мотивированному запросу Персональные данные без получения Согласия могут быть Предоставлены: в судебные органы для осуществления правосудия, в органы государственной безопасности, прокуратуры, полиции, в следственные органы, в иные органы и организации в случаях, установленных нормативными правовыми актами, обязательными для исполнения.</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">6.3.4 В случае Предоставления Персональных данных </span><span style="font-weight: 400;">Оператор </span><span style="font-weight: 400;">предупреждает получающих лиц о том, что эти данные могут быть использованы лишь в целях, для которых они сообщены.</span></span></p>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">6.4 Актуализация, уничтожение Персональных данных. </span></em></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">6.4.1 В случае подтверждения факта неточности Персональных данных они подлежат актуализации.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">6.4.2 </span><span style="font-size: 12pt;"><span style="font-weight: 400;">Оператор </span><span style="font-weight: 400;">уничтожает персональные данные в следующих случаях:</span></span></p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">Наличие угрозы безопасности Сайта.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">Прекращение действия Согласия.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">Истечение срока хранения Персональных данных.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">По запросу Субъекта персональных данных.</span></li>
+</ul>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">6.5 Блокирование Персональных данных. </span></em><span style="font-weight: 400;">Оператор</span><span style="font-weight: 400;"> оставляет за собой право временно прекратить Обработку (за исключением случаев, если Обработка необходима для уточнения Персональных данных).</span></span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>7. Трансграничная передача персональных данных</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">7.1 Для достижения целей, указанных в Политике, Оператор может передавать Персональные данные в страны, отличные от страны, из которой они были первоначально получены. До начала осуществления Трансграничной передачи персональных данных Оператор обязан убедиться в том, что иностранным государством, на территорию которого осуществляется передача Персональных данных, обеспечивается адекватная защита прав Субъекта персональных данных. При Трансграничной передаче персональных данных Оператор защищает данные в соответствии с Политикой.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">7.2 Трансграничная передача персональных данных на территории иностранных государств, не обеспечивающих адекватной защиты прав Субъекта персональных данных, может осуществляться:</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">7.2.1 При наличии С</span><span style="font-weight: 400;">огласия в письменной форме на трансграничную передачу данных;</span></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">7.2.2 в случаях, предусмотренных международными договорами РФ, федеральными законами, если это необходимо для защиты основ конституционного строя РФ, обеспечения обороны и безопасности государства, а также обеспечения безопасного функционирования транспортного комплекса, защиты интересов личности, общества и государства в сфере транспортного комплекса от актов незаконного вмешательства;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">7.2.3 для исполнения соглашения, стороной которого Субъект персональных данных является;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">7.2.4 в целях защиты жизни, здоровья и иных жизненно важных интересов Субъекта персональных данных или интересов других лиц при невозможности получения согласия Субъекта персональных данных в письменной форме.</span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>8. Права Субъекта персональных данных</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1 Субъект персональных данных вправе направить Оператору запрос по Обработке, в том числе содержащей:</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.1 подтверждение факта Обработки;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.2 правовые основания Обработки;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.3 цели и применяемые Оператором способы Обработки;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.4 обрабатываемые Персональные данные, относящиеся к соответствующему Субъекту, источник их получения, если иной порядок представления таких данных не предусмотрен законодательством РФ;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.5 сроки Обработки, в том числе сроки хранения Персональных данных;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.6 порядок осуществления прав, предусмотренных законодательством РФ;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.7 информацию об осуществленной или о предполагаемой Трансграничной передаче данных;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.8 сведения о лицах, которым могут быть раскрыты Персональные данные на основании договора с Оператором или в соответствии с законодательством РФ;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.9 наименование или фамилию, имя, отчество и адрес лица, осуществляющего Обработку по поручению Оператора, если Обработка поручена или будет поручена такому лицу;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">8.1.10 иные сведения, предусмотренные законодательством РФ.</span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>9. Обязанности Оператора</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">9.1 В соответствии с требованиями Закона Оператор обязан:</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">9.1.1 по запросу Субъекта персональных данных предоставлять &nbsp;информацию об Обработке или обоснованный отказ;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">9.1.2 по требованию Субъекта персональных данных уточнять обрабатываемые Персональные данные, блокировать или удалять их, если они являются неполными, устаревшими, неточными, незаконно полученными или ненужными для заявленной цели Обработки;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">9.1.3 обеспечить правомерность Обработки. В случае, если обеспечить правомерность Обработки невозможно, Оператор в срок, не превышающий 10 (десять) рабочих дней с даты выявления неправомерной Обработки, обязан уничтожить или обеспечить Уничтожение Персональных данных;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">9.1.4 прекратить Обработку и уничтожить Персональные данные в срок, не превышающий 30 (тридцать) дней с даты поступления от Субъекта персональных данных отзыва Согласия, за исключением случаев, когда Обработка может быть продолжена в соответствии с законодательством РФ;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">9.1.5 принимать меры, необходимые и достаточные для обеспечения выполнения обязанностей, предусмотренных законодательством РФ.</span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>10. Меры защиты Персональных данных</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">10.1 Принимаемые меры защиты Персональных данных основаны на требованиях ст. 18.1, ст. 19 Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и включают в себя: </span></p>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">10.1.1 Правовые меры</span></em><span style="font-weight: 400;">:</span></span></p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">разработка Оператором локальных документов, реализующих требования российского законодательства, в том числе – Политики в отношении обработки и защиты персональных данных, и размещение ее на Сайта;</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">отказ от любых способов Обработки, не соответствующих целям, заранее предопределенным Оператором.</span></li>
+</ul>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">10.1.2 Организационные меры:</span></em></span></p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">назначение лица, ответственного за организацию Обработки;</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">ограничение состава работников Оператора, имеющих доступ к Персональным данным, и организацию разрешительной системы доступа к ним;</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">ознакомление работников, осуществляющих Обработку, с нормативными правовыми актами, с локальными актами, регламентирующими порядок Обработки и защиты Персональных данных;</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">периодическая оценка рисков, касающихся процессов Обработки;</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">периодическое проведение проверок в целях осуществления внутреннего контроля соответствия Обработки требованиям законодательства РФ. </span></li>
+</ul>
+<p><span style="font-size: 12pt;"><em><span style="font-weight: 400;">10.1.3 Технические меры</span></em><span style="font-weight: 400;">:</span></span></p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">предотвращение несанкционированного доступа к системам, в которых хранятся Персональные данные;</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">резервирование и восстановление Персональных данных, работоспособности технических средств и программного обеспечения, средств защиты информации в информационных системах Персональных данных;</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400; font-size: 12pt;">мониторинг и анализ защищенности сетевой инфраструктуры Оператора.</span></li>
+</ul>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>11. Ограничение действия Политики</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">11.1 Политика применяется к Сайту и при получении персональных данных в магазинах Оператора, указанных по адресу <a href="https://health-tehnika.ru/page/kontakty">https://health-tehnika.ru/page/kontakty</a>, и не применяется к другим ресурсам.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">11.2 Субъект персональных данных должен разумно и ответственно подходить к размещению собственных Персональных данных на Сайте в открытом доступе при направлении вопросов и оставлении отзывов.</span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>12. Ограничения ответственности</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">12.1 Оператор не несет ответственности за:</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">12.1.1 сохранение конфиденциальности и/или использование Персональных данных самостоятельно Распространенных или Представленных Субъектом персональных данных третьим лицам;</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">12.1.2 действия третьих лиц, получивших доступ к Персональным данным Субъекта персональных данных по вине последнего;</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">12.1.3 возможное нецелевое использование Персональных данных Субъекта персональных данных, произошедшее из-за </span><span style="font-weight: 400;">технических неполадок в программном обеспечении, серверах или компьютерных сетях, находящихся вне контроля Оператора. </span></span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>13. Порядок рассмотрения обращений</strong></span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">13.1 Если Пользователь больше не желает получатть сообщения рекламно-информационного характера, он должен отписаться от рассылки способом, указанном в письме или уведомить об этом Оператора другим способом.</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">13.2 Субъект персональных данных или его представитель вправе направить Оператору свои обращения, запросы об Обработке:</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">в письменной форме по адресу: </span><span style="font-weight: 400;">129085, Москва, проспект Мира 101с2</span><span style="font-weight: 400;">&nbsp;или </span><span style="font-weight: 400;">в форме электронного документа по адресу электронной почты: </span><a href="mailto:info@health-tehnika.ru"><span style="font-weight: 400;">info@health-tehnika.ru</span></a><span style="font-weight: 400;">.</span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">13.3 Запрос должен содержать информацию, позволяющую идентифицировать </span><span style="font-weight: 400;">Субъекта персональных данных</span><span style="font-weight: 400;">, в том числе данные его номера телефона, указанные при оформлении заказа или регистрации/обращении через Сайт.</span></span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">13.4 Оператор обязуется рассмотреть и направить ответ на поступивший запрос в течение 30</span><span style="font-weight: 400;">&nbsp;(тридцати</span><span style="font-weight: 400;">) рабочих дней с момента поступления обращения.</span></span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12pt;"><strong>14. Реквизиты Оператора</strong></span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400; font-size: 12pt;">Индивидуальный предприниматель Лебедь Ольга Генриевна</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">ИНН 645501424844</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">ОГРНИП 305645512600015</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">Адрес местонахождения: <span>129085, Москва, проспект Мира 101с2</span>.</span></p>
+<p><span style="font-size: 12pt;">р/с 40802810500000592121</span></p>
+<p><span style="font-size: 12pt;">к/с 30101810145250000974</span></p>
+<p><span style="font-size: 12pt;">в АО «Тинькофф Банк»</span></p>
+<p><span style="font-size: 12pt;">БИК 044525974</span></p>
+<p><span style="font-weight: 400; font-size: 12pt;">Телефон: +7(499)703-39-71</span></p>
+<p><span style="font-size: 12pt;"><span style="font-weight: 400;">Электронная почта: </span><a href="mailto:info@health-tehnika.ru"><span style="font-weight: 400;">info@health-tehnika.ru</span></a></span></p>
+<p>&nbsp;</p>
+<p><br><br><br></p>
+     
+      
+      
+      
+    </div>
+  </article>
+
+
+
+
+
+<script type="text/javascript">
+  var google_tag_params = {
+    ecomm_pagetype: 'other',
+  };
+</script>
+<script type="text/javascript">
+  /* <![CDATA[ */
+  var google_conversion_id = 940468161;
+  var google_custom_params = window.google_tag_params;
+  var google_remarketing_only = true;
+  /* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+  <div style="display:inline;">
+    <img height="1" width="1" style="border-style:none;" alt=""
+         src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/940468161/?value=0&amp;guid=ON&amp;script=0" />
+  </div>
+</noscript>
+
+<script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/captcha.js"></script>
+
+<script>
+	$(function() {
+    	$('.contacts__pickup-place-phone iframe').css('width', '555')
+      	$('.contacts__pickup-place').css('padding-right', '0')
+    })
+</script>
+
+
+  <!-- Хэлпер заднего фона для всплывающих окон -->
+<div class="popup-background"></div>
+
+<div class="footer__outer">
+			<footer class="footer">
+				<div class="footer__menu">
+					<h3 class="footer__menu-title">Сервис</h3>
+					<ul class="footer__menu-list">
+						<li class="footer__menu-item">
+							<a href="/page/garantii-vozvrat">Гарантия</a>
+						</li>
+						<li class="footer__menu-item">
+							<a href="/page/garantii-vozvrat">Обмен и возврат</a>
+						</li>
+						<li class="footer__menu-item">
+							<a target="_blank" href="https://docs.google.com/forms/d/1UykBxDh2cwjWCFWJXweFc0cFmoiPUi3F4-8AbbL6F0E/viewform?edit_requested=true#response=ACYDBNhbI_rf5roICHPVzSvhL6HfuRaShZzU8ZlUcwwQEki-xldIiNxOT_zD-IQQARiGot8">Заявка на ремонт</a>
+						</li>
+						<li class="footer__menu-item">
+							<a href="/page/delivery#Gde_zakaz">Что с моим заказом? </a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="footer__menu">
+					<h3 class="footer__menu-title">Компания</h3>
+					<ul class="footer__menu-list">
+						<li class="footer__menu-item">
+							<a href="/page/o-nas">О нас</a>
+						</li>
+						<li class="footer__menu-item">
+							<a href="/page/otzyvy-o-nas">Отзывы</a>
+						</li>
+						<li class="footer__menu-item">
+							<a href="/page/feedback">Обратная связь</a>
+						</li>
+						<li class="footer__menu-item">
+							<a href="/page/vakansii">Наши вакансии</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="footer__menu">
+					<h3 class="footer__menu-title">Важное</h3>
+					<ul class="footer__menu-list">
+						<li class="footer__menu-item">
+							<a href="/page/politika-konfidentsialnosti">Политика конфиденциальности</a>
+						</li>
+						<li class="footer__menu-item">
+							<a href="/page/politika-konfidentsialnosti">Пользовательское соглашение</a>
+						</li>
+						<li class="footer__menu-item">
+							<a href="/page/publichnaya-oferta">Публичная оферта</a>
+						</li>
+                      <li class="footer__menu-item">
+							<a href="/page/kontakty">Контакты</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="footer__icons-block">
+					<div class="footer__social">
+						<h3 class="footer__social-title">Мы в социальных сетях</h3>
+						<ul class="footer__social-icons">
+							<li class="footer__social-item footer__social-item--inst">
+								<a href="https://www.instagram.com/health_tehnika/" target="_blank">Instagram</a>
+							</li>
+							<li class="footer__social-item footer__social-item--ytb">
+								<a href="https://www.youtube.com/channel/UCE7VnebSlRvMr-PymwWnm7A" target="_blank">Youtube</a>
+							</li>
+							<li class="footer__social-item footer__social-item--fb">
+								<a href="https://www.facebook.com/health.tehnika/" target="_blank">Facebook</a>
+							</li>
+							<li class="footer__social-item footer__social-item--vk">
+								<a href="https://vk.com/ht_zozh" target="_blank">Вконтакте</a>
+							</li>
+                          	<li class="secondary-header__social-item secondary-header__social-item--telegram">
+								<a href="https://t.me/health_tehnika" target="_blank">Telegram</a>
+							</li>
+						</ul>
+					</div>
+					<div class="footer__payment-icons">
+						<h3 class="footer__payment-icons-title">Способы оплаты</h3>
+						<div class="footer__payments-list">
+							<ul>
+<li><img src="https://img.health-tehnika.ru/files/1/801/12501793/original/visa.svg" width="56" height="19"></li>
+<li><img src="https://img.health-tehnika.ru/files/1/908/12501900/original/mastercard.svg" width="52" height="33"></li>
+<li><img src="https://img.health-tehnika.ru/files/1/918/12501910/original/masestro.svg" width="53" height="32"></li>
+<li><img src="https://img.health-tehnika.ru/files/1/1963/17475499/original/sberbank.png" width="34" height="34"></li>
+<li><img src="https://img.health-tehnika.ru/files/1/923/12501915/original/halva.svg" width="34" height="35"></li>
+<li><img src="https://img.health-tehnika.ru/files/1/926/12501918/original/tinkoff.svg" width="76" height="19"></li>
+<li><img src="https://img.health-tehnika.ru/files/1/929/12501921/original/mir.svg" width="59" height="18"></li>
+</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<div class="copyright">
+              <span><h3 class="text-footer" style="text-align: left;"><span style="font-size: 10pt;"><strong><span style="color: #808080; font-family: tahoma, arial, helvetica, sans-serif;">2014 - 2023&nbsp; © Все права защищены. Техника Здоровья</span></strong></span></h3>
+<p><span style="font-size: 10pt;"><strong><span style="color: #808080; font-family: tahoma, arial, helvetica, sans-serif;">Запрещается копирование, распространение или иное использование контента и других объектов без предварительного письменного согласования с правообладателем.</span></strong></span></p></span>
+			</div>
+		</div>
+  <!-- Модальное окно формой выбора города -->
+		<div id="location-form" class="modal modal--location mfp-hide zoom-anim-dialog" role="dialog" aria-hidden="true">
+			<div class="modal__dialog">
+				<div class="modal__content">
+					<div action="" class="modal__form">
+						<div class="modal__form-group">
+							<label for="geo-country">Выберите страну</label>
+							<select name="geo-country" id="geo-country">
+								<option value="BY">Беларусь</option>
+								<option value="KZ">Казахстан</option>
+								<option selected="selected" value="RU">Россия</option>
+							</select>
+						</div>
+
+						<div class="modal__form-group">
+							<label for="city-select">Введите город</label>
+							<input type="text" name="city-select" id="city-select">
+						</div>
+						<div class="modal__city-dropdown">
+							<div id="js_city-select-modal" style="display:none;"></div>
+						</div>
+					</div>
+
+					<!-- modal close button -->
+					<a href="javascript:;" class="modal__close mfp-close">
+						<svg class="" viewBox="0 0 24 24">
+							<path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"></path>
+							<path d="M0 0h24v24h-24z" fill="none"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Хэлпер заднего фона для всплывающих окон -->
+		<div class="popup-background"></div>
+
+		<div id="request-sent-message" class="modal modal--quick-order mfp-hide zoom-anim-dialog" role="dialog" aria-hidden="true">stron
+			<div class="modal__dialog">
+				<div class="modal__content">
+
+					<div class="call-form__success-message">
+						<img src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/call-phone.svg" alt="Мы скоро перезвоним вам">
+
+						<strong>Мы приняли Вашу заявку. Ожидайте звонка в ближайшее время!</strong>
+
+						<button class="button" onclick="closePopup()">Понятно</button>
+					</div>
+
+					<!-- modal close button -->
+					<a href="javascript:;" class="modal__close mfp-close">
+						<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M23.915 24.7915L1.13957 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+							<path d="M1 24.7915L23.7755 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div id="confirmation-message" class="modal modal--quick-order mfp-hide zoom-anim-dialog" role="dialog" aria-hidden="true">
+			<div class="modal__dialog">
+				<div class="modal__content">
+
+					<div class="call-form__success-message">
+						<img src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/call-phone.svg" alt="Мы скоро перезвоним вам">
+
+						<strong id="confirmation-message-content">...</strong>
+
+						<button class="button" onclick="closePopup()">Понятно</button>
+					</div>
+
+					<!-- modal close button -->
+					<a href="javascript:;" class="modal__close mfp-close">
+						<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M23.915 24.7915L1.13957 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+							<path d="M1 24.7915L23.7755 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Модальное окно с сообщением о добавлении товара в корзину -->
+		<div id="product-added" class="modal mfp-hide zoom-anim-dialog" role="dialog" aria-hidden="true">
+			<div class="modal__dialog">
+				<div class="modal__content">
+					<div class="product-added-popup">
+						<strong class="product-added-popup__title">Товар добавлен в корзину</strong>
+
+						<div class="product-added-popup__product">
+							<img class="product-added-popup__product-image" src="" alt="">
+							<span class="product-added-popup__product-name">Шнековая соковыжималка Hurom Premium H-Al LBE20</span>
+							<span class="product-added-popup__product-price">50 490 ₽</span>
+						</div>
+
+						<div class="product-added-popup__buttons">
+							<button onclick="closePopup()" class="button button--light product-added-popup__return">Продолжить покупки</button>
+							<a href="/cart_items" class="button product-added-popup__to-basket">Перейти в корзину</a>
+						</div>
+					</div>
+
+					<!-- modal close button -->
+					<a href="javascript:;" class="modal__close mfp-close">
+						<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M23.915 24.7915L1.13957 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+							<path d="M1 24.7915L23.7755 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Модальное окно с формой быстрого заказа -->
+		<div id="quick-order" class="modal modal--quick-order mfp-hide zoom-anim-dialog" role="dialog" aria-hidden="true">
+			<div class="modal__dialog">
+				<div class="modal__content">
+					<form action="" class="quick-order" id="quick-order-form">
+						<strong class="quick-order__title">Купить в один клик</strong>
+
+						<div class="quick-order__errors">
+
+						</div>
+
+						<div class="quick-order__fields">
+
+                            <div class="modal__form-group">
+                                <label for="quick-name">Введите имя</label>
+                                <input type="text" id="quick-name" name="name" class="quick-order__field" value="">
+                            </div>
+
+                            <div class="modal__form-group">
+                                <label for="quick-phone">Введите телефон</label>
+                                <input type="text" id="quick-phone" name="phone" class="quick-order__field js_phone-field" value="">
+                            </div>
+							<input type="hidden" name="comment" value="Быстрый заказ">
+							<input type="hidden" name="delivery_variant" value="2039692">
+							<input type="hidden" name="payment_gateway" value="1522461">
+
+						</div>
+
+						<button type="submit" class="button quick-order__submit">Купить</button>
+
+						<span class="quick-order__confidential-message">Нажимая кнопку купить, я даю согласие <a target="_blank" href="/page/politika-konfidentsialnosti">на обработку
+							персональных данных.</a></span>
+					</form>
+
+					<!-- modal close button -->
+					<a href="javascript:;" class="modal__close mfp-close">
+						<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M23.915 24.7915L1.13957 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+							<path d="M1 24.7915L23.7755 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div id="pre-order" class="modal modal--quick-order mfp-hide zoom-anim-dialog" role="dialog" aria-hidden="true">
+			<div class="modal__dialog">
+				<div class="modal__content">
+					<form action="" class="quick-order">
+						<strong class="quick-order__title">Оформить предзаказ</strong>
+
+						<div class="quick-order__errors">
+
+						</div>
+
+						<div class="quick-order__fields">
+
+                            <div class="modal__form-group">
+                                <label for="quick-name">Введите имя</label>
+                                <input type="text" id="quick-name" name="name" class="quick-order__field" value="">
+                            </div>
+
+                            <div class="modal__form-group">
+                                <label for="quick-phone">Введите телефон</label>
+                                <input type="text" id="quick-phone" name="phone" class="quick-order__field js_phone-field" value="">
+                            </div>
+							<input type="hidden" name="comment" value="Предзаказ">
+							<input type="hidden" name="delivery_variant" value="2039692">
+							<input type="hidden" name="payment_gateway" value="1522461">
+
+						</div>
+
+						<button type="submit" class="button quick-order__submit">Оформить предзаказ</button>
+
+						<span class="quick-order__confidential-message">Нажимая кнопку оформить предзаказ, я даю согласие <a target="_blank" href="/page/politika-konfidentsialnosti">на обработку
+							персональных данных.</a></span>
+					</form>
+
+					<!-- modal close button -->
+					<a href="javascript:;" class="modal__close mfp-close">
+						<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M23.915 24.7915L1.13957 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+							<path d="M1 24.7915L23.7755 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Модальное окно с сообщением о добавлении товара в корзину -->
+		<div id="product-added-full" class="modal mfp-hide zoom-anim-dialog" role="dialog" aria-hidden="true">
+			<div class="modal__dialog">
+				<div class="modal__content">
+					<div class="product-added-popup">
+						<strong class="product-added-popup__title">Товар добавлен в корзину</strong>
+
+						<div class="product-added-popup__product">
+							<img class="product-added-popup__product-image" src="" alt="">
+							<span class="product-added-popup__product-name"></span>
+							<span class="product-added-popup__product-price"></span>
+						</div>
+
+						<div class="product-added-popup__buttons">
+							<button onclick="closePopup()" class="button button--light product-added-popup__return">Продолжить покупки</button>
+							<a href="/cart_items" class="button product-added-popup__to-basket">Перейти в корзину</a>
+						</div>
+						
+					</div>
+
+					<!-- modal close button -->
+					<a href="javascript:;" class="modal__close mfp-close">
+						<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M23.915 24.7915L1.13957 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+							<path d="M1 24.7915L23.7755 1.00017" stroke="#84B53F" stroke-width="1.5"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Модальное окно с сообщением о добавлении товара в избранное -->
+		<div style="display: none" class="liked-message" id="liked-message">
+			<img src="https://img.health-tehnika.ru/images/products/1/7330/219978914/medium_shnekovaya-sokovyzhimalka-hurom-premium-h-ai-ube20-golubaya.jpg" alt="Название товара" class="liked-message__image">
+
+			<div class="liked-message__text">
+				<strong>Товар "Шнековая соковыжималка Hurom Premium H-AI UBE20, голубая"</strong>
+              <p class="limit"></p>
+				<span>Всего в списке 2 товара</span>
+			</div>
+
+			<a class="button button--color-reverse liked-message__compare-link" href="/compares">Сравнить</a>
+
+			<button class="liked-message__close" onclick="$('.liked-message').fadeOut()">
+				<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M23.915 24.7915L1.13957 1.00017" stroke="#fff" stroke-width="1.5"></path>
+					<path d="M1 24.7915L23.7755 1.00017" stroke="#fff" stroke-width="1.5"></path>
+				</svg>
+			</button>
+		</div>
+
+  <script>
+  
+    /*var botPattern = "(googlebot\/|Googlebot-Mobile|Googlebot-Image|Google favicon|Mediapartners-Google|bingbot|slurp|java|wget|curl|Commons-HttpClient|Python-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST-WebCrawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon |httrack|webcrawler|grub.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail.RU_Bot|discobot|heritrix|findthatfile|europarchive.org|NerdByNature.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web-archive-net.com.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks-robot|it2media-domain-crawler|ip-web-crawler.com|siteexplorer.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|g00g1e.net|GrapeshotCrawler|urlappendbot|brainobot|fr-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf.fr_bot|A6-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|AddThis)";
+    var botRe = new RegExp(botPattern, 'i');
+    if (!botRe.test(navigator.userAgent)) {
+      var title = $('title').text(),
+          og_title = $("meta[property='og:title']").attr("content");
+      $('title').text('Загрузка...');
+      $("meta[property='og:title']").attr("content", "");
+
+      var timeout = setTimeout(function () {
+        $('title').text('Загрузка..');
+        $("meta[property='og:title']").attr("content", window.location.href);
+        var timeout2 = setTimeout(function () {
+          $('title').text(title);
+          clearTimeout(timeout2);
+        }, 7000);
+        clearTimeout(timeout);
+      }, 500);
+      $('meta,div,img').removeAttr('itemtype').removeAttr('content').removeProp('itemtype').removeAttr('itemprop').removeProp('itemprop').removeAttr('data-title');
+      var h1_content = $('h1').first().text();
+      if ($('.product').length != 0) {
+        $('.product').removeAttr('data-title').removeAttr('data-price');
+        console.log(h1_content);
+        $('.product h1')[0].outerHTML = "<div class='goods__item-title' id='pageh1'>" + h1_content + "</div>";
+        $('.product__gallery a.MagicZoom, .product__gallery img, .product-card img').removeAttr('alt').removeAttr('title');
+      }
+
+    }
+
+    var iterations = 0;
+
+    function taskbar_check() {
+      var smb = $('body div[style*="height: 30px;"]:first-child');
+      var smb5 = $('body div[style*="display: block ! important; opacity: 1 ! important; height: 30px;"]');
+      var smb6 = $('body div[style*="display: block !important; opacity: 1 !important; height: 30px;"]');
+      var smb7 = $('body div[style*="all: initial;"]');
+      var ysov1 = $('body div[style*="top: 0px !important;"]');
+      var ysov2 = $('body div[style*="top: -1px !important; display: table !important; opacity: 1 !important;"]');
+      var ysov3 = $('body div[style*="top: -1px; display: table ! important; opacity: 1 ! important;"]');
+      var ysov4 = $('body div[style*="top: -1px ! important; display: table ! important; opacity: 1 ! important;"]');
+      var ym_reach = '';
+
+      if (smb.length > 0 || smb5.length > 0 || smb6.length > 0 || smb7.length > 0) {
+        if (smb.length > 0) {
+          smb[0].remove();
+        } else if (smb6.length > 0) {
+          smb6.remove();
+        } else if (smb7.length > 0) {
+          smb7.remove();
+        } else {
+          smb5.remove();
+        }
+        iterations = 0;
+        ym_reach = 'smb_remove';
+        $('body').attr('style', '');
+      }
+
+      if (ysov1.length > 0) {
+        ysov1.remove();
+        $('html').attr('style', '');
+        iterations = 0;
+        ym_reach = 'ya_sov_remove_not_ff';
+      } else if (ysov2.length > 0) {
+        ysov2.remove();
+        $('html').attr('style', '');
+        iterations = 0;
+        ym_reach = 'ya_sov_remove_not_ff';
+      } else if (ysov3.length > 0 || ysov4.length > 0) {
+        if (ysov3.length > 0) {
+          ysov3.remove();
+        } else {
+          ysov4.remove();
+        }
+        $('html').attr('style', '');
+        iterations = 0;
+        ym_reach = 'ya_sov_remove_ff';
+      }
+
+      if (iterations++ >= 100) {
+        clearInterval(interval_exe);
+      }
+    }
+
+    var interval_exe = setInterval(taskbar_check, 500);*/
+    
+    
+    $(document).on('click', '.lalala', function() {
+  const $button = $(this);
+  convead('event', 'custom', {key: 'send_form'}, { email: $button.parents('form').find('input[type=text]').val() });
+      console.log(".lalala");
+
+      convead('event', 'custom', {key: 'send_form2'}, { email: $(this).parents('form').find('input[type=text]').val() });
+});
+    
+    
+
+
+
+      $(document).on('click', '#feedback_commit', function () {
+        let $form = $('#feedback_form')[0];
+		let $thanks = $($form).find('#thanks')[0];		
+
+        setTimeout(function () {
+          if ($thanks.style.display !== 'none') {
+            $('#feedback_content').val('');
+			$('#feedback_from').val('');
+
+          }
+          
+          convead('widget', 'show', {id: 87290});
+        }, 100);
+      });
+    
+    
+  </script>
+  
+  <script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/modernizr.js"></script>
+  <script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/jquery.mask.min.js"></script>
+  <script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/nouislider.min.js"></script>
+  <script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/jquery.magnific-popup.js"></script>
+  <script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/owl.carousel.js"></script>
+  <script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/script.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+  <script src="https://static.insales-cdn.com/assets/1/7590/2637222/1675173782/shop.js"></script>
+
+<script>
+document.querySelector('[data-elem-id=“1646609641024”]').onclick = function (
+event
+) {
+event.preventDefault();
+convead("widget", "show", { id: 132978 });
+};
+
+</script>
+
+<!-- retail online consultant -->
+<script>
+  if (window.location.pathname.search(/cart_items|new_order|^\/$/) == -1) {
+    var _rcct = 'e3b27e89edd3d8d97c75e67ed3cc7b95fed3db78e936f30777fae1c64ed7dbc1';
+    !function (t) {
+      var a = t.getElementsByTagName("head")[0];
+      var c = t.createElement("script");
+      c.type = "text/javascript";
+      c.src = "//c.retailcrm.pro/widget/loader.js";
+      a.appendChild(c);
+    } (document);
+  }
+</script>
+<!-- <script src="//code.jivosite.com/widget/MgpWm7ul0h" async></script> -->
+<!-- отключаем calltouch.ru
+<script type="text/javascript">
+function ct(w,d,e,c){
+var a='all',b='tou',src=b+'c'+'h';src='m'+'o'+'d.c'+a+src;
+var jsHost="https://"+src,s=d.createElement(e),p=d.getElementsByTagName(e)[0];
+s.async=1;s.src=jsHost+"."+"r"+"u/d_client.js?param;"+(c?"client_id"+c+";":"")+"ref"+escape(d.referrer)+";url"+escape(d.URL)+";cook"+escape(d.cookie)+";";
+p.parentNode.insertBefore(s,p);
+if(!w.jQuery){var jq=d.createElement(e);
+jq.src=jsHost+"."+"r"+'u/js/jquery-1.7.min.js';
+p.parentNode.insertBefore(jq,p);}}
+if(!!window.GoogleAnalyticsObject){window[window.GoogleAnalyticsObject](function(tracker){ 
+if (!!window[window.GoogleAnalyticsObject].getAll()[0])
+{ct(window,document,'script', window[window.GoogleAnalyticsObject].getAll()[0].get('clientId'))}
+else{ct(window,document,'script', null);}});
+}else{ct(window,document,'script', null);}
+</script>
+
+
+<script type="text/javascript">(function(w,doc) {
+if (!w.__utlWdgt ) {
+    w.__utlWdgt = true;
+    var d = doc, s = d.createElement('script'), g = 'getElementsByTagName';
+    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+    s.src = ('https:' == w.location.protocol ? 'https' : 'http')  + '://w.uptolike.com/widgets/v1/uptolike.js';
+    var h=d[g]('body')[0];
+    h.appendChild(s);
+}})(window,document);
+</script> 
+<div data-background-alpha="0.0" data-buttons-color="#ffffff" data-counter-background-color="#ffffff" data-share-counter-size="12" data-top-button="false" data-share-counter-type="disable" data-follow-ok="group/54143660064893" data-share-style="1" data-mode="share" data-follow-vk="ht_zozh" data-like-text-enable="false" data-mobile-view="true" data-icon-color="#ffffff" data-orientation="fixed-left" data-text-color="#000000" data-share-shape="round" data-sn-ids="gp.vk.fb.ok." data-share-size="30" data-background-color="#ffffff" data-preview-mobile="false" data-mobile-sn-ids="fb.vk.ok.gp." data-pid="1576534" data-counter-background-alpha="1.0" data-follow-gp="u/0/104192576444628335157" data-following-enable="true" data-exclude-show-more="true" data-follow-yt="channel/UCCaW7hMov0CboP-_R7tyxSQ" data-selection-enable="false" data-follow-fb="health.tehnika" class="uptolike-buttons" ></div> -->
+<script type="text/javascript" src="/served_assets/public/shop/referer_code.js"></script><div class="m-modal m-modal--checkout" id="insales-quick-checkout-dialog"><div class="m-modal-wrapper"><form id="quick_checkout_form" data-address-autocomplete="https://kladr.insales.ru" action="/orders/create_with_quick_checkout.json" accept-charset="UTF-8" method="post"><button class="m-modal-close" data-modal="close"></button><div class="m-modal-heading">КУПИТЬ В ОДИН КЛИК</div><div class="m-modal-errors"></div><input id="shipping_address_country" type="hidden" value="RU"><div class="m-input m-input--required "><label for="client_name" class="m-input-label">Имя:</label><input class="m-input-field" placeholder="" type="text" id="client_name" name="client[name]" value=""></div><div class="m-input m-input--required "><label for="client_phone" class="m-input-label">Телефон:</label><input class="m-input-field" placeholder="" type="tel" id="client_phone" name="client[phone]" value=""></div><div class="m-modal-footer"><button class="m-modal-button m-modal-button--checkout button--checkout" type="submit">КУПИТЬ</button></div></form></div></div>
+<script type="text/javascript">
+  var pipOldVkAsyncInit = null;
+  var pipEventFired = false;
+  var pipHandlerInstalled = false;
+  var pipConsultantClicked = false;
+  if ( ( window.vkAsyncInit !== undefined && window.vkAsyncInit !== null ) && typeof window.vkAsyncInit === "function" ) {
+    pipOldVkAsyncInit = window.vkAsyncInit;
+  }
+
+  window.vkAsyncInit = function() {
+
+    let pathname;
+    let intConsultantFounder = null;
+
+    if ( pipEventFired ) {
+      return;
+    }
+
+    if ( pipOldVkAsyncInit !== null ) {
+      pipOldVkAsyncInit();
+    }
+
+    pathname = window.location.pathname;
+
+    
+
+    intConsultantFounder = window.setInterval( function() {
+      let consultant = $( 'div.consultant-widget-wrap.consultant-widget-wrap_left-bottom' );
+
+      if ( consultant.length > 0 ) {
+        window.clearInterval( intConsultantFounder );
+        consultant.click( function() {
+
+          if ( pipConsultantClicked ) {
+            return;
+          }
+          pipConsultantClicked = true;
+          console.log('==============CONSULTANT CLICK==============');
+          /* VK.Goal( 'contact' ); */
+          fbq( 'track', 'Contact' );
+        } );
+      }
+    }, 500 );
+
+    if ( pipHandlerInstalled === false ) {
+      $( 'button.button.product-card__button, button.product__order-button.button, button.button.button--buy.js-buy[type="submit"]' ).click( function() {
+        console.log('==============ADD TO CART CLICK==============');
+        /* VK.Goal( 'add_to_cart' ); */
+      } );
+      $( 'button[data-href="#quick-order"], input.cart__order-button.button[type="submit"][value="Оформить заказ"], a.main-header__cart-order-btn[href="/cart_items"]' ).click( function() {
+        console.log('==============QUICK ORDER/ORDER CLICK==============');
+        /* VK.Goal( 'initiate_checkout' ); */
+
+      } );
+
+      pipHandlerInstalled = true;
+    }
+  };
+</script>
+<script type="text/javascript">
+
+    var digiScript = document.createElement('script');
+
+    digiScript.src = '//cdn.diginetica.net/1249/client.js?ts=' + Date.now();
+
+    digiScript.defer = true;
+
+    digiScript.async = true;
+
+    document.body.appendChild(digiScript);
+
+</script><script src="//cdn.diginetica.net/1249/client.js?ts=1676541553570" defer="" async=""></script>
+
+
+<script>
+(function() {
+	window.carrotquest_account_url = 'https://health-tehnika.ru';
+	
+	
+	window.carrotquest_isclient = false;
+	
+})();
+</script>   <div class="magic-hidden-wrapper"></div><link rel="stylesheet" type="text/css" href="https://c.retailcrm.pro/widget//static/css/app.1de7672113161b292ee542305d56e683.css"><script type="text/javascript" charset="utf-8" defer="" async="" src="https://c.retailcrm.pro/widget//static/js/app.07dc80d1d1d85568fb78.js"></script><div id="__autosizeInputGhost" style="display: inline-block; height: 0px; overflow: hidden; position: absolute; top: 0px; visibility: hidden; white-space: nowrap;"></div><!----></body></html>

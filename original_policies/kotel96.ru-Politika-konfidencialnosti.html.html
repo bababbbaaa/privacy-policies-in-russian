@@ -1,0 +1,1366 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<title>Политика конфиденциальности</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/watch.js"></script><script type="text/javascript" src="/js/jquery-1.5.1.js"></script>
+<script type="text/javascript" src="/js/site.js"></script>
+<script type="text/javascript" src="/js/easybox/easybox.min.js"></script>
+<link rel="stylesheet" href="/js/easybox/easybox.min.css" type="text/css" media="screen">
+<link href="/css/style.css" rel="stylesheet" type="text/css">
+<style id="abu-collapse-styles" type="text/css"></style></head>
+
+<body>
+
+
+
+<div id="loader" style="display: none;">
+    <div id="shadow">
+        <div id="loader_box"></div>
+    </div>
+</div>
+<!--feedback form-->
+<style>
+/*inputs*/
+
+#f_feedback_c{
+
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
+	background-image: -webkit-linear-gradient(top, #fff, #ccc);
+	background-image: -moz-linear-gradient(top, #fff, #ccc);
+	background-image: -ms-linear-gradient(top, #fff, #ccc);
+	background-image: -o-linear-gradient(top, #fff, #ccc);
+	background-color: #ccc; 
+	border-radius: 15px; 
+	border: 1px solid #999; 
+	-moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);    
+
+}
+
+#content_feedback .input_default, #form_order_c .input_default_c{
+
+	width: 400px;
+	border-radius: 10px; 
+	background-color: #fff;
+	color: #000;
+	font-weight: bold;
+	padding: 5px;
+	outline-width: 0px;
+	border: 1px solid #999;
+	cursor: pointer;
+
+}
+
+#content_feedback .input_default:focus{
+	border: 1px solid #69b549;
+	-moz-box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);    
+}
+
+#content_feedback .input_wrong , #form_order_c .input_wrong_c{
+
+	width: 400px;
+	background-color: #fff;
+	color: #000;
+	font-weight: bold;
+	padding: 5px;
+	outline-width: 0px;
+	border: 1px solid #bf0000;
+	cursor: pointer;
+	border-radius: 10px; 
+	-moz-box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);    
+
+}
+</style>
+<script>
+//сценарий для работы формы обратной связи
+//закрываем форму обратной связи
+$(function(){
+	check_default();
+	$("#black_op").live("click", function(){
+		$("#feedback_block").hide();
+		return false;
+	});
+	//открываем форму обратной связи
+	$("#show_feedback").live("click", function(){
+		$("#feedback_block").show();
+		return false;
+	});
+	$("#feedback_block .submit").live("click", function(){
+		//по клику на кнопку "отправить" проверяем данные формы...
+		//нужно проверить на валидность все поля взависимости от их назначения + проверить не пустые ли они, считаем что все поляобязательны для заполнения
+		//получаем текущие значенияполей
+		var name = $("#feedback_block #name").val();
+		var email = $("#feedback_block #email").val();
+		var phone = $("#feedback_block #phone").val();
+		var text = $("#feedback_block #text").val();
+			if(name!==""){
+				if(email!=="" && isValidEmail(email)==true){
+					if(phone!=="" && isValidPhone(phone)==true){
+						if(text!==""){
+							$.post("/ajax/feedback.php", { name: name, email: email, phone: phone, text: text }, function(data, status){
+								if(status=="success" && data=="1"){
+									alert("Все поля успешно заполнены! Ваше письмо отправлено!");
+									$("#feedback_block #name").val("");
+									$("#feedback_block #email").val("");
+									$("#feedback_block #phone").val("");
+									$("#feedback_block #text").val("");
+									$("#feedback_block").hide();
+								}
+							});
+						}else{
+							$("#feedback_block #text").attr("class", "input_wrong");	
+						}
+					}else{
+						$("#feedback_block #phone").attr("class", "input_wrong");	
+					}
+				}else{
+					$("#feedback_block #email").attr("class", "input_wrong");	
+				}
+			}else{
+				$("#feedback_block #name").attr("class", "input_wrong");	
+			}
+		return false;	
+	});
+	$("input[class=input_default], input[class=input_default_c], textarea[class=input_default], textarea[class=input_default_c], input[class=input_wrong], textarea[class=input_wrong], input[class=input_wrong_c], textarea[class=input_wrong_c]").live("click", function(){
+
+		var value_by_default = $(this).attr("def"); //значение в поле "по умолчанию" содержится в аттрибуте def, который мы сами придумали
+
+		var current_value = $(this).val(); //значение введенное в поле в текущий момент
+
+		//в случае если поле не пустое и не сопадает со значением по умолчанию, мы ничего НЕ делаем, в случае еслизначение поля совпадает со значением по умолчанию - мы всодержимое поля пишем значение "по умолчанию"
+
+			if(current_value==value_by_default){
+
+				$(this).val("");	
+
+			}
+
+		//еще нужно проверить, если поле подсвечено для фиксирования невалидных данных, нужно перекрасить в обыное состояние
+
+			if($(this).attr("class")=="input_wrong"){
+
+				$(this).attr("class", "input_default");	
+
+			}
+
+			if($(this).attr("class")=="input_wrong_c"){
+
+				$(this).attr("class", "input_default_c");	
+
+			}
+
+		return false;	
+
+	});	
+
+	$("#f_feedback").live("blur", function(){
+
+		//при движении мыши по полю мы выставляем там где нужно значения по умолчанию	
+
+		check_default();
+
+	});
+
+	$("#f_feedback_c").live("blur", function(){
+
+		//при движении мыши по полю мы выставляем там где нужно значения по умолчанию	
+
+		check_default_c();
+
+	});
+});	
+function check_default(){
+
+	$(".input_default").each(function(){
+
+		var value_by_default = $(this).attr("def"); //значение в поле "по умолчанию" содержится в аттрибуте def, который мы сами придумали
+
+		var current_value = $(this).val(); //значение введенное в поле в текущий момент	
+
+			if(current_value==""){
+
+				$(this).val(value_by_default);	
+
+			}
+
+	});		
+
+}
+//проверяем валидный ли адрес электронной почты
+function isValidEmail(email){
+	var email = email.replace(/^\s+|\s+$/g, "");
+	return (/^([a-z0-9_\-]+\.)*[a-z0-9_\-]+@([a-z0-9][a-z0-9\-]*[a-z0-9]\.)+[a-z]{2,6}$/i).test(email);
+}
+//проверяем правильно ли введено ФИО
+function isValidName (name){
+	var name = name.replace(/^\s+|\s+$/g, "");
+	return (/^[a-zA-ZА-Яа-я\-]+$/i).test(name);
+}
+//проверяем номер телефона
+function isValidPhone (phone){
+	var phone = phone.replace(/^\s+|\s+$/g, "");
+	return (/^[0-9\-\)\(\+]+$/i).test(phone);
+}
+</script>
+<div id="feedback_block" style="position: fixed; width: 100%; height: 100%; display: none; z-index: 998;">
+
+	<div id="black_op" style="position: fixed; width: 100%; height: 100%; z-index: 999; background-color: #000; opacity: 0.6;"></div>
+
+    <div id="content_feedback" style="position: absolute; top: 50%; left: 50%; margin-left: -220px; margin-top:  -250px; z-index: 1000; background-color: #fff; border: 2px solid #fff; border-radius: 5px;">
+
+    	<h3 align="center">Форма обратной связи</h3>
+
+        <div align="center">
+
+        	<i>(все поля обязательны для заполнения)</i>
+
+        </div>
+
+        <br>
+
+          <table id="f_feedback" width="400" cellspacing="0" cellpadding="10" align="center">
+
+          	<tbody><tr>
+
+            	<td>
+
+                	<input id="name" name="name" value="" def="Ф. И. О." class="input_default">
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+            	<td>
+
+                	<input id="email" name="email" value="" def="E-mail" class="input_default">
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+            	<td>
+
+                	<input id="phone" name="phone" value="" def="Ваш телефон" class="input_default">
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+            	<td>
+
+                	<textarea id="text" name="text" def="Текст письма" class="input_default"></textarea>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+            	<td align="center">
+
+                	<input type="button" class="submit" value="Отправить">
+
+                </td>
+
+            </tr>
+
+          </tbody></table> 
+
+    </div>
+
+</div>
+
+<!--конец альтернативной формы заявки-->
+
+
+<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+  <tbody><tr>
+    <td>
+    <table width="100%" cellspacing="0" cellpadding="5" border="0" align="center">
+      <tbody><tr>
+        <td width="40%" valign="top"><table cellspacing="0" cellpadding="3" border="0">
+          <tbody><tr>
+            <td valign="top" height="38"><img src="/img/telefon.jpg" width="35" height="23"></td>
+            <td valign="middle" nowrap=""><span class="telefon_red">(343)222-06-53; 8-922222-31-70</span></td>
+          </tr>
+        </tbody></table>          </td>
+        <td rowspan="2" width="60%" valign="middle"><p class="zagolovok_red" align="center"><span class="zagolovok_blue"><a href="/"><img src="/img/logotip_300.jpg" alt="Отопительное оборудование - Интернет-магазин" width="300" height="100" border="0"></a></span></p></td>
+        <td width="35%" valign="top"><div class="text_grey" align="left">Е к а т е р и н б у р г, Интернет-магазин "Kotel96" - отопительное оборудование: котлы, бойлеры, радиаторы, водонагреватели, напольное отопление, насосы.</div></td>
+      </tr>
+      <tr>
+        <td width="40%" valign="top"><div align="center"><span class="zagolovok_red"><span class="zagolovok_blue">И н т е р н е т - м а г а з и н </span><br>
+отопительного оборудования</span></div></td>
+        <td width="35%" valign="middle"><div align="center"><span class="text"><i><b>Поиск по Каталогу<br>
+          </b>Пример: Настенный газовый котел</i></span><br>
+          </div>
+          <table cellspacing="0" cellpadding="0" border="0" align="center">
+            <tbody><tr>
+              <td nowrap="">
+                  <form name="searchForm" method="post" action="/poisk.html">
+                      <input name="search" type="text" id="search" size="50">
+                      <input type="submit" name="button" id="button" value="Найти">
+                  </form>
+              </td>
+            </tr>
+          </tbody></table>
+          </td>
+      </tr>
+    </tbody></table><table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+        <tbody><tr>
+          <td colspan="2" valign="middle" align="left"><table width="100%" height="30" cellspacing="1" cellpadding="1" border="0" align="left">
+              <tbody><tr valign="middle" bgcolor="#E61211">
+                
+		<td width="11%" align="center"><a href="/" class="main_menu">Главная</a></td>
+		
+					<td width="100" nowrap="" align="center">
+						<a href="/O-kompanii.html" class="main_menu">О компании</a>
+					</td>
+					
+					<td width="100" nowrap="" align="center">
+						<a href="/Novosti.html" class="main_menu">Новости</a>
+					</td>
+					
+					<td width="100" nowrap="" align="center">
+						<a href="/Katalog.html" class="main_menu">Каталог</a>
+					</td>
+					
+					<td width="100" nowrap="" align="center">
+						<a href="/Uslugi.html" class="main_menu">Услуги</a>
+					</td>
+					
+					<td width="100" nowrap="" align="center">
+						<a href="/oplata-dostavka.html" class="main_menu">Оплата/Доставка</a>
+					</td>
+					
+					<td width="100" nowrap="" align="center">
+						<a href="/Nashi-obekty.html" class="main_menu">Наши объекты</a>
+					</td>
+					
+					<td width="100" nowrap="" align="center">
+						<a href="/Stati.html" class="main_menu">Статьи</a>
+					</td>
+					
+					<td width="100" nowrap="" align="center">
+						<a href="/Kontakty.html" class="main_menu">Контакты</a>
+					</td>
+					              </tr>
+          </tbody></table></td>
+          <td><div align="center"><a href="/Korzina.html"><img src="/img/korzina.jpg" width="159" height="33" border="0"></a></div></td>
+        </tr>
+        <tr>
+          <td width="250" valign="top">
+            <table width="250" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF">
+                <tbody><tr>
+                    <td><div align="center"><a href="/Katalog.html"><img src="/img/katalog_159_38.jpg" width="159" height="38" border="0"></a></div></td>
+                </tr>
+                <tr>
+                    <td align="left">
+                    	
+					<a href="/Kotly.html" class="razdel">Котлы</a>
+					
+						<div style="display: none">
+						
+							<a href="/Nastennye-kotly.html" class="podrazdel">Настенные котлы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Proterm---Slovakiya--Nastennye.html" class="pod_podrazdel">Protherm (Протерм) / Словакия</a>
+										
+										<a href="/baxi-italiya-Nastennye.html" class="pod_podrazdel">Baxi (Бакси) / Италия</a>
+										
+										<a href="/Nastennye-Immergas-Immergaz--Italiya.html" class="pod_podrazdel">Immergas (Иммергаз) / Италия</a>
+										
+										<a href="/nastennye-Bosch-Bosh--Germaniya.html" class="pod_podrazdel">Bosch (Бош) / Германия</a>
+										
+										<a href="/Nastennye-Buderus-Buderus--Germaniya.html" class="pod_podrazdel">Buderus (Будерус) / Германия</a>
+										
+										<a href="/Vaillant--Germaniya.html" class="pod_podrazdel">Vaillant (Вайлант) / Германия</a>
+										
+										<a href="/Nastennye-De-Dietrich-De-Ditrish--Franciya.html" class="pod_podrazdel">De Dietrich (Де Дитриш) / Франция</a>
+										
+										<a href="/nastennye-Viessmann.html" class="pod_podrazdel">Viessmann (Виссманн) / Турция</a>
+										
+										<a href="/kotly-Daewoo-Deu--Yuzhnaya-Koreya.html" class="pod_podrazdel">Daewoo (Дэу) / Южная Корея</a>
+										
+										<a href="/Nastennye-Beretta-Beretta--Italiya.html" class="pod_podrazdel">Beretta (Беретта) / Италия</a>
+										
+										<a href="/Nastennye-Lotte-Lem-Lotte-Lem--Yuzhnaya-Koreya.html" class="pod_podrazdel">KOVI (Кови) / Южная Корея</a>
+										
+										<a href="/Kiturami--Nastennye-Yuzhnaya-koreya.html" class="pod_podrazdel">Kiturami (Китурами) / Южная корея</a>
+										
+										<a href="/Rinnai--Yaponiya--Nastennye.html" class="pod_podrazdel">Rinnai (Риннай) / Япония</a>
+										
+									</div>
+									
+							<a href="/Napolnye-kotly.html" class="podrazdel">Напольные котлы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Proterm--Slovakiya--napolnye.html" class="pod_podrazdel">Котлы Протерм (Protherm) / Словакия</a>
+										
+										<a href="/Baksi--Italiya--Napolnye.html" class="pod_podrazdel">Baxi (Бакси) / Италия</a>
+										
+												<div style="display: none">
+												
+													<a href="/Odnokonturnye-baksi.html" class="podpod_podrazdel">Одноконтурные</a>
+													
+													<a href="/S-vstroennym-bojlerom-Baksi.html" class="podpod_podrazdel">С встроенным бойлером</a>
+													
+													<a href="/Energonezavisimye-Baksi.html" class="podpod_podrazdel">Энергонезависимые</a>
+													
+												</div>
+												
+										<a href="/Vaillant--Germaniya--napolnye.html" class="pod_podrazdel">Vaillant (Вайлант) / Германия</a>
+										
+										<a href="/napolnye-ACV-Ej-Si-Vi--Belgiya.html" class="pod_podrazdel">ACV (Эй-Си-Ви) / Бельгия</a>
+										
+										<a href="/kotly-De-Dietrich-De-Ditrish--Franciya.html" class="pod_podrazdel">De Dietrich (Де Дитриш) / Франция</a>
+										
+										<a href="/Napolnye-Beretta.html" class="pod_podrazdel">Beretta (Беретта) / Италия</a>
+										
+										<a href="/Kotly-Lemaks--Chehiya.html" class="pod_podrazdel">Котлы Лемакс / Чехия</a>
+										
+									</div>
+									
+							<a href="/Tverdotoplivnye-kotly.html" class="podrazdel">Твердотопливные котлы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Proterm--Slovakiya--Tverdotoplivnye.html" class="pod_podrazdel">Protherm / Протерм / Словакия</a>
+										
+										<a href="/Beretta-tverdotoplivnye.html" class="pod_podrazdel">Beretta (Беретта) / Италия</a>
+										
+										<a href="/Tverdotoplivnye-De-Dietrich-De-Ditrish--Franciya.html" class="pod_podrazdel">De Dietrich (Де Дитриш) / Франция</a>
+										
+										<a href="/KChM--Kirovskij-zavod--Rossiya.html" class="pod_podrazdel">КЧМ / Кировский завод / Россия</a>
+										
+										<a href="/STEN--Novosibirsk--Rossiya.html" class="pod_podrazdel">СТЭН / Новосибирск / Россия</a>
+										
+										<a href="/Radijator--Serbia.html" class="pod_podrazdel">Radijator / Сербия</a>
+										
+									</div>
+									
+							<a href="/Elektrokotly.html" class="podrazdel">Электрокотлы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Proterm--Slovakiya--Elektrokotly.html" class="pod_podrazdel">Protherm (Протерм) / Словакия</a>
+										
+										<a href="/Kospel--Polsha--Elektrokotly.html" class="pod_podrazdel">Kospel (Коспил) / Польша</a>
+										
+										<a href="/Vaillant-elektrokotly.html" class="pod_podrazdel">Vaillant  (Вайлант) / Германия</a>
+										
+										<a href="/Miass-Rossiya.html" class="pod_podrazdel">Миасс / Россия</a>
+										
+									</div>
+									
+							<a href="/Kondensacionnye-kotly.html" class="podrazdel">Конденсационные котлы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Kondensacionnye-Protherm-Proterm--Slovakiya.html" class="pod_podrazdel">Protherm (Протерм) / Словакия</a>
+										
+										<a href="/Kondensacionnye-Vaillant-Vajlant--Germaniya.html" class="pod_podrazdel">Vaillant (Вайлант) / Германия</a>
+										
+									</div>
+									
+							<a href="/Pelletnye-kotly.html" class="podrazdel">Пеллетные котлы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Pelletnye-ACV-plus.html" class="pod_podrazdel">Пеллетные ACV plus</a>
+										
+									</div>
+									
+							<a href="/Komplektuyuschie-dlya-kotlov.html" class="podrazdel">Комплектующие для котлов</a>
+							
+									<div style="display: none">
+									
+										<a href="/Dymohody.html" class="pod_podrazdel">Дымоходы</a>
+										
+										<a href="/Nadstavki-Polu-Turbo.html" class="pod_podrazdel">Надставки Полу-Турбо</a>
+										
+										<a href="/Regulyatory.html" class="pod_podrazdel">Регуляторы</a>
+										
+									</div>
+									
+						</div>
+						
+					<a href="/Promyshlennye-kotly-i-oborudovanie.html" class="razdel">Промышленные котлы</a>
+					
+						<div style="display: none">
+						
+							<a href="/Promyshlennye-kotly.html" class="podrazdel">Промышленные котлы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Promyshlennye-kotly-Beretta-Beretta--Italiya.html" class="pod_podrazdel">Beretta (Беретта) / Италия</a>
+										
+									</div>
+									
+						</div>
+						
+					<a href="/Boilery.html" class="razdel">Бойлеры</a>
+					
+						<div style="display: none">
+						
+							<a href="/Proterm--Slovakiya--bojlery.html" class="podrazdel">Protherm (Протерм) / Словакия</a>
+							
+							<a href="/asv-belgiya-bojlery.html" class="podrazdel">ACV (Эй-Си-Ви) / Бельгия</a>
+							
+									<div style="display: none">
+									
+										<a href="/Seriya-ACV-Comfort.html" class="pod_podrazdel">Серия ACV Comfort</a>
+										
+										<a href="/Seriya-ACV-Smart-STD.html" class="pod_podrazdel">Серия ACV Smart STD</a>
+										
+										<a href="/Seriya-ACV-Smart-Line-E.html" class="pod_podrazdel">Серия ACV Smart Line E</a>
+										
+										<a href="/Seriya-ACV-Smart-Line-EW.html" class="pod_podrazdel">Серия ACV Smart Line EW</a>
+										
+										<a href="/Aksessuary-dlya-bojlerov-ACV.html" class="pod_podrazdel">Аксессуары для бойлеров ACV</a>
+										
+									</div>
+									
+							<a href="/Baksi-Italiya-Bojlery.html" class="podrazdel">Baxi (Бакси) / Италия</a>
+							
+									<div style="display: none">
+									
+										<a href="/Seriya-PREMIER-Plus.html" class="pod_podrazdel">Серия Baxi PREMIER Plus</a>
+										
+										<a href="/Seriya-UB.html" class="pod_podrazdel">Серия Baxi UB</a>
+										
+									</div>
+									
+							<a href="/Lapesa-Ispaniya-Bojlery.html" class="podrazdel">Lapesa (Лапеса) / Испания</a>
+							
+									<div style="display: none">
+									
+										<a href="/Seriya-Geiser-inox-S.html" class="pod_podrazdel">Серия Geiser Inox GX-S</a>
+										
+										<a href="/Seriya-Geiser-Inox-GX-D.html" class="pod_podrazdel">Серия Geiser Inox GX-D</a>
+										
+									</div>
+									
+							<a href="/Vaillant-bojlery.html" class="podrazdel">Vaillant  (Вайлант) / Германия</a>
+							
+							<a href="/Bojlera-Beretta-Beretta--Italiya.html" class="podrazdel">Beretta (Беретта) / Италия</a>
+							
+							<a href="/Bojlery-Drazice-Drazhice--Chehiya.html" class="podrazdel">Drazice (Дражице) / Чехия</a>
+							
+									<div style="display: none">
+									
+										<a href="/Napolnye-s-bokovym-vyvodom.html" class="pod_podrazdel">Напольные с боковым выводом</a>
+										
+										<a href="/Napolnye-s-elektroTenom.html" class="pod_podrazdel">Напольные с электроТэном</a>
+										
+									</div>
+									
+							<a href="/Bojlery-Hajdu-Hajdu--Vengriya.html" class="podrazdel">Hajdu (Хайду) / Венгрия</a>
+							
+						</div>
+						
+					<a href="/Vodonagrevateli.html" class="razdel">Водонагреватели</a>
+					
+						<div style="display: none">
+						
+							<a href="/EVN-Thermex--Rossiya.html" class="podrazdel">Thermex / Россия</a>
+							
+							<a href="/EVN-Ariston--Italiya.html" class="podrazdel">Ariston / Италия</a>
+							
+									<div style="display: none">
+									
+										<a href="/EVN-ABS-PLATINUM-ECO.html" class="pod_podrazdel">ABS PLATINUM ECO</a>
+										
+										<a href="/EVN-PLATINUM-SI.html" class="pod_podrazdel">PLATINUM SI</a>
+										
+									</div>
+									
+							<a href="/Vodonagrevateli-Bosch--Germaniya.html" class="podrazdel">Bosch / Германия</a>
+							
+							<a href="/Vodonagrevateli-Stiebel-Eltron--Germaniya.html" class="podrazdel">Stiebel Eltron / Германия</a>
+							
+							<a href="/Evn--Baxi--Italiya.html" class="podrazdel">Baxi / Италия</a>
+							
+						</div>
+						
+					<a href="/Vozdushno-otopitelnye-apparaty.html" class="razdel">Воздушное отопление</a>
+					
+						<div style="display: none">
+						
+							<a href="/EvroHit.html" class="podrazdel">EuroHeat / Польша</a>
+							
+							<a href="/Sonniger.html" class="podrazdel">Sonniger / Германия</a>
+							
+						</div>
+						
+					<a href="/Radiatory.html" class="razdel">Радиаторы</a>
+					
+						<div style="display: none">
+						
+							<a href="/Alyuminievye-radiatory.html" class="podrazdel">Алюминиевые радиаторы</a>
+							
+							<a href="/Bimetallicheskie-radiatory.html" class="podrazdel">Биметаллические радиаторы</a>
+							
+							<a href="/Stalnye-panelnye-radiatory.html" class="podrazdel">Стальные панельные радиаторы</a>
+							
+									<div style="display: none">
+									
+										<a href="/kermi.html" class="pod_podrazdel">Kermi</a>
+										
+												<div style="display: none">
+												
+													<a href="/Bokovoe-podklyuchenie-Profil-Kompakt.html" class="podpod_podrazdel">Боковое подключение Profil-Kompakt</a>
+													
+															<div style="display: none">
+															
+																<a href="/Radiatory-Profil-Kompakt-Tip-11.html" class="podpod_podrazdel">Тип 11 Высота 300</a>
+																
+																<a href="/Radiatory-Profil-Kompakt-Tip-12.html" class="podpod_podrazdel">Тип 12 Высота 300</a>
+																
+																<a href="/Radiatory-Profil-Kompakt-Tip-22.html" class="podpod_podrazdel">Тип 22 Высота 300</a>
+																
+																<a href="/Radiatory-Profil-Kompakt-Tip-11-Vysota-500.html" class="podpod_podrazdel">Тип 11 Высота 500</a>
+																
+																<a href="/Radiatory-Profil-Kompakt-Tip-12-Vysota-500.html" class="podpod_podrazdel">Тип 12 Высота 500</a>
+																
+																<a href="/Radiatory-Profil-Kompakt-Tip-22-Vysota-500.html" class="podpod_podrazdel">Тип 22 Высота 500</a>
+																
+															</div>
+															
+													<a href="/Nizhnee-podklyuchenie-Profil-Ventil.html" class="podpod_podrazdel">Нижнее подключение Profil-Ventil</a>
+													
+															<div style="display: none">
+															
+																<a href="/Radiatory-Profil-Ventil-Tip-11.html" class="podpod_podrazdel">Тип 11 Высота 300</a>
+																
+																<a href="/Radiatory-Profil-Ventil-Tip-12.html" class="podpod_podrazdel">Тип 12 Высота 300</a>
+																
+																<a href="/Radiatory-Profil-Ventil-Tip-22.html" class="podpod_podrazdel">Тип 22 Высота 300</a>
+																
+																<a href="/Radiatory-Profil-Ventil-Tip-11-Vysota-500.html" class="podpod_podrazdel">Тип 11 Высота 500</a>
+																
+																<a href="/Radiatory-Profil-Ventil-Tip-12-Vysota-500.html" class="podpod_podrazdel">Тип 12 Высота 500</a>
+																
+																<a href="/Radiatory-Profil-Ventil-Tip-22-Vysota-500.html" class="podpod_podrazdel">Тип 22 Высота 500</a>
+																
+															</div>
+															
+												</div>
+												
+									</div>
+									
+							<a href="/Komplektuyuschie-k-radiatoram.html" class="podrazdel">Комплектующие к радиаторам</a>
+							
+						</div>
+						
+					<a href="/Nasosy.html" class="razdel">Насосы</a>
+					
+						<div style="display: none">
+						
+							<a href="/Pogruzhnye-nasosy-dlya-skvazhin.html" class="podrazdel">Погружные насосы для скважин</a>
+							
+									<div style="display: none">
+									
+										<a href="/Grundfos-pogruzhnye.html" class="pod_podrazdel">Grundfos / Германия</a>
+										
+									</div>
+									
+							<a href="/Komplekty-dlya-podderzhaniya-postoyannogo-davleniya-s-nasosom.html" class="podrazdel">Комплекты для поддержания постоянного давления с насосом</a>
+							
+									<div style="display: none">
+									
+										<a href="/Komplekty-Grundfos--Germaniya.html" class="pod_podrazdel">Grundfos / Германия</a>
+										
+									</div>
+									
+							<a href="/Komplektuyuschie-dlya-obvyazki-skvazhin.html" class="podrazdel">Комплектующие для обвязки скважин</a>
+							
+							<a href="/Cirkulyacionnye-nasosy.html" class="podrazdel">Циркуляционные насосы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Grunfos-cirkulyacionnye.html" class="pod_podrazdel">Grundfos / Германия</a>
+										
+										<a href="/Villo-cirkulyacionnye.html" class="pod_podrazdel">Wilo / Германия</a>
+										
+										<a href="/Cirkulyacionnye-DAB--Italiya.html" class="pod_podrazdel">DAB / Италия</a>
+										
+									</div>
+									
+							<a href="/Nasosnye-stancii.html" class="podrazdel">Насосные станции</a>
+							
+									<div style="display: none">
+									
+										<a href="/Grunfos-stancii.html" class="pod_podrazdel">Grundfos / Германия</a>
+										
+										<a href="/Villo-stancii.html" class="pod_podrazdel">Wilo / Германия</a>
+										
+										<a href="/Nasosnye-stancii-DAB.html" class="pod_podrazdel">DAB / Италия</a>
+										
+									</div>
+									
+							<a href="/Kanalizacionnye-nasosy.html" class="podrazdel">Канализационные насосы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Grundfos-kanalizacionnye.html" class="pod_podrazdel">Grundfos / Германия</a>
+										
+									</div>
+									
+							<a href="/Drenazhnye-nasosy.html" class="podrazdel">Дренажные насосы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Grunfos-drenazhnye.html" class="pod_podrazdel">Grundfos / Германия</a>
+										
+									</div>
+									
+						</div>
+						
+					<a href="/Rasshiritelnye-baki.html" class="razdel">Мембранные баки</a>
+					
+						<div style="display: none">
+						
+							<a href="/Ekspanzomaty-dlya-otopleniya.html" class="podrazdel">Экспанзоматы для отопления</a>
+							
+							<a href="/Gidroakkumulyatory-dlya-vodosnabzheniya.html" class="podrazdel">Гидроаккумуляторы  для воды</a>
+							
+						</div>
+						
+					<a href="/Truboprovody.html" class="razdel">Труба</a>
+					
+						<div style="display: none">
+						
+							<a href="/Truby-iz-sshitogo-polietilena.html" class="podrazdel">Трубы из сшитого полиэтилена</a>
+							
+									<div style="display: none">
+									
+										<a href="/Truboprovody-Rehau.html" class="pod_podrazdel">Rehau</a>
+										
+												<div style="display: none">
+												
+													<a href="/Truba-Rehau.html" class="podpod_podrazdel">Труба Rehau</a>
+													
+															<div style="display: none">
+															
+																<a href="/Truba--otopitelnaya-RAUPINK.html" class="podpod_podrazdel">Труба  отопительная RAUTITAN pink</a>
+																
+																<a href="/Truba--vodoprovodnaya-RAUHIS.html" class="podpod_podrazdel">Труба  водопроводная RAUTITAN his</a>
+																
+																<a href="/Universalnaya-truba-RAUTITAN-Stabil.html" class="podpod_podrazdel">Универсальная труба RAUTITAN stabil</a>
+																
+																<a href="/Universalnaya-truba-RAUTITAN-Flex.html" class="podpod_podrazdel">Универсальная труба RAUTITAN flex</a>
+																
+																<a href="/Truba--dlya-teplogo-pola-RAUTHERM-S.html" class="podpod_podrazdel">Труба  для теплого пола Rautherm S</a>
+																
+															</div>
+															
+													<a href="/Fitingi-Rehau.html" class="podpod_podrazdel">Фитинги Rehau</a>
+													
+															<div style="display: none">
+															
+																<a href="/Gilzy.html" class="podpod_podrazdel">Гильзы</a>
+																
+																<a href="/Trojniki.html" class="podpod_podrazdel">Тройники</a>
+																
+																<a href="/Mufty-rehau.html" class="podpod_podrazdel">Муфты</a>
+																
+																<a href="/Ugolniki.html" class="podpod_podrazdel">Угольники</a>
+																
+																<a href="/Perehodniki.html" class="podpod_podrazdel">Переходники</a>
+																
+																<a href="/Rezbozazhimnye-soedineniya.html" class="podpod_podrazdel">Резьбозажимные соединения</a>
+																
+																<a href="/Fiksatory-povorota.html" class="podpod_podrazdel">Фиксаторы поворота</a>
+																
+																<a href="/Fiksiruyuschaya-shina.html" class="podpod_podrazdel">Фиксирующая шина</a>
+																
+															</div>
+															
+													<a href="/Instrument-Rehau.html" class="podpod_podrazdel">Инструмент Rehau</a>
+													
+												</div>
+												
+										<a href="/Sshityj-polietilen-Stout.html" class="pod_podrazdel">Stout</a>
+										
+												<div style="display: none">
+												
+													<a href="/Truba-Stout.html" class="podpod_podrazdel">Труба Stout</a>
+													
+															<div style="display: none">
+															
+																<a href="/Truba-dlya-teplogo-pola-Stout.html" class="podpod_podrazdel">Труба для теплого пола Stout</a>
+																
+																<a href="/Universalnaya-truba-Stout.html" class="podpod_podrazdel">Универсальная труба Stout</a>
+																
+															</div>
+															
+													<a href="/Fitingi-Stout.html" class="podpod_podrazdel">Фитинги Stout</a>
+													
+															<div style="display: none">
+															
+																<a href="/Perehodniki-Stout.html" class="podpod_podrazdel">Переходники Stout</a>
+																
+																<a href="/Ugolniki-Stout.html" class="podpod_podrazdel">Угольники Stout</a>
+																
+																<a href="/Mufty-Stout.html" class="podpod_podrazdel">Муфты Stout</a>
+																
+																<a href="/Gilzy-Stout.html" class="podpod_podrazdel">Гильзы Stout</a>
+																
+																<a href="/Rezbozazhimnye-soedineniya-Stout.html" class="podpod_podrazdel">Резьбозажимные соединения Stout</a>
+																
+															</div>
+															
+													<a href="/Instrument-Stout.html" class="podpod_podrazdel">Инструмент Stout</a>
+													
+												</div>
+												
+										<a href="/Sshityj-polietilen-Elsen.html" class="pod_podrazdel">Elsen</a>
+										
+												<div style="display: none">
+												
+													<a href="/Truba-Elsen.html" class="podpod_podrazdel">Труба Elsen</a>
+													
+												</div>
+												
+									</div>
+									
+							<a href="/Mednye-truby.html" class="podrazdel">Медные трубы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Truba-Wieland-Viland--Germaniya.html" class="pod_podrazdel">Труба Wieland (Виланд) / Германия</a>
+										
+												<div style="display: none">
+												
+													<a href="/Truba-mednaya-otozhzhennaya.html" class="podpod_podrazdel">Труба медная неотожженная</a>
+													
+												</div>
+												
+									</div>
+									
+							<a href="/Truby-iz-metalloplastika.html" class="podrazdel">Трубы из металлопластика</a>
+							
+									<div style="display: none">
+									
+										<a href="/Truby-metalloplastikovye-APE.html" class="pod_podrazdel">Труба APE (АПЕ) / Италия</a>
+										
+										<a href="/Fitingi-APE-APE--Italiya.html" class="pod_podrazdel">Фитинги APE (АПЕ) / Италия</a>
+										
+									</div>
+									
+							<a href="/Truby-iz-polipropilena.html" class="podrazdel">Трубы из полипропилена</a>
+							
+									<div style="display: none">
+									
+										<a href="/Polipropilen-Kalde.html" class="pod_podrazdel">Kalde</a>
+										
+									</div>
+									
+							<a href="/Truby-iz-nerzhaveyuschej-stali.html" class="podrazdel">Трубы из нержавеющей стали</a>
+							
+									<div style="display: none">
+									
+										<a href="/Truba-Valtec-nerzhaveyuschaya-stal.html" class="pod_podrazdel">Труба Valtec нержавеющая сталь</a>
+										
+									</div>
+									
+						</div>
+						
+					<a href="/Zapornaya-armatura.html" class="razdel">Запорная арматура</a>
+					
+						<div style="display: none">
+						
+							<a href="/Kollektory.html" class="podrazdel">Коллекторы</a>
+							
+									<div style="display: none">
+									
+										<a href="/Kollektornye-gruppy-bez-rashodomerov-Rehau.html" class="pod_podrazdel">Коллекторные группы без расходомеров Rehau</a>
+										
+										<a href="/Kollektornye-gruppy-s-rashodomerami-Rehau.html" class="pod_podrazdel">Коллекторные группы с расходомерами Rehau</a>
+										
+										<a href="/Kollektory-STOUT.html" class="pod_podrazdel">Коллекторы STOUT</a>
+										
+									</div>
+									
+							<a href="/Uzly-smeshivaniya.html" class="podrazdel">Узлы смешивания</a>
+							
+									<div style="display: none">
+									
+										<a href="/Smesitelnyj-uzly-Danfoss.html" class="pod_podrazdel">Смесительный узлы Danfoss</a>
+										
+									</div>
+									
+							<a href="/Kollektornye-shkafy.html" class="podrazdel">Коллекторные шкафы</a>
+							
+						</div>
+						
+					<a href="/Avtomatika.html" class="razdel">Автоматика и КИП</a>
+					
+						<div style="display: none">
+						
+							<a href="/Avtomatika-dlya-vodyanogo-teplogo-pola.html" class="podrazdel">Автоматика для водяного теплого пола</a>
+							
+									<div style="display: none">
+									
+										<a href="/Watts.html" class="pod_podrazdel">Watts</a>
+										
+										<a href="/teplyj-pol-Salus.html" class="pod_podrazdel">Salus</a>
+										
+									</div>
+									
+							<a href="/Avtomatika-i-bezopasnost-v-kotelnoj.html" class="podrazdel">Автоматика и безопасность в котельной</a>
+							
+									<div style="display: none">
+									
+										<a href="/Vatts-kotelnaya.html" class="pod_podrazdel">Watts</a>
+										
+										<a href="/Esbi-kotelnaya.html" class="pod_podrazdel">Esbe</a>
+										
+										<a href="/Avtomatika-Danfoss.html" class="pod_podrazdel">Danfoss</a>
+										
+										<a href="/Avtomatika-i-bezopasnost-v-kotelnoj-Stout.html" class="pod_podrazdel">Stout</a>
+										
+									</div>
+									
+							<a href="/Avtomatika-dlya-vodosnabzheniya.html" class="podrazdel">Автоматика для водоснабжения</a>
+							
+									<div style="display: none">
+									
+										<a href="/vatts-vodosnabzhenie.html" class="pod_podrazdel">Watts</a>
+										
+									</div>
+									
+						</div>
+						
+					<a href="/Stabilizatory-napryazheniya.html" class="razdel">Стабилизаторы напряжения</a>
+					
+						<div style="display: none">
+						
+							<a href="/stab-Teplocom.html" class="podrazdel">Teplocom / Россия</a>
+							
+						</div>
+						
+					<a href="/Vnutripolnye-konvektora.html" class="razdel">Внутрипольные конвектора</a>
+					
+						<div style="display: none">
+						
+							<a href="/Konvektora-EVA-bez-ventilyatorov.html" class="podrazdel">Конвектора EVA без вентиляторов</a>
+							
+									<div style="display: none">
+									
+										<a href="/Konvektora-EVA-Coil-KG-80.html" class="pod_podrazdel">Конвектора EVA Coil-KG 80</a>
+										
+										<a href="/Konvektora-EVA-Coil-KTT-80.html" class="pod_podrazdel">Конвектора EVA Coil-KTT 80</a>
+										
+									</div>
+									
+							<a href="/Konvektora-EVA-c-ventilyatorami.html" class="podrazdel">Конвектора EVA c вентиляторами</a>
+							
+									<div style="display: none">
+									
+										<a href="/Konvektora-EVA-Coil-KB.html" class="pod_podrazdel">Конвектора EVA Coil-KB</a>
+										
+										<a href="/Konvektora-EVA-Coil-KB-80.html" class="pod_podrazdel">Конвектора EVA Coil-KB 80</a>
+										
+									</div>
+									
+							<a href="/Konvektora-Kermi-estestvennaya-konvekciya.html" class="podrazdel">Конвектора Kermi без вентиляторов</a>
+							
+									<div style="display: none">
+									
+										<a href="/Konvektora-Kermi-bez-ventilyatora-montazhnaya-vysota-80mm.html" class="pod_podrazdel">Конвектора Kermi без вентилятора монтажная высота 80мм</a>
+										
+										<a href="/Konvektora-Kermi-bez-ventilyatora-montazhnaya-vysota-110mm.html" class="pod_podrazdel">Конвектора Kermi без вентилятора монтажная высота 110мм</a>
+										
+										<a href="/Konvektora-Kermi-bez-ventilyatora-montazhnaya-vysota-150mm.html" class="pod_podrazdel">Конвектора Kermi без вентилятора монтажная высота 150мм</a>
+										
+										<a href="/Konvektora-Kermi-bez-ventilyatora-montazhnaya-vysota-200mm.html" class="pod_podrazdel">Конвектора Kermi без вентилятора монтажная высота 200мм</a>
+										
+									</div>
+									
+							<a href="/Konvektora-Kermi-s-ventilyatorom.html" class="podrazdel">Конвектора Kermi с вентиляторами</a>
+							
+									<div style="display: none">
+									
+										<a href="/Konvektora-Kermi-s-ventilyatorom-montazhnaya-vysota-75mm.html" class="pod_podrazdel">Конвектора Kermi с вентилятором монтажная высота 75мм</a>
+										
+										<a href="/Konvektora-Kermi-s-ventilyatorom-montazhnaya-vysota-110mm.html" class="pod_podrazdel">Конвектора Kermi с вентилятором монтажная высота 110мм</a>
+										
+									</div>
+									
+							<a href="/Avtomatika-dlya-konvektorov.html" class="podrazdel">Автоматика для конвекторов</a>
+							
+						</div>
+						
+					<a href="/Bytovye-kondicionery.html" class="razdel">Бытовые кондиционеры</a>
+					
+						<div style="display: none">
+						
+							<a href="/Kondicionery-Hisense-Hajsens--Kitaj.html" class="podrazdel">Hisense (Хайсенс) / Китай</a>
+							
+						</div>
+						
+					<a href="/Baki-dlya-vody.html" class="razdel">Баки для воды</a>
+					
+						<div style="display: none">
+						
+							<a href="/baki-Aquatech.html" class="podrazdel">Aquatech / Россия</a>
+							
+									<div style="display: none">
+									
+										<a href="/Baki-Aquatech-Seriya-ATV.html" class="pod_podrazdel">Баки Aquatech Серия ATV</a>
+										
+										<a href="/Baki-Aquatech-dlya-dusha.html" class="pod_podrazdel">Баки Aquatech для душа</a>
+										
+									</div>
+									
+						</div>
+						
+					<a href="/Uplotniteli.html" class="razdel">Уплотнители</a>
+					
+						<div style="display: none">
+						
+							<a href="/Uplotniteli-Unipak-Yunipak--Rossiya.html" class="podrazdel">Unipak (Юнипак) / Россия</a>
+							
+						</div>
+						
+					<a href="/Stroitelnyj-instrument.html" class="razdel">Сантехнический инструмент</a>
+					
+						<div style="display: none">
+						
+							<a href="/Instrument-Ridgid.html" class="podrazdel">Инструмент Ridgid</a>
+							
+						</div>
+						
+					<a href="/Rasprodazha-tovarov.html" class="razdel">Распродажа товаров</a>
+					
+						<div style="display: none">
+						
+							<a href="/Rasprodazha-tovarov-iz-nalichiya-EKB.html" class="podrazdel">Распродажа товаров из наличия</a>
+							
+						</div>
+						                    </td>
+                </tr>
+            </tbody></table>
+    		<table width="260" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF">
+                <tbody><tr>
+                	<td><div align="center"><a href="/uslugi.html"><img src="/img/uslugi_159_38.jpg" width="159" height="38" border="0"></a></div></td>
+                </tr>
+                
+					<tr>
+						<td><a href="/Vyezd-specialista.html" class="razdel">Выезд специалиста</a></td>
+					</tr>
+					
+					<tr>
+						<td><a href="/Raschet-sistemi-otopleniya.html" class="razdel">Расчет системы отопления</a></td>
+					</tr>
+					
+					<tr>
+						<td><a href="/Montazhnye-raboty.html" class="razdel">Монтажные работы</a></td>
+					</tr>
+					            </tbody></table>
+    	</td>
+          <td width="100%" valign="top" align="left">
+          	<div class="telefon_red" style="text-align: center;"><br>
+            
+		<h1 class="telefon_red">Политика конфиденциальности</h1>
+		            </div>
+            <span class="telefon_w"><br></span>
+            
+            <table width="90%" cellspacing="0" cellpadding="0" border="0" align="center">
+            <tbody><tr>
+              <td class="text" valign="top" align="justify">
+             	<span class="text"><a href="/" class="text_small">Главная</a> | <a href="/Politika-konfidencialnosti.html" class="text_small">Политика конфиденциальности</a></span><br>
+              	<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">Настоящая Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в отношении всей информации, которую Сайт может получить о Пользователе во время просмотра сайта.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">1. ОПРЕДЕЛЕНИЕ ТЕРМИНОВ</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">1.1 В настоящей Политике конфиденциальности используются следующие термины:</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">1.1.1. «Администрация сайта» – уполномоченные сотрудники на управления сайтом, которые организуют и (или) осуществляет обработку персональных данных, а также определяет цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">1.1.2. «Персональные данные» — любая информация, относящаяся к прямо или косвенно определенному или определяемому физическому лицу (субъекту персональных данных).</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">1.1.3. «Обработка персональных данных» — любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">1.1.4. «Конфиденциальность персональных данных» — обязательное для соблюдения Оператором или иным получившим доступ к персональным данным лицом требование не допускать их распространения без согласия субъекта персональных данных или наличия иного законного основания.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">1.1.5. «Пользователь сайта» (далее - Пользователь) – лицо, имеющее доступ к Сайту, посредством сети Интернет и использующее Сайт.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">1.1.6. «Cookies» — небольшой фрагмент данных, отправленный веб-сервером и хранимый на компьютере пользователя, который веб-клиент или веб-браузер каждый раз пересылает веб-серверу в HTTP-запросе при попытке открыть страницу соответствующего сайта.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">1.1.7. «IP-адрес» — уникальный сетевой адрес узла в компьютерной сети, построенной по протоколу IP.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">2. ОБЩИЕ ПОЛОЖЕНИЯ</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">2.1. Использование Пользователем Сайта означает согласие с настоящей Политикой конфиденциальности и условиями обработки персональных данных Пользователя.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">2.2. В случае несогласия с условиями Политики конфиденциальности Пользователь должен прекратить использование Сайта.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">2.3. Настоящая Политика конфиденциальности применяется только к данному сайту. Администрация сайта не контролирует и не несет ответственность за сайты третьих лиц, на которые Пользователь может перейти по ссылкам, доступным на Сайте.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">2.4. Администрация сайта не проверяет достоверность персональных данных, предоставляемых Пользователем Сайта.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">3. ПРЕДМЕТ ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.1. Настоящая Политика конфиденциальности устанавливает обязательства Администрации сайта по неразглашению и обеспечению режима защиты конфиденциальности персональных данных, которые Пользователь предоставляет по запросу Администрации сайта при регистрации на Сайте или при оформлении заказа для приобретения Товара, оказания Услуг или выполнения Работ.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.2. Персональные данные, разрешённые к обработке в рамках настоящей Политики конфиденциальности, предоставляются Пользователем путём заполнения формы на Сайте и включают в себя следующую информацию:</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.2.1. фамилию, имя, отчество Пользователя;</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.2.2. контактный телефон Пользователя;</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.2.3. адрес электронной почты (e-mail);</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.2.4. адрес доставки Товара&nbsp;или место оказания услуг (если требуется);</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.2.5. место жительство Пользователя.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.3. Сайт защищает Данные, которые автоматически передаются в процессе просмотра рекламных блоков и при посещении страниц, на которых установлен статистический скрипт системы («пиксель»):</span></p>
+<ul style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;">
+<li style="box-sizing: border-box; outline: none;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">IP адрес;</span></li>
+<li style="box-sizing: border-box; outline: none;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">информация из cookies;</span></li>
+<li style="box-sizing: border-box; outline: none;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">информация о браузере (или иной программе, которая осуществляет доступ к показу рекламы);</span></li>
+<li style="box-sizing: border-box; outline: none;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">время доступа;</span></li>
+<li style="box-sizing: border-box; outline: none;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">адрес страницы, на которой расположен рекламный блок;</span></li>
+<li style="box-sizing: border-box; outline: none;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">реферер (адрес предыдущей страницы).</span></li>
+</ul>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.3.1. Отключение cookies может повлечь невозможность доступа к частям Сайта, требующим авторизации.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.3.2. Сайт осуществляет сбор статистики об IP-адресах своих посетителей. Данная информация используется с целью выявления и решения технических проблем, для контроля законности проводимых финансовых платежей.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">3.4. Любая иная персональная информация неоговоренная выше (история покупок, используемые браузеры и операционные системы и т.д.) подлежит надежному хранению и нераспространению, за исключением случаев, предусмотренных в п.п. 5.2. и 5.3. настоящей Политики конфиденциальности.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">4. ЦЕЛИ СБОРА ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ ПОЛЬЗОВАТЕЛЯ</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1. Персональные данные Пользователя Администрация сайта может использовать в целях:</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.1. Идентификации Пользователя, зарегистрированного на Сайте, для оформления заказа и (или) заключения Договора купли-продажи товара либо оказания услуг дистанционным способом.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.2. Предоставления Пользователю доступа к персонализированным ресурсам Сайта.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.3. Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования Сайта, оказания услуг, обработка запросов и заявок от Пользователя.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.4. Определения места нахождения Пользователя для обеспечения безопасности, предотвращения мошенничества.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.5. Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.6. Создания учетной записи для совершения покупок либо заказа услуг, если Пользователь дал согласие на создание учетной записи.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.7. Уведомления Пользователя Сайта о состоянии Заказа.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.8. Обработки и получения платежей, подтверждения налога или налоговых льгот, оспаривания платежа, определения права на получение кредитной линии Пользователем.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.9. Предоставления Пользователю эффективной клиентской и технической поддержки при возникновении проблем связанных с использованием Сайта.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.10. Предоставления Пользователю с его согласия, обновлений продукции либо услуг, специальных предложений, информации о ценах, новостной рассылки и иных сведений от имени Сайта или от имени партнеров Сайта.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.11. Осуществления рекламной деятельности с согласия Пользователя.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">4.1.12. Предоставления доступа Пользователю на сайты или сервисы партнеров Сайта с целью получения продуктов, обновлений и услуг.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">5. СПОСОБЫ И СРОКИ ОБРАБОТКИ ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">5.1. Обработка персональных данных Пользователя осуществляется без ограничения срока, любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">5.2. Пользователь соглашается с тем, что Администрация сайта вправе передавать персональные данные третьим лицам, в частности, курьерским службам, организациями почтовой связи, операторам электросвязи, исключительно в целях выполнения заказа Пользователя, оформленного на Сайте, включая доставку Товара, оказания Услуг или выполнения Работ.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">5.3. Персональные данные Пользователя могут быть переданы уполномоченным органам государственной власти Российской Федерации только по основаниям и в порядке, установленным законодательством Российской Федерации.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">5.4. При утрате или разглашении персональных данных Администрация сайта информирует Пользователя об утрате или разглашении персональных данных.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">5.5. Администрация сайта принимает необходимые организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">5.6. Администрация сайта совместно с Пользователем принимает все необходимые меры по предотвращению убытков или иных отрицательных последствий, вызванных утратой или разглашением персональных данных Пользователя.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">6. ОБЯЗАТЕЛЬСТВА СТОРОН</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">6.1. Пользователь обязан:</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">6.1.1. Предоставить информацию о персональных данных, необходимую для пользования Сайтом.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">6.1.2. Обновить, дополнить предоставленную информацию о персональных данных в случае изменения данной информации.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">6.2. Администрация сайта обязана:</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">6.2.1. Использовать полученную информацию исключительно для целей, указанных в п. 4 настоящей Политики конфиденциальности.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">6.2.2. Обеспечить хранение конфиденциальной информации в тайне, не разглашать без предварительного письменного разрешения Пользователя, а также не осуществлять продажу, обмен, опубликование, либо разглашение иными возможными способами переданных персональных данных Пользователя, за исключением п.п. 5.2. и 5.3. настоящей Политики Конфиденциальности.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">6.2.3. Принимать меры предосторожности для защиты конфиденциальности персональных данных Пользователя согласно порядку, обычно используемого для защиты такого рода информации в существующем деловом обороте.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">6.2.4. Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента обращения или запроса Пользователя или его законного представителя либо уполномоченного органа по защите прав субъектов персональных данных на период проверки, в случае выявления недостоверных персональных данных или неправомерных действий.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">7. ОТВЕТСТВЕННОСТЬ СТОРОН</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">7.1. Администрация сайта, не исполнившая свои обязательства, несёт ответственность за убытки, понесённые Пользователем в связи с неправомерным использованием персональных данных, в соответствии с законодательством Российской Федерации, за исключением случаев, предусмотренных п.п. 5.2., 5.3. и 7.2. настоящей Политики Конфиденциальности.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">7.2. В случае утраты или разглашения Конфиденциальной информации Администрация сайта не несёт ответственность, если данная конфиденциальная информация:</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">7.2.1. Стала публичным достоянием до её утраты или разглашения.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">7.2.2. Была получена от третьей стороны до момента её получения Администрацией сайта.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">7.2.3. Была разглашена с согласия Пользователя.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">8. РАЗРЕШЕНИЕ СПОРОВ</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">8.1. До обращения в суд с иском по спорам, возникающим из отношений между Пользователем Сайта и Администрацией сайта, обязательным является предъявление претензии (письменного предложения о добровольном урегулировании спора).</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">8.2. Получатель претензии в течение 30 календарных дней со дня получения претензии, письменно уведомляет заявителя претензии о результатах рассмотрения претензии.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">8.3. При не достижении соглашения спор будет передан на рассмотрение в судебный орган в соответствии с действующим законодательством Российской Федерации.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">8.4. К настоящей Политике конфиденциальности и отношениям между Пользователем и Администрацией сайта применяется действующее законодательство Российской Федерации.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;"><strong style="box-sizing: border-box; outline: none;">9. ДОПОЛНИТЕЛЬНЫЕ УСЛОВИЯ</strong></span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">9.1. Администрация сайта вправе вносить изменения в настоящую Политику конфиденциальности без согласия Пользователя.</span></p>
+<p style="box-sizing: border-box; outline: none; color: #0f3e68; font-family: SegoeUI; font-size: 17px;"><span style="color: #333333; font-family: arial, helvetica, sans-serif;">9.2. Новая Политика конфиденциальности вступает в силу с момента ее размещения на Сайте, если иное не предусмотрено новой редакцией Политики конфиденциальности.</span></p>              </td>
+            </tr>
+            </tbody></table>          
+            <table width="90%" cellspacing="0" cellpadding="0" border="0" align="center">
+              <tbody><tr>
+                <td><div align="center"><a href="#" onclick="javascript:history.back(); return false;" style="color:#000000;">назад</a></div></td>
+              </tr>
+            </tbody></table>
+            </td>
+          <td width="240" valign="top">
+            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                <tbody><tr>
+                    <td align="center">
+                        <div id="cartSmall">
+                            
+					В корзине пусто
+					                        </div>  
+                     </td>
+                </tr>
+                <tr>
+                	<td class="text_grey">&nbsp;</td>
+                </tr>
+            </tbody></table>
+            <table width="100%" cellspacing="0" cellpadding="0" border="0" align="right">
+                <tbody><tr>
+                    <td>
+                        <div style="padding-bottom: 10px;" align="center">
+                            <a href="/Rasprodazha.html"><img src="/img/rasprodaza_159_38.jpg" width="159" height="38" border="0"></a>
+                        </div>
+                    </td>
+                </tr>
+                            </tbody></table>
+            <table width="240" cellspacing="0" cellpadding="0" border="0" align="right">
+                <tbody><tr>
+                    <td>
+                    <div align="center"><br>
+                        <a href="/Novosti.html"><img src="/img/novosti_159_38.jpg" width="159" height="38" border="0"></a>
+                    </div>
+                    </td>
+                </tr>
+                
+					<tr>
+						<td>
+							<p>
+								<span class="text_grey">30.12.2022</span>
+								<a href="/Rezhim-raboty-v-Novom-Godu.html" class="newsLast">
+								<b>Режим работы в Новом Году!!!</b>
+								</a>
+								<br>
+								<span class="text">31 декабря 2022-Выходной день!!!
+С 9 января 2023 работаем в обычном режиме.
+Новый год&nbsp;— новая страница жизни. Так пусть на&nbsp;ней не&nbsp;будет пустого места, пусть она заполнится множеством красок, ярких событий и&nbsp;приключений. Пусть в&nbsp;новом году вам сопутствует удача, успех и&nbsp;достаток. Наслаждайтесь каждым мгновением вашей жизни, будьте с&nbsp;любимыми, окружайте себя и&nbsp;своих близких теплом и&nbsp;заботой, согревайте их&nbsp;своей любовью, а&nbsp;они в&nbsp;ответ согреют вас. Будьте счастливы, с&nbsp;Новым годом!</span>
+							</p>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<p>
+								<span class="text_grey">26.04.2022</span>
+								<a href="/Rezhim-raboty-v-majskie-prazdniki.html" class="newsLast">
+								<b>Режим работы в майские праздники!</b>
+								</a>
+								<br>
+								<span class="text"></span>
+							</p>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							<p>
+								<span class="text_grey">05.03.2022</span>
+								<a href="#" class="newsLast">
+								<b>6,7,8 Марта Выходные!!!</b>
+								</a>
+								<br>
+								<span class="text"></span>
+							</p>
+						</td>
+					</tr>
+					                <tr>
+                    <td>
+                        <div align="right">
+                            <a href="/Novosti.html" class="newsLast"><b>все новости</b></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody></table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+    	</td>
+        </tr>
+      </tbody></table>
+                  <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+                <tbody><tr>
+                    <td height="75" background="image/fon_bottom.jpg">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="40" bgcolor="#0E4484"><div class="text_grey" align="center">
+                    <p>&nbsp;</p>
+                    <p class="text_w">
+                    	Copyright © 2012 - 2020 Интернет-магазин "Kotel96". Системы отопления.<br> Екатеринбург. тел.: 8-922222-31-70 <br><a href="http://kotel96.ru/Politika-konfidencialnosti.html"><span style="color: #ffffff;">Политика конфиденциальности</span></a>                    </p>
+                    </div>
+                    <div align="center">
+                    	<p>&nbsp;<a href="http://yandex.ru/cy?base=0&amp;host=kotel96.ru"><img src="http://www.yandex.ru/cycounter?kotel96.ru" alt="Яндекс цитирования" width="88" height="31" border="0"></a>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter15872734 = new Ya.Metrika({id:15872734, enableAll: true, webvisor:true});
+        } catch(e) { }
+    });
+    
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/15872734" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">//<![CDATA[
+var a='',js=10;try{a+=';r='+escape(document.referrer);}catch(e){}try{a+=';j='+navigator.javaEnabled();js=11;}catch(e){}
+try{s=screen;a+=';s='+s.width+'*'+s.height;a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth);js=12;}catch(e){}
+try{if(typeof((new Array).push('t'))==="number")js=13;}catch(e){}
+try{document.write('<a href="http://top.mail.ru/jump?from=2222991">'+
+'<img src="http://db.ce.b1.a2.top.mail.ru/counter?id=2222991;t=230;js='+js+a+';rand='+Math.random()+
+'" alt="Рейтинг@Mail.ru" style="border:0;" height="31" width="88" /></a>');}catch(e){}//]]></script><a href="http://top.mail.ru/jump?from=2222991"><img src="http://db.ce.b1.a2.top.mail.ru/counter?id=2222991;t=230;js=13;r=;j=false;s=1366*768;d=24;rand=0.032550122861804476" alt="Рейтинг@Mail.ru" style="border:0;" width="88" height="31"></a>
+<noscript><p><a href="http://top.mail.ru/jump?from=2222991">
+<img src="http://db.ce.b1.a2.top.mail.ru/counter?js=na;id=2222991;t=230" 
+style="border:0;" height="31" width="88" alt="Рейтинг@Mail.ru" /></a></p></noscript>
+<!-- //Rating@Mail.ru counter -->
+
+
+
+<!-- HotLog -->
+<script type="text/javascript" language="javascript">
+hotlog_js="1.0"; hotlog_r=""+Math.random()+"&s=2243177&im=43&r="+
+escape(document.referrer)+"&pg="+escape(window.location.href);
+</script>
+<script type="text/javascript" language="javascript1.1">
+hotlog_js="1.1"; hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N");
+</script>
+<script type="text/javascript" language="javascript1.2">
+hotlog_js="1.2"; hotlog_r+="&wh="+screen.width+"x"+screen.height+"&px="+
+(((navigator.appName.substring(0,3)=="Mic"))?screen.colorDepth:screen.pixelDepth);
+</script>
+<script type="text/javascript" language="javascript1.3">
+hotlog_js="1.3";
+</script>
+<script type="text/javascript" language="javascript">
+hotlog_r+="&js="+hotlog_js;
+document.write('<a href="http://click.hotlog.ru/?2243177" target="_blank"><img '+
+'src="http://hit41.hotlog.ru/cgi-bin/hotlog/count?'+
+hotlog_r+'" border="0" width="88" height="31" alt="HotLog"></a>');
+</script><a href="http://click.hotlog.ru/?2243177" target="_blank"><img src="http://hit41.hotlog.ru/cgi-bin/hotlog/count?0.008726040937136692&amp;s=2243177&amp;im=43&amp;r=&amp;pg=https%3A//kotel96.ru/Politika-konfidencialnosti.html&amp;j=N&amp;wh=1366x768&amp;px=24&amp;js=1.3" alt="HotLog" width="88" height="31" border="0"></a>
+<noscript>
+<a href="http://click.hotlog.ru/?2243177" target="_blank"><img
+src="http://hit41.hotlog.ru/cgi-bin/hotlog/count?s=2243177&im=43" border="0"
+width="88" height="31" alt="HotLog"></a>
+</noscript>
+<!-- /HotLog -->
+
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t42.1;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet' "+
+"border='0' width='31' height='31'></a>")
+//--></script><a href="http://www.liveinternet.ru/click" target="_blank"><img src="//counter.yadro.ru/hit?t42.1;r;s1366*768*24;uhttps%3A//kotel96.ru/Politika-konfidencialnosti.html;0.7607976827574784" alt="" title="LiveInternet" width="31" height="31" border="0"></a><!--/LiveInternet-->
+
+<a title="Разработка и Продвижение Сайта, Интернет-магазина." target="_blank" href="http://sv-site.ru/"><img src="http://sv-site.ru/pic/logo_sv.jpg" alt="Разработка и Продвижение Сайта, Интернет-магазина." style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px" width="88" height="31"></a>
+
+<a href="http://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2508/*http://grade.market.yandex.ru/?id=133398&amp;action=link"><img src="http://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2506/*http://grade.market.yandex.ru/?id=133398&amp;action=image&amp;size=1" alt="Читайте отзывы покупателей и оценивайте качество магазина на Яндекс.Маркете" width="120" height="110" border="0"></a>
+</p>
+                    </div>
+                </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+
+
+<div id="easyOverlay" style="display: none;"></div><div id="easyCenter" style="display: none;"><div id="easyContainer"></div></div><div id="easyBottomContainer" style="display: none;"><div id="easyBottom"><div id="easyNavigation"><a id="easyPrevLink" href="#"></a><a id="easyNextLink" href="#"></a></div><a id="easyCloseLink" href="#"></a><a id="easySlideLink" href="#"></a><div id="easyCaption"></div><div id="easyNumber"></div><div style="clear: both;"></div></div></div></body></html>

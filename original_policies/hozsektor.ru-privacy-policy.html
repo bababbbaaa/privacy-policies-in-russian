@@ -1,0 +1,450 @@
+<html prefix="og: https://ogp.me/ns#" itemscope="" itemtype="https://schema.org/WebPage" lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <meta name="yandex-verification" content="e1a2fb20d08a361e">
+    <link rel="preload" as="font" type="font/woff2" href="/wp-content/themes/hozsektor/fonts/ibm-plex-sans-v8-latin_cyrillic-300.woff2" crossorigin="">
+    <link rel="preload" as="font" type="font/woff2" href="/wp-content/themes/hozsektor/fonts/ibm-plex-sans-v8-latin_cyrillic-600.woff2" crossorigin="">
+    <link rel="preload" as="image" href="/wp-content/themes/hozsektor/img/logo.webp" type="image/webp">
+            <link rel="preload" as="image" href="/wp-content/themes/hozsektor/img/header.webp" type="image/webp">
+    
+    <title>Политика конфиденциальности</title>
+
+		<!-- All in One SEO 4.1.4.5 -->
+		<meta name="description" content="Политика конфиденциальности сайта хозяйственный сектор">
+		<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+		<meta name="keywords" content="политика конфиденциальности">
+		<link rel="canonical" href="https://hozsektor.com/privacy-policy">
+		<meta property="og:locale" content="ru_RU">
+		<meta property="og:site_name" content="Web журнал HOZSEKTOR">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="Политика конфиденциальности">
+		<meta property="og:description" content="Политика конфиденциальности сайта хозяйственный сектор">
+		<meta property="og:url" content="https://hozsektor.com/privacy-policy">
+		<meta property="og:image" content="https://hozsektor.com/site-imag/hozsektor_ru.png">
+		<meta property="og:image:secure_url" content="https://hozsektor.com/site-imag/hozsektor_ru.png">
+		<meta property="article:published_time" content="2018-09-20T21:41:06+00:00">
+		<meta property="article:modified_time" content="2020-03-24T09:18:17+00:00">
+		<meta property="article:publisher" content="https://www.facebook.com/">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:domain" content="hozsektor.com">
+		<meta name="twitter:title" content="Политика конфиденциальности">
+		<meta name="twitter:description" content="Политика конфиденциальности сайта хозяйственный сектор">
+		<meta name="twitter:image" content="https://hozsektor.com/site-imag/hozsektor_ru.png">
+		<meta name="google" content="nositelinkssearchbox">
+		<!-- All in One SEO -->
+
+<link rel="preload" href="/wp-content/plugins/rate-my-post/public/css/fonts/ratemypost.ttf" type="font/ttf" as="font" crossorigin="anonymous">
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link data-minify="1" rel="stylesheet" id="rate-my-post-css" href="https://hozsektor.com/wp-content/cache/min/1/wp-content/plugins/rate-my-post/public/css/rate-my-post.css?ver=1675007661" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="main-css" href="https://hozsektor.com/wp-content/cache/min/1/wp-content/themes/hozsektor/css/main.css?ver=1675007663" type="text/css" media="all">
+<link rel="stylesheet" id="fancybox-css" href="/wp-content/plugins/easy-fancybox/css/jquery.fancybox.min.css" type="text/css" media="screen">
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='fancybox-ie-css' href='/wp-content/plugins/easy-fancybox/css/jquery.fancybox-ie.min.css' type='text/css' media='screen' />
+<![endif]-->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://hozsektor.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://hozsektor.com/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js" defer=""></script>
+<style>.pseudo-clearfy-link { color: #008acf; cursor: pointer;}.pseudo-clearfy-link:hover { text-decoration: none;}</style><style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><!--[if lt IE 9]><style id="fancybox-inline-css-ie" type="text/css">/* IE6 */
+.fancybox-ie6 #fancybox-close{background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_close.png",sizingMethod="scale")}
+.fancybox-ie6 #fancybox-left-ico{background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_nav_left.png",sizingMethod="scale")}
+.fancybox-ie6 #fancybox-right-ico{background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_nav_right.png",sizingMethod="scale")}
+.fancybox-ie6 #fancybox-title-over{background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_title_over.png",sizingMethod="scale");zoom:1}
+.fancybox-ie6 #fancybox-title-float-left{background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_title_left.png",sizingMethod="scale")}
+.fancybox-ie6 #fancybox-title-float-main{background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_title_main.png",sizingMethod="scale")}
+.fancybox-ie6 #fancybox-title-float-right{background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_title_right.png",sizingMethod="scale")}
+#fancybox-loading.fancybox-ie6 div{background:transparent;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_loading.png",sizingMethod="scale")}
+/* IE6, IE7, IE8 */
+.fancybox-ie #fancybox-title-over{background-image:url(https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_title_over.png)}
+.fancybox-ie #fancybox-bg-n{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_shadow_n.png",sizingMethod="scale")}
+.fancybox-ie #fancybox-bg-ne{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_shadow_ne.png",sizingMethod="scale")}
+.fancybox-ie #fancybox-bg-e{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_shadow_e.png",sizingMethod="scale")}
+.fancybox-ie #fancybox-bg-se{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_shadow_se.png",sizingMethod="scale")}
+.fancybox-ie #fancybox-bg-s{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_shadow_s.png",sizingMethod="scale")}
+.fancybox-ie #fancybox-bg-sw{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_shadow_sw.png",sizingMethod="scale")}
+.fancybox-ie #fancybox-bg-w{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_shadow_w.png",sizingMethod="scale")}
+.fancybox-ie #fancybox-bg-nw{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://hozsektor.com/wp-content/plugins/easy-fancybox/images/fancy_shadow_nw.png",sizingMethod="scale")}</style><![endif]--><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>    
+    </head>
+
+<body class="privacy-policy page-template-default page page-id-3">
+
+    <div class="site-container">
+
+        <header class="site-header">
+
+            <div class="header-top">
+
+                                    <a class="logo" href="/">
+                        <picture>
+                            <source srcset="https://hozsektor.com/wp-content/themes/hozsektor/img/logo.webp" type="image/webp">
+                            <img class="skip-lazy" src="https://hozsektor.com/wp-content/themes/hozsektor/img/logo.png" alt="Логотип портала" width="578" height="195">
+                        </picture>
+                        <div class="h1 hide">Хозсектор</div>
+                        <div class="site-desc">Интернет-журнал о домашнем хозяйстве и садоводстве</div></a>
+                
+                
+<div class="social">
+            <a target="_blank" rel="noopener" href="https://vk.com/hozsektorcom" class="vk"></a>
+                            <a target="_blank" rel="noopener" href="https://ok.ru/group/61342034952277" class="ok"></a>
+        </div>
+                <div class="search-block">
+                    <div class="search-icon"></div>
+                    <div id="searchform" class="popup-wrap">
+                        <div class="popup-overlay"></div>
+                        <div class="popup">
+                            <span>Введите запрос и нажмите <i>Enter</i>:</span>
+                            <form method="get" class="search-form" action="https://hozsektor.com/">
+    <input type="search" placeholder="Поиск информации на портале" name="s" value="">
+    <button class="search-submit" aria-label="Поиск"></button>
+</form>                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="header-menu mobile-menu" aria-label="Главное меню">
+                <input id="mobile-menu-toggle" type="checkbox">
+                <label class="mobile-menu-button" for="mobile-menu-toggle">
+                    <span></span>
+                </label>
+                <div class="primary-menu">
+                    <span class="cross"></span>
+                    <ul class="menu"><li id="menu-item-16957" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-16957"><a href="/domashnee-hozyajstvo">Домашнее хозяйство</a>
+<ul class="sub-menu">
+	<li id="menu-item-16942" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-16942"><a href="/domashnee-hozyajstvo/dom-i-dacha">Дом и Дача</a>
+	<ul class="sub-menu">
+		<li id="menu-item-19998" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-19998"><a href="/stroitelstvo">Строительство</a></li>
+		<li id="menu-item-19999" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-19999"><a href="/poleznye-sovety">Полезные советы</a></li>
+	</ul>
+</li>
+	<li id="menu-item-16943" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16943"><a href="/domashnee-hozyajstvo/cvetnik">Цветник</a></li>
+	<li id="menu-item-16945" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16945"><a href="/domashnee-hozyajstvo/uchastok">Участок</a></li>
+	<li id="menu-item-16944" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16944"><a href="/domashnee-hozyajstvo/ogorod">Огород</a></li>
+	<li id="menu-item-16946" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16946"><a href="/domashnee-hozyajstvo/sad">Сад</a></li>
+</ul>
+</li>
+<li id="menu-item-17381" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-17381"><a href="/selskoe-hozyajstvo">Сельское хозяйство</a>
+<ul class="sub-menu">
+	<li id="menu-item-17383" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17383"><a href="/selskoe-hozyajstvo/zhivotnovodstvo">Животноводство</a></li>
+	<li id="menu-item-17384" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17384"><a href="/selskoe-hozyajstvo/pticevodstvo">Птицеводство</a></li>
+	<li id="menu-item-17385" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17385"><a href="/selskoe-hozyajstvo/pchelovodstvo">Пчеловодство</a></li>
+	<li id="menu-item-17386" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17386"><a href="/selskoe-hozyajstvo/rybalka">Рыбалка</a></li>
+	<li id="menu-item-17382" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17382"><a href="/selskoe-hozyajstvo/griby">Грибы</a></li>
+</ul>
+</li>
+<li id="menu-item-17175" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-17175"><a href="/oborudovanie">Оборудование</a>
+<ul class="sub-menu">
+	<li id="menu-item-16952" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16952"><a href="/instrument">Инструмент</a></li>
+	<li id="menu-item-16953" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16953"><a href="/domashnee-hozyajstvo/materialy">Материалы</a></li>
+	<li id="menu-item-17091" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17091"><a href="/tehnika">Техника</a></li>
+</ul>
+</li>
+<li id="menu-item-25720" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25720"><a href="/poleznye-sovety">Полезные советы</a></li>
+</ul>                </div>
+            </nav>
+
+                            <picture>
+                    <source srcset="https://hozsektor.com/wp-content/themes/hozsektor/img/header.webp" type="image/webp">
+                    <img class="skip-lazy" src="https://hozsektor.com/wp-content/themes/hozsektor/img/header.png" alt="" width="549" height="295">
+                </picture>
+            
+        </header>
+
+        
+        <main class="content-sidebar-wrap">
+<div class="content-wrap">
+
+    <ul class="breadcrumbs" itemprop="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+                <meta itemprop="position" content="1"></li></ul>
+    
+        
+<article class="post post-3 page type-page status-publish hentry">
+
+    <h1>
+        Политика конфиденциальности    </h1>
+
+    <div class="post-content">
+        <div class="all">
+<h2>Кто мы</h2>
+<p>Наш адрес сайта: https://hozsektor.com.</p>
+<h2>Какие персональные данные мы собираем и с какой целью</h2>
+<h3>Комментарии</h3>
+<p>Если посетитель оставляет комментарий на сайте, мы собираем данные указанные в форме комментария, а также IP адрес посетителя и данные user-agent браузера с целью определения спама. Анонимизированная строка создаваемая из вашего адреса email («хеш») может предоставляться сервису Gravatar, чтобы определить используете ли вы его. Политика конфиденциальности Gravatar доступна здесь: https://automattic.com/privacy/ . После одобрения комментария ваше изображение профиля будет видимым публично в контексте вашего комментария.</p>
+<h3>Медиафайлы</h3>
+<p>Если вы зарегистрированный пользователь и загружаете фотографии на сайт, вам возможно следует избегать загрузки изображений с метаданными EXIF, так как они могут содержать данные вашего месторасположения по GPS. Посетители могут извлечь эту информацию скачав изображения с сайта.</p>
+<h3>Формы контактов</h3>
+<h3>Куки</h3>
+<p>Если вы оставляете комментарий на нашем сайте, вы можете включить сохранение вашего имени, адреса email и вебсайта в куки. Это делается для вашего удобства, чтобы не заполнять данные снова при повторном комментировании. Эти куки хранятся в течение одного года. Если у вас есть учетная запись на сайте и вы войдете в неё, мы установим временный куки для определения поддержки куки вашим браузером, куки не содержит никакой личной информации и удаляется при закрытии вашего браузера. При входе в учетную запись мы также устанавливаем несколько куки с данными входа и настройками экрана. Куки входа хранятся в течение двух дней, куки с настройками экрана — год. Если вы выберете возможность «Запомнить меня», данные о входе будут сохраняться в течение двух недель. При выходе из учетной записи куки входа будут удалены. При редактировании или публикации статьи в браузере будет сохранен дополнительный куки, он не содержит персональных данных и содержит только ID записи отредактированной вами, истекает через 1 день.</p>
+<h3>Встраиваемое содержимое других вебсайтов</h3>
+<p>Статьи на этом сайте могут включать встраиваемое содержимое (например видео, изображения, статьи и др.), подобное содержимое ведет себя так же, как если бы посетитель зашел на другой сайт. Эти сайты могут собирать данные о вас, использовать куки, внедрять дополнительное отслеживание третьей стороной и следить за вашим взаимодействием с внедренным содержимым, включая отслеживание взаимодействия, если у вас есть учетная запись и вы авторизовались на том сайте.</p>
+<a href="/wp-content/uploads/2020/02/text-pic-policy.jpg" rel="Политика конфиденциальности."><img decoding="async" class="aligncenter wp-image-17203 size-full" title="Политика конфиденциальности." src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201600%20700'%3E%3C/svg%3E" alt="privacy-policy" data-lazy-srcset="https://hozsektor.com/wp-content/uploads/2020/02/text-pic-policy.jpg 1600w, https://hozsektor.com/wp-content/uploads/2020/02/text-pic-policy-300x131.jpg 300w, https://hozsektor.com/wp-content/uploads/2020/02/text-pic-policy-1536x672.jpg 1536w" data-lazy-sizes="(max-width: 1600px) 100vw, 1600px" data-lazy-src="https://hozsektor.com/wp-content/uploads/2020/02/text-pic-policy.jpg" width="1600" height="700"><noscript><img decoding="async" class="aligncenter wp-image-17203 size-full" title="Политика конфиденциальности." src="https://hozsektor.com/wp-content/uploads/2020/02/text-pic-policy.jpg" alt="privacy-policy" width="1600" height="700" srcset="https://hozsektor.com/wp-content/uploads/2020/02/text-pic-policy.jpg 1600w, https://hozsektor.com/wp-content/uploads/2020/02/text-pic-policy-300x131.jpg 300w, https://hozsektor.com/wp-content/uploads/2020/02/text-pic-policy-1536x672.jpg 1536w" sizes="(max-width: 1600px) 100vw, 1600px" /></noscript></a>
+</div>
+<div class="all"><input checked="checked" type="checkbox">&nbsp;Я принимаю условия политики конфиденциальности.</div>
+    </div>
+
+</article>
+	  
+    
+</div>
+
+
+<aside class="sidebar sidebar-primary" aria-label="Основной сайдбар" itemscope="itemscope" itemtype="https://schema.org/WPSideBar">
+
+                <div class="widget cats-widget">
+
+                    <div class="cat-1">
+        <div class="h3">Домашнее хозяйство</div>
+        <ul class="menu"><li id="menu-item-25702" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25702"><a href="/domashnee-hozyajstvo/cvetnik">Цветник</a></li>
+<li id="menu-item-25703" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25703"><a href="/domashnee-hozyajstvo/materialy">Материалы</a></li>
+<li id="menu-item-25704" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25704"><a href="/domashnee-hozyajstvo/dom-i-dacha">Дом и Дача</a></li>
+<li id="menu-item-25705" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25705"><a href="/domashnee-hozyajstvo/ogorod">Огород</a></li>
+<li id="menu-item-25706" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25706"><a href="/domashnee-hozyajstvo/sad">Сад</a></li>
+<li id="menu-item-25707" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25707"><a href="/domashnee-hozyajstvo/uchastok">Участок</a></li>
+</ul>    </div>
+    <div class="cat-2">
+        <div class="h3">Сельское хозяйство</div>
+        <ul class="menu"><li id="menu-item-25708" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25708"><a href="/selskoe-hozyajstvo/griby">Грибы</a></li>
+<li id="menu-item-25709" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25709"><a href="/selskoe-hozyajstvo/zhivotnovodstvo">Животноводство</a></li>
+<li id="menu-item-25710" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25710"><a href="/selskoe-hozyajstvo/pticevodstvo">Птицеводство</a></li>
+<li id="menu-item-25711" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25711"><a href="/selskoe-hozyajstvo/pchelovodstvo">Пчеловодство</a></li>
+<li id="menu-item-25712" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25712"><a href="/selskoe-hozyajstvo/rybalka">Рыбалка</a></li>
+</ul>    </div>
+    <div class="cat-3">
+        <div class="h3">Кладовая</div>
+        <ul class="menu"><li id="menu-item-25713" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25713"><a href="/instrument">Инструмент</a></li>
+<li id="menu-item-25714" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25714"><a href="/oborudovanie">Оборудование</a></li>
+<li id="menu-item-25715" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25715"><a href="/poleznye-sovety">Полезные советы</a></li>
+<li id="menu-item-25716" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25716"><a href="/stroitelstvo">Строительство</a></li>
+<li id="menu-item-25717" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25717"><a href="/tehnika">Техника</a></li>
+</ul>    </div>
+
+            </div>
+        <div class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><!-- Yandex.RTB R-A-987937-1 -->
+<div id="yandex_rtb_R-A-987937-1"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+    (function(w, d, n, s, t) {
+        w[n] = w[n] || [];
+        w[n].push(function() {
+            Ya.Context.AdvManager.render({
+                blockId: "R-A-987937-1",
+                renderTo: "yandex_rtb_R-A-987937-1",
+                async: true
+            });
+        });
+        t = d.getElementsByTagName("script")[0];
+        s = d.createElement("script");
+        s.type = "text/javascript";
+        s.src = "//an.yandex.ru/system/context.js";
+        s.async = true;
+        t.parentNode.insertBefore(s, t);
+    })(this, this.document, "yandexContextAsyncCallbacks");
+</script></div></div><div class="widget vk-widget">            <div id="vk_groups"></div>
+
+            <script type="rocketlazyloadscript">
+                let ok = false;
+                window.addEventListener('scroll', function() {
+                    if (ok === false) {
+                        ok = true;
+                        setTimeout(() => {
+                            let script = document.createElement('script');
+                            script.src = 'https://vk.com/js/api/openapi.js?169';
+                            document.getElementById('vk_groups').after(script);
+                            script.onload = function() {
+                                VK.Widgets.Group("vk_groups", {
+                                    mode: 0,
+                                    width: '320',
+                                    color3: '41425A'
+                                }, 207278334);
+                            }
+                        }, 300)
+                    }
+                });
+            </script>
+
+        </div><div class="widget ok-widget">            <div id="ok_group_widget"></div>
+
+            <script type="rocketlazyloadscript">
+                ! function(d, id, did, st) {
+                    var js = d.createElement("script");
+                    js.src = "https://connect.ok.ru/connect.js";
+                    js.onload = js.onreadystatechange = function() {
+                        if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+                            if (!this.executed) {
+                                this.executed = true;
+                                setTimeout(function() {
+                                    OK.CONNECT.insertGroupWidget(id, did, st);
+                                }, 0);
+                            }
+                        }
+                    };
+                    d.documentElement.appendChild(js);
+                }(document, "ok_group_widget", "61342034952277", '{"width":360,"height":285}'); 
+            </script>
+        </div>
+    <div class="sidebar-sticky">
+        <div class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><!-- Yandex.RTB R-A-987937-2 -->
+<div id="yandex_rtb_R-A-987937-2"></div>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+    (function(w, d, n, s, t) {
+        w[n] = w[n] || [];
+        w[n].push(function() {
+            Ya.Context.AdvManager.render({
+                blockId: "R-A-987937-2",
+                renderTo: "yandex_rtb_R-A-987937-2",
+                async: true
+            });
+        });
+        t = d.getElementsByTagName("script")[0];
+        s = d.createElement("script");
+        s.type = "text/javascript";
+        s.src = "//an.yandex.ru/system/context.js";
+        s.async = true;
+        t.parentNode.insertBefore(s, t);
+    })(this, this.document, "yandexContextAsyncCallbacks");
+</script></div></div>    </div>
+
+</aside>
+
+</main> <!-- /.content-wrap -->
+
+<footer class="site-footer">
+
+    <div>
+        <div class="logo">
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20293%2061'%3E%3C/svg%3E" alt="Логотип портала" data-lazy-src="https://hozsektor.com/wp-content/themes/hozsektor/img/logo-footer.png" width="293" height="61"><noscript><img src="https://hozsektor.com/wp-content/themes/hozsektor/img/logo-footer.png" alt="Логотип портала" width="293" height="61"></noscript>
+        </div>
+        <div class="copyright">
+            <p>2023 © Хозяйственный сектор – Интернет-журнал о домашнем хозяйстве и садоводстве</p>
+        </div>
+        
+<div class="social">
+            <a target="_blank" rel="noopener" href="https://vk.com/hozsektorcom" class="vk"></a>
+                            <a target="_blank" rel="noopener" href="https://ok.ru/group/61342034952277" class="ok"></a>
+        </div>    </div>
+
+    <div class="footer-menu">
+        <ul class="menu"><li id="menu-item-25696" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-25696"><a href="/">Главная</a></li>
+<li id="menu-item-25700" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25700"><a href="/o-sajte-hozyajstvennyj-sektor">О проекте</a></li>
+<li id="menu-item-25698" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25698"><a href="/vse-stati">Карта сайта</a></li>
+<li id="menu-item-25697" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-3 current_page_item menu-item-25697"><a aria="-" current="page" class="rrl current_page_item">Политика конфиденциальности</a></li>
+<li id="menu-item-25701" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25701"><a href="/terms">Пользовательское соглашение</a></li>
+<li id="menu-item-25699" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25699"><a href="/kontakty">Контакты</a></li>
+</ul>    </div>
+
+    <div>
+        <picture>
+            <source data-lazy-srcset="https://hozsektor.com/wp-content/themes/hozsektor/img/footer.webp" type="image/webp">
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20172%20260'%3E%3C/svg%3E" alt="" data-lazy-src="https://hozsektor.com/wp-content/themes/hozsektor/img/footer.png" width="172" height="260"><noscript><img src="https://hozsektor.com/wp-content/themes/hozsektor/img/footer.png" width="172" height="260" alt=""></noscript>
+        </picture>
+    </div>
+
+    <div>
+                <div>
+            <p>Копирование материалов без разрешения администрации сайта или автора запрещено.</p>
+        </div>
+        <a class="footer-design" href="https://seonica.ru" target="_blank" rel="noopener noreferrer">Сделано в 2021</a>
+    </div>
+
+</footer>
+
+</div> <!-- /.site-container -->
+
+<div class="menu-overlay"><span></span></div>
+
+<div id="scroll-button">
+    <div id="scroll-button_up" class="scroll-action_up">
+        <svg class="svg-inline--fa fa-arrow-up fa-w-14" aria-hidden="true" data-prefix="far" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+            <path d="M6.101 261.899L25.9 281.698c4.686 4.686 12.284 4.686 16.971 0L198 126.568V468c0 6.627 5.373 12 12 12h28c6.627 0 12-5.373 12-12V126.568l155.13 155.13c4.686 4.686 12.284 4.686 16.971 0l19.799-19.799c4.686-4.686 4.686-12.284 0-16.971L232.485 35.515c-4.686-4.686-12.284-4.686-16.971 0L6.101 244.929c-4.687 4.686-4.687 12.284 0 16.97z" fill="' . $webnavoz_button_button_color . '"></path>
+        </svg>
+    </div>
+    <div id="scroll-button_middle">
+        <span class="scroll-action_perc">10</span>%
+    </div>
+    <div id="scroll-button_down" class="scroll-action_down">
+        <svg class="svg-inline--fa fa-arrow-down fa-w-14" aria-hidden="true" data-prefix="far" data-icon="arrow-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+            <path d="M441.9 250.1l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L250 385.4V44c0-6.6-5.4-12-12-12h-28c-6.6 0-12 5.4-12 12v341.4L42.9 230.3c-4.7-4.7-12.3-4.7-17 0L6.1 250.1c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z"></path>
+        </svg>
+    </div>
+</div>
+
+<script type="rocketlazyloadscript">var pseudo_links = document.querySelectorAll(".pseudo-clearfy-link");for (var i=0;i<pseudo_links.length;i++ ) { pseudo_links[i].addEventListener("click", function(e){   window.open( e.target.getAttribute("data-uri") ); }); }</script><script type="rocketlazyloadscript">document.addEventListener("copy", (event) => {var pagelink = "\nИсточник: https://hozsektor.com/privacy-policy";event.clipboardData.setData("text", document.getSelection() + pagelink);event.preventDefault();});</script><script type="rocketlazyloadscript" data-rocket-type="text/javascript">var fb_timeout, fb_opts={'overlayShow':true,'hideOnOverlayClick':true,'showCloseButton':true,'margin':20,'centerOnScroll':false,'enableEscapeButton':true,'autoScale':true };
+if(typeof easy_fancybox_handler==='undefined'){
+var easy_fancybox_handler=function(){
+jQuery('.nofancybox,a.wp-block-file__button,a.pin-it-button,a[href*="pinterest.com/pin/create"],a[href*="facebook.com/share"],a[href*="twitter.com/share"]').addClass('nolightbox');
+/* IMG */
+var fb_IMG_select='a[href*=".jpg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpg"]:not(.nolightbox),a[href*=".jpeg"]:not(.nolightbox,li.nolightbox>a),area[href*=".jpeg"]:not(.nolightbox),a[href*=".png"]:not(.nolightbox,li.nolightbox>a),area[href*=".png"]:not(.nolightbox),a[href*=".webp"]:not(.nolightbox,li.nolightbox>a),area[href*=".webp"]:not(.nolightbox)';
+jQuery(fb_IMG_select).addClass('fancybox image').attr('rel','gallery');
+jQuery('a.fancybox,area.fancybox,li.fancybox a').each(function(){jQuery(this).fancybox(jQuery.extend({},fb_opts,{'type':'image','transitionIn':'elastic','easingIn':'easeOutBack','transitionOut':'elastic','easingOut':'easeInBack','opacity':true,'hideOnContentClick':true,'titleShow':true,'titlePosition':'inside','titleFromAlt':true,'showNavArrows':true,'enableKeyboardNav':true,'cyclic':true}))});};
+jQuery('a.fancybox-close').on('click',function(e){e.preventDefault();jQuery.fancybox.close()});
+};
+jQuery(easy_fancybox_handler);jQuery(document).on('post-load',easy_fancybox_handler);
+</script><script type="text/javascript" id="rate-my-post-js-extra">
+/* <![CDATA[ */
+var rmp_frontend = {"admin_ajax":"https:\/\/hozsektor.com\/wp-admin\/admin-ajax.php","postID":"3","noVotes":"","cookie":"","afterVote":"","notShowRating":"1","social":"1","feedback":"1","cookieDisable":"1","emptyFeedback":"\u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043e\u0442\u0437\u044b\u0432","hoverTexts":"1","preventAccidental":"1","grecaptcha":"1","siteKey":"","votingPriv":"1","loggedIn":"","positiveThreshold":"2","ajaxLoad":"1","nonce":"f41cf000e3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://hozsektor.com/wp-content/cache/min/1/wp-content/plugins/rate-my-post/public/js/rate-my-post.js?ver=1675007661" id="rate-my-post-js" defer=""></script>
+<script type="text/javascript" id="toc-front-js-extra">
+/* <![CDATA[ */
+var tocplus = {"visibility_show":"\u043f\u043e\u043a\u0430\u0437\u0430\u0442\u044c","visibility_hide":"\u0441\u043a\u0440\u044b\u0442\u044c","width":"100%"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://hozsektor.com/wp-content/plugins/table-of-contents-plus/front.min.js" id="toc-front-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin|\/logout|\/hozdvor","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/hozsektor.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" id="main-js-extra">
+/* <![CDATA[ */
+var ajax_random = {"ajaxurl":"https:\/\/hozsektor.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://hozsektor.com/wp-content/cache/min/1/wp-content/themes/hozsektor/js/main.js?ver=1675007661" id="main-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://hozsektor.com/wp-content/plugins/easy-fancybox/js/jquery.fancybox.min.js" id="jquery-fancybox-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://hozsektor.com/wp-content/plugins/easy-fancybox/js/jquery.easing.min.js" id="jquery-easing-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://hozsektor.com/wp-content/plugins/easy-fancybox/js/jquery.mousewheel.min.js" id="jquery-mousewheel-js" defer=""></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://hozsektor.com/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script>
+<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(81128092, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/81128092" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+
+</body></html>

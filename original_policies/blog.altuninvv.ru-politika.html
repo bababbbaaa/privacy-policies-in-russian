@@ -1,0 +1,1345 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-ru" dir="ltr" lang="ru-ru"><head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+
+    <meta charset="utf-8">
+	<meta name="rights" content="Алтунин Василий Владимирович (Altunin Vasiliy Vladimirovich)">
+	<meta property="og:type" content="article">
+	<meta property="og:image" content="https://blog.altuninvv.ru/images/joomlart/article/184b7cb84d7b456c96a0bdfbbeaa5f14.jpg">
+	<meta property="og:title" content="Пишем «плавающее» окно на qt5. Часть 1">
+	<meta property="og:description" content=" Сегодня с помощью QtCreator и C++ мы реализуем простое «плавающее» окно – часы. Работать мы будем в Windows 10. Материал будет разбит на несколько частей.
+ Создавая программы, программист зачастую">
+	<meta property="og:url" content="http://blog.altuninvv.ru/politika?view=article&amp;amp;id=">
+	<meta name="author" content="Алтунин Василий">
+	<meta name="robots" content="
+, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+	<meta name="description" content="Сегодня с помощью QtCreator и C++ мы реализуем простое «плавающее» окно – часы. Работать мы будем в Windows 10. Материал будет разбит на несколько частей. Создавая программы, программист зачастую сталкивается с необходимостью вывода...">
+	<meta name="generator" content="Joomla! - Open Source Content Management">
+	<title>Политика конфиденциальности</title>
+	<link href="https://blog.altuninvv.ru/component/search/?id=8&amp;Itemid=149&amp;format=opensearch" rel="search" title="Искать АлтунинВВ.Блог" type="application/opensearchdescription+xml">
+	<link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+<link href="/media/vendor/joomla-custom-elements/css/joomla-alert.min.css?0.2.0" rel="stylesheet">
+	<link href="/components/com_jcomments/tpl//style.css" rel="stylesheet">
+	<link href="/plugins/content/jllike/js/buttons.min.css?1ccc063361d368b3917db9f36f9ead15" rel="stylesheet">
+	<link href="/plugins/system/jce/css/content.css?badb4208be409b1335b815dde676300e" rel="stylesheet">
+	<link href="/modules/mod_maximenuck/themes/custom/css/maximenuck_maximenuck147.css" rel="stylesheet">
+	<style>
+            .jllikeproSharesContayner a {border-radius: 15px; margin-left: 6px;}
+            .jllikeproSharesContayner i {width: 30px;height: 30px;}
+            .jllikeproSharesContayner span {height: 30px;line-height: 30px;font-size: 1rem;}
+        </style>
+	<style>
+            @media screen and (max-width:800px) {
+                .jllikeproSharesContayner {position: fixed;right: 0;bottom: 0; z-index: 999999; background-color: #fff!important;width: 100%;}
+                .jllikeproSharesContayner .event-container > div {border-radius: 0; padding: 0; display: block;}
+                .like .l-count {display:none}
+                .jllikeproSharesContayner a {border-radius: 0!important;margin: 0!important;}
+                .l-all-count {margin-left: 10px; margin-right: 10px;}
+                .jllikeproSharesContayner i {width: 44px!important; border-radius: 0!important;}
+                .l-ico {background-position: 50%!important}
+                .likes-block_left {text-align:left;}
+                .likes-block_right {text-align:right;}
+                .likes-block_center {text-align:center;}
+                .button_text {display: none;}
+            }
+            </style>
+	<style>/* Mobile Menu CK - https://www.joomlack.fr */
+/* Automatic styles */
+
+.mobilemenuck-bar {display:none;position:relative;left:0;top:0;right:0;z-index:100;}
+.mobilemenuck-bar-title {display: block;}
+.mobilemenuck-bar-button {cursor:pointer;box-sizing: border-box;position:absolute; top: 0; right: 0;line-height:0.8em;font-family:Segoe UI;text-align: center;}
+.mobilemenuck {box-sizing: border-box;width: 100%;}
+.mobilemenuck-topbar {position:relative;}
+.mobilemenuck-title {display: block;}
+.mobilemenuck-button {cursor:pointer;box-sizing: border-box;position:absolute; top: 0; right: 0;line-height:0.8em;font-family:Segoe UI;text-align: center;}
+.mobilemenuck a {display:block;text-decoration: none;}
+.mobilemenuck a:hover {text-decoration: none;}
+.mobilemenuck .mobilemenuck-item > div {position:relative;}
+/* for accordion */
+.mobilemenuck-togglericon:after {cursor:pointer;text-align:center;display:block;position: absolute;right: 0;top: 0;content:"+";}
+.mobilemenuck .open .mobilemenuck-togglericon:after {content:"-";}
+.mobilemenuck-lock-button.mobilemenuck-button {right:45px}
+.mobilemenuck-lock-button.mobilemenuck-button svg {max-height:50%;}
+.mobilemenuck-lock-button.mobilemenuck-button::after {display: block;content: "";height: 100%;width: 100%;z-index: 1;position: absolute;top: 0;left: 0;}
+.mobilemenuck[data-display="flyout"] {overflow: initial !important;}
+.mobilemenuck[data-display="flyout"] .level1 + .mobilemenuck-submenu {position:absolute;top:0;left:auto;display:none;height:100vh;left:100%;}
+.mobilemenuck[data-display="flyout"] .level2 + .mobilemenuck-submenu {position:absolute;top:0;left:auto;display:none;height:100vh;left:100%;}
+.mobilemenuck[data-display="flyout"][data-effect*="slideright"] .level1 + .mobilemenuck-submenu {right:100%;left:auto;}
+.mobilemenuck[data-display="flyout"][data-effect*="slideright"] .level2 + .mobilemenuck-submenu {right:100%;left:auto;}
+@media screen and (max-width: 640px) {
+.mobilemenuck[data-display="flyout"] .level1 + .mobilemenuck-submenu {position:static;width: initial !important;height: initial;}
+}
+@media screen and (max-width: 1000px) {
+.mobilemenuck[data-display="flyout"] .level2 + .mobilemenuck-submenu {position:static;width: initial !important;height: initial;}
+}
+.mobilemenuck-backbutton {
+	cursor: pointer;
+}
+
+.mobilemenuck-backbutton:hover {
+	opacity: 0.7;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-bar-title {
+	background: #464646;
+	color: #FFFFFF;
+	font-weight: bold;
+	text-indent: 20px;
+	line-height: 43px;
+	font-size: 20px;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-bar-title a {
+	color: #FFFFFF;
+	font-weight: bold;
+	text-indent: 20px;
+	line-height: 43px;
+	font-size: 20px;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-bar-button {
+	background: #333333;
+	height: 43px;
+	width: 43px;
+	color: #FFFFFF;
+	padding-top: 8px;
+	font-size: 1.8em;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-bar-button a {
+	color: #FFFFFF;
+	font-size: 1.8em;
+}
+
+[data-id="maximenuck147"].mobilemenuck {
+	background: #464646;
+	color: #FFFFFF;
+	padding-bottom: 5px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+[data-id="maximenuck147"].mobilemenuck a {
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-title {
+	background: #464646;
+	height: 43px;
+	text-indent: 20px;
+	line-height: 43px;
+	font-size: 20px;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-title a {
+	text-indent: 20px;
+	line-height: 43px;
+	font-size: 20px;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-button {
+	min-height: 35px;
+	height: 100%;
+	width: 45px;
+	line-height: 35px;
+	font-size: 1.8em;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-button a {
+	line-height: 35px;
+	font-size: 1.8em;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-item > .level1 {
+	background: #027EA6;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-o-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	color: #FFFFFF;
+	margin-top: 4px;
+	margin-right: 4px;
+	margin-bottom: 4px;
+	margin-left: 4px;
+	padding-left: 15px;
+	line-height: 35px;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-item > .level1 a {
+	color: #FFFFFF;
+	line-height: 35px;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-item > .level1:hover, [data-id="maximenuck147"] .mobilemenuck-item > .level1.open {
+	background: #008bb8;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-item > .level2 {
+	background: #FFFFFF;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-o-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	color: #000000;
+	margin-top: 4px;
+	margin-right: 4px;
+	margin-bottom: 4px;
+	margin-left: 4px;
+	padding-left: 25px;
+	line-height: 35px;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-item > .level2 a {
+	color: #000000;
+	line-height: 35px;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-item > .level2:hover, [data-id="maximenuck147"] .mobilemenuck-item > .level2.open {
+	background: #f0f0f0;
+}
+
+[data-id="maximenuck147"] .level2 + .mobilemenuck-submenu .mobilemenuck-item > div {
+	background: #689332;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-o-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	color: #FFFFFF;
+	margin-top: 4px;
+	margin-right: 4px;
+	margin-bottom: 4px;
+	margin-left: 4px;
+	padding-left: 35px;
+	line-height: 35px;
+}
+
+[data-id="maximenuck147"] .level2 + .mobilemenuck-submenu .mobilemenuck-item > div a {
+	color: #FFFFFF;
+	line-height: 35px;
+}
+
+[data-id="maximenuck147"] .level2 + .mobilemenuck-submenu .mobilemenuck-item > div:hover, [data-id="maximenuck147"] .mobilemenuck-item > .level2 + .mobilemenuck-submenu .mobilemenuck-item > div.open {
+	background: #72a137;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-togglericon:after {
+	background: #000000;
+	background: rgba(0,0,0,0.25);
+	-pie-background: rgba(0,0,0,0.25);
+	-moz-border-radius: 0px 5px 5px 0px;
+	-o-border-radius: 0px 5px 5px 0px;
+	-webkit-border-radius: 0px 5px 5px 0px;
+	border-radius: 0px 5px 5px 0px;
+	min-height: 35px;
+	height: 100%;
+	width: 35px;
+	padding-right: 5px;
+	padding-left: 5px;
+	line-height: 35px;
+	font-size: 1.7em;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-togglericon:after a {
+	line-height: 35px;
+	font-size: 1.7em;
+}
+.mobilemaximenuck div span.descck {
+	padding-left: 10px;
+	font-size: 12px;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-item-counter {
+	display: inline-block;
+	margin: 0 5px;
+	padding: 10px;
+	font-size: 12px;
+	line-height: 0;
+	background: rgba(0,0,0,0.3);
+	color: #eee;
+	border-radius: 10px;
+	height: 20px;
+	transform: translate(10px,-3px);
+	box-sizing: border-box;
+}
+
+[data-id="maximenuck147"] + #mobilemenuck-overlay {
+	position: fixed;
+	top: 0;
+	background: #000;
+	opacity: 0.3;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 9;
+}
+
+[data-id="maximenuck147"] .mobilemenuck-backbutton svg {
+	width: 14px;
+	fill: #fff;
+	position: relative;
+	left: -5px;
+	top: -2px;
+}[data-id="maximenuck147"] + #mobilemenuck-overlay {
+	position: fixed;
+	top: 0;
+	background: #000000;
+	opacity: 0.3;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 9;
+}.mobilemenuck-logo { text-align: center; }.mobilemenuck-logo-left { text-align: left; }.mobilemenuck-logo-right { text-align: right; }.mobilemenuck-logo a { display: inline-block; }</style>
+	<style>.dj-hideitem { display: none !important; }
+</style>
+	<style>div.mod_search87 input[type="search"]{ width:auto; }</style>
+	<style>div#maximenuck147 .titreck-text {
+	flex: 1;
+}
+
+div#maximenuck147 .maximenuck.rolloveritem  img {
+	display: none !important;
+}
+@media screen and (max-width: 1199px) {div#maximenuck147 ul.maximenuck li.maximenuck.nomobileck, div#maximenuck147 .maxipushdownck ul.maximenuck2 li.maximenuck.nomobileck { display: none !important; }
+	div#maximenuck147.maximenuckh {
+        height: auto !important;
+    }
+	
+	div#maximenuck147.maximenuckh li.maxiFancybackground {
+		display: none !important;
+	}
+
+    div#maximenuck147.maximenuckh ul:not(.noresponsive) {
+        height: auto !important;
+        padding-left: 0 !important;
+        /*padding-right: 0 !important;*/
+    }
+
+    div#maximenuck147.maximenuckh ul:not(.noresponsive) li {
+        float :none !important;
+        width: 100% !important;
+		box-sizing: border-box;
+        /*padding-right: 0 !important;*/
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    div#maximenuck147.maximenuckh ul:not(.noresponsive) li > div.floatck {
+        width: 100% !important;
+		box-sizing: border-box;
+		right: 0 !important;
+		left: 0 !important;
+		margin-left: 0 !important;
+		position: relative !important;
+		/*display: none;
+		height: auto !important;*/
+    }
+	
+	div#maximenuck147.maximenuckh ul:not(.noresponsive) li:hover > div.floatck {
+		position: relative !important;
+		margin-left: 0 !important;
+    }
+
+    div#maximenuck147.maximenuckh ul:not(.noresponsive) div.floatck div.maximenuck2 {
+        width: 100% !important;
+    }
+
+    div#maximenuck147.maximenuckh ul:not(.noresponsive) div.floatck div.floatck {
+        width: 100% !important;
+        margin: 20px 0 0 0 !important;
+    }
+	
+	div#maximenuck147.maximenuckh ul:not(.noresponsive) div.floatck div.maxidrop-main {
+        width: 100% !important;
+    }
+
+    div#maximenuck147.maximenuckh ul:not(.noresponsive) li.maximenucklogo img {
+        display: block !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        float: none !important;
+    }
+	
+	
+	/* for vertical menu  */
+	div#maximenuck147.maximenuckv {
+        height: auto !important;
+    }
+	
+	div#maximenuck147.maximenuckh li.maxiFancybackground {
+		display: none !important;
+	}
+
+    div#maximenuck147.maximenuckv ul:not(.noresponsive) {
+        height: auto !important;
+        padding-left: 0 !important;
+        /*padding-right: 0 !important;*/
+    }
+
+    div#maximenuck147.maximenuckv ul:not(.noresponsive) li {
+        float :none !important;
+        width: 100% !important;
+        /*padding-right: 0 !important;*/
+		padding-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    div#maximenuck147.maximenuckv ul:not(.noresponsive) li > div.floatck {
+        width: 100% !important;
+		right: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		position: relative !important;
+		left: 0 !important;
+		/*display: none;
+		height: auto !important;*/
+    }
+	
+	div#maximenuck147.maximenuckv ul:not(.noresponsive) li:hover > div.floatck {
+		position: relative !important;
+		margin-left: 0 !important;
+    }
+
+    div#maximenuck147.maximenuckv ul:not(.noresponsive) div.floatck div.maximenuck2 {
+        width: 100% !important;
+    }
+
+    div#maximenuck147.maximenuckv ul:not(.noresponsive) div.floatck div.floatck {
+        width: 100% !important;
+        margin: 20px 0 0 0 !important;
+    }
+	
+	div#maximenuck147.maximenuckv ul:not(.noresponsive) div.floatck div.maxidrop-main {
+        width: 100% !important;
+    }
+
+    div#maximenuck147.maximenuckv ul:not(.noresponsive) li.maximenucklogo img {
+        display: block !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        float: none !important;
+    }
+}
+	
+@media screen and (min-width: 1200px) {
+	div#maximenuck147 ul.maximenuck li.maximenuck.nodesktopck, div#maximenuck147 .maxipushdownck ul.maximenuck2 li.maximenuck.nodesktopck { display: none !important; }
+}/*---------------------------------------------
+---	 WCAG				                ---
+----------------------------------------------*/
+#maximenuck147.maximenuck-wcag-active .maximenuck-toggler-anchor ~ ul {
+    display: block !important;
+}
+
+#maximenuck147 .maximenuck-toggler-anchor {
+	height: 0;
+	opacity: 0;
+	overflow: hidden;
+	display: none;
+}</style>
+	<style>#maximenuck147-mobile-bar, #maximenuck147-mobile-bar-wrap-topfixed { display: none; }
+	@media only screen and (max-width:1199px){
+	#maximenuck147 { display: none !important; }
+	#maximenuck147-mobile-bar, #maximenuck147-mobile-bar-wrap-topfixed { display: block; }
+	.mobilemenuck-hide {display: none !important;}
+    body { padding-top: 40px !important; } }</style>
+
+	
+	
+	<script type="text/javascript" async="" id="topmailru-code" src="https://top-fwz1.mail.ru/js/code.js"></script><script type="application/json" class="joomla-script-options loaded">{"joomla.jtext":{"ERROR":"\u041e\u0448\u0438\u0431\u043a\u0430","MESSAGE":"\u0421\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435","NOTICE":"\u0412\u043d\u0438\u043c\u0430\u043d\u0438\u0435","WARNING":"\u041f\u0440\u0435\u0434\u0443\u043f\u0440\u0435\u0436\u0434\u0435\u043d\u0438\u0435","JCLOSE":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c","JOK":"\u041e\u043a","JOPEN":"\u041e\u0442\u043a\u0440\u044b\u0442\u044c"},"system.paths":{"root":"","rootFull":"https:\/\/blog.altuninvv.ru\/","base":"","baseFull":"https:\/\/blog.altuninvv.ru\/"},"csrf.token":"11601d0d851f749ac4795cc0430f3324"}</script>
+	
+	
+	
+	
+	
+	<script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/blog.altuninvv.ru\/","name":"Главная"}},{"@type":"ListItem","position":2,"item":{"@id":"https:\/\/blog.altuninvv.ru\/politika","name":"Политика конфиденциальности"}}]}</script>
+	
+	
+	<link rel="canonical" href="http://blog.altuninvv.ru/politika">
+	<!-- Start: Структурные данные гугла -->
+             <script type="application/ld+json" data-type="gsd"> { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Администрирование серверов и ПК на Astra Linux, установка и настройка, сборка служб и компонентов из исходного кода, установка из пакетов и сторонних репозиториев. Программирование на языке C++ с помощью фреймворка Qt. Использование PHP, JavaScript, HTML, CSS, GULP для создания сайтов и в веб-дизайн...", "item": "https://blog.altuninvv.ru/" }, { "@type": "ListItem", "position": 2, "name": "Политика конфиденциальности", "item": "https://blog.altuninvv.ru/politika" } ] } </script> <script type="application/ld+json" data-type="gsd"> { "@context": "https://schema.org", "@type": "Article", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://blog.altuninvv.ru/politika" }, "headline": "Пишем «плавающее» окно на qt5. Часть 1 0", "description": "Сегодня с помощью QtCreator и C++ мы реализуем простое «плавающее» окно – часы. Работать мы будем в Windows 10. Материал будет разбит на несколько частей. Создавая программы, программист зачастую сталкивается с необходимостью вывода разнообразной информации на экран. Для этого обычно используются разнообразные всплывающие окна или окна диалог Если же необходимо показывать пользователю достаточно часто изменяющуюся информацию, например, скорость загрузки/скачивания информации, вывод какого-либо графика – то тут лучше использовать «плавающее» окно. Плавающие окна появились довольно давно, самые первые менеджеры закачки использовали их, чтобы отображать информацию о статусе соединения и скорости закачки. Как правило такие окошки были полупрозрачны, так что не перекрывали полностью полезную площадь экрана и могли быть размещены в любой части экрана. Такие окна часто использовались в старых программах для закачки файлов. Яндекс.Браузер умеет откреплять любое видео в виде плавающего окна, что очень удобно. 0", "image": { "@type": "ImageObject", "url": "https://blog.altuninvv.ru/images/joomlart/article/184b7cb84d7b456c96a0bdfbbeaa5f14.jpg" }, "author": { "@type": "Person", "name": "Алтунин Василий", "url": "https://blog.altuninvv.ru/politika" }, "publisher": { "@type": "Organization", "name": "АлтунинВВ.Блог", "logo": { "@type": "ImageObject", "url": "https://blog.altuninvv.ru/images/mylogo.png" } }, "datePublished": "2020-02-27T11:04:58+11:00", "dateCreated": "2020-02-27T11:04:58+11:00", "dateModified": "2022-12-22T15:17:15+11:00" } </script>
+            <!-- End: Структурные данные гугла -->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=zX7k6xMoM2">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=zX7k6xMoM2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=zX7k6xMoM2">
+    <link rel="manifest" href="/site.webmanifest?v=zX7k6xMoM2">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=zX7k6xMoM2" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico?v=zX7k6xMoM2">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="wot-verification" content="1dc5f9a01c3a3d97dd66">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=zX7k6xMoM2">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=zX7k6xMoM2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=zX7k6xMoM2">
+    <link rel="manifest" href="/site.webmanifest?v=zX7k6xMoM2">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=zX7k6xMoM2" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico?v=zX7k6xMoM2">
+
+
+    <link rel="stylesheet" href="/media/templates/site/lightblog/css/styles.css" type="text/css" preload="">
+    <link rel="stylesheet" href="/media/templates/site/lightblog/css/template.css" type="text/css" preload="">
+
+    <link rel="stylesheet" href="/media/templates/site/lightblog/css/custom.css" type="text/css" preload="">
+    <link rel="stylesheet" href="/media/templates/site/lightblog/css/grid.css" type="text/css" preload="">
+
+    
+
+
+            <!-- your code -->
+    
+    <meta property="og:type" content="blog">
+
+    <!-- Yandex.RTB -->
+    
+    
+
+	<script src="/media/vendor/jquery/js/jquery.min.js?3.6.0"></script>
+<script src="/media/legacy/js/jquery-noconflict.min.js?04499b98c0305b16b373dff09fe79d1290976288"></script>
+<script src="/media/com_jchoptimize/cache/js/1dccb1b64e0a18ecb34333bde8b918734ac74b51d048a3521891a22198e0de54.js"></script>
+	<script src="/plugins/content/jllike/js/buttons.min.js?1ccc063361d368b3917db9f36f9ead15"></script>
+<script src="/media/plg_system_mobilemenuck/assets/mobilemenuck.js?ver=1.5.9"></script>
+<script>            var jllickeproSettings = {
+                url : "http://blog.altuninvv.ru",
+                typeGet : "0",
+                enableCounters : 1,
+                disableMoreLikes : 0,
+                isCategory : 0,
+                buttonsContayner : "div.itemBackToTop",
+                parentContayner : "div.jllikeproSharesContayner",
+            };</script>
+<script>jQuery(document).ready(function(){ new MobileMenuCK(jQuery('#maximenuck147'), {menubarbuttoncontent : '&#x2261;',topbarbuttoncontent : '×',showmobilemenutext : 'custom',mobilemenutext : 'АлтунинВВ.Блог',container : 'body',detectiontype : 'resolution',resolution : '1199',usemodules : '0',useimages : '0',showlogo : '1',showdesc : '0',displaytype : 'accordion',displayeffect : 'normal',menuwidth : '300',openedonactiveitem : '0',mobilebackbuttontext : 'Back',menuselector : 'ul.maximenuck',uriroot : '',tooglebarevent : 'click',tooglebaron : 'all',logo_source : 'maximenuck',logo_image : '',logo_link : '',logo_alt : '',logo_position : 'left',logo_width : '',logo_height : '',logo_margintop : '',logo_marginright : '',logo_marginbottom : '',logo_marginleft : '',topfixedeffect : 'always',lock_button : '0',lock_forced : '0',accordion_use_effects : '0',accordion_toggle : '0',show_icons : '0',counter : '0',hide_desktop : '1',overlay : '1',menuid : 'maximenuck147',merge : '',beforetext : '',aftertext : '',mergeorder : '',logo_where : '1',uriroot : ''}); });</script>
+<script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("loaded");
+
+
+        });
+    </script>
+<script>
+        window.yaContextCb = window.yaContextCb || []
+    </script>
+	<script src="/media/mod_menu/js/menu-es5.min.js?1ccc063361d368b3917db9f36f9ead15" nomodule="" defer=""></script>
+	<script src="/media/system/js/messages-es5.min.js?70b6651d6deab46dc8a25f03338f66f540cc62e2" nomodule="" defer=""></script>
+	<script src="/media/system/js/messages.min.js?7425e8d1cb9e4f061d5e30271d6d99b085344117" type="module"></script>
+	<script src="https://yandex.ru/ads/system/context.js" async=""></script>
+  <link rel="image_src" href="https://blog.altuninvv.ru/images/joomlart/article/184b7cb84d7b456c96a0bdfbbeaa5f14.jpg">
+<style id="abu-collapse-styles" type="text/css"></style></head>
+
+<body class="background ilu" itemscope="" itemtype="https://schema.org/WebPage">
+
+
+    <div class="f-table f-col f-w-100" id="main">
+
+        <div id="scroll-top"></div>
+
+        <!-- nav start -->
+
+        <div id="nav-w" class="f-table f-row nav_top f-align-center f-just-arnd f-w-100 header_bg">
+            <div class="f-w-100 f-pad-05 ">
+                <div class="f-table f-row f-just-arnd f-align-center f-no-wrap f-w-100">
+                    <div class="f-shrink">
+                        <div class="f-w-100">
+                            <div class="container">
+                                <div class="f-table f-row f-align-center logo-block">
+                                    <div class="" itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject">
+                                        <a rel="home" itemprop="url image" href="https://blog.altuninvv.ru/"><img itemprop="url image" class="alogo" src="/images/mylogo_site.svg" alt="Логотип АлтунинВВ.Блог" title="АлтунинВВ.Блог" width="70em" height="70em"></a>
+                                        <meta itemprop="width" content="40">
+                                        <meta itemprop="height" content="40">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="f-table f-grow f-w-100 f-align-center f-just-center">
+                        <nav role="navigation" itemscope="" itemtype="https://www.schema.org/SiteNavigationElement">
+                            <div id="nav">
+                                <!-- debut Maximenu CK -->
+	<div class="maximenuckh ltr" id="maximenuck147" style="z-index:10000;">
+						<ul itemscope="" itemtype="https://www.schema.org/SiteNavigationElement" class=" maximenuck" data-mobilemenuck-id="maximenuck147">
+				<li itemprop="name" data-level="1" class="maximenuck item101 first level1 " style="z-index : 12000;"><a itemprop="url" data-hover="Новости" class="maximenuck " href="/" title="Новости"><span class="titreck" data-hover="Новости"><span class="titreck-text"><span class="titreck-title">Новости</span></span></span></a>
+		</li><li itemprop="name" data-level="1" class="maximenuck item256 level1 " style="z-index : 11999;"><a itemprop="url" data-hover="Simply" class="maximenuck " href="/simply"><span class="titreck" data-hover="Simply"><span class="titreck-text"><span class="titreck-title">Simply</span></span></span></a>
+		</li><li itemprop="name" data-level="1" class="maximenuck item136 parent level1 " style="z-index : 11998;"><a itemprop="url" data-hover="ЯП" class="maximenuck " href="/программирование"><span class="titreck" data-hover="ЯП"><span class="titreck-text"><span class="titreck-title">ЯП</span></span></span></a>
+	<div class="floatck" style=""><div class="maxidrop-main" style=""><div class="maximenuck2 first ">
+	<ul class="maximenuck2"><li itemprop="name" data-level="2" class="maximenuck item137 first parent level2 " style="z-index : 11997;"><a itemprop="url" data-hover="Qt5" class="maximenuck " href="/программирование/qt5"><span class="titreck" data-hover="Qt5"><span class="titreck-text"><span class="titreck-title">Qt5</span></span></span></a>
+	<div class="floatck" style=""><div class="maxidrop-main" style=""><div class="maximenuck2 first ">
+	<ul class="maximenuck2"><li itemprop="name" data-level="3" class="maximenuck item218 first level3 " style="z-index : 11996;"><a itemprop="url" data-hover="Модели" class="maximenuck " href="/программирование/qt5/модели"><span class="titreck" data-hover="Модели"><span class="titreck-text"><span class="titreck-title">Модели</span></span></span></a>
+		</li><li itemprop="name" data-level="3" class="maximenuck item219 level3 " style="z-index : 11995;"><a itemprop="url" data-hover="Виджеты" class="maximenuck " href="/программирование/qt5/виджеты"><span class="titreck" data-hover="Виджеты"><span class="titreck-text"><span class="titreck-title">Виджеты</span></span></span></a>
+		</li><li itemprop="name" data-level="3" class="maximenuck item220 level3 " style="z-index : 11994;"><a itemprop="url" data-hover="WebAPI" class="maximenuck " href="/программирование/qt5/webapi"><span class="titreck" data-hover="WebAPI"><span class="titreck-text"><span class="titreck-title">WebAPI</span></span></span></a>
+		</li><li itemprop="name" data-level="3" class="maximenuck item221 last level3 " style="z-index : 11993;"><a itemprop="url" data-hover="LDAP" class="maximenuck " href="/программирование/qt5/ldap"><span class="titreck" data-hover="LDAP"><span class="titreck-text"><span class="titreck-title">LDAP</span></span></span></a>
+	</li>
+	</ul>
+	</div></div></div>
+	</li><li itemprop="name" data-level="2" class="maximenuck item222 level2 " style="z-index : 11992;"><a itemprop="url" data-hover="C++" class="maximenuck " href="/программирование/cpp"><span class="titreck" data-hover="C++"><span class="titreck-text"><span class="titreck-title">C++</span></span></span></a>
+		</li><li itemprop="name" data-level="2" class="maximenuck item225 level2 " style="z-index : 11991;"><a itemprop="url" data-hover="Visual Studio Code" class="maximenuck " href="/программирование/visual-studio-code"><span class="titreck" data-hover="Visual Studio Code"><span class="titreck-text"><span class="titreck-title">Visual Studio Code</span></span></span></a>
+		</li><li itemprop="name" data-level="2" class="maximenuck item228 level2 " style="z-index : 11990;"><a itemprop="url" data-hover="GULP" class="maximenuck " href="/программирование/gulp"><span class="titreck" data-hover="GULP"><span class="titreck-text"><span class="titreck-title">GULP</span></span></span></a>
+		</li><li itemprop="name" data-level="2" class="maximenuck item233 level2 " style="z-index : 11989;"><a itemprop="url" data-hover="PHP" class="maximenuck " href="/программирование/php"><span class="titreck" data-hover="PHP"><span class="titreck-text"><span class="titreck-title">PHP</span></span></span></a>
+		</li><li itemprop="name" data-level="2" class="maximenuck item257 level2 " style="z-index : 11988;"><a itemprop="url" data-hover="Vue.js" class="maximenuck " href="/программирование/vue-js"><span class="titreck" data-hover="Vue.js"><span class="titreck-text"><span class="titreck-title">Vue.js</span></span></span></a>
+		</li><li itemprop="name" data-level="2" class="maximenuck item363 last level2 " style="z-index : 11987;"><a itemprop="url" data-hover="API" class="maximenuck " href="/программирование/api"><span class="titreck" data-hover="API"><span class="titreck-text"><span class="titreck-title">API</span></span></span></a>
+	</li>
+	</ul>
+	</div></div></div>
+	</li><li itemprop="name" data-level="1" class="maximenuck item144 parent level1 " style="z-index : 11986;"><a itemprop="url" data-hover="Статьи" class="maximenuck " href="/статьи"><span class="titreck" data-hover="Статьи"><span class="titreck-text"><span class="titreck-title">Статьи</span></span></span></a>
+	<div class="floatck" style=""><div class="maxidrop-main" style=""><div class="maximenuck2 first ">
+	<ul class="maximenuck2"><li itemprop="name" data-level="2" class="maximenuck item187 first parent level2 " style="z-index : 11985;"><a itemprop="url" data-hover="Сеть" class="maximenuck " href="/статьи/сеть"><span class="titreck" data-hover="Сеть"><span class="titreck-text"><span class="titreck-title">Сеть</span></span></span></a>
+	<div class="floatck" style=""><div class="maxidrop-main" style=""><div class="maximenuck2 first ">
+	<ul class="maximenuck2"><li itemprop="name" data-level="3" class="maximenuck item188 first level3 " style="z-index : 11984;"><a itemprop="url" data-hover="GNS3" class="maximenuck " href="/статьи/сеть/gns3"><span class="titreck" data-hover="GNS3"><span class="titreck-text"><span class="titreck-title">GNS3</span></span></span></a>
+		</li><li itemprop="name" data-level="3" class="maximenuck item229 last level3 " style="z-index : 11983;"><a itemprop="url" data-hover="Zabbix" class="maximenuck " href="/статьи/сеть/zabbix"><span class="titreck" data-hover="Zabbix"><span class="titreck-text"><span class="titreck-title">Zabbix</span></span></span></a>
+	</li>
+	</ul>
+	</div></div></div>
+	</li><li itemprop="name" data-level="2" class="maximenuck item209 parent level2 " style="z-index : 11982;"><a itemprop="url" data-hover="Операционные системы" class="maximenuck " href="/статьи/os"><span class="titreck" data-hover="Операционные системы"><span class="titreck-text"><span class="titreck-title">Операционные системы</span></span></span></a>
+	<div class="floatck" style=""><div class="maxidrop-main" style=""><div class="maximenuck2 first ">
+	<ul class="maximenuck2"><li itemprop="name" data-level="3" class="maximenuck item252 first parent level3 " style="z-index : 11981;"><a itemprop="url" data-hover="Linux" class="maximenuck " href="/статьи/os/linux"><span class="titreck" data-hover="Linux"><span class="titreck-text"><span class="titreck-title">Linux</span></span></span></a>
+	<div class="floatck" style=""><div class="maxidrop-main" style=""><div class="maximenuck2 first ">
+	<ul class="maximenuck2"><li itemprop="name" data-level="4" class="maximenuck item210 first last level4 " style="z-index : 11980;"><a itemprop="url" data-hover="Astra Linux" class="maximenuck " href="/статьи/os/linux/astralinux" title="Astra Linux"><span class="titreck" data-hover="Astra Linux"><span class="titreck-text"><span class="titreck-title">Astra Linux</span></span></span></a>
+	</li>
+	</ul>
+	</div></div></div>
+	</li><li itemprop="name" data-level="3" class="maximenuck item223 last level3 " style="z-index : 11979;"><a itemprop="url" data-hover="Windows" class="maximenuck " href="/статьи/os/windows"><span class="titreck" data-hover="Windows"><span class="titreck-text"><span class="titreck-title">Windows</span></span></span></a>
+	</li>
+	</ul>
+	</div></div></div>
+	</li><li itemprop="name" data-level="2" class="maximenuck item211 parent level2 " style="z-index : 11978;"><a itemprop="url" data-hover="Железо" class="maximenuck " href="/статьи/железо"><span class="titreck" data-hover="Железо"><span class="titreck-text"><span class="titreck-title">Железо</span></span></span></a>
+	<div class="floatck" style=""><div class="maxidrop-main" style=""><div class="maximenuck2 first ">
+	<ul class="maximenuck2"><li itemprop="name" data-level="3" class="maximenuck item212 first level3 " style="z-index : 11977;"><a itemprop="url" data-hover="Arduino" class="maximenuck " href="/статьи/железо/arduino"><span class="titreck" data-hover="Arduino"><span class="titreck-text"><span class="titreck-title">Arduino</span></span></span></a>
+		</li><li itemprop="name" data-level="3" class="maximenuck item128 parent last level3 " style="z-index : 11976;"><a itemprop="url" data-hover="Eltex" class="maximenuck " href="/статьи/железо/eltex"><span class="titreck" data-hover="Eltex"><span class="titreck-text"><span class="titreck-title">Eltex</span></span></span></a>
+	<div class="floatck" style=""><div class="maxidrop-main" style=""><div class="maximenuck2 first ">
+	<ul class="maximenuck2"><li itemprop="name" data-level="4" class="maximenuck item129 first level4 " style="z-index : 11975;"><a itemprop="url" data-hover="MES" class="maximenuck " href="/статьи/железо/eltex/mes"><span class="titreck" data-hover="MES"><span class="titreck-text"><span class="titreck-title">MES</span></span></span></a>
+		</li><li itemprop="name" data-level="4" class="maximenuck item130 last level4 " style="z-index : 11974;"><a itemprop="url" data-hover="ESR" class="maximenuck " href="/статьи/железо/eltex/esr"><span class="titreck" data-hover="ESR"><span class="titreck-text"><span class="titreck-title">ESR</span></span></span></a>
+	</li>
+	</ul>
+	</div></div></div>
+	</li>
+	</ul>
+	</div></div></div>
+	</li>
+	</ul>
+	</div></div></div>
+	</li><li itemprop="name" data-level="1" class="maximenuck item108 parent level1 " style="z-index : 11973;"><a itemprop="url" data-hover="Обо мне" class="maximenuck " href="/обо-мне"><span class="titreck" data-hover="Обо мне"><span class="titreck-text"><span class="titreck-title">Обо мне</span></span></span></a>
+	<div class="floatck" style=""><div class="maxidrop-main" style=""><div class="maximenuck2 first ">
+	<ul class="maximenuck2"><li itemprop="name" data-level="2" class="maximenuck item132 first level2 " style="z-index : 11972;"><a itemprop="url" data-hover="Контакты" class="maximenuck " href="/обо-мне/контакты"><span class="titreck" data-hover="Контакты"><span class="titreck-text"><span class="titreck-title">Контакты</span></span></span></a>
+		</li><li itemprop="name" data-level="2" class="maximenuck item362 last level2 " style="z-index : 11971;"><a itemprop="url" data-hover="Поддержать" class="maximenuck " href="/обо-мне/поддержать"><span class="titreck" data-hover="Поддержать"><span class="titreck-text"><span class="titreck-title">Поддержать</span></span></span></a>
+	</li>
+	</ul>
+	</div></div></div>
+	</li>            </ul>
+    </div>
+    <!-- fin maximenuCK -->
+
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="f-shrink">
+                        <div class="f-table f-row socheadericons socicons_top f-w-100 f-just-center f-align-center">
+
+                            <meta itemprop="name" content="АлтунинВВ.Блог">
+
+                            <link itemprop="url" href="https://blog.altuninvv.ru/">
+
+                            <div class="f-pad-05">
+                                <a itemprop="sameAs" target="_blank" rel="external" href="https://rutube.ru/channel/1589052" class="f-table">
+                                    <img class="socheaderimg" src="/images/rutube.svg" alt="ВЛОГ на Rutube" title="ВЛОГ на Rutube" width="20px">
+                                </a>
+                            </div>
+
+                            <div class="f-pad-05">
+                                <a itemprop="sameAs" target="_blank" rel="external" href="https://vk.com/skyr9999" class="f-table">
+                                    <img class="socheaderimg" src="/images/vk-logo.svg" alt="Сообщество ВКонтакте" title="Сообщество ВКонтакте">
+                                </a>
+                            </div>
+
+                            <div class="f-pad-05">
+                                <a itemprop="sameAs" target="_blank" rel="external" href="https://t.me/altuninvv_blog" class="f-table">
+                                    <img class="socheaderimg" src="/images/telegram-logo.svg" alt="Группа в Telegram" title="Группа в Telegram">
+                                </a>
+                            </div>
+                            <div class="f-pad-05">
+                                <a itemprop="sameAs" target="_blank" rel="external" href="https://discord.gg/6MbyXYGBEE" class="f-table">
+                                    <img class="socheaderimg" src="/images/discord-logo.svg" alt="Сервер Discord" title="Сервер Discord">
+                                </a>
+                            </div>
+
+                            <div class="f-pad-05">
+                                <a itemprop="sameAs" target="_blank" rel="external" href="https://yarus.ru/feed/467786" class="f-table">
+                                    <img class="socheaderimg" src="/images/yarus-logo.svg" alt="Канал в ЯRUS" title="Канал в ЯRUS">
+                                </a>
+                            </div>
+
+                            <div class="f-pad-05">
+                                <a itemprop="sameAs" target="_blank" rel="external" href="https://dzen.ru/altuninvv" class="f-table">
+                                    <img class="socheaderimg" src="/images/dzen.svg" alt="Канал в ДЗЕН" title="Канал в ДЗЕН">
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="content" class="f-table f-col f-just-btw">
+
+            <div class="f-table f-row f-wrap content_wrapper">
+
+                <div class="f-w-100 main-content">
+
+                    <div id="breadcrumb-w">
+                        <nav class="mod-breadcrumbs__wrapper module f-table f-col f-mar-top-1" aria-label="Breadcrumbs">
+    <div class="mod-breadcrumbs breadcrumb">
+                    <span class="mod-breadcrumbs__here float-start">
+                Вы здесь: &nbsp;
+        </span>
+        
+        <span class="mod-breadcrumbs__item breadcrumb-item"> › <a href="/" class="pathway"><span>Главная</span></a></span>    
+    </div></nav>
+                    </div>
+
+
+                    
+                    <div id="comp-i">
+                        <div id="system-message-container" aria-live="polite"></div>
+
+                        <div class="com-content-article blog_post item-page" itemscope="" itemtype="https://schema.org/Article">
+    <meta itemprop="inLanguage" content="ru-RU">
+    
+    
+    
+        <time class="font-size-08" datetime="2020-02-27T11:04:58+11:00" itemprop="datePublished">
+            27 февраля 2020        </time>
+    
+                    
+
+        <figure class="left item-image">
+    <img src="/images/joomlart/article/184b7cb84d7b456c96a0bdfbbeaa5f14.jpg" itemprop="image" alt="Float window over source code" decoding="async" width="500" height="323">    </figure>
+
+
+                    <div class="page-header">
+                <h1 itemprop="headline">
+                    Пишем «плавающее» окно на qt5. Часть 1                </h1>
+                                                            </div>
+                
+                
+
+                
+
+                
+<div class="ad_banner_inner">
+
+<!-- Yandex.RTB R-A-1629398-2 -->
+<div id="yandex_rtb_R-A-1629398-2"></div>
+<script>
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            renderTo: 'yandex_rtb_R-A-1629398-2',
+            blockId: 'R-A-1629398-2'
+        })
+    })
+</script>
+
+
+</div>        
+
+        <div itemprop="articleBody" class="com-content-article__body">
+            <p style="text-align: left;">Сегодня с помощью QtCreator и C++ мы реализуем простое «плавающее» окно – часы. Работать мы будем в Windows 10. Материал будет разбит на несколько частей.</p>
+<p style="text-align: left;">Создавая программы, программист зачастую сталкивается с необходимостью вывода разнообразной информации на экран. Для этого обычно используются разнообразные всплывающие окна или окна диалог</p>
+<p style="text-align: left;">Если же необходимо показывать пользователю достаточно часто изменяющуюся информацию, например, скорость загрузки/скачивания информации, вывод какого-либо графика – то тут лучше использовать «плавающее» окно.</p>
+<p style="text-align: left;">Плавающие окна появились довольно давно, самые первые менеджеры закачки использовали их, чтобы отображать информацию о статусе соединения и скорости закачки. Как правило такие окошки были полупрозрачны, так что не перекрывали полностью полезную площадь экрана и могли быть размещены в любой части экрана. Такие окна часто использовались в старых программах для закачки файлов.</p>
+<p style="text-align: left;"><a href="https://browser.yandex.ru">Яндекс.Браузер</a> умеет откреплять любое видео в виде плавающего окна, что очень удобно.</p>
+ 
+<p style="text-align: left;">Так же, «плавающее» окно использует программа Download Master.&nbsp;</p>
+<h2 style="text-align: left;">Создание проекта</h2>
+<p style="text-align: left;">Откроем Qtcreator и создадим проект <code>Qt Widgets Application</code> для декстопа.</p>
+<p style="text-align: left;">Назовем его <code>QtFloatWindow</code>.</p>
+<p style="text-align: left;">В качестве «<code>Build System</code>» выберем <code>qmake</code>.</p>
+<p style="text-align: left;">Класс окна оставим без изменений.</p>
+<h2 style="text-align: left;">Пробный запуск</h2>
+<p style="text-align: left;">Сразу после создания, проект откроется в редакторе, нам нужно проверить собирается ли у нас проект в принципе.</p>
+<p style="text-align: left;">Раскрываем папку с проектом и открываем файл <code>mainwindow.cpp</code></p>
+<p style="text-align: left;">Нажимаем Ctrl+R, будет запущена сборка проекта.</p>
+<p style="text-align: left;">Возможно в процессе сборки вы получите сообщение об ошибке:</p>
+<p style="text-align: left;"><img class="lazyload" src="/images/qt_vulkan_err.png" alt="" width="323" height="161"></p>
+<p style="text-align: left;">Жмем Yes.</p>
+<p style="text-align: left;">Это ошибка:</p>
+<p style="text-align: left;"><code>C:\msys64\mingw64\share\qt5\mkspecs\common\windows-vulkan.conf:1: error: Cannot find feature windows_vulkan_sdk</code></p>
+<p style="text-align: left;">Её можно спокойно игнорировать, если, конечно, вы не используете Vulkan API для разработки под windows.</p>
+<p style="text-align: left;"><img class="lazyload" src="/images/qt_empty_proj_win.png" alt="" width="840" height="670">Если более серьезных ошибок не возникло и среда сборки у вас настроена верно, то появится такое вот окно:</p>
+<p style="text-align: left;">Вот и всё, текст прошел успешно можно закрывать окно.</p>
+<h2 style="text-align: left;">Добавление формы для плавающего окошка</h2>
+<p style="text-align: left;">Пришло время заняться непосредственно плавающим окном.</p>
+<p style="text-align: left;">Добавим новую форму в проект. Для этого щелкаем правой кнопкой на название проекта и выбираем Add new…</p>
+<p style="text-align: left;">В новом выбираем <code>Qt</code> и <code>Qt Designer Form Class</code> и жмем <code>Choose…</code></p>
+<p style="text-align: left;"><img class="lazyload" src="/images/qt_add_new_form.png" alt="" width="946" height="616"></p>
+<p style="text-align: left;">На следующей форме выбираем <code>Widget</code> и жмем <code>Next</code></p>
+<p style="text-align: left;">Задаем имя новой формы в поле <code>Class name</code>: <code>FloatWindow</code></p>
+<p style="text-align: left;"><img class="lazyload" src="/images/qt_add_new_form_class.png" alt="" width="771" height="596"></p>
+<p style="text-align: left;">Жмем <code>Next</code> и сразу <code>Finish</code></p>
+<p style="text-align: left;">Откроется наша, только что созданная, форма:</p>
+<p style="text-align: left;">В свойствах формы в блоке geometry задаем новые размеры формы, пусть это будет:</p>
+<p style="text-align: left;"><code>Width: 200</code></p>
+<p style="text-align: left;"><code>Height: 70</code></p>
+<p style="text-align: left;">Размеры окна, в редакторе, изменяться в соответствии с заданными размерами.</p>
+<h2 style="text-align: left;">Тестирование новой формы</h2>
+<p style="text-align: left;">Если мы сейчас запустим сборку проекта, то после его запуска не увидим новую форму. Нам нужно вручную добавить код для его создания.</p>
+<p style="text-align: left;">Откроем <code>mainwindow.cpp</code></p>
+<p style="text-align: left;">Добавим в начало файла:</p>
+<pre xml:lang="cpp">[code]#include "floatwindow.h"[/code]</pre>
+<p style="text-align: left;">В конец <code>MainWindow::MainWindow(QWidget *parent)</code> добавим:</p>
+<pre xml:lang="cpp">[code]<br>FloatWindow *fwin = new FloatWindow(); &nbsp;&nbsp;&nbsp; <br>fwin-&gt;show(); <br>[/code]</pre>
+<p style="text-align: left;">У нас получится:</p>
+<pre xml:lang="cpp">[code]<br>#include "mainwindow.h"<br>#include "ui_mainwindow.h"<br>#include "floatwindow.h"<br><br>MainWindow::MainWindow(QWidget *parent)<br>&nbsp;&nbsp;&nbsp; : QMainWindow(parent)<br>&nbsp;&nbsp;&nbsp; , ui(new Ui::MainWindow)<br><br>{<br>&nbsp;&nbsp;&nbsp; ui-&gt;setupUi(this);<br><br>&nbsp;&nbsp;&nbsp; FloatWindow *fwin = new FloatWindow();<br>&nbsp;&nbsp;&nbsp; fwin-&gt;show();<br>}<br><br>MainWindow::~MainWindow()<br>{<br>&nbsp;&nbsp;&nbsp; delete ui;<br>}<br>[/code]</pre>
+<p style="text-align: left;">Запускаем проект Ctrl+R</p>
+<p style="text-align: left;">Откроется наше большое окно, если вы его свернем, то под ним окажется наша новая форма:</p>
+<p style="text-align: left;"><img class="lazyload" src="/images/empty_qt_float_win.png" alt="" width="240" height="140"></p>
+<h2 style="text-align: left;">Добавление компонентов на форму</h2>
+<p style="text-align: left;">Займемся внешним видом нашей формы, откроем её в редакторе и перетащим новый компонент <code>Widget</code> из области со списком компонентов.</p>
+<p style="text-align: left;">Так же перетащим на <code>Label</code> на только что созданный <code>Widget</code>. Вы можете его перетащить и сбросить не только непосредственно на форму, но и на имя widget в списке компонентов формы.</p>
+<p style="text-align: left;">В списке справа выбираем нашу форму – <code>FloatWindow</code></p>
+<p style="text-align: left;">Правой кнопкой вызываем меню и выбираем <code>Lay Out -&gt; Lay Out Horizontally</code>.</p>
+<p style="text-align: left;">В списке справа выбираем нашу форму – <code>Widget</code></p>
+<p style="text-align: left;">Правой кнопкой вызываем меню и выбираем <code>Lay Out -&gt; Lay Out Horizontally</code>.</p>
+<p style="text-align: left;">Выбираем <code>widget</code> и в поле <code>objectName</code> вводим новое значение для нее – <code>centralwidget</code></p>
+<p style="text-align: left;">Выбираем <code>label</code> и в поле <code>objectName</code> вводим новое значение для нее – <code>clockLabel</code></p>
+<p style="text-align: left;">Выбираем <code>label</code></p>
+<p style="text-align: left;">Обратите внимание, так как мы использовали <code>Layout</code>, то изменять размер <code>Label</code> мы не можем.</p>
+<p style="text-align: left;">В окне свойств пролистайте вниз до свойств <code>QLabel</code></p>
+<p style="text-align: left;">В поле <code>Text</code> вводим <code>00:00:00</code></p>
+<p style="text-align: left;">В поле <code>alignment</code> для <code>Horizontal</code> выставляем <code>AlignHCenter</code></p>
+<p style="text-align: left;">Листаем вверх и выставляем размер шрифта равным <code>30</code></p>
+<p style="text-align: left;">У нас получится следующее:</p>
+<p style="text-align: left;"><img class="lazyload" src="/images/qt_editor_ready_fw.png" alt="" width="218" height="88"></p>
+<p style="text-align: left;">Теперь уберем ненужные отступы.</p>
+<p style="text-align: left;">В списке справа выделяем <code>FloatWindow</code> и пролистываем свойства до самого низа – <code>Layout</code></p>
+<p style="text-align: left;">Меняем все значения равные <code>9</code> или <code>6</code> на <code>0</code>. Таким образом мы убираем ненужные отступы.</p>
+<p style="text-align: left;">Повторяем тоже самое для <code>centralwidget</code></p>
+<h2 style="text-align: left;">Делаем из формы «плавающее» окно</h2>
+<p style="text-align: left;">Открываем <code>floatwindow.cpp</code> и добавляем код в &nbsp;<code>FloatWindow::FloatWindow(QWidget *parent)</code></p>
+<pre xml:lang="cpp">[code]<br>setStyleSheet("#centralwidget { background-color: rgba(255, 255, 255, 100); border:1px solid #eee; }");<br><br>setAttribute(Qt::WA_TranslucentBackground);<br><br>setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint); &nbsp;&nbsp;&nbsp; <br>[/code]</pre>
+<p style="text-align: left;">Запускаем, чтобы проверить что получилось – Ctrl-R.</p>
+<p style="text-align: left;">Вот у нас и получилось нечто похожее на «плавающее» окошко, правда сдвинуть его не получиться, так как заголовки и границы у формы мы скрыли.</p>
+<h2 style="text-align: left;">Учим окно перемещаться по экрану</h2>
+<p style="text-align: left;">Давайте добавим код, позволяющий нам его перемещать по экрану.</p>
+<p style="text-align: left;">Открываем <code>floatwindow.cpp</code> и добавляем в конец файла:</p>
+<pre xml:lang="cpp">[code]<br>void FloatWindow::mousePressEvent(QMouseEvent *evt)<br>{<br>&nbsp;&nbsp;&nbsp; oldPos = evt-&gt;globalPos();<br>}<br><br>void FloatWindow::mouseMoveEvent(QMouseEvent *evt)<br>{<br>&nbsp;&nbsp;&nbsp; const QPoint delta = evt-&gt;globalPos() - oldPos;<br>&nbsp;&nbsp;&nbsp; move(x()+delta.x(), y()+delta.y());<br>&nbsp;&nbsp;&nbsp; oldPos = evt-&gt;globalPos();<br>}<br>[/code]</pre>
+<p style="text-align: left;">Нажимаем F4 и добавляем</p>
+<p style="text-align: left;"><code>QPoint oldPos;</code></p>
+<p style="text-align: left;">после</p>
+<p style="text-align: left;"><code>Ui::FloatWindow *ui;</code></p>
+<p style="text-align: left;">Добавляем</p>
+<pre xml:lang="cpp">[code]<br>protected:<br>&nbsp;&nbsp;&nbsp;&nbsp; void mousePressEvent(QMouseEvent *evt);<br>&nbsp;&nbsp;&nbsp;&nbsp; void mouseMoveEvent(QMouseEvent *evt);<br>[/code]</pre>
+<p style="text-align: left;">после&nbsp;</p>
+<pre xml:lang="cpp">[code]<br>private:<br> &nbsp;&nbsp; Ui::FloatWindow *ui;<br> &nbsp;&nbsp; QPoint oldPos;<br>[/code]</pre>
+<p style="text-align: left;">Добавляем</p>
+<p style="text-align: left;"><code>#include &lt;QMouseEvent&gt;</code></p>
+<p style="text-align: left;">В начало файла.</p>
+<p style="text-align: left;">Запускаем сборку Ctrl-R.</p>
+<p style="text-align: left;">Вот и наше полупрозрачное окошко:</p>
+<p style="text-align: left;"><img class="lazyload" src="/images/2020-02-25_16-46-29.png" alt="" width="447" height="138"></p>
+<p style="text-align: left;">Просто щелкаем на нем левой кнопкой мыши и не отпуская перетаскиваем в нужное место на экране.</p>
+<h2 style="text-align: left;">Заключение</h2>
+<p style="text-align: left;">Подведем итоги, мы узнали:</p>
+<ol style="text-align: left;">
+<li>Как добавить еще одну форму к проекту;</li>
+<li>Как правильно добавить компоненты на форму и настроить отступы;</li>
+<li>Как превратить обычную форму в «плавающее» окно;</li>
+<li>Добавили функционал перемещения окна в любое место экрана.</li>
+</ol>
+<p style="text-align: left;">Вот и всё на сегодня. В следующем материале мы добавим контекстное меню для плавающего окна и заставим часы идти.</p>
+<p style="text-align: left;">Готовый проект вы можете найти на github по <span style="text-decoration: underline;"><a href="https://github.com/vasiliyaltunin/articles.blog.altuninvv.ru/tree/master/qt5/FloatWindow/Part1/QtFloatWindow">ссылке</a></span>.</p>				<div class="jllikeproSharesContayner jllikepro_8">
+				<input type="hidden" class="link-to-share" id="link-to-share-8" value="http://blog.altuninvv.ru/politika">
+				<input type="hidden" class="share-title" id="share-title-8" value="Пишем «плавающее» окно на qt5. Часть 1">
+				<input type="hidden" class="share-image" id="share-image-8" value="https://blog.altuninvv.ru/images/joomlart/article/184b7cb84d7b456c96a0bdfbbeaa5f14.jpg">
+				<input type="hidden" class="share-desc" id="share-desc-8" value=" Сегодня с помощью QtCreator и C++ мы реализуем простое «плавающее» окно – часы. Работать мы будем в Windows 10. Материал будет разбит на несколько частей.
+ Создавая программы, программист зачастую">
+				<input type="hidden" class="share-id" value="8">
+				<div class="event-container">
+				<div class="likes-block_left">					<a title="Вконтакте" class="like l-vk" id="l-vk-8">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Одноклассники" class="like l-ok" id="l-ok-8">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Weibo" class="like l-wb" id="l-wb-8">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Telegram" class="like l-tl" id="l-tl-8">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="WhatsApp" class="like l-wa" id="l-wa-8">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Viber" class="like l-vi" id="l-vi-8">
+					<i class="l-ico"></i>
+					<span class="l-count"></span>
+					</a>					<a title="Всего лайков" class="l-all" id="l-all-8">
+					<i class="l-ico"></i>
+					<span class="l-count l-all-count" id="l-all-count-8">0</span>
+					</a>					</div>
+				</div>
+			</div>        </div>
+
+
+        <div class="f-mar-top-2"></div>
+            <div class="article-info text-muted f-table f-row font-size-08 f-pad-bot-1 f-gap-05">
+    <div>
+        <dd class="category-name">
+    <span class="icon-folder-open icon-fw" aria-hidden="true"></span>                        Категория: <a href="/программирование/qt5" itemprop="genre">Qt5</a>    </dd>
+    </div>
+    <div>
+        <dd class="hits">
+    <span class="icon-eye icon-fw" aria-hidden="true"></span>
+    <meta itemprop="interactionCount" content="UserPageVisits:3007">
+    Просмотров: 3007</dd>
+    </div>
+</div>
+    
+    
+            </div>
+                        <div class="clr"></div>
+                    </div>
+
+                    
+
+                </div>
+                <div class="f-w-100 rightbar">
+                    <div id="sidebar" class="f-table f-col f-just-start sidebar">
+
+                        <div class="itemad">
+                            <!-- Yandex.RTB R-A-1629398-1 -->
+                            <div id="yandex_rtb_R-A-1629398-1" class="f-mar-top-1"></div>
+                            <script>
+                                window.yaContextCb.push(() => {
+                                    Ya.Context.AdvManager.render({
+                                        renderTo: 'yandex_rtb_R-A-1629398-1',
+                                        blockId: 'R-A-1629398-1'
+                                    })
+                                })
+                            </script>
+                        </div>
+                        <!-- AD -->
+
+                        
+<div class="module f-table f-col f-mar-top-1">
+            <div class="font-600">Поиск</div>
+        <div class="module-body">
+    <div class="search mod_search87 f-table f-col">
+	<form action="/politika" method="post" class="form-inline" role="search">
+		<input name="searchword" id="mod-search-searchword87" maxlength="200" class="w-100 inputbox search-query input-medium search_blog" type="search" size="20" placeholder="Введите текст для поиска...">		<input type="hidden" name="task" value="search">
+		<input type="hidden" name="option" value="com_search">
+		<input type="hidden" name="Itemid" value="149">
+	</form>
+</div>
+    </div>
+
+</div>
+<div class="module f-table f-col f-mar-top-1">
+        <div class="module-body">
+    <div class="mod-tagspopular-cloud tagspopular tagscloud">
+        <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/group">
+                group</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1.1em" href="/component/tags/tag/3d">
+                3D</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/туннель">
+                туннель</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1.2em" href="/component/tags/tag/hypervisor">
+                hypervisor</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/роутер">
+                роутер</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/microsoft">
+                Microsoft</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1.5em" href="/component/tags/tag/nginx">
+                nginx</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/master">
+                master</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/maridb">
+                MariDB</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/карта">
+                карта</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/failover">
+                FAILOVER</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/миграция">
+                миграция</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/север">
+                север</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1em" href="/component/tags/tag/wsl">
+                WSL</a>
+                    </span>
+            <span class="tag">
+            <a class="tag-name" style="font-size: 1.4em" href="/component/tags/tag/настройка">
+                настройка</a>
+                    </span>
+    </div>
+    </div>
+
+</div>
+<div class="module f-table f-col f-mar-top-1">
+            <div class="font-600">Архив</div>
+        <div class="module-body">
+    <div class="f-table f-col f-just-btw f-pad-top-1">
+<ul class="f-table f-col f-just-btw f-gap-05">
+            
+    <li>
+        <a href="/архив?year=2023&amp;month=1">
+            Январь            2023            (1)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2022&amp;month=12">
+            Декабрь            2022            (9)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2022&amp;month=9">
+            Сентябрь            2022            (2)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2022&amp;month=8">
+            Август            2022            (3)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2022&amp;month=7">
+            Июль            2022            (5)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2022&amp;month=6">
+            Июнь            2022            (3)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2022&amp;month=5">
+            Май            2022            (3)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2022&amp;month=4">
+            Апрель            2022            (10)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2022&amp;month=2">
+            Февраль            2022            (2)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2022&amp;month=1">
+            Январь            2022            (6)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2021&amp;month=12">
+            Декабрь            2021            (5)
+        </a>
+    </li>
+            
+    <li>
+        <a href="/архив?year=2021&amp;month=11">
+            Ноябрь            2021            (10)
+        </a>
+    </li>
+    </ul>
+
+<div class="f-pad-top-1">
+<a href="/архив">Все записи</a>
+</div>
+
+</div>
+    </div>
+
+</div>
+<div class="module f-table f-col f-mar-top-1">
+            <div class="font-600">Популярные</div>
+        <div class="module-body">
+    
+<ul class="mostread-block mod-list f-pad-top-1">
+    <li itemscope="" itemtype="https://schema.org/Article" class="mostread">
+    ›<a href="/сеть/gns3/22-установка-gns3-–-2-2-11-в-hyper-v" itemprop="url">
+        <span itemprop="name">
+            Установка GNS3 – 2.2.11 в Hyper-V            </span>
+        </a>
+    </li>
+    <li itemscope="" itemtype="https://schema.org/Article" class="mostread">
+    ›<a href="/статьи/11-реальное-импортозамещение-или-что-такое-торп" itemprop="url">
+        <span itemprop="name">
+            Реальное импортозамещение или что такое ТОРП?            </span>
+        </a>
+    </li>
+    <li itemscope="" itemtype="https://schema.org/Article" class="mostread">
+    ›<a href="/сеть/gns3/37-настраиваем-windows-для-работы-с-vlan" itemprop="url">
+        <span itemprop="name">
+            Настраиваем Windows для работы с VLAN            </span>
+        </a>
+    </li>
+    <li itemscope="" itemtype="https://schema.org/Article" class="mostread">
+    ›<a href="/программирование/visual-studio-code/97-установка-поддержки-c-в-visual-studio-code-vscode" itemprop="url">
+        <span itemprop="name">
+            Установка поддержки C++ в Visual Studio Code (VSCode)            </span>
+        </a>
+    </li>
+    <li itemscope="" itemtype="https://schema.org/Article" class="mostread">
+    ›<a href="/os/windows/99-обновляем-windows-10-до-версии-20h2" itemprop="url">
+        <span itemprop="name">
+            Обновляем Windows 10 до версии 20H2            </span>
+        </a>
+    </li>
+</ul>
+    </div>
+
+</div>
+
+                        <!-- Yandex.RTB R-A-1629398-5 -->
+                        <div id="yandex_rtb_R-A-1629398-5" class="f-mar-top-1"></div>
+                        <script>
+                            window.yaContextCb.push(() => {
+                                Ya.Context.AdvManager.render({
+                                    renderTo: 'yandex_rtb_R-A-1629398-5',
+                                    blockId: 'R-A-1629398-5'
+                                })
+                            })
+                        </script>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ad_banner_inner">
+                <!-- Yandex.RTB R-A-1629398-6 -->
+                <div id="yandex_rtb_R-A-1629398-6" class="f-mar-top-1"></div>
+                <script>
+                    window.yaContextCb.push(() => {
+                        Ya.Context.AdvManager.render({
+                            renderTo: 'yandex_rtb_R-A-1629398-6',
+                            blockId: 'R-A-1629398-6'
+                        })
+                    })
+                </script>
+            </div>
+        </div>
+
+        <div id="footer" class="f-table f-col f-just-btw f-gap-05 footer">
+            <div class="bottom_block f-table f-row f-just-btw f-gap-1 f-w-100">
+                <div class="f-w-100 footer-menu">
+                    <ul class="f-table f-row footer_menu f-gap-1 f-just-btw">
+<li class="nav-item item-289 deeper parent"><a href="/программирование">Языки</a><ul class="mod-menu__sub list-unstyled small"><li class="nav-item item-295"><a href="/языки-программирования/cpp">C++</a></li><li class="nav-item item-296"><a href="/языки-программирования/visual-studio-code">VSCode</a></li><li class="nav-item item-297"><a href="/языки-программирования/gulp">GULP</a></li><li class="nav-item item-298"><a href="/языки-программирования/php">PHP</a></li><li class="nav-item item-299"><a href="/языки-программирования/vue-js">Vue.js</a></li></ul></li><li class="nav-item item-290 deeper parent"><a href="/программирование/qt5">Qt5</a><ul class="mod-menu__sub list-unstyled small"><li class="nav-item item-291"><a href="/qt5/модели">Модели</a></li><li class="nav-item item-292"><a href="/qt5/виджеты">Виджеты</a></li><li class="nav-item item-293"><a href="/qt5/webapi">WebAPI</a></li><li class="nav-item item-294"><a href="/qt5/ldap">LDAP</a></li></ul></li><li class="nav-item item-304 deeper parent"><a href="/os">OS</a><ul class="mod-menu__sub list-unstyled small"><li class="nav-item item-306"><a href="/os/windows">Windows</a></li><li class="nav-item item-305 deeper parent"><a href="/статьи/os/linux">Linux</a><ul class="mod-menu__sub list-unstyled small"><li class="nav-item item-288"><a href="/simply">Simply Linux</a></li><li class="nav-item item-329"><a href="/статьи/os/linux/astralinux">Astra Linux</a></li></ul></li></ul></li><li class="nav-item item-301 deeper parent"><a href="/статьи/сеть">Сеть</a><ul class="mod-menu__sub list-unstyled small"><li class="nav-item item-302"><a href="/сеть/gns3">GNS3</a></li><li class="nav-item item-303"><a href="/сеть/zabbix">Zabbix</a></li></ul></li></ul>
+
+                </div>
+                <div class="f-w-100 f-pad-1">
+                    <div class="f-table f-col f-just-center f-align-center font-600 f-w-100">Подпишитесь</div>
+
+                    <div class="f-table f-row socheadericons f-w-100 f-just-center f-align-center">
+
+                        <meta itemprop="name" content="АлтунинВВ.Блог">
+
+                        <link itemprop="url" href="https://blog.altuninvv.ru/">
+
+                        <div class="f-pad-05">
+                            <a itemprop="sameAs" target="_blank" rel="external" href="https://rutube.ru/channel/1589052" class="f-table">
+                                <img class="socheaderimg" src="/images/rutube.svg" alt="ВЛОГ на Rutube" title="ВЛОГ на Rutube" width="20px">
+                            </a>
+                        </div>
+
+                        <div class="f-pad-05">
+                            <a itemprop="sameAs" target="_blank" rel="external" href="https://vk.com/skyr9999" class="f-table">
+                                <img class="socheaderimg" src="/images/vk-logo.svg" alt="Сообщество ВКонтакте" title="Сообщество ВКонтакте">
+                            </a>
+                        </div>
+
+                        <div class="f-pad-05">
+                            <a itemprop="sameAs" target="_blank" rel="external" href="https://t.me/altuninvv_blog" class="f-table">
+                                <img class="socheaderimg" src="/images/telegram-logo.svg" alt="Группа в Telegram" title="Группа в Telegram">
+                            </a>
+                        </div>
+                        <div class="f-pad-05">
+                            <a itemprop="sameAs" target="_blank" rel="external" href="https://discord.gg/6MbyXYGBEE" class="f-table">
+                                <img class="socheaderimg" src="/images/discord-logo.svg" alt="Сервер Discord" title="Сервер Discord">
+                            </a>
+                        </div>
+
+                        <div class="f-pad-05">
+                            <a itemprop="sameAs" target="_blank" rel="external" href="https://yarus.ru/feed/467786" class="f-table">
+                                <img class="socheaderimg" src="/images/yarus-logo.svg" alt="Канал в ЯRUS" title="Канал в ЯRUS">
+                            </a>
+                        </div>
+
+                        <div class="f-pad-05">
+                            <a itemprop="sameAs" target="_blank" rel="external" href="https://dzen.ru/altuninvv" class="f-table">
+                                <img class="socheaderimg" src="/images/dzen.svg" alt="Канал в ДЗЕН" title="Канал в ДЗЕН">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="f-table f-col f-just-center f-align-center f-w-100 f-pad-05">
+                        <a href="https://blog.altuninvv.ru/обо-мне/контакты">Контакты</a>
+                    </div>
+
+                    <div class="f-table f-col f-just-center f-align-center f-w-100 f-pad-05">
+                        <a href="https://blog.altuninvv.ru/politika">Политика конфиденциальности</a>
+                    </div>
+
+                    <div class="copyright f-table f-col f-just-center f-align-center f-w-100">
+                        Copyright © 2021-2023 АлтунинВВ.Блог                    </div>
+
+                </div>
+            </div>
+
+            <div class="copyright f-table f-row f-just-center f-align-center f-pad-05">
+                Перепечатка или воспроизведение материалов этого сайта, без разрешения автора, запрещены!
+            </div>
+
+            <div class="f-table f-row f-just-center f-wrap">
+
+                <div class="f-pad-05">
+                    <!--LiveInternet logo--><a rel="nofollow noopener" href="//www.liveinternet.ru/click" target="_blank"><img src="//counter.yadro.ru/logo?14.6" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" alt="" style="border:0" width="88" height="31"></a>
+                    <!--/LiveInternet-->
+                </div>
+                <div class="f-pad-05">
+                    <a rel="nofollow noopener" href="https://webmaster.yandex.ru/siteinfo/?site=blog.altuninvv.ru"><img alt="" src="https://yandex.ru/cycounter?blog.altuninvv.ru&amp;theme=light&amp;lang=ru" width="88" height="31" border="0"></a>
+                </div>
+
+                <div class="f-pad-05">
+                    <!-- Rating Mail.ru logo -->
+                    <a rel="nofollow noopener" href="https://top.mail.ru/jump?from=3250771">
+                        <img src="https://top-fwz1.mail.ru/counter?id=3250771;t=479;l=1" style="border:0;" alt="Top.Mail.Ru" width="88" height="31">
+                    </a>
+                </div>
+                <!-- //Rating Mail.ru logo -->
+                <div class="f-pad-05">
+                    <!--popcatru--><a rel="nofollow noopener" href="https://www.popcat.ru/" title="Наш сайт в каталоге популярных сайтов PopCat.ru" target="_blank"><img src="https://www.popcat.ru/images/sitelogo.gif" style="border:0;" alt="Белый каталог сайтов PopCat.ru" width="88" height="31"></a>
+                    <!--/popcatru-->
+                </div>
+
+            </div>
+
+        </div>
+
+        
+
+
+        <!-- Rambler Top100 code -->
+        <a href="//top100.rambler.ru/navi/7632478/" rel="nofollow" class="cnt_counter">
+            <img src="//counter.rambler.ru/top100.cnt?pid=7632478" alt="Топ-100">
+        </a>
+        <!-- end Rambler Top100 code -->
+
+    </div>
+
+
+
+<script type="text/javascript">
+    setTimeout(() => {
+
+        (function(m, e, t, r, i, k, a) {
+            m[i] = m[i] || function() {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(57666445, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true
+        });
+
+    }, 4000);
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/57666445" style="position:absolute; left:-9999px;" alt="" /></div>
+</noscript>
+
+<!--LiveInternet counter-->
+<script type="text/javascript">
+    new Image().src = "//counter.yadro.ru/hit?r" +
+        escape(document.referrer) + ((typeof(screen) == "undefined") ? "" :
+            ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ?
+                screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) +
+        ";h" + escape(document.title.substring(0, 150)) +
+        ";" + Math.random();
+</script>
+<!--/LiveInternet-->
+
+
+
+<!-- Rating Mail.ru counter -->
+<script type="text/javascript">
+    var _tmr = window._tmr || (window._tmr = []);
+    _tmr.push({
+        id: "3250771",
+        type: "pageView",
+        start: (new Date()).getTime()
+    });
+    (function(d, w, id) {
+        if (d.getElementById(id)) return;
+        var ts = d.createElement("script");
+        ts.type = "text/javascript";
+        ts.async = true;
+        ts.id = id;
+        ts.src = "https://top-fwz1.mail.ru/js/code.js";
+        var f = function() {
+            var s = d.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(ts, s);
+        };
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "topmailru-code");
+</script><noscript>
+    <div>
+        <img src="https://top-fwz1.mail.ru/counter?id=3250771;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
+    </div>
+</noscript>
+<!-- //Rating Mail.ru counter -->
+
+
+<div id="maximenuck147-mobile" class="mobilemenuck ltr" data-id="maximenuck147" style="position: absolute; z-index: 100000; top: 0px; left: 0px; display: none;" data-display="accordion" data-effect="normal"><div class="mobilemenuck-topbar"><div class="mobilemenuck-title">АлтунинВВ.Блог</div><div class="mobilemenuck-button">×</div></div><div class="mobilemenuck-item" data-level="1"><div class="menuck maximenuck item101 first level1 "><a href="/" class="maximenuck " title="Новости"><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Новости"><span class="titreck-text"><span class="titreck-title">Новости</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="1"><div class="menuck maximenuck item256 level1 "><a href="/simply" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Simply"><span class="titreck-text"><span class="titreck-title">Simply</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="1"><div class="menuck maximenuck item136 parent level1 "><a href="/программирование" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="ЯП"><span class="titreck-text"><span class="titreck-title">ЯП</span></span></span></span></a><div class="mobilemenuck-togglericon"></div></div><div class="mobilemenuck-submenu" style="display: none;"><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item137 first parent level2 "><a href="/программирование/qt5" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Qt5"><span class="titreck-text"><span class="titreck-title">Qt5</span></span></span></span></a><div class="mobilemenuck-togglericon"></div></div><div class="mobilemenuck-submenu" style="display: none;"><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item218 first level3 "><a href="/программирование/qt5/модели" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Модели"><span class="titreck-text"><span class="titreck-title">Модели</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item219 level3 "><a href="/программирование/qt5/виджеты" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Виджеты"><span class="titreck-text"><span class="titreck-title">Виджеты</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item220 level3 "><a href="/программирование/qt5/webapi" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="WebAPI"><span class="titreck-text"><span class="titreck-title">WebAPI</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item221 last level3 "><a href="/программирование/qt5/ldap" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="LDAP"><span class="titreck-text"><span class="titreck-title">LDAP</span></span></span></span></a></div></div></div></div><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item222 level2 "><a href="/программирование/cpp" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="C++"><span class="titreck-text"><span class="titreck-title">C++</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item225 level2 "><a href="/программирование/visual-studio-code" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Visual Studio Code"><span class="titreck-text"><span class="titreck-title">Visual Studio Code</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item228 level2 "><a href="/программирование/gulp" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="GULP"><span class="titreck-text"><span class="titreck-title">GULP</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item233 level2 "><a href="/программирование/php" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="PHP"><span class="titreck-text"><span class="titreck-title">PHP</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item257 level2 "><a href="/программирование/vue-js" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Vue.js"><span class="titreck-text"><span class="titreck-title">Vue.js</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item363 last level2 "><a href="/программирование/api" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="API"><span class="titreck-text"><span class="titreck-title">API</span></span></span></span></a></div></div></div></div><div class="mobilemenuck-item" data-level="1"><div class="menuck maximenuck item144 parent level1 "><a href="/статьи" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Статьи"><span class="titreck-text"><span class="titreck-title">Статьи</span></span></span></span></a><div class="mobilemenuck-togglericon"></div></div><div class="mobilemenuck-submenu" style="display: none;"><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item187 first parent level2 "><a href="/статьи/сеть" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Сеть"><span class="titreck-text"><span class="titreck-title">Сеть</span></span></span></span></a><div class="mobilemenuck-togglericon"></div></div><div class="mobilemenuck-submenu" style="display: none;"><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item188 first level3 "><a href="/статьи/сеть/gns3" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="GNS3"><span class="titreck-text"><span class="titreck-title">GNS3</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item229 last level3 "><a href="/статьи/сеть/zabbix" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Zabbix"><span class="titreck-text"><span class="titreck-title">Zabbix</span></span></span></span></a></div></div></div></div><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item209 parent level2 "><a href="/статьи/os" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Операционные системы"><span class="titreck-text"><span class="titreck-title">Операционные системы</span></span></span></span></a><div class="mobilemenuck-togglericon"></div></div><div class="mobilemenuck-submenu" style="display: none;"><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item252 first parent level3 "><a href="/статьи/os/linux" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Linux"><span class="titreck-text"><span class="titreck-title">Linux</span></span></span></span></a><div class="mobilemenuck-togglericon"></div></div><div class="mobilemenuck-submenu" style="display: none;"><div class="mobilemenuck-item" data-level="4"><div class="menuck maximenuck item210 first last level4 "><a href="/статьи/os/linux/astralinux" class="maximenuck " title="Astra Linux"><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Astra Linux"><span class="titreck-text"><span class="titreck-title">Astra Linux</span></span></span></span></a></div></div></div></div><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item223 last level3 "><a href="/статьи/os/windows" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Windows"><span class="titreck-text"><span class="titreck-title">Windows</span></span></span></span></a></div></div></div></div><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item211 parent level2 "><a href="/статьи/железо" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Железо"><span class="titreck-text"><span class="titreck-title">Железо</span></span></span></span></a><div class="mobilemenuck-togglericon"></div></div><div class="mobilemenuck-submenu" style="display: none;"><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item212 first level3 "><a href="/статьи/железо/arduino" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Arduino"><span class="titreck-text"><span class="titreck-title">Arduino</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="3"><div class="menuck maximenuck item128 parent last level3 "><a href="/статьи/железо/eltex" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Eltex"><span class="titreck-text"><span class="titreck-title">Eltex</span></span></span></span></a><div class="mobilemenuck-togglericon"></div></div><div class="mobilemenuck-submenu" style="display: none;"><div class="mobilemenuck-item" data-level="4"><div class="menuck maximenuck item129 first level4 "><a href="/статьи/железо/eltex/mes" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="MES"><span class="titreck-text"><span class="titreck-title">MES</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="4"><div class="menuck maximenuck item130 last level4 "><a href="/статьи/железо/eltex/esr" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="ESR"><span class="titreck-text"><span class="titreck-title">ESR</span></span></span></span></a></div></div></div></div></div></div></div></div><div class="mobilemenuck-item" data-level="1"><div class="menuck maximenuck item108 parent level1 "><a href="/обо-мне" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Обо мне"><span class="titreck-text"><span class="titreck-title">Обо мне</span></span></span></span></a><div class="mobilemenuck-togglericon"></div></div><div class="mobilemenuck-submenu" style="display: none;"><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item132 first level2 "><a href="/обо-мне/контакты" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Контакты"><span class="titreck-text"><span class="titreck-title">Контакты</span></span></span></span></a></div></div><div class="mobilemenuck-item" data-level="2"><div class="menuck maximenuck item362 last level2 "><a href="/обо-мне/поддержать" class="maximenuck "><span class="mobilemenuck-item-text"><span class="titreck" data-hover="Поддержать"><span class="titreck-text"><span class="titreck-title">Поддержать</span></span></span></span></a></div></div></div></div></div><div id="maximenuck147-mobile-bar" class="mobilemenuck-bar ltr" style="position:absolute" data-id="maximenuck147"><div class="mobilemenuck-bar-title">АлтунинВВ.Блог</div><div class="mobilemenuck-bar-button">≡</div></div></body><!-- /Yandex.Metrika counter --></html>

@@ -1,0 +1,1158 @@
+<html itemscope="" itemtype="https://schema.org/WebPage" class="" data-skin="light" lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+	
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->
+<link rel="manifest" href="/superpwa-manifest.json">
+<link rel="prefetch" href="/superpwa-manifest.json">
+<meta name="theme-color" content="#8cbeea">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-title" content="Дачникам">
+<meta name="application-name" content="Дачникам">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-1.png.webp">
+<link rel="apple-touch-icon" sizes="192x192" href="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-1.png.webp">
+<!-- / SuperPWA.com -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v20.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Пользовательское соглашение – Дачникам</title><link rel="stylesheet" href="https://dachnikam.org/wp-content/cache/min/1/714d38f81e1ef06338b26a78ebbbfc4f.css" media="all" data-minify="1">
+	<meta name="description" content="Пользовательское соглашение">
+	<link rel="canonical" href="https://dachnikam.org/polzovatelskoe-soglashenie">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Пользовательское соглашение – Дачникам">
+	<meta property="og:description" content="Пользовательское соглашение">
+	<meta property="og:url" content="https://dachnikam.org/polzovatelskoe-soglashenie">
+	<meta property="og:site_name" content="Дачникам">
+	<meta property="article:publisher" content="https://www.facebook.com/dlyadachnikov.ru/">
+	<meta property="article:modified_time" content="2023-01-15T16:26:32+00:00">
+	<meta name="twitter:card" content="summary_large_image">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://dachnikam.org/polzovatelskoe-soglashenie","url":"https://dachnikam.org/polzovatelskoe-soglashenie","name":"Пользовательское соглашение &ndash; Дачникам","isPartOf":{"@id":"https://dachnikam.org/#website"},"datePublished":"2023-01-15T16:25:51+00:00","dateModified":"2023-01-15T16:26:32+00:00","description":"Пользовательское соглашение","breadcrumb":{"@id":"https://dachnikam.org/polzovatelskoe-soglashenie#breadcrumb"},"inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://dachnikam.org/polzovatelskoe-soglashenie"]}]},{"@type":"BreadcrumbList","@id":"https://dachnikam.org/polzovatelskoe-soglashenie#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://dachnikam.org/"},{"@type":"ListItem","position":2,"name":"Пользовательское соглашение"}]},{"@type":"WebSite","@id":"https://dachnikam.org/#website","url":"https://dachnikam.org/","name":"Дачникам","description":"Для дачников - полезные советы дачникам садоводам и огородникам","publisher":{"@id":"https://dachnikam.org/#/schema/person/37e064e2bc1bafbbdb0472852cdd7cb2"},"alternateName":"Dachnikam","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://dachnikam.org/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":["Person","Organization"],"@id":"https://dachnikam.org/#/schema/person/37e064e2bc1bafbbdb0472852cdd7cb2","name":"Dachnik","image":{"@type":"ImageObject","inLanguage":"ru-RU","@id":"https://dachnikam.org/#/schema/person/image/","url":"https://dachnikam.org/wp-content/uploads/2018/07/Dachnik-120.png","contentUrl":"https://dachnikam.org/wp-content/uploads/2018/07/Dachnik-120.png","width":100,"height":128,"caption":"Dachnik"},"logo":{"@id":"https://dachnikam.org/#/schema/person/image/"},"description":"Дачник","sameAs":["https://dachnikam.org/","https://www.facebook.com/dlyadachnikov.ru/","https://youtube.com/channel/UCUXV6RxzC0r6wVTkttRAAig"]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+<link rel="alternate" type="application/rss+xml" title="Дачникам » Лента" href="https://dachnikam.org/feed">
+<link rel="alternate" type="application/rss+xml" title="Дачникам » Лента комментариев" href="https://dachnikam.org/comments/feed">
+
+		<style type="text/css">
+			:root{
+			
+					--main-nav-background: #FFFFFF;
+					--main-nav-secondry-background: rgba(0,0,0,0.03);
+					--main-nav-primary-color: #0088ff;
+					--main-nav-contrast-primary-color: #FFFFFF;
+					--main-nav-text-color: #2c2f34;
+					--main-nav-secondry-text-color: rgba(0,0,0,0.5);
+					--main-nav-main-border-color: rgba(0,0,0,0.1);
+					--main-nav-secondry-border-color: rgba(0,0,0,0.08);
+				
+			}
+		</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"><script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/dachnikam.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=81582bdb254a94e4464424087c6479a8"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<style id="wp-block-library-inline-css" type="text/css">
+:root{--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,161;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}.has-text-align-center{text-align:center}.has-text-align-left{text-align:left}.has-text-align-right{text-align:right}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}.screen-reader-text:focus{background-color:#ddd;clip:auto!important;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}figure{margin:0 0 1em}
+</style>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" id="roboto-css" href="https://fonts.googleapis.com/css?family=Roboto%3A300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic&amp;ver=6.1.1" type="text/css" media="all">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" id="tie-css-print-css" href="https://dachnikam.org/wp-content/themes/jannah/assets/css/print.css?ver=6.0.0" type="text/css" media="print">
+
+
+<style id="crb-template-override-inline-css" type="text/css">
+
+                .crb-container {
+                    display: grid !important;
+                    grid-template-columns: 1fr 1fr 1fr !important;
+                    grid-column-gap: 20px !important; 
+                }
+                @media screen and (max-width: 40em) {
+                .crb-container {
+                    grid-template-columns: 1fr !important;
+                    grid-column-gap: 10px !important; 
+                }
+            }
+</style>
+
+<style id="tie-css-style-custom-inline-css" type="text/css">
+:root:root{--brand-color: #00cc22;--dark-brand-color: #009a00;--bright-color: #FFFFFF;--base-color: #2c2f34;}#footer-widgets-container{border-top: 8px solid #00cc22;-webkit-box-shadow: 0 -5px 0 rgba(0,0,0,0.07); -moz-box-shadow: 0 -8px 0 rgba(0,0,0,0.07); box-shadow: 0 -8px 0 rgba(0,0,0,0.07);}#reading-position-indicator{box-shadow: 0 0 10px rgba( 0,204,34,0.7);}
+</style>
+
+<style id="rocket-lazyload-inline-css" type="text/css">
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:url(https://dachnikam.org/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}
+</style>
+<script type="text/javascript" id="append_link-js-extra">
+/* <![CDATA[ */
+var append_link = {"read_more":"\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a: %link%","prepend_break":"2","use_title":"true","add_site_name":"true","site_name":"\u0414\u0430\u0447\u043d\u0438\u043a\u0430\u043c","site_url":"https:\/\/dachnikam.org","always_link_site":"true","page_title":"\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u043e\u0435 \u0441\u043e\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0435"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/cache/min/1/wp-content/plugins/append-link-on-copy/js/append_link.js?ver=1676445719" id="append_link-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" id="jquery-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/cache/min/1/wp-content/plugins/waspthemes-yellow-pencil/library/js/animation-events.js?ver=1676445719" id="yellow-pencil-library-js" defer=""></script>
+
+<!-- Google Analytics snippet added by Site Kit -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-215105083-9" id="google_gtagjs-js" async=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="google_gtagjs-js-after">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('set', 'linker', {"domains":["dachnikam.org"]} );
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "UA-215105083-9", {"anonymize_ip":true});
+gtag("config", "G-YTX8K2ZX82");
+</script>
+
+<!-- End Google Analytics snippet added by Site Kit -->
+
+<!-- OG: 3.1.9 -->
+<meta property="og:image" content="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-1.png"><meta property="og:description" content="Пользовательское Соглашение Настоящее Пользовательское Соглашение (Далее Соглашение) регулирует отношения между владельцем https://dachnikam.org/ (далее Дачникам.орг или Администрация) с одной стороны и пользователем сайта с другой. Сайт dachnikam.org не является средством массовой информации. Используя сайт, Вы соглашаетесь с условиями данного соглашения. Если Вы не согласны с условиями данного соглашения, не используйте сайт dachnikam.org! Предмет соглашения Администрация предоставляет..."><meta property="og:type" content="article"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="Дачникам"><meta property="og:title" content="Пользовательское соглашение"><meta property="og:url" content="https://dachnikam.org/polzovatelskoe-soglashenie"><meta property="og:updated_time" content="2023-01-15T20:26:32+04:00">
+<meta property="article:published_time" content="2023-01-15T16:25:51+00:00"><meta property="article:modified_time" content="2023-01-15T16:26:32+00:00"><meta property="article:author:first_name" content="Гагик"><meta property="article:author:last_name" content="Айвазян"><meta property="article:author:username" content="Dachnik">
+<meta property="twitter:partner" content="ogwp"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Пользовательское соглашение"><meta property="twitter:description" content="Пользовательское Соглашение Настоящее Пользовательское Соглашение (Далее Соглашение) регулирует отношения между владельцем https://dachnikam.org/ (далее Дачникам.орг или Администрация) с одной..."><meta property="twitter:url" content="https://dachnikam.org/polzovatelskoe-soglashenie">
+<meta itemprop="image" content="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-1.png"><meta itemprop="name" content="Пользовательское соглашение"><meta itemprop="headline" content="Пользовательское соглашение"><meta itemprop="description" content="Пользовательское Соглашение Настоящее Пользовательское Соглашение (Далее Соглашение) регулирует отношения между владельцем https://dachnikam.org/ (далее Дачникам.орг или Администрация) с одной стороны и пользователем сайта с другой. Сайт dachnikam.org не является средством массовой информации. Используя сайт, Вы соглашаетесь с условиями данного соглашения. Если Вы не согласны с условиями данного соглашения, не используйте сайт dachnikam.org! Предмет соглашения Администрация предоставляет..."><meta itemprop="datePublished" content="2023-01-15"><meta itemprop="dateModified" content="2023-01-15T16:26:32+00:00"><meta itemprop="author" content="Dachnik">
+<meta property="profile:first_name" content="Гагик"><meta property="profile:last_name" content="Айвазян"><meta property="profile:username" content="Dachnik">
+<!-- /OG -->
+
+<link rel="https://api.w.org/" href="https://dachnikam.org/wp-json/"><link rel="alternate" type="application/json" href="https://dachnikam.org/wp-json/wp/v2/pages/33371"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://dachnikam.org/xmlrpc.php?rsd">
+<link rel="alternate" type="application/json+oembed" href="https://dachnikam.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdachnikam.org%2Fpolzovatelskoe-soglashenie">
+<link rel="alternate" type="text/xml+oembed" href="https://dachnikam.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdachnikam.org%2Fpolzovatelskoe-soglashenie&amp;format=xml">
+<meta name="generator" content="Site Kit by Google 1.94.0"><!-- Google tag (gtag.js) -->
+<script type="rocketlazyloadscript" async="" src="https://www.googletagmanager.com/gtag/js?id=UA-215105083-9"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-215105083-9');
+</script>
+<!-- Yandex.RTB -->
+<script type="rocketlazyloadscript">window.yaContextCb=window.yaContextCb||[]</script>
+<script type="rocketlazyloadscript" src="https://yandex.ru/ads/system/context.js" async=""></script><meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Google AdSense snippet added by Site Kit -->
+<meta name="google-adsense-platform-account" content="ca-host-pub-2644536267352236">
+<meta name="google-adsense-platform-domain" content="sitekit.withgoogle.com">
+<!-- End Google AdSense snippet added by Site Kit -->
+<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style>
+<!-- Google AdSense snippet added by Site Kit -->
+<script type="rocketlazyloadscript" async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4785735929867150&amp;host=ca-host-pub-2644536267352236" crossorigin="anonymous" data-rocket-type="text/javascript"></script>
+
+<!-- End Google AdSense snippet added by Site Kit -->
+<link rel="icon" href="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-1-75x75.png.webp" sizes="32x32">
+<link rel="icon" href="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-1.png.webp" sizes="192x192">
+<meta name="msapplication-TileImage" content="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-1.png">
+		<style type="text/css" id="wp-custom-css">
+			.post__entry ol > li:before {
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    top: 4px;
+    left: -35px;
+    width: 20px;
+    height: 20px;
+    text-align: right;
+    text-align: center;
+    border-radius: 50%;
+    background: -webkit-gradient(linear, left top, right top, from(#8be48a), to(#249a06));
+    background: linear-gradient(to right, #8be48a, #249a06);
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+
+.toc_title{
+    font-size:24px!important;
+    margin:0!important;
+    text-align:center;
+    font-weight:400!important
+}
+.toc_list{
+    -webkit-column-count:2;
+    column-count:2;
+    padding:0 20px!important;
+    line-height:1.5
+}
+.toc_list ul ul,.toc_list li li{
+    margin:0;
+    padding:0;
+    font-size:14px!important
+}
+ul.toc_list>li>ul{
+    margin:0 0 0 25px!important
+}
+#toc_container li:before{
+    display: none !important; 
+}
+#toc_container{
+    font-size:20px;
+    border:0;
+    width:100%!important
+}
+#toc_container li{
+    list-style:none;
+    border:1px solid rgba(236,236,236,.86);
+    border-right:none;
+    border-bottom:none;
+    border-left:none
+}
+#toc_container .toc_list li:first-child{
+    border-top:none
+}
+#toc_container ul li a{
+    color:#45484a;
+    display:block;
+    padding:3px 0
+}
+#toc_container ul.toc_list li a:before{
+    content:"";
+    display:inline-block;
+    width:13px;
+    height:30px;
+    margin-right:10px;
+    background:url(//dachnikam.org/wp-content/uploads/img/arrow-right.svg)no-repeat;
+    vertical-align:middle
+}
+#toc_container ul.toc_list ul li a:before{
+    width:12px;
+    height:17px;
+    margin-right:10px;
+    background:url(//dachnikam.org/wp-content/uploads/img/burger-left.svg)no-repeat
+}
+#toc_container ul.toc_list ul ul li a:before{
+    width:12px;
+    height:17px;
+    margin-right:10px;
+    background:url(//dachnikam.org/wp-content/uploads/img/youtube-icon.svg)no-repeat
+}
+#toc_container.toc_white{
+    background:#f3f3f3!important
+}
+
+ #toc_container li,#toc_container ul{
+    margin:0;
+    padding:0
+}
+#toc_container.no_bullets li,#toc_container.no_bullets ul,#toc_container.no_bullets ul li,.toc_widget_list.no_bullets,.toc_widget_list.no_bullets li{
+    background:0 0;
+    list-style-type:none;
+    list-style:none
+}
+#toc_container.have_bullets li{
+    padding-left:12px
+}
+#toc_container ul ul{
+    margin-left:1.5em
+}
+#toc_container{
+    background:#f9f9f9;
+    border:1px solid #aaa;
+    padding:10px;
+    margin-bottom:1em;
+    width:auto;
+    display:table;
+    font-size:95%
+}
+#toc_container.toc_light_blue{
+    background:#edf6ff
+}
+#toc_container.toc_white{
+    background:#fff
+}
+#toc_container.toc_black{
+    background:#000
+}
+#toc_container.toc_transparent{
+    background:none transparent
+}
+#toc_container p.toc_title{
+    text-align:center;
+    font-weight:700;
+    margin:0;
+    padding:0
+}
+#toc_container.toc_black p.toc_title{
+    color:#aaa
+}
+#toc_container span.toc_toggle{
+    font-weight:400;
+    font-size:90%
+}
+#toc_container p.toc_title+ul.toc_list{
+    margin-top:1em
+}
+.toc_wrap_left{
+    float:left;
+    margin-right:10px
+}
+.toc_wrap_right{
+    float:right;
+    margin-left:10px
+}
+#toc_container a{
+    text-decoration:none;
+    text-shadow:none
+}
+#toc_container a:hover{
+    text-decoration:underline
+}
+.toc_sitemap_posts_letter{
+    font-size:1.5em;
+    font-style:italic
+}
+@media (max-width:1080px){
+    .toc_list{
+        -moz-column-count:1;
+        -webkit-column-count:1;
+        column-count:1
+    }
+}
+.post-ratings{
+	   display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 11px 4px;
+    color: #fff;
+    border-radius: 10px;
+    background: #434954;
+    padding-left: 24px;
+    padding-right: 24px;
+}		</style>
+		<style id="yellow-pencil">
+/*
+	The following CSS generated by YellowPencil Plugin.
+	https://yellowpencil.waspthemes.com
+*/
+.content a img{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:4px 5px 14px 0px #171716;box-shadow:4px 5px 14px 0px #171716;}.content main .current{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-width:1px;border-color:#27ae60;}.content main a.page-numbers{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.navbar-header a img.yp_onscreen{-webkit-animation-name:bounce;animation-name:bounce;-webkit-transform-origin:center bottom;-ms-transform-origin:center bottom;transform-origin:center bottom;}.navbar-header a img{-webkit-animation-fill-mode:both;animation-fill-mode:both;}.layout-boxed .footer a{background-color:#f59f1d;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.header .navigation .container{background-color:#ffffff;}.content .post-title a{color:#000000;}#submit{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:2px 2px 8px 0px #121111;box-shadow:2px 2px 8px 0px #121111;}#comment{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:5px 3px 14px -6px #000000;box-shadow:5px 3px 14px -6px #000000;background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/1lined_paper.png");}.wrap-socials_webnavoz .socials-likebox_webnavoz .likebutton_webnavoz{-webkit-box-shadow:5px 6px 10px -4px #26212e;box-shadow:5px 6px 10px -4px #26212e;}.hentry .ytd-video-primary-info-renderer .su-heading-inner{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;color:#151313;text-shadow:rgb(255, 255, 255) 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;}#i .su-heading .su-heading-inner{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;color:#0f0f0f;text-shadow:rgb(255, 255, 255) 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;}.hentry h2 .su-heading-inner{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;color:#000000 !important;}.content main h1{color:#000000;text-shadow:rgb(255, 255, 255) 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;}.hentry h3 .su-heading-inner{color:#070707;text-shadow:rgb(255, 255, 255) 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.webnavoz_notificationbox{background-color:#f9d95c !important;}.webnavoz_notificationbox .webnavoz_notificationbox_main a{background-color:#098f41;}.wpbm-main-blog-wrapper a .fa-facebook{border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}.wpbm-main-blog-wrapper a .fa-twitter{border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}.wpbm-main-blog-wrapper a .fa-google-plus{border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}.wpbm-main-blog-wrapper a .fa-vk{background-color:#2980b9;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}.wpbm-main-blog-wrapper a .fa-whatsapp{background-color:#2ecc71;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}.wpbm-main-blog-wrapper a .fa-envelope-o{border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}#block-3{border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;background-color:#089b45;}#right-sidebar .inside-right-sidebar .widget{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/pool_table.png");}#menu-glavnoe-menyu{background-color:#07873a;}#masthead .inside-header{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/pool_table.png");}.inside-article p .popUp-mikolator{color:#3498db;}#main .page .inside-article{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/1shattered.png");}#main .hentry .inside-article{background-color:#ebf3ee;}.wpbm-main-blog-wrapper a img{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:none;box-shadow:none;}.wpbm-main-blog-wrapper .wpbm-second-inner-wrap{-webkit-box-shadow:none;box-shadow:none;}.wpbm-main-blog-wrapper .wpbm-title a{color:#171616;text-shadow:rgb(255, 255, 255) 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;font-family:'Roboto', sans-serif;}body{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/rockywall.png");}.wpbm-pagination-block li .wpbm-page-link{background-color:#fc7e22;}#menu-glavnoe-menyu .sub-menu a{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/pool_table.png");}#menu-glavnoe-menyu > .menu-item > a{font-size:15px;text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}.wpbm-main-blog-wrapper .wpbm-content a{color:#0b883f;text-shadow:rgb(255, 255, 255) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px;}.inside-article .ads-custom-box .ads-custom-box-title{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#primary-menu .menu > .menu-item > a{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}#primary-menu .menu{border-style:solid !important;border-width:1px;border-color:#f39c12;border-top-style:none;border-right-style:none;border-bottom-style:none;}.site-branding .main-title a{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;font-size:30px;}.wpbm-main-blog-wrapper a .wp-post-image{border-style:solid;border-color:#f39c12;border-width:1px;}.inside-article table{background-color:#f2d9b4;border-style:solid;border-color:#27ae60;border-width:2px;}.inside-article tr td{border-color:#27ae60;border-width:1px;background-color:#f5e0c0;}.inside-article h2 .su-heading-inner{text-shadow:rgb(255, 255, 255) 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;font-weight:600;}.inside-article p .wp-image-25819{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.inside-article p .wp-image-25821{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.inside-article p .wp-image-25822{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.inside-article p .wp-image-25823{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.inside-article p .wp-image-25953{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.inside-article p .wp-image-25824{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.inside-article p .wp-image-25825{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.inside-article p .wp-image-25836{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.yarpp-thumbnails-horizontal .yarpp-thumbnail .wp-post-image{-webkit-box-shadow:none;box-shadow:none;}.yarpp-template-thumbnails .yarpp-thumbnails-horizontal a{border-color:#f39c12;border-style:solid;border-width:1px;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px;}.inside-article .ads-custom-box{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#logo a .logo-text{font-family:Impact,Haettenschweiler,'Franklin Gothic Bold',Charcoal,'Helvetica Inserat','Bitstream Vera Sans Bold','Arial Black','sans serif';text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;position:relative;top:8px;font-weight:500;line-height:1em;color:#08c808;text-transform:capitalize;letter-spacing:2.4px;}#tie-block_2870 .container-wrapper{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-color:rgba(243,156,18,0.38);background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/light_toast.png");}#tie-block_304 .container-wrapper{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-color:#f39c12;background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/white_leather.png");border-width:1px;}#tie-block_1810 .container-wrapper{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-color:#f39c12;background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/white_leather.png");border-width:1px;}#tiepost-33110-section-749 .sidebar .widget{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-color:#ffffff;border-color:#27ae60;border-width:2px;}#tiepost-33110-section-6559 .sidebar .widget{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-color:#27ae60;}#tie-block_611 .container-wrapper{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/white_leather.png");border-color:#27ae60;border-width:2px;}#tie-block_611 .entry .ads-custom-box{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#tie-block_611 .mag-box-title h3{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}#tie-block_304 .mag-box-title h3{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}#tie-block_1810 .mag-box-title h3{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}#tie-block_2870 .mag-box-title h3{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}#tiepost-33110-section-749 .widget-title .the-subtitle{text-shadow:rgb(255, 255, 255) 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;}#tiepost-33110-section-6559 .widget-title .the-subtitle{text-shadow:rgb(255, 255, 255) 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;}#tie-block_1837 .mag-box-title h3{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}#tie-block_2223 .mag-box-title h3{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}.big-posts-box .mag-box-title h3{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}.sidebar .widget{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-color:rgba(243,156,18,0.43);}#the-post{border-color:rgba(243,156,18,0.43);border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/snow.png");}#toc_container{border-color:#08b450;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.sidebar .tabs-container-wrapper{border-top-right-radius:10px;border-bottom-right-radius:10px;border-color:rgba(243,156,18,0.43);}#the-post .warning{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-image:-webkit-linear-gradient(67deg, #f7971e 52%, #ffd200 100%);background-image:-o-linear-gradient(67deg, #f7971e 52%, #ffd200 100%);background-image:linear-gradient(-23deg, #f7971e 52%, #ffd200 100%);}#the-post .check{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-image:-webkit-linear-gradient(67deg, #f7971e 52%, #ffd200 100%);background-image:-o-linear-gradient(67deg, #f7971e 52%, #ffd200 100%);background-image:linear-gradient(-23deg, #f7971e 52%, #ffd200 100%);}#the-post .info{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-image:-webkit-linear-gradient(67deg, #f7971e 52%, #ffd200 100%);background-image:-o-linear-gradient(67deg, #f7971e 52%, #ffd200 100%);background-image:linear-gradient(-23deg, #f7971e 52%, #ffd200 100%);}#the-post .danger{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background-image:-webkit-linear-gradient(67deg, #f7971e 52%, #ffd200 100%);background-image:-o-linear-gradient(67deg, #f7971e 52%, #ffd200 100%);background-image:linear-gradient(-23deg, #f7971e 52%, #ffd200 100%);}#tie-wrapper .prev-next-post-nav{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-color:#f39c12;}#the-post p .wp-image-29349{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29348{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:3px 3px 8px 1px #2c2f34;box-shadow:3px 3px 8px 1px #2c2f34;}#the-post p .wp-image-29350{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29351{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29352{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29353{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29354{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29355{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29356{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29357{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29358{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-29359{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#tiepost-33110-section-6559 .sidebar .tabs-container-wrapper{border-top-left-radius:0px;border-bottom-left-radius:0px;}.tab-content-recent .post-thumb .wp-post-image{-webkit-box-shadow:2px 2px 7px -1px #333333;box-shadow:2px 2px 7px -1px #333333;}#tiepost-33110-section-6559 .widget .widget-title{border-bottom-color:#f39c12;}#tiepost-33110-section-749 .widget .widget-title{border-bottom-color:#f39c12;}#tie-block_2870 .mag-box-title{border-style:solid;border-bottom-color:#f39c12;}#tie-block_304 .mag-box-title{border-bottom-color:#f39c12;}#tie-block_1810 .mag-box-title{border-bottom-color:#f39c12;}#tie-block_304 .post-item .more-link{border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}#tie-block_1810 .post-item .more-link{border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}#tiepost-33110-section-749 label input[type=search]{border-color:rgba(243,156,18,0.34);border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}#menu-components-wrap{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/pool_table.png");}#theme-header{background-image:-webkit-linear-gradient(left, #1d976c 0%, #93f9b9 100%);background-image:-o-linear-gradient(left, #1d976c 0%, #93f9b9 100%);background-image:linear-gradient(-90deg, #1d976c 0%, #93f9b9 100%);}#share-buttons-bottom .share-links .large-share-button{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#share-buttons-bottom .share-links .tie-icon-skype{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#main-nav{background-color:#f9d293;}#top-nav{background-image:url("https://dachnikam.org/wp-content/uploads/2022/03/dachnikam.org_.fon_.png");}#top-nav .topbar-wrapper .topbar-today-date{text-shadow:rgba(0, 0, 0, 0.3) 0px 1px 1px;color:#1a1818;text-transform:uppercase;font-family:'Arial Black','Arial Bold',Gadget,sans-serif;font-size:11px;}#top-nav .topbar-wrapper .social-icons-item .tie-icon-facebook{color:#1e60e6 !important;}#top-nav .topbar-wrapper .social-icons-item .tie-icon-pinterest{color:#f2230c !important;}#top-nav .topbar-wrapper .social-icons-item .tie-icon-instagram{color:#ce3907 !important;}#top-nav .topbar-wrapper .vk-social-icon .tie-social-icon{color:#0897f6 !important;}#top-nav .topbar-wrapper .social-icons-item .tie-icon-odnoklassniki{color:#e4650f !important;}.tie-alignright .components .social-icons-item .telegram-social-icon .tie-icon-paper-plane{color:#1862f5 !important;}#tie-wrapper{background-image:-webkit-linear-gradient(2deg, #c9d6ff 0%, #e2e2e2 100%);background-image:-o-linear-gradient(2deg, #c9d6ff 0%, #e2e2e2 100%);background-image:linear-gradient(-88deg, #c9d6ff 0%, #e2e2e2 100%);}#theme-header .logo-wrapper .logo-container{background-image:-webkit-linear-gradient(346deg, #ff8008 0%, #ffc837 100%);background-image:-o-linear-gradient(346deg, #ff8008 0%, #ffc837 100%);background-image:linear-gradient(-104deg, #ff8008 0%, #ffc837 100%);}#main-nav .container{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/pool_table.png");}#tie-block_1837 .container-wrapper{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/white_leather.png");border-color:#27ae60;border-style:solid;border-width:2px;}#tiepost-33110-section-6559 .big-posts-box .container-wrapper{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/white_leather.png");}#tiepost-33110-section-3286 .section-item{background-image:-webkit-linear-gradient(355deg, #c9d6ff 0%, #e2e2e2 100%);background-image:-o-linear-gradient(355deg, #c9d6ff 0%, #e2e2e2 100%);background-image:linear-gradient(-95deg, #c9d6ff 0%, #e2e2e2 100%);}#breadcrumb{color:#e67e22;}#share-buttons-top .share-links .tie-icon-facebook{-webkit-box-shadow:none;box-shadow:none;}#share-buttons-top .share-links .tie-icon-envelope{-webkit-box-shadow:none;box-shadow:none;}#main-content-row .post-ratings{background-image:-webkit-linear-gradient(left, #11998e 50%, #38ef7d 100%);background-image:-o-linear-gradient(left, #11998e 50%, #38ef7d 100%);background-image:linear-gradient(-90deg, #11998e 50%, #38ef7d 100%);background-color:#7d1ea3;position:relative;top:12px;border-color:#e67e22;border-style:solid;border-width:2px;}#tie-block_2223 .entry .ads-custom-box{border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-top-left-radius:10px;}#tie-block_2223 .entry .ads-custom-box-title{border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-top-left-radius:10px;border-top-right-radius:10px;background-color:#e67e22;color:#070707;text-shadow:rgba(0, 0, 0, 0.3) 0px 1px 1px;}.background-overlay #tie-container #tie-wrapper #tiepost-33110-section-6559 .section-item .container-normal .main-content-row .sidebar .theiaStickySidebar .widget{border-width:2px !important;}#tiepost-33110-section-6559 .tabs-widget .tab-content-comments{border-bottom-style:none;border-top-color:transparent;}#tie-block_1837 .the-global-title h3{font-size:25px;}#tie-block_2223 .the-global-title h3{font-size:24px;}#tie-block_611 .the-global-title h3{font-size:24px;}#tie-block_1810 .the-global-title h3{font-size:24px;}#tie-block_304 .the-global-title h3{font-size:24px;}#tiepost-33110-section-749 .widget .the-subtitle{font-size:24px;}#tie-block_2870 .the-global-title h3{font-size:24px;font-weight:600;color:#0bba54;}.wp-caption a img{-webkit-box-shadow:0px 0px 14px 2px #0c0d0c;box-shadow:0px 0px 14px 2px #0c0d0c;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post blockquote{background-image:-webkit-linear-gradient(64deg, #fc4a1a 0%, #f7b733 100%);background-image:-o-linear-gradient(64deg, #fc4a1a 0%, #f7b733 100%);background-image:linear-gradient(-26deg, #fc4a1a 0%, #f7b733 100%);border-color:#27ae60;border-style:solid;border-width:2px;}#the-post .entry-content{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/ice_age.png");border-style:none;}#share-buttons-bottom{background-image:-webkit-linear-gradient(37deg, #d9a7c7 0%, #fffcdc 100%);background-image:-o-linear-gradient(37deg, #d9a7c7 0%, #fffcdc 100%);background-image:linear-gradient(-53deg, #d9a7c7 0%, #fffcdc 100%);}#add-comment-block{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/bedge_grunge.png");}#related-posts{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/fabric_of_squares_gray.png");}#the-post p .wp-image-33304{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#the-post p .wp-image-33303{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:0px 0px 15px 0px #111211;box-shadow:0px 0px 15px 0px #111211;}#the-post p .wp-image-33302{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:0px 0px 15px 0px #161716;box-shadow:0px 0px 15px 0px #161716;}#the-post p .wp-image-33301{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:0px 0px 18px 0px #141513;box-shadow:0px 0px 18px 0px #141513;}#the-post p .wp-image-33300{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:0px 0px 15px 0px #161716;box-shadow:0px 0px 15px 0px #161716;}#the-post a p{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;-webkit-box-shadow:none;box-shadow:none;}.sidebar .widget-title .the-subtitle{font-size:22px;}.sidebar .widget h3{font-size:23px;}.tabs .active a{text-shadow:rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) -1px 0px 1px;}.sidebar .tabs li a{text-shadow:rgba(0, 0, 0, 0.3) 0px 1px 1px !important;}.tabs li a{font-weight:500;}.Arqam-Lite .social-icons-item .instagram-social-icon{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.Arqam-Lite .social-icons-item .facebook-social-icon{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}#share-buttons-bottom .share-title span{font-size:16px;font-weight:500;}#the-post .yarpp-template-thumbnails a{-webkit-box-shadow:3px 3px 10px -2px #070707;box-shadow:3px 3px 10px -2px #070707;}#the-post .ads-custom-box{border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;}.sidebar .widget .widget-title-icon{color:#e67e22;}#tiepost-33110-section-749{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/kindajean.png");}#tiepost-33110-section-3286 .section-item .main-content{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/1old_wall.png");}#tiepost-33110-section-6559 .section-item .main-content{background-image:url("https://dachnikam.org/wp-content/plugins/waspthemes-yellow-pencil/assets/grey.png");}@media (min-width:992px){#menu-glavnoe-menyu > .menu-item > a{font-size:18px;}}
+</style><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript></head>
+
+<body data-rsssl="1" id="tie-body" class="page-template-default page page-id-33371 wp-custom-logo wrapper-has-shadow block-head-1 magazine3 magazine1 is-desktop is-header-layout-2 has-header-ad sidebar-right has-sidebar post-layout-1">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0.49803921568627"></feFuncR><feFuncG type="table" tableValues="0 0.49803921568627"></feFuncG><feFuncB type="table" tableValues="0 0.49803921568627"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 0.27843137254902"></feFuncG><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0"></feFuncR><feFuncG type="table" tableValues="0 0.64705882352941"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.78039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.94901960784314"></feFuncG><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.44705882352941 0.4"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.098039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.66274509803922"></feFuncG><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg>
+
+<div class="background-overlay">
+
+	<div id="tie-container" class="site tie-container">
+
+		
+		<div id="tie-wrapper">
+
+			
+<header id="theme-header" class="theme-header header-layout-2 main-nav-light main-nav-default-light main-nav-below has-stream-item top-nav-active top-nav-light top-nav-default-light top-nav-below top-nav-below-main-nav has-shadow is-stretch-header has-normal-width-logo has-custom-sticky-logo mobile-header-centered mobile-components-row">
+	
+<div class="container header-container">
+	<div class="tie-row logo-row">
+
+		
+		<div class="logo-wrapper">
+			<div class="tie-col-md-4 logo-container clearfix">
+				<div id="mobile-header-components-area_1" class="mobile-header-components"><ul class="components"><li class="mobile-component_menu custom-menu-link"><a href="#" id="mobile-menu-icon" class=""><span class="tie-mobile-menu-icon tie-icon-grid-9"></span><span class="screen-reader-text">﻿Меню</span></a></li></ul></div>
+		<div id="logo" class="text-logo" style="margin-top: 10px; margin-bottom: 20px;">
+
+			
+			<a title="Дачникам" href="https://dachnikam.org/">
+				<div class="logo-text">Дачникам</div>			</a>
+
+			
+		</div><!-- #logo /-->
+
+		<div id="mobile-header-components-area_2" class="mobile-header-components"></div>			</div><!-- .tie-col /-->
+		</div><!-- .logo-wrapper /-->
+
+		<div class="tie-col-md-8 stream-item stream-item-top-wrapper"><div class="stream-item-top"><div class="stream-item-size" style=""><!-- Yandex.RTB R-A-2190491-1 -->
+<script type="rocketlazyloadscript">window.yaContextCb.push(()=>{
+  Ya.Context.AdvManager.render({
+    type: 'topAd',    
+    blockId: 'R-A-2190491-1'
+  })
+})</script></div></div></div><!-- .tie-col /-->
+	</div><!-- .tie-row /-->
+</div><!-- .container /-->
+
+<div class="main-nav-wrapper">
+	<nav id="main-nav" class="main-nav header-nav" aria-label="Первая навигация">
+		<div class="container">
+
+			<div class="main-menu-wrapper">
+
+				
+				<div id="menu-components-wrap">
+
+					
+		<div id="sticky-logo" class="image-logo">
+
+			
+			<a title="Дачникам" href="https://dachnikam.org/">
+				
+				<picture class="tie-logo-default tie-logo-picture">
+					<source class="tie-logo-source-default tie-logo-source" data-lazy-srcset="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-kopiya.png.webp 1x" srcset="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-kopiya.png.webp 1x">
+					<img class="tie-logo-img-default tie-logo-img entered lazyloading" src="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-kopiya.png.webp" alt="Дачникам" style="max-height:49px; width: auto;" data-lazy-src="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-kopiya.png.webp" data-ll-status="loading"><noscript><img class="tie-logo-img-default tie-logo-img" src="https://dachnikam.org/wp-content/uploads/2023/01/dachnikam-kopiya.png.webp" alt="Дачникам" style="max-height:49px; width: auto;" /></noscript>
+				</picture>
+						</a>
+
+			
+		</div><!-- #Sticky-logo /-->
+
+		<div class="flex-placeholder"></div>
+		
+
+
+					<div class="main-menu main-menu-wrap tie-alignleft">
+						<div id="main-nav-menu" class="main-menu header-menu"><ul id="menu-glavnoe-menyu" class="menu" role="menubar"><li id="menu-item-12712" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-12712"><a title="Советы садоводам" href="https://dachnikam.org/sad">Сад</a>
+<ul class="sub-menu menu-sub-content">
+	<li id="menu-item-28431" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28431"><a href="https://dachnikam.org/sad/plodovye-derevya">Плодовые деревья</a></li>
+	<li id="menu-item-28602" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28602"><a href="https://dachnikam.org/sad/plodovye-derevya/abrikos">Абрикос</a></li>
+	<li id="menu-item-28526" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28526"><a href="https://dachnikam.org/sad/plodovye-derevya/yablonya">Яблоня</a></li>
+	<li id="menu-item-28751" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28751"><a href="https://dachnikam.org/sad/plodovye-derevya/grusha">Груша</a></li>
+	<li id="menu-item-28608" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28608"><a href="https://dachnikam.org/sad/plodovye-derevya/chereshnya-i-vishnya">Черешня и вишня</a></li>
+	<li id="menu-item-28412" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28412"><a href="https://dachnikam.org/sad/yagodnye-kustarniki">Ягодные кустарники</a></li>
+	<li id="menu-item-28682" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28682"><a href="https://dachnikam.org/sad/yagodnye-kustarniki/smorodina">Смородина</a></li>
+	<li id="menu-item-28554" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28554"><a href="https://dachnikam.org/sad/yagodnye-kustarniki/kryzhovnik">Крыжовник</a></li>
+	<li id="menu-item-28448" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28448"><a href="https://dachnikam.org/sad/yagodnye-kustarniki/vinograd">Виноград</a></li>
+	<li id="menu-item-28582" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28582"><a href="https://dachnikam.org/sad/yagodnye-kustarniki/malina">Малина</a></li>
+</ul>
+</li>
+<li id="menu-item-12711" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-12711"><a title="Советы огородникам" href="https://dachnikam.org/ogorod">Огород</a>
+<ul class="sub-menu menu-sub-content">
+	<li id="menu-item-28422" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28422"><a href="https://dachnikam.org/ogorod/ovoshhi">Овощи</a></li>
+	<li id="menu-item-28423" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28423"><a href="https://dachnikam.org/ogorod/ovoshhi/kartofel">Картофель</a></li>
+	<li id="menu-item-28426" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28426"><a href="https://dachnikam.org/ogorod/ovoshhi/tomaty">Томаты</a></li>
+	<li id="menu-item-31517" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31517"><a href="https://dachnikam.org/ogorod/ovoshhi/baklazhan">Баклажан</a></li>
+	<li id="menu-item-28424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28424"><a href="https://dachnikam.org/ogorod/ovoshhi/morkov">Морковь</a></li>
+	<li id="menu-item-28425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28425"><a href="https://dachnikam.org/ogorod/ovoshhi/ogurtsy">Огурцы</a></li>
+	<li id="menu-item-28441" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28441"><a href="https://dachnikam.org/ogorod/ovoshhi/luk-i-chesnok">Лук и чеснок</a></li>
+	<li id="menu-item-28585" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28585"><a href="https://dachnikam.org/ogorod/klubnika-i-zemlyanika">Клубника и земляника</a></li>
+</ul>
+</li>
+<li id="menu-item-28451" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-28451"><a title="Цветы и растения" href="https://dachnikam.org/tsvety-i-rasteniya">Цветы и растения</a>
+<ul class="sub-menu menu-sub-content">
+	<li id="menu-item-28411" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28411"><a title="Однолетние цветы" href="https://dachnikam.org/tsvety-i-rasteniya/odnoletnie-tsvety">Однолетние</a></li>
+	<li id="menu-item-28410" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28410"><a title="Многолетние цветы" href="https://dachnikam.org/tsvety-i-rasteniya/mnogoletnie-tsvety">Многолетние</a></li>
+	<li id="menu-item-28450" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28450"><a title="Неприхотливые цветы" href="https://dachnikam.org/tsvety-i-rasteniya/neprihotlivye-tsvety">Неприхотливые</a></li>
+	<li id="menu-item-28559" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28559"><a title="Розы" href="https://dachnikam.org/tsvety-i-rasteniya/rozy">Розы</a></li>
+	<li id="menu-item-28609" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28609"><a title="Растения" href="https://dachnikam.org/tsvety-i-rasteniya/rasteniya">Растения</a></li>
+	<li id="menu-item-17042" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17042"><a title="Комнатные цветы и растения" href="https://dachnikam.org/tsvety-i-rasteniya/komnatnye-tsvety-i-rasteniya">Комнатные</a></li>
+</ul>
+</li>
+<li id="menu-item-12708" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-12708"><a title="Дизайн дачи" href="https://dachnikam.org/landshaft">Ландшафт</a>
+<ul class="sub-menu menu-sub-content">
+	<li id="menu-item-28495" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28495"><a href="https://dachnikam.org/landshaft/dekorativnye-derevya">Декоративные деревья</a></li>
+	<li id="menu-item-28427" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28427"><a href="https://dachnikam.org/landshaft/dekorativnye-kustarniki">Декоративные кустарники</a></li>
+	<li id="menu-item-28433" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28433"><a href="https://dachnikam.org/landshaft/hvojnye-derevya">Хвойные деревья</a></li>
+	<li id="menu-item-28428" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28428"><a href="https://dachnikam.org/landshaft/tsvetnik-i-klumba">Цветник и клумба</a></li>
+	<li id="menu-item-28430" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28430"><a href="https://dachnikam.org/landshaft/dizajn-sada">Дизайн сада</a></li>
+	<li id="menu-item-28413" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28413"><a href="https://dachnikam.org/landshaft/liany">Лианы</a></li>
+</ul>
+</li>
+<li id="menu-item-28773" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-28773"><a href="https://dachnikam.org/udobreniya">Удобрения</a>
+<ul class="sub-menu menu-sub-content">
+	<li id="menu-item-28774" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28774"><a href="https://dachnikam.org/udobreniya/podkormki">Подкормки</a></li>
+	<li id="menu-item-28775" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28775"><a href="https://dachnikam.org/udobreniya/preparaty">Препараты</a></li>
+</ul>
+</li>
+<li id="menu-item-12705" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12705"><a title="Вредители сада и огорода" href="https://dachnikam.org/vrediteli">Вредители</a></li>
+<li id="menu-item-28421" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28421"><a href="https://dachnikam.org/hozyajkam">Хозяйкам</a></li>
+<li id="menu-item-30562" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-30562"><a href="https://dachnikam.org/poleznye-svojstva">Полезные свойства</a></li>
+</ul></div>					</div><!-- .main-menu.tie-alignleft /-->
+
+					
+				</div><!-- #menu-components-wrap /-->
+			</div><!-- .main-menu-wrapper /-->
+		</div><!-- .container /-->
+
+			</nav><!-- #main-nav /-->
+</div><!-- .main-nav-wrapper /-->
+
+
+<nav id="top-nav" class=" top-nav header-nav" aria-label="Дополнительная навигация">
+	<div class="container">
+		<div class="topbar-wrapper">
+
+			
+			<div class="tie-alignleft">
+							</div><!-- .tie-alignleft /-->
+
+			<div class="tie-alignright">
+							</div><!-- .tie-alignright /-->
+
+		</div><!-- .topbar-wrapper /-->
+	</div><!-- .container /-->
+</nav><!-- #top-nav /-->
+</header>
+
+<div id="content" class="site-content container"><div id="main-content-row" class="tie-row main-content-row">
+
+<div class="main-content tie-col-md-8 tie-col-xs-12" role="main">
+
+	
+	<article id="the-post" class="container-wrapper post-content">
+
+		
+	<header class="entry-header-outer">
+
+		<nav id="breadcrumb"><a href="https://dachnikam.org/"><span class="tie-icon-home" aria-hidden="true"></span> Главная</a><em class="delimiter">/</em><span class="current">Пользовательское соглашение</span></nav><script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BreadcrumbList","@id":"#Breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"name":"\u0413\u043b\u0430\u0432\u043d\u0430\u044f","@id":"https:\/\/dachnikam.org\/"}}]}</script>
+		<div class="entry-header">
+			<h1 class="post-title entry-title">Пользовательское соглашение</h1>
+		</div><!-- .entry-header /-->
+
+		
+	</header><!-- .entry-header-outer /-->
+
+	
+		<div class="entry-content entry clearfix">
+
+			<div class="stream-item stream-item-above-post-content"><div class="stream-item-size" style=""><!-- Yandex.RTB R-A-2190491-2 -->
+<div id="yandex_rtb_R-A-2190491-2"></div>
+<script type="rocketlazyloadscript">window.yaContextCb.push(()=>{
+  Ya.Context.AdvManager.render({
+    renderTo: 'yandex_rtb_R-A-2190491-2',
+    blockId: 'R-A-2190491-2'
+  })
+})</script></div></div>
+			<div id="polzovatelskoe-soglashenie" class="index-title"></div><h3 style="padding-left: 60px;">Пользовательское Соглашение</h3>
+<p style="padding-left: 60px;">Настоящее Пользовательское Соглашение (Далее Соглашение) регулирует отношения между владельцем<a href="https://dachnikam.org/" target="_blank" rel="noopener noreferrer"> https://dachnikam.org/ </a>(далее Дачникам.орг или Администрация) с одной стороны и пользователем сайта с другой.<br>
+Сайт dachnikam.org не является средством массовой информации.</p>
+<p style="padding-left: 60px;">Используя сайт, Вы соглашаетесь с условиями данного соглашения.<br>
+<b>Если Вы не согласны с условиями данного соглашения, не используйте сайт <a href="https://dachnikam.org/">dachnikam.org</a>!</b></p>
+<div id="predmet-soglasheniya" class="index-title"></div><div id="predmet-soglasheniya" class="index-title"></div><h3 style="padding-left: 60px;">Предмет соглашения</h3>
+<p style="padding-left: 60px;"><b>Администрация предоставляет пользователю право на размещение на сайте следующей информации:</b></p>
+<div id="predmet-soglasheniya" class="index-title"></div><div id="predmet-soglasheniya" class="index-title"></div><h3 style="padding-left: 60px;">Предмет соглашения</h3>
+<p style="padding-left: 60px;"><b>Администрация предоставляет пользователю право на размещение на сайте следующей информации:</b><br>
+– Текстовой информации<br>
+– Фотоматериалов<br>
+– Ссылок на материалы, размещенные на других сайтах</p>
+<div id="prava-i-obyazannosti-storon" class="index-title"></div><h3 style="padding-left: 60px;">Права и обязанности сторон</h3>
+<p style="padding-left: 60px;"><b>Пользователь имеет право:</b><br>
+– осуществлять поиск информации на сайте<br>
+– получать информацию на сайте<br>
+– создавать информацию для сайта<br>
+– распространять информацию на сайте<br>
+– комментировать контент, выложенный на сайте<br>
+– изменять рейтинг пользователей<br>
+– копировать информацию на другие сайты с указанием источника<br>
+– копировать информацию на другие сайты с разрешения Администрации сайта<br>
+– копировать информацию на другие сайты с разрешения правообладателя<br>
+– использовать информацию сайта в личных некоммерческих целях<br>
+– использовать информацию сайта в коммерческих целях с разрешения Администрации<br>
+– использовать информацию сайта в коммерческих целях с разрешения правообладателей</p>
+<p style="padding-left: 60px;"><b>Администрация имеет право:</b><br>
+– по своему усмотрению и необходимости создавать, изменять, отменять правила<br>
+– ограничивать доступ к любой информации на сайте<br>
+– создавать, изменять, удалять информацию<br>
+– удалять учетные записи<br>
+– отказывать в регистрации без объяснения причин</p>
+<p style="padding-left: 60px;"><b>Пользователь обязуется:</b><br>
+– обеспечить достоверность предоставляемой информации<br>
+– обеспечивать сохранность личных данных от доступа третьих лиц<br>
+– обновлять Персональные данные, предоставленные при регистрации, в случае их изменения<br>
+– не копировать информацию с других источников<br>
+– при копировании информации с других источников, включать в её состав информацию об авторе<br>
+– не распространять информацию, которая направлена на пропаганду войны, разжигание национальной, расовой или религиозной ненависти и вражды, а также иной информации, за распространение которой предусмотрена уголовная или административная ответственность<br>
+– не нарушать работоспособность сайта<br>
+– не совершать действия, направленные на введение других Пользователей в заблуждение<br>
+– не передавать в пользование свою учетную запись и/или логин и пароль своей учетной записи третьим лицам<br>
+– не размещать материалы рекламного, эротического, порнографического или оскорбительного характера, а также иную информацию, размещение которой запрещено или противоречит нормам действующего законодательства РФ<br>
+– не использовать скрипты (программы) для автоматизированного сбора информации и/или взаимодействия с Сайтом и его Сервисами</p>
+<p style="padding-left: 60px;"><b>Администрация обязуется:</b><br>
+– поддерживать работоспособность сайта за исключением случаев, когда это невозможно по независящим от Администрации причинам.<br>
+– осуществлять разностороннюю защиту учетной записи Пользователя<br>
+– защищать информацию, распространение которой ограничено или запрещено законами путем вынесения предупреждения либо удалением учетной записи пользователя, нарушившего правила<br>
+– предоставить всю доступную информацию о Пользователе уполномоченным на то органам государственной власти в случаях, установленных законом</p>
+<div id="otvetstvennost-storon" class="index-title"></div><h3 style="padding-left: 60px;">Ответственность сторон</h3>
+<p style="padding-left: 60px;">– пользователь лично несет полную ответственность за распространяемую им информацию<br>
+– администрация не несет никакой ответственности за достоверность информации, скопированной из других источников<br>
+– администрация не несёт ответственность за несовпадение ожидаемых Пользователем и реально полученных услуг<br>
+– администрация не несет никакой ответственности за услуги, предоставляемые третьими лицами<br>
+– в случае возникновения форс-мажорной ситуации (боевые действия, чрезвычайное положение, стихийное бедствие и т. д.) Администрация не гарантирует сохранность информации, размещённой Пользователем, а также бесперебойную работу информационного ресурса</p>
+<div id="usloviya-dejstviya-soglasheniya" class="index-title"></div><h3 style="padding-left: 60px;">Условия действия Соглашения</h3>
+<p style="padding-left: 60px;">Данное Соглашение вступает в силу при любом использовании данного сайта.<br>
+Соглашение действует бессрочно.<br>
+Администрация оставляет за собой право в одностороннем порядке изменять данное соглашение по своему усмотрению.<br>
+Администрация не оповещает пользователей об изменении в Соглашении.</p>
+
+			
+		</div><!-- .entry-content /-->
+
+		
+		<div id="share-buttons-bottom" class="share-buttons share-buttons-bottom">
+			<div class="share-links  icons-text share-pill">
+				
+				<a href="https://www.facebook.com/sharer.php?u=https://dachnikam.org/polzovatelskoe-soglashenie" rel="external noopener nofollow" title="Facebook" target="_blank" class="facebook-share-btn  large-share-button" data-raw="https://www.facebook.com/sharer.php?u={post_link}">
+					<span class="share-btn-icon tie-icon-facebook"></span> <span class="social-text">Facebook</span>
+				</a>
+				<a href="https://twitter.com/intent/tweet?text=%D0%9F%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5&amp;url=https://dachnikam.org/polzovatelskoe-soglashenie" rel="external noopener nofollow" title="Twitter" target="_blank" class="twitter-share-btn  large-share-button" data-raw="https://twitter.com/intent/tweet?text={post_title}&amp;url={post_link}">
+					<span class="share-btn-icon tie-icon-twitter"></span> <span class="social-text">Twitter</span>
+				</a>
+				<a href="https://pinterest.com/pin/create/button/?url=https://dachnikam.org/polzovatelskoe-soglashenie&amp;description=%D0%9F%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5&amp;media=" rel="external noopener nofollow" title="Pinterest" target="_blank" class="pinterest-share-btn  large-share-button" data-raw="https://pinterest.com/pin/create/button/?url={post_link}&amp;description={post_title}&amp;media={post_img}">
+					<span class="share-btn-icon tie-icon-pinterest"></span> <span class="social-text">Pinterest</span>
+				</a>
+				<a href="https://vk.com/share.php?url=https://dachnikam.org/polzovatelskoe-soglashenie" rel="external noopener nofollow" title="Вконтакте" target="_blank" class="vk-share-btn  large-share-button" data-raw="https://vk.com/share.php?url={post_link}">
+					<span class="share-btn-icon tie-icon-vk"></span> <span class="social-text">Вконтакте</span>
+				</a>
+				<a href="https://connect.ok.ru/dk?st.cmd=WidgetSharePreview&amp;st.shareUrl=https://dachnikam.org/polzovatelskoe-soglashenie&amp;description=%D0%9F%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5&amp;media=" rel="external noopener nofollow" title="Одноклассники" target="_blank" class="odnoklassniki-share-btn  large-share-button" data-raw="https://connect.ok.ru/dk?st.cmd=WidgetSharePreview&amp;st.shareUrl={post_link}&amp;description={post_title}&amp;media={post_img}">
+					<span class="share-btn-icon tie-icon-odnoklassniki"></span> <span class="social-text">Одноклассники</span>
+				</a>
+				<a href="https://api.whatsapp.com/send?text=%D0%9F%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%20https://dachnikam.org/polzovatelskoe-soglashenie" rel="external noopener nofollow" title="WhatsApp" target="_blank" class="whatsapp-share-btn  large-share-button" data-raw="https://api.whatsapp.com/send?text={post_title}%20{post_link}">
+					<span class="share-btn-icon tie-icon-whatsapp"></span> <span class="social-text">WhatsApp</span>
+				</a>
+				<a href="https://telegram.me/share/url?url=https://dachnikam.org/polzovatelskoe-soglashenie&amp;text=%D0%9F%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5" rel="external noopener nofollow" title="Telegram" target="_blank" class="telegram-share-btn  large-share-button" data-raw="https://telegram.me/share/url?url={post_link}&amp;text={post_title}">
+					<span class="share-btn-icon tie-icon-paper-plane"></span> <span class="social-text">Telegram</span>
+				</a>
+				<a href="viber://forward?text=%D0%9F%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%20https://dachnikam.org/polzovatelskoe-soglashenie" rel="external noopener nofollow" title="Viber" target="_blank" class="viber-share-btn  large-share-button" data-raw="viber://forward?text={post_title}%20{post_link}">
+					<span class="share-btn-icon tie-icon-phone"></span> <span class="social-text">Viber</span>
+				</a>			</div><!-- .share-links /-->
+		</div><!-- .share-buttons /-->
+
+		
+	</article><!-- #the-post /-->
+
+	
+	<div class="post-components">
+
+		
+	</div><!-- .post-components /-->
+
+	
+</div><!-- .main-content -->
+
+
+	<aside class="sidebar tie-col-md-4 tie-col-xs-12 normal-side" aria-label="Основной Сайдбар">
+		<div class="theiaStickySidebar">
+			<div id="search-2" class="container-wrapper widget widget_search"><div class="widget-title the-global-title"><div class="the-subtitle">Поиск по сайту</div></div><form role="search" method="get" class="search-form" action="https://dachnikam.org/">
+				<label>
+					<span class="screen-reader-text">Найти:</span>
+					<input type="search" class="search-field" placeholder="Поиск…" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Поиск">
+			</form><div class="clearfix"></div></div><!-- .widget /--><div id="social-statistics-1" class="container-wrapper widget social-statistics-widget"><div class="widget-title the-global-title"><div class="the-subtitle">Мы в соц сетях</div></div>
+					<div class="social-counter-total">
+						<span class="tie-icon-heart"></span>
+						<span class="counter-total-text">1230 <strong>0</strong> 1500</span>
+					</div>
+							<ul class="solid-social-icons two-cols Arqam-Lite">
+				<span class="theme-notice">Перейдите на страницу настроек Arqam, чтобы настроить учетные записи социальных сетей.</span>			</ul>
+			<div class="clearfix"></div></div><!-- .widget /--><div id="tie-widget-categories-3" class="container-wrapper widget widget_categories tie-widget-categories"><div class="widget-title the-global-title"><div class="the-subtitle">Категории</div></div><ul>	<li class="cat-item cat-counter tie-cat-item-1788"><a href="https://dachnikam.org/poleznye-svojstva">Полезные свойства</a> <span>41</span>
+</li>
+	<li class="cat-item cat-counter tie-cat-item-1791"><a href="https://dachnikam.org/hozyajkam">Хозяйкам</a> <span>15</span>
+</li>
+	<li class="cat-item cat-counter tie-cat-item-563"><a href="https://dachnikam.org/vrediteli">Вредители</a> <span>11</span>
+</li>
+	<li class="cat-item cat-counter tie-cat-item-10"><a href="https://dachnikam.org/tsvety-i-rasteniya">Цветы и растения</a> <span>102</span>
+</li>
+	<li class="cat-item cat-counter tie-cat-item-1825"><a href="https://dachnikam.org/udobreniya">Удобрения</a> <span>12</span>
+</li>
+	<li class="cat-item cat-counter tie-cat-item-29"><a href="https://dachnikam.org/ogorod">Огород</a> <span>59</span>
+</li>
+	<li class="cat-item cat-counter tie-cat-item-9"><a href="https://dachnikam.org/sad">Сад</a> <span>60</span>
+</li>
+	<li class="cat-item cat-counter tie-cat-item-1"><a href="https://dachnikam.org/landshaft">Ландшафт</a> <span>35</span>
+</li>
+</ul><div class="clearfix"></div></div><!-- .widget /--><div id="posts-list-widget-5" class="container-wrapper widget posts-list"><div class="widget-title the-global-title"><div class="the-subtitle">Последние статьи</div></div><div class="widget-posts-list-wrapper"><div class="widget-posts-list-container posts-list-half-posts"><ul class="posts-list-items widget-posts-wrapper">
+<li class="widget-single-post-item widget-post-list tie-standard">
+
+			<div class="post-widget-thumbnail">
+
+			
+			<a aria-label="Виноград Гурман ранний" href="https://dachnikam.org/vinograd-gurman-rannij.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20390%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2022/05/Vinograd-Gurman-rannij-390x220.jpg" width="390" height="220"><noscript><img width="390" height="220" src="https://dachnikam.org/wp-content/uploads/2022/05/Vinograd-Gurman-rannij-390x220.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" /></noscript></a>		</div><!-- post-alignleft /-->
+	
+	<div class="post-widget-body ">
+		<a class="post-title the-subtitle" href="https://dachnikam.org/vinograd-gurman-rannij.html">Виноград Гурман ранний</a>
+
+		<div class="post-meta">
+			<span class="date meta-item tie-icon">21.11.2022</span>		</div>
+	</div>
+</li>
+
+<li class="widget-single-post-item widget-post-list tie-standard">
+
+			<div class="post-widget-thumbnail">
+
+			
+			<a aria-label="Груша Августовская роса – описание сорта и основные характеристики" href="https://dachnikam.org/grusha-avgustovskaya-rosa.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20390%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2022/04/avgustovskaya-rosa-390x220.jpg" width="390" height="220"><noscript><img width="390" height="220" src="https://dachnikam.org/wp-content/uploads/2022/04/avgustovskaya-rosa-390x220.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" /></noscript></a>		</div><!-- post-alignleft /-->
+	
+	<div class="post-widget-body ">
+		<a class="post-title the-subtitle" href="https://dachnikam.org/grusha-avgustovskaya-rosa.html">Груша Августовская роса – описание сорта и основные характеристики</a>
+
+		<div class="post-meta">
+			<span class="date meta-item tie-icon">21.11.2022</span>		</div>
+	</div>
+</li>
+
+<li class="widget-single-post-item widget-post-list tie-standard">
+
+			<div class="post-widget-thumbnail">
+
+			
+			<a aria-label="Яблоня Моди – основные характеристики, нюансы выращивания, отзывы садоводов" href="https://dachnikam.org/yablonya-modi-osnovnye-harakteristiki-nyuansy-vyrashhivaniya-otzyvy-sadovodov.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20390%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2022/03/YAblonya-Modi-390x220.jpg" width="390" height="220"><noscript><img width="390" height="220" src="https://dachnikam.org/wp-content/uploads/2022/03/YAblonya-Modi-390x220.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" /></noscript></a>		</div><!-- post-alignleft /-->
+	
+	<div class="post-widget-body ">
+		<a class="post-title the-subtitle" href="https://dachnikam.org/yablonya-modi-osnovnye-harakteristiki-nyuansy-vyrashhivaniya-otzyvy-sadovodov.html">Яблоня Моди – основные характеристики, нюансы выращивания, отзывы садоводов</a>
+
+		<div class="post-meta">
+			<span class="date meta-item tie-icon">21.11.2022</span>		</div>
+	</div>
+</li>
+
+<li class="widget-single-post-item widget-post-list tie-standard">
+
+			<div class="post-widget-thumbnail">
+
+			
+			<a aria-label="Сорт розы Клементина" href="https://dachnikam.org/sort-rozy-klementina.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20293%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="Роза Клементина" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2022/02/1-1.jpg" width="293" height="220"><noscript><img width="293" height="220" src="https://dachnikam.org/wp-content/uploads/2022/02/1-1.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="Роза Клементина" decoding="async" loading="lazy" /></noscript></a>		</div><!-- post-alignleft /-->
+	
+	<div class="post-widget-body ">
+		<a class="post-title the-subtitle" href="https://dachnikam.org/sort-rozy-klementina.html">Сорт розы Клементина</a>
+
+		<div class="post-meta">
+			<span class="date meta-item tie-icon">28.06.2022</span>		</div>
+	</div>
+</li>
+</ul></div></div><div class="clearfix"></div></div><!-- .widget /--><div id="custom_html-2" class="widget_text container-wrapper widget widget_custom_html"><div class="widget-title the-global-title"><div class="the-subtitle">Реклама на сайте</div></div><div class="textwidget custom-html-widget"><!-- Yandex.RTB R-A-2190491-3 -->
+<div id="yandex_rtb_R-A-2190491-3"></div>
+<script type="rocketlazyloadscript">window.yaContextCb.push(()=>{
+  Ya.Context.AdvManager.render({
+    renderTo: 'yandex_rtb_R-A-2190491-3',
+    blockId: 'R-A-2190491-3'
+  })
+})</script></div><div class="clearfix"></div></div><!-- .widget /--><div id="yarpp_widget-2" class="container-wrapper widget widget_yarpp_widget"><div class="yarpp yarpp-related yarpp-related-widget yarpp-related-none yarpp-template-thumbnails">
+<!-- YARPP Thumbnails -->
+<h3>Самые читаемые статьи</h3>
+<p>Нет похожих записей.</p>
+</div>
+<div class="clearfix"></div></div><!-- .widget /-->		</div><!-- .theiaStickySidebar /-->
+	</aside><!-- .sidebar /-->
+	</div><!-- .main-content-row /--></div><!-- #content /-->
+<footer id="footer" class="site-footer dark-skin dark-widgetized-area">
+
+	
+			<div id="footer-widgets-container">
+				<div class="container">
+					
+		<div class="footer-widget-area footer-boxed-widget-area">
+			<div class="tie-row">
+
+									<div class="tie-col-sm-4 normal-side">
+						<div id="posts-list-widget-3" class="container-wrapper widget posts-list"><div class="widget-title the-global-title"><div class="the-subtitle">Самые просматриваемые статьи</div></div><div class="widget-posts-list-wrapper"><div class="widget-posts-list-container timeline-widget"><ul class="posts-list-items widget-posts-wrapper">					<li class="widget-single-post-item">
+						<a href="https://dachnikam.org/sorta-kartofelya-po-alfavitu-foto-i-opisanie.html">
+							<span class="date meta-item tie-icon">22.01.2023</span>							<h3>Сорта картофеля по алфавиту фото и описание</h3>
+						</a>
+					</li>
+										<li class="widget-single-post-item">
+						<a href="https://dachnikam.org/kustarniki-tsvetushhie-vse-leto-zimostojkie.html">
+							<span class="date meta-item tie-icon">31.01.2023</span>							<h3>Цветущие кустарники и деревья: названия и фото</h3>
+						</a>
+					</li>
+										<li class="widget-single-post-item">
+						<a href="https://dachnikam.org/tuya-zhelteet-i-sohnet-chto-delat.html">
+							<span class="date meta-item tie-icon">03.03.2022</span>							<h3>Туя желтеет и сохнет что делать чтобы спасти растение</h3>
+						</a>
+					</li>
+					</ul></div></div><div class="clearfix"></div></div><!-- .widget /-->					</div><!-- .tie-col /-->
+				
+									<div class="tie-col-sm-4 normal-side">
+						<div id="posts-list-widget-4" class="container-wrapper widget posts-list"><div class="widget-title the-global-title"><div class="the-subtitle">Последние измененные статьи</div></div><div class="widget-posts-list-wrapper"><div class="widget-posts-list-container posts-pictures-widget"><div class="tie-row widget-posts-wrapper">						<div class="widget-single-post-item tie-col-xs-4 tie-standard">
+							
+			<a aria-label="Цветущие кустарники и деревья: названия и фото" href="https://dachnikam.org/kustarniki-tsvetushhie-vse-leto-zimostojkie.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20390%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="Кустарники цветущие все лето зимостойкие" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2016/05/henomelis_yaponski-390x220.jpg" width="390" height="220"><noscript><img width="390" height="220" src="https://dachnikam.org/wp-content/uploads/2016/05/henomelis_yaponski-390x220.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="Кустарники цветущие все лето зимостойкие" decoding="async" loading="lazy" /></noscript></a>						</div>
+												<div class="widget-single-post-item tie-col-xs-4 tie-standard">
+							
+			<a aria-label="Лучшие декоративные кустарники для сада – фото с названиями" href="https://dachnikam.org/dekorativnye-kustarniki-dlya-sada.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20293%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="Декоративные кустарники фото и названия" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2017/04/Dekorativnye-kustarniki-foto-i-nazvaniya-min.jpg" width="293" height="220"><noscript><img width="293" height="220" src="https://dachnikam.org/wp-content/uploads/2017/04/Dekorativnye-kustarniki-foto-i-nazvaniya-min.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="Декоративные кустарники фото и названия" decoding="async" loading="lazy" /></noscript></a>						</div>
+												<div class="widget-single-post-item tie-col-xs-4 tie-standard">
+							
+			<a aria-label="Средства и растения для косметических целей" href="https://dachnikam.org/sredstva-i-rasteniya-dlya-kosmeticheskih-tselej.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20325%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2020/03/Sredstva-i-rasteniya-dlya-kosmeticheskih-celej.jpg" width="325" height="220"><noscript><img width="325" height="220" src="https://dachnikam.org/wp-content/uploads/2020/03/Sredstva-i-rasteniya-dlya-kosmeticheskih-celej.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" /></noscript></a>						</div>
+												<div class="widget-single-post-item tie-col-xs-4 tie-standard">
+							
+			<a aria-label="Сорта картофеля по алфавиту фото и описание" href="https://dachnikam.org/sorta-kartofelya-po-alfavitu-foto-i-opisanie.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20264%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="Сорта картофеля по алфавиту фото и описание" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2017/04/Sorta-kartofelya-po-alfavitu-foto-i-opisanie-min.jpg" width="264" height="220"><noscript><img width="264" height="220" src="https://dachnikam.org/wp-content/uploads/2017/04/Sorta-kartofelya-po-alfavitu-foto-i-opisanie-min.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="Сорта картофеля по алфавиту фото и описание" decoding="async" loading="lazy" /></noscript></a>						</div>
+												<div class="widget-single-post-item tie-col-xs-4 tie-standard">
+							
+			<a aria-label="Древовидная гортензия: подбираем наилучший сорт (фото и названия)" href="https://dachnikam.org/drevovidnaya-gortenziya-sorta-s-foto.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20390%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2019/07/Gortenziya-drevovidnaya.jpg" width="390" height="220"><noscript><img width="390" height="220" src="https://dachnikam.org/wp-content/uploads/2019/07/Gortenziya-drevovidnaya.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" /></noscript></a>						</div>
+												<div class="widget-single-post-item tie-col-xs-4 tie-standard">
+							
+			<a aria-label="Яблоня Моди – основные характеристики, нюансы выращивания, отзывы садоводов" href="https://dachnikam.org/yablonya-modi-osnovnye-harakteristiki-nyuansy-vyrashhivaniya-otzyvy-sadovodov.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20390%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2022/03/YAblonya-Modi-390x220.jpg" width="390" height="220"><noscript><img width="390" height="220" src="https://dachnikam.org/wp-content/uploads/2022/03/YAblonya-Modi-390x220.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" /></noscript></a>						</div>
+												<div class="widget-single-post-item tie-col-xs-4 tie-standard">
+							
+			<a aria-label="Груша Августовская роса – описание сорта и основные характеристики" href="https://dachnikam.org/grusha-avgustovskaya-rosa.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20390%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2022/04/avgustovskaya-rosa-390x220.jpg" width="390" height="220"><noscript><img width="390" height="220" src="https://dachnikam.org/wp-content/uploads/2022/04/avgustovskaya-rosa-390x220.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" /></noscript></a>						</div>
+												<div class="widget-single-post-item tie-col-xs-4 tie-standard">
+							
+			<a aria-label="Виноград Гурман ранний" href="https://dachnikam.org/vinograd-gurman-rannij.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20390%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2022/05/Vinograd-Gurman-rannij-390x220.jpg" width="390" height="220"><noscript><img width="390" height="220" src="https://dachnikam.org/wp-content/uploads/2022/05/Vinograd-Gurman-rannij-390x220.jpg" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" /></noscript></a>						</div>
+												<div class="widget-single-post-item tie-col-xs-4 tie-standard">
+							
+			<a aria-label="Сорта и гибриды желтых пионов" href="https://dachnikam.org/sorta-zheltyh-pionov.html" class="post-thumb">
+			<div class="post-thumb-overlay-wrap">
+				<div class="post-thumb-overlay">
+					<span class="tie-icon tie-media-icon"></span>
+				</div>
+			</div>
+		<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20390%20220'%3E%3C/svg%3E" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" data-lazy-src="https://dachnikam.org/wp-content/uploads/2022/09/ZHeltye-piony-390x220.jpg.webp" width="390" height="220"><noscript><img width="390" height="220" src="https://dachnikam.org/wp-content/uploads/2022/09/ZHeltye-piony-390x220.jpg.webp" class="attachment-jannah-image-large size-jannah-image-large wp-post-image" alt="" decoding="async" loading="lazy" /></noscript></a>						</div>
+						</div></div></div><div class="clearfix"></div></div><!-- .widget /-->					</div><!-- .tie-col /-->
+				
+									<div class="tie-col-sm-4 normal-side">
+						<div id="tag_cloud-1" class="container-wrapper widget widget_tag_cloud"><div class="widget-title the-global-title"><div class="the-subtitle">Метки</div></div><div class="tagcloud"><a href="https://dachnikam.org/tag/abrikos" class="tag-cloud-link tag-link-1839 tag-link-position-1" style="font-size: 11.783783783784pt;" aria-label="Абрикос (3 элемента)">Абрикос</a>
+<a href="https://dachnikam.org/tag/vinograd" class="tag-cloud-link tag-link-1851 tag-link-position-2" style="font-size: 10.27027027027pt;" aria-label="Виноград (2 элемента)">Виноград</a>
+<a href="https://dachnikam.org/tag/gortenziya" class="tag-cloud-link tag-link-1846 tag-link-position-3" style="font-size: 11.783783783784pt;" aria-label="Гортензия (3 элемента)">Гортензия</a>
+<a href="https://dachnikam.org/tag/kaktusy" class="tag-cloud-link tag-link-1845 tag-link-position-4" style="font-size: 11.783783783784pt;" aria-label="Кактусы (3 элемента)">Кактусы</a>
+<a href="https://dachnikam.org/tag/kartofel" class="tag-cloud-link tag-link-1837 tag-link-position-5" style="font-size: 11.783783783784pt;" aria-label="Картофель (3 элемента)">Картофель</a>
+<a href="https://dachnikam.org/tag/klematis" class="tag-cloud-link tag-link-1876 tag-link-position-6" style="font-size: 10.27027027027pt;" aria-label="Клематис (2 элемента)">Клематис</a>
+<a href="https://dachnikam.org/tag/komnatnye-tsvety" class="tag-cloud-link tag-link-1847 tag-link-position-7" style="font-size: 20.612612612613pt;" aria-label="Комнатные цветы (19 элементов)">Комнатные цветы</a>
+<a href="https://dachnikam.org/tag/kryzhovnik" class="tag-cloud-link tag-link-1874 tag-link-position-8" style="font-size: 10.27027027027pt;" aria-label="Крыжовник (2 элемента)">Крыжовник</a>
+<a href="https://dachnikam.org/tag/kustarniki" class="tag-cloud-link tag-link-1855 tag-link-position-9" style="font-size: 14.936936936937pt;" aria-label="Кустарники (6 элементов)">Кустарники</a>
+<a href="https://dachnikam.org/tag/malina" class="tag-cloud-link tag-link-1843 tag-link-position-10" style="font-size: 13.045045045045pt;" aria-label="Малина (4 элемента)">Малина</a>
+<a href="https://dachnikam.org/tag/piony" class="tag-cloud-link tag-link-1878 tag-link-position-11" style="font-size: 13.045045045045pt;" aria-label="Пионы (4 элемента)">Пионы</a>
+<a href="https://dachnikam.org/tag/poleznye-svojstva" class="tag-cloud-link tag-link-1835 tag-link-position-12" style="font-size: 22pt;" aria-label="Полезные свойства (25 элементов)">Полезные свойства</a>
+<a href="https://dachnikam.org/tag/smorodina" class="tag-cloud-link tag-link-1844 tag-link-position-13" style="font-size: 11.783783783784pt;" aria-label="Смородина (3 элемента)">Смородина</a>
+<a href="https://dachnikam.org/tag/sovety" class="tag-cloud-link tag-link-1850 tag-link-position-14" style="font-size: 10.27027027027pt;" aria-label="Советы (2 элемента)">Советы</a>
+<a href="https://dachnikam.org/tag/tomaty" class="tag-cloud-link tag-link-1858 tag-link-position-15" style="font-size: 10.27027027027pt;" aria-label="Томаты (2 элемента)">Томаты</a>
+<a href="https://dachnikam.org/tag/trvy" class="tag-cloud-link tag-link-1865 tag-link-position-16" style="font-size: 8pt;" aria-label="Трвы (1 элемент)">Трвы</a>
+<a href="https://dachnikam.org/tag/tsvety" class="tag-cloud-link tag-link-1852 tag-link-position-17" style="font-size: 14.936936936937pt;" aria-label="Цветы (6 элементов)">Цветы</a>
+<a href="https://dachnikam.org/tag/chai" class="tag-cloud-link tag-link-1866 tag-link-position-18" style="font-size: 8pt;" aria-label="Чаи (1 элемент)">Чаи</a></div>
+<div class="clearfix"></div></div><!-- .widget /-->					</div><!-- .tie-col /-->
+				
+									<div class=" normal-side">
+											</div><!-- .tie-col /-->
+				
+			</div><!-- .tie-row /-->
+		</div><!-- .footer-widget-area /-->
+
+						</div><!-- .container /-->
+			</div><!-- #Footer-widgets-container /-->
+			
+			<div id="site-info" class="site-info">
+				<div class="container">
+					<div class="tie-row">
+						<div class="tie-col-md-12">
+
+							<div class="copyright-text copyright-text-second">© Copyright 2018 - 2023 Все права защищены  | Все материалы сайта являются объектами авторского права dachnikam.org | Перепечатка материалов разрешена только с указанием первоисточника
+
+</div><div class="footer-menu"><ul id="menu-futer" class="menu"><li id="menu-item-30232" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30232"><a href="https://dachnikam.org/vse_stati">Все статьи</a></li>
+<li id="menu-item-28333" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28333"><a href="https://dachnikam.org/o-nas">О нас</a></li>
+<li id="menu-item-26515" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26515"><a href="https://dachnikam.org/kontakty">Контакты</a></li>
+<li id="menu-item-33373" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-33371 current_page_item menu-item-33373 tie-current-menu"><a href="https://dachnikam.org/polzovatelskoe-soglashenie" aria-current="page">Пользовательское соглашение</a></li>
+<li id="menu-item-33374" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33374"><a href="https://dachnikam.org/politika-konfidentsialnosti">Политика конфиденциальности</a></li>
+</ul></div><ul class="social-icons"></ul> 
+
+						</div><!-- .tie-col /-->
+					</div><!-- .tie-row /-->
+				</div><!-- .container /-->
+			</div><!-- #site-info /-->
+			
+</footer><!-- #footer /-->
+
+
+		<a id="go-to-top" class="go-to-top-button" href="#go-to-tie-body">
+			<span class="tie-icon-angle-up"></span>
+			<span class="screen-reader-text">Кнопка «Наверх»</span>
+		</a>
+	
+		</div><!-- #tie-wrapper /-->
+
+		
+	<aside class=" side-aside normal-side dark-skin dark-widgetized-area appear-from-left" aria-label="Второстепенный сайдбар" style="visibility: hidden;">
+		<div data-height="100%" class="side-aside-wrapper has-custom-scroll">
+
+			<a href="#" class="close-side-aside remove big-btn light-btn">
+				<span class="screen-reader-text">Закрыть</span>
+			</a><!-- .close-side-aside /-->
+
+
+			
+				<div id="mobile-container">
+
+					
+					<div id="mobile-menu" class=" has-custom-menu">
+						<div class="menu-glavnoe-menyu-container"><ul id="mobile-custom-menu" class="menu" role="menubar"><li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-12712"><a title="Советы садоводам" href="https://dachnikam.org/sad">Сад</a>
+<ul class="sub-menu menu-sub-content">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28431"><a href="https://dachnikam.org/sad/plodovye-derevya">Плодовые деревья</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28602"><a href="https://dachnikam.org/sad/plodovye-derevya/abrikos">Абрикос</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28526"><a href="https://dachnikam.org/sad/plodovye-derevya/yablonya">Яблоня</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28751"><a href="https://dachnikam.org/sad/plodovye-derevya/grusha">Груша</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28608"><a href="https://dachnikam.org/sad/plodovye-derevya/chereshnya-i-vishnya">Черешня и вишня</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28412"><a href="https://dachnikam.org/sad/yagodnye-kustarniki">Ягодные кустарники</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28682"><a href="https://dachnikam.org/sad/yagodnye-kustarniki/smorodina">Смородина</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28554"><a href="https://dachnikam.org/sad/yagodnye-kustarniki/kryzhovnik">Крыжовник</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28448"><a href="https://dachnikam.org/sad/yagodnye-kustarniki/vinograd">Виноград</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28582"><a href="https://dachnikam.org/sad/yagodnye-kustarniki/malina">Малина</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-12711"><a title="Советы огородникам" href="https://dachnikam.org/ogorod">Огород</a>
+<ul class="sub-menu menu-sub-content">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28422"><a href="https://dachnikam.org/ogorod/ovoshhi">Овощи</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28423"><a href="https://dachnikam.org/ogorod/ovoshhi/kartofel">Картофель</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28426"><a href="https://dachnikam.org/ogorod/ovoshhi/tomaty">Томаты</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31517"><a href="https://dachnikam.org/ogorod/ovoshhi/baklazhan">Баклажан</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28424"><a href="https://dachnikam.org/ogorod/ovoshhi/morkov">Морковь</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28425"><a href="https://dachnikam.org/ogorod/ovoshhi/ogurtsy">Огурцы</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28441"><a href="https://dachnikam.org/ogorod/ovoshhi/luk-i-chesnok">Лук и чеснок</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28585"><a href="https://dachnikam.org/ogorod/klubnika-i-zemlyanika">Клубника и земляника</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-28451"><a title="Цветы и растения" href="https://dachnikam.org/tsvety-i-rasteniya">Цветы и растения</a>
+<ul class="sub-menu menu-sub-content">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28411"><a title="Однолетние цветы" href="https://dachnikam.org/tsvety-i-rasteniya/odnoletnie-tsvety">Однолетние</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28410"><a title="Многолетние цветы" href="https://dachnikam.org/tsvety-i-rasteniya/mnogoletnie-tsvety">Многолетние</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28450"><a title="Неприхотливые цветы" href="https://dachnikam.org/tsvety-i-rasteniya/neprihotlivye-tsvety">Неприхотливые</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28559"><a title="Розы" href="https://dachnikam.org/tsvety-i-rasteniya/rozy">Розы</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28609"><a title="Растения" href="https://dachnikam.org/tsvety-i-rasteniya/rasteniya">Растения</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17042"><a title="Комнатные цветы и растения" href="https://dachnikam.org/tsvety-i-rasteniya/komnatnye-tsvety-i-rasteniya">Комнатные</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-12708"><a title="Дизайн дачи" href="https://dachnikam.org/landshaft">Ландшафт</a>
+<ul class="sub-menu menu-sub-content">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28495"><a href="https://dachnikam.org/landshaft/dekorativnye-derevya">Декоративные деревья</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28427"><a href="https://dachnikam.org/landshaft/dekorativnye-kustarniki">Декоративные кустарники</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28433"><a href="https://dachnikam.org/landshaft/hvojnye-derevya">Хвойные деревья</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28428"><a href="https://dachnikam.org/landshaft/tsvetnik-i-klumba">Цветник и клумба</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28430"><a href="https://dachnikam.org/landshaft/dizajn-sada">Дизайн сада</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28413"><a href="https://dachnikam.org/landshaft/liany">Лианы</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-28773"><a href="https://dachnikam.org/udobreniya">Удобрения</a>
+<ul class="sub-menu menu-sub-content">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28774"><a href="https://dachnikam.org/udobreniya/podkormki">Подкормки</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28775"><a href="https://dachnikam.org/udobreniya/preparaty">Препараты</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12705"><a title="Вредители сада и огорода" href="https://dachnikam.org/vrediteli">Вредители</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28421"><a href="https://dachnikam.org/hozyajkam">Хозяйкам</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-30562"><a href="https://dachnikam.org/poleznye-svojstva">Полезные свойства</a></li>
+</ul></div>					</div><!-- #mobile-menu /-->
+
+											<div id="mobile-social-icons" class="social-icons-widget solid-social-icons">
+							<ul></ul> 
+						</div><!-- #mobile-social-icons /-->
+						
+				</div><!-- #mobile-container /-->
+			
+
+			
+		</div><!-- .side-aside-wrapper /-->
+	</aside><!-- .side-aside /-->
+
+	
+	</div><!-- #tie-container /-->
+</div><!-- .background-overlay /-->
+
+	<div class="popUp-box-expert_plag form-openexpert_plag">
+		<div class="wrapbody-popup-expert_plag">
+		<span class="close-popUp"></span>
+		<div class="title_expert_plag">Задать вопрос эксперту</div>
+		<div class="form-style-expert_plag">
+			<form id="form-expert_plag" action="#">
+				<div class="form-style">
+					<div class="item-field">
+						<input name="title" id="title" type="text" placeholder="Вопрос">
+					</div>
+					<div class="hidden-input">
+						<input type="hidden" name="cat" value="">
+						<input type="text" id="textadd">
+					</div>
+					<div class="item-field">
+						<textarea name="editor" id="editor" rows="5" cols="50" placeholder="Подробнее о вопросе"></textarea>
+					</div>
+					<div class="submit-form">
+						<input id="button-expert_plag" style="" type="submit" value="Отправить">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="bg-fix"></div>
+	</div>
+	<div class="popUp-box-expert_plag form-resultexpert_plag">
+		<div class="wrapbody-popup-expert_plag">
+			<span class="close-popUp"></span>
+				<p>Спасибо!</p>
+				<p>В ближайшее время мы опубликуем информацию.</p>
+		</div>
+		<div class="bg-fix"></div>
+	</div>
+ 		 <script type="rocketlazyloadscript"> var expert_ajaxUrl = "https://dachnikam.org/wp-admin/admin-ajax.php";</script>
+ 	 <!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(92377122, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/92377122" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+ 		 <script type="rocketlazyloadscript"> var mikolator_ajaxUrl = "https://dachnikam.org/wp-admin/admin-ajax.php";</script>
+		 
+ 	 <div id="is-scroller-outer"><div id="is-scroller"></div></div><div id="fb-root"></div>
+
+<style id="yarpp-thumbnails-inline-css" type="text/css">
+.yarpp-thumbnails-horizontal .yarpp-thumbnail {width: 130px;height: 170px;margin: 5px;margin-left: 0px;}.yarpp-thumbnail > img, .yarpp-thumbnail-default {width: 120px;height: 120px;margin: 5px;}.yarpp-thumbnails-horizontal .yarpp-thumbnail-title {margin: 7px;margin-top: 0px;width: 120px;}.yarpp-thumbnail-default > img {min-height: 120px;min-width: 120px;}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/cache/min/1/wp-content/plugins/experts-by-webnavoz/js/experts.js?ver=1676445719" id="script-experts_webnavoz-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/cache/min/1/wp-content/plugins/mikolator-by-webnavoz/js/jquery.tooltipster.js?ver=1676445719" id="tooltipster-mikolator_webnavoz-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/cache/min/1/wp-content/plugins/mikolator-by-webnavoz/js/mikolator.js?ver=1676445719" id="script-mikolator-js" defer=""></script>
+<script type="text/javascript" id="superpwa-register-sw-js-extra">
+/* <![CDATA[ */
+var superpwa_sw = {"url":"\/superpwa-sw.js","disable_addtohome":"0","enableOnDesktop":""};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/cache/min/1/wp-content/plugins/super-progressive-web-apps/public/js/register-sw.js?ver=1676445719" id="superpwa-register-sw-js" defer=""></script>
+<script type="text/javascript" id="toc-front-js-extra">
+/* <![CDATA[ */
+var tocplus = {"smooth_scroll":"1","visibility_show":"\u041f\u043e\u043a\u0430\u0437\u0430\u0442\u044c","visibility_hide":"\u0421\u043a\u0440\u044b\u0442\u044c","width":"Auto"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/plugins/table-of-contents-plus/front.min.js?ver=2302" id="toc-front-js" defer=""></script>
+<script type="text/javascript" id="wp-postratings-js-extra">
+/* <![CDATA[ */
+var ratingsL10n = {"plugin_url":"https:\/\/dachnikam.org\/wp-content\/plugins\/wp-postratings","ajax_url":"https:\/\/dachnikam.org\/wp-admin\/admin-ajax.php","text_wait":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043d\u0435 \u0433\u043e\u043b\u043e\u0441\u0443\u0439\u0442\u0435 \u0437\u0430 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u0437\u0430\u043f\u0438\u0441\u0435\u0439 \u043e\u0434\u043d\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u043e.","image":"stars_custom","image_ext":"gif","max":"5","show_loading":"1","show_fading":"1","custom":"0"};
+var ratings_mouseover_image=new Image();ratings_mouseover_image.src="https://dachnikam.org/wp-content/plugins/wp-postratings/images/stars_custom/rating_over.gif";;
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/cache/min/1/wp-content/plugins/wp-postratings/js/postratings-js.js?ver=1676445719" id="wp-postratings-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin|\/logout|\/wp-login.php","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/dachnikam.org","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" id="tie-scripts-js-extra">
+/* <![CDATA[ */
+var tie = {"is_rtl":"","ajaxurl":"https:\/\/dachnikam.org\/wp-admin\/admin-ajax.php","is_taqyeem_active":"","is_sticky_video":"","mobile_menu_top":"","mobile_menu_active":"area_1","mobile_menu_parent":"true","lightbox_all":"true","lightbox_gallery":"true","lightbox_skin":"dark","lightbox_thumb":"vertical","lightbox_arrows":"true","is_singular":"1","autoload_posts":"","reading_indicator":"true","lazyload":"","select_share":"true","select_share_twitter":"true","select_share_facebook":"true","select_share_linkedin":"","select_share_email":"","facebook_app_id":"5303202981","twitter_username":"","responsive_tables":"","ad_blocker_detector":"","sticky_behavior":"default","sticky_desktop":"true","sticky_mobile":"true","sticky_mobile_behavior":"default","ajax_loader":"<div class=\"loader-overlay\"><div class=\"spinner-circle\"><\/div><\/div>","type_to_search":"","lang_no_results":"\u041d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e","sticky_share_mobile":"","sticky_share_post":""};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/themes/jannah/assets/js/scripts.min.js?ver=6.0.0" id="tie-scripts-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/cache/min/1/wp-content/themes/jannah/assets/ilightbox/lightbox.js?ver=1676445719" id="tie-js-ilightbox-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/themes/jannah/assets/js/sliders.min.js?ver=6.0.0" id="tie-js-sliders-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/cache/min/1/wp-content/themes/jannah/assets/js/shortcodes.js?ver=1676445719" id="tie-js-shortcodes-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/themes/jannah/assets/js/desktop.min.js?ver=6.0.0" id="tie-js-desktop-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://dachnikam.org/wp-content/themes/jannah/assets/js/single.min.js?ver=6.0.0" id="tie-js-single-js" defer=""></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://dachnikam.org/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script><script>function lazyLoadThumb(e){var t='<img data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<button class="play" aria-label="play Youtube video"></button>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?'':'&'+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var e,t,p,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),a[t].appendChild(e),p=e.querySelector('.play'),p.onclick=lazyLoadYoutubeIframe});</script>
+
+
+
+</body></html>

@@ -1,0 +1,959 @@
+<html itemscope="" itemtype="http://schema.org/WebPage" lang="ru"><head>
+	
+	<meta charset="utf-8">
+	
+	<title>Политика конфиденциальности — LePodium</title>
+	<meta name="description" content="Политика конфиденциальности — LePodium">
+	<meta name="keywords" content="">
+
+        <link rel="canonical" href="https://lepodium.ru/privacy">                            
+	<link rel="shortcut icon" href="/maxiengine/templates/lepodium.net/favicon-lepodium.ico">
+	<link rel="icon" href="/maxiengine/templates/lepodium.net/favicon-lepodium.png" type="image/png">
+
+	<link href="/maxiengine/templates/lepodium.net/css/style_lepodium.css?rnd=257368805" rel="stylesheet" type="text/css" media="all">
+
+		<link rel="alternate" hreflang="ru-ru" href="https://lepodium.ru/privacy">
+		<link rel="alternate" hreflang="ru-by" href="https://lepodium.by/privacy">
+		<link rel="alternate" hreflang="ru-ua" href="https://lepodium.com.ua/privacy">
+		<link rel="alternate" hreflang="ru-kz" href="https://lepodium.kz/privacy">
+	
+	<meta name="robots" content="index, follow">
+        	<meta property="og:type" content="product"> 
+	<meta property="og:url" content="/privacy">
+        <meta property="og:title" content="Политика конфиденциальности — LePodium">
+        <meta property="og:description" content="">
+        <meta property="og:image" content="">
+        
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Preload -->
+        <link rel="dns-prefetch" href="//www.googletagmanager.com/">
+        <link rel="preconnect" href="//www.googletagmanager.com/">
+
+	<link rel="dns-prefetch" href="//www.google-analytics.com/">
+	<link rel="preconnect" href="//www.google-analytics.com/">
+
+	<link rel="dns-prefetch" href="//mc.yandex.ru/">
+	<link rel="preconnect" href="//mc.yandex.ru/">
+
+        <link rel="dns-prefetch" href="//code.jivosite.com/">
+        <link rel="preconnect" href="//code.jivosite.com/">
+
+        <link rel="dns-prefetch" href="//cdn.jsdelivr.net/">
+        <link rel="preconnect" href="//cdn.jsdelivr.net/">
+
+        <link rel="dns-prefetch" href="//ajax.googleapis.com/">
+        <link rel="preconnect" href="//ajax.googleapis.com/">
+
+        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com/">
+        <link rel="preconnect" href="//cdnjs.cloudflare.com/">
+
+        <link rel="dns-prefetch" href="//mc.webvisor.org/">
+        <link rel="preconnect" href="//mc.webvisor.org/">
+
+        <link rel="dns-prefetch" href="https://cdn.lepodium.net">
+        <link rel="preconnect" href="https://cdn.lepodium.net">
+
+	<!-- Head block -->
+<meta name="google-site-verification" content="Xz1jZ8KdpFWD8Ad8Jb1w_xIOQf6YYsNMxAgn28tkWEc">
+<meta name="yandex-verification" content="603f69b0c010e476">
+<meta name="yandex-verification" content="954186577000cde3">
+<meta name="yandex-verification" content="a92852c6296c66e8">
+<meta name="yandex-verification" content="0b8f1530b83f68f6">
+
+</head>
+<body>
+
+<script id="maxiengine-jssdk" src="/counter?js&amp;r=&amp;s=1366x768&amp;c=24&amp;h=0.42881891819645335"></script><script><!--
+var i=new Image();i.src='/maxiengine/templates/lepodium.net/images/close.png';
+--></script>
+
+<!--noindex-->
+
+<div id="like-form" style="display:none;">
+
+<div class="like-close" onclick="hideLike();">&nbsp;</div>
+<div class="clear"></div>
+<div id="like-title">Мы сообщим вам о поступлении товара</div>
+<input type="text" name="email" id="like-email" placeholder="Укажите ваш e-mail">
+<div id="like-submit" onclick="submitLike();">Сохранить</div>
+
+</div>
+
+<div id="like-error" style="display:none;">
+<div class="like-close" onclick="hideErrorLike();">&nbsp;</div>
+<div id="like-error-title">Ошибка</div>
+<div id="like-error-message">&nbsp;</div>
+<div id="like-error-ok" onclick="hideErrorLike();">OK</div>
+</div>
+
+<div id="like-success" style="display:none;">
+<div class="like-close" onclick="hideSuccessLike();">&nbsp;</div>
+<div id="like-success-title">Успешно</div>
+<div id="like-success-message">&nbsp;</div>
+<div id="like-success-ok" onclick="hideSuccessLike();">OK</div>
+</div>
+
+<!--/noindex-->
+
+
+<script><!--
+
+function showErrorLike(msg) {
+ jQuery('#like-error-message').html(msg);
+ jQuery('#like-error').fadeIn(300);
+ jQuery('#like-form').fadeOut(100);
+}
+
+function hideErrorLike() {
+ jQuery('#like-error').fadeOut(100);
+ jQuery('#like-form').fadeIn(300);
+}
+
+function showSuccessLike(msg) {
+ jQuery('#like-success-message').html(msg);
+ jQuery('#like-form').fadeOut(100);
+ jQuery('#like-success').fadeIn(300);
+}
+
+function hideSuccessLike() {
+ jQuery('#like-success').fadeOut(200);
+ jQuery('#like-wrap').fadeOut(200);
+}
+
+
+var action = '';
+var code = '';
+
+
+function submitLike() {
+ var email = jQuery('#like-email').val();
+ if (!validateEmail(email)) { showErrorLike('Указан неверный адрес e-mail'); return; }
+ 
+ $.ajax({
+  url: '/mod/account?command=subscribe&email=' + encodeURIComponent(email) + '&action=' + action + '&code=' + encodeURIComponent(code),
+   success: function(data) {
+    showSuccessLike('Мы сообщим вам о поступлении товара');
+   }
+ });
+}
+
+function showLike(_action,_code,msg) {
+ action = _action;
+ code = _code;
+ jQuery('#like-title').html(msg);
+ jQuery('#like-wrap').fadeIn(200);
+ jQuery('#like-form').fadeIn(200);
+}
+
+function hideLike() {
+ jQuery('#like-form').fadeOut(200);
+ jQuery('#like-wrap').fadeOut(200);
+}
+
+function validateEmail(email) {
+ var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+ return re.test(email);
+}
+
+--></script>
+
+
+
+<div id="like-wrap" style="display:none;">&nbsp;</div>
+
+
+<div class="display:none;">
+
+<!-- Include Google Tag Manager Script -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-P0CD9LYRL7"></script>
+<!-- End Include Google Tag Manager Script -->
+
+
+
+
+
+
+<!-- MaxiEngine counter -->
+<script><!--
+(function(d, s, id){
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)){ return; }
+js = d.createElement(s); js.id = id;
+js.onload = function(){
+// remote script has loaded
+};
+js.src = "/counter?js&r=" + encodeURIComponent(document.referrer) + "&s=" + encodeURIComponent(screen.width) + "x" + encodeURIComponent(screen.height) + "&c=" + encodeURIComponent(screen.colorDepth) + "&h=" + Math.random();
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'maxiengine-jssdk'));
+--></script>
+
+<!-- End MaxiEngine counter -->
+
+
+
+
+<div style="display:none;">
+
+<!-- BEGIN JIVOSITE CODE -->
+<script>
+(function(){ document.jivositeloaded=0;var widget_id = 'ynjqfhPj1R';var d=document;var w=window;function l(){var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}//эта строка обычная для кода JivoSite
+function zy(){
+    //удаляем EventListeners
+    if(w.detachEvent){//поддержка IE8
+        w.detachEvent('onscroll',zy);
+        w.detachEvent('onmousemove',zy);
+        w.detachEvent('ontouchmove',zy);
+        w.detachEvent('onresize',zy);
+    }else {
+        w.removeEventListener("scroll", zy, false);
+        w.removeEventListener("mousemove", zy, false);
+        w.removeEventListener("touchmove", zy, false);
+        w.removeEventListener("resize", zy, false);
+    }
+    //запускаем функцию загрузки JivoSite
+    if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}
+    //Устанавливаем куку по которой отличаем первый и второй хит
+    var cookie_date = new Date ( );
+    cookie_date.setTime ( cookie_date.getTime()+60*60*28*1000); //24 часа для Москвы
+    d.cookie = "JivoSiteLoaded=1;path=/;expires=" + cookie_date.toGMTString();
+}
+if (d.cookie.search ( 'JivoSiteLoaded' )<0){//проверяем, первый ли это визит на наш сайт, если да, то назначаем EventListeners на события прокрутки, изменения размера окна браузера и скроллинга на ПК и мобильных устройствах, для отложенной загрузке JivoSite.
+    if(w.attachEvent){// поддержка IE8
+        w.attachEvent('onscroll',zy);
+        w.attachEvent('onmousemove',zy);
+        w.attachEvent('ontouchmove',zy);
+        w.attachEvent('onresize',zy);
+    }else {
+        w.addEventListener("scroll", zy, {capture: false, passive: true});
+        w.addEventListener("mousemove", zy, {capture: false, passive: true});
+        w.addEventListener("touchmove", zy, {capture: false, passive: true});
+        w.addEventListener("resize", zy, {capture: false, passive: true});
+    }
+}else {zy();}
+})();</script>
+<!-- END JIVOSITE CODE -->
+
+
+
+</div>
+
+
+
+</div>
+
+
+<!-- Clickable area -->
+<div id="click" onclick="window.location.href = 'https://lepodium.ru';"></div>
+
+<div id="mobile-logo">
+<div id="mobile-logo-img" onclick="window.location.href = 'https://lepodium.ru';" title=""><img src="/maxiengine/templates/lepodium.net/images/lepodium-logo-mobile.png" alt="">
+<div class="flag" onclick="window.location.href = 'https://lepodium.ru';"><img src="/maxiengine/templates/lepodium.net/flags/hearts/ru.png" alt=""></div>
+</div>
+
+<div id="mobile-lang">
+<span class="selected">RU</span><br>
+</div>
+
+
+
+</div>
+
+<div id="header">
+<div id="logo" onclick="window.location.href = 'https://lepodium.ru';" title=""><img src="/maxiengine/templates/lepodium.net/images/lepodium-logo-full-ru.png" alt="" width="180">
+<div class="flag" onclick="window.location.href = 'https://lepodium.ru';"><img src="/maxiengine/templates/lepodium.net/flags/hearts/ru.png" alt=""></div>
+</div>
+
+
+
+<div class="clear"></div>
+</div>
+
+
+<div id="widecontent">
+<h1>Политика конфиденциальности</h1>
+
+<p><b>LePodium</b> (далее - Сайт) использует файлы cookies с целью улучшения качества предоставляемых услуг (учёт интересов и предпочтений и персонализация выдачи), а также аналитики, которая позволяет сделать наш Сайт лучше и более эффективно контролировать каналы продаж. При первом посещении Сайта мы предлагаем вам согласиться на использовании файлов cookies или отказаться (в последнем случае будет прописан специальный файл cookie с пометкой о том, что не требуется отслеживать ваши посещения).</p>
+
+<br><h2>Использование материалов Сайта</h2>
+
+<p>Любые материалы Сайта (включая текстовый контент, информацию о товарах и ценах, фотографии, другие изображения или видео) могут быть использованы в некоммерческих целях при условии простановки прямой открытой для индексации гиперссылки (в случае использования на web-страницах) с названием данного проекта (LePodium, Le Podium, ЛеПодиум или Ле Подиум).</p>
+
+<p>Другие варианты использования вышеуказанных материалов возможны лишь с письменного разрешения администрации Сайта.</p>
+
+<br><h2>Контакты</h2>
+
+<p>По вопросам сотрудничества (включая подключение новых магазинов) обращайтесь:</p>
+
+<p><b>E-mail:</b> admin(собачка)lepodium.ru</p>
+<p><b>Telegram:</b> @LePodium</p>
+<p><b>Whatsapp:</b> +7 995 123-77-24</p>
+<p><b>Viber:</b> +7 995 123-77-24</p>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- Loading... -->
+<div id="filter-wait" onclick="hide_wait();"><div id="filter-wait-image">&nbsp;</div></div>
+
+<script><!--
+
+function lazy_load() {
+ $('.lazy').each(function(){
+  if ($(this).attr("src").indexOf("empty.png") != -1) {
+    $(this).attr("src",$(this).attr("data-original")); }
+ });
+}
+
+function scroll_top() {
+ $('html, body').animate({scrollTop : 0},500);
+ $('#scroll-top').fadeOut(300);
+ return false; 
+}
+
+function image_url(id,no) {
+ var s = '' + id;
+ var s1 = Math.floor(id / 1000000);
+ var s2 = Math.floor(id / 1000) % 1000;
+ url = 'https://cdn.lepodium.net/images/' + zero_fill(s1,3) + '/' + zero_fill(s2,3) +  '/' + id + '-' + no + '.jpg'; 
+ return url;
+}
+
+function zero_fill(s,cnt) {
+ s = '' + s;
+ for (var i = s.length; i < cnt; i++) s = '0' + s;
+ return s;
+}
+
+var imgid = 0;
+var imgcnt = 0;
+var imglist = null;
+
+function preload_gallery() {
+ var images = [];
+ for (var i = 0; i <= imglist.length; i += 4) {
+   if (!imglist[i]) break;
+   images[i] = new Image();
+   images[i].src = image_url(imglist[i],imglist[i + 1]);
+  }
+}
+
+/* Parse gallery data from DOM */
+function parse_gallery(id) {
+ var data = $('#img' + id).attr("data-list");
+ imglist = data.split(" ");
+ return imglist;
+}
+
+/* Get event caller ID */
+function get_id(event) {
+ var id = event.target.id;
+ id = parseInt(id.substring(2));
+ return id;
+}
+
+/* Check for Safari */
+function is_safari() {
+  var is_iphone = navigator.userAgent.toLowerCase().indexOf('iphone') > -1;
+  var is_ipad   = navigator.userAgent.toLowerCase().indexOf('ipad') > -1;
+  return is_iphone || is_ipad;
+}
+
+/* Check for Android */
+function is_android() {
+  return navigator.userAgent.toLowerCase().indexOf('android') > -1;
+}
+
+/* Bind touch screen functions for the gallery */
+function bind_touch() {
+ if (!is_safari() && !is_android()) {
+   $('.product-link').mouseenter(function(event) {
+     open_gallery(get_id(event));
+   });
+
+   $('.product-link').mousemove(function(event) {
+     do_gallery(get_id(event));
+   });
+
+   $('.product-link').mouseleave(function(event) {
+     close_gallery(get_id(event));
+   });
+   
+   return;
+  }
+
+ $(document).on('click','.product-link',function() {
+   var dt = get_date() - clickdt;
+   if (dt <= 500) { $('#pl' + imgid).click(); return; }
+   imgid = 0;
+   return false;
+ });
+
+ $(document).on('touchmove','.product-link',function() {
+ });
+
+ $(document).on('touchstart','.product-link',function() {
+      clickdt = get_date();
+      _imgid = $(this).attr('data-id');
+      if (imgid == _imgid) return;
+      imgid = _imgid;
+      open_gallery(imgid);
+      do_gallery(imgid);
+ });
+
+ $(document).on('touchmove','.product-link',function() {
+    _imgid = $(this).attr('data-id');
+    imgid = _imgid;
+    open_gallery(imgid);
+    do_gallery(imgid);
+ });
+
+ $(document).on('touchend','.product-link',function() {
+      close_slider(imgid);
+      $('#imglist' + imgid).fadeOut(300);
+      imgid = imgcnt = 0;
+      imglist = null;
+ });
+}
+
+/* Open gallery */
+function open_gallery(id) {
+// if (imgid == id) return;
+
+ parse_gallery(id);
+ if (imglist.length <= 4) return;
+
+ imgid = id;
+ imgcnt = 2;
+
+ preload_gallery();
+ open_slider();
+}
+
+/* Close gallery */
+function close_gallery(id) {
+ /* new */
+ $('#img' + id).show();
+ /* /new */
+ $('#imglist' + id).fadeOut(300);
+ close_slider(id);
+
+ imgid = imgcnt = 0;
+ imglist = null;
+}
+
+function get_date() {
+ dt = new Date();
+ return dt.getTime();
+}
+
+function set_slider(no,c) {
+ for (var i = 0; i < c; i++) $('#ps-' + imgid + '-' + i).css('background-color','#c0c0c0');
+ $('#ps-' + imgid + '-' + no).css('background-color','#4d0000');
+}
+
+/* Set image to selected one */
+function do_gallery(id) {
+ var p = (!is_android()? event.pageX: event.touches[0].pageX) - $('#imgph' + id).offset().left;
+ var w = $('#imgph' + id).width();
+ var c = imglist.length / 4;
+ var no = Math.floor((p / w) / (1 / c));
+ if (no >= imglist.length / 4) no--;
+ if (no < 0) no = 0;
+ set_slider(no,c);
+//alert('p=' + p + ' w=' + w + ' c=' + c);
+//alert(event.touches[0].pageX);
+
+ if (imglist[no * 4 + 3] / imglist[no * 4 + 2] > 1.5)  $('#imglist' + id).css({'height': 'calc(100% - 32px)', 'width': 'auto'});
+ else $('#imglist' + id).css({'height': 'auto', 'width': 'calc(100% - 6px)'});
+
+//alert(no);
+//alert(image_url(imglist[no * 4], imglist[no * 4 + 1]));
+
+ $('#imglist' + id).attr('src', image_url(imglist[no * 4], imglist[no * 4 + 1]));
+ $('#imglist' + id).fadeIn(100);
+ if (no && $('#img' + id).is(':visible')) $('#img' + id).hide();
+}
+
+function open_slider() {
+ var html = "";
+ var width = (100 / (imglist.length / 4));
+ for (var i = 0; i < imglist.length; i += 4) {
+   html += '<div class="product-slide" id="ps-' + imgid + '-' + (i / 4) + '" style="z-index:100;position:relative;width:calc(' + width + '% - 4px);">&nbsp;</div>';
+  }
+ $('#imggallery' + imgid).html(html).fadeIn();
+}
+
+function close_slider(id) {
+ $('#img' + id).show();
+ $('#imggallery' + id).html('&nbsp;');
+}
+
+function show_wait() {
+ $('#filter-wrap').fadeIn(5);
+ $('#filter-wait').fadeIn(50);
+ return true;
+}
+function hide_wait() {
+ $('#filter-wait').fadeOut(150);
+ $('#filter-wrap').fadeOut(150);
+}
+function open_url(url) {
+// show_wait();
+ setTimeout("open_url_2('" + url + '\')',110);
+// open_url_2(url);
+}
+function open_url_2(url) {
+ window.location.href = url;
+}
+
+function scroll_go_step(id,pos) {
+ jQuery('#' + id).scrollLeft(pos);
+}
+
+function scroll_go(id,step) {
+ if (step >= 0) $('#' + id).animate( { scrollLeft: '+=300' }, 500);
+ else           $('#' + id).animate( { scrollLeft: '-=300' }, 500);
+}
+
+
+--></script>
+
+
+
+
+
+<div id="header2">
+<ul class="topmenu">
+
+<li class="topmenu-item">
+<a href="javascript:show_mobile_menu('48204','/womens');">Женщинам</a>
+<ul class="topmenu-item2"><li><div class="topmenu-padding">
+        <div class="topmenu-col">
+    <a class="cat1" href="/womens-clothing">Женская одежда</a><br>
+        		    <a class="cat2" href="/womens-blouses">Блузки</a><br>
+	        		    <a class="cat2" href="/womens-pants">Брюки</a><br>
+	        		    <a class="cat2" href="/womens-outerwear">Верхняя одежда</a><br>
+	        		    <a class="cat2" href="/womens-jeans">Джинсы</a><br>
+	        		    <a class="cat2" href="/womens-cardigans">Кардиганы</a><br>
+	        		    <a class="cat2" href="/womens-lingerie">Нижнее бельё</a><br>
+	        		    <a class="cat2" href="/womens-dresses">Платья</a><br>
+	        		    <a class="cat2" href="/womens-beachwear">Пляжная мода</a><br>
+	        		    <a class="cat2" href="/womens-jumpers">Свитеры</a><br>
+	        		    <a class="cat2" href="/womens-hoodies">Толстовки</a><br>
+	        		    <a class="cat2" href="/womens-tops">Топы</a><br>
+	        		    <a class="cat2" href="/womens-tshirts">Футболки</a><br>
+	        		    <a class="cat2" href="/womens-shorts">Шорты</a><br>
+	        		    <a class="cat2" href="/womens-skirts">Юбки</a><br>
+	            <div class="clear"></div>
+    </div>
+        <div class="topmenu-col">
+    <a class="cat1" href="/womens-shoes">Женская обувь</a><br>
+        		    <a class="cat2" href="/womens-ballet-flats">Балетки</a><br>
+	        		    <a class="cat2" href="/womens-heeled-sandals">Босоножки</a><br>
+	        		    <a class="cat2" href="/womens-boots">Ботинки</a><br>
+	        		    <a class="cat2" href="/womens-sneakers">Кроссовки</a><br>
+	        		    <a class="cat2" href="/womens-moccasins">Мокасины</a><br>
+	        		    <a class="cat2" href="/womens-sandals">Сандалии</a><br>
+	        		    <a class="cat2" href="/womens-high-boots">Сапоги</a><br>
+	        		    <a class="cat2" href="/womens-pumps">Туфли</a><br>
+	        		    <a class="cat2" href="/womens-flip-flops">Шлёпанцы</a><br>
+	            <div class="clear"></div>
+    </div>
+        <div class="topmenu-col">
+    <a class="cat1" href="/womens-accessories">Женские аксессуары</a><br>
+        		    <a class="cat2" href="/womens-ties">Галстуки</a><br>
+	        		    <a class="cat2" href="/womens-caps">Кепки</a><br>
+	        		    <a class="cat2" href="/womens-clutches">Клатчи</a><br>
+	        		    <a class="cat2" href="/womens-wallets">Кошельки</a><br>
+	        		    <a class="cat2" href="/womens-sunglasses">Очки</a><br>
+	        		    <a class="cat2" href="/womens-belts">Ремни</a><br>
+	        		    <a class="cat2" href="/womens-backpacks">Рюкзаки</a><br>
+	        		    <a class="cat2" href="/womens-bags">Сумки</a><br>
+	        		    <a class="cat2" href="/womens-watches">Часы</a><br>
+	        		    <a class="cat2" href="/womens-beanies">Шапки</a><br>
+	        		    <a class="cat2" href="/womens-scarves">Шарфы</a><br>
+	            <div class="clear"></div>
+    </div>
+            <div class="clear"></div>
+    </div></li></ul>
+        </li>
+<li class="topmenu-item">
+<a href="javascript:show_mobile_menu('48205','/mens');">Мужчинам</a>
+<ul class="topmenu-item2"><li><div class="topmenu-padding">
+        <div class="topmenu-col">
+    <a class="cat1" href="/mens-clothing">Мужская одежда</a><br>
+        		    <a class="cat2" href="/mens-pants">Брюки</a><br>
+	        		    <a class="cat2" href="/mens-outerwear">Верхняя одежда</a><br>
+	        		    <a class="cat2" href="/mens-jeans">Джинсы</a><br>
+	        		    <a class="cat2" href="/mens-cardigans">Кардиганы</a><br>
+	        		    <a class="cat2" href="/mens-suits">Костюмы</a><br>
+	        		    <a class="cat2" href="/mens-lingerie">Нижнее бельё</a><br>
+	        		    <a class="cat2" href="/mens-blazers">Пиджаки</a><br>
+	        		    <a class="cat2" href="/mens-beachwear">Пляжная мода</a><br>
+	        		    <a class="cat2" href="/mens-polos">Поло</a><br>
+	        		    <a class="cat2" href="/mens-shirts">Рубашки</a><br>
+	        		    <a class="cat2" href="/mens-jumpers">Свитеры</a><br>
+	        		    <a class="cat2" href="/mens-hoodies">Толстовки</a><br>
+	        		    <a class="cat2" href="/mens-tshirts">Футболки</a><br>
+	        		    <a class="cat2" href="/mens-shorts">Шорты</a><br>
+	            <div class="clear"></div>
+    </div>
+        <div class="topmenu-col">
+    <a class="cat1" href="/mens-shoes">Мужская обувь</a><br>
+        		    <a class="cat2" href="/womens-boots">Ботинки</a><br>
+	        		    <a class="cat2" href="/mens-sneakers">Кроссовки</a><br>
+	        		    <a class="cat2" href="/mens-moccasins">Мокасины</a><br>
+	        		    <a class="cat2" href="/mens-high-boots">Сапоги</a><br>
+	        		    <a class="cat2" href="/mens-loafers">Туфли</a><br>
+	        		    <a class="cat2" href="/mens-flip-flops">Шлёпанцы</a><br>
+	            <div class="clear"></div>
+    </div>
+        <div class="topmenu-col">
+    <a class="cat1" href="/mens-accessories">Мужские аксессуары</a><br>
+        		    <a class="cat2" href="/mens-ties">Галстуки</a><br>
+	        		    <a class="cat2" href="/mens-caps">Кепки</a><br>
+	        		    <a class="cat2" href="/mens-wallets">Кошельки</a><br>
+	        		    <a class="cat2" href="/mens-sunglasses">Очки</a><br>
+	        		    <a class="cat2" href="/mens-belts">Ремни</a><br>
+	        		    <a class="cat2" href="/mens-backpacks">Рюкзаки</a><br>
+	        		    <a class="cat2" href="/mens-bags">Сумки</a><br>
+	        		    <a class="cat2" href="/mens-watches">Часы</a><br>
+	        		    <a class="cat2" href="/mens-beanies">Шапки</a><br>
+	        		    <a class="cat2" href="/mens-scarves">Шарфы</a><br>
+	            <div class="clear"></div>
+    </div>
+            <div class="clear"></div>
+    </div></li></ul>
+        </li>
+<li class="topmenu-item">
+<a href="javascript:show_mobile_menu('48206','');">Девочкам</a>
+<ul class="topmenu-item2"><li><div class="topmenu-padding">
+        <div class="topmenu-col">
+    <a class="cat1" href="/girls">Для девочек</a><br>
+        		    <a class="cat2" href="/girls-accessories">Аксессуары</a><br>
+	        		    <a class="cat2" href="/girls-outerwear">Верхняя одежда</a><br>
+	        		    <a class="cat2" href="/girls-shoes">Обувь</a><br>
+	        		    <a class="cat2" href="/girls-clothing">Одежда</a><br>
+	            <div class="clear"></div>
+    </div>
+        <div class="topmenu-col">
+    <a class="cat1" href="/boys">Для мальчиков</a><br>
+        		    <a class="cat2" href="/boys-accessories">Аксессуары</a><br>
+	        		    <a class="cat2" href="/boys-outerwear">Верхняя одежда</a><br>
+	        		    <a class="cat2" href="/boys-shoes">Обувь</a><br>
+	        		    <a class="cat2" href="/boys-clothing">Одежда</a><br>
+	            <div class="clear"></div>
+    </div>
+        <div class="topmenu-col">
+    <a class="cat1" href="/baby">Для новорожденных</a><br>
+        		    <a class="cat2" href="/baby-accessories">Аксессуары</a><br>
+	        		    <a class="cat2" href="/baby-outerwear">Верхняя одежда</a><br>
+	        		    <a class="cat2" href="/baby-shoes">Обувь</a><br>
+	        		    <a class="cat2" href="/baby-clothing">Одежда</a><br>
+	            <div class="clear"></div>
+    </div>
+            <div class="clear"></div>
+    </div></li></ul>
+        </li>
+<li class="topmenu-item">
+<a href="javascript:show_mobile_menu('48207','/brands');">Бренды</a>
+<ul class="topmenu-item2"><li><div class="topmenu-padding">
+    <div class="topmenu-cols">
+	        <a class="cat2" href="/brands">[ВСЕ БРЕНДЫ]</a><br>
+                <a class="cat2" href="/brand/balenciaga">Balenciaga</a><br>
+                <a class="cat2" href="/brand/balmain">Balmain</a><br>
+                <a class="cat2" href="/brand/brunello-cucinelli">Brunello Cucinelli</a><br>
+                <a class="cat2" href="/brand/burberry">Burberry</a><br>
+                <a class="cat2" href="/brand/chloe">Chloe</a><br>
+                <a class="cat2" href="/brand/dolce-gabbana">Dolce&amp;Gabbana</a><br>
+                <a class="cat2" href="/brand/fendi">Fendi</a><br>
+                <a class="cat2" href="/brand/furla">Furla</a><br>
+                <a class="cat2" href="/brand/givenchy">Givenchy</a><br>
+                <a class="cat2" href="/brand/gucci">Gucci</a><br>
+                <a class="cat2" href="/brand/loewe">Loewe</a><br>
+                <a class="cat2" href="/brand/loro-piana">Loro Piana</a><br>
+                <a class="cat2" href="/brand/marc-jacobs">Marc Jacobs</a><br>
+                <a class="cat2" href="/brand/michael-kors">Michael Kors</a><br>
+                <a class="cat2" href="/brand/off-white">Off-White</a><br>
+                <a class="cat2" href="/brand/prada">Prada</a><br>
+                <a class="cat2" href="/brand/premiata">Premiata</a><br>
+                <a class="cat2" href="/brand/saint-laurent">Saint Laurent</a><br>
+                <a class="cat2" href="/brand/valentino">Valentino</a><br>
+                <a class="cat2" href="/brand/versace">Versace</a><br>
+                <a class="cat2" href="/brand/vetements">Vetements</a><br>
+            </div>
+        <div class="clear"></div>
+    </div></li></ul>
+        </li>
+<li class="topmenu-item">
+<a href="/info">О проекте</a>
+    </li>
+<li class="topmenu-item-n">
+</li>
+
+</ul>
+</div>
+
+<!-- Mobile menu -->
+<div id="mobile-menu-wrap">
+        <div class="filter-menu" id="mobile-menu-48204">
+	<div class="filter-title">Женщинам</div>
+	<div class="filter-close"><a rel="nofollow" href="javascript:hide_mobile_menu('48204');">⊗</a></div>
+	<div class="filter-scroll">
+		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/womens-clothing');" onclick="return show_wait();">Женская одежда</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-blouses');" onclick="return show_wait();">Блузки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-pants');" onclick="return show_wait();">Брюки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-outerwear');" onclick="return show_wait();">Верхняя одежда</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-jeans');" onclick="return show_wait();">Джинсы</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-cardigans');" onclick="return show_wait();">Кардиганы</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-lingerie');" onclick="return show_wait();">Нижнее бельё</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-dresses');" onclick="return show_wait();">Платья</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-beachwear');" onclick="return show_wait();">Пляжная мода</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-jumpers');" onclick="return show_wait();">Свитеры</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-hoodies');" onclick="return show_wait();">Толстовки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-tops');" onclick="return show_wait();">Топы</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-tshirts');" onclick="return show_wait();">Футболки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-shorts');" onclick="return show_wait();">Шорты</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-skirts');" onclick="return show_wait();">Юбки</a></div>
+	    	    	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/womens-shoes');" onclick="return show_wait();">Женская обувь</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-ballet-flats');" onclick="return show_wait();">Балетки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-heeled-sandals');" onclick="return show_wait();">Босоножки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-boots');" onclick="return show_wait();">Ботинки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-sneakers');" onclick="return show_wait();">Кроссовки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-moccasins');" onclick="return show_wait();">Мокасины</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-sandals');" onclick="return show_wait();">Сандалии</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-high-boots');" onclick="return show_wait();">Сапоги</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-pumps');" onclick="return show_wait();">Туфли</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-flip-flops');" onclick="return show_wait();">Шлёпанцы</a></div>
+	    	    	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/womens-accessories');" onclick="return show_wait();">Женские аксессуары</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-ties');" onclick="return show_wait();">Галстуки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-caps');" onclick="return show_wait();">Кепки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-clutches');" onclick="return show_wait();">Клатчи</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-wallets');" onclick="return show_wait();">Кошельки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-sunglasses');" onclick="return show_wait();">Очки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-belts');" onclick="return show_wait();">Ремни</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-backpacks');" onclick="return show_wait();">Рюкзаки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-bags');" onclick="return show_wait();">Сумки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-watches');" onclick="return show_wait();">Часы</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-beanies');" onclick="return show_wait();">Шапки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-scarves');" onclick="return show_wait();">Шарфы</a></div>
+	    	    	    		</div>
+    </div>
+        <div class="filter-menu" id="mobile-menu-48205">
+	<div class="filter-title">Мужчинам</div>
+	<div class="filter-close"><a rel="nofollow" href="javascript:hide_mobile_menu('48205');">⊗</a></div>
+	<div class="filter-scroll">
+		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/mens-clothing');" onclick="return show_wait();">Мужская одежда</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-pants');" onclick="return show_wait();">Брюки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-outerwear');" onclick="return show_wait();">Верхняя одежда</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-jeans');" onclick="return show_wait();">Джинсы</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-cardigans');" onclick="return show_wait();">Кардиганы</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-suits');" onclick="return show_wait();">Костюмы</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-lingerie');" onclick="return show_wait();">Нижнее бельё</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-blazers');" onclick="return show_wait();">Пиджаки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-beachwear');" onclick="return show_wait();">Пляжная мода</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-polos');" onclick="return show_wait();">Поло</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-shirts');" onclick="return show_wait();">Рубашки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-jumpers');" onclick="return show_wait();">Свитеры</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-hoodies');" onclick="return show_wait();">Толстовки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-tshirts');" onclick="return show_wait();">Футболки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-shorts');" onclick="return show_wait();">Шорты</a></div>
+	    	    	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/mens-shoes');" onclick="return show_wait();">Мужская обувь</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/womens-boots');" onclick="return show_wait();">Ботинки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-sneakers');" onclick="return show_wait();">Кроссовки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-moccasins');" onclick="return show_wait();">Мокасины</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-high-boots');" onclick="return show_wait();">Сапоги</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-loafers');" onclick="return show_wait();">Туфли</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-flip-flops');" onclick="return show_wait();">Шлёпанцы</a></div>
+	    	    	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/mens-accessories');" onclick="return show_wait();">Мужские аксессуары</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-ties');" onclick="return show_wait();">Галстуки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-caps');" onclick="return show_wait();">Кепки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-wallets');" onclick="return show_wait();">Кошельки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-sunglasses');" onclick="return show_wait();">Очки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-belts');" onclick="return show_wait();">Ремни</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-backpacks');" onclick="return show_wait();">Рюкзаки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-bags');" onclick="return show_wait();">Сумки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-watches');" onclick="return show_wait();">Часы</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-beanies');" onclick="return show_wait();">Шапки</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/mens-scarves');" onclick="return show_wait();">Шарфы</a></div>
+	    	    	    		</div>
+    </div>
+        <div class="filter-menu" id="mobile-menu-48206">
+	<div class="filter-title">Девочкам</div>
+	<div class="filter-close"><a rel="nofollow" href="javascript:hide_mobile_menu('48206');">⊗</a></div>
+	<div class="filter-scroll">
+		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/girls');" onclick="return show_wait();">Для девочек</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/girls-accessories');" onclick="return show_wait();">Аксессуары</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/girls-outerwear');" onclick="return show_wait();">Верхняя одежда</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/girls-shoes');" onclick="return show_wait();">Обувь</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/girls-clothing');" onclick="return show_wait();">Одежда</a></div>
+	    	    	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/boys');" onclick="return show_wait();">Для мальчиков</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/boys-accessories');" onclick="return show_wait();">Аксессуары</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/boys-outerwear');" onclick="return show_wait();">Верхняя одежда</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/boys-shoes');" onclick="return show_wait();">Обувь</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/boys-clothing');" onclick="return show_wait();">Одежда</a></div>
+	    	    	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/baby');" onclick="return show_wait();">Для новорожденных</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/baby-accessories');" onclick="return show_wait();">Аксессуары</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/baby-outerwear');" onclick="return show_wait();">Верхняя одежда</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/baby-shoes');" onclick="return show_wait();">Обувь</a></div>
+	    	    	    	    <div class="filter-item level2"><a rel="nofollow" href="javascript:open_url('/baby-clothing');" onclick="return show_wait();">Одежда</a></div>
+	    	    	    		</div>
+    </div>
+        <div class="filter-menu" id="mobile-menu-48207">
+	<div class="filter-title">Бренды</div>
+	<div class="filter-close"><a rel="nofollow" href="javascript:hide_mobile_menu('48207');">⊗</a></div>
+	<div class="filter-scroll">
+		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brands');" onclick="return show_wait();">[ВСЕ БРЕНДЫ]</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/balenciaga');" onclick="return show_wait();">Balenciaga</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/balmain');" onclick="return show_wait();">Balmain</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/brunello-cucinelli');" onclick="return show_wait();">Brunello Cucinelli</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/burberry');" onclick="return show_wait();">Burberry</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/chloe');" onclick="return show_wait();">Chloe</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/dolce-gabbana');" onclick="return show_wait();">Dolce&amp;Gabbana</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/fendi');" onclick="return show_wait();">Fendi</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/furla');" onclick="return show_wait();">Furla</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/givenchy');" onclick="return show_wait();">Givenchy</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/gucci');" onclick="return show_wait();">Gucci</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/loewe');" onclick="return show_wait();">Loewe</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/loro-piana');" onclick="return show_wait();">Loro Piana</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/marc-jacobs');" onclick="return show_wait();">Marc Jacobs</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/michael-kors');" onclick="return show_wait();">Michael Kors</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/off-white');" onclick="return show_wait();">Off-White</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/prada');" onclick="return show_wait();">Prada</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/premiata');" onclick="return show_wait();">Premiata</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/saint-laurent');" onclick="return show_wait();">Saint Laurent</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/valentino');" onclick="return show_wait();">Valentino</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/versace');" onclick="return show_wait();">Versace</a></div>
+	    		<div class="filter-item"><a rel="nofollow" href="javascript:open_url('/brand/vetements');" onclick="return show_wait();">Vetements</a></div>
+	    		</div>
+    </div>
+        <div class="filter-menu" id="mobile-menu-48208">
+	<div class="filter-title">О проекте</div>
+	<div class="filter-close"><a rel="nofollow" href="javascript:hide_mobile_menu('48208');">⊗</a></div>
+	<div class="filter-scroll">
+		</div>
+    </div>
+    </div>
+
+
+
+<script><!--
+
+
+function show_mobile_menu(id,url) {
+ if (!$('#mobile-logo').is(':visible')) return;//open_url(url);
+// $('#logo').hide(); $('#mobile-logo').hide();
+ $('#mobile-menu-wrap').fadeIn(50);
+ $('#mobile-menu-' + id).fadeIn(150);
+}
+
+function hide_mobile_menu(id) {
+// $('#logo').show(); $('#mobile-logo').show();
+ $('#mobile-menu-' + id).fadeOut(150);
+ $('#mobile-menu-wrap').fadeOut(50);
+}
+
+
+--></script>
+
+<div class="clear"></div>
+
+<div id="footer">
+<div id="footer-logo"><a href="/"><img src="/maxiengine/templates/lepodium.net/images/lepodium-logo-mobile.png" alt="LePodium" title="" width="148" height="48"></a></div>
+
+© 2017-2023 LePodium - мода класса люкс с доставкой<br>Сотни тысяч моделей одежды, обуви и аксессуаров из мировых бутиков
+
+<br><br>
+<a href="/contacts">Контакты</a> | <a href="/delivery">Доставка и оплата</a> | <a href="/privacy">Политика конфиденциальности</a> | <a href="/jobs">Вакансии</a>
+
+<br><br>
+
+<a href="/womens">Женщинам</a> | <a href="/mens">Мужчинам</a> | <a href="">Девочкам</a> | <a href="/brands">Бренды</a> | <a href="/info">О проекте</a>
+<br><br>
+
+
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+
+<script><!--
+//var img1 = new Image(); img1.src = '/maxiengine/templates/lepodium.net/images/loading.gif';
+//var img2 = new Image(); img2.src = '/maxiengine/templates/lepodium.net/images/redirect-logo.png';
+--></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
+
+
+<script><!--
+
+
+function ismobile() {
+ if ($('#mobile-logo').is(':visible')) return true;
+ return false;
+}
+
+var clickdt = 0;
+var ajax_brands = [];
+var ajax_tree = [];
+var ajax_tags = [];
+var ajax_models = [];
+
+$(document).ready(function(){
+
+ var img1 = new Image(); img1.src = '/maxiengine/templates/lepodium.net/images/loading.gif';
+ 
+ var ajax_url = window.location.href;
+ if (ajax_url.indexOf('?') == -1) ajax_url += '?';
+ else ajax_url += '&';
+ ajax_url += 'ajax-filters';
+ ajax_url += '&rnd=' + Math.random();
+
+//alert(ajax_url);
+ 
+ 
+  
+ 
+ $("img.lazy").lazyload({
+ }); setTimeout('lazy_load();',ismobile()? 6000: 3000);
+ 
+
+ 
+//$(document).on("tap",function(){
+//  mmCount++;
+//  $('#mm').text(' ' + mmCount + ' ' + Math.random());
+//});
+// var mmCount = 0;
+// $(document).mousemove(function(event) {
+//   mmCount++;
+//   $("#mm").text(' ' + mmCount + ' ' + Math.random());
+// });
+  
+
+ 
+ $(window).scroll(function(){
+  if ($(this).scrollTop() > 300) { if (!$('#scroll-top').is(':visible')) $('#scroll-top').fadeIn(300); }
+  else { if ($('#scroll-top').is(':visible')) $('#scroll-top').fadeOut(300); }
+ });
+
+});
+
+
+--></script>
+<a href="javascript:scroll_top();" id="scroll-top">▲</a>
+
+
+<!-- vh0z5vmviqp9qjv1k66vggi3skrgi5pf -->
+
+
+
+
+</body></html>

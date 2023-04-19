@@ -1,0 +1,1474 @@
+<html dir="ltr" lang="ru"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Конфиденциальность персональной информации</title>
+<base href="https://file4life.ru/">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="https://file4life.ru/image/catalog/11.png" rel="icon">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400italic,700,700italic,300,300italic" rel="stylesheet" type="text/css">
+<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="https://file4life.ru/ns-cache/_aa600d37ce87dbbe531339259c570b43.css">
+<link href="catalog/view/javascript/popupcart_ext/popupcart_ext.css?ver=1.5" type="text/css" rel="stylesheet" media="screen">
+<link href="catalog/view/javascript/popupcart_ext/owl.carousel.css" type="text/css" rel="stylesheet" media="screen">
+  
+		<style type="text/css">body {background-color: ;}</style>
+<style type="text/css">
+#cart:hover .dropdown-menu{
+	display:block; 
+}
+</style>
+<style type="text/css">
+.sticker-ns.popular .fa{
+	color:#FFFFFF}
+.sticker-ns.popular{
+	background: #4BFF1F none repeat scroll 0 0;
+	color:#FFFFFF;
+}
+.sticker-ns.popular:after {
+  border-color: #4BFF1F transparent #4BFF1F #4BFF1F}				
+.sticker-ns.special .fa{
+	color:#FFFFFF}
+.sticker-ns.special {
+	background: #FF0A2B none repeat scroll 0 0;
+	color:#FFFFFF;
+}
+.sticker-ns.special:after {
+  border-color: #FF0A2B transparent #FF0A2B #FF0A2B}	
+.sticker-ns.bestseller .fa{
+	color:#FFFFFF}
+.sticker-ns.bestseller {
+	background: #FFC640 none repeat scroll 0 0;
+	color:;
+}
+.sticker-ns.bestseller:after {
+  border-color: #FFC640 transparent #FFC640 #FFC640}	
+.sticker-ns.newproduct .fa{
+	color:#FFFFFF}
+.sticker-ns.newproduct{
+	background: #6536FF none repeat scroll 0 0;
+	color:#FFFFFF;
+}
+.sticker-ns.newproduct:after {
+  border-color: #6536FF transparent #6536FF #6536FF}
+</style>
+<script type="text/javascript" async="" src="https://st.top100.ru/top100/3.13.8/media.js"></script><script type="text/javascript" async="" src="https://st.top100.ru/top100/3.13.8/usability.js"></script><script type="text/javascript" async="" src="https://st.top100.ru/top100/top100.js"></script><script type="text/javascript" async="" id="topmailru-code" src="https://top-fwz1.mail.ru/js/code.js"></script><script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="https://file4life.ru/ns-cache/_c3d6d46348699d85e1445275efc072ca.js"></script>
+<script src="catalog/view/javascript/popupcart_ext/jquery.total-storage.min.js" type="text/javascript"></script>
+<script src="catalog/view/javascript/popupcart_ext/popupcart_ext.js" type="text/javascript"></script>
+<script src="catalog/view/javascript/popupcart_ext/owl.carousel.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function init(elem, options){
+	elem.addClass('countdownHolder');
+	$.each(['Days','Hours','Minutes','Sec'],function(i){
+		var clas;
+		if (this=='Days') {clas="Дней";}
+		if (this=='Hours') {clas="Часов";}
+		if (this=='Minutes') {clas="минут";}
+		if (this=='Sec') {clas="сек";}
+		$('<span class="count'+this+'">' +
+			'<span class="position">' +
+			'<span class="digit static">0</span>' +	'</span>' +
+			'<span class="position">' +	'<span class="digit static">0</span>' +	'</span><span class="time_productany">'+clas+'</span></span>').appendTo(elem);	
+		});
+}
+</script>
+<script type="text/javascript">
+  var button_shopping = "Продолжить покупки";
+  var button_checkout = "Оформление заказа";
+  var link_checkout = "https://file4life.ru/simplecheckout/";
+  var link_newstorecheckout = "https://file4life.ru/index.php?route=checkout/pixelshopcheckout";
+</script>
+<script type="text/javascript">
+var text_showmore = 'Показать еще';
+var color_schem = '3';
+var loading_masked_img = '<img src="catalog/view/theme/pixelshop/image/ring-alt-'+ color_schem +'.svg" />';
+function loading_masked(action) {
+	if (action) {
+		$('.loading_masked').html(loading_masked_img);
+		$('.loading_masked').show();
+	} else {
+		$('.loading_masked').html('');
+		$('.loading_masked').hide();
+	}
+}
+function creatOverlayLoadPage(action) {
+	if (action) {
+		$('#messageLoadPage').html(loading_masked_img);
+		$('#messageLoadPage').show();
+	} else {
+		$('#messageLoadPage').html('');
+		$('#messageLoadPage').hide();
+	}
+}
+function quickview_open(id) {
+$('body').prepend('<div id="messageLoadPage"></div><div class="mfp-bg-quickview"></div>');
+	$.ajax({
+		type:'post',
+		data:'quickview29=1',
+		url:'index.php?route=product/product&product_id='+id,	
+		beforeSend: function() {
+			creatOverlayLoadPage(true); 
+		},
+		complete: function() {
+			$('.mfp-bg-quickview').hide();
+			$('#messageLoadPage').hide();
+			creatOverlayLoadPage(false); 
+		},	
+		success:function (data) {
+			$('.mfp-bg-quickview').hide();
+			$data = $(data);
+			var new_data = $data.find('#quickview-container').html();							
+			$.magnificPopup.open({
+				tLoading: loading_masked_img,
+				items: {
+					src: new_data,
+				},
+				type: 'inline'
+			});
+		}
+});							
+}
+	$(document).ready(function(){
+		$("#back-top").hide();
+		$(function () {
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 150) {
+					$('#back-top').fadeIn();
+				} else {
+					$('#back-top').fadeOut();
+				}
+			});
+			$('#back-top a').click(function () {
+				$('body,html').animate({
+					scrollTop: 0
+				}, 800);
+				return false;
+			});
+		});
+		
+	});	
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	if($("#top-fixed").length==0) {
+	var menu_fix = '<div class="menu_fix col-sm-3 col-md-3"></div>';
+	var search_fix = '<div class="search_fix col-sm-6 col-md-7"><div id="search-fixed-top"></div></div>';
+	var cart_fix = '<div class="col-sm-3 col-md-2 cart_fix"></div>';	
+	$('#top').before('<div id="top-fixed" class="hidden-xs hidden-sm"><div class="container"><div class="row">'+menu_fix+' '+search_fix+' '+cart_fix+'</div></div></div>');		
+	$('#menu').clone().appendTo('#top-fixed .menu_fix');	
+	$('#search').clone().appendTo('#top-fixed #search-fixed-top');
+	$('header .shopping-cart').clone().appendTo('#top-fixed .cart_fix');
+	$('#top-fixed #menu-list').css('margin-top', 0);
+}	
+	$(window).scroll(function(){		
+		if($(this).scrollTop()>200) {
+			$('header .shopping-cart #cart').removeClass('open');
+			$('#top-fixed').addClass('sticky-header-1');
+		}else{
+			$('#top-fixed').removeClass('sticky-header-1');
+		}		
+	});
+
+	var $menu_fixed = $("#top-fixed #menu-list");
+	if($(window).width() > 922){
+		$menu_fixed.menuAim('switchToHover');
+	} else {
+        $menu_fixed.menuAim('switchToClick');
+	}
+		
+        $menu_fixed.menuAim({
+            activateCallback: activateSubmenu_fixed,
+            deactivateCallback: deactivateSubmenu_fixed
+        });
+		
+        function activateSubmenu_fixed(row) {
+            var $row = $(row),
+                submenuId_fixed = $row.data("submenuId"),
+                $submenu_fixed = $("#top-fixed #" + submenuId_fixed),
+                height = $menu_fixed.outerHeight(),
+                width = $menu_fixed.outerWidth();
+            $submenu_fixed.css({
+                display: "block",
+				top:0
+            });
+            $row.find("a").addClass("maintainHover");
+        }
+        function deactivateSubmenu_fixed(row) {
+            var $row = $(row),
+                submenuId_fixed = $row.data("submenuId"),
+                $submenu_fixed = $("#top-fixed #" + submenuId_fixed);
+            $submenu_fixed.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+        $("#top-fixed #menu .dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+        $("#top-fixed #menu .dropdown-menu li").click(function(e) {
+            $("#top-fixed a.maintainHover").removeClass("maintainHover");
+        });
+$('#top-fixed #search a').bind('click', function() {
+	$("#top-fixed #selected_category").val($(this).attr('data-idsearch'));
+	$('#top-fixed .category-name').html($(this).html());
+});
+$('#top-fixed .btn-search').bind('click', function() {										
+	url = $('base').attr('href') + 'index.php?route=product/search';
+
+	var value = $('#top-fixed input[name=\'search\']').val();
+
+	if (value) {
+		url += '&search=' + encodeURIComponent(value);
+	} else {
+		url += '&search=';
+	}
+							
+	var category_id = $('#top-fixed input[name=\'category_id\']').prop('value');
+						
+	if (category_id > 0) {
+		url += '&category_id=' + encodeURIComponent(category_id) + '&sub_category=true';
+	}
+	location = url;
+						
+});	
+});
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91450355-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+							
+
+<script type="text/javascript">
+	function get_modal_callbacking () {		
+		$.magnificPopup.open({
+            tLoading: loading_masked_img,
+            items: {
+              src: 'index.php?route=module/callback',
+              type: 'ajax'
+            },
+          });
+	}
+</script>
+
+
+
+<style>
+	#tcb_call_1 .tcb_phone_1 {
+		background: #35dd35;
+	}
+	#tcb_call_1 .tcb_layout_1 {
+		 border-color: #35dd35 transparent;
+	}
+	
+	#tcb_call_1 .tcb_layout_2 {
+		 border-color: #35dd35;
+	}
+</style>
+	<style>
+		#tcb_call_1 { bottom: 10% !important;}
+	</style>
+	
+<style id="abu-collapse-styles" type="text/css"></style></head><body class="information-information"><div id="popupcart_extended_background" class="popup_background" style="opacity: 0; visibility: hidden; background-color: black; position: fixed; inset: 0px; z-index: 100000; transition: all 0.3s ease 0s;"></div><div id="popupcart_extended_wrapper" class="popup_wrapper" style="opacity: 0; visibility: hidden; position: fixed; overflow: auto; z-index: 100001; transition: all 0.3s ease 0s; width: 100%; height: 100%; top: 0px; left: 0px; text-align: center; display: none;"><div id="popupcart_extended" data-popup-initialized="true" class="popup_content" style="opacity: 0; visibility: hidden; display: inline-block; outline: none; transition: all 0.3s ease 0s; text-align: left; position: relative; vertical-align: middle;" aria-hidden="true" role="dialog">   
+<div class="head">Корзина покупок <img onclick="$('#popupcart_extended').popup('hide')" class="close" src="catalog/view/theme/default/image/remove-small.png"></div>
+    <div class="empty">В вашей корзине пусто!</div>
+<input type="hidden" name="addtocart_logic" value="1">
+<input type="hidden" name="click_on_cart" value="">
+</div><div class="popup_align" style="display: inline-block; vertical-align: middle; height: 100%;"></div></div><div id="callback" class="callback-view" style="background:#35dd35 !important;"><div><img src="image/data/callback.png"></div></div>
+<script type="text/javascript">
+$('.callback-view').bind('click', function(){
+		$.magnificPopup.open({
+            tLoading: loading_masked_img,
+            items: {
+              src: 'index.php?route=module/callback',
+              type: 'ajax'
+            },			
+          });
+});
+</script>
+<div id="tcb_call_1">
+	<div class="tcb_phone_1">
+		<div class="tcb_phone_img_1"></div>
+	</div>
+	<div class="tcb_layout_1"></div>
+	<div class="tcb_layout_2"></div>
+</div>
+<script type="text/javascript">
+$('#tcb_call_1').bind('click', function(){
+		$.magnificPopup.open({
+            tLoading: loading_masked_img,
+            items: {
+              src: 'index.php?route=module/callback',
+              type: 'ajax'
+            },
+          });
+});
+</script>
+			
+
+              
+				
+<script type="text/javascript">
+function fastorder_open(product_id) {  
+          $.magnificPopup.open({
+            tLoading: loading_masked_img,
+            items: {
+              src: 'index.php?route=module/newfastorder&product_id='+product_id,
+              type: 'ajax'
+            }
+          });
+        }
+function fastorder_open_cart() {  
+          $.magnificPopup.open({
+            tLoading: loading_masked_img,
+            items: {
+              src: 'index.php?route=module/newfastordercart',
+              type: 'ajax'
+            }
+			
+          });
+        }		
+</script>
+			
+
+
+
+              
+      
+<p id="back-top" style="display: none;"><a rel="nofollow" class="btn btn-default" href="#top"><i class="fa fa-chevron-up" style="font-size:18px;"></i></a></p>
+<div id="login-form-popup" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">Авторизация</h4>
+				</div>
+				<div class="modal-body">
+				<div class="form-group">
+					<div class="message"></div>
+				</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
+							<input type="text" name="email_authorization" value="" placeholder="E-Mail" id="input-email-authorization" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>	
+							<input type="password" name="password_authorization" value="" placeholder="Пароль" id="input-password-authorization" class="form-control">
+						</div>
+					</div>
+					<div class="form-group text-center">
+						<a href="https://file4life.ru/simpleregister/">Регистрация</a> | <a href="https://file4life.ru/forgot-password/">Забыли пароль?</a>
+					</div>
+				</div>		
+				<div class="modal-footer">	
+					<input type="button" value="Войти" id="button-login-popup" class="btn-login btn-block">		
+				</div>					
+			</form>
+		</div>
+	</div>
+</div>
+
+        <header>
+          <div id="top-fixed" class="hidden-xs hidden-sm"><div class="container"><div class="row"><div class="menu_fix col-sm-3 col-md-3"><nav id="menu" class="btn-group btn-block">
+				<button type="button" class="btn btn-menu btn-block dropdown-toggle" data-toggle="dropdown">
+					<i class="fa fa-bars"></i>
+					Каталог товаров				</button>
+				<ul id="menu-list" class="dropdown-menu" style="margin-top: 0px;">
+																							<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="transferfactory">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/Categorii/Buy10-25x25.jpg">
+																														Трансфер Факторы									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="programmy-tf">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/Kartinki/20151110125331-25x25.jpg">
+																														Программы ТФ									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-2" class="dropdown">
+								<a href="o-4life" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+																			<img alt="О компании 4Life" class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/1-25x25.jpg">
+									<i class="fa fa-angle-down arrow"></i>
+																			О компании 4Life								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																	
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																														
+										  <div id="menu-amazon-2" class="ns-dd dropdown-menu-full-image nsmenu-type-category-full-image box-col-3">
+											<div class="dropdown-inner">
+											  											
+																							  <div class="menu-add-html">
+																								</div>
+																							  
+												<ul class="list-unstyled nsmenu-haschild">
+																								<li class="nsmenu-parent-block">
+												<a class="nsmenu-parent-img" href="https://file4life.ru/o-4life/proizvodstvo-transfer-factor/"><img src="https://file4life.ru/image/cache/catalog/Categorii/proizvodstvo-transfer-factor-50x50.jpg" alt="Производство" title="Производство"></a>
+												<a class="nsmenu-parent-title" href="https://file4life.ru/o-4life/proizvodstvo-transfer-factor/">
+												Производство																								</a>
+												
+																
+												</li>
+																								<li class="nsmenu-parent-block">
+												<a class="nsmenu-parent-img" href="https://file4life.ru/o-4life/science-4life/"><img src="https://file4life.ru/image/cache/catalog/Categorii/Research_Study4l-50x50.jpg" alt="Наука" title="Наука"></a>
+												<a class="nsmenu-parent-title" href="https://file4life.ru/o-4life/science-4life/">
+												Наука																								</a>
+												
+																
+												</li>
+																								<li class="nsmenu-parent-block">
+												<a class="nsmenu-parent-img" href="https://file4life.ru/o-4life/nagrady-4life/"><img src="https://file4life.ru/image/cache/catalog/Categorii/nagrady-50x50.jpg" alt="Награды" title="Награды"></a>
+												<a class="nsmenu-parent-title" href="https://file4life.ru/o-4life/nagrady-4life/">
+												Награды																								</a>
+												
+																
+												</li>
+																								<li class="nsmenu-parent-block">
+												<a class="nsmenu-parent-img" href="https://file4life.ru/o-4life/success-4life/"><img src="https://file4life.ru/image/cache/catalog/Categorii/success-50x50.jpg" alt="Успех" title="Успех"></a>
+												<a class="nsmenu-parent-title" href="https://file4life.ru/o-4life/success-4life/">
+												Успех																								</a>
+												
+																
+												</li>
+																								</ul>
+											  											</div>            
+											</div>
+											
+																																<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="sertifikaty">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/sertifikaty/gmp-25x25.jpg">
+																														Сертификаты									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="partnerstvo-4life">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/Categorii/partnerstvo-25x25.jpg">
+																														Партнерство									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="immunitet">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/immunitet/parazitoz-25x25.jpg">
+																														Иммунитет									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="polezno-znat">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/vrachi/faq-25x25.png">
+																														Полезно знать									</a>
+								</li>							
+																				</ul>
+			</nav></div> <div class="search_fix col-sm-6 col-md-7"><div id="search-fixed-top"><div id="search" class="input-group">	
+	<div class="input-group-btn categories">
+		<button id="change_category" type="button" class="btn btn-search-select dropdown-toggle" data-toggle="dropdown">
+						<span class="category-name">Все Категории&nbsp;</span>&nbsp;
+			<i class="fa fa-angle-up" aria-hidden="true"></i>
+			<i class="fa fa-angle-down" aria-hidden="true"></i>	
+		</button>
+		<ul class="dropdown-menu search-dropdown">
+			<li><a href="#" onclick="return false;" data-idsearch="0">Все Категории</a></li>
+						<li><a href="#" onclick="return false;" data-idsearch="20">Трансфер Факторы</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="18">Программы ТФ</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="25">О компании 4Life</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="59">Сертификаты</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="57">Партнерство</a></li>
+				
+					</ul>
+		<input id="selected_category" type="hidden" name="category_id" value="">
+	</div>
+<input type="text" name="search" value="" placeholder="Я ищу" class="form-control input-lg search-autocomplete" autocompleteserach="off"><ul class="dropdown-menu autosearch"></ul>
+	
+  <span class="input-group-btn button_search">
+    <button type="button" class="btn btn-search">Найти</button>
+  </span>
+</div></div></div> <div class="col-sm-3 col-md-2 cart_fix"><div class="shopping-cart">
+<div id="cart" class="btn-group">
+  <button type="button" onclick="fastorder_open_cart();" data-loading-text="Загрузка..." class="btn btn-block dropdown-toggle">
+			<span class="cart-total-empty"><span class="text-empty-cart">Корзина <br>пуста</span></span>
+	  </button>
+  
+  <ul class="dropdown-menu pull-right">
+        <li>
+      <p class="text-center">В корзине пусто!</p>
+    </li>
+      </ul>
+</div>
+</div></div></div></div></div><nav id="top">
+      
+  <div class="container">
+  	<div class="pull-left">
+		<div class="navbar">
+			<div class="navbar-header">
+				<button data-toggle="collapse-side" data-target=".side-collapse" type="button" class="navbar-toggle btn-slides-menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
+			</div>
+			<div class="navbar-inverse side-collapse in">
+				<nav class="navbar-collapse">
+					<ul class="nav navbar-nav">
+													<li><button onclick="window.open('https://file4life.ru/delivery', '_blank')" type="button" class="btn btn-link"><i class="fa fa-rocket"></i> Доставка</button></li>													<li><button onclick="window.open('https://file4life.ru/contact-us/', '_blank')" type="button" class="btn btn-link"><i class="fa fa-phone"></i> Контакты</button></li>													<li><button onclick="window.open('https://file4life.ru/privacy', '_blank')" type="button" class="btn btn-link"><i class="fa fa-graduation-cap"></i> Политика Безопасности</button></li>												<div class="visible-xs">
+												<li><a rel="nofollow" href="https://file4life.ru/simpleregister/">Регистрация</a></li>
+						<li><a rel="nofollow" onclick="$('.side-collapse').toggleClass('in');" href="#login_modal_popup" data-toggle="modal" data-target="#login-form-popup">Авторизация</a></li>
+												</div>
+					</ul>
+				</nav></div></div></div></div></nav>
+				
+	
+		<div class="pull-right">	
+		<div class="pull-right">
+			<div class="pull-left">
+<form action="https://file4life.ru/index.php?route=common/currency/currency" method="post" enctype="multipart/form-data" id="currency">
+  <div class="btn-group">
+    <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                            <strong> р.</strong>
+            <span class="hidden-xs hidden-sm hidden-md">Валюта</span> <i class="fa fa-caret-down"></i></button>
+    <ul class="dropdown-menu">
+                  <li><button class="currency-select btn btn-link btn-block" type="button" name="EUR">€ Euro</button></li>
+                        <li><button class="currency-select btn btn-link btn-block" type="button" name="USD">$ US Dollar</button></li>
+                        <li><button class="currency-select btn btn-link btn-block" type="button" name="RUB"> р. Рубль</button></li>
+                </ul>
+  </div>
+  <input type="hidden" name="code" value="">
+  <input type="hidden" name="redirect" value="https://file4life.ru/privacy">
+</form>
+</div>
+		</div>
+		<div class="pull-right">
+					</div>
+		<div class="pull-right">
+			<a rel="nofollow" class="btn btn-link" href="https://file4life.ru/wishlist/" id="wishlist-total" title="Мои Закладки"><i class="fa fa-heart fa-fw"></i> <span class="hidden-xs hidden-sm hidden-md">Мои Закладки</span></a>
+		</div>
+		<div class="pull-right">
+			<a rel="nofollow" class="btn btn-link" href="https://file4life.ru/compare-products/" id="compare-total" title="Сравнение товаров"><i class="fa fa-exchange" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md">Сравнение товаров</span></a>
+		</div>
+	</div>
+  
+
+
+  <div class="container">
+    <div class="row">
+		<div class="col-xs-6 col-xs-push-3 col-sm-3 col-md-2 col-sm-push-0  text-center text-left-md logo-top">
+			<div id="logo">
+															<a href="https://file4life.ru/"><img src="https://file4life.ru/image/catalog/file4life_fav.jpg" title="ТрансферФактор в Москве File4Life.ru" alt="ТрансферФактор в Москве File4Life.ru" class="img-responsive"></a>
+												</div>
+		</div>
+		<div class="contant-info-header col-xs-3 col-xs-pull-6 col-sm-pull-0 col-sm-6 col-md-8">
+			<div class="navbar-toggle-contact">
+				<button data-toggle="collapse-contact" data-target=".collapse-contact" type="button" class="btn-contact"><i class="fa fa-bars" aria-hidden="true"></i></button>
+			</div>
+			<div class="collapse-contact in">
+			<div class="head-info-col" style="height: 94px;">
+								<div>
+					<div class="title-contant-header"></div>
+					<div class="tel-contant-header"></div>
+									</div>
+			</div>
+			<div class="head-info-col" style="height: 94px;">
+								<div>
+					<div class="title-contant-header"></div>
+					<div class="tel-contant-header">+7-925-787-90-43</div>
+																	<div class="col-info">
+							<i class="fa fa-whatsapp"></i>
+														WhatsApp +7-925-787-90-43													</div>
+															</div>
+			</div>
+			<div class="head-info-col" style="height: 94px;">
+								<div>
+					<div class="title-contant-header"></div>
+					<div class="tel-contant-header"></div>
+									</div>
+			</div>
+			<div class="head-info-col" style="height: 94px;">
+									<div class="col_icon"><i class="fa fa-clock-o"></i></div>
+								<div class="box-desc-col-info">
+					<div class="title-contant-header">График работы: </div>
+					<div class="tel-contant-header"></div>
+																	<div class="col-info">
+							<i class=""></i>
+														Пн.-пт: с 10:00 до 20:00													</div>
+												<div class="col-info">
+							<i class=""></i>
+														Сб: с 11:00 до 18:00													</div>
+															</div>
+			</div>
+		</div>
+		</div>
+      <div class="col-xs-3 col-sm-3 col-md-2"><div class="shopping-cart">
+<div id="cart" class="btn-group">
+  <button type="button" onclick="fastorder_open_cart();" data-loading-text="Загрузка..." class="btn btn-block dropdown-toggle">
+			<span class="cart-total-empty"><span class="text-empty-cart">Корзина <br>пуста</span></span>
+	  </button>
+  
+  <ul class="dropdown-menu pull-right">
+        <li>
+      <p class="text-center">В корзине пусто!</p>
+    </li>
+      </ul>
+</div>
+</div>
+</div>
+	</div>  
+  </div>
+	<div class="navigation-menu-top">
+	<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-5 col-md-6 col-lg-7 search-top col-sm-push-4 col-md-push-3"><script type="text/javascript">
+$(document).ready(function() {
+  var category_id_page = $('#content select[name=\'category_id\']').find("option:selected").attr("value");
+  var category_id_html = $('#content select[name=\'category_id\']').find("option:selected").html();
+  
+  $("#selected_category").val(category_id_page);
+  $("#category_now").val(category_id_page);
+  $(".category-name").html(category_id_html);
+  $('.select-category').find('.filter-option').html(category_id_html)
+  });
+ </script>
+<div id="searchtop">	
+<div id="search" class="input-group">	
+	<div class="input-group-btn categories">
+		<button id="change_category" type="button" class="btn btn-search-select dropdown-toggle" data-toggle="dropdown">
+						<span class="category-name">Все Категории&nbsp;</span>&nbsp;
+			<i class="fa fa-angle-up" aria-hidden="true"></i>
+			<i class="fa fa-angle-down" aria-hidden="true"></i>	
+		</button>
+		<ul class="dropdown-menu search-dropdown">
+			<li><a href="#" onclick="return false;" data-idsearch="0">Все Категории</a></li>
+						<li><a href="#" onclick="return false;" data-idsearch="20">Трансфер Факторы</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="18">Программы ТФ</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="25">О компании 4Life</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="59">Сертификаты</a></li>
+				
+						<li><a href="#" onclick="return false;" data-idsearch="57">Партнерство</a></li>
+				
+					</ul>
+		<input id="selected_category" type="hidden" name="category_id" value="0">
+	</div>
+<input type="text" name="search" value="" placeholder="Я ищу" class="form-control input-lg search-autocomplete" autocompleteserach="off"><ul class="dropdown-menu autosearch"></ul>
+	
+  <span class="input-group-btn button_search">
+    <button type="button" class="btn btn-search">Найти</button>
+  </span>
+</div>
+</div>
+<script type="text/javascript">
+$('#search a').click(function(){
+	$("#selected_category").val($(this).attr('data-idsearch'));
+	$('.category-name').html($(this).html());
+});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	var autoSearch = $('#searchtop input[name="search"]');
+
+	var customAutocompleteSearchtop = null;
+	autoSearch.autocompleteSerach({
+		delay: 500,
+	responsea : function (items){
+		if (items.length) {
+			for (i = 0; i < items.length; i++) {
+				this.items[items[i]['value']] = items[i];
+			}
+		}
+		var html='';
+		if(items.length){
+			$.each(items,function(key,item){
+				if(item.product_id!=0){
+					html += '<li><a href="'+ item.href +'" class="autosearch_link">';
+					html += '<div class="ajaxadvance">';
+					html += '<div class="image">';
+					if(item.image){
+					html += '<img title="'+item.name+'" src="'+item.image+'"/>';
+					}
+					html += '</div>';
+					html += '<div class="content">';
+					html += 	'<h3 class="name">'+item.label+'</h3>';
+					if(item.model){
+					html += 	'<div class="model">';
+					html +=		'Модель: '+ item.model;
+					html +=		'</div>';
+					}
+					if(item.manufacturer){
+					html += 	'<div class="manufacturer">';
+					html +=		'Производитель: '+ item.manufacturer;			
+					html +=		'</div>';		
+					}
+					if(item.stock_status){
+					html += 	'<div class="stock_status">';
+					html +=		'Наличие: '+ item.stock_status;			
+					html +=		'</div>';
+					}	
+					if(item.price){
+					html += 	'<div class="price"> ';
+					if (!item.special) { 
+					html +=			 item.price;
+					} else {	
+					html +=			'<span class="price-old">'+ item.price +'</span> <span class="price-new">'+ item.special +'</span>';
+					}	
+					html +=		'</div>';
+					}	
+									
+					if (item.rating) {
+					html +=		'<div class="ratings"> ';
+					for (var i = 1; i <= 5; i++) {
+					if (item.rating < i) { 
+					html +=		'<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>';
+					} else {	
+					html +=		'<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>';
+					} 
+					}
+					html +=		'</div>';
+					}
+					html +='</div>';
+					html += '</div></a></li>'
+				}
+			});
+					html +=	'<li><a class="search-view-all-result" href="index.php?route=product/search&search=' + autoSearch.val() + '">Просмотреть все результаты</a></li>';
+		}	
+		if (html) {
+			autoSearch.siblings('ul.dropdown-menu').show();
+		} else {
+			autoSearch.siblings('ul.dropdown-menu').hide();
+		}
+
+		$(autoSearch).siblings('ul.dropdown-menu').html(html);
+	},
+		source: function(request, response) {
+		customAutocompleteSearchtop = this;
+			$.ajax({
+				url: 'index.php?route=module/autosearch/ajaxLiveSearch&filter_name=' +  encodeURIComponent(request),
+				dataType : 'json',
+				success : function(json) {
+				customAutocompleteSearchtop.responsea($.map(json, function(item) {
+					return {
+					label: item.name,
+						name: item.name1,
+						value: item.product_id,
+						model: item.model,
+						stock_status: item.stock_status,
+						image: item.image,
+						manufacturer: item.manufacturer,
+						price: item.price,
+						special: item.special,
+						category: item.category,
+						rating: item.rating,
+						reviews: item.reviews,
+						href:item.href,
+						}
+				}));
+				}
+			});
+		},
+		select : function (ui){	
+			return false;
+		},
+		selecta: function(ui) {
+		if(ui.href){
+			location = ui.href;
+		}
+			return false;
+		},
+		focus: function(event, ui) {
+			return false;
+		}
+		});							
+	});
+</script>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	var autoSearchFixed = $('#search-fixed-top input[name="search"]');
+	var customAutocomplete = null;
+						$('#search-fixed-top ul.dropdown-menu.autosearch').remove();
+	autoSearchFixed.autocompleteSerach({
+		delay: 500,
+	responsea : function (items){
+		if (items.length) {
+			for (i = 0; i < items.length; i++) {
+				this.items[items[i]['value']] = items[i];
+			}
+		}
+		var html='';
+		if(items.length){
+			$.each(items,function(key,item){
+				if(item.product_id!=0){
+					html += '<li><a href="'+ item.href +'" class="autosearch_link">';
+					html += '<div class="ajaxadvance">';
+					html += '<div class="image">';
+					if(item.image){
+					html += '<img title="'+item.name+'" src="'+item.image+'"/>';
+					}
+					html += '</div>';
+					html += '<div class="content">';
+					html += 	'<h3 class="name">'+item.label+'</h3>';
+					if(item.model){
+					html += 	'<div class="model">';
+					html +=		'Модель: '+ item.model;
+					html +=		'</div>';
+					}
+					if(item.manufacturer){
+					html += 	'<div class="manufacturer">';
+					html +=		'Производитель: '+ item.manufacturer;			
+					html +=		'</div>';		
+					}
+					if(item.stock_status){
+					html += 	'<div class="stock_status">';
+					html +=		'Наличие: '+ item.stock_status;			
+					html +=		'</div>';
+					}	
+					if(item.price){
+					html += 	'<div class="price"> ';
+					if (!item.special) { 
+					html +=			 item.price;
+					} else {	
+					html +=			'<span class="price-old">'+ item.price +'</span> <span class="price-new">'+ item.special +'</span>';
+					}	
+					html +=		'</div>';
+					}	
+									
+					if (item.rating) {
+					html +=		'<div class="ratings"> ';
+					for (var i = 1; i <= 5; i++) {
+					if (item.rating < i) { 
+					html +=		'<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>';
+					} else {	
+					html +=		'<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>';
+					} 
+					}
+					html +=		'</div>';
+					}
+					html +='</div>';
+					html += '</div></a></li>'
+				}
+			});
+					html +=	'<li><a class="search-view-all-result" href="index.php?route=product/search&search=' + autoSearchFixed.val() + '">Просмотреть все результаты</a></div>';
+		}	
+		if (html) {
+			autoSearchFixed.siblings('ul.dropdown-menu').show();
+		} else {
+			autoSearchFixed.siblings('ul.dropdown-menu').hide();
+		}
+
+		$(autoSearchFixed).siblings('ul.dropdown-menu').html(html);
+	},
+		source: function(request, response) {
+		customAutocomplete = this;
+			$.ajax({
+				url: 'index.php?route=module/autosearch/ajaxLiveSearch&filter_name=' +  encodeURIComponent(request),
+				dataType : 'json',
+				success : function(json) {
+				customAutocomplete.responsea($.map(json, function(item) {
+					return {
+					label: item.name,
+						name: item.name1,
+						value: item.product_id,
+						model: item.model,
+						stock_status: item.stock_status,
+						image: item.image,
+						manufacturer: item.manufacturer,
+						price: item.price,
+						special: item.special,
+						category: item.category,
+						rating: item.rating,
+						reviews: item.reviews,
+						href:item.href
+						}
+				}));
+				}
+			});
+		},
+		select : function (ui){	
+			return false;
+		},
+		selecta: function(ui) {
+		if(ui.href){
+			location = +ui.href;
+		} 
+			return false;
+		},
+		focus: function(event, ui) {
+			return false;
+		}
+		});			
+	});
+</script>
+				</div>	
+		<div class="col-xs-12 col-sm-4 col-md-3 col-sm-pull-5 col-md-pull-6 col-lg-pull-7">
+						<nav id="menu" class="btn-group btn-block">
+				<button type="button" class="btn btn-menu btn-block dropdown-toggle" data-toggle="dropdown">
+					<i class="fa fa-bars"></i>
+					Каталог товаров				</button>
+				<ul id="menu-list" class="dropdown-menu" style="">
+																							<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="transferfactory">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/Categorii/Buy10-25x25.jpg">
+																														Трансфер Факторы									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="programmy-tf">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/Kartinki/20151110125331-25x25.jpg">
+																														Программы ТФ									</a>
+								</li>							
+																													<li data-submenu-id="menu-amazon-2" class="dropdown">
+								<a href="o-4life" class="parent-link  dropdown-toggle dropdown-img" data-toggle="dropdown">
+																			<img alt="О компании 4Life" class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/1-25x25.jpg">
+									<i class="fa fa-angle-down arrow"></i>
+																			О компании 4Life								</a>
+								<span class="toggle-child">
+									<i class="fa fa-plus plus"></i>
+									<i class="fa fa-minus minus"></i>
+								</span>
+								<!--SIMPLE CATEGORY-->
+																	
+																		<!--END SIMPLE CATEGORY-->
+									
+									<!-- FULL CATEGORY-->
+																																						<!-- END FULL CATEGORY -->
+										<!-- FULL-IMAGE CATEGORY -->
+																														
+										  <div id="menu-amazon-2" class="ns-dd dropdown-menu-full-image nsmenu-type-category-full-image box-col-3">
+											<div class="dropdown-inner">
+											  											
+																							  <div class="menu-add-html">
+																								</div>
+																							  
+												<ul class="list-unstyled nsmenu-haschild">
+																								<li class="nsmenu-parent-block">
+												<a class="nsmenu-parent-img" href="https://file4life.ru/o-4life/proizvodstvo-transfer-factor/"><img src="https://file4life.ru/image/cache/catalog/Categorii/proizvodstvo-transfer-factor-50x50.jpg" alt="Производство" title="Производство"></a>
+												<a class="nsmenu-parent-title" href="https://file4life.ru/o-4life/proizvodstvo-transfer-factor/">
+												Производство																								</a>
+												
+																
+												</li>
+																								<li class="nsmenu-parent-block">
+												<a class="nsmenu-parent-img" href="https://file4life.ru/o-4life/science-4life/"><img src="https://file4life.ru/image/cache/catalog/Categorii/Research_Study4l-50x50.jpg" alt="Наука" title="Наука"></a>
+												<a class="nsmenu-parent-title" href="https://file4life.ru/o-4life/science-4life/">
+												Наука																								</a>
+												
+																
+												</li>
+																								<li class="nsmenu-parent-block">
+												<a class="nsmenu-parent-img" href="https://file4life.ru/o-4life/nagrady-4life/"><img src="https://file4life.ru/image/cache/catalog/Categorii/nagrady-50x50.jpg" alt="Награды" title="Награды"></a>
+												<a class="nsmenu-parent-title" href="https://file4life.ru/o-4life/nagrady-4life/">
+												Награды																								</a>
+												
+																
+												</li>
+																								<li class="nsmenu-parent-block">
+												<a class="nsmenu-parent-img" href="https://file4life.ru/o-4life/success-4life/"><img src="https://file4life.ru/image/cache/catalog/Categorii/success-50x50.jpg" alt="Успех" title="Успех"></a>
+												<a class="nsmenu-parent-title" href="https://file4life.ru/o-4life/success-4life/">
+												Успех																								</a>
+												
+																
+												</li>
+																								</ul>
+											  											</div>            
+											</div>
+											
+																																<!-- END FULL-IMAGE CATEGORY -->
+										
+										<!-- HTML-BLOCK -->
+																				<!-- END HTML-BLOCK -->
+										
+										<!-- MANUFACTURER-BLOCK -->
+																				<!-- END MANUFACTURER-BLOCK -->
+										
+										<!-- INFORMATION-BLOCK -->
+																				<!-- END INFORMATION-BLOCK -->
+										
+										<!-- PRODUCT-BLOCK -->
+																				<!-- END PRODUCT-BLOCK -->
+										
+							</li>
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="sertifikaty">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/sertifikaty/gmp-25x25.jpg">
+																														Сертификаты									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="partnerstvo-4life">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/Categorii/partnerstvo-25x25.jpg">
+																														Партнерство									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="immunitet">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/immunitet/parazitoz-25x25.jpg">
+																														Иммунитет									</a>
+								</li>							
+																														<li>						
+									<a class="dropdown-toggle dropdown-img" data-toggle="dropdown" href="polezno-znat">
+																					<img class="nsmenu-thumb" src="https://file4life.ru/image/cache/catalog/vrachi/faq-25x25.png">
+																														Полезно знать									</a>
+								</li>							
+																				</ul>
+			</nav>
+			<div id="menuMask"></div>	
+					</div>
+		<div class="col-sm-3 col-md-3 col-lg-2 hidden-xs">
+			<div class="account_login_icon"></div>	
+			<div class="account_login_text"><a rel="nofollow" href="https://file4life.ru/my-account/">Личный кабинет</a></div>
+							<div class="account_login_come"><a rel="nofollow" href="#login_modal_popup" data-toggle="modal" data-target="#login-form-popup">Войти</a></div>	
+				
+		</div>	
+<script type="text/javascript">
+var $menu = $("header #menu-list");
+	$menu.menuAim({
+        activateCallback: activateSubmenu,
+        deactivateCallback: deactivateSubmenu
+    });
+		
+    function activateSubmenu(row) {
+        var $row = $(row),
+            submenuId = $row.data("submenuId"),
+            $submenu = $("header #" + submenuId),
+            height = $menu.outerHeight(),
+            width = $menu.outerWidth();
+            $submenu.css({
+                display: "block",
+				top:0
+            });
+            $row.find("a").addClass("maintainHover");
+        }
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("header #" + submenuId);
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+        $("header #menu .dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+        $("header #menu .dropdown-menu li").click(function(e) {
+            $("header a.maintainHover").removeClass("maintainHover");
+        });		
+function screenClass() {
+    if($(window).innerWidth() > 922) {
+		ToHoverMenu();
+    } else {
+		ToClickMenu();
+    }
+}
+function ToHoverMenu(){
+    $menu.menuAim('switchToHover');	
+}
+function ToClickMenu(){
+    $menu.menuAim('switchToClick');	
+}
+
+$(window).bind('resize',function(){
+    screenClass();
+});		
+$(".ns-dd").hover(function() {$(this).parent().find('.parent-link').toggleClass('hover');});
+$(".child-box").hover(function() {$(this).parent().find('.with-child').toggleClass('hover');});
+$('#menu #menu-list span.toggle-child').bind('click', function() {
+	$(this).parent().toggleClass('open');
+});
+</script>
+    </div>	
+    </div>	
+    </div>	
+
+
+<div class="container">
+  <ul class="breadcrumb " itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+									<li><a itemprop="url" href="https://file4life.ru/"><span itemprop="title"><i class="fa fa-home"></i></span></a></li>
+												<li>Политика Безопасности</li>
+						</ul>
+  <div class="row">
+                     <div id="content" class="col-sm-12">
+  <div class="row banner-blocks-container banner-block-12610">
+		<div class="col-sm-12 col-sm-4 col-md-4">
+		<div class="banner-item ">
+				<div class="banner-image">
+					<img src="https://file4life.ru/image/cache/catalog/menu_icons/info_01-50x50.png" alt="БЫСТРАЯ ДОСТАВКА">
+				</div>
+				<div class="banner-info">
+					<div class="banner-title">БЫСТРАЯ ДОСТАВКА</div>
+					<div class="banner-description">БЕСПЛАТНО от 9000</div>
+				</div>			
+		</div>
+	</div>
+		<div class="col-sm-12 col-sm-4 col-md-4">
+		<div class="banner-item ">
+				<div class="banner-image">
+					<img src="https://file4life.ru/image/cache/catalog/menu_icons/info_02-50x50.png" alt="КАЧЕСТВО">
+				</div>
+				<div class="banner-info">
+					<div class="banner-title">КАЧЕСТВО</div>
+					<div class="banner-description">От производителя</div>
+				</div>			
+		</div>
+	</div>
+		<div class="col-sm-12 col-sm-4 col-md-4">
+		<div class="banner-item ">
+				<div class="banner-image">
+					<img src="https://file4life.ru/image/cache/catalog/menu_icons/info_04-50x50.png" alt="ОРИГИНАЛ">
+				</div>
+				<div class="banner-info">
+					<div class="banner-title">ОРИГИНАЛ</div>
+					<div class="banner-description">Официальный дистрибьютор!</div>
+				</div>			
+		</div>
+	</div>
+	<script>
+$(document).ready(function() {
+	banner_cols = $('#column-right, #column-left,.position-no-owl').length;
+	if ($(".banner-block-12610").parents("#column-left, #column-right, .position-no-owl").length) {
+		$('.banner-block-12610 > div').addClass("col-md-12");
+	} else {
+		$('.banner-block-12610 > div').addClass("col-md-4");
+	}
+});
+</script>
+</div>
+
+      <h1>Конфиденциальность персональной информации</h1>
+      <p>1. Предоставление информации Клиентом:</p><p>1.1. При регистрации на сайте www.file4life.ru (далее - "Сайт") Клиент предоставляет следующую информацию:</p><p>Фамилия, Имя, адрес электронной почты. При оформлении Заказа Клиент может предоставить следующую информацию: фамилия, имя, отчество получателя Заказа, адрес для доставки Заказа, номер контактного телефона.</p><p>1.2. Предоставляя свои персональные данные Клиент соглашается на их обработку (вплоть до отзыва Клиентом своего согласия на обработку его персональных данных) администрацией Сайта, в целях исполнения Сайтом и/или его партнерами своих обязательств перед клиентом, продажи товаров и предоставления услуг, предоставления справочной информации, а также в целях продвижения товаров, работ и услуг, а также соглашается на получение сообщений рекламно-информационного характера и сервисных сообщений. При обработке персональных данных Клиента Сайт руководствуется Федеральным законом "О персональных данных", Федеральным законом "О рекламе" и локальными нормативными документами.</p><p>1.2.1. Если Клиент желает уточнения его персональных данных, их блокирования или уничтожения в случае, если персональные данные являются неполными, устаревшими, неточными, незаконно полученными или не являются необходимыми для заявленной цели обработки, либо в случае желания клиента отозвать свое согласие на обработку персональных данных или устранения неправомерных действий администрации Сайта в отношении его персональных данных то он должен направить официальный запрос Сайту в порядке, предусмотренном Политикой в отношении обработки персональных данных.</p><p>Если Клиент желает удалить свою учетную запись на Сайте, Клиент обращается к нам по адресу 4file4life@gmail.com с соответствующей просьбой. Данное действие не подразумевает отзыв согласия Клиента на обработку его персональных данных, который согласно действующему законодательству происходит в порядке, предусмотренном абзацем 1 настоящего пункта.</p><p>1.3. Использование информации предоставленной Клиентом и получаемой Сайтом.</p><p>1.3.1 Сайт использует предоставленные Клиентом данные в течение всего срока регистрации Клиента на Сайте в целях:</p><ul><li>регистрации/авторизации Клиента на Сайте;</li><li>обработки Заказов Клиента и для выполнения своих обязательств перед Клиентом;</li><li>для осуществления деятельности по продвижению товаров и услуг;</li><li>оценки и анализа работы Сайта;</li><li>определения победителя в акциях, проводимых Сайтом;</li><li>анализа покупательских особенностей Клиента и предоставления персональных рекомендаций;</li><li>участия Клиента в программе лояльности;</li><li>информирования клиента об акциях, скидках и специальных предложениях посредством электронных и СМС-рассылок.</li></ul><p>1.3.2. Сайт вправе направлять Клиенту сообщения рекламно-информационного характера. Если Клиент не желает получать сообщения рекламно-информационного характера от Сайта, он должен изменить соответствующие настройки подписки в соответствующем разделе Личного кабинета. С момента изменения указанных настроек получение рассылок Сайта возможно в течение 3 дней, что обусловлено особенностями работы и взаимодействия информационных систем, а так же условиями договоров с контрагентами, осуществляющими в интересах Сайта рассылки сообщений рекламно-информационного характера. Отказ Клиента от получения сервисных сообщений невозможен по техническим причинам. Сервисными сообщениями являются направляемые на адрес электронной почты, указанный при регистрации на Сайте, а также посредством смс-сообщений и/или push-уведомлений и через Службу по работе с клиентами на номер телефона, указанный при регистрации и/или при оформлении Заказа, о состоянии Заказа, товарах в корзине Клиента и/или добавленных Клиентом в "Избранное", и о присвоении статуса программы.</p><p>2. Предоставление и передача информации, полученной Сайтом:</p><p>2.1. Сайт обязуется не передавать полученную от Клиента информацию третьим лицам. Не считается нарушением предоставление Сайтом информации агентам и третьим лицам, действующим на основании договора с Сайтом, для исполнения обязательств перед Клиентом и только в рамках договоров. Не считается нарушением настоящего пункта передача Сайтом третьим лицам данных о Клиенте в обезличенной форме в целях оценки и анализа работы Сайта, анализа покупательских особенностей Клиента и предоставления персональных рекомендаций.</p><p>2.2. Не считается нарушением обязательств передача информации в соответствии с обоснованными и применимыми требованиями законодательства Российской Федерации.</p><p>2.3. Сайт вправе использовать технологию "cookies". "Cookies" не содержат конфиденциальную информацию и не передаются третьим лицам.</p><p>2.4. Сайт получает информацию об ip-адресе посетителя Сайта  www.file4life.ru и сведения о том, по ссылке с какого интернет-сайта посетитель пришел. Данная информация не используется для установления личности посетителя.</p><p>2.5. Сайт не несет ответственности за сведения, предоставленные Клиентом на Сайте в общедоступной форме.</p><p>2.6. Сайт при обработке персональных данных принимает необходимые и достаточные организационные и технические меры для защиты персональных данных от неправомерного доступа к ним, а также от иных неправомерных действий в отношении персональных данных.</p><p>3. Хранение и использование информации Клиентом</p><p>3.1. Клиент обязуется не сообщать третьим лицам логин и пароль, используемые им для идентификации в Онлайн-маркете www.file4life.ru.</p><p>3.2. Клиент обязуется обеспечить должную осмотрительность при хранении и использовании логина и пароля (в том числе, но не ограничиваясь: использовать лицензионные антивирусные программы, использовать сложные буквенно-цифровые сочетания при создании пароля, не предоставлять в распоряжение третьих лиц компьютер или иное оборудование с введенными на нем логином и паролем Клиента и т.п.)</p><p>3.3. В случае возникновения у Сайта подозрений относительно использования учетной записи Клиента третьим лицом или вредоносным программным обеспечением Сайт вправе в одностороннем порядке изменить пароль Клиента.</p></div>
+    </div>
+</div>
+<div class="banner-footer-privilege">
+	<div class="container">
+
+              
+      
+					<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="custom-block-privilege ">
+						<div class="icon-privilege">
+							<div class="display-table-privilege">
+								<div class="display-table-cell-privilege">
+									<i class="fa fa-plane"></i>
+								</div>
+							</div>
+						</div>
+						<div class="description-privilege">
+							<div class="display-table-privilege">
+								<div class="display-table-cell-privilege">
+									<div class="text-footer-banner">
+										<div class="banner-title-footer">БЫСТРАЯ ДОСТАВКА</div>
+										<span class="banner-description-footer">в дар при заказе от 9000 р. МКАД</span>
+									</div>
+								</div>
+							</div>
+						</div>			
+				</div>
+			</div>
+					<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="custom-block-privilege ">
+						<div class="icon-privilege">
+							<div class="display-table-privilege">
+								<div class="display-table-cell-privilege">
+									<i class="fa fa-phone"></i>
+								</div>
+							</div>
+						</div>
+						<div class="description-privilege">
+							<div class="display-table-privilege">
+								<div class="display-table-cell-privilege">
+									<div class="text-footer-banner">
+										<div class="banner-title-footer">ЗАКАЗ ПО ТЕЛЕФОНУ</div>
+										<span class="banner-description-footer">+7-925-787-90-43</span>
+									</div>
+								</div>
+							</div>
+						</div>			
+				</div>
+			</div>
+					<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="custom-block-privilege ">
+						<div class="icon-privilege">
+							<div class="display-table-privilege">
+								<div class="display-table-cell-privilege">
+									<i class="fa fa-comments"></i>
+								</div>
+							</div>
+						</div>
+						<div class="description-privilege">
+							<div class="display-table-privilege">
+								<div class="display-table-cell-privilege">
+									<div class="text-footer-banner">
+										<div class="banner-title-footer">ОРИГИНАЛ</div>
+										<span class="banner-description-footer">Официальный дистрибьютор!</span>
+									</div>
+								</div>
+							</div>
+						</div>			
+				</div>
+			</div>
+					<div class="col-xs-12 col-sm-6 col-md-3">
+				<div class="custom-block-privilege ">
+						<div class="icon-privilege">
+							<div class="display-table-privilege">
+								<div class="display-table-cell-privilege">
+									<i class="fa fa-university"></i>
+								</div>
+							</div>
+						</div>
+						<div class="description-privilege">
+							<div class="display-table-privilege">
+								<div class="display-table-cell-privilege">
+									<div class="text-footer-banner">
+										<div class="banner-title-footer">ГАРАНТИЯ КАЧЕСТВА</div>
+										<span class="banner-description-footer">4Life Research</span>
+									</div>
+								</div>
+							</div>
+						</div>			
+				</div>
+			</div>
+			</div>
+</div>
+
+              
+      
+<footer>
+<div class="footer">
+<div class="container footer-center">
+    <div class="row">
+		<div class="col-sm-12 col-md-3">
+			<h3>О нашем магазине</h3>
+			<div class="description_store_footer"><p>Официальный дистрибьютор компании 4Life в Москве.</p>
+<p>Данный интернет-сайт носит исключительно информационный характер и не является публичной офертой, предусмотренной ст. 437 Гражданского Кодекса РФ</p></div>
+		</div>
+		
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<h3><i class="fa fa-question-circle-o"></i> ИНФОРМАЦИЯ</h3>
+			<ul class="list-unstyled">
+															<li><a href="https://file4life.ru/delivery">Доставка Трансфер Фактора</a></li>
+											<li><a href="https://file4life.ru/privacy">Политика Безопасности</a></li>
+																</ul>
+		</div>
+		
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<h3><i class="fa fa-recycle"></i> СЛУЖБА ПОДДЕРЖКИ</h3>
+			<ul class="list-unstyled">
+								<li><a href="https://file4life.ru/contact-us/">Связаться с нами</a></li>
+												<li><a href="https://file4life.ru/add-return/">Возврат товара</a></li>
+												<li><a href="https://file4life.ru/sitemap/">Карта сайта</a></li>
+											</ul>
+		</div>
+		<div class="clearfix visible-sm"></div>
+		<div class="col-xs-12 col-sm-6 col-md-2">
+			<h3><i class="fa fa-exclamation"></i> ДОПОЛНИТЕЛЬНО</h3>
+			<ul class="list-unstyled">
+									<li><a href="https://file4life.ru/brands/">Бренд</a></li>
+												<li><a href="https://file4life.ru/vouchers/">Подарочные сертификаты</a></li>
+																<li><a href="https://file4life.ru/specials/">Товары со скидкой</a></li>
+												<li><a href="https://file4life.ru/my-account/">Личный Кабинет</a></li>
+																							</ul>
+		</div>
+	  <div class="col-xs-12 col-sm-6 col-md-3">
+		<div class="footer-info-col">
+				
+					<div class="title-contant-footer">
+					<h3><i class="fa fa-comments"></i> СВЯЗАТЬСЯ С НАМИ</h3></div>
+				
+				<div>	
+					<div class="tel-contant-footer">+7-925-787-90-43</div>
+																	<div class="col-info">
+							<i class="fa fa-whatsapp"></i>
+														WhatsApp +7-925-787-90-43													</div>
+												<div class="col-info">
+							<i class="fa fa-phone-square"></i>
+														Viber +7-925-787-90-43													</div>
+												<div class="col-info">
+							<i class="fa fa-paper-plane-o"></i>
+														E-mail: 4file4life@gmail.com													</div>
+															</div>
+			</div>
+		
+	   </div>
+	       </div>
+  </div>
+		<div class="footer-nav">
+			<div class="container">
+
+              
+      
+			<div class="row">
+<!--LiveInternet counter--><script type="text/javascript">
+document.write("<a href='//www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t50.11;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet' "+
+"border='0' width='31' height='31'><\/a>")
+</script><a href="//www.liveinternet.ru/click" target="_blank"><img src="//counter.yadro.ru/hit?t50.11;r;s1366*768*24;uhttps%3A//file4life.ru/privacy;0.8535288982753367" alt="" title="LiveInternet" width="31" height="31" border="0"></a><!--/LiveInternet-->
+
+				<div class="col-sm-12 col-md-4 text-left">
+					<div class="powored">
+						<div class="powored-table">
+							<div class="powored-table-cell">
+						ТрансферФактор в Москве File4Life.ru © 2023							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-4 text-center">
+									</div>
+				<div class="col-sm-12 col-md-4 text-right">
+									</div>
+			</div>  
+			</div>  
+		</div>  
+<div class="container">
+
+              
+      
+	<div class="row">
+		<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter42327014 = new Ya.Metrika2({
+                    id:42327014,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks2");
+</script>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">
+var _tmr = window._tmr || (window._tmr = []);
+_tmr.push({id: "3036790", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "topmailru-code");
+</script><noscript><div>
+<img src="//top-fwz1.mail.ru/counter?id=3036790;js=na" style="border:0;position:absolute;left:-9999px;" alt="" />
+</div></noscript>
+<!-- //Rating@Mail.ru counter -->
+
+<!-- Top100 (Kraken) Counter -->
+<script>
+    (function (w, d, c) {
+    (w[c] = w[c] || []).push(function() {
+        var options = {
+            project: 6237284,
+            attributes_dataset: [ "your-attribute" ],
+            trackHashes: true,
+            user_id: null,
+        };
+        try {
+            w.top100Counter = new top100(options);
+        } catch(e) { }
+    });
+    var n = d.getElementsByTagName("script")[0],
+    s = d.createElement("script"),
+    f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src =
+    (d.location.protocol == "https:" ? "https:" : "http:") +
+    "//st.top100.ru/top100/top100.js";
+
+    if (w.opera == "[object Opera]") {
+    d.addEventListener("DOMContentLoaded", f, false);
+} else { f(); }
+})(window, document, "_top100q");
+</script>
+<noscript>
+  <img src="//counter.rambler.ru/top100.cnt?pid=6237284" alt="Топ-100" />
+</noscript>
+<!-- END Top100 (Kraken) Counter -->
+
+	</div>
+</div>
+</div>
+</footer>
+
+        
+      
+</header><div id="load_cart">
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#popupcart_extended').popup({transition: 'all 0.3s',	scrolllock: true});	
+});
+
+function carousel () {
+	$('.related_product').owlCarousel({
+		responsiveBaseWidth: '.related_product',
+		navigation: true,
+		slideSpeed: 200,
+		paginationSpeed: 300,
+		touchDrag: true,
+		mouseDrag: false,
+		navigationText: ['&lt;', '&gt;'],
+		pagination: false,
+	});
+}
+
+function p_array() {
+}
+
+function replace_button(product_id, options){
+if(options && $('.'+product_id).attr('id') == 'button-cart') {
+	var text = 'Уже в корзине, купить ещё';
+} else {
+	var text = 'Уже в корзине';
+}
+if(options) {
+	$('html, body').find('.'+product_id).val(text).text(text).addClass('in_cart');
+} else {
+	$('html, body').find('.'+product_id).attr('onclick', '$(\'#popupcart_extended\').popup(\'show\');').val(text).text(text).addClass('in_cart');
+}
+}
+
+function replace_button_del(product_id, data){
+	var p_q = "$('input[name=\"quantity\"]').val()";
+	$('.'+product_id).attr('onclick', 'cart.add(\''+ product_id +'\', '+p_q+');').val('В корзину').html(data).removeClass('in_cart');
+}
+</script></div></body></html>

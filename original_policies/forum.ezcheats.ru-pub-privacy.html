@@ -1,0 +1,583 @@
+<html><script type="text/javascript">try {
+(function injectPageScriptAPI(scriptName, shouldOverrideWebSocket, shouldOverrideWebRTC, isInjected) { 
+
+    'use strict';
+
+    /**
+     * If script have been injected into a frame via contentWindow then we can simply take the copy of messageChannel left for us by parent document
+     * Otherwise creates new message channel that sends a message to the content-script to check if request should be allowed or not.
+     */
+    var messageChannel = isInjected ? window[scriptName] : (function () {
+
+        // Save original postMessage and addEventListener functions to prevent webpage from tampering both.
+        var postMessage = window.postMessage;
+        var addEventListener = window.addEventListener;
+
+        // Current request ID (incremented every time we send a new message)
+        var currentRequestId = 0;
+        var requestsMap = {};
+
+        /**
+         * Handles messages sent from the content script back to the page script.
+         *
+         * @param event Event with necessary data
+         */
+        var onMessageReceived = function (event) {
+
+            if (!event.data || !event.data.direction || event.data.direction !== "to-page-script@abu") {
+                return;
+            }
+
+            var requestData = requestsMap[event.data.requestId];
+            if (requestData) {
+                var wrapper = requestData.wrapper;
+                requestData.onResponseReceived(wrapper, event.data.block);
+                delete requestsMap[event.data.requestId];
+            }
+        };
+
+        /**
+         * @param url                The URL to which wrapped object is willing to connect
+         * @param requestType        Request type ( WEBSOCKET or WEBRTC)
+         * @param wrapper            WebSocket wrapper instance
+         * @param onResponseReceived Called when response is received
+         */
+        var sendMessage = function (url, requestType, wrapper, onResponseReceived) {
+
+            if (currentRequestId === 0) {
+                // Subscribe to response when this method is called for the first time
+                addEventListener.call(window, "message", onMessageReceived, false);
+            }
+
+            var requestId = ++currentRequestId;
+            requestsMap[requestId] = {
+                wrapper: wrapper,
+                onResponseReceived: onResponseReceived
+            };
+
+            var message = {
+                requestId: requestId,
+                direction: 'from-page-script@abu',
+                elementUrl: url,
+                documentUrl: document.URL,
+                requestType: requestType
+            };
+
+            // Send a message to the background page to check if the request should be blocked
+            postMessage.call(window, message, "*");
+        };
+
+        return {
+            sendMessage: sendMessage
+        };
+
+    })();
+
+    /*
+     * In some case Chrome won't run content scripts inside frames.
+     * So we have to intercept access to contentWindow/contentDocument and manually inject wrapper script into this context
+     *
+     * Based on: https://github.com/adblockplus/adblockpluschrome/commit/1aabfb3346dc0821c52dd9e97f7d61b8c99cd707
+     */
+    var injectedToString = Function.prototype.toString.bind(injectPageScriptAPI);
+
+    var injectedFramesAdd;
+    var injectedFramesHas;
+    if (window.WeakSet instanceof Function) {
+        var injectedFrames = new WeakSet();
+        injectedFramesAdd = WeakSet.prototype.add.bind(injectedFrames);
+        injectedFramesHas = WeakSet.prototype.has.bind(injectedFrames);
+    } else {
+        var frames = [];
+        injectedFramesAdd = function (el) {
+            if (frames.indexOf(el) < 0) {
+                frames.push(el);
+            }
+        };
+        injectedFramesHas = function (el) {
+            return frames.indexOf(el) >= 0;
+        };
+    }
+
+    /**
+     * Injects wrapper's script into passed window
+     * @param contentWindow Frame's content window
+     */
+    function injectPageScriptAPIInWindow(contentWindow) {
+        try {
+            if (contentWindow && !injectedFramesHas(contentWindow)) {
+                injectedFramesAdd(contentWindow);
+                contentWindow[scriptName] = messageChannel; // Left message channel for the injected script
+                var args = "'" + scriptName + "', " + shouldOverrideWebSocket + ", " + shouldOverrideWebRTC + ", true";
+                contentWindow.eval("(" + injectedToString() + ")(" + args + ");");
+                delete contentWindow[scriptName];
+            }
+        } catch (e) {
+        }
+    }
+
+    /**
+     * Overrides access to contentWindow/contentDocument for the passed HTML element's interface (iframe, frame, object)
+     * If the content of one of these objects is requested we will inject our wrapper script.
+     * @param iface HTML element's interface
+     */
+    function overrideContentAccess(iface) {
+
+        var contentWindowDescriptor = Object.getOwnPropertyDescriptor(iface.prototype, "contentWindow");
+        var contentDocumentDescriptor = Object.getOwnPropertyDescriptor(iface.prototype, "contentDocument");
+
+        // Apparently in HTMLObjectElement.prototype.contentWindow does not exist
+        // in older versions of Chrome such as 42.
+        if (!contentWindowDescriptor) {
+            return;
+        }
+
+        var getContentWindow = Function.prototype.call.bind(contentWindowDescriptor.get);
+        var getContentDocument = Function.prototype.call.bind(contentDocumentDescriptor.get);
+
+        contentWindowDescriptor.get = function () {
+            var contentWindow = getContentWindow(this);
+            injectPageScriptAPIInWindow(contentWindow);
+            return contentWindow;
+        };
+        contentDocumentDescriptor.get = function () {
+            injectPageScriptAPIInWindow(getContentWindow(this));
+            return getContentDocument(this);
+        };
+
+        Object.defineProperty(iface.prototype, "contentWindow", contentWindowDescriptor);
+        Object.defineProperty(iface.prototype, "contentDocument", contentDocumentDescriptor);
+    }
+
+    var interfaces = [HTMLFrameElement, HTMLIFrameElement, HTMLObjectElement];
+    for (var i = 0; i < interfaces.length; i++) {
+        overrideContentAccess(interfaces[i]);
+    }
+
+    /**
+     * Defines properties in destination object
+     * @param src Source object
+     * @param dest Destination object
+     * @param properties Properties to copy
+     */
+    var copyProperties = function (src, dest, properties) {
+        for (var i = 0; i < properties.length; i++) {
+            var prop = properties[i];
+            var descriptor = Object.getOwnPropertyDescriptor(src, prop);
+            // Passed property may be undefined
+            if (descriptor) {
+                Object.defineProperty(dest, prop, descriptor);
+            }
+        }
+    };
+
+    /**
+     * Check request by sending message to content script
+     * @param url URL to block
+     * @param type Request type
+     * @param callback Result callback
+     */
+    var checkRequest = function (url, type, callback) {
+        messageChannel.sendMessage(url, type, this, function (wrapper, blockConnection) {
+            callback(blockConnection);
+        });
+    };
+
+    /**
+     * The function overrides window.WebSocket with our wrapper, that will check url with filters through messaging with content-script.
+     *
+     * IMPORTANT NOTE:
+     * This function is first loaded as a content script. The only purpose of it is to call
+     * the "toString" method and use resulting string as a text content for injected script.
+     */
+    var overrideWebSocket = function () { 
+
+        if (!(window.WebSocket instanceof Function)) {
+            return;
+        }
+
+        /**
+         * WebSocket wrapper implementation.
+         * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/349
+         *
+         * Based on:
+         * https://github.com/adblockplus/adblockpluschrome/commit/457a336ee55a433217c3ffe5d363e5c6980f26f4
+         */
+
+        /**
+         * As far as possible we must track everything we use that could be sabotaged by the website later in order to circumvent us.
+         */
+        var RealWebSocket = WebSocket;
+        var closeWebSocket = Function.prototype.call.bind(RealWebSocket.prototype.close);
+
+        function WrappedWebSocket(url, protocols) {
+            // Throw correct exceptions if the constructor is used improperly.
+            if (!(this instanceof WrappedWebSocket)) {
+                return RealWebSocket();
+            }
+            if (arguments.length < 1) {
+                return new RealWebSocket();
+            }
+
+            var websocket = new RealWebSocket(url, protocols);
+
+            // This is the key point: checking if this WS should be blocked or not
+            // Don't forget that the type of 'websocket.url' is String, but 'url 'parameter might have another type.
+            checkRequest(websocket.url, 'WEBSOCKET', function (blocked) {
+                if (blocked) {
+                    closeWebSocket(websocket);
+                }
+            });
+
+            return websocket;
+        }
+
+        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/488
+        WrappedWebSocket.prototype = RealWebSocket.prototype;
+        window.WebSocket = WrappedWebSocket.bind();
+
+        copyProperties(RealWebSocket, WebSocket, ["CONNECTING", "OPEN", "CLOSING", "CLOSED", "name", "prototype"]);
+
+        RealWebSocket.prototype.constructor = WebSocket;
+
+    };
+
+    /**
+     * The function overrides window.RTCPeerConnection with our wrapper, that will check ice servers URLs with filters through messaging with content-script.
+     *
+     * IMPORTANT NOTE:
+     * This function is first loaded as a content script. The only purpose of it is to call
+     * the "toString" method and use resulting string as a text content for injected script.
+     */
+    var overrideWebRTC = function () { 
+
+
+        if (!(window.RTCPeerConnection instanceof Function) &&
+            !(window.webkitRTCPeerConnection instanceof Function)) {
+            return;
+        }
+
+        /**
+         * RTCPeerConnection wrapper implementation.
+         * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/588
+         *
+         * Based on:
+         * https://github.com/adblockplus/adblockpluschrome/commit/af0585137be19011eace1cf68bf61eed2e6db974
+         *
+         * Chromium webRequest API doesn't allow the blocking of WebRTC connections
+         * https://bugs.chromium.org/p/chromium/issues/detail?id=707683
+         */
+
+        var RealRTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
+        var closeRTCPeerConnection = Function.prototype.call.bind(RealRTCPeerConnection.prototype.close);
+
+        var RealArray = Array;
+        var RealString = String;
+        var createObject = Object.create;
+        var defineProperty = Object.defineProperty;
+
+        /**
+         * Convert passed url to string
+         * @param url URL
+         * @returns {string}
+         */
+        function urlToString(url) {
+            if (typeof url !== "undefined") {
+                return RealString(url);
+            }
+        }
+
+        /**
+         * Creates new immutable array from original with some transform function
+         * @param original
+         * @param transform
+         * @returns {*}
+         */
+        function safeCopyArray(original, transform) {
+
+            if (original === null || typeof original !== "object") {
+                return original;
+            }
+
+            var immutable = RealArray(original.length);
+            for (var i = 0; i < immutable.length; i++) {
+                defineProperty(immutable, i, {
+                    configurable: false, enumerable: false, writable: false,
+                    value: transform(original[i])
+                });
+            }
+            defineProperty(immutable, "length", {
+                configurable: false, enumerable: false, writable: false,
+                value: immutable.length
+            });
+            return immutable;
+        }
+
+        /**
+         * Protect configuration from mutations
+         * @param configuration RTCPeerConnection configuration object
+         * @returns {*}
+         */
+        function protectConfiguration(configuration) {
+
+            if (configuration === null || typeof configuration !== "object") {
+                return configuration;
+            }
+
+            var iceServers = safeCopyArray(
+                configuration.iceServers,
+                function (iceServer) {
+
+                    var url = iceServer.url;
+                    var urls = iceServer.urls;
+
+                    // RTCPeerConnection doesn't iterate through pseudo Arrays of urls.
+                    if (typeof urls !== "undefined" && !(urls instanceof RealArray)) {
+                        urls = [urls];
+                    }
+
+                    return createObject(iceServer, {
+                        url: {
+                            configurable: false, enumerable: false, writable: false,
+                            value: urlToString(url)
+                        },
+                        urls: {
+                            configurable: false, enumerable: false, writable: false,
+                            value: safeCopyArray(urls, urlToString)
+                        }
+                    });
+                }
+            );
+
+            return createObject(configuration, {
+                iceServers: {
+                    configurable: false, enumerable: false, writable: false,
+                    value: iceServers
+                }
+            });
+        }
+
+        /**
+         * Check WebRTC connection's URL and close if it's blocked by rule
+         * @param connection Connection
+         * @param url URL to check
+         */
+        function checkWebRTCRequest(connection, url) {
+            checkRequest(url, 'WEBRTC', function (blocked) {
+                if (blocked) {
+                    try {
+                        closeRTCPeerConnection(connection);
+                    } catch (e) {
+                        // Ignore exceptions
+                    }
+                }
+            });
+        }
+
+        /**
+         * Check each URL of ice server in configuration for blocking.
+         *
+         * @param connection RTCPeerConnection
+         * @param configuration Configuration for RTCPeerConnection
+         * https://developer.mozilla.org/en-US/docs/Web/API/RTCConfiguration
+         */
+        function checkConfiguration(connection, configuration) {
+
+            if (!configuration || !configuration.iceServers) {
+                return;
+            }
+
+            var iceServers = configuration.iceServers;
+            for (var i = 0; i < iceServers.length; i++) {
+
+                var iceServer = iceServers[i];
+                if (!iceServer) {
+                    continue;
+                }
+
+                if (iceServer.url) {
+                    checkWebRTCRequest(connection, iceServer.url);
+                }
+
+                if (iceServer.urls) {
+                    for (var j = 0; j < iceServer.urls.length; j++) {
+                        checkWebRTCRequest(connection, iceServer.urls[j]);
+                    }
+                }
+            }
+        }
+
+        /**
+         * Overrides setConfiguration method
+         * https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/setConfiguration
+         */
+        if (RealRTCPeerConnection.prototype.setConfiguration) {
+
+            var realSetConfiguration = Function.prototype.call.bind(RealRTCPeerConnection.prototype.setConfiguration);
+
+            RealRTCPeerConnection.prototype.setConfiguration = function (configuration) {
+                configuration = protectConfiguration(configuration);
+                // Call the real method first, so that validates the configuration
+                realSetConfiguration(this, configuration);
+                checkConfiguration(this, configuration);
+            };
+        }
+
+        function WrappedRTCPeerConnection(configuration, arg) {
+
+            if (!(this instanceof WrappedRTCPeerConnection)) {
+                return RealRTCPeerConnection();
+            }
+
+            configuration = protectConfiguration(configuration);
+
+            /**
+             * The old webkitRTCPeerConnection constructor takes an optional second argument and we must pass it.
+             */
+            var connection = new RealRTCPeerConnection(configuration, arg);
+            checkConfiguration(connection, configuration);
+            return connection;
+        }
+
+        WrappedRTCPeerConnection.prototype = RealRTCPeerConnection.prototype;
+
+        var boundWrappedRTCPeerConnection = WrappedRTCPeerConnection.bind();
+        copyProperties(RealRTCPeerConnection, boundWrappedRTCPeerConnection, ["caller", "generateCertificate", "name", "prototype"]);
+        RealRTCPeerConnection.prototype.constructor = boundWrappedRTCPeerConnection;
+
+        if ("RTCPeerConnection" in window) {
+            window.RTCPeerConnection = boundWrappedRTCPeerConnection;
+        }
+        if ("webkitRTCPeerConnection" in window) {
+            window.webkitRTCPeerConnection = boundWrappedRTCPeerConnection;
+        }
+    };
+
+    if (shouldOverrideWebSocket) {
+        overrideWebSocket();
+    }
+
+    if (shouldOverrideWebRTC) {
+        overrideWebRTC();
+    }
+})('wrapper-script-1962705035265545', false, true);
+} catch (ex) { console.error('Error executing AG js: ' + ex); }
+(function () {
+            var current = document.currentScript;
+            var parent = current && current.parentNode;
+            if (parent) {
+                parent.removeChild(current);
+            }
+        })();</script><head>
+    <meta charset="utf-8">
+    <title>Политика обработки персональных данных - EZcheats</title>
+    <meta name="generator" content="Discourse 3.0.0.beta16 - https://github.com/discourse/discourse version 1ee9356a548fc30baba4c6df75cd8c80a60d4219">
+<link rel="icon" type="image/png" href="https://ezcheats-01.s3.dualstack.eu-west-2.amazonaws.com/optimized/1X/1c300bcd67ae468793b0146ced519d6d2354d28c_2_32x32.ico">
+<link rel="apple-touch-icon" type="image/png" href="https://forum-ezcheats.fra1.cdn.digitaloceanspaces.com/optimized/3X/4/f/4fe089458328c8ab30a35b82a33e0b7a3fdceb4c_2_180x180.png">
+<meta name="theme-color" media="all" content="#ffffff">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="https://forum.ezcheats.ru/t/politika-obrabotki-personalnyh-dannyh/177627">
+
+<link rel="search" type="application/opensearchdescription+xml" href="https://forum.ezcheats.ru/opensearch.xml" title="EZcheats Search">
+
+    <link href="/stylesheets/publish_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="publish">
+
+  <link href="/stylesheets/discourse-assign_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-assign">
+  <link href="/stylesheets/discourse-canned-replies_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-canned-replies">
+  <link href="/stylesheets/discourse-checklist_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-checklist">
+  <link href="/stylesheets/discourse-details_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-details">
+  <link href="/stylesheets/discourse-local-dates_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-local-dates">
+  <link href="/stylesheets/discourse-narrative-bot_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-narrative-bot">
+  <link href="/stylesheets/discourse-presence_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-presence">
+  <link href="/stylesheets/discourse-solved_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-solved">
+  <link href="/stylesheets/discourse-tooltips_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-tooltips">
+  <link href="/stylesheets/discourse-vk-auth_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-vk-auth">
+  <link href="/stylesheets/discourse-whos-online_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="discourse-whos-online">
+  <link href="/stylesheets/lazy-yt_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="lazy-yt">
+  <link href="/stylesheets/poll_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="poll">
+  <link href="/stylesheets/poll_desktop_0c9eaa759d02bc4004e9d950ee0375ac28630010.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="poll_desktop">
+
+  <link href="/stylesheets/desktop_theme_4_85a7fb6f06fa3df72129c2fdbeba96b524c8f5cc.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="4" data-theme-name="custom header links">
+<link href="/stylesheets/desktop_theme_7_ba1d6fd8bd885aa19db2a7a64a494a68a9d5e3c7.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="7" data-theme-name="discotoc">
+<link href="/stylesheets/desktop_theme_2_f70a025dc2966fa130b7fbf3a0da5c13f4b9b756.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" data-target="desktop_theme" data-theme-id="2" data-theme-name="light">
+
+    
+    
+  </head>
+  <body class="published-page privacy topic-177627 site-feedback">
+    
+<link rel="preload" href="/theme-javascripts/320a23804524f95660783a8c3dda461e2446295e.js?__ws=forum.ezcheats.ru" as="script">
+<script defer="" src="/theme-javascripts/320a23804524f95660783a8c3dda461e2446295e.js?__ws=forum.ezcheats.ru" data-theme-id="4"></script>
+
+    <link href="/stylesheets/color_definitions_scheme__2_6ac35c3ec6a8e80cc936e29abd167165b7088c41.css?__ws=forum.ezcheats.ru" media="all" rel="stylesheet" class="light-scheme">
+
+<div class="published-page-header">
+    <div class="published-page-header-wrapper">
+        <a href="https://forum.ezcheats.ru">
+          <img class="published-page-logo" src="//forum-ezcheats.fra1.digitaloceanspaces.com/original/3X/4/f/4fe089458328c8ab30a35b82a33e0b7a3fdceb4c.png">
+        </a>
+      <h1 class="published-page-title">Политика обработки персональных данных</h1>
+    </div>
+  </div>
+<div class="published-page-content-wrapper">
+  <div class="published-page-content-header">
+    <div class="published-page-author">
+      <img class="avatar" src="/user_avatar/forum.ezcheats.ru/creator/90/2_2.png">
+      <div class="published-page-author-details">
+        <div class="username">creator</div>
+        <div class="topic-created-at">March 23, 2021</div>
+      </div>
+    </div>
+  </div>
+    <div class="published-page-content-body">
+      <h4><strong>Политика в отношении обработки персональных данных</strong></h4>
+<h5>1. Общие положения</h5>
+<p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые Евламповым Антоном Сергеевичем (далее – Оператор).</p>
+<p>1.1. Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.</p>
+<p>1.2. Настоящая политика Оператора в отношении обработки персональных данных (далее – Политика) применяется ко всей информации, которую Оператор может получить о посетителях веб-сайтов <a href="https://ezcheats.ru">https://ezcheats.ru</a>, <a href="https://ezcheats.com">https://ezcheats.com</a>, <a href="https://forum.ezcheats.ru">https://forum.ezcheats.ru</a>.</p>
+<h5>2. Основные понятия, используемые в Политике</h5>
+<p>2.1. Автоматизированная обработка персональных данных – обработка персональных данных с помощью средств вычислительной техники;</p>
+<p>2.2. Блокирование персональных данных – временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных);</p>
+<p>2.3. Веб-сайт – совокупность графических и информационных материалов, а также программ для ЭВМ и баз данных, обеспечивающих их доступность в сети интернет по сетевым адресам <a href="https://ezcheats.ru">https://ezcheats.ru</a>, <a href="https://ezcheats.com">https://ezcheats.com</a>, <a href="https://forum.ezcheats.ru">https://forum.ezcheats.ru</a>;</p>
+<p>2.4. Информационная система персональных данных — совокупность содержащихся в базах данных персональных данных, и обеспечивающих их обработку информационных технологий и технических средств;</p>
+<p>2.5. Обезличивание персональных данных — действия, в результате которых невозможно определить без использования дополнительной информации принадлежность персональных данных конкретному Пользователю или иному субъекту персональных данных;</p>
+<p>2.6. Обработка персональных данных – любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных;</p>
+<p>2.7. Оператор – государственный орган, муниципальный орган, юридическое или физическое лицо, самостоятельно или совместно с другими лицами организующие и (или) осуществляющие обработку персональных данных, а также определяющие цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными;</p>
+<p>2.8. Персональные данные – любая информация, относящаяся прямо или косвенно к определенному или определяемому Пользователю веб-сайтов <a href="https://ezcheats.ru">https://ezcheats.ru</a>, <a href="https://ezcheats.com">https://ezcheats.com</a>, <a href="https://forum.ezcheats.ru">https://forum.ezcheats.ru</a>;</p>
+<p>2.9. Пользователь – любой посетитель веб-сайтов <a href="https://ezcheats.ru">https://ezcheats.ru</a>, <a href="https://ezcheats.com">https://ezcheats.com</a>, <a href="https://forum.ezcheats.ru">https://forum.ezcheats.ru</a>;</p>
+<p>2.10. Предоставление персональных данных – действия, направленные на раскрытие персональных данных определенному лицу или определенному кругу лиц;</p>
+<p>2.11. Распространение персональных данных – любые действия, направленные на раскрытие персональных данных неопределенному кругу лиц (передача персональных данных) или на ознакомление с персональными данными неограниченного круга лиц, в том числе обнародование персональных данных в средствах массовой информации, размещение в информационно-телекоммуникационных сетях или предоставление доступа к персональным данным каким-либо иным способом;</p>
+<p>2.12. Трансграничная передача персональных данных – передача персональных данных на территорию иностранного государства органу власти иностранного государства, иностранному физическому или иностранному юридическому лицу;</p>
+<p>2.13. Уничтожение персональных данных – любые действия, в результате которых персональные данные уничтожаются безвозвратно с невозможностью дальнейшего восстановления содержания персональных данных в информационной системе персональных данных и (или) уничтожаются материальные носители персональных данных.</p>
+<h5>3. Оператор может обрабатывать следующие персональные данные Пользователя</h5>
+<p>3.1. <mark>Электронный адрес;</mark></p>
+<p>3.2. Также на сайте происходит сбор и обработка обезличенных данных о посетителях (в т.ч. файлов «cookie») с помощью сервисов интернет-статистики (Яндекс Метрика и Гугл Аналитика и других).</p>
+<p>3.3. Вышеперечисленные данные далее по тексту Политики объединены общим понятием Персональные данные.</p>
+<h5>4. Цели обработки персональных данных</h5>
+<p>4.1. Цель обработки персональных данных Пользователя — <mark>информирование Пользователя посредством отправки электронных писем; предоставление доступа Пользователю к сервисам, информации и/или материалам, содержащимся на веб-сайте</mark>.</p>
+<p>4.2. Также Оператор имеет право направлять Пользователю уведомления о новых продуктах и услугах, специальных предложениях и различных событиях. Пользователь всегда может отказаться от получения информационных сообщений, направив Оператору письмо на адрес электронной почты <a href="mailto:creator@ezcheats.ru">creator@ezcheats.ru</a> с пометкой «Отказ от уведомлений о новых продуктах и услугах и специальных предложениях».</p>
+<p>4.3. Обезличенные данные Пользователей, собираемые с помощью сервисов интернет-статистики, служат для сбора информации о действиях Пользователей на сайте, улучшения качества сайта и его содержания.</p>
+<h5>5. Правовые основания обработки персональных данных</h5>
+<p>5.1. Оператор обрабатывает персональные данные Пользователя только в случае их заполнения и/или отправки Пользователем самостоятельно через специальные формы, расположенные на сайте <a href="https://ezcheats.ru">https://ezcheats.ru</a>. Заполняя соответствующие формы и/или отправляя свои персональные данные Оператору, Пользователь выражает свое согласие с данной Политикой.</p>
+<p>5.2. Оператор обрабатывает обезличенные данные о Пользователе в случае, если это разрешено в настройках браузера Пользователя (включено сохранение файлов «cookie» и использование технологии JavaScript).</p>
+<h5>6. Порядок сбора, хранения, передачи и других видов обработки персональных данных</h5>
+<p>Безопасность персональных данных, которые обрабатываются Оператором, обеспечивается путем реализации правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований действующего законодательства в области защиты персональных данных.</p>
+<p>6.1. Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.</p>
+<p>6.2. Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства.</p>
+<p>6.3. В случае выявления неточностей в персональных данных, Пользователь может актуализировать их самостоятельно, путем направления Оператору уведомление на адрес электронной почты Оператора <a href="mailto:creator@ezcheats.ru">creator@ezcheats.ru</a> с пометкой «Актуализация персональных данных».</p>
+<p>6.4. Срок обработки персональных данных является неограниченным. Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора <a href="mailto:creator@ezcheats.ru">creator@ezcheats.ru</a> с пометкой «Отзыв согласия на обработку персональных данных».</p>
+<h5>7. Трансграничная передача персональных данных</h5>
+<p>7.1. Оператор до начала осуществления трансграничной передачи персональных данных обязан убедиться в том, что иностранным государством, на территорию которого предполагается осуществлять передачу персональных данных, обеспечивается надежная защита прав субъектов персональных данных.</p>
+<p>7.2. Трансграничная передача персональных данных на территории иностранных государств, не отвечающих вышеуказанным требованиям, может осуществляться только в случае наличия согласия в письменной форме субъекта персональных данных на трансграничную передачу его персональных данных и/или исполнения договора, стороной которого является субъект персональных данных.</p>
+<h5>8. Заключительные положения</h5>
+<p>8.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты <a href="mailto:creator@ezcheats.ru">creator@ezcheats.ru</a>.</p>
+<p>8.2. В данном документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены ее новой версией.</p>
+<p>8.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу <a href="https://forum.ezcheats.ru/pub/privacy">https://forum.ezcheats.ru/pub/privacy</a>.</p>
+    </div>
+</div>
+
+    
+  
+
+</body></html>

@@ -1,0 +1,695 @@
+<html><head><style>
+  .fc.old-theme-fix {
+    overflow: visible;
+  }
+  .fc.old-theme-fix:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
+  .tt-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+
+  }
+  .twitter-typeahead {
+    display: inherit !important;
+  }
+  .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+  }
+  .tt-suggestion, .tt-footer {
+    display: block;
+    padding: 1px 0px 1px 10px;
+  }
+  .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+    color: #fff;
+  }
+  .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion p, .tt-footer p {
+    margin: 0;
+  }
+</style><style>
+  .spinner-container, .spinner {
+    position: absolute;
+    left:     0;
+    bottom:   0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .spinner-container {
+    z-index:  900;
+    overflow: hidden;
+
+    &.animate .spinner {
+      &.slide-up {
+        opacity: 0;
+      }
+
+      &.fade-in {
+        opacity: 0;
+      }
+    }
+  }
+
+  .spinner {
+    height:   100%;
+    opacity:  0.6;
+    background: #fff;
+
+    &.slide-up {
+      @include transition-property(opacity, bottom);
+      @include transition-duration(0.3s);
+    }
+
+    &.fade-in {
+      @include transition-property(opacity);
+      @include transition-duration(1s);
+    }
+
+    .spin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+
+  .spinner {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  .spinner-screen {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+  }
+</style><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot; &quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;р&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;р&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:true,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:false},&quot;vk&quot;:{&quot;pixel_active&quot;:true,&quot;price_list_id&quot;:&quot;2587&quot;},&quot;new_ya_metrika&quot;:true,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:null,&quot;account_id&quot;:146680,&quot;hide_items_out_of_stock&quot;:true,&quot;forbid_order_over_existing&quot;:true,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:true,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями  \u003ca href='/page/dogovor-oferta' target='blank'\u003eоферты\u003c/a\u003e. и \u003ca href='/page/politika-konfidentsialnosti' target='blank'\u003eполитики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:2,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]"><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" id="topmailru-code" src="https://top-fwz1.mail.ru/js/code.js"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript" async="" src="/javascripts/insales_counter.js?6"></script><script src="/packs/js/shop_bundle-8a1e792bc7fc3e09587c.js"></script><style type="text/css"></style>
+        <!--InsalesCounter -->
+        <script type="text/javascript">
+        if (typeof(__id) == 'undefined') {
+          var __id=146680;
+
+          (function() {
+            var ic = document.createElement('script'); ic.type = 'text/javascript'; ic.async = true;
+            ic.src = '/javascripts/insales_counter.js?6';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ic, s);
+          })();
+        }
+        </script>
+        <!-- /InsalesCounter -->
+
+  
+    
+       
+    <title>TeaCorner.ru - Пользовательское соглашение</title>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+  	<meta name="keywords" content="Пользовательское соглашение">
+  	<meta name="description" content="Пользовательское соглашение">
+    
+    
+   		<link rel="icon" href="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/favicon.ico" type="image/x-icon">   
+  		<link rel="shortcut icon" href="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/favicon.ico" type="image/x-icon"> 
+  	            
+  	<link href="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/nivo-light.css" rel="stylesheet" type="text/css">	
+  	<link href="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/nivo-slider.css" rel="stylesheet" type="text/css">  
+    <link href="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/jquery.fancybox.css" rel="stylesheet" type="text/css">	          
+    <link href="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/reviews.css" rel="stylesheet" type="text/css">    
+    <link href="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/styles.css" rel="stylesheet" type="text/css">           
+  	  
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/jquery.cookie.js"></script>
+  	<script src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/jquery.easing.1.3.js"></script>
+    <script src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/common.js"></script>
+  	<script src="/served_assets/empty.js"></script>
+  	<script src="/served_assets/public/shop/cart.js?1676485507"></script>	
+  	<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/jquery.nivo.slider.pack.js"></script>
+  	<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/jquery.fancybox.js"></script>           
+  	<!--[if lt IE 9]>
+		<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/PIE_IE678.js"></script>
+	<![endif]-->
+  	<!--[if IE 9]>
+  		<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/PIE_IE9.js"></script>
+	<![endif]-->    
+  	<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/theme.js"></script>  
+  <meta property="”fb:admins”" content="”100001534932150“/"> 
+<meta property="fb:app_id" content="1742263285998770">
+  <link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/custom-user.css">
+  
+  
+  
+  <style id="abu-collapse-styles" type="text/css"></style></head>
+
+<body>      <!-- Yandex.Metrika counter -->
+      <script type="text/javascript">
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(25894070, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            ecommerce:"dataLayer"
+       });
+      </script>
+      <script type="text/javascript">
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({});
+      </script>
+      <noscript><div><img src="https://mc.yandex.ru/watch/25894070" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+      <!-- /Yandex.Metrika counter -->
+
+  
+  <!-- Rating@Mail.ru counter -->
+  <script type="text/javascript">
+  var _tmr = window._tmr || (window._tmr = []);
+  _tmr.push({id: "2604126", type: "pageView", start: (new Date()).getTime()});
+  (function (d, w, id) {
+    if (d.getElementById(id)) return;
+    var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+    ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+    var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+    if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+  })(document, window, "topmailru-code");
+  </script><noscript><div style="position:absolute;left:-10000px;">
+  <img src="//top-fwz1.mail.ru/counter?id=2604126;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" />
+  </div></noscript>
+  <!-- //Rating@Mail.ru counter -->
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- Rating@Mail.ru counter dynamic remarketing appendix -->
+  <script type="text/javascript">
+  var _tmr = _tmr || [];
+  _tmr.push({
+      type: 'itemView',
+      productid: 'VALUE',
+      pagetype: 'other',
+      totalvalue: 'VALUE',
+      list: '1'
+  });
+  </script>
+  <!-- // Rating@Mail.ru counter dynamic remarketing appendix -->
+  
+    
+      <noscript><h2 class="attention">Для корректной работы сайта включите JavaScript в настройках браузера.</h2></noscript>
+  <div class="wrapper">
+    <div class="header">
+      
+      
+        
+           <a class="logo" href="/"><img src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/loaded_logo.png" title=""></a>
+        
+      
+            
+         <a class="cart" href="/cart_items">
+            <div class="title">Корзина</div>           
+            <div class="text">В корзине <span id="cart_items">0</span>&nbsp;<span id="word_product">товаров</span>
+              <br>на сумму&nbsp;<span id="cart_amount">0</span>р.
+            </div>
+        </a>
+      
+      	
+          <div class="phone">
+            <div class="phone-numbers"><a class="phone-numbers__link" href="tel:+74951233255">8 495 123-32-55</a> <a class="phone-numbers__link" href="tel:+78003022035">8 800 302-20-35</a></div>
+<p><span>10:00 — 19:00</span></p>
+            <span class="hidden">TeaCorner.ru</span>
+            <span class="hidden">https://teacorner.ru</span>
+          </div>	
+                  
+            <div class="menu">          	
+            <div class="main">                                                 	              	
+              	<ul class="main-menu">                  
+                    
+                     
+                  	
+                    <li class="main-menu-item"><a href="/client_account/login">Личный кабинет</a></li> 
+                    
+                     
+                  	
+                    <li class="main-menu-item"><a href="/page/delivery">Доставка</a></li> 
+                    
+                     
+                  	
+                    <li class="main-menu-item"><a href="/page/kontakty">Контакты</a></li> 
+                                     
+              	</ul>                                            
+              	<div class="menu-decor-wrap">
+                    <div class="menu-decor"></div>
+                </div>
+            </div>            
+            <div class="search">                
+              	<form action="/search" method="get">
+                  	<input id="search_submit" type="submit" class="submit" value="">
+                	<input id="search" type="text" class="query" name="q" value="Найти...">                  	
+                </form>                
+            </div>
+        </div>
+    </div>
+    <div class="aside">
+        <div class="categories">
+            <div class="title">Каталог</div>
+            <ul>
+              
+              	<li>
+                  <a class="" href="/collection/puer"><div class="marker "></div>Пуэр</a>
+                    <ul class="subcollection ">
+                      
+                        <li>
+                            <a class="" href="/collection/shu-puer">Шу Пуэр</a>
+                            <ul class="subcollection ">
+                               
+                            </ul>
+                        </li>
+                      
+                        <li>
+                            <a class="" href="/collection/shen-puer">Шен Пуэр</a>
+                            <ul class="subcollection ">
+                               
+                            </ul>
+                        </li>
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/belyy-chay"><div class="marker "></div>Белый и Желтый чаи</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/zelenyy-chay"><div class="marker "></div>Зеленый чай</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/ulun"><div class="marker "></div>Улуны</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/krasnyy-chay"><div class="marker "></div>Красный (чёрный) чай</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/hey-cha"><div class="marker "></div>Хэй Ча</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/posuda-iz-stekla"><div class="marker "></div>Посуда из стекла</a>
+                    <ul class="subcollection ">
+                      
+                        <li>
+                            <a class="" href="/collection/gunfu-chayniki">Гунфу чайники</a>
+                            <ul class="subcollection ">
+                               
+                            </ul>
+                        </li>
+                      
+                        <li>
+                            <a class="" href="/collection/steklyannye-chayniki">Стеклянные чайники</a>
+                            <ul class="subcollection ">
+                               
+                            </ul>
+                        </li>
+                      
+                        <li>
+                            <a class="" href="/collection/podstavki-dlya-podogreva-chaynika">Подставки для подогрева</a>
+                            <ul class="subcollection ">
+                               
+                            </ul>
+                        </li>
+                      
+                        <li>
+                            <a class="" href="/collection/stakany-s-dvoynymi-stenkami">Стаканы с двойными стенками</a>
+                            <ul class="subcollection ">
+                               
+                            </ul>
+                        </li>
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/zavarochnye-chayniki"><div class="marker "></div>Заварочные чайники</a>
+                    <ul class="subcollection ">
+                      
+                        <li>
+                            <a class="" href="/collection/steklyannye-zavarochnye-chayniki">Стеклянные заварочные чайники</a>
+                            <ul class="subcollection ">
+                               
+                            </ul>
+                        </li>
+                      
+                        <li>
+                            <a class="" href="/collection/chayniki-s-knopkoy">Чайники с кнопкой</a>
+                            <ul class="subcollection ">
+                               
+                            </ul>
+                        </li>
+                      
+                        <li>
+                            <a class="" href="/collection/chayniki-iz-keramiki-i-farfora">Чайники из керамики и фарфора</a>
+                            <ul class="subcollection ">
+                               
+                            </ul>
+                        </li>
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/keramika-i-farfor"><div class="marker "></div>Керамика и фарфор</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/isinskie-chayniki"><div class="marker "></div>Исинские чайники</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/chabani"><div class="marker "></div>Чабани</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/aksessuary"><div class="marker "></div>Аксессуары</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+              
+              	<li>
+                  <a class="" href="/collection/podarki"><div class="marker "></div>Подарки</a>
+                    <ul class="subcollection ">
+                      
+                    </ul>
+                </li>                   
+                                           
+            </ul>
+        </div>            
+      
+          
+      
+      	
+      		<div class="special"><p><a rel="nofollow" href="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2508/*https://market.yandex.ru/shop/402783/reviews"><img src="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=2507/*https://grade.market.yandex.ru/?id=402783&amp;action=image&amp;size=1" alt="Читайте отзывы покупателей и оценивайте качество магазина на Яндекс.Маркете" width="155" height="140"></a></p></div>
+      	
+      		<div class="special"><p style="text-align: center;">Доставка&nbsp;по Москве <br>&nbsp;270 рублей.&nbsp;<br>При заказе на сумму <br>более 3000 рублей<br>&nbsp;бесплатно.</p></div>
+      	
+      		<div class="special"><p style="text-align: center;"><span style="font-family: georgia, palatino; font-size: 12pt;">Любые пробники<br>бесплатно.</span></p>
+<p style="text-align: center;"><span style="font-family: georgia, palatino; font-size: 10pt;">Пишите в примечаниях<br>при оформлении заказа.</span></p></div>
+      	
+                        
+    </div>
+    <div class="content">
+      <div class="page">
+    <h1 class="page-title">Пользовательское соглашение</h1>
+    <div class="wrapper" style="padding-bottom:40px;"><p><strong>Пользовательское соглашение</strong></p>
+<p>&nbsp;</p>
+<p>Настоящий документ «Пользовательское соглашение» (далее - Соглашение) представляет собой предложение ИП Цукор В.В, размещенное на сайте https://teacorner.ru (далее - «Сайт»), заключить договор на изложенных ниже условиях Соглашения.</p>
+<p>&nbsp;</p>
+<p><strong>1.Общие положения</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p>1.1.Вы настоящим подтверждаете, что с момента регистрации на Сайте и в течение времени пользования Сайтом, а также персонализированными сервисами Сайта, вы являетесь Пользователем Сайта вплоть до вашего личного обращения в администрацию Сайта с требованием об отказе от любых взаимоотношений с Сайтом.</p>
+<p>&nbsp;</p>
+<p>1.2.Использование вами Сайта любым способом и в любой форме в пределах его объявленных функциональных возможностей, включая:</p>
+<p>а)просмотр размещенных на Сайте материалов;</p>
+<p>б)регистрация и/или авторизация на Сайте;</p>
+<p>в)размещение или отображение на Сайте любых материалов, включая но не ограничиваясь такими как: тексты, гипертекстовые ссылки, изображения, аудио и видео- файлы, сведения и/или иная информация;</p>
+<p>создает договор на условиях настоящего Соглашения в соответствии с положениями ст.437 и 438 Гражданского кодекса Российской Федерации.</p>
+<p>&nbsp;</p>
+<p>1.3.Воспользовавшись любой из указанных выше возможностей по использованию Сайта вы подтверждаете, что:</p>
+<p>а)ознакомились с условиями настоящего Соглашения в полном объеме до начала использования Сайта;</p>
+<p>б)принимаете все условия настоящего Соглашения в полном объеме без каких-либо изъятий и ограничений с вашей стороны и обязуетесь их соблюдать или прекратить использование Сайта. Если вы не согласны с условиями настоящего Соглашения или не имеете права на заключение договора на их основе, вам следует незамедлительно прекратить любое использование Сайта;</p>
+<p>в)Соглашение (в том числе любая из его частей) может быть изменено Сайтом без какого-либо специального уведомления. Новая редакция Соглашения вступает в силу с момента ее размещения на Сайте либо доведения до сведения Пользователя в иной удобной форме, если иное не предусмотрено новой редакцией Соглашения.</p>
+<p>&nbsp;</p>
+<ol start="2">
+<li><strong> Общие условия пользования Сайтом</strong></li>
+</ol>
+<p><strong>&nbsp;</strong></p>
+<p>2.1.Сайт осуществляет продажу товара посредством веб-ресурса https://teacorner.ru&nbsp;и сопутствующих сервисных служб Сайта.&nbsp;<br> 2.2.Сайт осуществляет доставку товара способами, определенными в Части 5.5 настоящего Соглашения.&nbsp;<br> 2.3.Сайт предоставляет доступ к персонализированным сервисам Сайта для получения наиболее полной информации по интересующему вас товару, создания рейтингов и мнений, участия в конкурсных программах и иных акциях, проводимых Сайтом.</p>
+<p>2.4.Настоящим вы даете своё добровольное согласие на информирование вас обо всех действиях Сайта, связанных с продажей товара и/или оказанием услуг, в том числе о статусе выполнения заказа, а также об иных событиях любого характера, относящихся к сервисам Сайта.&nbsp;<br> 2.5.Согласие на получение рассылки:<br> Подписываясь на SMS- и email-рассылку https://teacorner.ru или третьих лиц, уполномоченных на рассылку от имени&nbsp;https://teacorner.ru/, в сети Интернет&nbsp;https://teacorner.ru/, я соглашаюсь получать информационную рассылку на телефон и электронный адрес, указанный мной при подписке через сервис подписки информационной рассылки на сайте&nbsp;https://teacorner.ru/. Я проинформирован о том, что в случае, если у меня возникнет желание отказаться от информационной рассылки&nbsp; https://teacorner.ru/, мне будет необходимо самостоятельно перейти по ссылке «Отписаться от рассылки», указанной в тексте отправляемых сайтом сообщений с электронного адреса&nbsp;Сайта mail@teacorner.ru или же сообщить о несогласии получения информационных рассылок по адресам, указанным в разделе «Контакты» данного Соглашения. Я также даю разрешение&nbsp;Сайту или третьим лицам, уполномоченным на рассылку от имени&nbsp;Сайта, собирать, хранить и обрабатывать все переданные мною в адрес&nbsp;Сайта персональные данные (в том числе фамилию, имя, отчество и адрес электронной почты) с целью информирования о новостях и других событиях&nbsp;Сайта. &nbsp;<br> 2.6.Вы соглашаетесь, что Сайт не несет никакой ответственности за задержки, сбои, неверную или несвоевременную доставку, удаление или несохранность каких-либо уведомлений. При этом Сайт оставляет за собой право повторного направления любого уведомления, в случае его неполучения Вами.&nbsp;<br> 2.7.Все вопросы по информационной поддержке Вы можете задать по адресу&nbsp;mail@teacorner.ru</p>
+<p>2.8.Вы признаёте, что сопровождающее товар описание на Сайте не претендует на исчерпывающую информативность и может содержать неточности. Вы вправе направить все замечания по неточному описанию товара Сайту по адресу&nbsp;mail@teacorner.ru</p>
+<p>2.9. Вы признаёте, что Сайт прилагает достаточные усилия, чтобы внешний вид, упаковка и характеристики товаров соответствовали описаниям, приведенным в каталоге Сайта. Одновременно Сайт доводит до вашего сведения, что фактические внешний вид, упаковка и характеристики товара могут отличаться от этих описаний в случае ассортиментного товара, а также в случае внесения изменений в товар непосредственно производителем.<br> 2.10. Вы проинформированы, что цена и наличие товара на Сайте изменяется на круглосуточно без предварительного уведомления об этом и указываются в индивидуальном статусе и подробной карточке товара, отображаемым в каталоге на Сайте.&nbsp;<br> </p>
+<p><strong>3.Обязательства Пользователя при использовании Сайта</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p>3.1.Вы соглашаетесь не использовать сервисы Сайта с целью:&nbsp;<br> 3.1.1.загрузки контента, который является незаконным, нарушает любые права третьих лиц; пропагандирует насилие, жестокость, ненависть и/или дискриминацию по расовому, национальному, половому, религиозному, социальному признакам; содержит недостоверные сведения и/или оскорбления в адрес конкретных лиц, организаций, органов власти;&nbsp;<br> 3.1.2.побуждения к совершению противоправных действий, а также содействия лицам, действия которых направлены на нарушение ограничений и запретов, действующих на территории РФ;<br> 3.1.3.нарушения прав несовершеннолетних лиц и/или причинение им вреда в любой форме;&nbsp;<br> 3.1.4.ущемления прав меньшинств;&nbsp;<br> 3.1.5.выдачи себя за другого человека или представителя организации и/или сообщества без достаточных на то прав, в том числе за сотрудников Сайта;<br> 3.1.6.введения в заблуждение относительно свойств и характеристик каких-либо товаров из каталога на Сайте; некорректного сравнения товаров, а также формирования негативного отношения к лицам, (не) пользующимся определенными товарами, или осуждения таких лиц;<br> 3.1.7.загрузки контента, который вы не имеете права делать доступным по законодательству РФ или согласно каким-либо контрактным отношениям;&nbsp;<br> 3.1.8.загрузки контента, который затрагивает и/или содержит какой-либо патент, торговый знак, коммерческую тайну, фирменное наименование, авторские и смежные с ними права, а равно прочие права на результаты интеллектуальной деятельности, принадлежащие или правомерно используемые третьими лицами;&nbsp;<br> 3.1.9.загрузки не разрешенной специальным образом рекламной информации и/или спама;&nbsp;<br> 3.1.10.сбора и обработки персональных данных, информации о частной жизни любых лиц;&nbsp;<br> 3.1.11.нарушения нормальной работы Сайта;<br> 3.1.12.нарушения российских или международных норм права.<br> 3.2.Вы соглашаетесь не использовать на Сайте бранных слов, непристойных и оскорбительных образов, сравнений и выражений, в том числе в отношении пола, расы, национальности, профессии, социальной категории, возраста, языка человека и гражданина, а также в отношении организаций, органов власти, официальных государственных символов (флагов, гербов, гимнов), религиозных символов, объектов культурного наследия (памятников истории и культуры).<br> 3.3.Вы признаете и соглашаетесь, что Сайт имеет право (но не обязанность) по своему усмотрению отказать в размещении и/или удалить любой контент, доступный через сервисы Сайта.</p>
+<p>&nbsp;</p>
+<p><strong>4.Политика конфиденциальности</strong></p>
+<p>&nbsp;</p>
+<p>4.1.Условия Политики конфиденциальности и отношения между вами и Сайтом, связанные с обработкой персональных данных, регулируются Федеральным Законом РФ №152-ФЗ от 27 июля 2006г. «О персональных данных».&nbsp;<br> 4.2.Политика конфиденциальности действует в отношении персональных данных, которые Сайт получил или может получить от вас при регистрации и/или оформлении заказа на Сайте, и необходимые для выполнения обязательств со стороны Сайта в отношении приобретаемого вами товара/услуги и/или вашего доступа к сервисам Сайта.&nbsp;</p>
+<p>4.3.Политика конфиденциальности доступна по ссылке – https://teacorner.ru/page/politika-konfidentsialnosti</p>
+<p><strong>5.Условия приобретения и доставки товара</strong></p>
+<p>&nbsp;</p>
+<p>5.1.Вы можете приобрести товар на Сайте, оплатив его следующими способами: наличными, кредитной картой, электронными деньгами, с лицевого счёта мобильного телефона, банковским переводом по квитанции, подарочным сертификатом.</p>
+<p>5.2.Настоящим вы соглашаетесь, что выбранный вами способ оплаты не подлежит изменению с момента оформления заказа на Сайте.&nbsp;<br> 5.3.Настоящим вы соглашаетесь, что подтверждение заказа, оплаченного электронными деньгами, кредитной картой, с личного счета мобильного телефона, банковским переводом, происходит только после подтверждения списания денежных средств в счёт оплаты заказа.&nbsp;<br> 5.4.Вы подтверждаете, что оплата заказа электронными деньгами, кредитной картой, с личного счета мобильного телефона должна быть произведена в течение 5 календарных дней с момента его оформления на Сайте. Вы соглашаетесь, что в случае неоплаты заказа по истечении указанного срока, заказ может быть аннулирован.&nbsp;</p>
+<p>5.5.Сайт осуществляет доставку товара следующими способами: служба доставки Сайта (курьерская доставка или доставка в пункт самовывоза), почтовая доставка службами Shop- Logistics &nbsp;и Почты России. Вы вправе выбрать любой удобный для вас способ доставки в соответствии с условиями доставки в свой регион/страну или исходя из своих предпочтений.&nbsp;<br> 5.6.Вы соглашаетесь, что в случае невозможности передачи вам товара по вашей вине, в том числе нарушения вами срока, в течение которого вы обязаны забрать товар, будет расцениваться Сайтом как ваш отказ от товара. При этом товар возвращается Сайту, а заказ считается аннулированным.&nbsp;<br> 5.7.В случае вашего отказа от товара, а также в случае отсутствия заказанного вами товара, перечисленная Сайту предоплата за товар, за исключением расходов Сайта на доставку товара, будет возвращена вам не позднее чем через 10 календарных дней с даты предъявления.&nbsp;<br> 5.8.Все вопросы, связанные со сроками и условиями доставки товара, вы можете направить Сайту по адресу - mail@teacorner.ru</p>
+<p>&nbsp;</p>
+<p><strong>6.Ответственность</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p>6.1Сервисы Сайта могут содержать ссылки на другие ресурсы. Вы признаете и соглашаетесь с тем, что Сайт не несет никакой ответственности за доступность этих ресурсов и за их контент, а также за любые последствия, связанные с использованием вами контента этих ресурсов.<br> 6.2.Вы также соглашаетесь с тем, что Сайт не несёт никакой ответственности за ваши персональные данные, которые вы предоставляете сторонним ресурсам и/или иным третьим лицам в случае перехода на них с Сайта.<br> 6.3.Вы подтверждаете, что Сайт не отвечает за возможную потерю и/или порчу данных, которая может произойти из-за нарушения вами положений настоящего Соглашения, а также неправильного доступа и/или использования персонализированных сервисов Сайта.</p>
+<p>6.4.Ответственность за действия несовершеннолетних, включая приобретение ими товаров из каталога на Сайте, лежит на законных представителях несовершеннолетних.</p>
+<p>6.5.Вы соглашаетесь, что в случае неисполнения и/или ненадлежащего исполнения Сайтом обязательств по продаже и/или доставке вам товара в связи с предоставлением вами недостоверных и/или недействительных данных о себе, а равно невыполнение вами условий настоящего Соглашения, Сайт ответственности не несет.&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>7.Реквизиты Сайта</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p>Индивидуальный предприниматель Цукор Владимир Владимирович</p>
+<p>ОГРНИП - 314774626601110</p>
+<p>Адрес: Г. Москва, Сумской проезд д. 8 корпус 3</p>
+<p>Фактический адрес офиса:&nbsp; г. Москва, Старомарьинское шоссе, 14</p>
+<p>Схема проезда в офис размещена на странице «Контакты» — https://teacorner.ru/page/feedback</p>
+<p>&nbsp;</p>
+<p>Электронная почта для обращений&nbsp; - mail@teacorner.ru</p>
+<p>Дата публикации – 1.07.2017</p>
+      <div class="clear"></div>
+  	</div> 
+</div>                                                                                
+    </div>
+    <div class="clear"></div>
+    <div class="footer">
+        <ul style="float: left;">
+          	     
+          		<li><a href="/blogs/o-chae">О чае</a></li>              		
+                 
+          		<li><a href="/blogs/kak-zavarivat-chay">Как заваривать</a></li>              		
+                 
+          		<li><a href="/blogs/novosti">Новости</a></li>              		
+                 
+          		<li><a href="/page/skidki">Скидки</a></li>              		
+                 
+          		<li><a href="/page/oplata">Оплата и возврат</a></li>              		
+                 
+          		<li><a href="/page/polzovatelskoye-soglasheniye">Пользовательское соглашение</a></li>              		
+                 
+          		<li><a href="/page/dogovor-oferta">Договор-оферта</a></li>              		
+                 
+          		<li><a href="/page/politika-konfidentsialnosti">Политика конфиденциальности</a></li>              		
+                                   
+        </ul>
+  </div><img style="margin-top:3px;" src="https://static.insales-cdn.com/assets/1/41/1753129/1629968529/footer.png">      
+     
+    <script type="text/javascript">
+var google_tag_params = {
+
+
+
+
+
+ecomm_pagetype: 'other',
+
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 962368091;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/962368091/?value=0&guid=ON&script=0"/>
+</div>
+</noscript>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53892769-1');
+
+  ga('require', 'ec');
+</script>
+
+
+<script>
+// Просмотр карточки товара (просмотр товара, сопутствующих и аналогичных)
+  if (location.pathname.indexOf("/product/") != -1) {
+    var productsEcommerceMass = [];
+    var impressionsEcommerceMass = [];
+    
+    ecommerce_products.forEach(function(product, i) {
+      productsEcommerceMass[i] = {
+        id: product.id,
+        name: product.title,
+        brand: product.characteristics.filter(characteristic => characteristic.property_id == 898866)[0] ? product.characteristics.filter(characteristic => characteristic.property_id == 898866)[0].title : '',
+        category: ecommerce_collections[i],
+        price: product.variants[0].price,
+      }
+    });
+    
+    ecommerce_impressions.forEach(function(product, i) {
+      impressionsEcommerceMass[i] = {
+        id: product.id,
+        name: product.title,
+        list: 'Related & Similar Products',
+        brand: product.characteristics.filter(characteristic => characteristic.property_id == 898866)[0] ? product.characteristics.filter(characteristic => characteristic.property_id == 898866)[0].title : '',
+        category: ecommerce_impressions_collections[i],
+        position: i,
+        price: product.variants[0].price,
+      }
+    });
+    
+    if (productsEcommerceMass.length) {
+      for (var i = 0; i < productsEcommerceMass.length; i++) {
+        ga('set', 'nonInteraction', true); // не влияет на показатель отказов
+
+        ga('ec:addProduct', productsEcommerceMass[i]);
+      }
+    }
+    
+    if (impressionsEcommerceMass.length) {
+      var n = 10; // максимум передаваемых товаров за раз
+      for (var j = 0; j < impressionsEcommerceMass.length; j = j + n) {
+        for (var i = j; i < j + n && i < impressionsEcommerceMass.length; i++) {
+          ga('set', 'nonInteraction', true); // не влияет на показатель отказов
+
+          ga('ec:addImpression', impressionsEcommerceMass[i]);
+        }
+
+        ga('ec:setAction', 'detail');
+
+        ga('send', 'pageview');
+      }
+    } else {
+
+      ga('ec:setAction', 'detail');
+
+      ga('send', 'pageview');
+    }
+    
+  };
+</script>
+
+<!-- К закону "О персональных данных" -->
+<script>
+/*
+  $('#feedback_commit').attr("disabled", "disabled");
+  $('#feedback_commit').attr("title", "Подтвердите согласие с условиями оферты и политики конфиденциальности");
+
+  $('#my_checkbox').click( function() {
+    if ( $("#my_checkbox").prop("checked") ){
+      $("#feedback_commit").removeAttr("disabled");
+      $("#feedback_commit").removeAttr("title");
+    }
+    else {
+      $('#feedback_commit').attr("disabled", "disabled");
+      $('#feedback_commit').attr("title", "Подтвердите согласие с условиями оферты и политики конфиденциальности");
+    }
+  });
+*/
+</script>
+<!-- END К закону "О персональных данных" -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-53892769-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-53892769-1', {
+    'custom_map': {
+        'dimension5': 'clientId'
+    }
+});
+</script>
+<!-- END Global site tag (gtag.js) - Google Analytics --><!-- VK Pixel Code -->
+<div id="vk_api_transport"><script type="text/javascript" src="https://vk.com/js/api/openapi.js?169" async=""></script></div>
+<script type="text/javascript">
+  window.vkAsyncInit = function() {
+    VK.Retargeting.Init("VK-RTRG-1494-30cs9");
+    VK.Retargeting.Hit();
+    
+    
+  };
+
+setTimeout(function() {
+    var el = document.createElement("script");
+    el.type = "text/javascript";
+    el.src = "https://vk.com/js/api/openapi.js?169";
+    el.async = true;
+    document.getElementById("vk_api_transport").appendChild(el);
+  }, 0);
+</script>
+<noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1494-30cs9" style="position:fixed; left:-999px;" alt=""/>
+</noscript>
+<!-- End VK Pixel Code -->
+
+</div></body></html>

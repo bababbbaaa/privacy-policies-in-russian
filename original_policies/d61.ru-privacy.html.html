@@ -1,0 +1,713 @@
+<html lang="ru"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=false">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/dion.css?63177">
+    <link rel="stylesheet" type="text/css" href="/style/bootstrap/style.css?63177">
+    <link rel="canonical" href="http://d61.ru/privacy.html">
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/jquery.maskedinput.min.js"></script>
+    <title>Политика в отношении обработки персональных данных | «Дион.Школа», система управления сайтами образовательных организаций</title>
+    <meta name="description" content="">
+    <!-- [+] FAVICON -->
+    <link rel="icon" href="/logo.lame.orange.svg" type="image/svg+xml">
+    <meta name="format-detection" content="telephone=YES">
+    <!-- [-] FAVICON -->
+    
+    <meta property="og:title" content="Политика в отношении обработки персональных данных | «Дион.Школа», система управления сайтами образовательных организаций">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://d61.ru/upload/images/src/58_b.jpg">
+    <meta property="og:url" content="http://d61.ru/privacy.html">
+    <meta property="og:site_name" content="«Дион.Школа», система управления сайтами образовательных организаций">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@d61ru">
+    <meta name="twitter:title" content="Политика в отношении обработки персональных данных | «Дион.Школа», система управления сайтами образовательных организаций">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image:src" content="https://d61.ru/upload/images/src/58_m.jpg">
+    <meta name="twitter:image:alt" content="">
+
+    <meta name="yandex-verification" content="f996879ec355239d">
+    <meta name="yandex-verification" content="678d1a9f9deb200b">
+    <meta name="google-site-verification" content="NPNcTl9XrV3bNdkIn_9YVDY6GQW5h3lTe6Y-nBWwds8">
+    <meta name="google-site-verification" content="N-PgXudVvNFbdhVb85USg2HfaJ1F9_o75h48dEC_i-A">
+    <meta name="p:domain_verify" content="a342543d5163f399475ba3f26418055c">
+
+    
+
+    	<script>
+		
+		$(function() {
+			
+			$('#content').css({'margin-top' : $('#header').innerHeight()});
+			$(window).on('resize', function() {$('#content').css({'margin-top' : $('#header').innerHeight()});});
+			//$('body').css({'margin-top' : $('#header').innerHeight()});
+			//$(window).on('resize', function() {$('body').css({'margin-top' : $('#header').innerHeight()});});
+			
+			//$('.ajax_select').on('change', function() {
+			$('body').on('change', '.ajax_select', function() {
+				var tid = $(this).attr('id');
+				
+				var val = $(this).val();
+				console.log(val);
+				var aim = $('#' + $(this).data('aim'));
+				aim.html('');
+				$.post('/ajax/ajax', {
+					action  : tid,
+					selector: val
+				}, function(data) {
+					if (data) {
+						var d = $.parseJSON(data);
+						$.each(d, function(index, value) {
+							aim.append(new Option(value, index));	
+						});
+					}
+				});
+				if (val == 0) { aim.prop('disabled', true);  }
+				else          { aim.prop('disabled', false); }
+			});
+			
+			$('#element').toast('show');
+			$('[data-toggle="tooltip"]').tooltip().css('cursor', 'pointer');
+			
+		});
+		</script>
+</head>
+<body>
+    <div class="w-100 position-fixed overflow-hidden bg-white shadow-sm" id="header" style="z-index: 99; top: 0; left: 0;">
+    <div class="container    dion--header">
+        <div class="row">
+            <div class="col-12 col-sm-4 col-md-4 col-lg-4    dion--logo-container">
+            	<a href="/" title="Главная страница официального сайта ЦИТ «Дион»">            	
+            	<div id="dion--logo-title" class="d-flex dion--logo-title f-s-24 f-s-lg-17 f-s-md-19 f-s-xl-22 f-s-xl-23 float-left h1 text-left text-md-left text-sm-center">ЕИСП «ДИОН»
+                    <div class="d-block d-sm-none d-md-block dion--logo-subtitle f-s-10 f-s-xl-11 f-w-400 text-muted">единая информационная сетевая платформа</div>
+                </div>
+                
+                <style>
+                    .dion--logo-title {
+                        display: flex!important;
+                        align-items: flex-start;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
+                </style>
+            	
+            	<!-- 
+            	<div id="dion--logo-title" class="d-block dion--logo-title f-s-lg-17 f-s-md-12 f-s-xl-22 f-s-xl-23 float-left h1 text-left">Платформа Дион.Школа
+            	                                	                    <div class="d-block d-lg-block dion--logo-subtitle f-s-13 f-s-md-11 f-s-xl-15 f-w-300 f-w-md-500 text-muted">сайты образовательных организаций</div>
+            	                                	                </div>
+            	                 -->
+                
+                <!-- <div id="dion--logo-title" class="h1 d-block float-left text-left    dion--logo-title">Дион</div> -->
+                <!-- <div class="d-block d-sm-none d-lg-block float-left text-left text-muted    dion--logo-subtitle">центр информационных технологий</div> -->
+                </a>            </div>
+            <div class="d-none d-lg-block col-lg-2 col-xl-2"> 
+            </div>
+    
+            <div class="d-none d-md-block col-md-1 dion--header-phone-icon"></div>
+            <div class="col-7 col-sm-4 col-md-3 col-lg-2 p-sm-2    dion--subheader dion--header-phone-container">
+                <div class="text-right">
+                    <a class="d-block text-success text-decoration-none  float-sm-right float-md-left text-left text-sm-right pt-1 pb-1 p-sm-0    dion--header-phone" style="width: 132px;" href="tel:+78002014541">8 800 201-45-41</a>
+                    <a class="d-none d-sm-block text-success text-decoration-none  float-sm-right float-md-left text-left text-sm-right    dion--header-phone" style="width: 132px;" href="tel:+79183892425">+7 918 389-24-25</a>
+                </div>
+            </div>
+    
+            <div class="d-none d-md-block col-md-1 dion--header-email-icon"></div>
+            <div class="col-5 col-sm-4 col-md-3 col-lg-2 p-sm-2    dion--subheader dion--header-email-container">
+                <a class="d-block float-right float-md-left text-left pt-1 pb-1 p-sm-0    dion--header-email" href="mailto:dion@d61.ru">dion@d61.ru</a>
+                <a class="d-none d-sm-block text-decoration-none  font-weight-normal float-right float-md-left    dion--header-email" href="">написать нам</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="dion--content" id="content" style="margin-top: 66px;">
+        <div class="container-fluid" style="background:#eee;">
+    <div class="row">
+        <div class="col-12 border-top border-bottom py-3 text-center">
+            <strong class="f-cera f-w-900 d-block d-md-inline text-center text-md-left text-uppercase">Поделиться: </strong>
+<div class="d-block d-md-inline-block text-center text-md-left">
+<a onclick="window.open('https://connect.ok.ru/offer?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="f-cera odnoklassniki btn btn-sm"><i class="fa fa-odnoklassniki"></i><span class="d-none d-md-inline"> Одноклассники</span></a>
+<a onclick="window.open('https://vkontakte.ru/share.php?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="f-cera vkontakte btn btn-sm"><i class="fa fa-vk"></i><span class="d-none d-md-inline"> ВКонтакте</span></a>
+<!--
+<a onClick="window.open('https://www.facebook.com/sharer.php?u=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="f-cera facebook btn btn-sm"><i class="fa fa-facebook"></i><span class="d-none d-md-inline"> Facebook</span></a>
+
+<a onClick="window.open('https://twitter.com/share?url=http://d61.ru/privacy.html&text=&via=d61ru','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="twitter btn btn-sm"><i class="fa fa-twitter"></i><span class="d-none d-md-inline"> Twitter</span></a>
+-->
+
+<a onclick="window.open('https://connect.mail.ru/share?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="f-cera moimir btn btn-sm"><i class="fa fa-at dion--color-orange" style="color:#f60!important;"></i><span class="d-none d-md-inline"> МойМир</span></a>
+
+<!-- <a onClick="window.open('https://www.livejournal.com/update.bml?event=https://d61.ru/privacy.html&subject=','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="livejournal">LiveJournal</a> -->
+<!-- <a onClick="window.open('https://ru.pinterest.com/pin/create/button/?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="pinterest">Pinterest</a> -->
+<!-- <a onClick="window.open('https://www.evernote.com/clip.action?url=https://d61.ru/privacy.html&target=blog','sharer','toolbar=0,status=0,width=930,height=500');" href="javascript: void(0)" class="evernote">Evernote</a> -->
+<!-- <a onClick="window.open('https://www.liveinternet.ru/journal_post.php?action=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=812,height=585');" href="javascript: void(0)" class="liveinternet">LiveInternet</a> -->
+<!-- <a onClick="window.open('https://digg.com/submit?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=812,height=585');" href="javascript: void(0)" class="digg">Digg</a> -->
+<!-- <a onClick="window.open('https://new.spring.me/#!/welcome?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=812,height=585');" href="javascript: void(0)" class="spring">Spring</a> -->
+<a id="fav" rel="sidebar" href="https://d61.ru/privacy.html" class="link btn btn-sm btn-secondary d-none d-md-inline-block"><i class="fa fa-bookmark"></i></a>
+<a href="mailto:?subject=&amp;body=https://d61.ru/privacy.html" class="email btn btn-sm btn-primary d-none d-md-inline-block"><i class="fa fa-envelope"></i></a>
+<a href="javascript:window.print(); void 0;" class="print btn btn-sm btn-primary d-none d-md-inline-block"><i class="fa fa-print"></i></a>
+</div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .facebook,.twitter,.odnoklassniki,.vkontakte,.moimir {color:#fff!important;min-width:40px!important}
+    .facebook {background-color:#3b5998!important;}
+    .twitter  {background-color:#55acee!important;}
+    .odnoklassniki  {background-color:#ee8208!important;}
+    .vkontakte  {background-color:#4a76a8!important;}
+    .moimir  {background-color:#005ff9!important;}
+</style>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Политика в отношении обработки персональных данных <p class="lead"></p></h1>
+    			</div>
+    		</div>
+            <div class="row">
+                <div class="col">
+                    <p>1. Общие положения</p>
+
+<p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые ОБЩЕСТВОМ С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ ЦЕНТР ИНФОРМАЦИОННЫХ ТЕХНОЛОГИЙ ДИОН (далее – Оператор).</p>
+
+<p>1.1. Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.</p>
+
+<p>1.2. Настоящая политика Оператора в отношении обработки персональных данных (далее – Политика) применяется ко всей информации, которую Оператор может получить о посетителях веб-сайта <a href="https://d61.ru" target="_blank">https://d61.ru</a> и его поддоменов 3 уровня.</p>
+
+<p>2. Основные понятия, используемые в Политике</p>
+
+<p>2.1. Автоматизированная обработка персональных данных – обработка персональных данных с помощью средств вычислительной техники;</p>
+
+<p>2.2. Блокирование персональных данных – временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных);</p>
+
+<p>2.3. Веб-сайт – совокупность графических и информационных материалов, а также программ для ЭВМ и баз данных, обеспечивающих их доступность в сети интернет по сетевому адресу <a href="https://d61.ru" target="_blank">https://d61.ru</a> и адресам&nbsp;его поддоменов 3 уровня;</p>
+
+<p>2.4. Информационная система персональных данных — совокупность содержащихся в базах данных персональных данных, и обеспечивающих их обработку информационных технологий и технических средств;</p>
+
+<p>2.5. Обезличивание персональных данных — действия, в результате которых невозможно определить без использования дополнительной информации принадлежность персональных данных конкретному Пользователю или иному субъекту персональных данных;</p>
+
+<p>2.6. Обработка персональных данных – любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных;</p>
+
+<p>2.7. Оператор – государственный орган, муниципальный орган, юридическое или физическое лицо, самостоятельно или совместно с другими лицами организующие и (или) осуществляющие обработку персональных данных, а также определяющие цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными;</p>
+
+<p>2.8. Персональные данные – любая информация, относящаяся прямо или косвенно к определенному или определяемому Пользователю веб-сайта https://foodmonitoring.ru;</p>
+
+<p>2.9. Пользователь – любой посетитель веб-сайта <a href="https://d61.ru" target="_blank">https://d61.ru</a> и его поддоменов 3 уровня;</p>
+
+<p>2.10. Предоставление персональных данных – действия, направленные на раскрытие персональных данных определенному лицу или определенному кругу лиц;</p>
+
+<p>2.11. Распространение персональных данных – любые действия, направленные на раскрытие персональных данных неопределенному кругу лиц (передача персональных данных) или на ознакомление с персональными данными неограниченного круга лиц, в том числе обнародование персональных данных в средствах массовой информации, размещение в информационно-телекоммуникационных сетях или предоставление доступа к персональным данным каким-либо иным способом;</p>
+
+<p>2.12. Трансграничная передача персональных данных – передача персональных данных на территорию иностранного государства органу власти иностранного государства, иностранному физическому или иностранному юридическому лицу;</p>
+
+<p>2.13. Уничтожение персональных данных – любые действия, в результате которых персональные данные уничтожаются безвозвратно с невозможностью дальнейшего восстановления содержания персональных данных в информационной системе персональных данных и (или) уничтожаются материальные носители персональных данных.</p>
+
+<p>3. Оператор может обрабатывать следующие персональные данные Пользователя</p>
+
+<p>3.1. Фамилия, имя, отчество;</p>
+
+<p>3.2. Электронный адрес;</p>
+
+<p>3.3. Номера телефонов;</p>
+
+<p>3.4. Также на сайте происходит сбор и обработка обезличенных данных о посетителях (в т.ч. файлов «cookie») с помощью сервисов интернет-статистики (Яндекс Метрика и Гугл Аналитика и других).</p>
+
+<p>3.5. Вышеперечисленные данные далее по тексту Политики объединены общим понятием Персональные данные.</p>
+
+<p>4. Цели обработки персональных данных</p>
+
+<p>4.1. Цель обработки персональных данных Пользователя — отправка Пользователю регистрационных данных для доступа к сервисам Оператора, отправка Пользователю информации по работе с сервисами Оператора, восстановление доступа к личному кабинету Пользователя.</p>
+
+<p>4.2. Также Оператор имеет право направлять Пользователю уведомления о новых продуктах и услугах, специальных предложениях и различных событиях. Пользователь всегда может отказаться от получения информационных сообщений, направив Оператору письмо на адрес электронной почты dion@d61.ru с пометкой «Отказ от уведомлений о новых продуктах и услугах и специальных предложениях».</p>
+
+<p>4.3. Обезличенные данные Пользователей, собираемые с помощью сервисов интернет-статистики, служат для сбора информации о действиях Пользователей на сайте, улучшения качества сайта и его содержания.<br>
+&nbsp;<br>
+5. Правовые основания обработки персональных данных</p>
+
+<p>5.1. Оператор обрабатывает персональные данные Пользователя только в случае их заполнения и/или отправки Пользователем самостоятельно через специальные формы, расположенные на сайте https://foodmonitoring.ru. Заполняя соответствующие формы и/или отправляя свои персональные данные Оператору, Пользователь выражает свое согласие с данной Политикой.</p>
+
+<p>5.2. Оператор обрабатывает обезличенные данные о Пользователе в случае, если это разрешено в настройках браузера Пользователя (включено сохранение файлов «cookie» и использование технологии JavaScript).</p>
+
+<p>6. Порядок сбора, хранения, передачи и других видов обработки персональных данных</p>
+
+<p>Безопасность персональных данных, которые обрабатываются Оператором, обеспечивается путем реализации правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований действующего законодательства в области защиты персональных данных.</p>
+
+<p>6.1. Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.</p>
+
+<p>6.2. Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства.</p>
+
+<p>6.3. В случае выявления неточностей в персональных данных, Пользователь может актуализировать их самостоятельно, путем направления Оператору уведомление на адрес электронной почты Оператора dion@d61.ru с пометкой «Актуализация персональных данных».</p>
+
+<p>6.4. Срок обработки персональных данных является неограниченным. Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора dion@d61.ru с пометкой «Отзыв согласия на обработку персональных данных».</p>
+
+<p>7. Трансграничная передача персональных данных</p>
+
+<p>7.1. Трансграничная передача персональных данных на территории иностранных государств НЕ ОСУЩЕСТВЛЯЕТСЯ.</p>
+
+<p>8. Заключительные положения</p>
+
+<p>8.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты dion@d61.ru.</p>
+
+<p>8.2. В данном документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены ее новой версией.</p>
+
+<p>8.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу <a href="/privacy.html">https://d61.ru/privacy.html</a>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" style="background:#eee;">
+    <div class="row">
+        <div class="col-12 border-top border-bottom py-3 text-center">
+            <strong class="f-cera f-w-900 d-block d-md-inline text-center text-md-left text-uppercase">Поделиться: </strong>
+<div class="d-block d-md-inline-block text-center text-md-left">
+<a onclick="window.open('https://connect.ok.ru/offer?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="f-cera odnoklassniki btn btn-sm"><i class="fa fa-odnoklassniki"></i><span class="d-none d-md-inline"> Одноклассники</span></a>
+<a onclick="window.open('https://vkontakte.ru/share.php?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="f-cera vkontakte btn btn-sm"><i class="fa fa-vk"></i><span class="d-none d-md-inline"> ВКонтакте</span></a>
+<!--
+<a onClick="window.open('https://www.facebook.com/sharer.php?u=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="f-cera facebook btn btn-sm"><i class="fa fa-facebook"></i><span class="d-none d-md-inline"> Facebook</span></a>
+
+<a onClick="window.open('https://twitter.com/share?url=http://d61.ru/privacy.html&text=&via=d61ru','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="twitter btn btn-sm"><i class="fa fa-twitter"></i><span class="d-none d-md-inline"> Twitter</span></a>
+-->
+
+<a onclick="window.open('https://connect.mail.ru/share?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="f-cera moimir btn btn-sm"><i class="fa fa-at dion--color-orange" style="color:#f60!important;"></i><span class="d-none d-md-inline"> МойМир</span></a>
+
+<!-- <a onClick="window.open('https://www.livejournal.com/update.bml?event=https://d61.ru/privacy.html&subject=','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="livejournal">LiveJournal</a> -->
+<!-- <a onClick="window.open('https://ru.pinterest.com/pin/create/button/?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)" class="pinterest">Pinterest</a> -->
+<!-- <a onClick="window.open('https://www.evernote.com/clip.action?url=https://d61.ru/privacy.html&target=blog','sharer','toolbar=0,status=0,width=930,height=500');" href="javascript: void(0)" class="evernote">Evernote</a> -->
+<!-- <a onClick="window.open('https://www.liveinternet.ru/journal_post.php?action=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=812,height=585');" href="javascript: void(0)" class="liveinternet">LiveInternet</a> -->
+<!-- <a onClick="window.open('https://digg.com/submit?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=812,height=585');" href="javascript: void(0)" class="digg">Digg</a> -->
+<!-- <a onClick="window.open('https://new.spring.me/#!/welcome?url=https://d61.ru/privacy.html','sharer','toolbar=0,status=0,width=812,height=585');" href="javascript: void(0)" class="spring">Spring</a> -->
+<a id="fav" rel="sidebar" href="https://d61.ru/privacy.html" class="link btn btn-sm btn-secondary d-none d-md-inline-block"><i class="fa fa-bookmark"></i></a>
+<a href="mailto:?subject=&amp;body=https://d61.ru/privacy.html" class="email btn btn-sm btn-primary d-none d-md-inline-block"><i class="fa fa-envelope"></i></a>
+<a href="javascript:window.print(); void 0;" class="print btn btn-sm btn-primary d-none d-md-inline-block"><i class="fa fa-print"></i></a>
+</div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .facebook,.twitter,.odnoklassniki,.vkontakte,.moimir {color:#fff!important;min-width:40px!important}
+    .facebook {background-color:#3b5998!important;}
+    .twitter  {background-color:#55acee!important;}
+    .odnoklassniki  {background-color:#ee8208!important;}
+    .vkontakte  {background-color:#4a76a8!important;}
+    .moimir  {background-color:#005ff9!important;}
+</style>
+    </div><!-- #dion-content -->
+    <div class="wrapper     dion--footer">
+    <div class="container pb-5 pb-md-0">
+        <div class="row">
+            <div class="col-12 text-center">
+            	<p class="text-center small text-white text-uppercase font-weight-bold f-cera mb-0">Дион.Школа в соцсетях:</p>
+            	<a href="https://vk.com/dion.school" class="dion--footer-social-button vk" target="_blank" rel="noopener noreferrer">
+                </a>
+
+            	<a href="https://t.me/joinchat/AAAAAE9sz6lPnmuqfWCOxA" class="dion--footer-social-button tg" target="_blank" rel="noopener noreferrer">
+                </a>
+
+            	<a href="https://twitter.com/d61ru" class="dion--footer-social-button tw" target="_blank" rel="noopener noreferrer">
+                </a>
+
+            	<a href="https://www.youtube.com/channel/UC_TWdNvzNSIWlPZw9Dr3jAA" class="dion--footer-social-button yt" target="_blank" rel="noopener noreferrer">
+                </a>
+            </div>
+
+            <div class="col-12 col-md-4 pt-4 f-cera f-s-13">
+                <p class="text-left text-white font-weight-bold f-cera mb-0">НОВОСТИ:</p>
+                            <a href="/pobeda-countdown.html" class="text-white d-block text-truncate my-1" title="Новости: Виджет обратного отсчета до Дня Победы">Виджет обратного отсчета до Дня Победы</a>
+                            <a href="/tickets.html" class="text-white d-block text-truncate my-1" title="Новости: АС «Дион-Редакция»">АС «Дион-Редакция» — автоматизированная система обработки и учета заявок</a>
+                            <a href="/dion-media.html" class="text-white d-block text-truncate my-1" title="Новости: Открытие собственного видеохостинга для образовательных организаций">Видеохостинг Дион.Медиа</a>
+                            <a href="/novii-razdel-profilnoe-obuchenie.html" class="text-white d-block text-truncate my-1" title="Новости: Новый раздел «Профильное обучение»">Новый раздел «Профильное обучение»</a>
+                            <a href="/ssl-security.html" class="text-white d-block text-truncate my-1" title="Новости: SSL-защита сайтов наших клиентов">SSL-защита сайтов наших клиентов</a>
+                            <a href="/nova.html" class="text-white d-block text-truncate my-1" title="Новости: Обновление платформы. Версия Nova">Версия Nova</a>
+                        </div>
+
+            <div class="col-12 col-md-4 pt-4 f-cera f-s-13">
+                <p class="text-left text-white font-weight-bold f-cera mb-0">ОБЗОРЫ:</p>
+                            <a href="/o-podgotovke-k-2020-2021-uchebnomu-godu.html" class="text-white d-block text-truncate my-1" title="Обзор: Подготовка к 2020-2021 учебному году">Подготовка к 2020-2021 учебному году</a>
+                            <a href="/kak-podgotovit-schkolu-k-noko.html" class="text-white d-block text-truncate my-1" title="Обзор: Как подготовить школу к НОКО">Как подготовить школу к НОКО</a>
+                            <a href="/avgustovskii-pedsovet-podgotovka-2020.html" class="text-white d-block text-truncate my-1" title="Обзор: Августовский педсовет: как подготовиться к собранию в 2020 году">Августовский педсовет: как подготовиться к собранию в 2020 году</a>
+                            <a href="/sanitarnie-pravila-dlya-schkol-2020-2021-covid.html" class="text-white d-block text-truncate my-1" title="Обзор: Санитарные правила для школ на 2020-2021 учебный год">Санитарные правила для школ на 2020-2021 учебный год</a>
+                            <a href="/cifrovaya-obrazovatelnaya-sreda-2020.html" class="text-white d-block text-truncate my-1" title="Обзор: Цифровая образовательная среда — на старт!">Цифровая образовательная среда — на старт!</a>
+                            <a href="/spravka-profili-obucheniya.html" class="text-white d-block text-truncate my-1" title="Обзор: Профили обучения">Профили обучения</a>
+                            <a href="/structura-razdela-protivodeistvie-korrupcii.html" class="text-white d-block text-truncate my-1" title="Обзор: Структура раздела сайта «Противодействие коррупции»">Структура раздела «Противодействие коррупции»</a>
+                            <a href="/priemka-schkoly-2020-2021.html" class="text-white d-block text-truncate my-1" title="Обзор: Важный этап лета: приемка школы 2020-2021">Приемка школы 2020-2021</a>
+                            <a href="/kak-urokki-ru-pomogaut-distantu.html" class="text-white d-block text-truncate my-1" title="Обзор: Как Urokki.ru помогают дистанционному образованию">Как Urokki.ru помогают дистанционному образованию</a>
+                            <a href="/v-chem-problema-distancionnogo-obrazovaniya-v-rf.html" class="text-white d-block text-truncate my-1" title="Обзор: В чем беда дистанционного обучения в России">В чем беда дистанционного обучения в России</a>
+                        </div>
+
+            <div class="col-12 col-md-4 pt-4 f-cera f-s-13">
+                <p class="text-left text-white font-weight-bold f-cera mb-0">ПОЛЕЗНАЯ ИНФОРМАЦИЯ:</p>
+                            <a href="/o-dokumentakh-gve-oge-2021.html" class="text-white d-block text-truncate my-1" title="Полезная информация: О документах обучащихся для прохождения ГВЭ и/или ОГЭ, ГВЭ в особых условиях в 2021 году">О документах обучащихся для прохождения ГВЭ и/или ОГЭ, ГВЭ в особых условиях в 2021 году</a>
+                            <a href="/sroki-podachi-zayavlenii-o-sposobe-vedeniya-trudovoy-knizhki-2020.html" class="text-white d-block text-truncate my-1" title="Полезная информация: Сроки подачи заявлений о способе ведения трудовой книжки">Сроки подачи заявлений о способе ведения трудовой книжки</a>
+                            <a href="/skachat-anketi-dlya-zapolneniya-noko.html" class="text-white d-block text-truncate my-1" title="Полезная информация: Скачать шаблоны анкет для заполнения (НОКО)">Скачать шаблоны анкет для заполнения (НОКО)</a>
+                            <a href="/proekt-cifrovaya-obrazovatelnaya-sreda.html" class="text-white d-block text-truncate my-1" title="Полезная информация: О проведении в 2020-22 годах эксперимента по внедрению целевой модели цифровой образовательной среды">О проведении в 2020-22 годах эксперимента по внедрению целевой модели цифровой образовательной среды</a>
+                            <a href="/kalendar-obrazovatelnih-sobitii-2020-2021.html" class="text-white d-block text-truncate my-1" title="Полезная информация: Календарь образовательных событий на 2020-2021 учебный год">Календарь образовательных событий на 2020-2021 учебный год</a>
+                            <a href="/mr-2-4-0180-20-2020-05-18.html" class="text-white d-block text-truncate my-1" title="Полезная информация: Родительский контроль за организацией питания детей в общеобразовательных организациях">Родительский контроль за организацией питания детей в общеобразовательных организациях</a>
+                            <a href="/sait-gmu-bus-gov-ru.html" class="text-white d-block text-truncate my-1" title="Полезная информация: Как создать кнопку со ссылкой на официальный сайт ГМУ www.bus.gov.ru">Получить ссылку на сайт ГМУ</a>
+                            <a href="/2020-05-12-mr-rpn-covid-19.html" class="text-white d-block text-truncate my-1" title="Полезная информация: Рекомендации по организации работы образовательных организаций в условиях сохранения рисков распространения COVID-19">Рекомендации по организации работы образовательных организаций в условиях сохранения рисков распространения COVID-19</a>
+                        </div>
+
+
+<!--             <div class="col-12 col-md-4 pt-4 f-cera f-s-13">
+                <p class="text-left text-white font-weight-bold f-cera mb-0">ПОЛЕЗНАЯ ИНФОРМАЦИЯ:</p>
+                <a href="/2020-05-12-mr-rpn-covid-19.html" class="text-white d-block text-truncate my-1" title="Рекомендации по организации работы образовательных организаций в условиях сохранения рисков распространения COVID-19">Рекомендации Роспотребнадзора — COVID-19</a>
+                <a href="/sait-gmu-bus-gov-ru.html" class="text-white d-block text-truncate my-1" title="Мы сделали бесплатный виджет создания кнопки со ссылкой на bus.gov.ru для установки на Ваш сайт">Как создать ссылку на сайт ГМУ (bus.gov.ru)</a>
+                <a href="/ssl-security.html" class="text-white d-block text-truncate my-1" title="Новости: SSL-защита сайтов наших клиентов">SSL-защита сайтов наших клиентов</a>
+                <a href="/novii-razdel-profilnoe-obuchenie.html" class="text-white d-block text-truncate my-1" title="Новости: Новый раздел «Профильное обучение»">Новый раздел «Профильное обучение»</a>
+                <a href="/nova.html" class="text-white d-block text-truncate my-1" title="Обзор версии Nova">Версия Nova</a>
+            </div> -->
+
+            <div class="bg-secondary col-12 f-cera f-s-12 mt-5 mb-5 order-5 order-md-5 py-2 rounded-pill shadow text-center">
+                <a href="/tariff.html" class="mx-1 mx-md-2" style="color:#ccc;">Тарифы</a>
+            	<a href="/requisites.html" class="mx-1 mx-md-2" style="color:#ccc;">Реквизиты</a>
+                <a href="/oferta.html" class="mx-1 mx-md-2" style="color:#ccc;">Оферта</a>
+                <a href="/privacy.html" class="mx-1 mx-md-2" style="color:#ccc;">Персональные&nbsp;данные</a>
+                <a href="/contact.html" class="mx-1 mx-md-2" style="color:#ccc;">Контакты</a>
+                            </div>
+
+
+        </div>
+        <div class="pb-5 pb-md-4 row">
+
+            <div class="col-6 col-md-5 col-xl-4 f-cera f-s-12 text-left">
+            	<a href="https://dion.center" class="d-block text-left text-decoration-none" style="padding-left: 40px; background: url(https://ds.d61.ru/uploads/logo.lame.blue.svg) center left no-repeat; color: #ccc;"><span class="d-none d-lg-inline">Центр информационных технологий </span>«Дион»<span class="d-inline d-lg-none">, ЦИТ</span><br>©&nbsp;2005–2023</a>
+                <!-- <a href="call:88002014541" class="d-block my-1  text-center text-decoration-none" style="color: #ccc;">8 800 201-45-41</a>
+                <a href="mailto:dion@d61.ru" class="d-block mt-1 mb-4  text-center text-decoration-none" style="color: #ccc;">dion@d61.ru</a> -->
+            </div>
+            <div class="col-6 col-md-7 col-xl-4 f-cera f-s-12 col-6 col-md-4 f-cera f-s-12 text-md-left text-right">
+                <a href="call:88002014541" class="text-decoration-none" style="color: #ccc;">8 800 201-45-41</a><br>
+                <a href="mailto:dion@d61.ru" class="text-decoration-none" style="color: #ccc;">dion@d61.ru</a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/popper.min.js?63177"></script>
+<script src="/assets/js/bootstrap.min.js?63177"></script>
+<script src="/assets/js/engine.js?63177"></script>
+
+
+
+
+    <style>
+        .error_tip,.success_tip {
+            text-align: center;
+            font-family: 'cera';
+            text-size: 13px;
+            line-height: 1;
+            padding: 5px 15px;
+            margin: 15px 0;
+            border-radius: .25rem;
+        }
+        .error_tip {
+            color: #d33;
+            border: 1px solid #d33;
+            box-shadow: 0 0 3px 1px rgb(221 51 51 / 75%);
+        }
+        .success_tip {
+            color: #3d3;
+            border: 1px solid #3d3;
+            box-shadow: 0 0 3px 1px rgb(51 221 51 / 75%);
+        }
+        .form-control-domain {
+            height: calc(3.375rem + 2px);
+            padding: .5rem 1rem;
+            text-align: center;
+            font-weight: 700;
+            color: #ff6700;
+        }
+        @media all and (min-width:992px) {
+            .form-control-domain {
+                height: calc(4.375rem + 2px);
+                padding: .5rem 1rem;
+                font-size: 2.75rem;
+                font-family: 'cera';
+                text-align: center;
+                font-weight: 700;
+                color: #ff6700;
+            }
+            
+            
+            
+        }
+    </style>
+
+
+    <script>
+    
+    $( document ).ready(function(){
+        function validate_domain(value){
+        	var login = $.trim(value);
+        	$('#err_name_empty, #err_name_length, #err_name_format, #success_name_good, #success_name_free, #err_name_exists').hide();
+        	if(!login.length){
+        		$('#err_name_empty').show();
+        		return false;
+        	}
+        	if((login.length < 6) || (login.length > 30)){
+        		$('#err_name_length').show();
+        		return false;
+        	}
+        	if(!login.match(/^([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)+$/)){
+        		$('#err_name_format').show();
+        		return false;
+        	}
+        	$('#success_name_good').show();
+        	return true;
+        }
+        $('body').on('focus', '#domain', function() {
+            $('body').on('keyup', '#domain', function() {
+            	var value = $(this).val();
+            	console.log(value);
+        		if (validate_domain(value)) {
+    				$.post('/ajax/check.domain', {
+    					value: value
+    				}, function(data) {
+    					$('#err_name_empty, #err_name_length, #err_name_format, #success_name_good, #success_name_free, #err_name_exists').hide();
+    					if (data) {
+    					    console.log(data);
+    						$('#success_name_free').show();	
+    					}
+    					else {
+    					    console.log(data);
+    						$('#err_name_exists').show();
+    					}
+    				});
+    			}
+            });
+        });
+        $('body').on('focus mouseup', '#inn', function() {
+            var ths = $(this);
+            ths.mask("9999999999");
+            ths.selectionStart = ths.val().length;
+        });
+        $('body').on('focus', '[inputmode=tel]', function() {
+            $(this).mask("+7 999 999-99-99");
+        });
+        $('body').on('click', '.create_site', function(){
+    		var msg = $(this).closest('form').serialize();
+    		var container = $('#form-container');
+    		console.log(msg);
+    		$.ajax({
+    			type: 'POST',
+    			url: '/ajax/create.site',
+    			data: msg,
+    			success: function(data) {
+    				var dt = $.parseJSON(data);
+    				$('#create_error').remove();
+    				$('#create_success').remove();
+                    if (dt.response) {
+                        container.html(dt.out);//.html(dt.out);
+                    }
+                    else {
+                        container.append(dt.out);
+                    }
+    			},
+    			error:  function(xhr, str){
+    				container.html('Возникла ошибка: ' + xhr.responseCode);
+    			}
+    		});
+        });
+        $('body').on('keyup', '#inn', function(e) {
+            var inn = $('#inn').val().toString();
+            var reg = parseInt($('#region_id').val()).toString();
+            var dis = parseInt($('#district_id').val()).toString();
+            if (inn.length == 10) {
+                $('#inn').css(
+                    {
+                          'box-shadow': '0 0 5px 3px rgba(64,255,64,.7)'
+                        , 'border-color' : 'rgb(64,255,64)'
+                    }
+                );
+                $('#searchByINN').removeClass('d-none');
+            }
+            else {
+                $('#searchByINN').addClass('d-none');
+                $('#inn').css(
+                    {
+                          'box-shadow': 'none'
+                        , 'border-color' : '#ced4da'
+                    }
+                );
+            }
+            
+            if (e.keyCode === 13) {
+                console.log('Enter');
+                
+                if (inn.length == 10) {
+                    console.log('правильная длина');
+                    
+                    var link = $('#searchByINN')[0];
+                    var linkEvent = null;
+                    if (document.createEvent) {
+                        linkEvent = document.createEvent('MouseEvents');
+                        linkEvent.initEvent('click', true, true);
+                        link.dispatchEvent(linkEvent);
+                    }
+                    else if (document.createEventObject) {
+                        linkEvent = document.createEventObject();
+                        link.fireEvent('onclick', linkEvent);
+                    }
+                }
+                
+                
+                else {
+                    console.log('неправильная длина');
+                    return false;
+                }
+                
+            }
+            
+        });
+        $('body').on('blur', '#inn', function() {
+            var inn = $('#inn').val().toString();
+            if (inn.length < 10) {
+                $('#inn').css(
+                    {
+                          'box-shadow': '0 0 5px 3px rgba(255,64,64,.7)'
+                        , 'border-color' : 'rgb(255,64,64)'
+                    }
+                );
+                $('#searchByINN').addClass('d-none');
+            }
+            else {
+                $('#inn').css(
+                    {
+                          'box-shadow': '0 0 5px 3px rgba(64,255,64,.7)'
+                        , 'border-color' : 'rgb(64,255,64)'
+                    }
+                );
+                $('#searchByINN').removeClass('d-none');
+            }
+        });
+        $('body').on('click', '.select_org', function() {
+            var uid = $(this).attr('id').split('__')[2];
+            $.post('/ajax/get.regform', {
+    			  uid : uid
+    		}, function(data) {
+    			if (data) {
+                    $('#result').html('').append(data);
+    			}
+    		});
+            
+        });
+        $('body').on('click', '#searchByINN', function(){
+            var inn = $('#inn').val().toString();
+            if (!inn) { alert('Не указан ИНН'   ); return false; }
+            if (inn.length != 10) { 
+                alert('Длина ИНН должна составлять 10 символов'); 
+                return false; 
+            }
+    		$.post('/ajax/byinn', {
+    			  query       : inn
+    		}, function(data) {
+    			if (data) {
+    			    
+                    var dt = $.parseJSON(data);
+                    if (dt.response) {
+                        $('#result').html(dt.out);
+                    }
+                    else {
+                        $('#result').append(dt.out);
+                        $('#inn').val('').focus();
+                    }
+    			}
+    		});
+        });
+    });
+    </script>
+
+
+
+
+
+<script type="application/ld+json">
+{
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	"url": "https://d61.ru",
+	"name": "Центр информационных технологий «Дион»",
+	"email": "dion@d61.ru",
+	"logo": "https://d61.ru/apple-touch-icon-57x57.png",
+	"description": "Дион.Школа — система управления сайтами образовательных организаций",
+	"address": {
+		"@type": "PostalAddress",
+		"postalCode": "353260",
+		"addressRegion": "Краснодарский край",
+		"addressLocality": "Северский район, с. Львовское",
+		"streetAddress": "ул. Ленина, 9/1"
+	},	  
+	"contactPoint" : [
+		{
+			"@type" : "ContactPoint",
+			"telephone" : "+7 800 201-45-41",
+			"contactType" : "customer service"
+		},
+		{
+			"@type" : "ContactPoint",
+			"telephone" : "+7 (918) 389-24-25",
+			"contactType" : "customer service"
+		}
+	]	  
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "url": "",
+    "numberOfItems": "4",
+    "itemListElement": [
+        {
+            "@type": "Product",
+            "image": "",
+            "url": "https://d61.ru/#tariff-promo",
+            "name": "Тариф «Промо»",
+			"description": "1 гигабайт",
+            "offers": {
+                "@type": "Offer",
+                "price": "500 руб/мес"
+            }
+        },
+        {
+            "@type": "Product",
+            "image": "",
+            "url": "https://d61.ru/#tariff-start",
+            "name": "Тариф «Старт»",
+			"description": "1 гигабайт, верстка публикаций, 10 приоритетных заявок в месяц",
+            "offers": {
+                "@type": "Offer",
+                "price": "1800 руб/мес"
+            }
+        },
+        {
+            "@type": "Product",
+            "image": "",
+            "url": "https://d61.ru/#tariff-standart",
+            "name": "Тариф «Стандарт»",
+			"description": "5 гигабайт, верстка публикаций, 25 приоритетных заявок в месяц",
+            "offers": {
+                "@type": "Offer",
+                "price": "3600 руб/мес"
+            }
+        },
+        {
+            "@type": "Product",
+            "image": "",
+            "url": "https://d61.ru/#tariff-premium",
+            "name": "Тариф «Премиум»",
+			"description": "15 гигабайт, верстка публикаций, 50 приоритетных заявок в месяц",
+            "offers": {
+                "@type": "Offer",
+                "price": "5200 руб/мес"
+            }
+        }
+    ]
+}
+	  
+</script>
+
+</body></html>

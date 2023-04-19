@@ -1,0 +1,1115 @@
+<html class="mobile-view mobile-device ios-device text-size-normal anon" lang="ru"><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript">try {
+(function injectPageScriptAPI(scriptName, shouldOverrideWebSocket, shouldOverrideWebRTC, isInjected) { 
+
+    'use strict';
+
+    /**
+     * If script have been injected into a frame via contentWindow then we can simply take the copy of messageChannel left for us by parent document
+     * Otherwise creates new message channel that sends a message to the content-script to check if request should be allowed or not.
+     */
+    var messageChannel = isInjected ? window[scriptName] : (function () {
+
+        // Save original postMessage and addEventListener functions to prevent webpage from tampering both.
+        var postMessage = window.postMessage;
+        var addEventListener = window.addEventListener;
+
+        // Current request ID (incremented every time we send a new message)
+        var currentRequestId = 0;
+        var requestsMap = {};
+
+        /**
+         * Handles messages sent from the content script back to the page script.
+         *
+         * @param event Event with necessary data
+         */
+        var onMessageReceived = function (event) {
+
+            if (!event.data || !event.data.direction || event.data.direction !== "to-page-script@abu") {
+                return;
+            }
+
+            var requestData = requestsMap[event.data.requestId];
+            if (requestData) {
+                var wrapper = requestData.wrapper;
+                requestData.onResponseReceived(wrapper, event.data.block);
+                delete requestsMap[event.data.requestId];
+            }
+        };
+
+        /**
+         * @param url                The URL to which wrapped object is willing to connect
+         * @param requestType        Request type ( WEBSOCKET or WEBRTC)
+         * @param wrapper            WebSocket wrapper instance
+         * @param onResponseReceived Called when response is received
+         */
+        var sendMessage = function (url, requestType, wrapper, onResponseReceived) {
+
+            if (currentRequestId === 0) {
+                // Subscribe to response when this method is called for the first time
+                addEventListener.call(window, "message", onMessageReceived, false);
+            }
+
+            var requestId = ++currentRequestId;
+            requestsMap[requestId] = {
+                wrapper: wrapper,
+                onResponseReceived: onResponseReceived
+            };
+
+            var message = {
+                requestId: requestId,
+                direction: 'from-page-script@abu',
+                elementUrl: url,
+                documentUrl: document.URL,
+                requestType: requestType
+            };
+
+            // Send a message to the background page to check if the request should be blocked
+            postMessage.call(window, message, "*");
+        };
+
+        return {
+            sendMessage: sendMessage
+        };
+
+    })();
+
+    /*
+     * In some case Chrome won't run content scripts inside frames.
+     * So we have to intercept access to contentWindow/contentDocument and manually inject wrapper script into this context
+     *
+     * Based on: https://github.com/adblockplus/adblockpluschrome/commit/1aabfb3346dc0821c52dd9e97f7d61b8c99cd707
+     */
+    var injectedToString = Function.prototype.toString.bind(injectPageScriptAPI);
+
+    var injectedFramesAdd;
+    var injectedFramesHas;
+    if (window.WeakSet instanceof Function) {
+        var injectedFrames = new WeakSet();
+        injectedFramesAdd = WeakSet.prototype.add.bind(injectedFrames);
+        injectedFramesHas = WeakSet.prototype.has.bind(injectedFrames);
+    } else {
+        var frames = [];
+        injectedFramesAdd = function (el) {
+            if (frames.indexOf(el) < 0) {
+                frames.push(el);
+            }
+        };
+        injectedFramesHas = function (el) {
+            return frames.indexOf(el) >= 0;
+        };
+    }
+
+    /**
+     * Injects wrapper's script into passed window
+     * @param contentWindow Frame's content window
+     */
+    function injectPageScriptAPIInWindow(contentWindow) {
+        try {
+            if (contentWindow && !injectedFramesHas(contentWindow)) {
+                injectedFramesAdd(contentWindow);
+                contentWindow[scriptName] = messageChannel; // Left message channel for the injected script
+                var args = "'" + scriptName + "', " + shouldOverrideWebSocket + ", " + shouldOverrideWebRTC + ", true";
+                contentWindow.eval("(" + injectedToString() + ")(" + args + ");");
+                delete contentWindow[scriptName];
+            }
+        } catch (e) {
+        }
+    }
+
+    /**
+     * Overrides access to contentWindow/contentDocument for the passed HTML element's interface (iframe, frame, object)
+     * If the content of one of these objects is requested we will inject our wrapper script.
+     * @param iface HTML element's interface
+     */
+    function overrideContentAccess(iface) {
+
+        var contentWindowDescriptor = Object.getOwnPropertyDescriptor(iface.prototype, "contentWindow");
+        var contentDocumentDescriptor = Object.getOwnPropertyDescriptor(iface.prototype, "contentDocument");
+
+        // Apparently in HTMLObjectElement.prototype.contentWindow does not exist
+        // in older versions of Chrome such as 42.
+        if (!contentWindowDescriptor) {
+            return;
+        }
+
+        var getContentWindow = Function.prototype.call.bind(contentWindowDescriptor.get);
+        var getContentDocument = Function.prototype.call.bind(contentDocumentDescriptor.get);
+
+        contentWindowDescriptor.get = function () {
+            var contentWindow = getContentWindow(this);
+            injectPageScriptAPIInWindow(contentWindow);
+            return contentWindow;
+        };
+        contentDocumentDescriptor.get = function () {
+            injectPageScriptAPIInWindow(getContentWindow(this));
+            return getContentDocument(this);
+        };
+
+        Object.defineProperty(iface.prototype, "contentWindow", contentWindowDescriptor);
+        Object.defineProperty(iface.prototype, "contentDocument", contentDocumentDescriptor);
+    }
+
+    var interfaces = [HTMLFrameElement, HTMLIFrameElement, HTMLObjectElement];
+    for (var i = 0; i < interfaces.length; i++) {
+        overrideContentAccess(interfaces[i]);
+    }
+
+    /**
+     * Defines properties in destination object
+     * @param src Source object
+     * @param dest Destination object
+     * @param properties Properties to copy
+     */
+    var copyProperties = function (src, dest, properties) {
+        for (var i = 0; i < properties.length; i++) {
+            var prop = properties[i];
+            var descriptor = Object.getOwnPropertyDescriptor(src, prop);
+            // Passed property may be undefined
+            if (descriptor) {
+                Object.defineProperty(dest, prop, descriptor);
+            }
+        }
+    };
+
+    /**
+     * Check request by sending message to content script
+     * @param url URL to block
+     * @param type Request type
+     * @param callback Result callback
+     */
+    var checkRequest = function (url, type, callback) {
+        messageChannel.sendMessage(url, type, this, function (wrapper, blockConnection) {
+            callback(blockConnection);
+        });
+    };
+
+    /**
+     * The function overrides window.WebSocket with our wrapper, that will check url with filters through messaging with content-script.
+     *
+     * IMPORTANT NOTE:
+     * This function is first loaded as a content script. The only purpose of it is to call
+     * the "toString" method and use resulting string as a text content for injected script.
+     */
+    var overrideWebSocket = function () { 
+
+        if (!(window.WebSocket instanceof Function)) {
+            return;
+        }
+
+        /**
+         * WebSocket wrapper implementation.
+         * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/349
+         *
+         * Based on:
+         * https://github.com/adblockplus/adblockpluschrome/commit/457a336ee55a433217c3ffe5d363e5c6980f26f4
+         */
+
+        /**
+         * As far as possible we must track everything we use that could be sabotaged by the website later in order to circumvent us.
+         */
+        var RealWebSocket = WebSocket;
+        var closeWebSocket = Function.prototype.call.bind(RealWebSocket.prototype.close);
+
+        function WrappedWebSocket(url, protocols) {
+            // Throw correct exceptions if the constructor is used improperly.
+            if (!(this instanceof WrappedWebSocket)) {
+                return RealWebSocket();
+            }
+            if (arguments.length < 1) {
+                return new RealWebSocket();
+            }
+
+            var websocket = new RealWebSocket(url, protocols);
+
+            // This is the key point: checking if this WS should be blocked or not
+            // Don't forget that the type of 'websocket.url' is String, but 'url 'parameter might have another type.
+            checkRequest(websocket.url, 'WEBSOCKET', function (blocked) {
+                if (blocked) {
+                    closeWebSocket(websocket);
+                }
+            });
+
+            return websocket;
+        }
+
+        // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/488
+        WrappedWebSocket.prototype = RealWebSocket.prototype;
+        window.WebSocket = WrappedWebSocket.bind();
+
+        copyProperties(RealWebSocket, WebSocket, ["CONNECTING", "OPEN", "CLOSING", "CLOSED", "name", "prototype"]);
+
+        RealWebSocket.prototype.constructor = WebSocket;
+
+    };
+
+    /**
+     * The function overrides window.RTCPeerConnection with our wrapper, that will check ice servers URLs with filters through messaging with content-script.
+     *
+     * IMPORTANT NOTE:
+     * This function is first loaded as a content script. The only purpose of it is to call
+     * the "toString" method and use resulting string as a text content for injected script.
+     */
+    var overrideWebRTC = function () { 
+
+
+        if (!(window.RTCPeerConnection instanceof Function) &&
+            !(window.webkitRTCPeerConnection instanceof Function)) {
+            return;
+        }
+
+        /**
+         * RTCPeerConnection wrapper implementation.
+         * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/588
+         *
+         * Based on:
+         * https://github.com/adblockplus/adblockpluschrome/commit/af0585137be19011eace1cf68bf61eed2e6db974
+         *
+         * Chromium webRequest API doesn't allow the blocking of WebRTC connections
+         * https://bugs.chromium.org/p/chromium/issues/detail?id=707683
+         */
+
+        var RealRTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
+        var closeRTCPeerConnection = Function.prototype.call.bind(RealRTCPeerConnection.prototype.close);
+
+        var RealArray = Array;
+        var RealString = String;
+        var createObject = Object.create;
+        var defineProperty = Object.defineProperty;
+
+        /**
+         * Convert passed url to string
+         * @param url URL
+         * @returns {string}
+         */
+        function urlToString(url) {
+            if (typeof url !== "undefined") {
+                return RealString(url);
+            }
+        }
+
+        /**
+         * Creates new immutable array from original with some transform function
+         * @param original
+         * @param transform
+         * @returns {*}
+         */
+        function safeCopyArray(original, transform) {
+
+            if (original === null || typeof original !== "object") {
+                return original;
+            }
+
+            var immutable = RealArray(original.length);
+            for (var i = 0; i < immutable.length; i++) {
+                defineProperty(immutable, i, {
+                    configurable: false, enumerable: false, writable: false,
+                    value: transform(original[i])
+                });
+            }
+            defineProperty(immutable, "length", {
+                configurable: false, enumerable: false, writable: false,
+                value: immutable.length
+            });
+            return immutable;
+        }
+
+        /**
+         * Protect configuration from mutations
+         * @param configuration RTCPeerConnection configuration object
+         * @returns {*}
+         */
+        function protectConfiguration(configuration) {
+
+            if (configuration === null || typeof configuration !== "object") {
+                return configuration;
+            }
+
+            var iceServers = safeCopyArray(
+                configuration.iceServers,
+                function (iceServer) {
+
+                    var url = iceServer.url;
+                    var urls = iceServer.urls;
+
+                    // RTCPeerConnection doesn't iterate through pseudo Arrays of urls.
+                    if (typeof urls !== "undefined" && !(urls instanceof RealArray)) {
+                        urls = [urls];
+                    }
+
+                    return createObject(iceServer, {
+                        url: {
+                            configurable: false, enumerable: false, writable: false,
+                            value: urlToString(url)
+                        },
+                        urls: {
+                            configurable: false, enumerable: false, writable: false,
+                            value: safeCopyArray(urls, urlToString)
+                        }
+                    });
+                }
+            );
+
+            return createObject(configuration, {
+                iceServers: {
+                    configurable: false, enumerable: false, writable: false,
+                    value: iceServers
+                }
+            });
+        }
+
+        /**
+         * Check WebRTC connection's URL and close if it's blocked by rule
+         * @param connection Connection
+         * @param url URL to check
+         */
+        function checkWebRTCRequest(connection, url) {
+            checkRequest(url, 'WEBRTC', function (blocked) {
+                if (blocked) {
+                    try {
+                        closeRTCPeerConnection(connection);
+                    } catch (e) {
+                        // Ignore exceptions
+                    }
+                }
+            });
+        }
+
+        /**
+         * Check each URL of ice server in configuration for blocking.
+         *
+         * @param connection RTCPeerConnection
+         * @param configuration Configuration for RTCPeerConnection
+         * https://developer.mozilla.org/en-US/docs/Web/API/RTCConfiguration
+         */
+        function checkConfiguration(connection, configuration) {
+
+            if (!configuration || !configuration.iceServers) {
+                return;
+            }
+
+            var iceServers = configuration.iceServers;
+            for (var i = 0; i < iceServers.length; i++) {
+
+                var iceServer = iceServers[i];
+                if (!iceServer) {
+                    continue;
+                }
+
+                if (iceServer.url) {
+                    checkWebRTCRequest(connection, iceServer.url);
+                }
+
+                if (iceServer.urls) {
+                    for (var j = 0; j < iceServer.urls.length; j++) {
+                        checkWebRTCRequest(connection, iceServer.urls[j]);
+                    }
+                }
+            }
+        }
+
+        /**
+         * Overrides setConfiguration method
+         * https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/setConfiguration
+         */
+        if (RealRTCPeerConnection.prototype.setConfiguration) {
+
+            var realSetConfiguration = Function.prototype.call.bind(RealRTCPeerConnection.prototype.setConfiguration);
+
+            RealRTCPeerConnection.prototype.setConfiguration = function (configuration) {
+                configuration = protectConfiguration(configuration);
+                // Call the real method first, so that validates the configuration
+                realSetConfiguration(this, configuration);
+                checkConfiguration(this, configuration);
+            };
+        }
+
+        function WrappedRTCPeerConnection(configuration, arg) {
+
+            if (!(this instanceof WrappedRTCPeerConnection)) {
+                return RealRTCPeerConnection();
+            }
+
+            configuration = protectConfiguration(configuration);
+
+            /**
+             * The old webkitRTCPeerConnection constructor takes an optional second argument and we must pass it.
+             */
+            var connection = new RealRTCPeerConnection(configuration, arg);
+            checkConfiguration(connection, configuration);
+            return connection;
+        }
+
+        WrappedRTCPeerConnection.prototype = RealRTCPeerConnection.prototype;
+
+        var boundWrappedRTCPeerConnection = WrappedRTCPeerConnection.bind();
+        copyProperties(RealRTCPeerConnection, boundWrappedRTCPeerConnection, ["caller", "generateCertificate", "name", "prototype"]);
+        RealRTCPeerConnection.prototype.constructor = boundWrappedRTCPeerConnection;
+
+        if ("RTCPeerConnection" in window) {
+            window.RTCPeerConnection = boundWrappedRTCPeerConnection;
+        }
+        if ("webkitRTCPeerConnection" in window) {
+            window.webkitRTCPeerConnection = boundWrappedRTCPeerConnection;
+        }
+    };
+
+    if (shouldOverrideWebSocket) {
+        overrideWebSocket();
+    }
+
+    if (shouldOverrideWebRTC) {
+        overrideWebRTC();
+    }
+})('wrapper-script-5123709598967204', false, true);
+} catch (ex) { console.error('Error executing AG js: ' + ex); }
+(function () {
+            var current = document.currentScript;
+            var parent = current && current.parentNode;
+            if (parent) {
+                parent.removeChild(current);
+            }
+        })();</script><head>
+    <meta charset="utf-8">
+    <title>Пользовательское соглашение - Buy-Club</title>
+    <meta name="description" content="Форум онлайн шоппинга">
+    <meta name="discourse_theme_id" content="2">
+    <meta name="discourse_current_homepage" content="categories">
+
+    <meta name="generator" content="Discourse 2.9.0.beta11 - https://github.com/discourse/discourse version e54a3d5ea9fdbde95f055d8f9e44b26430f5467b">
+<link rel="icon" type="image/png" href="https://buy-club.ru/uploads/default/optimized/1X/_129430568242d1b7f853bb13ebea28b3f6af4e7_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="https://buy-club.ru/uploads/default/optimized/1X/_129430568242d1b7f853bb13ebea28b3f6af4e7_2_180x180.png">
+<meta name="theme-color" media="all" content="#ffffff">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<link rel="canonical" href="https://buy-club.ru/tos">
+
+<link rel="search" type="application/opensearchdescription+xml" href="https://buy-club.ru/opensearch.xml" title="Buy-Club Search">
+
+    
+
+      <meta name="fragment" content="!">
+
+
+    
+
+      <link rel="preload" href="/assets/start-discourse-f633b2931f6e959c2cfecc4ee982bf48e1277532eaa9bf41022188dc6f494f31.js" as="script">
+      <link rel="preload" href="/assets/browser-update-d7761004034ce1ea7686d586f5e8a8d216e6f67b609f9b4bcaba53b8b8d34729.js" as="script">
+    <link rel="preload" href="/assets/browser-detect-7af298cd000a967d2bdc01b04807eda2924a388584ea38ad84919b726283c2ed.js" as="script">
+<script defer="" src="/assets/browser-detect-7af298cd000a967d2bdc01b04807eda2924a388584ea38ad84919b726283c2ed.js"></script>
+
+
+    <link rel="preload" href="/assets/locales/ru-c4198b45018c02ebc41003a704efb7ce49b098319d91dabd04a761f6e3e74c89.js" as="script">
+<script defer="" src="/assets/locales/ru-c4198b45018c02ebc41003a704efb7ce49b098319d91dabd04a761f6e3e74c89.js"></script>
+
+      <link rel="preload" href="/extra-locales/overrides?v=fb8d07b9b3c2433c70236ff24eac344a" as="script">
+<script defer="" src="/extra-locales/overrides?v=fb8d07b9b3c2433c70236ff24eac344a"></script>
+
+    <link rel="preload" href="/assets/vendor-00aa28ef128f6872b9ab95d38375b7a0ec42a3f0a313d9f92b60f057eea46df7.js" as="script">
+<script defer="" src="/assets/vendor-00aa28ef128f6872b9ab95d38375b7a0ec42a3f0a313d9f92b60f057eea46df7.js"></script>
+
+<link rel="preload" href="/assets/chunk.729.c87b6f4192ddca08b43a-0e11bd806e464f4f369958b4804f8950d3483eae3694a36b93fd87cd47fa014e.js" as="script">
+<script defer="" src="/assets/chunk.729.c87b6f4192ddca08b43a-0e11bd806e464f4f369958b4804f8950d3483eae3694a36b93fd87cd47fa014e.js"></script>
+
+<link rel="preload" href="/assets/chunk.143.c5ec877de681ac839fee-3acf9c671efa168423d63dec0b032f7a96223c20f4a88fa610919a1f94b43119.js" as="script">
+<script defer="" src="/assets/chunk.143.c5ec877de681ac839fee-3acf9c671efa168423d63dec0b032f7a96223c20f4a88fa610919a1f94b43119.js"></script>
+
+    <link rel="preload" href="/assets/discourse-14c85d2dbdc9fbccfa0431b35b4fb8fe1fb0f196acbdaab5558181f5f99c2309.js" as="script">
+<script defer="" src="/assets/discourse-14c85d2dbdc9fbccfa0431b35b4fb8fe1fb0f196acbdaab5558181f5f99c2309.js"></script>
+
+      <link rel="preload" href="/assets/plugins/discourse-details-07e91ea4324fc11f1e2725f3eb026f92f4a990d6a80ebf05dc882afbccd42a22.js" as="script">
+<script defer="" src="/assets/plugins/discourse-details-07e91ea4324fc11f1e2725f3eb026f92f4a990d6a80ebf05dc882afbccd42a22.js"></script>
+
+      <link rel="preload" href="/assets/plugins/discourse-local-dates-6e97812eed0e9de4d5051e87aa7621ca95eea3f1329c0558b1b696ada0af2920.js" as="script">
+<script defer="" src="/assets/plugins/discourse-local-dates-6e97812eed0e9de4d5051e87aa7621ca95eea3f1329c0558b1b696ada0af2920.js"></script>
+
+      <link rel="preload" href="/assets/plugins/discourse-narrative-bot-cbd8ce58efdeac85f62b2194b0a35d79e0b98958c19c473c75b32c4062ad15e8.js" as="script">
+<script defer="" src="/assets/plugins/discourse-narrative-bot-cbd8ce58efdeac85f62b2194b0a35d79e0b98958c19c473c75b32c4062ad15e8.js"></script>
+
+      <link rel="preload" href="/assets/plugins/discourse-presence-688a7d1516b5c2dd31f05f7f6373939ab545fe600f3ff258fa1ff27f8fc37623.js" as="script">
+<script defer="" src="/assets/plugins/discourse-presence-688a7d1516b5c2dd31f05f7f6373939ab545fe600f3ff258fa1ff27f8fc37623.js"></script>
+
+      <link rel="preload" href="/assets/plugins/docker_manager-6b3d0da7c0ffa4f973057a4e0c257f7ffe699c594ffa1376f61113b688267522.js" as="script">
+<script defer="" src="/assets/plugins/docker_manager-6b3d0da7c0ffa4f973057a4e0c257f7ffe699c594ffa1376f61113b688267522.js"></script>
+
+      <link rel="preload" href="/assets/plugins/docker_manager_extra-8c61f0774edf411064481cda97880696ecfe639cc504bad4bdc70539e989baad.js" as="script">
+<script defer="" src="/assets/plugins/docker_manager_extra-8c61f0774edf411064481cda97880696ecfe639cc504bad4bdc70539e989baad.js"></script>
+
+      <link rel="preload" href="/assets/plugins/lazy-yt-8412d6560c002ec84b5bc8ffdea0f809975a408c5350c1224d7f83476157f9e8.js" as="script">
+<script defer="" src="/assets/plugins/lazy-yt-8412d6560c002ec84b5bc8ffdea0f809975a408c5350c1224d7f83476157f9e8.js"></script>
+
+      <link rel="preload" href="/assets/plugins/poll-625a7a450f0dda1f351a5c9534c9387d2a81b687b8fe913a456143ddac8c521d.js" as="script">
+<script defer="" src="/assets/plugins/poll-625a7a450f0dda1f351a5c9534c9387d2a81b687b8fe913a456143ddac8c521d.js"></script>
+
+
+
+
+      
+      
+      
+
+    
+    <meta id="data-ga-universal-analytics" data-tracking-code="UA-24004893-1" data-json="{&quot;cookieDomain&quot;:&quot;auto&quot;}" data-auto-link-domains="">
+
+  <link rel="preload" href="/assets/google-universal-analytics-v3-4195304cc8fc9564a86cfaf637f43e2582acbb938c5f563f03b3c967c4bf07a4.js" as="script">
+<script defer="" src="/assets/google-universal-analytics-v3-4195304cc8fc9564a86cfaf637f43e2582acbb938c5f563f03b3c967c4bf07a4.js"></script>
+
+
+    <link id="manifest-link" rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials">
+
+
+        <meta property="og:site_name" content="Buy-Club">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://buy-club.ru/images/discourse-logo-sketch-small.png">
+<meta property="og:image" content="https://buy-club.ru/images/discourse-logo-sketch-small.png">
+<meta property="og:url" content="https://buy-club.ru/tos">
+<meta name="twitter:url" content="https://buy-club.ru/tos">
+<meta property="og:title" content="Пользовательское соглашение - Buy-Club">
+<meta name="twitter:title" content="Пользовательское соглашение - Buy-Club">
+<meta property="og:description" content="Форум онлайн шоппинга">
+<meta name="twitter:description" content="Форум онлайн шоппинга">
+
+
+    
+
+    <meta id="data-discourse-setup" data-base-url="https://buy-club.ru" data-base-uri="" data-environment="production" data-letter-avatar-version="5_684b749d1c1eee86b31a584fa946fc1a" data-markdown-it-url="/assets/markdown-it-bundle-64622e5747106d0157cc80a9ac3912b45d1129d1a10ec2cf42744f9298eaefd3.js" data-service-worker-url="service-worker.js" data-default-locale="ru" data-asset-version="3ebfd2dfa0f9ba1c5f807d68fded3808" data-disable-custom-css="false" data-highlight-js-path="/highlight-js/buy-club.ru/a5a82d5d9c93ba17b974dbe7408b61e64d7130b7.js" data-svg-sprite-path="/svg-sprite/buy-club.ru/svg-2-1115e03f22ca5b9985a4e33a30527aeb473b658b.js" data-enable-js-error-reporting="true" data-color-scheme-is-dark="false" data-user-dark-scheme-id="-1">
+
+    <meta name="discourse/config/environment" content="%7B%22modulePrefix%22%3A%22discourse%22%2C%22environment%22%3A%22production%22%2C%22rootURL%22%3A%22%22%2C%22locationType%22%3A%22history%22%2C%22historySupportMiddleware%22%3Afalse%2C%22EmberENV%22%3A%7B%22FEATURES%22%3A%7B%7D%2C%22EXTEND_PROTOTYPES%22%3A%7B%22Date%22%3Afalse%7D%2C%22_APPLICATION_TEMPLATE_WRAPPER%22%3Afalse%2C%22_DEFAULT_ASYNC_OBSERVERS%22%3Atrue%2C%22_JQUERY_INTEGRATION%22%3Atrue%7D%2C%22APP%22%3A%7B%22name%22%3A%22discourse%22%2C%22version%22%3A%222.9.0.beta11%20e54a3d5ea9fdbde95f055d8f9e44b26430f5467b%22%2C%22exportApplicationGlobal%22%3Atrue%7D%7D">
+  </head>
+
+  <body class="">
+      <section id="d-splash" style="--animation-state: running;">
+  <template class="splash-svg-template">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+      <style>
+        :root {
+          --animation-state: paused;
+        }
+
+        /* user picked a theme where the "regular" scheme is dark */
+        /* user picked a theme a light scheme and also enabled a dark scheme */
+
+        /* deal with light scheme first */
+        @media (prefers-color-scheme: light) {
+          :root {
+            --primary: #222222;
+            --secondary: #ffffff;
+            --tertiary: #0088cc;
+            --quaternary: #e45735;
+            --highlight: #ffff4d;
+            --success: #009900;
+          }
+        }
+
+        /* then deal with dark scheme */
+        @media (prefers-color-scheme: dark) {
+          :root {
+            --primary: #222222;
+            --secondary: #ffffff;
+            --tertiary: #0088cc;
+            --quaternary: #e45735;
+            --highlight: #ffff4d;
+            --success: #009900;
+          }
+        }
+
+        /* these styles need to live here because the SVG has a different scope */
+        .dots {
+          animation-name: loader;
+          animation-timing-function: ease-in-out;
+          animation-duration: 3s;
+          animation-iteration-count: infinite;
+          animation-play-state: var(--animation-state);
+          stroke: #fff;
+          stroke-width: 0.5px;
+          transform-origin: center;
+          opacity: 0;
+          r: max(1vw, 11px);
+          cy: 50%;
+          filter: saturate(2) opacity(0.85);
+        }
+
+        .dots:first-child {
+          fill: var(--quaternary);
+        }
+
+        .dots:nth-child(2) {
+          fill: var(--quaternary);
+          animation-delay: 0.15s;
+        }
+
+        .dots:nth-child(3) {
+          fill: var(--highlight);
+          animation-delay: 0.3s;
+        }
+
+        .dots:nth-child(4) {
+          fill: var(--tertiary);
+          animation-delay: 0.45s;
+        }
+
+        .dots:nth-child(5) {
+          fill: var(--tertiary);
+          animation-delay: 0.6s;
+        }
+
+        @keyframes loader {
+          0% {
+            opacity: 0;
+            transform: scale(1);
+          }
+          45% {
+            opacity: 1;
+            transform: scale(0.7);
+          }
+          65% {
+            opacity: 1;
+            transform: scale(0.7);
+          }
+          100% {
+            opacity: 0;
+            transform: scale(1);
+          }
+        }
+      </style>
+
+      <g class="container">
+        <circle class="dots" cx="30vw"></circle>
+        <circle class="dots" cx="40vw"></circle>
+        <circle class="dots" cx="50vw"></circle>
+        <circle class="dots" cx="60vw"></circle>
+        <circle class="dots" cx="70vw"></circle>
+      </g>
+    </svg>
+  </template>
+
+  <style>
+    html {
+      overflow-y: hidden !important;
+    }
+
+    /* user picked a theme where the "regular" scheme is dark */
+    /* user picked a theme a light scheme and also enabled a dark scheme */
+
+    /* deal with light scheme first */
+    @media (prefers-color-scheme: light) {
+      html {
+        background-color: #ffffff;
+      }
+
+      #d-splash .preloader-text-wrapper {
+        color: #222222;
+      }
+    }
+
+    /* then deal with dark scheme */
+    @media (prefers-color-scheme: dark) {
+      html {
+        background-color: #ffffff;
+      }
+
+      #d-splash .preloader-text-wrapper {
+        color: #222222;
+      }
+    }
+
+    #d-splash {
+      display: grid;
+      place-items: center;
+      backface-visibility: hidden;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 1001;
+      --animation-state: paused;
+    }
+
+    #d-splash .preloader-image {
+      max-width: 100%;
+      height: 100vh;
+    }
+
+    #d-splash .preloader-text-wrapper {
+      position: absolute;
+      opacity: 0;
+      animation: fade-in 0.5s ease-in-out;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+      animation-play-state: var(--animation-state);
+      margin-bottom: -4em;
+    }
+
+    #d-splash .preloader-text:after {
+      animation: loading-text 3s infinite;
+      content: "";
+      position: absolute;
+      margin: 0 0.1em;
+      left: 100%;
+    }
+
+    .rtl #d-splash .preloader-text:after {
+      left: 0;
+      right: 100%;
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes loading-text {
+      0% {
+        content: "";
+      }
+      25% {
+        content: ".";
+      }
+      50% {
+        content: "..";
+      }
+      75% {
+        content: "...";
+      }
+    }
+  </style>
+
+  <img class="preloader-image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHN0eWxlPSItLWFuaW1hdGlvbi1zdGF0ZTogcnVubmluZzsiPgogICAgICA8c3R5bGU+CiAgICAgICAgOnJvb3QgewogICAgICAgICAgLS1hbmltYXRpb24tc3RhdGU6IHBhdXNlZDsKICAgICAgICB9CgogICAgICAgIC8qIHVzZXIgcGlja2VkIGEgdGhlbWUgd2hlcmUgdGhlICJyZWd1bGFyIiBzY2hlbWUgaXMgZGFyayAqLwogICAgICAgIC8qIHVzZXIgcGlja2VkIGEgdGhlbWUgYSBsaWdodCBzY2hlbWUgYW5kIGFsc28gZW5hYmxlZCBhIGRhcmsgc2NoZW1lICovCgogICAgICAgIC8qIGRlYWwgd2l0aCBsaWdodCBzY2hlbWUgZmlyc3QgKi8KICAgICAgICBAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBsaWdodCkgewogICAgICAgICAgOnJvb3QgewogICAgICAgICAgICAtLXByaW1hcnk6ICMyMjIyMjI7CiAgICAgICAgICAgIC0tc2Vjb25kYXJ5OiAjZmZmZmZmOwogICAgICAgICAgICAtLXRlcnRpYXJ5OiAjMDA4OGNjOwogICAgICAgICAgICAtLXF1YXRlcm5hcnk6ICNlNDU3MzU7CiAgICAgICAgICAgIC0taGlnaGxpZ2h0OiAjZmZmZjRkOwogICAgICAgICAgICAtLXN1Y2Nlc3M6ICMwMDk5MDA7CiAgICAgICAgICB9CiAgICAgICAgfQoKICAgICAgICAvKiB0aGVuIGRlYWwgd2l0aCBkYXJrIHNjaGVtZSAqLwogICAgICAgIEBtZWRpYSAocHJlZmVycy1jb2xvci1zY2hlbWU6IGRhcmspIHsKICAgICAgICAgIDpyb290IHsKICAgICAgICAgICAgLS1wcmltYXJ5OiAjMjIyMjIyOwogICAgICAgICAgICAtLXNlY29uZGFyeTogI2ZmZmZmZjsKICAgICAgICAgICAgLS10ZXJ0aWFyeTogIzAwODhjYzsKICAgICAgICAgICAgLS1xdWF0ZXJuYXJ5OiAjZTQ1NzM1OwogICAgICAgICAgICAtLWhpZ2hsaWdodDogI2ZmZmY0ZDsKICAgICAgICAgICAgLS1zdWNjZXNzOiAjMDA5OTAwOwogICAgICAgICAgfQogICAgICAgIH0KCiAgICAgICAgLyogdGhlc2Ugc3R5bGVzIG5lZWQgdG8gbGl2ZSBoZXJlIGJlY2F1c2UgdGhlIFNWRyBoYXMgYSBkaWZmZXJlbnQgc2NvcGUgKi8KICAgICAgICAuZG90cyB7CiAgICAgICAgICBhbmltYXRpb24tbmFtZTogbG9hZGVyOwogICAgICAgICAgYW5pbWF0aW9uLXRpbWluZy1mdW5jdGlvbjogZWFzZS1pbi1vdXQ7CiAgICAgICAgICBhbmltYXRpb24tZHVyYXRpb246IDNzOwogICAgICAgICAgYW5pbWF0aW9uLWl0ZXJhdGlvbi1jb3VudDogaW5maW5pdGU7CiAgICAgICAgICBhbmltYXRpb24tcGxheS1zdGF0ZTogdmFyKC0tYW5pbWF0aW9uLXN0YXRlKTsKICAgICAgICAgIHN0cm9rZTogI2ZmZjsKICAgICAgICAgIHN0cm9rZS13aWR0aDogMC41cHg7CiAgICAgICAgICB0cmFuc2Zvcm0tb3JpZ2luOiBjZW50ZXI7CiAgICAgICAgICBvcGFjaXR5OiAwOwogICAgICAgICAgcjogbWF4KDF2dywgMTFweCk7CiAgICAgICAgICBjeTogNTAlOwogICAgICAgICAgZmlsdGVyOiBzYXR1cmF0ZSgyKSBvcGFjaXR5KDAuODUpOwogICAgICAgIH0KCiAgICAgICAgLmRvdHM6Zmlyc3QtY2hpbGQgewogICAgICAgICAgZmlsbDogdmFyKC0tcXVhdGVybmFyeSk7CiAgICAgICAgfQoKICAgICAgICAuZG90czpudGgtY2hpbGQoMikgewogICAgICAgICAgZmlsbDogdmFyKC0tcXVhdGVybmFyeSk7CiAgICAgICAgICBhbmltYXRpb24tZGVsYXk6IDAuMTVzOwogICAgICAgIH0KCiAgICAgICAgLmRvdHM6bnRoLWNoaWxkKDMpIHsKICAgICAgICAgIGZpbGw6IHZhcigtLWhpZ2hsaWdodCk7CiAgICAgICAgICBhbmltYXRpb24tZGVsYXk6IDAuM3M7CiAgICAgICAgfQoKICAgICAgICAuZG90czpudGgtY2hpbGQoNCkgewogICAgICAgICAgZmlsbDogdmFyKC0tdGVydGlhcnkpOwogICAgICAgICAgYW5pbWF0aW9uLWRlbGF5OiAwLjQ1czsKICAgICAgICB9CgogICAgICAgIC5kb3RzOm50aC1jaGlsZCg1KSB7CiAgICAgICAgICBmaWxsOiB2YXIoLS10ZXJ0aWFyeSk7CiAgICAgICAgICBhbmltYXRpb24tZGVsYXk6IDAuNnM7CiAgICAgICAgfQoKICAgICAgICBAa2V5ZnJhbWVzIGxvYWRlciB7CiAgICAgICAgICAwJSB7CiAgICAgICAgICAgIG9wYWNpdHk6IDA7CiAgICAgICAgICAgIHRyYW5zZm9ybTogc2NhbGUoMSk7CiAgICAgICAgICB9CiAgICAgICAgICA0NSUgewogICAgICAgICAgICBvcGFjaXR5OiAxOwogICAgICAgICAgICB0cmFuc2Zvcm06IHNjYWxlKDAuNyk7CiAgICAgICAgICB9CiAgICAgICAgICA2NSUgewogICAgICAgICAgICBvcGFjaXR5OiAxOwogICAgICAgICAgICB0cmFuc2Zvcm06IHNjYWxlKDAuNyk7CiAgICAgICAgICB9CiAgICAgICAgICAxMDAlIHsKICAgICAgICAgICAgb3BhY2l0eTogMDsKICAgICAgICAgICAgdHJhbnNmb3JtOiBzY2FsZSgxKTsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIDwvc3R5bGU+CgogICAgICA8ZyBjbGFzcz0iY29udGFpbmVyIj4KICAgICAgICA8Y2lyY2xlIGNsYXNzPSJkb3RzIiBjeD0iMzB2dyIvPgogICAgICAgIDxjaXJjbGUgY2xhc3M9ImRvdHMiIGN4PSI0MHZ3Ii8+CiAgICAgICAgPGNpcmNsZSBjbGFzcz0iZG90cyIgY3g9IjUwdnciLz4KICAgICAgICA8Y2lyY2xlIGNsYXNzPSJkb3RzIiBjeD0iNjB2dyIvPgogICAgICAgIDxjaXJjbGUgY2xhc3M9ImRvdHMiIGN4PSI3MHZ3Ii8+CiAgICAgIDwvZz4KICAgIDwvc3ZnPg==" alt="Buy-Club">
+
+  <div class="preloader-text-wrapper">
+    <div class="preloader-text">Загрузка...</div>
+  </div>
+
+  <noscript>
+    <style>
+      html {
+        overflow-y: revert !important;
+      }
+
+      #d-splash {
+        display: none;
+      }
+    </style>
+  </noscript>
+
+  <script>// This script is inlined in `_discourse_splash.html.erb
+const DELAY_TARGET = 2000;
+const POLLING_INTERVAL = 50;
+const splashSvgTemplate = document.querySelector(".splash-svg-template");
+const splashTemplateClone = splashSvgTemplate.content.cloneNode(true);
+const svgElement = splashTemplateClone.querySelector("svg");
+const svgString = new XMLSerializer().serializeToString(svgElement);
+const encodedSvg = btoa(svgString);
+const splashWrapper = document.querySelector("#d-splash");
+const splashImage = splashWrapper && splashWrapper.querySelector(".preloader-image");
+if (splashImage) {
+  splashImage.src = "data:image/svg+xml;base64,".concat(encodedSvg);
+  const connectStart = performance.timing.connectStart || 0;
+  const targetTime = connectStart + DELAY_TARGET;
+  let splashInterval;
+  let discourseReady;
+  const swapSplash = () => {
+    splashWrapper && splashWrapper.style.setProperty("--animation-state", "running");
+    svgElement && svgElement.style.setProperty("--animation-state", "running");
+    const newSvgString = new XMLSerializer().serializeToString(svgElement);
+    const newEncodedSvg = btoa(newSvgString);
+    splashImage.src = "data:image/svg+xml;base64,".concat(newEncodedSvg);
+    performance.mark("discourse-splash-visible");
+    clearSplashInterval();
+  };
+  const clearSplashInterval = () => {
+    clearInterval(splashInterval);
+    splashInterval = null;
+  };
+  (() => {
+    splashInterval = setInterval(() => {
+      if (discourseReady) {
+        clearSplashInterval();
+      }
+      if (Date.now() > targetTime) {
+        swapSplash();
+      }
+    }, POLLING_INTERVAL);
+  })();
+  document.addEventListener("discourse-ready", () => {
+    discourseReady = true;
+    splashWrapper && splashWrapper.remove();
+    performance.mark("discourse-splash-removed");
+  }, {
+    once: true
+  });
+}
+</script>
+
+</section>
+
+
+    <discourse-assets>
+      <discourse-assets-stylesheets>
+        <link href="/stylesheets/color_definitions_bazovaya__2_ac974109f07e0c9f5a6b002a380bb5087e7bae29.css?__ws=buy-club.ru" media="all" rel="stylesheet" class="light-scheme">
+
+  <link href="/stylesheets/mobile_cc5950f97d5c9d1b4ff07b252dcde69141db12dd.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="mobile">
+
+
+
+  <link href="/stylesheets/discourse-details_cc5950f97d5c9d1b4ff07b252dcde69141db12dd.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="discourse-details">
+  <link href="/stylesheets/discourse-local-dates_cc5950f97d5c9d1b4ff07b252dcde69141db12dd.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="discourse-local-dates">
+  <link href="/stylesheets/discourse-narrative-bot_cc5950f97d5c9d1b4ff07b252dcde69141db12dd.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="discourse-narrative-bot">
+  <link href="/stylesheets/discourse-presence_cc5950f97d5c9d1b4ff07b252dcde69141db12dd.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="discourse-presence">
+  <link href="/stylesheets/lazy-yt_cc5950f97d5c9d1b4ff07b252dcde69141db12dd.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="lazy-yt">
+  <link href="/stylesheets/poll_cc5950f97d5c9d1b4ff07b252dcde69141db12dd.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="poll">
+  <link href="/stylesheets/lazy-yt_mobile_cc5950f97d5c9d1b4ff07b252dcde69141db12dd.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="lazy-yt_mobile">
+  <link href="/stylesheets/poll_mobile_cc5950f97d5c9d1b4ff07b252dcde69141db12dd.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="poll_mobile">
+
+  <link href="/stylesheets/mobile_theme_2_97de655ab545e728af2e0135df805611be3a33c5.css?__ws=buy-club.ru" media="all" rel="stylesheet" data-target="mobile_theme" data-theme-id="2" data-theme-name="light">
+
+      </discourse-assets-stylesheets>
+      <discourse-assets-json>
+        <div class="hidden" id="data-preloaded" data-preloaded="{&quot;site&quot;:&quot;{\&quot;default_archetype\&quot;:\&quot;regular\&quot;,\&quot;notification_types\&quot;:{\&quot;mentioned\&quot;:1,\&quot;replied\&quot;:2,\&quot;quoted\&quot;:3,\&quot;edited\&quot;:4,\&quot;liked\&quot;:5,\&quot;private_message\&quot;:6,\&quot;invited_to_private_message\&quot;:7,\&quot;invitee_accepted\&quot;:8,\&quot;posted\&quot;:9,\&quot;moved_post\&quot;:10,\&quot;linked\&quot;:11,\&quot;granted_badge\&quot;:12,\&quot;invited_to_topic\&quot;:13,\&quot;custom\&quot;:14,\&quot;group_mentioned\&quot;:15,\&quot;group_message_summary\&quot;:16,\&quot;watching_first_post\&quot;:17,\&quot;topic_reminder\&quot;:18,\&quot;liked_consolidated\&quot;:19,\&quot;post_approved\&quot;:20,\&quot;code_review_commit_approved\&quot;:21,\&quot;membership_request_accepted\&quot;:22,\&quot;membership_request_consolidated\&quot;:23,\&quot;bookmark_reminder\&quot;:24,\&quot;reaction\&quot;:25,\&quot;votes_released\&quot;:26,\&quot;event_reminder\&quot;:27,\&quot;event_invitation\&quot;:28,\&quot;chat_mention\&quot;:29,\&quot;chat_message\&quot;:30,\&quot;chat_invitation\&quot;:31,\&quot;chat_group_mention\&quot;:32,\&quot;chat_quoted\&quot;:33,\&quot;assigned\&quot;:34,\&quot;question_answer_user_commented\&quot;:35},\&quot;post_types\&quot;:{\&quot;regular\&quot;:1,\&quot;moderator_action\&quot;:2,\&quot;small_action\&quot;:3,\&quot;whisper\&quot;:4},\&quot;trust_levels\&quot;:{\&quot;newuser\&quot;:0,\&quot;basic\&quot;:1,\&quot;member\&quot;:2,\&quot;regular\&quot;:3,\&quot;leader\&quot;:4},\&quot;groups\&quot;:[{\&quot;id\&quot;:42,\&quot;name\&quot;:\&quot;Leaders\&quot;,\&quot;flair_url\&quot;:null,\&quot;flair_bg_color\&quot;:\&quot;\&quot;,\&quot;flair_color\&quot;:\&quot;3AB54A\&quot;}],\&quot;filters\&quot;:[\&quot;latest\&quot;,\&quot;unread\&quot;,\&quot;new\&quot;,\&quot;unseen\&quot;,\&quot;top\&quot;,\&quot;read\&quot;,\&quot;posted\&quot;,\&quot;bookmarks\&quot;],\&quot;periods\&quot;:[\&quot;all\&quot;,\&quot;yearly\&quot;,\&quot;quarterly\&quot;,\&quot;monthly\&quot;,\&quot;weekly\&quot;,\&quot;daily\&quot;],\&quot;top_menu_items\&quot;:[\&quot;latest\&quot;,\&quot;unread\&quot;,\&quot;new\&quot;,\&quot;unseen\&quot;,\&quot;top\&quot;,\&quot;read\&quot;,\&quot;posted\&quot;,\&quot;bookmarks\&quot;,\&quot;categories\&quot;],\&quot;anonymous_top_menu_items\&quot;:[\&quot;latest\&quot;,\&quot;top\&quot;,\&quot;categories\&quot;,\&quot;categories\&quot;,\&quot;top\&quot;],\&quot;uncategorized_category_id\&quot;:1,\&quot;user_field_max_length\&quot;:2048,\&quot;post_action_types\&quot;:[{\&quot;id\&quot;:2,\&quot;name_key\&quot;:\&quot;like\&quot;,\&quot;name\&quot;:\&quot;Симпатия\&quot;,\&quot;description\&quot;:\&quot;Мне нравится это сообщение\&quot;,\&quot;short_description\&quot;:\&quot;Мне нравится\&quot;,\&quot;is_flag\&quot;:false,\&quot;is_custom_flag\&quot;:false},{\&quot;id\&quot;:3,\&quot;name_key\&quot;:\&quot;off_topic\&quot;,\&quot;name\&quot;:\&quot;Оффтопик (не по теме)\&quot;,\&quot;description\&quot;:\&quot;Это сообщение не имеет отношения к теме, судя по её названию и содержанию первого сообщения. Возможно, его стоит перенести.\&quot;,\&quot;short_description\&quot;:\&quot;Не относится к обсуждению\&quot;,\&quot;is_flag\&quot;:true,\&quot;is_custom_flag\&quot;:false},{\&quot;id\&quot;:4,\&quot;name_key\&quot;:\&quot;inappropriate\&quot;,\&quot;name\&quot;:\&quot;Неприемлемое сообщение\&quot;,\&quot;description\&quot;:\&quot;Это сообщение содержит контент, который разумный человек счёл бы оскорбительным  или нарушающим \\u003ca href=\\\&quot;/guidelines\\\&quot;\\u003eпринципы нашего сообщества\\u003c/a\\u003e.\&quot;,\&quot;short_description\&quot;:\&quot;Нарушение \\u003ca href=\\\&quot;/guidelines\\\&quot;\\u003eосновных принципов сообщества\\u003c/a\\u003e\&quot;,\&quot;is_flag\&quot;:true,\&quot;is_custom_flag\&quot;:false},{\&quot;id\&quot;:8,\&quot;name_key\&quot;:\&quot;spam\&quot;,\&quot;name\&quot;:\&quot;Спам\&quot;,\&quot;description\&quot;:\&quot;Это сообщение является рекламой или просто мусором. Оно не является полезным или не относится к текущей теме.\&quot;,\&quot;short_description\&quot;:\&quot;Это реклама или мусор\&quot;,\&quot;is_flag\&quot;:true,\&quot;is_custom_flag\&quot;:false},{\&quot;id\&quot;:6,\&quot;name_key\&quot;:\&quot;notify_user\&quot;,\&quot;name\&quot;:\&quot;Отправить пользователю @%{username} личное сообщение\&quot;,\&quot;description\&quot;:\&quot;Я хочу поговорить с этим человеком напрямую и конкретно об этом сообщении.\&quot;,\&quot;short_description\&quot;:\&quot;Я хочу поговорить с этим человеком напрямую и конкретно об этом сообщении.\&quot;,\&quot;is_flag\&quot;:true,\&quot;is_custom_flag\&quot;:true},{\&quot;id\&quot;:null,\&quot;name_key\&quot;:null,\&quot;name\&quot;:\&quot;translation missing: ru.post_action_types..title\&quot;,\&quot;description\&quot;:\&quot;translation missing: ru.post_action_types.description\&quot;,\&quot;short_description\&quot;:\&quot;translation missing: ru.post_action_types.short_description\&quot;,\&quot;is_flag\&quot;:false,\&quot;is_custom_flag\&quot;:false},{\&quot;id\&quot;:7,\&quot;name_key\&quot;:\&quot;notify_moderators\&quot;,\&quot;name\&quot;:\&quot;Другая причина\&quot;,\&quot;description\&quot;:\&quot;Это сообщение требует внимания персонала по иной причине, которая отсутствует в списке выше.\&quot;,\&quot;short_description\&quot;:\&quot;Требует внимания персонала по другой причине\&quot;,\&quot;is_flag\&quot;:true,\&quot;is_custom_flag\&quot;:true}],\&quot;topic_flag_types\&quot;:[{\&quot;id\&quot;:4,\&quot;name_key\&quot;:\&quot;inappropriate\&quot;,\&quot;name\&quot;:\&quot;Неуместная тема\&quot;,\&quot;description\&quot;:\&quot;Эта тема содержит контент, которое разумный человек посчитает оскорбительным или нарушающим \\u003ca href=\\\&quot;/guidelines\\\&quot;\\u003eпринципы нашего сообщества\\u003c/a\\u003e.\&quot;,\&quot;short_description\&quot;:\&quot;Нарушение \\u003ca href=\\\&quot;/guidelines\\\&quot;\\u003eосновных принципов сообщества\\u003c/a\\u003e\&quot;,\&quot;is_flag\&quot;:true,\&quot;is_custom_flag\&quot;:false},{\&quot;id\&quot;:8,\&quot;name_key\&quot;:\&quot;spam\&quot;,\&quot;name\&quot;:\&quot;Спам\&quot;,\&quot;description\&quot;:\&quot;Это сообщение представляет собой рекламу. Оно не содержит полезной информации и не относится к данной теме.\&quot;,\&quot;short_description\&quot;:\&quot;Это реклама\&quot;,\&quot;is_flag\&quot;:true,\&quot;is_custom_flag\&quot;:false},{\&quot;id\&quot;:null,\&quot;name_key\&quot;:null,\&quot;name\&quot;:\&quot;translation missing: ru.topic_flag_types..title\&quot;,\&quot;description\&quot;:\&quot;translation missing: ru.topic_flag_types.description\&quot;,\&quot;short_description\&quot;:\&quot;translation missing: ru.topic_flag_types.short_description\&quot;,\&quot;is_flag\&quot;:false,\&quot;is_custom_flag\&quot;:false},{\&quot;id\&quot;:7,\&quot;name_key\&quot;:\&quot;notify_moderators\&quot;,\&quot;name\&quot;:\&quot;Другая причина\&quot;,\&quot;description\&quot;:\&quot;Эта тема требует внимания персонала по причине нарушения \\u003ca href=\\\&quot;/guidelines\\\&quot;\\u003eпринципов сообщества\\u003c/a\\u003e, \\u003ca href=\\\&quot;/tos\\\&quot;\\u003eполитики конфиденциальности\\u003c/a\\u003e, или по любой другой причине, не перечисленной выше.\&quot;,\&quot;short_description\&quot;:\&quot;Требует внимания персонала по другой причине\&quot;,\&quot;is_flag\&quot;:true,\&quot;is_custom_flag\&quot;:true}],\&quot;can_create_tag\&quot;:false,\&quot;can_tag_topics\&quot;:false,\&quot;can_tag_pms\&quot;:false,\&quot;tags_filter_regexp\&quot;:\&quot;[/\\\\?#\\\\[\\\\]@!\\\\$\\u0026'\\\\(\\\\)\\\\*\\\\+,;=\\\\.%\\\\\\\\`^\\\\s|\\\\{\\\\}\\\&quot;\\u003c\\u003e]+\&quot;,\&quot;top_tags\&quot;:[\&quot;купить-в-японии\&quot;,\&quot;заказы-сп\&quot;,\&quot;правила\&quot;,\&quot;вопросы\&quot;,\&quot;детская-одежда-обувь\&quot;,\&quot;косметика\&quot;,\&quot;пристрой-организаторов\&quot;,\&quot;болталка\&quot;,\&quot;витамины-и-бады\&quot;,\&quot;закупки-o_lya-lya\&quot;,\&quot;отзывы-о-покупках\&quot;,\&quot;пристрой\&quot;,\&quot;iherb\&quot;,\&quot;tasty-coffee\&quot;,\&quot;кофе\&quot;,\&quot;красота\&quot;,\&quot;купить-в-сша\&quot;,\&quot;купоны\&quot;,\&quot;прямая-доставка\&quot;,\&quot;распродажи\&quot;,\&quot;супервыгодно\&quot;,\&quot;чай\&quot;,\&quot;японская-косметика\&quot;,\&quot;aliexpress\&quot;,\&quot;faq\&quot;,\&quot;my-shop\&quot;,\&quot;ozon\&quot;,\&quot;yoox\&quot;,\&quot;акции\&quot;,\&quot;банки\&quot;,\&quot;банковские-переводы\&quot;],\&quot;topic_featured_link_allowed_category_ids\&quot;:[10,9,1,17,22,18,23,8,7,11,25,15,19,16,2,14,5,6,13,27,12,21,20,24,26],\&quot;user_themes\&quot;:[{\&quot;theme_id\&quot;:1,\&quot;name\&quot;:\&quot;Dark\&quot;,\&quot;default\&quot;:false,\&quot;color_scheme_id\&quot;:1},{\&quot;theme_id\&quot;:3,\&quot;name\&quot;:\&quot;discourse-isabelle-theme\&quot;,\&quot;default\&quot;:false,\&quot;color_scheme_id\&quot;:2},{\&quot;theme_id\&quot;:2,\&quot;name\&quot;:\&quot;Light\&quot;,\&quot;default\&quot;:true,\&quot;color_scheme_id\&quot;:null}],\&quot;user_color_schemes\&quot;:[],\&quot;default_dark_color_scheme\&quot;:null,\&quot;censored_regexp\&quot;:[],\&quot;custom_emoji_translation\&quot;:{},\&quot;watched_words_replace\&quot;:null,\&quot;watched_words_link\&quot;:null,\&quot;categories\&quot;:[{\&quot;id\&quot;:5,\&quot;name\&quot;:\&quot;Работа форума\&quot;,\&quot;color\&quot;:\&quot;BF1E2E\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;pravila-foruma\&quot;,\&quot;topic_count\&quot;:9,\&quot;post_count\&quot;:120,\&quot;position\&quot;:0,\&quot;description\&quot;:\&quot;Работа форума Buy Club\&quot;,\&quot;description_text\&quot;:\&quot;Работа форума Buy Club\&quot;,\&quot;description_excerpt\&quot;:\&quot;Работа форума Buy Club\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-pravil/13\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:true,\&quot;num_featured_topics\&quot;:10,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;boxes_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:6,\&quot;name\&quot;:\&quot;Общение участников\&quot;,\&quot;color\&quot;:\&quot;B3B5B4\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;obshhenie-uchastnikov\&quot;,\&quot;topic_count\&quot;:4,\&quot;post_count\&quot;:61,\&quot;position\&quot;:1,\&quot;description\&quot;:\&quot;Общение на свободные темы\&quot;,\&quot;description_text\&quot;:\&quot;Общение на свободные темы\&quot;,\&quot;description_excerpt\&quot;:\&quot;Общение на свободные темы\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-obshhenie-uchastnikov/17\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:true,\&quot;num_featured_topics\&quot;:10,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;boxes_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:7,\&quot;name\&quot;:\&quot;Самостоятельные покупки\&quot;,\&quot;color\&quot;:\&quot;92278F\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;samostoyatelnye-pokupki\&quot;,\&quot;topic_count\&quot;:0,\&quot;post_count\&quot;:0,\&quot;position\&quot;:2,\&quot;description\&quot;:\&quot;Карты и банки, таможня и доставка\&quot;,\&quot;description_text\&quot;:\&quot;Карты и банки, таможня и доставка\&quot;,\&quot;description_excerpt\&quot;:\&quot;Карты и банки, таможня и доставка\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-samostoyatelnye-pokupki/20\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:true,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:true,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;boxes_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:8,\&quot;name\&quot;:\&quot;Банки и карты\&quot;,\&quot;color\&quot;:\&quot;ED207B\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;banki-i-karty\&quot;,\&quot;topic_count\&quot;:1,\&quot;post_count\&quot;:3,\&quot;position\&quot;:3,\&quot;description\&quot;:null,\&quot;description_text\&quot;:null,\&quot;description_excerpt\&quot;:null,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-banki-i-karty/21\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;parent_category_id\&quot;:7,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:10,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:9,\&quot;name\&quot;:\&quot;Таможня\&quot;,\&quot;color\&quot;:\&quot;0088CC\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;tamozhnya\&quot;,\&quot;topic_count\&quot;:1,\&quot;post_count\&quot;:1,\&quot;position\&quot;:4,\&quot;description\&quot;:\&quot;Вопросы, связанные с таможней\&quot;,\&quot;description_text\&quot;:\&quot;Вопросы, связанные с таможней\&quot;,\&quot;description_excerpt\&quot;:\&quot;Вопросы, связанные с таможней\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-tamozhnya/22\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;parent_category_id\&quot;:7,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:null,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:null,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:null,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:null,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:10,\&quot;name\&quot;:\&quot;Доставка\&quot;,\&quot;color\&quot;:\&quot;F7941D\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;dostavka\&quot;,\&quot;topic_count\&quot;:1,\&quot;post_count\&quot;:1,\&quot;position\&quot;:5,\&quot;description\&quot;:\&quot;Почта, частные курьерские службы, пересылочные компании.\&quot;,\&quot;description_text\&quot;:\&quot;Почта, частные курьерские службы, пересылочные компании.\&quot;,\&quot;description_excerpt\&quot;:\&quot;Почта, частные курьерские службы, пересылочные компании.\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-dostavka/23\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;parent_category_id\&quot;:7,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:15,\&quot;name\&quot;:\&quot;Магазины зарубежные и отечественные\&quot;,\&quot;color\&quot;:\&quot;12A89D\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;magaziny\&quot;,\&quot;topic_count\&quot;:2,\&quot;post_count\&quot;:88,\&quot;position\&quot;:6,\&quot;description\&quot;:\&quot;Обсуждение магазинов\&quot;,\&quot;description_text\&quot;:\&quot;Обсуждение магазинов\&quot;,\&quot;description_excerpt\&quot;:\&quot;Обсуждение магазинов\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-magaziny-zarubezhnye-i-otechestvennye/35\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:true,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;boxes_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:2,\&quot;name\&quot;:\&quot;Где купить? Акции и выгодные предложения\&quot;,\&quot;color\&quot;:\&quot;808281\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;site-feedback\&quot;,\&quot;topic_count\&quot;:15,\&quot;post_count\&quot;:616,\&quot;position\&quot;:7,\&quot;description\&quot;:\&quot;Обзор товаров и где их выгодно можно купить.\&quot;,\&quot;description_text\&quot;:\&quot;Обзор товаров и где их выгодно можно купить.\&quot;,\&quot;description_excerpt\&quot;:\&quot;Обзор товаров и где их выгодно можно купить.\&quot;,\&quot;topic_url\&quot;:\&quot;/t/udachnye-pokupki/1\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:true,\&quot;num_featured_topics\&quot;:10,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;boxes_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:11,\&quot;name\&quot;:\&quot;Совместные покупки\&quot;,\&quot;color\&quot;:\&quot;0088CC\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;sovmestnye-pokupki\&quot;,\&quot;topic_count\&quot;:1,\&quot;post_count\&quot;:1,\&quot;position\&quot;:8,\&quot;description\&quot;:\&quot;Совместные зарубежные и отечественные покупки\&quot;,\&quot;description_text\&quot;:\&quot;Совместные зарубежные и отечественные покупки\&quot;,\&quot;description_excerpt\&quot;:\&quot;Совместные зарубежные и отечественные покупки\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-sovmestnye-pokupki/26\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:true,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:true,\&quot;num_featured_topics\&quot;:10,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;boxes_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:25,\&quot;name\&quot;:\&quot;Отзывы о магазинах и покупках\&quot;,\&quot;color\&quot;:\&quot;0088CC\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;otzyvy-o-magazinah-i-pokupkah\&quot;,\&quot;topic_count\&quot;:7,\&quot;post_count\&quot;:24,\&quot;position\&quot;:13,\&quot;description\&quot;:\&quot;Отзывы о покупках, закупках, товарах, магазинах\&quot;,\&quot;description_text\&quot;:\&quot;Отзывы о покупках, закупках, товарах, магазинах\&quot;,\&quot;description_excerpt\&quot;:\&quot;Отзывы о покупках, закупках, товарах, магазинах\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-otzyvy-o-magazinah-i-pokupkah/126\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:null,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:null,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:null,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:null,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:21,\&quot;name\&quot;:\&quot;Коммерческие темы\&quot;,\&quot;color\&quot;:\&quot;E45735\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;kommercheskie-temy\&quot;,\&quot;topic_count\&quot;:1,\&quot;post_count\&quot;:2,\&quot;position\&quot;:14,\&quot;description\&quot;:\&quot;Продажа товаров на коммерческой основе\&quot;,\&quot;description_text\&quot;:\&quot;Продажа товаров на коммерческой основе\&quot;,\&quot;description_excerpt\&quot;:\&quot;Продажа товаров на коммерческой основе\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-kommercheskie-temy/49\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:true,\&quot;num_featured_topics\&quot;:10,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;boxes_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:16,\&quot;name\&quot;:\&quot;Доска объявлений\&quot;,\&quot;color\&quot;:\&quot;0088CC\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;doska-obyavlenij\&quot;,\&quot;topic_count\&quot;:3,\&quot;post_count\&quot;:7,\&quot;position\&quot;:15,\&quot;description\&quot;:\&quot;Продажа вещей новых и б/у\&quot;,\&quot;description_text\&quot;:\&quot;Продажа вещей новых и б\\u0026#x2F;у\&quot;,\&quot;description_excerpt\&quot;:\&quot;Продажа вещей новых и б/у\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-doska-obyavlenij/36\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:true,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:true,\&quot;num_featured_topics\&quot;:10,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;boxes_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:18,\&quot;name\&quot;:\&quot;Женское\&quot;,\&quot;color\&quot;:\&quot;ED207B\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;zhenskaya-odezhda-i-obuv\&quot;,\&quot;topic_count\&quot;:7,\&quot;post_count\&quot;:9,\&quot;position\&quot;:16,\&quot;description\&quot;:\&quot;Пристрой товаров для женщин\&quot;,\&quot;description_text\&quot;:\&quot;Пристрой товаров для женщин\&quot;,\&quot;description_excerpt\&quot;:\&quot;Пристрой товаров для женщин\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-zhenskoe/44\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;parent_category_id\&quot;:16,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:17,\&quot;name\&quot;:\&quot;Мужское\&quot;,\&quot;color\&quot;:\&quot;0088CC\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;muzhskaya-odezhda-i-obuv\&quot;,\&quot;topic_count\&quot;:2,\&quot;post_count\&quot;:2,\&quot;position\&quot;:17,\&quot;description\&quot;:\&quot;Пристрой товаров для мужчин\&quot;,\&quot;description_text\&quot;:\&quot;Пристрой товаров для мужчин\&quot;,\&quot;description_excerpt\&quot;:\&quot;Пристрой товаров для мужчин\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-muzhskoe/43\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;parent_category_id\&quot;:16,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:1,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:19,\&quot;name\&quot;:\&quot;Детское\&quot;,\&quot;color\&quot;:\&quot;12A89D\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;detskaya-odezhda-i-obuv\&quot;,\&quot;topic_count\&quot;:15,\&quot;post_count\&quot;:34,\&quot;position\&quot;:18,\&quot;description\&quot;:\&quot;Пристрой товаров для детей\&quot;,\&quot;description_text\&quot;:\&quot;Пристрой товаров для детей\&quot;,\&quot;description_excerpt\&quot;:\&quot;Пристрой товаров для детей\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-detskoe/45\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;parent_category_id\&quot;:16,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:22,\&quot;name\&quot;:\&quot;Работа\&quot;,\&quot;color\&quot;:\&quot;0088CC\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;rabota-i-podrabotka\&quot;,\&quot;topic_count\&quot;:1,\&quot;post_count\&quot;:1,\&quot;position\&quot;:19,\&quot;description\&quot;:null,\&quot;description_text\&quot;:null,\&quot;description_excerpt\&quot;:null,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-rabota/69\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;parent_category_id\&quot;:16,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:20,\&quot;name\&quot;:\&quot;Прочее\&quot;,\&quot;color\&quot;:\&quot;F7941D\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;prochee\&quot;,\&quot;topic_count\&quot;:0,\&quot;post_count\&quot;:0,\&quot;position\&quot;:20,\&quot;description\&quot;:\&quot;Пристрой прочих товаров\&quot;,\&quot;description_text\&quot;:\&quot;Пристрой прочих товаров\&quot;,\&quot;description_excerpt\&quot;:\&quot;Пристрой прочих товаров\&quot;,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-prochee/46\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;parent_category_id\&quot;:16,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:null,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:null,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:null,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:null,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:1,\&quot;name\&quot;:\&quot;РАЗНОЕ\&quot;,\&quot;color\&quot;:\&quot;0088CC\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;uncategorized\&quot;,\&quot;topic_count\&quot;:0,\&quot;post_count\&quot;:0,\&quot;position\&quot;:21,\&quot;description\&quot;:\&quot;Темы, которым не нужен раздел, или которые не соответствуют ни одному из существующих разделов.\&quot;,\&quot;description_text\&quot;:\&quot;Темы, которым не нужен раздел, или которые не соответствуют ни одному из существующих разделов.\&quot;,\&quot;description_excerpt\&quot;:\&quot;Темы, которым не нужен раздел, или которые не соответствуют ни одному из существующих разделов.\&quot;,\&quot;topic_url\&quot;:\&quot;/t/\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:10,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false},{\&quot;id\&quot;:27,\&quot;name\&quot;:\&quot;Пристрой от организаторов\&quot;,\&quot;color\&quot;:\&quot;9EB83B\&quot;,\&quot;text_color\&quot;:\&quot;FFFFFF\&quot;,\&quot;slug\&quot;:\&quot;pristroj-ot-organizatorov\&quot;,\&quot;topic_count\&quot;:6,\&quot;post_count\&quot;:125,\&quot;position\&quot;:24,\&quot;description\&quot;:null,\&quot;description_text\&quot;:null,\&quot;description_excerpt\&quot;:null,\&quot;topic_url\&quot;:\&quot;/t/opisanie-razdela-pristroj-ot-organizatorov/149\&quot;,\&quot;read_restricted\&quot;:false,\&quot;permission\&quot;:null,\&quot;parent_category_id\&quot;:11,\&quot;notification_level\&quot;:1,\&quot;topic_template\&quot;:\&quot;\&quot;,\&quot;has_children\&quot;:false,\&quot;sort_order\&quot;:\&quot;\&quot;,\&quot;sort_ascending\&quot;:null,\&quot;show_subcategory_list\&quot;:false,\&quot;num_featured_topics\&quot;:3,\&quot;default_view\&quot;:\&quot;\&quot;,\&quot;subcategory_list_style\&quot;:\&quot;rows_with_featured_topics\&quot;,\&quot;default_top_period\&quot;:\&quot;all\&quot;,\&quot;default_list_filter\&quot;:\&quot;all\&quot;,\&quot;minimum_required_tags\&quot;:0,\&quot;navigate_to_first_post_after_read\&quot;:false,\&quot;custom_fields\&quot;:{\&quot;has_chat_enabled\&quot;:null},\&quot;allowed_tags\&quot;:[],\&quot;allowed_tag_groups\&quot;:[],\&quot;allow_global_tags\&quot;:false,\&quot;read_only_banner\&quot;:\&quot;\&quot;,\&quot;uploaded_logo\&quot;:null,\&quot;uploaded_logo_dark\&quot;:null,\&quot;uploaded_background\&quot;:null,\&quot;required_tag_groups\&quot;:[],\&quot;can_edit\&quot;:false}],\&quot;markdown_additional_options\&quot;:{\&quot;chat\&quot;:{\&quot;limited_pretty_text_features\&quot;:[\&quot;anchor\&quot;,\&quot;bbcode-block\&quot;,\&quot;bbcode-inline\&quot;,\&quot;code\&quot;,\&quot;category-hashtag\&quot;,\&quot;censored\&quot;,\&quot;chat-transcript\&quot;,\&quot;discourse-local-dates\&quot;,\&quot;emoji\&quot;,\&quot;emojiShortcuts\&quot;,\&quot;inlineEmoji\&quot;,\&quot;html-img\&quot;,\&quot;mentions\&quot;,\&quot;unicodeUsernames\&quot;,\&quot;onebox\&quot;,\&quot;quotes\&quot;,\&quot;spoiler-alert\&quot;,\&quot;table\&quot;,\&quot;text-post-process\&quot;,\&quot;upload-protocol\&quot;,\&quot;watched-words\&quot;],\&quot;limited_pretty_text_markdown_rules\&quot;:[\&quot;autolink\&quot;,\&quot;list\&quot;,\&quot;backticks\&quot;,\&quot;newline\&quot;,\&quot;code\&quot;,\&quot;fence\&quot;,\&quot;image\&quot;,\&quot;table\&quot;,\&quot;linkify\&quot;,\&quot;link\&quot;,\&quot;strikethrough\&quot;,\&quot;blockquote\&quot;,\&quot;emphasis\&quot;]}},\&quot;displayed_about_plugin_stat_groups\&quot;:[\&quot;chat_messages\&quot;],\&quot;show_welcome_topic_banner\&quot;:false,\&quot;archetypes\&quot;:[{\&quot;id\&quot;:\&quot;regular\&quot;,\&quot;name\&quot;:\&quot;Обычная тема\&quot;,\&quot;options\&quot;:[]},{\&quot;id\&quot;:\&quot;banner\&quot;,\&quot;name\&quot;:\&quot;Объявление\&quot;,\&quot;options\&quot;:[]}],\&quot;user_fields\&quot;:[{\&quot;id\&quot;:1,\&quot;name\&quot;:\&quot;Номер телефона\&quot;,\&quot;description\&quot;:\&quot;Телефон в формате +7ХХХХХХХХХХ. Внимание! Ваш телефон не будет доступен всем, только администрации Форума\&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;editable\&quot;:true,\&quot;required\&quot;:true,\&quot;show_on_profile\&quot;:false,\&quot;show_on_user_card\&quot;:false,\&quot;searchable\&quot;:false,\&quot;position\&quot;:1},{\&quot;id\&quot;:2,\&quot;name\&quot;:\&quot;Ваш Ник на старой платформе\&quot;,\&quot;description\&quot;:\&quot;Внимание! Это новая платформа Buy Club, если Вы уже были зарегистрированы на старой платформе, напишите свой ник в поле. Это позволит быстрее дать Вам доступ ко всем темам. Если Вы новичок, напишите об этом. \&quot;,\&quot;field_type\&quot;:\&quot;text\&quot;,\&quot;editable\&quot;:false,\&quot;required\&quot;:true,\&quot;show_on_profile\&quot;:false,\&quot;show_on_user_card\&quot;:false,\&quot;searchable\&quot;:false,\&quot;position\&quot;:2}],\&quot;auth_providers\&quot;:[]}&quot;,&quot;siteSettings&quot;:&quot;{\&quot;default_locale\&quot;:\&quot;ru\&quot;,\&quot;title\&quot;:\&quot;Buy-Club\&quot;,\&quot;short_site_description\&quot;:\&quot;\&quot;,\&quot;exclude_rel_nofollow_domains\&quot;:\&quot;\&quot;,\&quot;logo\&quot;:\&quot;\&quot;,\&quot;logo_small\&quot;:\&quot;\&quot;,\&quot;digest_logo\&quot;:\&quot;\&quot;,\&quot;mobile_logo\&quot;:\&quot;\&quot;,\&quot;logo_dark\&quot;:\&quot;\&quot;,\&quot;logo_small_dark\&quot;:\&quot;\&quot;,\&quot;mobile_logo_dark\&quot;:\&quot;\&quot;,\&quot;large_icon\&quot;:\&quot;\&quot;,\&quot;favicon\&quot;:\&quot;\&quot;,\&quot;apple_touch_icon\&quot;:\&quot;\&quot;,\&quot;display_local_time_in_user_card\&quot;:true,\&quot;allow_user_locale\&quot;:false,\&quot;set_locale_from_accept_language_header\&quot;:false,\&quot;set_locale_from_cookie\&quot;:false,\&quot;support_mixed_text_direction\&quot;:false,\&quot;suggested_topics\&quot;:10,\&quot;ga_universal_tracking_code\&quot;:\&quot;UA-24004893-1\&quot;,\&quot;ga_universal_domain_name\&quot;:\&quot;auto\&quot;,\&quot;gtm_container_id\&quot;:\&quot;\&quot;,\&quot;top_menu\&quot;:\&quot;categories|top|new|latest|unread|posted|read\&quot;,\&quot;post_menu\&quot;:\&quot;read|like|share|flag|edit|bookmark|delete|admin|reply\&quot;,\&quot;post_menu_hidden_items\&quot;:\&quot;flag|delete|admin\&quot;,\&quot;share_links\&quot;:\&quot;twitter|facebook|email\&quot;,\&quot;allow_username_in_share_links\&quot;:true,\&quot;share_quote_visibility\&quot;:\&quot;anonymous\&quot;,\&quot;share_quote_buttons\&quot;:\&quot;twitter|email\&quot;,\&quot;desktop_category_page_style\&quot;:\&quot;categories_and_latest_topics\&quot;,\&quot;category_colors\&quot;:\&quot;BF1E2E|F1592A|F7941D|9EB83B|3AB54A|12A89D|25AAE2|0E76BD|652D90|92278F|ED207B|8C6238|231F20|808281|B3B5B4|E45735\&quot;,\&quot;category_style\&quot;:\&quot;box\&quot;,\&quot;max_category_nesting\&quot;:2,\&quot;enable_mobile_theme\&quot;:true,\&quot;enable_direct_s3_uploads\&quot;:false,\&quot;enable_upload_debug_mode\&quot;:false,\&quot;default_dark_mode_color_scheme_id\&quot;:-1,\&quot;relative_date_duration\&quot;:0,\&quot;fixed_category_positions\&quot;:true,\&quot;fixed_category_positions_on_create\&quot;:false,\&quot;enable_badges\&quot;:true,\&quot;enable_badge_sql\&quot;:false,\&quot;max_favorite_badges\&quot;:2,\&quot;enable_whispers\&quot;:false,\&quot;whispers_allowed_groups\&quot;:\&quot;\&quot;,\&quot;enable_bookmarks_with_reminders\&quot;:true,\&quot;push_notifications_prompt\&quot;:true,\&quot;vapid_public_key_bytes\&quot;:\&quot;4|192|133|171|156|70|121|66|228|140|128|38|198|151|226|166|9|39|65|144|130|133|42|221|116|14|108|255|19|5|37|158|247|98|85|37|110|234|131|124|239|178|110|231|186|16|27|149|209|22|253|166|221|175|130|57|72|103|183|108|110|94|100|204|71\&quot;,\&quot;enable_user_status\&quot;:false,\&quot;enable_user_tips\&quot;:false,\&quot;invite_only\&quot;:false,\&quot;login_required\&quot;:false,\&quot;must_approve_users\&quot;:false,\&quot;enable_local_logins\&quot;:true,\&quot;enable_local_logins_via_email\&quot;:true,\&quot;allow_new_registrations\&quot;:true,\&quot;enable_signup_cta\&quot;:true,\&quot;facebook_app_id\&quot;:\&quot;\&quot;,\&quot;auth_skip_create_confirm\&quot;:false,\&quot;auth_overrides_email\&quot;:false,\&quot;enable_discourse_connect\&quot;:false,\&quot;discourse_connect_overrides_avatar\&quot;:false,\&quot;hide_email_address_taken\&quot;:false,\&quot;min_username_length\&quot;:3,\&quot;max_username_length\&quot;:20,\&quot;unicode_usernames\&quot;:true,\&quot;min_password_length\&quot;:8,\&quot;min_admin_password_length\&quot;:8,\&quot;email_editable\&quot;:true,\&quot;logout_redirect\&quot;:\&quot;\&quot;,\&quot;full_name_required\&quot;:true,\&quot;enable_names\&quot;:true,\&quot;invite_expiry_days\&quot;:90,\&quot;invites_per_page\&quot;:40,\&quot;delete_user_max_post_age\&quot;:60,\&quot;delete_all_posts_max\&quot;:1,\&quot;prioritize_username_in_ux\&quot;:true,\&quot;enable_user_directory\&quot;:true,\&quot;allow_anonymous_posting\&quot;:false,\&quot;anonymous_posting_min_trust_level\&quot;:2,\&quot;allow_users_to_hide_profile\&quot;:true,\&quot;hide_user_profiles_from_public\&quot;:false,\&quot;allow_featured_topic_on_user_profiles\&quot;:true,\&quot;hide_suspension_reasons\&quot;:false,\&quot;ignored_users_count_message_threshold\&quot;:5,\&quot;ignored_users_message_gap_days\&quot;:365,\&quot;user_selected_primary_groups\&quot;:false,\&quot;gravatar_name\&quot;:\&quot;Gravatar\&quot;,\&quot;gravatar_base_url\&quot;:\&quot;www.gravatar.com\&quot;,\&quot;gravatar_login_url\&quot;:\&quot;/emails\&quot;,\&quot;enable_group_directory\&quot;:true,\&quot;enable_category_group_moderation\&quot;:false,\&quot;min_post_length\&quot;:2,\&quot;min_first_post_length\&quot;:10,\&quot;min_personal_message_post_length\&quot;:2,\&quot;max_post_length\&quot;:32000,\&quot;topic_featured_link_enabled\&quot;:true,\&quot;min_topic_views_for_delete_confirm\&quot;:5000,\&quot;min_topic_title_length\&quot;:4,\&quot;max_topic_title_length\&quot;:255,\&quot;enable_filtered_replies_view\&quot;:false,\&quot;min_personal_message_title_length\&quot;:2,\&quot;allow_uncategorized_topics\&quot;:false,\&quot;min_title_similar_length\&quot;:6,\&quot;enable_personal_messages\&quot;:true,\&quot;personal_message_enabled_groups\&quot;:\&quot;11\&quot;,\&quot;edit_history_visible_to_public\&quot;:true,\&quot;delete_removed_posts_after\&quot;:24,\&quot;traditional_markdown_linebreaks\&quot;:false,\&quot;enable_markdown_typographer\&quot;:true,\&quot;enable_markdown_linkify\&quot;:true,\&quot;markdown_linkify_tlds\&quot;:\&quot;com|net|org|io|co|tv|ru|cn|us|uk|me|de|fr|fi|gov|su|jp|tr|pt|рф\&quot;,\&quot;markdown_typographer_quotation_marks\&quot;:\&quot;“|”|‘|’\&quot;,\&quot;enable_rich_text_paste\&quot;:true,\&quot;suppress_reply_directly_below\&quot;:true,\&quot;suppress_reply_directly_above\&quot;:true,\&quot;max_reply_history\&quot;:1,\&quot;enable_mentions\&quot;:true,\&quot;here_mention\&quot;:\&quot;here\&quot;,\&quot;newuser_max_embedded_media\&quot;:5,\&quot;newuser_max_attachments\&quot;:0,\&quot;show_pinned_excerpt_mobile\&quot;:true,\&quot;show_pinned_excerpt_desktop\&quot;:true,\&quot;display_name_on_posts\&quot;:true,\&quot;show_time_gap_days\&quot;:7,\&quot;short_progress_text_threshold\&quot;:10000,\&quot;default_code_lang\&quot;:\&quot;auto\&quot;,\&quot;autohighlight_all_code\&quot;:false,\&quot;highlighted_languages\&quot;:\&quot;bash|c|cpp|csharp|css|diff|go|graphql|ini|java|javascript|json|kotlin|lua|makefile|markdown|objectivec|perl|php|php-template|plaintext|python|python-repl|r|ruby|rust|scss|shell|sql|swift|typescript|xml|yaml|wasm\&quot;,\&quot;show_copy_button_on_codeblocks\&quot;:false,\&quot;enable_emoji\&quot;:true,\&quot;enable_emoji_shortcuts\&quot;:true,\&quot;emoji_set\&quot;:\&quot;twitter\&quot;,\&quot;emoji_autocomplete_min_chars\&quot;:0,\&quot;enable_inline_emoji_translation\&quot;:false,\&quot;code_formatting_style\&quot;:\&quot;code-fences\&quot;,\&quot;allowed_href_schemes\&quot;:\&quot;\&quot;,\&quot;watched_words_regular_expressions\&quot;:false,\&quot;enable_diffhtml_preview\&quot;:false,\&quot;enable_fast_edit\&quot;:true,\&quot;old_post_notice_days\&quot;:14,\&quot;blur_tl0_flagged_posts_media\&quot;:true,\&quot;email_time_window_mins\&quot;:10,\&quot;disable_digest_emails\&quot;:false,\&quot;email_in\&quot;:false,\&quot;enable_imap\&quot;:false,\&quot;enable_smtp\&quot;:false,\&quot;disable_emails\&quot;:\&quot;no\&quot;,\&quot;bounce_score_threshold\&quot;:4,\&quot;enable_secondary_emails\&quot;:true,\&quot;max_image_size_kb\&quot;:4096,\&quot;max_attachment_size_kb\&quot;:4096,\&quot;authorized_extensions\&quot;:\&quot;jpg|jpeg|png|gif|heic|heif|webp\&quot;,\&quot;authorized_extensions_for_staff\&quot;:\&quot;\&quot;,\&quot;max_image_width\&quot;:690,\&quot;max_image_height\&quot;:500,\&quot;prevent_anons_from_downloading_files\&quot;:true,\&quot;secure_media\&quot;:false,\&quot;secure_uploads\&quot;:false,\&quot;enable_s3_uploads\&quot;:false,\&quot;allow_profile_backgrounds\&quot;:true,\&quot;allow_uploaded_avatars\&quot;:\&quot;0\&quot;,\&quot;default_avatars\&quot;:\&quot;\&quot;,\&quot;external_system_avatars_enabled\&quot;:true,\&quot;external_system_avatars_url\&quot;:\&quot;/letter_avatar_proxy/v4/letter/{first_letter}/{color}/{size}.png\&quot;,\&quot;external_emoji_url\&quot;:\&quot;\&quot;,\&quot;selectable_avatars_mode\&quot;:\&quot;disabled\&quot;,\&quot;selectable_avatars\&quot;:\&quot;\&quot;,\&quot;allow_staff_to_upload_any_file_in_pm\&quot;:true,\&quot;simultaneous_uploads\&quot;:5,\&quot;composer_media_optimization_image_enabled\&quot;:true,\&quot;composer_media_optimization_image_bytes_optimization_threshold\&quot;:524288,\&quot;composer_media_optimization_image_resize_dimensions_threshold\&quot;:1920,\&quot;composer_media_optimization_image_resize_width_target\&quot;:1920,\&quot;composer_media_optimization_image_resize_pre_multiply\&quot;:false,\&quot;composer_media_optimization_image_resize_linear_rgb\&quot;:false,\&quot;composer_media_optimization_image_encode_quality\&quot;:75,\&quot;composer_media_optimization_debug_mode\&quot;:false,\&quot;min_trust_level_to_allow_profile_background\&quot;:0,\&quot;min_trust_level_to_allow_user_card_background\&quot;:0,\&quot;min_trust_level_to_allow_ignore\&quot;:2,\&quot;tl1_requires_read_posts\&quot;:30,\&quot;tl3_links_no_follow\&quot;:false,\&quot;enforce_second_factor\&quot;:\&quot;no\&quot;,\&quot;moderators_change_post_ownership\&quot;:false,\&quot;moderators_view_emails\&quot;:false,\&quot;use_admin_ip_allowlist\&quot;:false,\&quot;allowed_iframes\&quot;:\&quot;https://www.google.com/maps/embed?|https://www.openstreetmap.org/export/embed.html?|https://calendar.google.com/calendar/embed?|https://codepen.io/|https://buy-club.ru/discobot/certificate.svg|https://buy-club.ru/discobot/certificate.svg\&quot;,\&quot;can_permanently_delete\&quot;:false,\&quot;max_oneboxes_per_post\&quot;:50,\&quot;reviewable_claiming\&quot;:\&quot;disabled\&quot;,\&quot;reviewable_default_topics\&quot;:false,\&quot;reviewable_default_visibility\&quot;:\&quot;low\&quot;,\&quot;alert_admins_if_errors_per_minute\&quot;:0,\&quot;alert_admins_if_errors_per_hour\&quot;:0,\&quot;max_prints_per_hour_per_user\&quot;:5,\&quot;invite_link_max_redemptions_limit\&quot;:5000,\&quot;invite_link_max_redemptions_limit_users\&quot;:10,\&quot;enable_chunked_encoding\&quot;:true,\&quot;long_polling_base_url\&quot;:\&quot;/\&quot;,\&quot;background_polling_interval\&quot;:60000,\&quot;polling_interval\&quot;:3000,\&quot;anon_polling_interval\&quot;:25000,\&quot;flush_timings_secs\&quot;:60,\&quot;verbose_localization\&quot;:false,\&quot;max_new_topics\&quot;:500,\&quot;enable_safe_mode\&quot;:false,\&quot;enable_experimental_sidebar_hamburger\&quot;:false,\&quot;enable_experimental_hashtag_autocomplete\&quot;:false,\&quot;enable_new_user_profile_nav_groups\&quot;:\&quot;\&quot;,\&quot;enable_sidebar\&quot;:true,\&quot;default_sidebar_categories\&quot;:\&quot;\&quot;,\&quot;default_sidebar_tags\&quot;:\&quot;\&quot;,\&quot;tos_url\&quot;:\&quot;\&quot;,\&quot;privacy_policy_url\&quot;:\&quot;\&quot;,\&quot;faq_url\&quot;:\&quot;\&quot;,\&quot;enable_backups\&quot;:true,\&quot;backup_location\&quot;:\&quot;local\&quot;,\&quot;maximum_backups\&quot;:5,\&quot;include_s3_uploads_in_backups\&quot;:false,\&quot;use_pg_headlines_for_excerpt\&quot;:false,\&quot;min_search_term_length\&quot;:3,\&quot;log_search_queries\&quot;:true,\&quot;version_checks\&quot;:true,\&quot;suppress_uncategorized_badge\&quot;:true,\&quot;header_dropdown_category_count\&quot;:8,\&quot;slug_generation_method\&quot;:\&quot;ascii\&quot;,\&quot;summary_timeline_button\&quot;:false,\&quot;topic_views_heat_low\&quot;:1000,\&quot;topic_views_heat_medium\&quot;:2000,\&quot;topic_views_heat_high\&quot;:3500,\&quot;topic_post_like_heat_low\&quot;:0.5,\&quot;topic_post_like_heat_medium\&quot;:1.0,\&quot;topic_post_like_heat_high\&quot;:2.0,\&quot;history_hours_low\&quot;:12,\&quot;history_hours_medium\&quot;:24,\&quot;history_hours_high\&quot;:48,\&quot;cold_age_days_low\&quot;:14,\&quot;cold_age_days_medium\&quot;:90,\&quot;cold_age_days_high\&quot;:180,\&quot;global_notice\&quot;:\&quot;\&quot;,\&quot;general_category_id\&quot;:-1,\&quot;show_create_topics_notice\&quot;:true,\&quot;welcome_topic_id\&quot;:7,\&quot;bootstrap_mode_min_users\&quot;:50,\&quot;bootstrap_mode_enabled\&quot;:false,\&quot;automatically_unpin_topics\&quot;:true,\&quot;read_time_word_count\&quot;:500,\&quot;topic_page_title_includes_category\&quot;:true,\&quot;svg_icon_subset\&quot;:\&quot;\&quot;,\&quot;allow_bulk_invite\&quot;:true,\&quot;use_polymorphic_bookmarks\&quot;:true,\&quot;suggest_weekends_in_date_pickers\&quot;:true,\&quot;disable_mailing_list_mode\&quot;:false,\&quot;default_topics_automatic_unpin\&quot;:true,\&quot;mute_all_categories_by_default\&quot;:false,\&quot;tagging_enabled\&quot;:true,\&quot;tag_style\&quot;:\&quot;box\&quot;,\&quot;max_tags_per_topic\&quot;:8,\&quot;max_tag_length\&quot;:25,\&quot;min_trust_level_to_tag_topics\&quot;:\&quot;3\&quot;,\&quot;max_tag_search_results\&quot;:1000000000,\&quot;max_tags_in_filter_list\&quot;:30,\&quot;tags_sort_alphabetically\&quot;:false,\&quot;tags_listed_by_group\&quot;:true,\&quot;pm_tags_allowed_for_groups\&quot;:\&quot;\&quot;,\&quot;suppress_overlapping_tags_in_list\&quot;:false,\&quot;remove_muted_tags_from_latest\&quot;:\&quot;always\&quot;,\&quot;force_lowercase_tags\&quot;:true,\&quot;dashboard_hidden_reports\&quot;:\&quot;\&quot;,\&quot;dashboard_visible_tabs\&quot;:\&quot;moderation|security|reports\&quot;,\&quot;dashboard_general_tab_activity_metrics\&quot;:\&quot;page_view_total_reqs|visits|time_to_first_response|likes|flags|user_to_user_private_messages_with_replies\&quot;,\&quot;details_enabled\&quot;:true,\&quot;poll_enabled\&quot;:true,\&quot;poll_maximum_options\&quot;:20,\&quot;poll_minimum_trust_level_to_create\&quot;:1,\&quot;poll_groupable_user_fields\&quot;:\&quot;\&quot;,\&quot;poll_export_data_explorer_query_id\&quot;:-16,\&quot;discourse_narrative_bot_enabled\&quot;:true,\&quot;discourse_local_dates_email_format\&quot;:\&quot;YYYY-MM-DDTHH:mm:ss[Z]\&quot;,\&quot;discourse_local_dates_enabled\&quot;:true,\&quot;discourse_local_dates_default_formats\&quot;:\&quot;LLL|LTS|LL|LLLL\&quot;,\&quot;discourse_local_dates_default_timezones\&quot;:\&quot;Europe/Paris|America/Los_Angeles|Europe/Moscow\&quot;,\&quot;presence_enabled\&quot;:true,\&quot;presence_max_users_shown\&quot;:25,\&quot;chat_enabled\&quot;:false,\&quot;chat_allowed_groups\&quot;:\&quot;3\&quot;,\&quot;chat_channel_retention_days\&quot;:90,\&quot;chat_dm_retention_days\&quot;:0,\&quot;chat_allow_archiving_channels\&quot;:false,\&quot;chat_default_channel_id\&quot;:\&quot;\&quot;,\&quot;default_emoji_reactions\&quot;:\&quot;+1|heart|tada\&quot;,\&quot;chat_minimum_message_length\&quot;:1,\&quot;chat_allow_uploads\&quot;:true,\&quot;max_chat_auto_joined_users\&quot;:10000,\&quot;direct_message_enabled_groups\&quot;:\&quot;11\&quot;,\&quot;chat_message_flag_allowed_groups\&quot;:\&quot;11\&quot;,\&quot;available_locales\&quot;:\&quot;[{\\\&quot;name\\\&quot;:\\\&quot;اللغة العربية\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;ar\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;беларуская мова\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;be\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;български език\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;bg\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;bosanski jezik\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;bs_BA\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;català\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;ca\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;čeština\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;cs\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;dansk\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;da\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Deutsch\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;de\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;ελληνικά\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;el\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;English (US)\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;en\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;English (UK)\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;en_GB\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Español\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;es\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;eesti\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;et\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;فارسی\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;fa_IR\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;suomi\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;fi\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Français\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;fr\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;galego\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;gl\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;עברית\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;he\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;hrvatski jezik\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;hr\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;magyar\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;hu\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Հայերեն\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;hy\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Indonesian\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;id\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Italiano\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;it\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;日本語\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;ja\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;한국어\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;ko\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;lietuvių kalba\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;lt\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;latviešu valoda\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;lv\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Norsk bokmål\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;nb_NO\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Nederlands\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;nl\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;polski\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;pl_PL\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Português\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;pt\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Português (BR)\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;pt_BR\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;limba română\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;ro\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Русский\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;ru\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;slovenčina\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;sk\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;slovenščina\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;sl\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Shqip\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;sq\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;српски језик\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;sr\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;svenska\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;sv\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Kiswahili\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;sw\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;తెలుగు\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;te\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;ไทย\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;th\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Türkçe\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;tr_TR\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;українська мова\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;uk\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;اردو\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;ur\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;Việt Nam\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;vi\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;简体中文\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;zh_CN\\\&quot;},{\\\&quot;name\\\&quot;:\\\&quot;繁體中文\\\&quot;,\\\&quot;value\\\&quot;:\\\&quot;zh_TW\\\&quot;}]\&quot;,\&quot;require_invite_code\&quot;:false,\&quot;site_logo_url\&quot;:\&quot;\&quot;,\&quot;site_logo_small_url\&quot;:\&quot;\&quot;,\&quot;site_mobile_logo_url\&quot;:\&quot;\&quot;,\&quot;site_favicon_url\&quot;:\&quot;https://buy-club.ru/uploads/default/optimized/1X/_129430568242d1b7f853bb13ebea28b3f6af4e7_2_32x32.png\&quot;,\&quot;site_logo_dark_url\&quot;:\&quot;\&quot;,\&quot;site_logo_small_dark_url\&quot;:\&quot;\&quot;,\&quot;site_mobile_logo_dark_url\&quot;:\&quot;\&quot;}&quot;,&quot;customHTML&quot;:&quot;{\&quot;top\&quot;:\&quot;\&quot;,\&quot;footer\&quot;:\&quot;\&quot;}&quot;,&quot;banner&quot;:&quot;{}&quot;,&quot;customEmoji&quot;:&quot;[{\&quot;name\&quot;:\&quot;_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/7bafd29477d359f1b5e96c256a285f51ef9937f7.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;8_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/c0b8e937971f3e6f7c1c76d1c22bf0c016a09aa5.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_angel_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/733db900dbae3f8dfeed418f5c908b089be18252.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_az_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/80d08a5563666df43e3cbb5e72c2474ebff3914f.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_bg_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/74b8e2dfd89f886e5f1f4fc38b2f4b2116d34c8b.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_d\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/bf7deee1950342b86071a6df182d24e49dbf67d0.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_d_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/2048ac0101de8bdc79cfe830be2fd60a3ac74508.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_da_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/e84e658b1d9041f2aecb264fbd7222fb0a7512a5.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_em_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/a2d505e137e95ec3eecfe739a74614d688ac6bde.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_huh_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/ba270641aedf2c9d67bc9e9294e9894ff8e2fa9c.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_k_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/fc3094e90bba8c1929f058c02295e03002f7e1e9.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_kiss_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/0eb512b0b3951611e9db8d00b39fff4a6177d4ed.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_o\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/da9cef385bfed28b458e3d7ca019ee7e0572ffd4.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_p\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/0f2f0921051030bc35c6ffd76d6bd868e6fce229.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_police_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/cae64c8d2b65d4ab8f32bb8afebe3063b1de13ca.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_r_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/635ff084a358f23dafb1277917fa404f343bb7a4.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_ra_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/733111783728feaf7a0d1d4b9c950e220b9bc800.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_sad_\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/908ea445e3348312aee16434b17de8353314653f.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;},{\&quot;name\&quot;:\&quot;_x\&quot;,\&quot;url\&quot;:\&quot;/uploads/default/original/1X/ed79d8139e5371925f5fc234b6469c8c71b9c601.gif\&quot;,\&quot;group\&quot;:\&quot;buyclub\&quot;}]&quot;,&quot;isReadOnly&quot;:&quot;false&quot;,&quot;isStaffWritesOnly&quot;:&quot;false&quot;,&quot;activatedThemes&quot;:&quot;{\&quot;2\&quot;:\&quot;Light\&quot;}&quot;}"></div>
+      </discourse-assets-json>
+      <discourse-assets-icons></discourse-assets-icons>
+    </discourse-assets>
+
+      
+
+    
+    <noscript data-path="/tos">
+      <header>
+  <a href="/">
+    Buy-Club
+  </a>
+</header>
+
+
+      <div id="main-outlet" class="wrap" role="main">
+        <!-- preload-content: -->
+        <div itemscope itemtype='http://schema.org/WebPage'>
+  <meta itemprop='lastReviewed' content='2020-06-16'>
+  <ul class='nav-pills' role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement'>
+      <li class="nav-item-about"><a href="/about">О форуме</a></a></li>
+        <li class='nav-item-faq'><a class='' href='/faq'>Правила</a></li>
+    <li class='nav-item-tos'><a href='/tos' class='active'>Пользовательское соглашение</a></li>
+    <li class='nav-item-privacy'><a href='/privacy' class=''>Конфиденциальность</a></li>
+  </ul>
+
+
+  <div itemprop='mainContentOfPage'>
+    <p>These terms govern use of the Internet forum at <a href="//new.buy-club.ru">http://new.buy-club.ru</a>. To use the forum, you must agree to these terms with <ins>company_name</ins>, the company that runs the forum.</p>
+<p>The company may offer other products and services, under different terms. These terms apply only to use of the forum.</p>
+<p>Skip to:</p>
+<ul>
+<li><a href="#heading--important-terms">Important Terms</a></li>
+<li><a href="#heading--permission">Your Permission to Use the Forum</a></li>
+<li><a href="#heading--conditions">Conditions for Use of the Forum</a></li>
+<li><a href="#heading--acceptable-use">Acceptable Use</a></li>
+<li><a href="#heading--content-standards">Content Standards</a></li>
+<li><a href="#heading--enforcement">Enforcement</a></li>
+<li><a href="#heading--your-account">Your Account</a></li>
+<li><a href="#heading--your-content">Your Content</a></li>
+<li><a href="#heading--responsibility">Your Responsibility</a></li>
+<li><a href="#heading--disclaimers">Disclaimers</a></li>
+<li><a href="#heading--liability">Limits on Liability</a></li>
+<li><a href="#heading--feedback">Feedback</a></li>
+<li><a href="#heading--termination">Termination</a></li>
+<li><a href="#heading--disputes">Disputes</a></li>
+<li><a href="#heading--general">General Terms</a></li>
+<li><a href="#heading--contact">Contact</a></li>
+<li><a href="#heading--changes">Changes</a></li>
+</ul>
+<h2 id="heading--important-terms"><a href="#heading--important-terms">Important Terms</a></h2>
+<p><em><strong>These terms include a number of important provisions that affect your rights and responsibilities, such as the disclaimers in <a href="#heading--disclaimers">Disclaimers</a>, limits on the company’s liability to you in <a href="#heading--liability">Limits on Liability</a>, your agreement to cover the company for damages caused by your misuse of the forum in <a href="#heading--responsibility">Responsibility for Your Use</a>, and an agreement to arbitrate disputes in <a href="#heading--disputes">Disputes</a>.</strong></em></p>
+<h2 id="heading--permission"><a href="#heading--permission">Your Permission to Use the Forum</a></h2>
+<p>Subject to these terms, the company gives you permission to use the forum. Everyone needs to agree to these terms to use the forum.</p>
+<h2 id="heading--conditions"><a href="#heading--conditions">Conditions for Use of the Forum</a></h2>
+<p>Your permission to use the forum is subject to the following conditions:</p>
+<ol>
+<li>
+<p>You must be at least thirteen years old.</p>
+</li>
+<li>
+<p>You may no longer use the forum if the company contacts you directly to say that you may not.</p>
+</li>
+<li>
+<p>You must use the forum in accordance with <a href="#heading--acceptable-use">Acceptable Use</a> and <a href="#heading--content-standards">Content Standards</a>.</p>
+</li>
+</ol>
+<h2 id="heading--acceptable-use"><a href="#heading--acceptable-use">Acceptable Use</a></h2>
+<ol>
+<li>
+<p>You may not break the law using the forum.</p>
+</li>
+<li>
+<p>You may not use or try to use another’s account on the forum without their specific permission.</p>
+</li>
+<li>
+<p>You may not buy, sell, or otherwise trade in user names or other unique identifiers on the forum.</p>
+</li>
+<li>
+<p>You may not send advertisements, chain letters, or other solicitations through the forum, or use the forum to gather addresses or other personal data for commercial mailing lists or databases.</p>
+</li>
+<li>
+<p>You may not automate access to the forum, or monitor the forum, such as with a web crawler, browser plug-in or add-on, or other computer program that is not a web browser. You may crawl the forum to index it for a publicly available search engine, if you run one.</p>
+</li>
+<li>
+<p>You may not use the forum to send e-mail to distribution lists, newsgroups, or group mail aliases.</p>
+</li>
+<li>
+<p>You may not falsely imply that you’re affiliated with or endorsed by the company.</p>
+</li>
+<li>
+<p>You may not hyperlink to images or other non-hypertext content on the forum on other webpages.</p>
+</li>
+<li>
+<p>You may not remove any marks showing proprietary ownership from materials you download from the forum.</p>
+</li>
+<li>
+<p>You may not show any part of the forum on other websites with <code>&lt;iframe&gt;</code>.</p>
+</li>
+<li>
+<p>You may not disable, avoid, or circumvent any security or access restrictions of the forum.</p>
+</li>
+<li>
+<p>You may not strain infrastructure of the forum with an unreasonable volume of requests, or requests designed to impose an unreasonable load on information systems underlying the forum.</p>
+</li>
+<li>
+<p>You may not impersonate others through the forum.</p>
+</li>
+<li>
+<p>You may not encourage or help anyone in violation of these terms.</p>
+</li>
+</ol>
+<h2 id="heading--content-standards"><a href="#heading--content-standards">Content Standards</a></h2>
+<ol>
+<li>
+<p>You may not submit content to the forum that is illegal, offensive, or otherwise harmful to others. This includes content that is harassing, inappropriate, or abusive.</p>
+</li>
+<li>
+<p>You may not submit content to the forum that violates the law, infringes anyone’s intellectual property rights, violates anyone’s privacy, or breaches agreements you have with others.</p>
+</li>
+<li>
+<p>You may not submit content to the forum containing malicious computer code, such as computer viruses or spyware.</p>
+</li>
+<li>
+<p>You may not submit content to the forum as a mere placeholder, to hold a particular address, user name, or other unique identifier.</p>
+</li>
+<li>
+<p>You may not use the forum to disclose information that you don’t have the right to disclose, like others’ confidential or personal information.</p>
+</li>
+</ol>
+<h2 id="heading--enforcement"><a href="#heading--enforcement">Enforcement</a></h2>
+<p>The company may investigate and prosecute violations of these terms to the fullest legal extent. The company may notify and cooperate with law enforcement authorities in prosecuting violations of the law and these terms.</p>
+<p>The company reserves the right to change, redact, and delete content on the forum for any reason. If you believe someone has submitted content to the forum in violation of these terms, <a href="#heading--contact">contact us immediately</a>.</p>
+<h2 id="heading--your-account"><a href="#heading--your-account">Your Account</a></h2>
+<p>You must create and log into an account to use some features of the forum.</p>
+<p>To create an account, you must provide some information about yourself. If you create an account, you agree to provide, at a minimum, a valid e-mail address, and to keep that address up-to-date. You may close your account at any time by e-mailing &lt;<ins>contact_email</ins>&gt;.</p>
+<p>You agree to be responsible for all action taken using your account, whether authorized by you or not, until you either close your account or notify the company that your account has been compromised. You agree to notify the company immediately if you suspect your account has been compromised. You agree to select a secure password for your account, and keep it secret.</p>
+<p>The company may restrict, suspend, or close your account on the forum according to its policy for handling copyright-related takedown requests, or if the company reasonably believes that you’ve broken any rule in these terms.</p>
+<h2 id="heading--your-content"><a href="#heading--your-content">Your Content</a></h2>
+<p>Nothing in these terms gives the company any ownership rights in intellectual property that you share with the forum, such as your account information, posts, or other content you submit to the forum. Nothing in these terms gives you any ownership rights in the company’s intellectual property, either.</p>
+<p>Between you and the company, you remain solely responsible for content you submit to the forum. You agree not to wrongly imply that content you submit to the forum is sponsored or approved by the company. These terms do not obligate the company to store, maintain, or provide copies of content you submit, and to change it, according to these terms.</p>
+<p>Content you submit to the forum belongs to you, and you decide what permission to give others for it. But at a minimum, you license the company to provide content that you submit to the forum to other users of the forum. That special license allows the company to copy, publish, and analyze content you submit to the forum.</p>
+<p>When content you submit is removed from the forum, whether by you or by the company, the company’s special license ends when the last copy disappears from the company’s backups, caches, and other systems. Other licenses you apply to content you submit, such as <a href="https://creativecommons.org">Creative Commons</a> licenses, may continue after your content is removed. Those licenses may give others, or the company itself, the right to share your content through the forum again.</p>
+<p>Others who receive content you submit to the forum may violate the terms on which you license your content. You agree that the company will not be liable to you for those violations or their consequences.</p>
+<h2 id="heading--responsibility"><a href="#heading--responsibility">Your Responsibility</a></h2>
+<p>You agree to indemnify the company from legal claims by others related to your breach of these terms, or breach of these terms by others using your account on the forum. Both you and the company agree to notify the other side of any legal claims for which you might have to indemnify the company as soon as possible. If the company fails to notify you of a legal claim promptly, you won’t have to indemnify the company for damages that you could have defended against or mitigated with prompt notice. You agree to allow the company to control investigation, defense, and settlement of legal claims for which you would have to indemnify the company, and to cooperate with those efforts. The company agrees not to agree to any settlement that admits fault for you or imposes obligations on you without your prior agreement.</p>
+<h2 id="heading--disclaimers"><a href="#heading--disclaimers">Disclaimers</a></h2>
+<p><em><strong>You accept all risk of using the forum and content on the forum. As far as the law allows, the company and its suppliers provide the forum as is, without any warranty whatsoever.</strong></em></p>
+<p>The forum may hyperlink to and integrate forums and services run by others. The company does not make any warranty about services run by others, or content they may provide. Use of services run by others may be governed by other terms between you and the one running service.</p>
+<h2 id="heading--liability"><a href="#heading--liability">Limits on Liability</a></h2>
+<p><em><strong>Neither the company nor its suppliers will be liable to you for breach-of-contract damages their personnel could not have reasonably foreseen when you agreed to these terms.</strong></em></p>
+<p><em><strong>As far as the law allows, the total liability to you for claims of any kind that are related to the forum or content on the forum will be limited to $50.</strong></em></p>
+<h2 id="heading--feedback"><a href="#heading--feedback">Feedback</a></h2>
+<p>The company welcomes your feedback and suggestions for the forum. See the <a href="#heading--contact">Contact</a> section below for ways to get in touch with us.</p>
+<p>You agree that the company will be free to act on feedback and suggestions you provide, and that the company won’t have to notify you that your feedback was used, get your permission to use it, or pay you. You agree not to submit feedback or suggestions that you believe might be confidential or proprietary, to you or others.</p>
+<h2 id="heading--termination"><a href="#heading--termination">Termination</a></h2>
+<p>Either you or the company may end the agreement written out in these terms at any time. When our agreement ends, your permission to use the forum also ends.</p>
+<p>The following provisions survive the end of our agreement: <a href="#heading--your-content">Your Content</a>, <a href="#heading--feedback">Feedback</a>, <a href="#heading--responsibility">Your Responsibility</a>, <a href="#heading--disclaimers">Disclaimers</a>, <a href="#heading--liability">Limits on Liability</a>, and <a href="#heading--general">General Terms</a>.</p>
+<h2 id="heading--disputes"><a href="#heading--disputes">Disputes</a></h2>
+<p><ins>governing_law</ins> will govern any dispute related to these terms or your use of the forum.</p>
+<p>You and the company agree to seek injunctions related to these terms only in state or federal court in <ins>city_for_disputes</ins>. Neither you nor the company will object to jurisdiction, forum, or venue in those courts.</p>
+<p><em><strong>Other than to seek an injunction or for claims under the Computer Fraud and Abuse Act, you and the company will resolve any dispute by binding American Arbitration Association arbitration. Arbitration will follow the AAA’s Commercial Arbitration Rules and Supplementary Procedures for Consumer Related Disputes. Arbitration will happen in <ins>city_for_disputes</ins>. You will settle any dispute as an individual, and not as part of a class action or other representative proceeding, whether as the plaintiff or a class member. No arbitrator will consolidate any dispute with any other arbitration without the company’s permission.</strong></em></p>
+<p>Any arbitration award will include costs of the arbitration, reasonable attorneys’ fees, and reasonable costs for witnesses. You and the company may enter arbitration awards in any court with jurisdiction.</p>
+<h2 id="heading--general"><a href="#heading--general">General Terms</a></h2>
+<p>If a provision of these terms is unenforceable as written, but could be changed to make it enforceable, that provision should be modified to the minimum extent necessary to make it enforceable. Otherwise, that provision should be removed.</p>
+<p>You may not assign your agreement with the company. The company may assign your agreement to any affiliate of the company, any other company that obtains control of the company, or any other company that buys assets of the company related to the forum. Any attempted assignment against these terms has no legal effect.</p>
+<p>Neither the exercise of any right under this Agreement, nor waiver of any breach of this Agreement, waives any other breach of this Agreement.</p>
+<p>These terms embody all the terms of agreement between you and the company about use of the forum. These terms entirely replace any other agreements about your use of the forum, written or not.</p>
+<h2 id="heading--contact"><a href="#heading--contact">Contact</a></h2>
+<p>You may notify the company under these terms, and send questions to the company, at &lt;<ins>contact_email</ins>&gt;.</p>
+<p>The company may notify you under these terms using the e-mail address you provide for your account on the forum, or by posting a message to the homepage of the forum or your account page.</p>
+<h2 id="heading--changes"><a href="#heading--changes">Changes</a></h2>
+<p>The company last updated these terms on July 12, 2018, and may update these terms again. The company will post all updates to the forum. For updates that contain substantial changes, the company agrees to e-mail you, if you’ve created an account and provided a valid e-mail address. The company may also announce updates with special messages or alerts on the forum.</p>
+<p>Once you get notice of an update to these terms, you must agree to the new terms in order to keep using the forum.</p>
+  </div>
+</div>
+
+  
+
+        <!-- :preload-content -->
+      </div>
+
+      <footer class="container wrap">
+  <nav class='crawler-nav'>
+    <ul>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/' itemprop="url">Домой </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/categories' itemprop="url">Разделы </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/guidelines' itemprop="url">Основные принципы сообщества и часто задаваемые вопросы </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/tos' itemprop="url">Пользовательское соглашение </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/privacy' itemprop="url">Политика конфиденциальности </a>
+        </span>
+      </li>
+    </ul>
+  </nav>
+  <p class='powered-by-link'>При поддержке <a href="http://www.discourse.org">Discourse</a>, лучше всего использовать с включённым JavaScript</p>
+</footer>
+
+    </noscript>
+
+      
+
+      
+
+    <section id="main">
+    </section>
+
+      <form id="hidden-login-form" method="post" action="/login" style="display: none;">
+        <input name="username" type="text" id="signin_username">
+        <input name="password" type="password" id="signin_password">
+        <input name="redirect" type="hidden">
+        <input type="submit" id="signin-button" value="Войти">
+      </form>
+
+    <script defer="" src="/assets/start-discourse-f633b2931f6e959c2cfecc4ee982bf48e1277532eaa9bf41022188dc6f494f31.js"></script>
+
+    
+
+    <script defer="" src="/assets/browser-update-d7761004034ce1ea7686d586f5e8a8d216e6f67b609f9b4bcaba53b8b8d34729.js"></script>
+
+      
+
+      
+  
+
+</body></html>

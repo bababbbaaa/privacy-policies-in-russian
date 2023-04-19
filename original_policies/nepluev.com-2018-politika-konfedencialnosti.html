@@ -1,0 +1,1042 @@
+<html class="no-js" lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<meta name="robots" content="noindex, nofollow">
+ <script type="rocketlazyloadscript" data-rocket-type="text/javascript"> (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(44881141, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/44881141" style="position:absolute; left:-9999px;" alt="" /></div></noscript>  <script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-THPDNV7');</script> <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- This site is optimized with the Yoast SEO Premium plugin v18.4 (Yoast SEO v19.9) - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Политика конфеденциальности » Валерий Неплюев | Профессиональные фотосессии</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;subset=cyrillic&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;subset=cyrillic&amp;display=swap" media="all" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%20Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;subset=cyrillic&#038;display=swap" /></noscript>
+	<meta name="description" content="Политика сбора и обработки информации для сайта nepluev.com">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Политика конфеденциальности">
+	<meta property="og:description" content="Политика сбора и обработки информации для сайта nepluev.com">
+	<meta property="og:url" content="https://nepluev.com/2018/politika-konfedencialnosti/">
+	<meta property="og:site_name" content="Валерий Неплюев | Профессиональные фотосессии">
+	<meta property="article:published_time" content="2018-02-17T16:44:09+00:00">
+	<meta property="article:modified_time" content="2018-05-05T15:04:12+00:00">
+	<meta property="og:image" content="https://nepluev.com/wp-content/uploads/2018/01/ubout_us.jpg">
+	<meta property="og:image:width" content="4096">
+	<meta property="og:image:height" content="1736">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta name="authar" content="val">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="Написано автором">
+	<meta name="twitter:data1" content="val">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://nepluev.com/2018/politika-konfedencialnosti/#article","isPartOf":{"@id":"https://nepluev.com/2018/politika-konfedencialnosti/"},"author":{"name":"val","@id":"https://nepluev.com/#/schema/person/c7ba322f214b1d60ad4ee9ee636011a8"},"headline":"Политика конфеденциальности","datePublished":"2018-02-17T16:44:09+00:00","dateModified":"2018-05-05T15:04:12+00:00","mainEntityOfPage":{"@id":"https://nepluev.com/2018/politika-konfedencialnosti/"},"wordCount":1391,"commentCount":0,"publisher":{"@id":"https://nepluev.com/#/schema/person/c7ba322f214b1d60ad4ee9ee636011a8"},"image":{"@id":"https://nepluev.com/2018/politika-konfedencialnosti/#primaryimage"},"thumbnailUrl":"https://nepluev.com/wp-content/uploads/2018/01/ubout_us.jpg","articleSection":["Остальное"],"inLanguage":"ru-RU","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://nepluev.com/2018/politika-konfedencialnosti/#respond"]}]},{"@type":"WebPage","@id":"https://nepluev.com/2018/politika-konfedencialnosti/","url":"https://nepluev.com/2018/politika-konfedencialnosti/","name":"Политика конфеденциальности &raquo; Валерий Неплюев | Профессиональные фотосессии","isPartOf":{"@id":"https://nepluev.com/#website"},"primaryImageOfPage":{"@id":"https://nepluev.com/2018/politika-konfedencialnosti/#primaryimage"},"image":{"@id":"https://nepluev.com/2018/politika-konfedencialnosti/#primaryimage"},"thumbnailUrl":"https://nepluev.com/wp-content/uploads/2018/01/ubout_us.jpg","datePublished":"2018-02-17T16:44:09+00:00","dateModified":"2018-05-05T15:04:12+00:00","description":"Политика сбора и обработки информации для сайта nepluev.com","breadcrumb":{"@id":"https://nepluev.com/2018/politika-konfedencialnosti/#breadcrumb"},"inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://nepluev.com/2018/politika-konfedencialnosti/"]}]},{"@type":"ImageObject","inLanguage":"ru-RU","@id":"https://nepluev.com/2018/politika-konfedencialnosti/#primaryimage","url":"https://nepluev.com/wp-content/uploads/2018/01/ubout_us.jpg","contentUrl":"https://nepluev.com/wp-content/uploads/2018/01/ubout_us.jpg","width":4096,"height":1736},{"@type":"BreadcrumbList","@id":"https://nepluev.com/2018/politika-konfedencialnosti/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная страница","item":"https://nepluev.com/"},{"@type":"ListItem","position":2,"name":"Политика конфеденциальности"}]},{"@type":"WebSite","@id":"https://nepluev.com/#website","url":"https://nepluev.com/","name":"Фотограф Валерий Неплюев","description":"Фотограф Валерий Неплюев","publisher":{"@id":"https://nepluev.com/#/schema/person/c7ba322f214b1d60ad4ee9ee636011a8"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://nepluev.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":["Person","Organization"],"@id":"https://nepluev.com/#/schema/person/c7ba322f214b1d60ad4ee9ee636011a8","name":"val","image":{"@type":"ImageObject","inLanguage":"ru-RU","@id":"https://nepluev.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/b6452cce4b843cb6c0d72f47ca5e72b8?s=96&r=g","contentUrl":"https://secure.gravatar.com/avatar/b6452cce4b843cb6c0d72f47ca5e72b8?s=96&r=g","caption":"val"},"logo":{"@id":"https://nepluev.com/#/schema/person/image/"}}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+	gg_rtl = false;
+	gg_columnized_max_w = 260;
+	gg_masonry_min_w = 150;
+	gg_phosostr_min_w = 120; 
+	gg_coll_max_w = 400;
+	
+	gg_preload_hires_img 	= false; 
+	gg_use_deeplink 		= true;
+	gg_monopage_filter 		= false;
+	gg_back_to_gall_scroll 	= false;
+	
+	gg_deeplinked_elems = ['ggt_','ggs_','ggp_','gcc_','gcg_'];
+	gg_basic_deeplink 	= false;
+	gg_dl_coll_gall 	= false;
+
+		// global vars
+	gg_galleria_toggle_info = false;
+	gg_galleria_fx = '';
+	gg_galleria_fx_time = 400; 
+	gg_galleria_img_crop = true;
+	gg_galleria_autoplay = false;
+	gg_galleria_interval = 3500;
+	gg_delayed_fx = true;
+	</script>
+    <link rel="stylesheet" id="wp-block-library-css" href="https://nepluev.com/wp-includes/css/dist/block-library/style.min.css?ver=6.1.1" media="all">
+<style id="wp-block-library-theme-inline-css">
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-top:4px solid;border-bottom:4px solid;margin-bottom:1.75em;color:currentColor}.wp-block-pullquote__citation,.wp-block-pullquote cite,.wp-block-pullquote footer{color:currentColor;text-transform:uppercase;font-size:.8125em;font-style:normal}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;position:relative;font-style:normal}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:"0 0 1em 0"}.wp-block-table thead{border-bottom:3px solid}.wp-block-table tfoot{border-top:3px solid}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video{margin:0 0 1em}.wp-block-template-part.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}
+</style>
+<link rel="stylesheet" id="classic-theme-styles-css" href="https://nepluev.com/wp-includes/css/classic-themes.min.css?ver=1" media="all">
+<style id="global-styles-inline-css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="ae-pro-css-css" href="https://nepluev.com/wp-content/plugins/anywhere-elementor-pro/includes/assets/css/ae-pro.min.css?ver=2.21.3" media="all">
+<style id="ae-pro-css-inline-css">
+.blog-entry.grid-entry .blog-entry-inner{ padding:0 !important; }.search #main #content-wrap{ padding:0 !important; }
+</style>
+<link rel="stylesheet" id="gg-lightbox-css-css" href="https://nepluev.com/wp-content/plugins/global-gallery/js/lightboxes/photobox/photobox.css?ver=6.1.1" media="all">
+<link rel="stylesheet" id="hfe-style-css" href="https://nepluev.com/wp-content/plugins/header-footer-elementor/assets/css/header-footer-elementor.css?ver=1.6.13" media="all">
+<link rel="stylesheet" id="jet-elements-css" href="https://nepluev.com/wp-content/plugins/jet-elements/assets/css/jet-elements.css?ver=2.6.5" media="all">
+<link rel="stylesheet" id="jet-elements-skin-css" href="https://nepluev.com/wp-content/plugins/jet-elements/assets/css/jet-elements-skin.css?ver=2.6.5" media="all">
+<link rel="stylesheet" id="elementor-icons-css" href="https://nepluev.com/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.16.0" media="all">
+<link rel="stylesheet" id="elementor-frontend-legacy-css" href="https://nepluev.com/wp-content/plugins/elementor/assets/css/frontend-legacy.min.css?ver=3.8.0" media="all">
+<link rel="stylesheet" id="elementor-frontend-css" href="https://nepluev.com/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.8.0" media="all">
+<link rel="stylesheet" id="elementor-post-3092-css" href="https://nepluev.com/wp-content/uploads/elementor/css/post-3092.css?ver=1655606797" media="all">
+<link rel="stylesheet" id="lae-animate-styles-css" href="https://nepluev.com/wp-content/plugins/addons-for-elementor-pro/assets/css/animate.css?ver=2.9.3" media="all">
+<link rel="stylesheet" id="lae-sliders-styles-css" href="https://nepluev.com/wp-content/plugins/addons-for-elementor-pro/assets/css/sliders.css?ver=2.9.3" media="all">
+<link rel="stylesheet" id="lae-icomoon-styles-css" href="https://nepluev.com/wp-content/plugins/addons-for-elementor-pro/assets/css/icomoon.css?ver=2.9.3" media="all">
+<link rel="stylesheet" id="lae-frontend-styles-css" href="https://nepluev.com/wp-content/plugins/addons-for-elementor-pro/assets/css/lae-frontend.css?ver=2.9.3" media="all">
+<link rel="stylesheet" id="lae-widgets-styles-css" href="https://nepluev.com/wp-content/plugins/addons-for-elementor-pro/assets/css/lae-widgets.css?ver=2.9.3" media="all">
+<link rel="stylesheet" id="elementor-pro-css" href="https://nepluev.com/wp-content/plugins/elementor-pro/assets/css/frontend.min.css?ver=3.6.5" media="all">
+<link rel="stylesheet" id="jet-blog-css" href="https://nepluev.com/wp-content/plugins/jet-blog/assets/css/jet-blog.css?ver=2.2.17" media="all">
+<link rel="stylesheet" id="font-awesome-5-all-css" href="https://nepluev.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/all.min.css?ver=3.8.0" media="all">
+<link rel="stylesheet" id="font-awesome-4-shim-css" href="https://nepluev.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/v4-shims.min.css?ver=3.8.0" media="all">
+<link rel="stylesheet" id="elementor-global-css" href="https://nepluev.com/wp-content/uploads/elementor/css/global.css?ver=1655606798" media="all">
+<link rel="stylesheet" id="elementor-post-57-css" href="https://nepluev.com/wp-content/uploads/elementor/css/post-57.css?ver=1655606799" media="all">
+<link rel="stylesheet" id="hfe-widgets-style-css" href="https://nepluev.com/wp-content/plugins/header-footer-elementor/inc/widgets-css/frontend.css?ver=1.6.13" media="all">
+<link rel="stylesheet" id="vegas-css-css" href="https://nepluev.com/wp-content/plugins/anywhere-elementor-pro/includes/assets/lib/vegas/vegas.min.css?ver=2.4.0" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="https://nepluev.com/wp-content/themes/oceanwp/assets/fonts/fontawesome/css/all.min.css?ver=5.15.1" media="all">
+<link rel="stylesheet" id="simple-line-icons-css" href="https://nepluev.com/wp-content/themes/oceanwp/assets/css/third/simple-line-icons.min.css?ver=2.4.0" media="all">
+<link rel="stylesheet" id="oceanwp-style-css" href="https://nepluev.com/wp-content/themes/oceanwp/assets/css/style.min.css?ver=3.3.4" media="all">
+<style id="oceanwp-style-inline-css">
+
+		.page-template-builder-fullwidth-std .page-header {
+			display: none;
+		}
+	
+</style>
+<link rel="stylesheet" id="ulp-css" href="https://nepluev.com/wp-content/plugins/layered-popups/css/style.min.css?ver=6.64" media="all">
+<link rel="stylesheet" id="ulp-link-buttons-css" href="https://nepluev.com/wp-content/plugins/layered-popups/css/link-buttons.min.css?ver=6.64" media="all">
+<link rel="stylesheet" id="animate.css-css" href="https://nepluev.com/wp-content/plugins/layered-popups/css/animate.min.css?ver=6.64" media="all">
+<link rel="stylesheet" id="spinkit-css" href="https://nepluev.com/wp-content/plugins/layered-popups/css/spinkit.min.css?ver=6.64" media="all">
+<link rel="stylesheet" id="elementor-post-512-css" href="https://nepluev.com/wp-content/uploads/elementor/css/post-512.css?ver=1655617083" media="all">
+<link rel="stylesheet" id="gg_fontawesome-css" href="https://nepluev.com/wp-content/plugins/global-gallery/css/font-awesome/css/font-awesome.min.css?ver=4.7.0" media="all">
+<link rel="stylesheet" id="gg-frontend-css-css" href="https://nepluev.com/wp-content/plugins/global-gallery/css/frontend.min.css?ver=7.052" media="all">
+<link rel="stylesheet" id="gg-slider-css-css" href="https://nepluev.com/wp-content/plugins/global-gallery/js/jquery.galleria/themes/ggallery/galleria.ggallery_minimal.css?ver=7.052" media="all">
+<link rel="stylesheet" id="gg-custom-css-css" href="https://nepluev.com/wp-content/plugins/global-gallery/css/custom.css?ver=7.052-58c1331503bdef2367eafc701d5670f2" media="all">
+<link rel="stylesheet" id="elementor-menus-css" href="https://nepluev.com/wp-content/plugins/navmenu-addon-for-elementor/assets/css/frontend.min.css?ver=1.1.6" media="all">
+<link rel="stylesheet" id="oe-widgets-style-css" href="https://nepluev.com/wp-content/plugins/ocean-extra/assets/css/widgets.css?ver=6.1.1" media="all">
+
+<link rel="stylesheet" id="elementor-icons-shared-0-css" href="https://nepluev.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3" media="all">
+<link rel="stylesheet" id="elementor-icons-fa-solid-css" href="https://nepluev.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3" media="all">
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" id="jquery-core-js"></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js"></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.5.18" async="" id="tp-tools-js"></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.5.20" async="" id="revmin-js"></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.8.0" id="font-awesome-4-shim-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://nepluev.com/wp-json/"><link rel="alternate" type="application/json" href="https://nepluev.com/wp-json/wp/v2/posts/432"><link rel="alternate" type="application/json+oembed" href="https://nepluev.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnepluev.com%2F2018%2Fpolitika-konfedencialnosti%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://nepluev.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnepluev.com%2F2018%2Fpolitika-konfedencialnosti%2F&amp;format=xml">
+        <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+            (function () {
+                window.lae_fs = {can_use_premium_code: false};
+            })();
+        </script>
+        <style id="mystickymenu" type="text/css">#mysticky-nav { width:100%; position: static; }#mysticky-nav.wrapfixed { position:fixed; left: 0px; margin-top:0px;  z-index: 99990; -webkit-transition: 0.4s; -moz-transition: 0.4s; -o-transition: 0.4s; transition: 0.4s; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; filter: alpha(opacity=100); opacity:1; background-color: #ffffff;}#mysticky-nav.wrapfixed .myfixed{ background-color: #ffffff; position: relative;top: auto;left: auto;right: auto;}#sticky-menu { } #mysticky-nav.wrapfixed { } #mysticky-nav.wrapfixed.up { } #mysticky-nav.wrapfixed.down { } #mysticky-nav .myfixed { margin:0 auto; float:none; border:0px; background:none; max-width:100%;} #mysticky-nav.wrapfixed {width: 100%!important; height: auto;} .wrapfixed { -webkit-box-shadow: 0 2px 2px 0px rgba(66,66,66,0.3); -moz-box-shadow: 0 2px 2px 0px rgba(66,66,66,0.3); box-shadow: 0 2px 2px 0px rgba(66, 66, 66, 0.3); }</style>			<style type="text/css">
+																															</style>
+			<meta name="generator" content="Powered by Slider Revolution 6.5.20 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+
+		<script type="rocketlazyloadscript">
+			var ulp_custom_handlers = {};
+			var ulp_cookie_value = "ilovelencha";
+			var ulp_onload_popup = "";
+			var ulp_onload_mode = "none";
+			var ulp_onload_period = "5";
+			var ulp_onscroll_popup = "";
+			var ulp_onscroll_mode = "none";
+			var ulp_onscroll_period = "5";
+			var ulp_onexit_popup = "";
+			var ulp_onexit_mode = "none";
+			var ulp_onexit_period = "5";
+			var ulp_onidle_popup = "";
+			var ulp_onidle_mode = "none";
+			var ulp_onidle_period = "5";
+			var ulp_onabd_popup = "";
+			var ulp_onabd_mode = "none";
+			var ulp_onabd_period = "5";
+			var ulp_onload_delay = "5";
+			var ulp_onload_close_delay = "0";
+			var ulp_onscroll_offset = "600";
+			var ulp_onidle_delay = "30";
+			var ulp_recaptcha_enable = "off";
+			var ulp_content_id = "432";
+		</script><link rel="icon" href="https://nepluev.com/wp-content/uploads/2018/01/cropped-nepluev_favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="https://nepluev.com/wp-content/uploads/2018/01/cropped-nepluev_favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://nepluev.com/wp-content/uploads/2018/01/cropped-nepluev_favicon-180x180.png">
+<meta name="msapplication-TileImage" content="https://nepluev.com/wp-content/uploads/2018/01/cropped-nepluev_favicon-270x270.png">
+<script type="rocketlazyloadscript">function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+				try {
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+					if(e.layout==="fullscreen" || e.l==="fullscreen")
+						newh = Math.max(e.mh,window.RSIH);
+					else{
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,
+							sl;
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}
+			//});
+		  };</script>
+		<style id="wp-custom-css">
+			h3.oceanwp-about-me-name{color:#fff}.contact-info-widget span.oceanwp-contact-title{color:#fff}#footer-widgets .footer-box a{color:#929292}div.recent-posts-details-inner.clr a{color:#929292}		</style>
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+	jQuery(document).delegate('.gg_linked_img', 'click', function() {
+		var link = jQuery(this).data('gg-link');
+		window.open(link ,'_top');
+	});
+	</script>
+	
+	        <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery('body').delegate('.gg_gallery_wrap *, .gg_galleria_slider_wrap *, #lcl_wrapper *', "contextmenu", function(e) {
+                e.preventDefault();
+            });
+		});
+		</script>
+                <style type="text/css">
+		.gg_gallery_wrap *, .gg_galleria_slider_wrap *, #lcl_wrapper * {
+			-webkit-touch-callout: none; 
+			-webkit-user-select: none;
+		}
+		</style>
+        <!-- OceanWP CSS -->
+<style type="text/css">
+/* Header CSS */#site-header.has-header-media .overlay-header-media{background-color:rgba(0,0,0,0.5)}/* Footer Bottom CSS */#footer-bottom a,#footer-bottom #footer-bottom-menu a{color:#848484}
+</style><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>	</head>
+	<body data-rsssl="1" class="post-template-default single single-post postid-432 single-format-standard wp-embed-responsive has-navmenu has-megamenu ehf-header ehf-template-oceanwp ehf-stylesheet-oceanwp oceanwp-theme dropdown-mobile default-breakpoint content-full-width content-max-width post-in-category-other page-header-disabled has-breadcrumbs elementor-default elementor-kit-3092">
+				<div class="ae_data elementor elementor-512" data-aetid="512">
+						<div data-elementor-type="wp-post" data-elementor-id="512" class="elementor elementor-512 elementor-bc-flex-widget">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+									<section data-ae-bg="https://nepluev.com/wp-content/uploads/2018/01/ubout_us.jpg" class="has_ae_slider elementor-section elementor-top-section elementor-element elementor-element-ce29358 ae-featured-bg-yes ae-featured-img-size-full elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-featured-bg-source-post ae-bg-gallery-type-default" data-id="ce29358" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;shape_divider_bottom&quot;:&quot;wave-brush&quot;,&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;3a4a75f&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+							<div class="elementor-background-overlay"></div>
+						<div class="elementor-shape elementor-shape-bottom" data-negative="false">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.5 27.8" preserveAspectRatio="none">
+	<path class="elementor-shape-fill" d="M283.5,9.7c0,0-7.3,4.3-14,4.6c-6.8,0.3-12.6,0-20.9-1.5c-11.3-2-33.1-10.1-44.7-5.7	s-12.1,4.6-18,7.4c-6.6,3.2-20,9.6-36.6,9.3C131.6,23.5,99.5,7.2,86.3,8c-1.4,0.1-6.6,0.8-10.5,2c-3.8,1.2-9.4,3.8-17,4.7	c-3.2,0.4-8.3,1.1-14.2,0.9c-1.5-0.1-6.3-0.4-12-1.6c-5.7-1.2-11-3.1-15.8-3.7C6.5,9.2,0,10.8,0,10.8V0h283.5V9.7z M260.8,11.3	c-0.7-1-2-0.4-4.3-0.4c-2.3,0-6.1-1.2-5.8-1.1c0.3,0.1,3.1,1.5,6,1.9C259.7,12.2,261.4,12.3,260.8,11.3z M242.4,8.6	c0,0-2.4-0.2-5.6-0.9c-3.2-0.8-10.3-2.8-15.1-3.5c-8.2-1.1-15.8,0-15.1,0.1c0.8,0.1,9.6-0.6,17.6,1.1c3.3,0.7,9.3,2.2,12.4,2.7	C239.9,8.7,242.4,8.6,242.4,8.6z M185.2,8.5c1.7-0.7-13.3,4.7-18.5,6.1c-2.1,0.6-6.2,1.6-10,2c-3.9,0.4-8.9,0.4-8.8,0.5	c0,0.2,5.8,0.8,11.2,0c5.4-0.8,5.2-1.1,7.6-1.6C170.5,14.7,183.5,9.2,185.2,8.5z M199.1,6.9c0.2,0-0.8-0.4-4.8,1.1	c-4,1.5-6.7,3.5-6.9,3.7c-0.2,0.1,3.5-1.8,6.6-3C197,7.5,199,6.9,199.1,6.9z M283,6c-0.1,0.1-1.9,1.1-4.8,2.5s-6.9,2.8-6.7,2.7	c0.2,0,3.5-0.6,7.4-2.5C282.8,6.8,283.1,5.9,283,6z M31.3,11.6c0.1-0.2-1.9-0.2-4.5-1.2s-5.4-1.6-7.8-2C15,7.6,7.3,8.5,7.7,8.6	C8,8.7,15.9,8.3,20.2,9.3c2.2,0.5,2.4,0.5,5.7,1.6S31.2,11.9,31.3,11.6z M73,9.2c0.4-0.1,3.5-1.6,8.4-2.6c4.9-1.1,8.9-0.5,8.9-0.8	c0-0.3-1-0.9-6.2-0.3S72.6,9.3,73,9.2z M71.6,6.7C71.8,6.8,75,5.4,77.3,5c2.3-0.3,1.9-0.5,1.9-0.6c0-0.1-1.1-0.2-2.7,0.2	C74.8,5.1,71.4,6.6,71.6,6.7z M93.6,4.4c0.1,0.2,3.5,0.8,5.6,1.8c2.1,1,1.8,0.6,1.9,0.5c0.1-0.1-0.8-0.8-2.4-1.3	C97.1,4.8,93.5,4.2,93.6,4.4z M65.4,11.1c-0.1,0.3,0.3,0.5,1.9-0.2s2.6-1.3,2.2-1.2s-0.9,0.4-2.5,0.8C65.3,10.9,65.5,10.8,65.4,11.1	z M34.5,12.4c-0.2,0,2.1,0.8,3.3,0.9c1.2,0.1,2,0.1,2-0.2c0-0.3-0.1-0.5-1.6-0.4C36.6,12.8,34.7,12.4,34.5,12.4z M152.2,21.1	c-0.1,0.1-2.4-0.3-7.5-0.3c-5,0-13.6-2.4-17.2-3.5c-3.6-1.1,10,3.9,16.5,4.1C150.5,21.6,152.3,21,152.2,21.1z"></path>
+	<path class="elementor-shape-fill" d="M269.6,18c-0.1-0.1-4.6,0.3-7.2,0c-7.3-0.7-17-3.2-16.6-2.9c0.4,0.3,13.7,3.1,17,3.3	C267.7,18.8,269.7,18,269.6,18z"></path>
+	<path class="elementor-shape-fill" d="M227.4,9.8c-0.2-0.1-4.5-1-9.5-1.2c-5-0.2-12.7,0.6-12.3,0.5c0.3-0.1,5.9-1.8,13.3-1.2	S227.6,9.9,227.4,9.8z"></path>
+	<path class="elementor-shape-fill" d="M204.5,13.4c-0.1-0.1,2-1,3.2-1.1c1.2-0.1,2,0,2,0.3c0,0.3-0.1,0.5-1.6,0.4	C206.4,12.9,204.6,13.5,204.5,13.4z"></path>
+	<path class="elementor-shape-fill" d="M201,10.6c0-0.1-4.4,1.2-6.3,2.2c-1.9,0.9-6.2,3.1-6.1,3.1c0.1,0.1,4.2-1.6,6.3-2.6	S201,10.7,201,10.6z"></path>
+	<path class="elementor-shape-fill" d="M154.5,26.7c-0.1-0.1-4.6,0.3-7.2,0c-7.3-0.7-17-3.2-16.6-2.9c0.4,0.3,13.7,3.1,17,3.3	C152.6,27.5,154.6,26.8,154.5,26.7z"></path>
+	<path class="elementor-shape-fill" d="M41.9,19.3c0,0,1.2-0.3,2.9-0.1c1.7,0.2,5.8,0.9,8.2,0.7c4.2-0.4,7.4-2.7,7-2.6	c-0.4,0-4.3,2.2-8.6,1.9c-1.8-0.1-5.1-0.5-6.7-0.4S41.9,19.3,41.9,19.3z"></path>
+	<path class="elementor-shape-fill" d="M75.5,12.6c0.2,0.1,2-0.8,4.3-1.1c2.3-0.2,2.1-0.3,2.1-0.5c0-0.1-1.8-0.4-3.4,0	C76.9,11.5,75.3,12.5,75.5,12.6z"></path>
+	<path class="elementor-shape-fill" d="M15.6,13.2c0-0.1,4.3,0,6.7,0.5c2.4,0.5,5,1.9,5,2c0,0.1-2.7-0.8-5.1-1.4	C19.9,13.7,15.7,13.3,15.6,13.2z"></path>
+</svg>		</div>
+					<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7683f17 ae-bg-gallery-type-default animated fadeInDown" data-id="7683f17" data-element_type="column" data-settings="{}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<section class="has_ae_slider elementor-section elementor-inner-section elementor-element elementor-element-abdbd94 elementor-section-full_width elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="abdbd94" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;fd02037&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-no">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-d2356ae ae-bg-gallery-type-default" data-id="d2356ae" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-68b8934 elementor-widget elementor-widget-image" data-id="68b8934" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+													<a href="/">
+							<img class="elementor-animation-shrink attachment-thumbnail size-thumbnail entered lazyloaded" alt="" data-lazy-srcset="https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-150x150.png 150w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-300x300.png 300w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-768x768.png 768w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-1024x1024.png 1024w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-20x20.png 20w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon.png 512w" data-lazy-sizes="(max-width: 150px) 100vw, 150px" data-lazy-src="https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-150x150.png" src="https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-150x150.png" data-ll-status="loaded" sizes="(max-width: 150px) 100vw, 150px" srcset="https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-150x150.png 150w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-300x300.png 300w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-768x768.png 768w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-1024x1024.png 1024w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-20x20.png 20w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon.png 512w" width="150" height="150"><noscript><img width="150" height="150" src="https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-150x150.png" class="elementor-animation-shrink attachment-thumbnail size-thumbnail" alt="" srcset="https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-150x150.png 150w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-300x300.png 300w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-768x768.png 768w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-1024x1024.png 1024w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon-20x20.png 20w, https://nepluev.com/wp-content/uploads/2018/01/nepluev_favicon.png 512w" sizes="(max-width: 150px) 100vw, 150px" /></noscript>								</a>
+														</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="has_ae_slider elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-37f5e60 ae-bg-gallery-type-default" data-id="37f5e60" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-be2bbd1 elementor-nav-menu__align-center elementor-nav-menu--dropdown-mobile elementor-nav-menu__text-align-center elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="be2bbd1" data-element_type="widget" data-settings="{&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;<i class=\&quot;fas fa-chevron-down\&quot;><\/i>&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;layout&quot;:&quot;horizontal&quot;,&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav migration_allowed="1" migrated="0" role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-fade">
+				<ul id="menu-1-be2bbd1" class="elementor-nav-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-30"><a href="https://nepluev.com/" class="elementor-item">Главная</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-383"><a href="https://nepluev.com/uslugi/" class="elementor-item">Услуги</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-394"><a href="https://nepluev.com/blog/" class="elementor-item">Блог</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31"><a href="https://nepluev.com/about-me/" class="elementor-item">Об авторе</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-582"><a href="https://nepluev.com/contacts/" class="elementor-item">Контакты</a></li>
+</ul>			</nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close eicon-close"></i>			<span class="elementor-screen-only">Меню</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true">
+				<ul id="menu-2-be2bbd1" class="elementor-nav-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-30"><a href="https://nepluev.com/" class="elementor-item" tabindex="-1">Главная</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-383"><a href="https://nepluev.com/uslugi/" class="elementor-item" tabindex="-1">Услуги</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-394"><a href="https://nepluev.com/blog/" class="elementor-item" tabindex="-1">Блог</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31"><a href="https://nepluev.com/about-me/" class="elementor-item" tabindex="-1">Об авторе</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-582"><a href="https://nepluev.com/contacts/" class="elementor-item" tabindex="-1">Контакты</a></li>
+</ul>			</nav>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="has_ae_slider elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-e6d8c2e ae-bg-gallery-type-default" data-id="e6d8c2e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-9fa8e5e elementor-align-center elementor-tablet-align-center elementor-hidden-phone elementor-widget elementor-widget-button" data-id="9fa8e5e" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="#ulp-sbV2Zcbreb5DI4OP" class="elementor-button-link elementor-button elementor-size-sm elementor-animation-pulse-shrink" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">Оставить заявку</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-inner-section elementor-element elementor-element-1230873 elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="1230873" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;97b6a87&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-aaa3697 ae-bg-gallery-type-default" data-id="aaa3697" data-element_type="column">
+			<div class="elementor-column-wrap">
+							<div class="elementor-widget-wrap">
+								</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-inner-section elementor-element elementor-element-ada5b2c elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="ada5b2c" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;c433591&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-6c56bba ae-bg-gallery-type-default" data-id="6c56bba" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-3ac9b8f elementor-widget elementor-widget-ae-post-meta" data-id="3ac9b8f" data-element_type="widget" data-settings="{&quot;layout_mode&quot;:&quot;horizontal&quot;}" data-widget_type="ae-post-meta.default">
+				<div class="elementor-widget-container">
+						<div class="ae-post-meta-list-wrapper ae-pm-layout-horizontal ae-pm-layout-tablet- ae-pm-layout-mobile-">
+						<div class="ae-post-meta-item-wrapper">
+			
+			<span class="ae-element-post-category-label">
+						</span>
+			<span class="ae-element-post-category">
+				<a href="https://nepluev.com/category/other/" rel="category">Остальное</a>			</span>
+		</div>
+					</div>
+					</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-inner-section elementor-element elementor-element-f6fbc48 elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="f6fbc48" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;e9ff6b7&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-de8d02a ae-bg-gallery-type-default" data-id="de8d02a" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-d9b6ba1 elementor-widget elementor-widget-ae-post-title" data-id="d9b6ba1" data-element_type="widget" data-widget_type="ae-post-title.default">
+				<div class="elementor-widget-container">
+			<a href="https://nepluev.com/2018/politika-konfedencialnosti/"><h1 itemprop="name" class="ae-element-post-title">Политика конфеденциальности</h1></a>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-inner-section elementor-element elementor-element-dfb4d7d elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="dfb4d7d" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;2abfd22&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-1baa275 ae-bg-gallery-type-default" data-id="1baa275" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-d5a1114 elementor-widget elementor-widget-ae-post-meta" data-id="d5a1114" data-element_type="widget" data-settings="{&quot;layout_mode&quot;:&quot;horizontal&quot;}" data-widget_type="ae-post-meta.default">
+				<div class="elementor-widget-container">
+						<div class="ae-post-meta-list-wrapper ae-pm-layout-horizontal ae-pm-layout-tablet- ae-pm-layout-mobile-">
+						<div class="ae-post-meta-item-wrapper">
+						<span class="ae-element-post-date-label">
+							</span>
+			<span class="ae-element-post-date" title="4:44 PM" rel="date">
+			<span>5 мая, 2018</span>			</span>
+		</div>
+					</div>
+					</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-top-section elementor-element elementor-element-7c612c8 elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="7c612c8" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;6e05b5c&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-77064f4 ae-bg-gallery-type-default" data-id="77064f4" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<section class="has_ae_slider elementor-section elementor-inner-section elementor-element elementor-element-9581b8c elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="9581b8c" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;86b6b50&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-8802b8a ae-bg-gallery-type-default" data-id="8802b8a" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-8c5733a elementor-widget elementor-widget-ae-author" data-id="8c5733a" data-element_type="widget" data-widget_type="ae-author.default">
+				<div class="elementor-widget-container">
+					<div class="ae-element-avatar overlay-hover">
+
+						<a href="https://nepluev.com/2018/politika-konfedencialnosti/" title="val">
+				
+				<img alt="" src="https://secure.gravatar.com/avatar/b6452cce4b843cb6c0d72f47ca5e72b8?s=100&amp;r=g" data-lazy-srcset="https://secure.gravatar.com/avatar/b6452cce4b843cb6c0d72f47ca5e72b8?s=200&amp;r=g 2x" class="avatar avatar-100 photo entered lazyloaded" decoding="async" data-lazy-src="https://secure.gravatar.com/avatar/b6452cce4b843cb6c0d72f47ca5e72b8?s=100&amp;r=g" data-ll-status="loaded" srcset="https://secure.gravatar.com/avatar/b6452cce4b843cb6c0d72f47ca5e72b8?s=200&amp;r=g 2x" width="100" height="100"><noscript><img alt='' src='https://secure.gravatar.com/avatar/b6452cce4b843cb6c0d72f47ca5e72b8?s=100&#038;r=g' srcset='https://secure.gravatar.com/avatar/b6452cce4b843cb6c0d72f47ca5e72b8?s=200&#038;r=g 2x' class='avatar avatar-100 photo' height='100' width='100' decoding='async'/></noscript>									<div class="ae-avatar-overlay"></div>
+				
+							</a>
+				</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-inner-section elementor-element elementor-element-92ace85 elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="92ace85" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;3ea373e&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-no">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-d1f7766 ae-bg-gallery-type-default" data-id="d1f7766" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-d6deb07 elementor-widget elementor-widget-text-editor" data-id="d6deb07" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p>Автор:&nbsp;</p>					</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="has_ae_slider elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-5416531 ae-bg-gallery-type-default" data-id="5416531" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-88903ad elementor-widget elementor-widget-ae-author" data-id="88903ad" data-element_type="widget" data-widget_type="ae-author.default">
+				<div class="elementor-widget-container">
+					<div class="ae-author-meta-wrapper">
+			
+				
+				<div itemprop="name">Валерий Неплюев</div>
+						</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-inner-section elementor-element elementor-element-eb66931 elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="eb66931" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;639589a&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-b86ef4e ae-bg-gallery-type-default" data-id="b86ef4e" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-005f204 firstletter elementor-widget elementor-widget-ae-post-content" data-id="005f204" data-element_type="widget" data-widget_type="ae-post-content.default">
+				<div class="elementor-widget-container">
+					<div class="ae-element-post-content">
+							Данная Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в отношении всей информации, которую Неплюев Валерий Владимирович (далее – Общество) может получить о клиенте...						</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-inner-section elementor-element elementor-element-a882cbe elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="a882cbe" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;b732052&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-b83393a ae-bg-gallery-type-default" data-id="b83393a" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-10a7dab elementor-widget elementor-widget-ae-post-content" data-id="10a7dab" data-element_type="widget" data-widget_type="ae-post-content.default">
+				<div class="elementor-widget-container">
+					<div class="ae-element-post-content">
+							<p>Данная Политика конфиденциальности персональных данных (далее – Политика конфиденциальности) действует в отношении всей информации, которую Неплюев Валерий Владимирович (далее – Общество) может получить о клиенте или партнере во время использования сайта – nepluev.com.</p>
+<p><strong>ОСНОВНЫЕ ПОНЯТИЯ</strong><br>
+В настоящей Политике конфиденциальности используются следующие термины и понятия:</p>
+<p><strong>«АДМИНИСТРАЦИЯ Nepluev.com (далее – Администрация сайта)»</strong> – уполномоченные сотрудники на управления технологической платформы, действующие от имени Общества, которые организуют и (или) осуществляет обработку персональных данных, а также определяет цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.</p>
+<p><strong>«ПЕРСОНАЛЬНЫЕ ДАННЫЕ»</strong> - любая информация, относящаяся к определенному или определяемому на основании такой информации физическому/юридическому лицу, необходимая Обществу в связи с исполнением им договорных обязательств перед Пользователем/Клиентом.</p>
+<p>Кроме того к персональным данным относятся данные, которые автоматически передаются Сервисам в процессе их использования с помощью установленного на устройстве Пользователя программного обеспечения, в том числе IP-адрес, информация из cookie, информация о браузере пользователя (или иной программе, с помощью которой осуществляется доступ к Сервисам), время доступа, адрес запрашиваемой страницы и т.п.</p>
+<p><strong>«ОБРАБОТКА ПЕРСОНАЛЬНЫХ ДАННЫХ»</strong> - сбор, систематизация, накопление, хранение, уточнение (обновление, изменение), использование, распространение (в том числе передача), обезличивание, блокирование, уничтожение персональных данных Клиентов.</p>
+<p><strong>«ПОЛЬЗОВАТЕЛЬ/КЛИЕНТ»</strong> – лицо, которое использует сайт в порядке, регламентированном Администрацией сайта.</p>
+<p><strong>«КОНФИДЕНЦИАЛЬНОСТЬ ПЕРСОНАЛЬНЫХ ДАННЫХ»</strong> - обязательное для соблюдения работниками Общества, получившими доступ к персональным данным, требование не допускать распространение персональных данных без согласия Клиента или иного законного основания.</p>
+<p><strong>ОБЩИЕ ПОЛОЖЕНИЯ</strong><br>
+Использование Пользователем/Клиентом сайта Nepluev.com означает согласие с настоящей Политикой конфиденциальности и условиями обработки персональных данных Пользователя/Клиента.<br>
+В случае несогласия с условиями Политики конфиденциальности Пользователь/Клиент должен прекратить использование сайта Nepluev.com и материалов размещенных на нем.</p>
+<p>Пользователь/Клиент при пользовании сайтом nepluev.com подтверждает, что:<br>
+- обладает всеми необходимыми правами, позволяющими ему осуществлять регистрацию (создание учетной записи) и/или использовать услуги сайта Brandmaker.ru без создания учетной записи;<br>
+- указывает достоверную информацию о себе в объемах, необходимых для пользования услугами сайта nepluev.com, обязательные для заполнения поля для дальнейшего предоставления услуг сайта помечены специальным образом, вся иная информация предоставляется Пользователем/Клиентом по его собственному усмотрению.<br>
+- осознает, что информация на сайте, размещаемая Пользователем/Клиентом о себе, может становиться доступной для третьих лиц, не оговоренных в настоящей Политике и может быть скопирована и распространена ими;<br>
+- ознакомлен с настоящей Политикой, выражает свое согласие с ней и принимает на себя указанные в ней права и обязанности. Ознакомление с условиями настоящей Политики, проставление галочки под ссылкой на данную Политику или использование сайта, или отправки данных посредством форм обратной связи на сайте, является письменным согласием Пользователя/Клиента на сбор, хранение, обработку и передачу третьим лицам персональных данных предоставляемых Пользователем/Клиентом.</p>
+<p><strong>ПРЕДМЕТ ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ</strong><br>
+Настоящая Политика конфиденциальности устанавливает обязательства Администрации сайта по неразглашению и обеспечению режима защиты конфиденциальности персональных данных, которые Пользователь предоставляет по запросу Администрации сайта при заполнении форм обратной связи на сайте nepluev.com.</p>
+<p>Персональные данные, разрешённые к обработке в рамках настоящей Политики конфиденциальности, предоставляются Пользователем/Клиентом путём заполнения регистрационной формы на сайте nepluev.com.<br>
+Администрация осуществляет сбор статистики об IP-адресах своих пользователей и использует системы мониторинга и сбора статистики типа Google метрика и прочих. Данная информация используется с целью выявления и решения технических проблем, для контроля законности проводимых рекламных компаний и финансовых платежей.</p>
+<p><strong>ЦЕЛИ СБОРА ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ ПОЛЬЗОВАТЕЛЯ</strong><br>
+Персональные данные Пользователя/Клиента Администрация сайта nepluev.com может использовать в целях:<br>
+Создания учетной записи и дальнейшей аутентификации и предоставления Пользователю/Клиенту доступа к личному кабинету.<br>
+Установления с Пользователем/Клиентом обратной связи, включая направление уведомлений, запросов, рассылок, смс рассылок, касающихся использования сайта и услуг Общества.<br>
+Определения места нахождения Пользователя/Клиента для обеспечения безопасности, предотвращения мошенничества.<br>
+Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем/Клиентом.<br>
+Предоставления Пользователю/Клиенту эффективной клиентской и технической поддержки при возникновении проблем связанных с использованием сайта.<br>
+Предоставления Пользователю/Клиенту с его согласия, обновлений сайта/системы, специальных предложений, новостной рассылки и иных сведений от имени сайта.</p>
+<p><strong>ОБЯЗАТЕЛЬСТВА СТОРОН</strong><br>
+Пользователь/Клиент обязан:<br>
+Предоставить актуальную информацию о персональных данных, необходимую для пользования сайтом nepluev.com.<br>
+Обновить, дополнить предоставленную Обществом информацию о персональных данных в случае изменения данной информации.<br>
+<strong>Администрация сайта обязана:</strong><br>
+Обеспечить хранение конфиденциальной информации в тайне, не разглашать без предварительного разрешения Пользователя/Клиента.<br>
+Принимать меры предосторожности для защиты конфиденциальности персональных данных Пользователя/Клиента согласно порядку, обычно используемого для защиты такого рода информации в существующем деловом обороте.</p>
+<p><strong>ОТВЕТСТВЕННОСТЬ СТОРОН</strong><br>
+В случае утраты или разглашения Конфиденциальной информации Администрация сайта не несёт ответственность, если данная конфиденциальная информация:<br>
+Стала публичным достоянием до её утраты или разглашения.<br>
+Была получена от третьей стороны до момента её получения Администрацией сайта.<br>
+Была разглашена с согласия Пользователя/Клиента или самим Пользователем/Клиентом.</p>
+<p><strong>РАЗРЕШЕНИЕ СПОРОВ</strong><br>
+До обращения в суд с иском по спорам, возникающим из отношений между Пользователем/Клиентом сайта и Администрацией сайта, обязательным является предъявление претензии (письменного предложения о добровольном урегулировании спора).<br>
+Получатель претензии в течение 30 календарных дней со дня получения претензии, письменно уведомляет заявителя претензии о результатах рассмотрения претензии.<br>
+К настоящей Политике конфиденциальности и отношениям между Пользователем/Клиентом и Администрацией сайта применяется действующее законодательство Российской Федерации.</p>
+<p><strong>ДОПОЛНИТЕЛЬНЫЕ УСЛОВИЯ</strong><br>
+Администрация сайта вправе вносить изменения в настоящую Политику конфиденциальности без согласия Пользователя/Клиента.<br>
+Новая Политика конфиденциальности вступает в силу с момента ее размещения на сайте, если иное не предусмотрено новой редакцией Политики конфиденциальности.<br>
+Все предложения или вопросы по настоящей Политике конфиденциальности следует сообщать Администрации Сайта на электронный адрес: info@skyhorse24.ru</p>
+<p><strong>СПОСОБЫ И СРОКИ ОБРАБОТКИ ПЕРСОНАЛЬНОЙ</strong><br>
+Обработка персональных данных Пользователя/Клиента осуществляется без ограничения срока, любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств.<br>
+При утрате или разглашении персональных данных Администрация сайта информирует Пользователя/Клиента об утрате или разглашении персональных данных.<br>
+Администрация сайта принимает необходимые организационные и технические меры для защиты персональной информации Пользователя/Клиента от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.<br>
+Администрация сайта совместно с Пользователем/Клиентом принимает все необходимые меры по предотвращению убытков или иных отрицательных последствий, вызванных утратой или разглашением персональных данных Пользователя/Клиента.<br>
+В случае не согласия Пользователя/Клиента в получении информации от Общества Пользователь/Клиент может отписаться от рассылки:<br>
+- кликнув по ссылке «отписаться» внизу письма;<br>
+- путем направления уведомления на электронную почту info@skyhorse24.ru.<br>
+При поступлении уведомлений на электронную почту info@skyhorse24.ru в специальном программном обеспечении для учета действий по соответствующему Пользователю/Клиенту, создается обращение по итогам полученной от Пользователя/Клиента информации. Обращение обрабатывается максимум в течение 48 часов. В результате информация о Пользователе/Клиенте не включается в сегмент рассылок.</p>
+<p><strong>ПРИЛОЖЕНИЕ №1 К ПОЛИТИКЕ ЗАЩИТЫ ПЕРСОНАЛЬНОЙ ИНФОРМАЦИИ ПОЛЬЗОВАТЕЛЕЙ САЙТА</strong></p>
+<p><strong>СОГЛАСИЕ ПОЛЬЗОВАТЕЛЯ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ</strong></p>
+<p>Пользователь, оставляя свои данные на Интернет-сайте nepluev.com, а также заполняя обратную форму с персональными данными, принимает настоящее Соглашение на обработку персональных данных (далее – Согласие). Принятием (акцептом) оферты Согласия является заполнение формы с персональными данными в форме обратной связи на Интернет-сайте по адресу: nepluev.com.</p>
+<p>Пользователь дает свое согласие администрации сайта nepluev.com на обработку своих персональных данных со следующими условиями:</p>
+<p>Данное Согласие дается на обработку персональных данных, как без использования средств автоматизации, так и с их использованием.<br>
+Согласие дается на обработку следующих персональных данных Пользователя:<br>
+Персональные данные, не являющиеся специальными или биометрическими: фамилия, имя, отчество; адрес регистрации и проживания; номера контактных телефонов; адреса электронной почты; сведения об аккаунтах в социальных сетях; сведения об интересах.<br>
+Цель обработки персональных данных: исполнение договорных обязательств, проведение рекламных кампаний и маркетинговых исследований, в том числе смс и e-mail рассылок, звонков.<br>
+Основанием для обработки персональных данных являются: Ст. 24 Конституции Российской Федерации; ст.6 Федерального закона №152-ФЗ «О персональных данных».<br>
+В ходе обработки с персональными данными будут совершены следующие действия: сбор; запись; систематизация; накопление; хранение; уточнение (обновление, изменение); извлечение; использование; передачу (распространение, предоставление, доступ); обезличивание; блокирование; удаление; уничтожение.<br>
+Передача персональных данных третьим лицам осуществляется на основании законодательства Российской Федерации, договора с участием субъекта персональных данных или с согласия субъекта персональных данных. Пользователь дает свое согласие на возможную передачу своих персональных данных третьим лицам.<br>
+Персональные данные обрабатываются до окончания обработки. Так же обработка персональных данных может быть прекращена по запросу субъекта персональных данных.<br>
+Согласие дается, в том числе на возможную трансграничную передачу персональных данных и информационные (рекламные) оповещения.<br>
+Согласие может быть отозвано субъектом персональных данных или его представителем, путем направления письменного заявления Неплюеву Валерию Владимировичу или его представителю по адресу, указанному в начале данного Согласия.<br>
+В случае отзыва субъектом персональных данных или его представителем согласия на обработку персональных данных Неплюев Валерий Владимирович вправе продолжить обработку персональных данных без согласия субъекта персональных данных при наличии оснований, указанных в пунктах 2 – 11 части 1 статьи 6, части 2 статьи 10 и части 2 статьи 11 Федерального закона №152-ФЗ «О персональных данных» от 26.06.2006 г.</p>
+						</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<div class="elementor-element elementor-element-cbcabb4 elementor-widget elementor-widget-text-editor" data-id="cbcabb4" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+									</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-ca8d0c3 elementor-widget elementor-widget-heading" data-id="ca8d0c3" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h3 class="elementor-heading-title elementor-size-default">Добавляйтесь в друзья!</h3>		</div>
+				</div>
+				<div class="elementor-element elementor-element-3ba1898 elementor-widget elementor-widget-template" data-id="3ba1898" data-element_type="widget" data-widget_type="template.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-template">
+					<div data-elementor-type="page" data-elementor-id="311" class="elementor elementor-311">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+									<section class="has_ae_slider elementor-section elementor-top-section elementor-element elementor-element-27d68ce6 elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="27d68ce6" data-element_type="section" data-settings="{&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;01d074e&quot;,&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4c34e6c5 ae-bg-gallery-type-default" data-id="4c34e6c5" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-3786580c elementor-shape-circle e-grid-align-tablet-center e-grid-align-mobile-center elementor-grid-0 e-grid-align-center elementor-widget elementor-widget-social-icons" data-id="3786580c" data-element_type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-social-icons-wrapper elementor-grid">
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-vk elementor-animation-sink elementor-repeater-item-c94b48d" href="https://vk.com/neplyuev" target="_blank" rel="nofollow">
+						<span class="elementor-screen-only">Vk</span>
+						<i class="fab fa-vk"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-yandex elementor-animation-sink elementor-repeater-item-145553c" href="https://zen.yandex.ru/id/5ea5954365a8ef41509bb085" target="_blank">
+						<span class="elementor-screen-only">Yandex</span>
+						<i class="fab fa-yandex"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-animation-sink elementor-repeater-item-76cd72e" href="https://www.instagram.com/travelstory4you/" target="_blank" rel="nofollow">
+						<span class="elementor-screen-only">Instagram</span>
+						<i class="fab fa-instagram"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook-f elementor-animation-sink elementor-repeater-item-d9120fa" href="https://www.facebook.com/valeriy.nepluev" target="_blank" rel="nofollow">
+						<span class="elementor-screen-only">Facebook-f</span>
+						<i class="fab fa-facebook-f"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-youtube elementor-animation-sink elementor-repeater-item-b7e577b" href="https://www.youtube.com/channel/UCJpJc2_8U9Bzoz4DIympK2A?sub_confirmation=1" target="_blank" rel="nofollow">
+						<span class="elementor-screen-only">Youtube</span>
+						<i class="fab fa-youtube"></i>					</a>
+				</span>
+					</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+									</div>
+			</div>
+					</div>
+				</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-f00552a elementor-widget elementor-widget-jet-blog-smart-listing" data-id="f00552a" data-element_type="widget" data-widget_type="jet-blog-smart-listing.default">
+				<div class="elementor-widget-container">
+			<div class="elementor-jet-blog-smart-listing jet-blog"><div class="jet-smart-listing-wrap" data-settings="{&quot;block_title&quot;:&quot;\u0421\u0432\u0435\u0436\u0438\u0435 \u0437\u0430\u043f\u0438\u0441\u0438&quot;,&quot;title_tag&quot;:&quot;h2&quot;,&quot;featured_post&quot;:&quot;&quot;,&quot;featured_position&quot;:null,&quot;featured_width&quot;:null,&quot;featured_layout&quot;:null,&quot;featured_image_size&quot;:null,&quot;featured_image_position&quot;:null,&quot;featured_image_width&quot;:null,&quot;featured_excerpt_length&quot;:null,&quot;featured_excerpt_trimmed_ending&quot;:null,&quot;featured_read_more&quot;:null,&quot;featured_read_more_text&quot;:null,&quot;featured_show_meta&quot;:null,&quot;featured_show_author&quot;:null,&quot;featured_show_author_icon&quot;:null,&quot;selected_featured_show_author_icon&quot;:null,&quot;featured_show_date&quot;:null,&quot;featured_show_date_icon&quot;:null,&quot;selected_featured_show_date_icon&quot;:null,&quot;featured_show_comments&quot;:null,&quot;featured_show_comments_icon&quot;:null,&quot;selected_featured_show_comments_icon&quot;:null,&quot;posts_columns_widescreen&quot;:null,&quot;posts_columns&quot;:&quot;2&quot;,&quot;posts_columns_laptop&quot;:null,&quot;posts_columns_tablet_extra&quot;:null,&quot;posts_columns_tablet&quot;:&quot;&quot;,&quot;posts_columns_mobile_extra&quot;:null,&quot;posts_columns_mobile&quot;:&quot;1&quot;,&quot;posts_rows&quot;:&quot;1&quot;,&quot;image_size&quot;:&quot;thumbnail&quot;,&quot;image_position&quot;:&quot;left&quot;,&quot;image_width&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:30,&quot;sizes&quot;:[]},&quot;excerpt_length&quot;:5,&quot;excerpt_trimmed_ending&quot;:&quot;...&quot;,&quot;read_more&quot;:&quot;&quot;,&quot;read_more_text&quot;:null,&quot;show_meta&quot;:&quot;&quot;,&quot;show_author&quot;:null,&quot;show_author_icon&quot;:null,&quot;selected_show_author_icon&quot;:null,&quot;show_date&quot;:null,&quot;show_date_icon&quot;:null,&quot;selected_show_date_icon&quot;:null,&quot;show_comments&quot;:null,&quot;show_comments_icon&quot;:null,&quot;selected_show_comments_icon&quot;:null,&quot;query_by&quot;:&quot;category&quot;,&quot;category_ids&quot;:&quot;&quot;,&quot;post_tag_ids&quot;:null,&quot;include_ids&quot;:null,&quot;exclude_ids&quot;:&quot;&quot;,&quot;custom_query_by&quot;:null,&quot;custom_terms_ids&quot;:null,&quot;meta_query&quot;:&quot;&quot;,&quot;meta_key&quot;:null,&quot;meta_value&quot;:null,&quot;show_filter&quot;:&quot;&quot;,&quot;filter_by&quot;:null,&quot;show_all_btn&quot;:null,&quot;all_btn_label&quot;:null,&quot;more_terms_icon&quot;:null,&quot;selected_more_terms_icon&quot;:null,&quot;show_arrows&quot;:&quot;&quot;,&quot;arrow_type&quot;:null,&quot;show_featured_terms&quot;:null,&quot;show_featured_terms_tax&quot;:null,&quot;show_terms&quot;:&quot;&quot;,&quot;show_terms_tax&quot;:null,&quot;featured_meta_position&quot;:null,&quot;meta_position&quot;:null,&quot;show_image&quot;:&quot;yes&quot;,&quot;post_type&quot;:&quot;post&quot;,&quot;post_ids&quot;:null,&quot;content_related_meta&quot;:null,&quot;show_content_related_meta&quot;:&quot;&quot;,&quot;meta_content_related_position&quot;:null,&quot;title_related_meta&quot;:null,&quot;show_title_related_meta&quot;:&quot;&quot;,&quot;meta_title_related_position&quot;:null,&quot;featured_title_length&quot;:null,&quot;title_length&quot;:0,&quot;add_button_icon&quot;:&quot;&quot;,&quot;button_icon&quot;:null,&quot;selected_button_icon&quot;:null,&quot;post_add_button_icon&quot;:&quot;&quot;,&quot;post_button_icon&quot;:null,&quot;selected_post_button_icon&quot;:null,&quot;use_custom_query&quot;:&quot;&quot;,&quot;custom_query&quot;:null,&quot;posts_offset&quot;:0,&quot;order&quot;:&quot;DESC&quot;,&quot;order_by&quot;:&quot;date&quot;,&quot;is_archive_template&quot;:&quot;&quot;}" data-page="1" data-term="0" data-scroll-top="">
+	<div class="jet-smart-listing__heading"><h2 class="jet-smart-listing__title">Свежие записи</h2></div>
+	<div class="jet-smart-listing rows-1 no-featured"><div class="jet-smart-listing__posts">
+				<div class="jet-smart-listing__post-wrapper">
+				<div class="jet-smart-listing__post has-post-thumb has-thumb-postion-left">
+										<div class="jet-smart-listing__post-thumbnail post-thumbnail-simple"><a href="https://nepluev.com/2020/koto-svadby-mif-ili-realnost-o-tom-kak-my-koshachyu-svadbu-provodili/"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20150'%3E%3C/svg%3E" class="jet-smart-listing__post-thumbnail-img post-thumbnail-img-simple wp-post-image" alt="Кото-свадьбы, миф или реальность? О том, как мы кошачью свадьбу проводили." decoding="async" data-lazy-src="https://nepluev.com/wp-content/uploads/2020/04/wedding-cats-1-150x150.jpg" width="150" height="150"><noscript><img width="150" height="150" src="https://nepluev.com/wp-content/uploads/2020/04/wedding-cats-1-150x150.jpg" class="jet-smart-listing__post-thumbnail-img post-thumbnail-img-simple wp-post-image" alt="Кото-свадьбы, миф или реальность? О том, как мы кошачью свадьбу проводили." decoding="async" /></noscript></a></div>					<div class="jet-smart-listing__post-content"><div class="jet-smart-listing__post-title post-title-simple"><a href="https://nepluev.com/2020/koto-svadby-mif-ili-realnost-o-tom-kak-my-koshachyu-svadbu-provodili/">Кото-свадьбы, миф или реальность? О том, как мы кошачью свадьбу проводили.</a></div><div class="jet-smart-listing__post-excerpt post-excerpt-simple">Все любят котэ, ну и...</div></div>
+				</div>
+			</div>
+						<div class="jet-smart-listing__post-wrapper">
+				<div class="jet-smart-listing__post has-post-thumb has-thumb-postion-left">
+										<div class="jet-smart-listing__post-thumbnail post-thumbnail-simple"><a href="https://nepluev.com/2020/dalnie-golubye-ozera-konnyj-poxod/"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20150'%3E%3C/svg%3E" class="jet-smart-listing__post-thumbnail-img post-thumbnail-img-simple wp-post-image" alt="Дальние голубые озера. Конный поход" decoding="async" loading="lazy" data-lazy-src="https://nepluev.com/wp-content/uploads/2020/04/07-blue-water-kazan-150x150.jpg" width="150" height="150"><noscript><img width="150" height="150" src="https://nepluev.com/wp-content/uploads/2020/04/07-blue-water-kazan-150x150.jpg" class="jet-smart-listing__post-thumbnail-img post-thumbnail-img-simple wp-post-image" alt="Дальние голубые озера. Конный поход" decoding="async" loading="lazy" /></noscript></a></div>					<div class="jet-smart-listing__post-content"><div class="jet-smart-listing__post-title post-title-simple"><a href="https://nepluev.com/2020/dalnie-golubye-ozera-konnyj-poxod/">Дальние голубые озера. Конный поход</a></div><div class="jet-smart-listing__post-excerpt post-excerpt-simple">Близ города Казань, недалеко от...</div></div>
+				</div>
+			</div>
+			</div>
+</div>
+	</div>
+<div class="jet-smart-listing-loading"></div></div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-top-section elementor-element elementor-element-f3e40a0 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="f3e40a0" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;,&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;10773ad&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-c08c289 ae-bg-gallery-type-default" data-id="c08c289" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-4371fdd elementor-widget elementor-widget-sidebar" data-id="4371fdd" data-element_type="widget" data-widget_type="sidebar.default">
+				<div class="elementor-widget-container">
+			<div id="ocean_about_me-3" class="footer-widget widget-oceanwp-about-me about-me-widget clr"><h4 class="widget-title">Об авторе</h4>
+				<div class="oceanwp-about-me">
+
+					<div class="oceanwp-about-me-avatar clr">
+
+													<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20165%20165'%3E%3C/svg%3E" alt="Об авторе" data-lazy-src="https://nepluev.com/wp-content/uploads/2018/03/avatar3_site.jpg" width="165" height="165"><noscript><img width="165" height="165" src="https://nepluev.com/wp-content/uploads/2018/03/avatar3_site.jpg" alt="Об авторе" /></noscript>
+													<h3 class="oceanwp-about-me-name">Валерий Неплюев</h3>
+						
+					</div><!-- .oceanwp-about-me-avatar -->
+
+											<div class="oceanwp-about-me-text clr">Профессиональный фотограф</div>
+					
+						<ul class="oceanwp-about-me-social style-color">
+							
+						</ul>
+
+					
+				</div>
+
+			</div><div id="ocean_social-4" class="footer-widget widget-oceanwp-social social-widget clr">
+				<ul class="oceanwp-social-icons no-transition style-light">
+					<li class="oceanwp-instagram"><a href="https://www.instagram.com/travelstory4you/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class=" fab fa-instagram" aria-hidden="true" role="img"></i></a><span class="screen-reader-text">Opens in a new tab</span></li><li class="oceanwp-yelp"><a href="https://zen.yandex.ru/id/5ea5954365a8ef41509bb085" aria-label="Yelp" target="_blank" rel="noopener noreferrer"><i class=" fab fa-yelp" aria-hidden="true" role="img"></i></a><span class="screen-reader-text">Opens in a new tab</span></li><li class="oceanwp-vk"><a href="https://vk.com/neplyuev" aria-label="VK" target="_blank" rel="noopener noreferrer"><i class=" fab fa-vk" aria-hidden="true" role="img"></i></a><span class="screen-reader-text">Opens in a new tab</span></li><li class="oceanwp-youtube"><a href="https://www.youtube.com/channel/UCJpJc2_8U9Bzoz4DIympK2A?sub_confirmation=1" aria-label="Youtube" target="_blank" rel="noopener noreferrer"><i class=" fab fa-youtube" aria-hidden="true" role="img"></i></a><span class="screen-reader-text">Opens in a new tab</span></li>				</ul>
+
+				
+			
+		
+			</div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="has_ae_slider elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-023656c ae-bg-gallery-type-default" data-id="023656c" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-e5eec62 elementor-widget elementor-widget-sidebar" data-id="e5eec62" data-element_type="widget" data-widget_type="sidebar.default">
+				<div class="elementor-widget-container">
+			<div id="ocean_contact_info-3" class="footer-widget widget-oceanwp-contact-info clr"><h4 class="widget-title">Контакты</h4><ul class="contact-info-widget default"><li class="text">На связи в Whatsapp, Telegram</li><li class="phone"><i class="icon-phone" aria-hidden="true"></i><div class="oceanwp-info-wrap"><span class="oceanwp-contact-title">Телефон:</span><a href="tel:+79050224000"><span class="oceanwp-contact-text">+7 (905) 022-40-00</span></a><span class="screen-reader-text">Opens in your application</span></div></li><li class="email"><i class="icon-envelope" aria-hidden="true"></i><div class="oceanwp-info-wrap"><span class="oceanwp-contact-title">E-mail: </span><span class="oceanwp-contact-text"><a href="mailto:info@nepluev.com">info@nepluev.com</a><span class="screen-reader-text">Opens in your application</span></span></div></li><li class="web"><i class="icon-link" aria-hidden="true"></i><div class="oceanwp-info-wrap"><span class="oceanwp-contact-title">Web-site:</span><span class="oceanwp-contact-text"><a href="https://nepluev.com" target="_self">nepluev.com</a></span></div></li></ul></div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="has_ae_slider elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-f11688a ae-bg-gallery-type-default" data-id="f11688a" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-966c5ea elementor-widget elementor-widget-sidebar" data-id="966c5ea" data-element_type="widget" data-widget_type="sidebar.default">
+				<div class="elementor-widget-container">
+			<div id="ocean_recent_posts-2" class="footer-widget widget-oceanwp-recent-posts recent-posts-widget clr"><h4 class="widget-title">Публикации</h4>
+				<ul class="oceanwp-recent-posts clr">
+
+					
+							<li class="clr">
+
+																	<a href="https://nepluev.com/2020/koto-svadby-mif-ili-realnost-o-tom-kak-my-koshachyu-svadbu-provodili/" title="Кото-свадьбы, миф или реальность? О том, как мы кошачью свадьбу проводили." class="recent-posts-thumbnail">
+										<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Кото-свадьбы, миф или реальность? О том, как мы кошачью свадьбу проводили." decoding="async" itemprop="image" loading="lazy" data-lazy-src="https://nepluev.com/wp-content/uploads/2020/04/wedding-cats-1-150x150.jpg" width="150" height="150"><noscript><img width="150" height="150" src="https://nepluev.com/wp-content/uploads/2020/04/wedding-cats-1-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Кото-свадьбы, миф или реальность? О том, как мы кошачью свадьбу проводили." decoding="async" itemprop="image" loading="lazy" /></noscript>
+										<span class="overlay"></span>
+									</a>
+								
+								<div class="recent-posts-details clr">
+
+									<div class="recent-posts-details-inner clr">
+
+										<a href="https://nepluev.com/2020/koto-svadby-mif-ili-realnost-o-tom-kak-my-koshachyu-svadbu-provodili/" class="recent-posts-title">Кото-свадьбы, миф или реальность? О том, как мы кошачью свадьбу проводили.</a>
+
+										<div class="recent-posts-info clr">
+											<div class="recent-posts-date">29.04.2020<span class="sep">/</span></div>
+											<div class="recent-posts-comments"><a href="https://nepluev.com/2020/koto-svadby-mif-ili-realnost-o-tom-kak-my-koshachyu-svadbu-provodili/#respond">0 Comments</a></div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</li>
+
+						
+							<li class="clr">
+
+																	<a href="https://nepluev.com/2020/dalnie-golubye-ozera-konnyj-poxod/" title="Дальние голубые озера. Конный поход" class="recent-posts-thumbnail">
+										<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Дальние голубые озера. Конный поход" decoding="async" itemprop="image" loading="lazy" data-lazy-src="https://nepluev.com/wp-content/uploads/2020/04/07-blue-water-kazan-150x150.jpg" width="150" height="150"><noscript><img width="150" height="150" src="https://nepluev.com/wp-content/uploads/2020/04/07-blue-water-kazan-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Дальние голубые озера. Конный поход" decoding="async" itemprop="image" loading="lazy" /></noscript>
+										<span class="overlay"></span>
+									</a>
+								
+								<div class="recent-posts-details clr">
+
+									<div class="recent-posts-details-inner clr">
+
+										<a href="https://nepluev.com/2020/dalnie-golubye-ozera-konnyj-poxod/" class="recent-posts-title">Дальние голубые озера. Конный поход</a>
+
+										<div class="recent-posts-info clr">
+											<div class="recent-posts-date">28.04.2020<span class="sep">/</span></div>
+											<div class="recent-posts-comments"><a href="https://nepluev.com/2020/dalnie-golubye-ozera-konnyj-poxod/#respond">0 Comments</a></div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</li>
+
+						
+							<li class="clr">
+
+																	<a href="https://nepluev.com/2018/svadba-obzor-tendencij-v-svadebnom-mire/" title="Обзор тенденций в свадебном мире" class="recent-posts-thumbnail">
+										<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Обзор тенденций в свадебном мире" decoding="async" itemprop="image" loading="lazy" data-lazy-srcset="https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-150x150.jpg 150w, https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-300x300.jpg 300w, https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-1024x1024.jpg 1024w, https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-20x20.jpg 20w" data-lazy-sizes="(max-width: 150px) 100vw, 150px" data-lazy-src="https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-150x150.jpg" width="150" height="150"><noscript><img width="150" height="150" src="https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Обзор тенденций в свадебном мире" decoding="async" itemprop="image" loading="lazy" srcset="https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-150x150.jpg 150w, https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-300x300.jpg 300w, https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-1024x1024.jpg 1024w, https://nepluev.com/wp-content/uploads/2018/03/main-page-slider4-20x20.jpg 20w" sizes="(max-width: 150px) 100vw, 150px" /></noscript>
+										<span class="overlay"></span>
+									</a>
+								
+								<div class="recent-posts-details clr">
+
+									<div class="recent-posts-details-inner clr">
+
+										<a href="https://nepluev.com/2018/svadba-obzor-tendencij-v-svadebnom-mire/" class="recent-posts-title">Обзор тенденций в свадебном мире</a>
+
+										<div class="recent-posts-info clr">
+											<div class="recent-posts-date">05.05.2018<span class="sep">/</span></div>
+											<div class="recent-posts-comments"><a href="https://nepluev.com/2018/svadba-obzor-tendencij-v-svadebnom-mire/#respond">0 Comments</a></div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</li>
+
+						
+					
+				</ul>
+
+				
+			</div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+				<section class="has_ae_slider elementor-section elementor-top-section elementor-element elementor-element-35cced3 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default ae-bg-gallery-type-default" data-id="35cced3" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;,&quot;jet_parallax_layout_list&quot;:[{&quot;jet_parallax_layout_image&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;_id&quot;:&quot;8f305a6&quot;,&quot;jet_parallax_layout_speed&quot;:{&quot;unit&quot;:&quot;%&quot;,&quot;size&quot;:50,&quot;sizes&quot;:[]},&quot;jet_parallax_layout_type&quot;:&quot;scroll&quot;,&quot;jet_parallax_layout_z_index&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x&quot;:50,&quot;jet_parallax_layout_bg_y&quot;:50,&quot;jet_parallax_layout_bg_size&quot;:&quot;auto&quot;,&quot;jet_parallax_layout_animation_prop&quot;:&quot;transform&quot;,&quot;jet_parallax_layout_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;],&quot;jet_parallax_layout_image_tablet&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_image_mobile&quot;:{&quot;url&quot;:&quot;&quot;,&quot;id&quot;:&quot;&quot;},&quot;jet_parallax_layout_direction&quot;:null,&quot;jet_parallax_layout_fx_direction&quot;:null,&quot;jet_parallax_layout_bg_x_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_x_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_y_mobile&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_tablet&quot;:&quot;&quot;,&quot;jet_parallax_layout_bg_size_mobile&quot;:&quot;&quot;}]}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="has_ae_slider elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-0142faf ae-bg-gallery-type-default" data-id="0142faf" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-1a5de67 elementor-widget elementor-widget-text-editor" data-id="1a5de67" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				© Copyright 2018 <i class="fa fa-heart" style="color: #d60000;"></i> Валерий Неплюев | <a href="/2018/politika-konfedencialnosti/">Политика конфиденциальности</a>					</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+									</div>
+			</div>
+					</div>
+					</div>
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+/* <![CDATA[ */
+var hasJetBlogPlaylist = 0;
+/* ]]> */
+</script>
+    <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+    if(	navigator.appVersion.indexOf("MSIE 8.") != -1 || navigator.appVersion.indexOf("MSIE 9.") != -1 ) {
+		document.body.className += ' gg_old_loader';
+	} else {
+		document.body.className += ' gg_new_loader';
+	}
+	</script>
+    
+		<script type="rocketlazyloadscript">
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = false;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+		<!-- Chatra {literal} -->
+<script type="rocketlazyloadscript">
+    (function(d, w, c) {
+        w.ChatraID = 'eu69PK8tL2mzP9PeW';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = 'https://call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+</script>
+<!-- /Chatra {/literal} --><link rel="stylesheet" id="elementor-post-311-css" href="https://nepluev.com/wp-content/uploads/elementor/css/post-311.css?ver=1655617083" media="all">
+<link rel="stylesheet" id="e-animations-css" href="https://nepluev.com/wp-content/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.8.0" media="all">
+<link rel="stylesheet" id="elementor-icons-fa-brands-css" href="https://nepluev.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min.css?ver=5.15.3" media="all">
+<link rel="stylesheet" id="rs-plugin-settings-css" href="https://nepluev.com/wp-content/plugins/revslider/public/assets/css/rs6.css?ver=6.5.20" media="all">
+<style id="rs-plugin-settings-inline-css">
+#rs-demo-id {}
+</style>
+<script id="ae-pro-js-js-extra">
+var aepro = {"ajaxurl":"https:\/\/nepluev.com\/wp-admin\/admin-ajax.php","current_url":"https%3A%2F%2Fnepluev.com%2F2018%2Fpolitika-konfedencialnosti%2F","breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"plugin_url":"https:\/\/nepluev.com\/wp-content\/plugins\/anywhere-elementor-pro","queried_page":{"ID":432,"page_type":"single"},"access_level":"2"};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/anywhere-elementor-pro/includes/assets/js/ae-pro.min.js?ver=2.21.3" id="ae-pro-js-js" defer=""></script>
+<script id="aep-build-js-extra">
+var aepro = {"ajaxurl":"https:\/\/nepluev.com\/wp-admin\/admin-ajax.php","current_url":"https%3A%2F%2Fnepluev.com%2F2018%2Fpolitika-konfedencialnosti%2F","breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"plugin_url":"https:\/\/nepluev.com\/wp-content\/plugins\/anywhere-elementor-pro","queried_page":{"ID":432,"page_type":"single"},"access_level":"2"};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/anywhere-elementor-pro/build/index.js?ver=2.21.3" id="aep-build-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/anywhere-elementor-pro/includes/assets/js/ae-editor.min.js?ver=2.21.3" id="ae_editor_js-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/global-gallery/js/lightboxes/photobox/jquery.photobox.min.js?ver=7.052" id="gg-lightbox-js-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/mystickymenu/js/detectmobilebrowser.js?ver=2.6.1" id="detectmobilebrowser-js" defer=""></script>
+<script id="mystickymenu-js-extra">
+var option = {"mystickyClass":".sticky-menu","activationHeight":"320","disableWidth":"720","disableLargeWidth":"0","adminBar":"false","device_desktop":"1","device_mobile":"1","mystickyTransition":"slide","mysticky_disable_down":"on"};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/mystickymenu/js/mystickymenu.min.js?ver=2.6.1" id="mystickymenu-js" defer=""></script>
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/login.php|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/nepluev.com","onHoverDelay":"100","rateThrottle":"3"};
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/anywhere-elementor-pro/includes/assets/lib/vegas/vegas.min.js?ver=2.4.0" id="vegas-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/imagesloaded.min.js?ver=4.1.4" id="imagesloaded-js" defer=""></script>
+<script id="oceanwp-main-js-extra">
+var oceanwpLocalize = {"nonce":"34a372e4f7","isRTL":"","menuSearchStyle":"drop_down","mobileMenuSearchStyle":"disabled","sidrSource":null,"sidrDisplace":"1","sidrSide":"left","sidrDropdownTarget":"link","verticalHeaderTarget":"link","customSelects":".woocommerce-ordering .orderby, #dropdown_product_cat, .widget_categories select, .widget_archive select, .single-product .variations_form .variations select","ajax_url":"https:\/\/nepluev.com\/wp-admin\/admin-ajax.php"};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/theme.min.js?ver=3.3.4" id="oceanwp-main-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/drop-down-mobile-menu.min.js?ver=3.3.4" id="oceanwp-drop-down-mobile-menu-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/drop-down-search.min.js?ver=3.3.4" id="oceanwp-drop-down-search-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/vendors/magnific-popup.min.js?ver=3.3.4" id="ow-magnific-popup-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/ow-lightbox.min.js?ver=3.3.4" id="oceanwp-lightbox-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/vendors/flickity.pkgd.min.js?ver=3.3.4" id="ow-flickity-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/ow-slider.min.js?ver=3.3.4" id="oceanwp-slider-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/scroll-effect.min.js?ver=3.3.4" id="oceanwp-scroll-effect-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/scroll-top.min.js?ver=3.3.4" id="oceanwp-scroll-top-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/themes/oceanwp/assets/js/select.min.js?ver=3.3.4" id="oceanwp-select-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/layered-popups/js/script.min.js?ver=6.64" id="ulp-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/global-gallery/js/frontend.js?ver=7.052" id="gg-frontend-js-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.0.1" id="smartmenus-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.6.5" id="elementor-pro-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.8.0" id="elementor-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.8.0" id="elementor-frontend-modules-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9" id="regenerator-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" id="wp-polyfill-js"></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/dist/hooks.min.js?ver=4169d3cf8e8d95a3d6d5" id="wp-hooks-js"></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/dist/i18n.min.js?ver=9e794f35a71bb98672ae" id="wp-i18n-js"></script>
+<script type="rocketlazyloadscript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type="rocketlazyloadscript" id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/nepluev.com\/wp-admin\/admin-ajax.php","nonce":"d14ddb6aba","urls":{"assets":"https:\/\/nepluev.com\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/nepluev.com\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"ru_RU","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/nepluev.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.6.5" id="elementor-pro-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2" id="elementor-waypoints-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2" id="jquery-ui-core-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor/assets/lib/swiper/swiper.min.js?ver=5.3.6" id="swiper-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor/assets/lib/share-link/share-link.min.js?ver=3.8.0" id="share-link-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor/assets/lib/dialog/dialog.min.js?ver=4.9.0" id="elementor-dialog-js" defer=""></script>
+<script type="rocketlazyloadscript" id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u0432 Facebook","shareOnTwitter":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u0432 Twitter","pinIt":"\u0417\u0430\u043f\u0438\u043d\u0438\u0442\u044c","download":"\u0421\u043a\u0430\u0447\u0430\u0442\u044c","downloadImage":"\u0421\u043a\u0430\u0447\u0430\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435","fullscreen":"\u0412\u043e \u0432\u0435\u0441\u044c \u044d\u043a\u0440\u0430\u043d","zoom":"\u0423\u0432\u0435\u043b\u0438\u0447\u0435\u043d\u0438\u0435","share":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f","playVideo":"\u041f\u0440\u043e\u0438\u0433\u0440\u0430\u0442\u044c \u0432\u0438\u0434\u0435\u043e","previous":"\u041d\u0430\u0437\u0430\u0434","next":"\u0414\u0430\u043b\u0435\u0435","close":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"\u0422\u0435\u043b\u0435\u0444\u043e\u043d","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"\u0422\u0435\u043b\u0435\u0444\u043e\u043d \u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0435","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"\u041f\u043b\u0430\u043d\u0448\u0435\u0442","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"\u041f\u043b\u0430\u043d\u0448\u0435\u0442 \u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0435","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"\u041d\u043e\u0443\u0442\u0431\u0443\u043a","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"\u0428\u0438\u0440\u043e\u043a\u043e\u0444\u043e\u0440\u043c\u0430\u0442\u043d\u044b\u0435","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},"version":"3.8.0","is_static":false,"experimentalFeatures":{"e_import_export":true,"e_hidden_wordpress_widgets":true,"theme_builder_v2":true,"landing-pages":true,"elements-color-picker":true,"favorite-widgets":true,"admin-top-bar":true,"page-transitions":true,"form-submissions":true,"e_scroll_snap":true},"urls":{"assets":"https:\/\/nepluev.com\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":432,"title":"%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B5%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20%C2%BB%20%D0%92%D0%B0%D0%BB%D0%B5%D1%80%D0%B8%D0%B9%20%D0%9D%D0%B5%D0%BF%D0%BB%D1%8E%D0%B5%D0%B2%20%7C%20%D0%9F%D1%80%D0%BE%D1%84%D0%B5%D1%81%D1%81%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D1%84%D0%BE%D1%82%D0%BE%D1%81%D0%B5%D1%81%D1%81%D0%B8%D0%B8","excerpt":"","featuredImage":"https:\/\/nepluev.com\/wp-content\/uploads\/2018\/01\/ubout_us-1024x1024.jpg"}};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.8.0" id="elementor-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor-pro/assets/js/preloaded-elements-handlers.min.js?ver=3.6.5" id="pro-preloaded-elements-handlers-js" defer=""></script>
+<script id="jet-elements-js-extra">
+var jetElements = {"ajaxUrl":"https:\/\/nepluev.com\/wp-admin\/admin-ajax.php","isMobile":"false","templateApiUrl":"https:\/\/nepluev.com\/wp-json\/jet-elements-api\/v1\/elementor-template","devMode":"false","messages":{"invalidMail":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043e\u0431\u043e\u0437\u043d\u0430\u0447\u044c\u0442\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0439 email"}};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/jet-elements/assets/js/jet-elements.min.js?ver=2.6.5" id="jet-elements-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/navmenu-addon-for-elementor/assets/js/modernizr.custom.js?ver=1.1.6" id="elementor-menus-modernizer-js" defer=""></script>
+<script id="elementor-menus-frontend-js-extra">
+var ElementorMenusFrontendConfig = {"ajaxurl":"https:\/\/nepluev.com\/wp-admin\/admin-ajax.php","nonce":"5efc9bb483"};
+var elementorScreenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+var elementorSecondaryScreenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/navmenu-addon-for-elementor/assets/js/frontend.min.js?ver=1.1.6" id="elementor-menus-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor/assets/js/preloaded-modules.min.js?ver=3.8.0" id="preloaded-modules-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min.js?ver=3.6.5" id="e-sticky-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/underscore.min.js?ver=1.13.4" id="underscore-js" defer=""></script>
+<script id="wp-util-js-extra">
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-includes/js/wp-util.min.js?ver=6.1.1" id="wp-util-js" defer=""></script>
+<script id="wpforms-elementor-js-extra">
+var wpformsElementorVars = {"captcha_provider":"recaptcha","recaptcha_type":"v3"};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/wpforms/assets/js/integrations/elementor/frontend.min.js?ver=1.7.3" id="wpforms-elementor-js" defer=""></script>
+<script id="jet-blog-js-extra">
+var JetBlogSettings = {"ajaxurl":"https:\/\/nepluev.com\/wp-admin\/admin-ajax.php"};
+</script>
+<script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/jet-blog/assets/js/jet-blog.min.js?ver=2.2.17" id="jet-blog-js" defer=""></script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		</script>
+	    <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		
+		
+	
+	// thumbs maker
+	var gg_lb_thumb = function(src) {
+					return 'https://nepluev.com/wp-content/plugins/global-gallery/classes/easy_wp_thumbs.php?src='+ encodeURIComponent(src) +'&w=100&h=100';
+			
+	};
+	
+	
+	// show lightbox 
+	gg_throw_lb = function(gall_obj, rel, clicked_index, no_deeplink) {
+		if(!Object.keys(gall_obj).length) {return false;}
+
+		if(jQuery('#gg_lb_gall').length) {jQuery('#gg_lb_gall').empty();}
+		else {jQuery('body').append('<div id="gg_lb_gall"></div>');}
+		
+						
+			jQuery.each(Object.keys(gall_obj), function(i, v) {
+				var obj = gall_obj[v];
+				var txt = (obj.descr) ? obj.title+' - '+obj.descr : obj.title;
+
+				jQuery('#gg_lb_gall').append('<a href="'+ obj.img +'"><img src="'+ gg_lb_thumb(obj.img) +'" title="'+ txt +'" /></a>');
+			});
+		
+			if(typeof(gg_ptb_executed) != 'undefined') {jQuery('#gg_lb_gall').photobox('destroy');}
+			gg_ptb_executed = true;
+			
+			jQuery('#gg_lb_gall').photobox('a',{ 
+				time: 5000,
+				history: false,
+				loop: true,
+				rotatable: false,
+				zoomable: true, 
+				thumbs: true, 
+				autoplay: false 
+			});
+			
+			jQuery('#gg_lb_gall a:eq('+ clicked_index +')').trigger('mouseenter.photobox');
+			jQuery('#gg_lb_gall a:eq('+ clicked_index +')').trigger('click');
+			
+			};
+	</script>
+	
+		<script type="rocketlazyloadscript">
+			var ulp_ajax_url = "https://nepluev.com/wp-admin/admin-ajax.php";
+			var ulp_count_impressions = "on";
+			var ulp_async_init = "on";
+			var ulp_css3_enable = "on";
+			var ulp_ga_tracking = "off";
+			var ulp_km_tracking = "off";
+			var ulp_onexit_limits = "off";
+			var ulp_no_preload = "on";
+			var ulp_campaigns = {"none":[""]};
+			var ulp_overlays = {"sbV2Zcbreb5DI4OP":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"h2vmeASWvIVjMGIK":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"lrPdBY5wMFoOZd8P":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"c3sk9oTKSv6oYcao":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"89fwrUMls1k2ADWG":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"3557zMZlc2Q45OoT":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"crfpuioaDQLSxo4V":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"vMBtqOmUH8Gb2Qid":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"fyuFQxzoYFVWrMkI":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"jzIK8fLQJvad76Zm":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"lToKhxXxrtXbkI9i":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"uM7v3MJtQIW23TWH":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"Owbtkx7IYPYIiTzb":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"DCc5rSNiHUmfCi6x":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"XpNIUXyxOAqxgidv":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"YAUuYKtu542vj5nt":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"mmw7PtCelqTbJWKW":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"IdPJ3EGABgEb7WRL":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"OregomPRv9nv9EiA":["#707070", "0.8", "on", "middle-center", "fadeIn", "classic", "#ffffff"],"none":["", "", "", "", ""]};
+			if (typeof ulp_init == "function") { 
+				ulp_init(); jQuery(document).ready(function() {ulp_ready();});
+			} else {
+				jQuery(document).ready(function(){ulp_init(); ulp_ready();});
+			}
+		</script><script type="rocketlazyloadscript" src="https://nepluev.com/wp-content/plugins/layered-popups/js/ads.js?ver=6.64" defer=""></script><script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://nepluev.com/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>	<script>class RocketElementorAnimation{constructor(){this.deviceMode=document.createElement("span"),this.deviceMode.id="elementor-device-mode",this.deviceMode.setAttribute("class","elementor-screen-only"),document.body.appendChild(this.deviceMode)}_detectAnimations(){let t=getComputedStyle(this.deviceMode,":after").content.replace(/"/g,"");this.animationSettingKeys=this._listAnimationSettingsKeys(t),document.querySelectorAll(".elementor-invisible[data-settings]").forEach(t=>{const e=t.getBoundingClientRect();if(e.bottom>=0&&e.top<=window.innerHeight)try{this._animateElement(t)}catch(t){}})}_animateElement(t){const e=JSON.parse(t.dataset.settings),i=e._animation_delay||e.animation_delay||0,n=e[this.animationSettingKeys.find(t=>e[t])];if("none"===n)return void t.classList.remove("elementor-invisible");t.classList.remove(n),this.currentAnimation&&t.classList.remove(this.currentAnimation),this.currentAnimation=n;let s=setTimeout(()=>{t.classList.remove("elementor-invisible"),t.classList.add("animated",n),this._removeAnimationSettings(t,e)},i);window.addEventListener("rocket-startLoading",function(){clearTimeout(s)})}_listAnimationSettingsKeys(t="mobile"){const e=[""];switch(t){case"mobile":e.unshift("_mobile");case"tablet":e.unshift("_tablet");case"desktop":e.unshift("_desktop")}const i=[];return["animation","_animation"].forEach(t=>{e.forEach(e=>{i.push(t+e)})}),i}_removeAnimationSettings(t,e){this._listAnimationSettingsKeys().forEach(t=>delete e[t]),t.dataset.settings=JSON.stringify(e)}static run(){const t=new RocketElementorAnimation;requestAnimationFrame(t._detectAnimations.bind(t))}}document.addEventListener("DOMContentLoaded",RocketElementorAnimation.run);</script>
+
+
+<span id="elementor-device-mode" class="elementor-screen-only"></span></body></html>

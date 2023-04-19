@@ -1,0 +1,2201 @@
+<html xmlns="http://www.w3.org/1999/xhtml" class=" js flexboxlegacy canvas canvastext no-touch"><head><style type="text/css">[type="submit"]:disabled {
+  pointer-events: none; }
+
+/*# sourceMappingURL=to.css.map */</style><style>
+  .fc.old-theme-fix {
+    overflow: visible;
+  }
+  .fc.old-theme-fix:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
+  .tt-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+
+  }
+  .twitter-typeahead {
+    display: inherit !important;
+  }
+  .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+  }
+  .tt-suggestion, .tt-footer {
+    display: block;
+    padding: 1px 0px 1px 10px;
+  }
+  .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+    color: #fff;
+  }
+  .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion p, .tt-footer p {
+    margin: 0;
+  }
+</style><style>
+  .spinner-container, .spinner {
+    position: absolute;
+    left:     0;
+    bottom:   0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .spinner-container {
+    z-index:  900;
+    overflow: hidden;
+
+    &.animate .spinner {
+      &.slide-up {
+        opacity: 0;
+      }
+
+      &.fade-in {
+        opacity: 0;
+      }
+    }
+  }
+
+  .spinner {
+    height:   100%;
+    opacity:  0.6;
+    background: #fff;
+
+    &.slide-up {
+      @include transition-property(opacity, bottom);
+      @include transition-duration(0.3s);
+    }
+
+    &.fade-in {
+      @include transition-property(opacity);
+      @include transition-duration(1s);
+    }
+
+    .spin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+
+  .spinner {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  .spinner-screen {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+  }
+</style><link media="all" onload="this.media=&quot;all&quot;" rel="stylesheet" type="text/css" href="/served_assets/public/jquery.modal-b7e3fb6a3704c0a2359a33962d371838618774b855128cef059add49182581c0.css"><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot;&quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;руб&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;руб&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:false,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:false,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:false},&quot;vk&quot;:{&quot;pixel_active&quot;:true,&quot;price_list_id&quot;:&quot;5080&quot;},&quot;new_ya_metrika&quot;:true,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;account_id&quot;:89809,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:false,&quot;minimum_items_price&quot;:500,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:true,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href=\&quot;page/politika-konfidentsialnosti\&quot; target=\&quot;_blank\&quot;\u003eполитика конфиденциальности\u003c/a\u003e&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:true,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:2,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]"><script type="text/javascript" async="" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.10.1/dist/js/jquery.suggestions.min.js"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript" async="" src="//code.jivosite.com/script/widget/79621"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-MK9KV7F&amp;l=gtmDataLayer"></script><script type="text/javascript" async="" src="/javascripts/insales_counter.js?6"></script><script src="/packs/js/shop_bundle-16233c9b04dc8ce13e23.js"></script><style type="text/css"></style>
+        <!--InsalesCounter -->
+        <script type="text/javascript">
+        if (typeof(__id) == 'undefined') {
+          var __id=89809;
+
+          (function() {
+            var ic = document.createElement('script'); ic.type = 'text/javascript'; ic.async = true;
+            ic.src = '/javascripts/insales_counter.js?6';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ic, s);
+          })();
+        }
+        </script>
+        <!-- /InsalesCounter -->
+      <script>gtmDataLayer = []; </script>
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','gtmDataLayer','GTM-MK9KV7F');
+      </script>
+      <!-- End Google Tag Manager -->
+    <script type="text/javascript">
+      (function() {
+          (function() { var d=document; var s = d.createElement('script');
+  s.type = 'text/javascript'; s.async = true;
+  s.src = '//code-eu1.jivosite.com/widget/ZOKO3c82ni'; d.head.appendChild(s); })();
+
+      })();
+    </script><script type="text/javascript" async="" src="//code-eu1.jivosite.com/widget/ZOKO3c82ni"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Пользовательское соглашение</title>
+  <meta name="keywords" content="Пользовательское соглашение">
+  <meta name="description" content="Пользовательское соглашение">
+  
+   <link rel="icon" href="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/favicon.ico" type="image/x-icon">   
+  <link rel="shortcut icon" href="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/favicon.ico" type="image/x-icon"> 
+     
+  <link type="text/css" rel="stylesheet" href="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/style.css">
+  
+  
+
+
+ <link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/custom-user.css">
+  
+  
+<!-- REES46 tracking scripts -->
+<script type="text/javascript">
+  window.r46_currency='0&nbsp;руб';
+  
+  
+</script>
+<!-- /REES46 tracking scripts -->
+  
+  <!-- Global site tag (gtag.js) - Google Ads: 943122435 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-943122435"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-943122435');
+</script>
+
+
+
+
+<script>
+$(document).ready(function(){
+  $('[data-prod-id]').on('click', function(){
+    var id = this.dataset.prodId;
+    var category = this.dataset.collectionTitle;
+
+    gtag('event', 'add_to_cart', {
+      'send_to': 'AW-943122435',
+      'items': [{
+        'id': id,
+        'category': category,
+        'google_business_vertical': 'retail'
+      }]
+    });
+  });
+});
+</script>
+  <script src="https://kit.fontawesome.com/58a7e59e14.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.10.1/dist/css/suggestions.min.css"></head>
+  <body id="one-column" class="with_fixed-header">      <!-- Yandex.Metrika counter -->
+      <script type="text/javascript">
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(21847387, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            ecommerce:"dataLayer"
+       });
+      </script>
+      <script type="text/javascript">
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({});
+      </script>
+      <noscript><div><img src="https://mc.yandex.ru/watch/21847387" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+      <!-- /Yandex.Metrika counter -->
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MK9KV7F"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    
+    <!--[if lte IE 7]>
+  <link rel="stylesheet" href="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/style_ie.css" type="text/css" media="screen, projection" />
+  <script async type="text/javascript" src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/pie.js"></script>
+  <![endif]-->
+    <!--[if lte IE 8]>
+  <style type="text/css">
+  #menu ul, #menu .first, #menu .last, .cart, .search .txt, .catalog, .quantity_input, .price-filter .txt, .coupon .txt, #comment_form input.txt, #review_form input.txt, #comment_form textarea, #review_form textarea, .style-block, #add_product_notification  {
+behavior: url(https://nadomfoto.ruhttps://static.insales-cdn.com/assets/1/3988/2248596/1673259895/PIE.htc);
+   zoom: 1;
+ }
+.style-block {position: relative;}
+.txt, .quantity_input {position: relative;}
+#menu ul {z-index: 100; position: relative;}
+</style>
+<![endif]-->
+    
+    <script type="text/javascript" src="/served_assets/public/shadowbox/adapter/shadowbox-jquery.js?1676581898"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/modernize.js"></script>
+    <script type="text/javascript" src="/served_assets/public/shadowbox/shadowbox.js?1676581898"></script>
+    <script type="text/javascript" src="/served_assets/public/jquery.cookie.js?1676581898"></script> 
+    <script type="text/javascript" src="/served_assets/empty.js"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/jquery.MetaData.js"> </script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/jquery.rating.pack.js"> </script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/jquery.cycle.all.js"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/common.js"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/OptionSelectors.js"></script>
+    <script type="text/javascript" async="" src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/insales.personal-data.js"> </script>
+  
+  <script type="text/javascript">
+    var cv_currency_format = "{\"delimiter\":\"\",\"separator\":\".\",\"format\":\"%n\\u0026nbsp;%u\",\"unit\":\"руб\",\"show_price_without_cents\":1}";
+  </script>
+  <script type="text/javascript">
+    Shadowbox.loadSkin('classic', '/javascripts/shadowbox/skin');
+    Shadowbox.loadLanguage('ru', '/javascripts/shadowbox/lang');
+    Shadowbox.loadPlayer(['img'], '/javascripts/shadowbox/player');
+    window.onload = Shadowbox.init;
+    
+    console.log(Shadowbox);
+       
+    jQuery(function() {
+      $("a.add_to_compare").live('click',function(e){ 
+        e.preventDefault(); 
+      });
+  
+      new InSales.Compare({
+        selector: 'a.add_to_compare',
+        draw: function(products) {
+
+          var text = '<h2>Сравнение товаров</h2>';
+          if (products.length == 0) {
+            text += '<i>Пока ни одного товара к сравнению не добавлено.</i>';
+            
+          } else {
+            text += '<ul class="compare-sidebar">';
+            $(products).each(function(index,product) {
+              text += '<li><a class="comp-info fl" href="/product/?product_id=' + product.id + '">'+product.title+'</a><a href="#" rel="' + product.id + '" class="remove_compare del fr" href="#">×</a></li>';  
+            });
+            text += '</ul><input type="submit" value="Сравнить" onclick="window.open(\'/compares\'); return false;" name="" class="button fr">';
+          }
+          $('.compare-wrap').html(text);
+          
+        }
+      });
+      
+      $('.compare-sidebar li .remove_compare').each(function() {
+ $(this).parents('#middle').find('.prod-block a.add_to_compare[rel="'+$(this).attr('rel')+'"]').replaceWith("<p rel="+$(this).attr('rel')+" class='added'>Товар добавлен к сравнению</p>");
+        
+       
+        
+      });
+      
+      $('.compare-sidebar li .remove_compare').live('click',function() {
+         $(this).parents('#middle').find('.prod-block p[rel="'+$(this).attr('rel')+'"]').replaceWith('<a href="#" class="add_to_compare" rel="'+$(this).attr('rel')+'">Добавить к сравнению</a> ');
+         
+      });
+            
+    /*  new InSales.Cart({
+        selector: 'input.buy',
+        draw: function(cart) {
+          var text = 'Корзина';
+          if (cart.order_lines.length > 0) {
+            text += '<span class="cart_items_price">' + InSales.formatMoney(cart.items_price, "") + '</span> <span class="cart_items_count">' + cart.items_count + '</span>';
+          }
+          $('.cart-inner').html(text);
+          this.addCallback = function () {
+                this.reloadCart(function () {
+                  cart.draw();
+                  set_preloaders_message('<div id="add_product_notification"><h3>Товар добавлен в корзину</h3><a href="#" class="closeCartMsg fl buy_button order_button">Продолжить покупки</a><a href="/cart_items/" class="fr buy_button">Перейти в корзину</a></div>');
+                  //window.setTimeout( hide_preloader, 1000);
+
+                });
+              }
+        }
+      });    */   
+      
+      /* поиска по сайту или в категории */
+      changeSearch();
+      $('.search_check').change(function(){
+        changeSearch();
+      });
+      
+      function changeSearch() {
+        if($('.search_check').is(':checked')) {
+          $('form.searchform').attr('action', '');
+        } else {
+          $('form.searchform').attr('action', '/search');
+        }
+      }
+      
+      $('.closeCartMsg').live('click', function(e){
+       e.preventDefault();
+        hide_preloader();
+      });
+    });
+  </script><link rel="stylesheet" type="text/css" href="/javascripts/shadowbox/skin/classic/skin.css"><script type="text/javascript" src="/javascripts/shadowbox/skin/classic/skin.js"></script><script type="text/javascript" src="/javascripts/shadowbox/lang/shadowbox-ru.js"></script><script type="text/javascript" src="/javascripts/shadowbox/player/shadowbox-img.js"></script>
+    
+  <script type="text/javascript">
+ $(function(){
+   $('.catalog-arrow').click(function(e){
+     e.preventDefault();
+     $('.catalog .hidden').css('display','inline-block');
+     $(this).hide();
+   });
+   
+   $('.prod-descr.init-tooltip').each(function(){
+     
+     var fullDescr = $(this).attr('title');
+     $(this).parents('.prod-block:first').append('<span class="tooltip">' + fullDescr + '</span>');
+   });
+   
+   $('.prod-descr').mouseover(function(){
+    $(this).parents('.prod-block:first').find('.tooltip').fadeIn('100');
+   });
+   
+   $('.tooltip').mouseout(function(){
+     $(this).parents('.prod-block:first').find('.tooltip').hide();
+   });
+ });
+ /* $(function() {
+
+    if ($(window).width() < 840) {return false};
+    var breakpoint = 0;
+    var $header = $('.header-main')
+    $(window)
+      .on('scroll.header',  function(event) {
+        
+        if ($(this).scrollTop() >= breakpoint) {
+
+          $header
+            .addClass('fixed-header');
+
+          $('body')
+            .addClass('with_fixed-header');
+          
+        }else{
+          $header
+            .removeClass('fixed-header');
+
+          $('body')
+            .removeClass('with_fixed-header');
+        }
+
+
+      });
+
+});*/
+$(function() {
+    $('.open-menu').on('click', function() {
+     $('.dropdown-menu-mobile').css('display', 'block') ;
+     $('.mobile-bg').css('display', 'block');
+    });
+  	$('.close').on('click', function() {
+     $('.dropdown-menu-mobile').css('display', 'none') ;
+     $('.mobile-bg').css('display', 'none');
+    });
+  $('.fa-angle-down').on('click', function() {
+     $('.fa-angle-down').css('display', 'none') ;
+     $('.mobile-catalog').css('display', 'block');
+    $('.fa-angle-up').css('display', 'block') ;
+    });
+  $('.fa-angle-up').on('click', function() {
+     $('.fa-angle-up').css('display', 'none') ;
+     $('.mobile-catalog').css('display', 'none');
+    $('.fa-angle-down').css('display', 'block') ;
+    });
+});
+
+  
+</script>
+
+    
+    <div id="wrapper">
+      <header class="header-main fixed-header" style="margin-bottom:40px;">
+        <div class="header-top-mobile hide-xl hide-lg">
+        	<div class="container">
+          		<div class="row-flex">
+              		<div class="row-flex logo-wrapper">
+                  		<button class="open-menu">
+                      		<svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="22" height="2" fill="#69AC11"></rect>
+                                <rect y="8" width="22" height="2" fill="#69AC11"></rect>
+                                <rect y="16" width="22" height="2" fill="#69AC11"></rect>
+                            </svg>
+                      	</button>
+                      	<div class="logo">
+                          
+                          <a href="/" class="logo-link">
+                            <img src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/loaded_logo.png" alt="NadomFoto">
+                        </a>
+                          
+                        </div>
+                  	</div>
+                  	<div class="row-flex cart-wrapper">
+                  		<a href="tel:8(495)364-48-68" class="open-contacts">
+                      		<i class="fas fa-phone" aria-hidden="true"></i>
+                      	</a>
+                      	<a href="/cart_items" class="shopping-cart-widget">
+                      		<i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                          	<span class="cart_items_count">0</span>
+                      	</a>
+                  	</div>
+              	</div>
+              	<div class="header-top-contacts">
+              		<a href="https://wa.me/79254948282" class="btn-watsapp" onclick="window.open('https://nadomfoto.ru/','_blank');window.open(this.href,'_self');">
+                      <p style="font-size: 14px;text-align: center;margin-bottom: 8px;">WhatsApp</p>
+                      <p style="font-size: 14px;text-align: center;margin-bottom: 8px;">+7 925 494-82-82</p>
+                  
+                 </a>
+                  <div class="worktime" style="font-size: 14px;">
+                          <i class="fas fa-clock" aria-hidden="true"></i>
+                          <span> Пн-Вс с 10:00 до 18:00 </span>
+                      </div>
+              	</div>
+          	</div>
+        </div>
+        <div id="header-top">
+          <div class="container hide-md">
+            <div class="line-top">
+              <div class="logo">
+            
+            <a href="/" class="logo-link">
+              <img src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/loaded_logo.png" alt="NadomFoto">
+          </a>
+            
+            </div>
+              <div>
+                      <div class="phone" itemscope="" itemtype="http://schema.org/Store">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <a href="tel:8(495)364-48-68">8(495)364-48-68 </a>
+                      </div>
+                      <div class="phone email">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <a href="mailto:info@nadomfoto.ru">info@nadomfoto.ru </a>
+                      </div>
+                 </div>
+                      <div class="worktime" style="font-size: 14px;">
+                          <i class="fas fa-clock" aria-hidden="true"></i>
+                          <span> ПН-ПТ с 10:00 до 18:00 | СБ-ВС выходной</span>
+                      </div>
+               
+                 <a href="https://wa.me/79254948282" class="btn-watsapp" onclick="window.open('https://nadomfoto.ru/','_blank');window.open(this.href,'_self');">
+                  <p style="font-size: 14px;text-align: center;margin-bottom: 8px;">WhatsApp</p>
+                      <p style="font-size: 14px;text-align: center;margin-bottom: 8px;">+7 925 494-82-82</p>
+                  
+                 </a>
+                   <div><a class="callback-header" href="javascript:void(0);" onclick="$('.shadow').fadeIn();$('.recallmsg').show();"><i class="fas fa-phone" aria-hidden="true"></i> Заказать звонок</a></div>
+                 <div class="cart">
+                   <a href="/cart_items" class="cart-inner">
+                      <i class="fas fa-shopping-cart" aria-hidden="true"></i> Корзина
+                     <span class="cart_items_count">0</span> 
+                   </a>
+                  </div>
+
+
+
+           </div>
+          </div>
+          <div class="line-bottom">  
+          <div class="container">
+
+            <div id="menu">
+              <div class="menu-inner">
+                <div class="catalog hide-md">Каталог <span style="font-weight:bold;margin-left: 5px;">∨</span></div>
+                <ul class="catalog-menu">
+                 
+                    <li>
+                      <a href="/collection/foto-akssesuary">Аксессуары для фото-видеокамер<span>&gt;</span></a>
+                      
+                          <div class="submenu">
+                          <ul class="submenu_list">
+                              
+                                  <li>
+                                      <a href="/collection/akkumulyatory"><span>Аккумуляторы для фотоаппаратов и видеокамер</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyator-canon">Аккумуляторы Canon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyator-nikon">Аккумуляторы Nikon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-sony">Аккумуляторы Sony</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-panasonic">Аккумуляторы Panasonic</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-jvc">Аккумуляторы JVC</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-samsung">Аккумуляторы Samsung</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-olympus">Аккумуляторы  Olympus</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-casio">Аккумуляторы Casio</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-fujifilm">Аккумуляторы Fujifilm</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-kodak">Аккумуляторы Kodak</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-minolta">Аккумуляторы Minolta</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-pentax">Аккумуляторы Pentax</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-gopro">Аккумуляторы GoPro</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-dlya-dji-osmo">Аккумуляторы для DJI Osmo</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-sanyo">Аккумуляторы Sanyo</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-fujimi">Аккумуляторы Fujimi</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-acmepower">Аккумуляторы AcmePower</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-relato">Аккумуляторы Relato</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-digital">Аккумуляторы другие</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/akkumulyatory-vneshnie">Аккумуляторы внешние</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/elementy-pitaniya-i-zaryadnye-ustroystva-2"><span>Зарядные устройства для фотоаппаратов и видеокамер</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-canon">Зарядка для Canon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/setevye-adaptery-canon">Сетевые адаптеры Canon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-nikon">Зарядка для Nikon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-sony">Зарядка для Sony</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-panasonic">Зарядка для Panasonic</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-jvc">Зарядка для JVC</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-samsung">Зарядка для Samsung</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-casio">Зарядка для Casio</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-fujifilm">Зарядка для Fujifilm</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-Kodak">Зарядка для Kodak</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-olympus">Зарядка для Olympus</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-dlya-pentex">Зарядка для Pentax</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/kategoriya">Зарядка для GoPro</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-acmepower">Зарядка AcmePower</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-relato">Зарядка Relato</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/dvoynye-zaryadnye-ustroystva">Двойные зарядные устройства</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/troynye-zaryadnye-ustroystva">Тройные зарядные устройства</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadnye-ustroystva-fujimi">Зарядные устройства FUJIMI</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/universalnye">Универсальные</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-protect">Зарядка PROTECT</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaryadka-digital">Зарядка Digital</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/batareynye-bloki"><span>Батарейные блоки</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/batareynye-bloki-dlya-nikon">Батарейные блоки для Nikon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/batareynye-bloki-dlya-canon">Батарейные блоки для Canon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/batareynye-bloki-dlya-sony">Батарейные блоки для Sony</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/karti-pamyti"><span>Карты памяти</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/karty-pamyati-sd">Карты памяти SD</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/arty-pamyati-standarta-compact-flash">Карты памяти стандарта Compact Flash</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/karty-pamyati-microsd">Карты памяти MicroSD</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/karty-pamyati-memory-stick-duo">Карты памяти Memory Stick Duo</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/karty-pamyati-dlya-mobilnyh-telefonov">Карты памяти других форматов</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/usb-nakopiteli">USB накопители</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/card-reader">Card reader</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/futlyary-dlya-kart-pamyati">Футляры для карт памяти</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/mikrofony-dlya-fotoapparata"><span>Микрофоны</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/petlichnye-mikrofony">Петличные микрофоны</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/Микрофоны-для-крепления-на-горячий-башмак">Микрофоны для крепления на горячий башмак</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/besprovodnye-mikrofony">Беспроводные микрофоны</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/mikrofony-boya">Микрофоны Boya</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/mikrofony-rode">Микрофоны RODE</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/mikrofony-dlya-smartfona">Микрофоны для смартфона</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/mikrofony">Микрофоны для видеокамер</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/vetrozaschita-dlya-mikrofona">Ветрозащита для микрофона</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/shtativy"><span>Штативы</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/dlya-foto">Штативы для фототехники</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/dlya-videotehniki">Штативы для видеотехники</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/shtativy-naplechnye-plechevoy-upor">Штативы наплечные (Плечевой упор)</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/monopody">Моноподы</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/selfi-monopod">Селфи-монопод</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/gibkie-shtativy">Гибкие штативы</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/nastolnye-shtativy">Настольные штативы</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/shtativnye-golovki">Штативные головки</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/stedikamy">Стедикамы</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/штативы-другие">Другое</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/sumkichehly"><span>Фотосумки и рюкзаки для фототехники</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/sumki-dlya-fotoapparatov">Сумки для зеркальных фотоаппаратов</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/chehly-dlya-kompaktnyh-fotoapparatov">Сумки и чехлы для компактных фотоаппаратов</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/dlya-videokamer-2">Сумки для видеокамер</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/ryukzaki-dlya-fototehniki">Рюкзаки для фототехники</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/osveschenie-dlya-fototehniki"><span>Вспышки и свет для фототехники</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/koltsevaya-vspyshka">Кольцевая вспышка</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/nakamernye-vspyshki-i-osvetiteli">Софтбоксы для вспышек</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/kabeli-dlya-vspyshek">Кабели для вспышек</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/perehodniki-goryachego-bashmaka-vspyshki">Переходники горячего башмака вспышки</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/rasseivateli">Насадки для накамерных вспышек</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/prochie">Прочие</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/nakamernye-led-osvetiteli">Накамерные LED осветители</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/radiosinhronizatory">Радиосинхронизаторы</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/pulty-du"><span>Пульты ДУ для фотоаппарата</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/usb"><span>Кабели и USB</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/elementy-pitaniya"><span>Батарейки AA и аккумуляторы AAA</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/podvodnye-boksy"><span>Подводные боксы и чехлы</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/vidoiskateli-i-naglazniki"><span>Видоискатели и наглазники</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/remen-dlya-fotoapparata"><span>Ремни для фотоаппаратов</span></a>
+                                      
+                                  </li>
+                              
+                          </ul>
+                  </div>
+                      
+                  </li>
+                  
+                    <li>
+                      <a href="/collection/videokamery">Аксессуары для видеокамер<span>&gt;</span></a>
+                      
+                          <div class="submenu">
+                          <ul class="submenu_list">
+                              
+                                  <li>
+                                      <a href="/collection/kabeli-shnury-perehodniki-razemy"><span>Кабели, шнуры, переходники, разъемы</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/hdmi-kabeli">HDMI кабели</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/hdmi-dvi-kabeli">HDMI-DVI кабели</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/perehodniki-adaptery-hdmi-i-dvi">Переходники (адаптеры) HDMI и DVI</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/video-kabeli-rca-rca-tyulpan">Видео кабели RCA-RCA (тюльпан)</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/video-kabeli-scart">Видео кабели SCART</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/prochie-video-i-audio-kabeli">Прочие видео и аудио кабели</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/video-i-audio-perehodniki-prochie">Видео и аудио переходники прочие</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/blendy"><span>Бленды для видеокамер</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/kassety"><span>Кассеты</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/foto-bumaga"><span>Фотобумага</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/monitory-dlya-foto-i-videokamer"><span>Мониторы для фото и видеокамер</span></a>
+                                      
+                                  </li>
+                              
+                          </ul>
+                  </div>
+                      
+                  </li>
+                  
+                    <li>
+                      <a href="/collection/obektiv">Аксессуары для объективов<span>&gt;</span></a>
+                      
+                          <div class="submenu">
+                          <ul class="submenu_list">
+                              
+                                  <li>
+                                      <a href="/collection/svetofiltry"><span>Светофильтры</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/svetofiltry-canon">Светофильтры Canon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/svetofiltr-nikon">Светофильтры Nikon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/svetofiltry-sony">Светофильтры Sony</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/marumi">Светофильтры Marumi</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/bw">Светофильтры B+W</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/kenko">Светофильтры Kenko</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/flama">Светофильтры Flama</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/svetofiltry-hoya">Светофильтры Hoya</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/katalog-1-2">Светофильтры Emilyfoto</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/svetofiltry-cavei">Светофильтры CAVEI</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/svetofiltry-jjc">Светофильтры JJC</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/svetofiltry-commlite">Светофильтры Commlite</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/svetofiltry-s-effektami"><span>Светофильтры с эффектами</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/filtry-fujimi-uv">Светофильтр UV (защитные)</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/filtry-fujimi-cpl">Поляризационные светофильтр CPL</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/filtr-nd-fujimi">Нейтральные светофильтры (ND)</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/filtr-effektnyy-fujimi">Звездные светофильтры</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/smyagchayuschie-soft-svetofiltry-fujimi">Смягчающие Soft светофильтры</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/filtry-gradientnye-fujimi">Светофильтры градиентные</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/filtry-dlya-makro-fujimi">Светофильтр для макро</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/filtry-kvadratnye-fujimi">Светофильтры квадратные</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/derzhateli-i-krepleniya-dlya-svetofiltrov"><span>Держатели и крепления для светофильтров</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/sredstva-po-zaschite-i-uhodu"><span>Средства по защите и уходу</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/uhod-za-optikoy">Уход за оптикой</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/dlya-chistki-matritsy">Для чистки матрицы</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zaschita-dlya-ekrana">Защита для экрана</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/dozhdevye-chehly-dlya-fotopparata">Дождевые чехлы для фотоппарата</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/blendy-i-kryshki"><span>Бленды для объективов</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/blendy-dlya-canon">Бленды для объективов Canon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/blenda-dlya-nikon">Бленды для Nikon</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/blendy-dlya-sony">Бленды для Sony</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/blendy-dlya-fujifilm">Бленды для Fujifilm</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/blendy-dlya-panasonic">Бленды для Panasonic</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/blendy-dlya-tamron">Бленды для Tamron</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/blend_universalnie">Бленды универсальные</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/blendy-dlya-pentax">Бленды для Pentax</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/kryshki-dlya-obektivov"><span>Крышки для объективов</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/kartochki-balansa-belogo"><span>Карточки баланса белого</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/futlyary-dlya-obektivov"><span>Футляры для объективов</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/perehodnye-koltsa-i-adapter"><span>Переходные кольца и адаптеры</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/perehodnye-povyshayuschie-koltsa"><span>Переходные повышающие кольца</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/makrokoltsa"><span>Макрокольца</span></a>
+                                      
+                                  </li>
+                              
+                          </ul>
+                  </div>
+                      
+                  </li>
+                  
+                    <li>
+                      <a href="/collection/studiynoe-oborudovanie">Студийное оборудование<span>&gt;</span></a>
+                      
+                          <div class="submenu">
+                          <ul class="submenu_list">
+                              
+                                  <li>
+                                      <a href="/collection/stoyki-i-sistemy-krepleniya"><span>Стойки и системы крепления</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/derzhateli">Держатели</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/zazhimy">Зажимы</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/stoyka-trenoga-dlya-fotostudii">Стойка-тренога для фотостудии</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/prochie-2">Прочие</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/otrazhateli-2"><span>Отражатели</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/otrazhateli-i-paneli">Отражатели и панели</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/kruglye-otrazhateli">Круглые отражатели</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/otrazhateli">Отражатели и фоны</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/oborudovanie-dlya-predmetnoy-semki"><span>Оборудование для предметной съемки</span><span>&gt;</span></a>
+                                      
+                                          <ul class="submenu2_list">
+                                            
+                                            <li>
+                                              <a href="/collection/fotoboksy-dlya-predmetnoy-semki">Фотобоксы для предметной съемки</a>
+                                              
+                                            </li>
+                                            
+                                            <li>
+                                              <a href="/collection/fotoboksy-s-podsvetkoy">Фотобоксы с подсветкой</a>
+                                              
+                                            </li>
+                                            
+                                          </ul>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/derzhatel-fona-i-otrazhateley"><span>Держатель фона и отражателей</span></a>
+                                      
+                                  </li>
+                              
+                          </ul>
+                  </div>
+                      
+                  </li>
+                  
+                    <li>
+                      <a href="/collection/gopro">Аксессуары для Gopro<span>&gt;</span></a>
+                      
+                          <div class="submenu">
+                          <ul class="submenu_list">
+                              
+                                  <li>
+                                      <a href="/collection/Аккумуляторы-для-GoPro"><span>Аккумуляторы для GoPro</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/zaryadnye-ustroystva-dlya-gopro"><span>Зарядки для GoPro</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/remen-dlya-gopro"><span>Ремень для GoPro</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/monopod-dlya-gopro"><span>Монопод для Гопро</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/krepleniya-dlya-gopro"><span>Крепления для GoPro</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/bolty-dlya-krepleniy-gopro"><span>Болты для креплений GoPro</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/boksy-dlya-gopro"><span>Боксы для GoPro</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/keysy-dlya-hraneniya-i-perenoski-gopro"><span>Кейсы для хранения и переноски GoPRo</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/poplavki-dlya-gopro"><span>Поплавки для GoPro</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/mikrofony-dlya-gopro"><span>Микрофоны для GoPro</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/kabeli-dlya-gopro"><span>Кабели для GoPRo</span></a>
+                                      
+                                  </li>
+                              
+                          </ul>
+                  </div>
+                      
+                  </li>
+                  
+                    <li>
+                      <a href="/collection/mobile">Аксессуары для телефонов<span>&gt;</span></a>
+                      
+                          <div class="submenu">
+                          <ul class="submenu_list">
+                              
+                                  <li>
+                                      <a href="/collection/zaryadnye-ustroystva-dlya-telefonov"><span>Зарядные устройства для телефонов</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/vneshnie-akkumulyatory"><span>Внешние аккумуляторы (Power Bank)</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/kabeli-usb-20-i-usb-30"><span>Кабели USB 2.0 и USB 3.0</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/kabeli-audio-jack-jack"><span>Кабели аудио Jack - Jack</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/audio-perehodniki-adaptery-jack-jack"><span>Аудио переходники (адаптеры) Jack - Jack</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/avtoderzhateli"><span>Автодержатели</span></a>
+                                      
+                                  </li>
+                              
+                          </ul>
+                  </div>
+                      
+                  </li>
+                  
+                    <li>
+                      <a href="/collection/tehnika-dlya-krasoty-i-zdorovya">Техника для красоты и здоровья<span>&gt;</span></a>
+                      
+                          <div class="submenu">
+                          <ul class="submenu_list">
+                              
+                                  <li>
+                                      <a href="/collection/philips"><span>Philips</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/braun"><span>Braun</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/panasonic"><span>Panasonic</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/andis"><span>Andis</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/wahl"><span>Wahl</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/aksessuary-dlya-britv"><span>Аксессуары для бритв</span></a>
+                                      
+                                  </li>
+                              
+                                  <li>
+                                      <a href="/collection/aksessuary-dlya-parikmaherov"><span>Аксессуары для парикмахеров</span></a>
+                                      
+                                  </li>
+                              
+                          </ul>
+                  </div>
+                      
+                  </li>
+                  
+                </ul>
+                <div class="header-menu">
+                  <ul>	
+                    
+                    
+                    <li><a href="https://nadomfoto.ru/collection/rasprodazha" title="Скидки" class="">Скидки</a></li>
+                    
+                    
+                    
+                    <li><a href="/page/доставка" title="Доставка" class="">Доставка</a></li>
+                    
+                    
+                    
+                    <li><a href="/page/oplata" title="Оплата" class="">Оплата</a></li>
+                    
+                    
+                    
+                    <li><a href="/page/garantiynoe-obsluzhivanie" title="Гарантия и возврат" class="">Гарантия и возврат</a></li>
+                    
+                    
+                    
+                    <li><a href="/client_account/login" title="Личный кабинет" class="">Личный кабинет</a></li>
+                    
+                    
+                    
+                    
+                    
+                    <li><a href="/page/feedback" title="Контакты" class="">Контакты</a></li>
+                    
+                    
+                  </ul>	
+                </div>
+                <div class="search">
+                      <form action="/search" method="get" class="searchform">     
+                       	 
+                      <fieldset>
+                       <input type="text" name="q" class="txt" value="Поиск" onfocus="if(this.value=='Поиск'){this.value='';}" onblur="if(this.value==''){this.value='';}">
+                       <button type="submit" class="btn" value=""><i class="fas fa-search" style="color:grey" aria-hidden="true"></i></button>
+                        
+                      </fieldset>
+                     </form>
+                    </div>
+              </div>
+            </div>
+          </div>  
+          </div>
+         </div>
+	
+        </header><!-- #header-->
+      <div style="width:100%;height:50px;"></div>
+      
+      <div class="breadcrumbs center-align">
+  <a href="/">Главная</a> &gt;
+  
+  <span>Пользовательское соглашение</span>
+   
+</div>
+
+      
+	<div id="middle" style="margin-top:40px;">  
+		<div id="container">
+			<div id="content">
+              <div class="style-block" style="background: #ffffff;"> 
+<h1>Пользовательское соглашение</h1>
+<div class="editor-content"><p><strong>Пользовательское соглашение</strong></p>
+<p>&nbsp;</p>
+<p>Настоящий документ «Пользовательское соглашение» (далее - Соглашение) представляет собой предложение ИП Ширяева Ольга Михайловна , размещенное на сайте <a href="http://www.nadomfoto.ru">www.nadomfoto.ru</a> &nbsp;(далее - «Сайт»), заключить договор на изложенных ниже условиях Соглашения.</p>
+<p>&nbsp;</p>
+<p><strong>1.Общие положения</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p>1.1.Вы настоящим подтверждаете, что с момента регистрации на Сайте и в течение времени пользования Сайтом, а также персонализированными сервисами Сайта, вы являетесь Пользователем Сайта вплоть до вашего личного обращения в администрацию Сайта с требованием об отказе от любых взаимоотношений с Сайтом.</p>
+<p>&nbsp;</p>
+<p>1.2.Использование вами Сайта любым способом и в любой форме в пределах его объявленных функциональных возможностей, включая:</p>
+<p>а)просмотр размещенных на Сайте материалов;</p>
+<p>б)регистрация и/или авторизация на Сайте;</p>
+<p>в)размещение или отображение на Сайте любых материалов, включая но не ограничиваясь такими как: тексты, гипертекстовые ссылки, изображения, аудио и видео- файлы, сведения и/или иная информация;</p>
+<p>создает договор на условиях настоящего Соглашения в соответствии с положениями ст.437 и 438 Гражданского кодекса Российской Федерации.</p>
+<p>&nbsp;</p>
+<p>1.3.Воспользовавшись любой из указанных выше возможностей по использованию Сайта вы подтверждаете, что:</p>
+<p>а)ознакомились с условиями настоящего Соглашения в полном объеме до начала использования Сайта;</p>
+<p>б)принимаете все условия настоящего Соглашения в полном объеме без каких-либо изъятий и ограничений с вашей стороны и обязуетесь их соблюдать или прекратить использование Сайта. Если вы не согласны с условиями настоящего Соглашения или не имеете права на заключение договора на их основе, вам следует незамедлительно прекратить любое использование Сайта;</p>
+<p>в)Соглашение (в том числе любая из его частей) может быть изменено Сайтом без какого-либо специального уведомления. Новая редакция Соглашения вступает в силу с момента ее размещения на Сайте либо доведения до сведения Пользователя в иной удобной форме, если иное не предусмотрено новой редакцией Соглашения.</p>
+<p>&nbsp;</p>
+<ol>
+<li><strong> Общие условия пользования Сайтом</strong></li>
+</ol>
+<p><strong>&nbsp;</strong></p>
+<p>2.1.Сайт осуществляет продажу товара посредством веб-ресурса NadomFoto.ru&nbsp;и сопутствующих сервисных служб Сайта.&nbsp;<br>2.2.Сайт осуществляет доставку товара способами, определенными в разделе доставки.</p>
+<p>2.3.Сайт предоставляет доступ к персонализированным сервисам Сайта для получения наиболее полной информации по интересующему вас товару, создания рейтингов и мнений, участия в конкурсных программах и иных акциях, проводимых Сайтом.</p>
+<p>2.4.Настоящим вы даете своё добровольное согласие на информирование вас обо всех действиях Сайта, связанных с продажей товара и/или оказанием услуг, в том числе о статусе выполнения заказа, а также об иных событиях любого характера, относящихся к сервисам Сайта.&nbsp;<br>2.5.Согласие на получение рассылки:<br>Подписываясь на SMS- и email-рассылку www.nadomfoto.ru&nbsp; или третьих лиц, уполномоченных на рассылку от имени&nbsp;www.nadomfoto.ru&nbsp;, в сети Интернет&nbsp;www.nadomfoto.ru, я соглашаюсь получать информационную рассылку на телефон и электронный адрес, указанный мной при подписке через сервис подписки информационной рассылки на сайте&nbsp;www.nadomfoto.ru. Я проинформирован о том, что в случае, если у меня возникнет желание отказаться от информационной рассылки&nbsp; www.nadomfoto.ru, мне будет необходимо самостоятельно перейти по ссылке «Отписаться от рассылки», указанной в тексте отправляемых сайтом сообщений с электронного адреса&nbsp;Сайта&nbsp;info@nadomfoto.ru или же сообщить о несогласии получения информационных рассылок по адресам, указанным в разделе «Контакты» данного Соглашения. Я также даю разрешение&nbsp;Сайту или третьим лицам, уполномоченным на рассылку от имени&nbsp;Сайта, собирать, хранить и обрабатывать все переданные мною в адрес&nbsp;Сайта персональные данные (в том числе фамилию, имя, отчество и адрес электронной почты) с целью информирования о новостях и других событиях&nbsp;Сайта. &nbsp;<br>2.6.Вы соглашаетесь, что Сайт не несет никакой ответственности за задержки, сбои, неверную или несвоевременную доставку, удаление или несохранность каких-либо уведомлений. При этом Сайт оставляет за собой право повторного направления любого уведомления, в случае его неполучения Вами.&nbsp;<br>2.7.Все вопросы по информационной поддержке Вы можете задать по адресу&nbsp;info@nadomfoto.ru.</p>
+<p>2.8.Вы признаёте, что сопровождающее товар описание на Сайте не претендует на исчерпывающую информативность и может содержать неточности. Вы вправе направить все замечания по неточному описанию товара Сайту по адресу&nbsp;info@nadomfoto.ru.</p>
+<p>2.9.Вы признаёте, что Сайт прилагает достаточные усилия, чтобы внешний вид, упаковка и характеристики товаров соответствовали описаниям, приведенным в каталоге Сайта. Одновременно Сайт доводит до вашего сведения, что фактические внешний вид, упаковка и характеристики товара могут отличаться от этих описаний в случае ассортиментного товара, а также в случае внесения изменений в товар непосредственно производителем.<br>2.10.Вы проинформированы, что цена и наличие товара на Сайте изменяется на круглосуточно без предварительного уведомления об этом и указываются в индивидуальном статусе и подробной карточке товара, отображаемым в каталоге на Сайте.&nbsp;</p>
+<p><strong>3.Обязательства Пользователя при использовании Сайта</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p>3.1.Вы соглашаетесь не использовать сервисы Сайта с целью:&nbsp;<br>3.1.1.загрузки контента, который является незаконным, нарушает любые права третьих лиц; пропагандирует насилие, жестокость, ненависть и/или дискриминацию по расовому, национальному, половому, религиозному, социальному признакам; содержит недостоверные сведения и/или оскорбления в адрес конкретных лиц, организаций, органов власти;&nbsp;<br>3.1.2.побуждения к совершению противоправных действий, а также содействия лицам, действия которых направлены на нарушение ограничений и запретов, действующих на территории РФ;<br>3.1.3.нарушения прав несовершеннолетних лиц и/или причинение им вреда в любой форме;&nbsp;<br>3.1.4.ущемления прав меньшинств;&nbsp;<br>3.1.5.выдачи себя за другого человека или представителя организации и/или сообщества без достаточных на то прав, в том числе за сотрудников Сайта;<br>3.1.6.введения в заблуждение относительно свойств и характеристик каких-либо товаров из каталога на Сайте; некорректного сравнения товаров, а также формирования негативного отношения к лицам, (не) пользующимся определенными товарами, или осуждения таких лиц;<br>3.1.7.загрузки контента, который вы не имеете права делать доступным по законодательству РФ или согласно каким-либо контрактным отношениям;&nbsp;<br>3.1.8.загрузки контента, который затрагивает и/или содержит какой-либо патент, торговый знак, коммерческую тайну, фирменное наименование, авторские и смежные с ними права, а равно прочие права на результаты интеллектуальной деятельности, принадлежащие или правомерно используемые третьими лицами;&nbsp;<br>3.1.9.загрузки не разрешенной специальным образом рекламной информации и/или спама;&nbsp;<br>3.1.10.сбора и обработки персональных данных, информации о частной жизни любых лиц;&nbsp;<br>3.1.11.нарушения нормальной работы Сайта;<br>3.1.12.нарушения российских или международных норм права.<br>3.2.Вы соглашаетесь не использовать на Сайте бранных слов, непристойных и оскорбительных образов, сравнений и выражений, в том числе в отношении пола, расы, национальности, профессии, социальной категории, возраста, языка человека и гражданина, а также в отношении организаций, органов власти, официальных государственных символов (флагов, гербов, гимнов), религиозных символов, объектов культурного наследия (памятников истории и культуры).<br>3.3.Вы признаете и соглашаетесь, что Сайт имеет право (но не обязанность) по своему усмотрению отказать в размещении и/или удалить любой контент, доступный через сервисы Сайта.</p>
+<p>&nbsp;</p>
+<p><strong>4.Политика конфиденциальности</strong></p>
+<p>&nbsp;</p>
+<p>4.1.Условия Политики конфиденциальности и отношения между вами и Сайтом, связанные с обработкой персональных данных, регулируются Федеральным Законом РФ №152-ФЗ от 27 июля 2006г. «О персональных данных».&nbsp;<br>4.2.Политика конфиденциальности действует в отношении персональных данных, которые Сайт получил или может получить от вас при регистрации и/или оформлении заказа на Сайте, и необходимые для выполнения обязательств со стороны Сайта в отношении приобретаемого вами товара/услуги и/или вашего доступа к сервисам Сайта.&nbsp;</p>
+<p>4.3.Политика конфиденциальности доступна по ссылке – <a href="http://nadomfoto.ru/page/polzovatelskoe-soglashenie">http://nadomfoto.ru/page/polzovatelskoe-soglashenie</a>.</p>
+<p>&nbsp;</p>
+<p><strong>5.Условия приобретения и доставки товара</strong></p>
+<p>&nbsp;</p>
+<p>5.1.Вы можете приобрести товар на Сайте, оплатив его следующими способами: наличными, кредитной картой, электронными деньгами, с лицевого счёта мобильного телефона, банковским переводом по квитанции.</p>
+<p>5.2.Настоящим вы соглашаетесь, что выбранный вами способ оплаты не подлежит изменению с момента оформления заказа на Сайте.&nbsp;<br>5.3.Настоящим вы соглашаетесь, что подтверждение заказа, оплаченного электронными деньгами, кредитной картой, с личного счета мобильного телефона, банковским переводом, происходит только после подтверждения списания денежных средств в счёт оплаты заказа.&nbsp;<br>5.4.Вы подтверждаете, что оплата заказа электронными деньгами, кредитной картой, с личного счета мобильного телефона должна быть произведена в течение 5 календарных дней с момента его оформления на Сайте. Вы соглашаетесь, что в случае неоплаты заказа по истечении указанного срока, заказ может быть аннулирован.&nbsp;</p>
+<p>5.5.Сайт осуществляет доставку товара следующими способами: служба доставки Сайта (курьерская доставка или доставка в пункт самовывоза), почтовая доставка службами СДЭК и Почты России. Вы вправе выбрать любой удобный для вас способ доставки в соответствии с условиями доставки в свой регион/страну или исходя из своих предпочтений.&nbsp;<br>5.6.Вы соглашаетесь, что в случае невозможности передачи вам товара по вашей вине, в том числе нарушения вами срока, в течение которого вы обязаны забрать товар, будет расцениваться Сайтом как ваш отказ от товара. При этом товар возвращается Сайту, а заказ считается аннулированным.&nbsp;<br>5.7.В случае вашего отказа от товара, а также в случае отсутствия заказанного вами товара, перечисленная Сайту предоплата за товар, за исключением расходов Сайта на доставку товара, будет возвращена вам не позднее чем через 10 календарных дней с даты предъявления.&nbsp;<br>5.8.Все вопросы, связанные со сроками и условиями доставки товара, вы можете направить в Сайту по адресу – info@nadomfoto.ru.</p>
+<p>&nbsp;</p>
+<p><strong>6.Ответственность</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p>6.1Сервисы Сайта могут содержать ссылки на другие ресурсы. Вы признаете и соглашаетесь с тем, что Сайт не несет никакой ответственности за доступность этих ресурсов и за их контент, а также за любые последствия, связанные с использованием вами контента этих ресурсов.<br>6.2.Вы также соглашаетесь с тем, что Сайт не несёт никакой ответственности за ваши персональные данные, которые вы предоставляете сторонним ресурсам и/или иным третьим лицам в случае перехода на них с Сайта.<br>6.3.Вы подтверждаете, что Сайт не отвечает за возможную потерю и/или порчу данных, которая может произойти из-за нарушения вами положений настоящего Соглашения, а также неправильного доступа и/или использования персонализированных сервисов Сайта.</p>
+<p>6.4.Ответственность за действия несовершеннолетних, включая приобретение ими товаров из каталога на Сайте, лежит на законных представителях несовершеннолетних.</p>
+<p>6.5.Вы соглашаетесь, что в случае неисполнения и/или ненадлежащего исполнения Сайтом обязательств по продаже и/или доставке вам товара в связи с предоставлением вами недостоверных и/или недействительных данных о себе, а равно невыполнение вами условий настоящего Соглашения, Сайт ответственности не несет.&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>7.Реквизиты Сайта</strong></p>
+<p>ИП Ширяева Ольга Михайловна</p>
+<p>ОГРНИП 317774600157886</p>
+<p>ИНН 771597165712</p>
+<p>Электронная почта для обращений&nbsp; - info@nadomfoto.</p>
+<p>&nbsp;</p>
+<p>Дата публикации – 30.06.2017</p></div>
+</div>
+              <div class="main-clear">&nbsp;</div>
+			</div><!-- #content-->
+		</div><!-- #container-->
+      
+      
+      
+      
+
+	</div><!-- #middle-->
+     
+<div class="dropdown-menu-mobile">
+  <div class="close">
+  		<i class="far fa-times-circle" aria-hidden="true"></i>
+  	</div> 
+  	<div>
+    	<ul>
+      		<li>
+          		<a href="/collection/all">Каталог</a>
+              	<i style="float:right;margin-right: 180px;" class="fa fa-angle-down" aria-hidden="true"></i>
+              	<i style="display:none; float:right;margin-right: 180px;" class="fa fa-angle-up" aria-hidden="true"></i>
+              	<ul class="mobile-catalog">
+              		
+                  		<li><a href="/collection/foto-akssesuary">Аксессуары для фото-видеокамер</a></li>
+                  	
+                  		<li><a href="/collection/videokamery">Аксессуары для видеокамер</a></li>
+                  	
+                  		<li><a href="/collection/obektiv">Аксессуары для объективов</a></li>
+                  	
+                  		<li><a href="/collection/studiynoe-oborudovanie">Студийное оборудование</a></li>
+                  	
+                  		<li><a href="/collection/gopro">Аксессуары для Gopro</a></li>
+                  	
+                  		<li><a href="/collection/mobile">Аксессуары для телефонов</a></li>
+                  	
+                  		<li><a href="/collection/tehnika-dlya-krasoty-i-zdorovya">Техника для красоты и здоровья</a></li>
+                  	
+              	</ul>
+          	</li>
+          	
+            
+            <li><a href="https://nadomfoto.ru/collection/rasprodazha" title="Скидки" class="">Скидки</a></li>
+            
+            
+            
+            <li><a href="/page/доставка" title="Доставка" class="">Доставка</a></li>
+            
+            
+            
+            <li><a href="/page/oplata" title="Оплата" class="">Оплата</a></li>
+            
+            
+            
+            <li><a href="/page/garantiynoe-obsluzhivanie" title="Гарантия и возврат" class="">Гарантия и возврат</a></li>
+            
+            
+            
+            <li><a href="/client_account/login" title="Личный кабинет" class="">Личный кабинет</a></li>
+            
+            
+            
+            
+            
+            <li><a href="/page/feedback" title="Контакты" class="">Контакты</a></li>
+            
+            
+      	</ul>
+    </div>
+   
+  </div>
+      <div class="mobile-bg"></div>
+      <div id="footer">
+
+<!--Мой код НАЧАЛО--><div class="center-align">	
+ <div class="dn">
+<a href="http://nadomfoto.ru/page/o-nas">О компании</a>
+<a href="https://nadomfoto.ru/page/samovyvoz">Самовывоз</a>
+
+</div><div class="dn">
+<a href="http://nadomfoto.ru/page/доставка">Доставка</a>
+<a href="http://nadomfoto.ru/page/oplata">Оплата</a>
+
+</div><div class="dn">
+<a href="http://nadomfoto.ru/client_account/login">Личный кабинет</a>
+<a href="http://nadomfoto.ru/page/feedback">Обратная связь</a>
+
+</div><div class="dn">
+<a href="/page/polzovatelskoe-soglashenie">Пользовательское соглашение</a>
+<a href="/page/publichnaya-oferta">Публичная оферта</a>
+        
+</div>
+</div>
+<div class="dn2">
+<div class="dn2_center">
+  
+  
+  <table><tbody><tr><td width="600" valign="top">
+2014-2023&nbsp;©&nbsp;Copyright&nbsp;NadomFoto&nbsp;|&nbsp;Интернет-магазин&nbsp;фототехники&nbsp;в&nbsp;Москве|&nbsp;Сайт не является публичной офертой, вся информация носит справочный характер. Все условия заказа уточняются с менеджером.
+  
+  
+  
+  
+<!--Мой код КОНЕЦ-->
+
+      <!-- #footer -->
+  
+    <!-- #wrapper -->
+   
+    
+    
+   <!-- BEGIN JIVOSITE CODE {literal} -->
+<script type="text/javascript">
+(function(){ var widget_id = '79621';
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+<!-- {/literal} END JIVOSITE CODE -->
+  
+    
+ <meta name="msvalidate.01" content="487C67360B1D6AEE25FB508DAC73B913">
+
+   
+    <div class="shadow">
+</div>
+<div class="recallmsg">
+  <a class="closemsg" href="javascript:void(0);" onclick="javascript: $('.recallmsg').hide(); $('.shadow').hide();">×</a>
+<form id="feedback_form" class="contact" action="/client_account/feedback" method="post" role="form">
+<div class="h3">Обратный звонок</div>
+<input type="text" name="feedback[phone]" value="" class="required" placeholder="Телефон">
+<input type="hidden" name="feedback[from]" placeholder="E-mail" value="info@nadomfoto.ru">
+<input type="hidden" name="feedback[content]" value="Обратный звонок">
+                                                                       
+<a href="#" class="button">Заказать обратный звонок</a>
+
+<div style="clear: both"></div>
+                        <div>
+      Мы перезвоним вам в течение 15 минут                    
+</div>
+<div class="notifications">
+</div>
+  <div class="js-recaptcha-field"></div>
+</form>
+</div>
+<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/3988/2248596/1673259895/jquery.maskedinput.js"></script>
+<script type="text/javascript">
+
+(function() {
+  var validateEmail, validatePhone;
+
+  $("input[name='feedback[phone]']").mask('+7 (999) 999-9999');
+
+  validateEmail = function(email) {
+    var re;
+    re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+  
+  validatePhone = function(phone) {
+    var re;
+    re = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+    return re.test(phone);
+  };  
+
+  $('form.contact a.button').click(function(e) {
+    var fields, is_error, t;
+    t = $(this);
+    e.preventDefault();
+    is_error = false;
+    t.parent('form.contact').find("input.required, textarea.required").each(function() {
+      if (this.value === this.defaultValue) {
+        is_error = true;
+        return $(this).css('background', 'rgba(255, 0, 0, 0.2)');
+      } else {
+        return $(this).css('background', '#fff');
+      }
+    });
+    if (validateEmail(t.parent('form.contact').find("input[name='feedback[from]']").val())) {
+      t.parent('form.contact').find("input[name='feedback[from]']").css('background', '#fff');
+    } else {
+      t.parent('form.contact').find("input[name='feedback[from]']").css('background', 'rgba(255, 0, 0, 0.2)');
+      is_error = true;
+    }
+    console.log(is_error);
+    if (validatePhone(t.parent('form.contact').find("input[name='feedback[phone]']").val())) {
+      t.parent('form.contact').find("input[name='feedback[phone]']").css('background', '#fff');
+    } else {
+      t.parent('form.contact').find("input[name='feedback[phone]']").css('background', 'rgba(255, 0, 0, 0.2)');
+      is_error = true;
+    }    
+    if (is_error === true) {
+      t.parent('form.contact').find('.notifications').html('Не все поля заполнены верно!');
+      t.parent('form.contact').find('.notifications').css('color', 'red');
+      return;
+    }
+    fields = t.parent('form.contact').serialize();
+    return $.ajax({
+      url: t.parent('form.contact').attr('action') + '.json',
+      type: 'post',
+      data: fields,
+      dataType: 'json',
+      success: function(response) {
+        if (response.status === 'ok') {
+          t.parent('form.contact').find('.notifications').html('Сообщение отправлено!');
+          t.parent('form.contact').find('.notifications').css('color', 'green');
+          t.parent('form.contact').find("input[name='feedback[phone]']").val('');
+          return 
+        } else {
+          t.parent('form.contact').find('.notifications').html('Ошибка!');
+          return t.parent('form.contact').find('.notifications').css('color', 'red');
+        }
+      }
+    });
+  });
+
+}).call(this); 
+     
+</script>
+<style>
+  
+  .shadow {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: none;
+    	z-index: 9998;	
+    top: 0px;
+    left: 0px;
+    }
+  
+  .closemsg {
+      float: right;
+      margin-top: -5px;
+      font-size: 18px;
+      text-decoration: none;
+  }
+
+  .closemsg:hover {
+  	text-decoration: none;
+      }  
+  .recallmsg {
+      background: #fff;
+      display: none;
+      position: absolute;
+      top: 45%;
+      left: 40%;
+    //transform: translate(-50%, -50%); 
+    //-webkit-transform: translate(-50%, -50%);  
+    //-moz-transform: translate(-50%, -50%); 
+    z-index: 9999;
+      padding: 20px;
+      width: 350px;
+      margin: 0 auto;
+  position: absolute;
+  top: 200px; left: 0; bottom: 0; right: 0;
+    height: 150px;
+    border-radius: 5px;
+  }
+  .contact .h3 {
+    font-size: 18px;
+    line-height: 30px;
+  	color: #4D3535;
+  	text-transform: uppercase;
+    margin-bottom: 10px;
+  
+  }
+  
+  .contact input, .contact button, .contact select, .contact textarea {
+    padding: 6px;
+    color: #2e3a47;
+    outline: none;
+  }
+  
+  .contact input[type="text"], .contact input[type="email"], .contact input[type="number"], .contact textarea      
+  {
+      padding: 7px;
+      margin-left: 0px;
+      margin-right: 0px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+      border-radius: 5px;
+      appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      -o-appearance: none;
+      -webkit-appearance: none;
+      -webkit-transition: all 0.15s linear 0s;
+      transition: all 0.15s linear 0s;
+      height: 30px;
+      float: left;
+      width: 310px;
+    font-size: 15px;
+    line-height: 30px;
+    	margin-bottom: 10px;
+    border: 1px solid #D8D8D8;
+      -webkit-box-bshadow: 0 0 2px #CCCCCC inset;
+  -moz-box-shadow: 0 0 2px #CCCCCC inset;
+  box-shadow: 0 0 2px #CCCCCC inset;
+  }
+  
+  .contact .button {
+      display: inline-block;
+      margin-bottom: 0;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      line-height: 1.428571429;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;    
+      text-align: center;
+      background-color: #1C7AB0;
+      padding: 5px 20px;
+      width: auto;
+      text-transform: uppercase;
+      height: auto;
+      float: left;
+    text-decoration: none !important;
+  }
+  .contact .notifications {
+    text-align: left;
+    width: 400px;
+    font-style: italic;
+    color: red;
+    //margin-top: 5px;
+  }
+  
+  .contact textarea {
+      height: 100px;
+   }
+</style>  
+    <a href="#" class="to_top"></a>
+<style>
+.to_top {
+	position: fixed;
+    left: 50px;
+  	bottom: 50px;
+	width: 51px;
+	height:  51px;
+  	display: none;
+	background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAclJREFUeNrsmbFqwkAYx5NTtBZsOxSXQsFqh0LH4lwcFByb1q1Tn6JP4tYXaNIH6OBjdAlS6OomYrUU9X/wBUKIqcTc1QvfBz8Id5fzfuffkETbdV0LdQQ64JyOTakJ+ALvjuNMijg4BU+gYplXcuOvQcPzvBeBg7ahIuGS629LmQsrH9WQMgc5kSkJK0fFMizDMizDMiyjsooaPmMOXun4QeUdh+pv5ht4YER41GaczAK8AT/U5lPbwiQZGS03IhIWcmnM3ssE0fITxvgqIic0RCtJKNPICU3RShLKLHJCY7SUR05ojpbSyIl/iJayyO0iM9shWn9FbqZbZpto2Vu2xUVOq8xxQp98j3W74d6vSH2VlHMrkemBVkz7IeiDK7CM6V9SX5/GRqtFc2uVKYBuRKgM7kAd/IJVzHkr6qvT2HJEpEtza7+aFWgXb0AV3INmaNGbKuhr0jlVmqOXViTL55kO7WotxbmX4BGc7MvDWSmlSFC1LBbB7wBYhmX2S2a1ZVsmpfJVk01XuWXMBtqmyZyBZ/7NsAzLsAzLsEyeZOY5cfmRMp85kRlJmaGl8N8sTSXXP5QyYzAAH2BqmMSU1j1wHGe8FmAAYP5lQb2qms4AAAAASUVORK5CYII=');
+    }
+
+</style>
+<script>
+(function() {
+  $(function() {
+    var to_top, to_top_engine;
+    to_top = $('.to_top');
+    to_top_engine = function() {
+      if ($(this).scrollTop() !== 0) {
+        return to_top.fadeIn();
+      } else {
+        return to_top.fadeOut();
+      }
+    };
+    to_top_engine();
+    $(window).scroll(function() {
+      return to_top_engine();
+    });
+    return to_top.on('click', function(e) {
+      e.preventDefault();
+      return $('html').animate({
+        scrollTop: 0
+      }, 800);
+    });
+  });
+
+}).call(this);   
+</script>
+        <script type="text/javascript" src=""></script>      
+  <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(21847387, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        trackHash:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/21847387" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44826141-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+<script>
+document.documentElement.addEventListener('mouseleave', function(e) {
+    if (e.clientY > 20)
+        return;
+ 
+         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if(regex.test($('#client_email').val())) {
+                        try {
+                                rrApi.setEmail($('#client_email').val());
+                                console.log('rr_b fired!');
+                                }catch(e){}
+                               
+                }
+ 
+});
+$('#client_email').on('blur', function() {
+   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;if(regex.test(this.value)) { try {rrApi.setEmail(this.value);}catch(e){}}
+});
+</script>
+
+
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 943122435;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+
+
+
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/943122435/?guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- dadata.ru -->
+<script type="text/javascript">
+window.DADATA_TOKEN = "02ec7a98a83fd7a8e3194ce9b51fec755adee3dc";
+</script>
+<script type="text/javascript" src="https://cdn.rawgit.com/hflabs/suggestions-insales/0.5.0/init.js"></script>
+<!-- /dadata.ru -->
+
+<!-- Скрипт который блокирует галерею в карточке товара-->
+<!--<script src="https://regmarkets.ru/js/r17.js" async type="text/javascript"></script>-->
+    <!-- Google Analytics Universal Code -->
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-44826141-1', 'auto');
+      
+      ga('send', 'pageview');
+    </script>
+<!-- VK Pixel Code -->
+<div id="vk_api_transport"></div>
+<script type="text/javascript">
+  window.vkAsyncInit = function() {
+    VK.Retargeting.Init("VK-RTRG-412496-6O2AG");
+    VK.Retargeting.Hit();
+    
+    
+  };
+
+setTimeout(function() {
+    var el = document.createElement("script");
+    el.type = "text/javascript";
+    el.src = "https://vk.com/js/api/openapi.js?169";
+    el.async = true;
+    document.getElementById("vk_api_transport").appendChild(el);
+  }, 0);
+</script>
+<noscript><img src="https://vk.com/rtrg?p=VK-RTRG-412496-6O2AG" style="position:fixed; left:-999px;" alt=""/>
+</noscript>
+<!-- End VK Pixel Code -->
+<div class="m-modal m-modal--checkout" id="insales-quick-checkout-dialog"><div class="m-modal-wrapper"><form id="quick_checkout_form" data-address-autocomplete="https://kladr.insales.ru" action="/orders/create_with_quick_checkout.json" accept-charset="UTF-8" method="post"><button class="m-modal-close" data-modal="close"></button><div class="m-modal-heading">Быстрый заказ - сроки и цену доставки согласует менеджер по телефону. Оставьте ваши контакты.</div><div class="m-modal-errors"></div><input id="shipping_address_country" type="hidden" value="RU"><div class="m-input m-input--required "><label for="client_phone" class="m-input-label">Контактный телефон:</label><input class="m-input-field" placeholder="Например: +7(926)111-11-11" type="tel" id="client_phone" name="client[phone]" value=""></div><div class="m-input  "><label for="client_name" class="m-input-label">Контактное лицо (ФИО):</label><input class="m-input-field suggestions-input" placeholder="" type="text" id="client_name" name="client[name]" value="" autocomplete="off" style="box-sizing: border-box;"></div><div class="m-input  "><label for="client_email" class="m-input-label">Email:</label><input class="m-input-field suggestions-input" placeholder="На ваш E-mail будут отправлены данные о заказе" type="text" id="client_email" name="client[email]" value="" autocomplete="off" style="box-sizing: border-box;"></div><div class="m-input  m-input--checkbox"><label for="client_consent_to_personal_data" class="m-input-label">Согласие на обработку персональных данных</label><input type="hidden" name="client[consent_to_personal_data]" value="0" id="" class=""><input type="checkbox" name="client[consent_to_personal_data]" value="1" id="client_consent_to_personal_data" checked="1"><span></span><div class="m-input-caption">Настоящим подтверждаю, что я ознакомлен и согласен с условиями <a href="page/politika-konfidentsialnosti" target="_blank">политика конфиденциальности</a></div></div><div class="m-modal-footer"><button class="m-modal-button m-modal-button--checkout button--checkout" type="submit">Оформить заказ</button></div></form></div></div>
+
+   
+</td></tr></tbody></table></div></div></div></div><div id="shadowbox_container"><div id="shadowbox_overlay"></div><div id="shadowbox"><div id="shadowbox_title"><div id="shadowbox_title_inner"></div></div><div id="shadowbox_body"><div id="shadowbox_body_inner"></div><div id="shadowbox_loading"><div id="shadowbox_loading_indicator"></div><span><a onclick="Shadowbox.close();">Отмена</a></span></div></div><div id="shadowbox_info"><div id="shadowbox_info_inner"><div id="shadowbox_counter"></div><div id="shadowbox_nav"><a id="shadowbox_nav_close" title="Закрыть" onclick="Shadowbox.close()"></a><a id="shadowbox_nav_next" title="Следующая" onclick="Shadowbox.next()"></a><a id="shadowbox_nav_play" title="Пуск" onclick="Shadowbox.play()"></a><a id="shadowbox_nav_pause" title="Пауза" onclick="Shadowbox.pause()"></a><a id="shadowbox_nav_previous" title="Предыдущая" onclick="Shadowbox.previous()"></a></div><div class="shadowbox_clear"></div></div></div></div></div></body></html>

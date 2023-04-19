@@ -1,0 +1,3082 @@
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths" style=""><!--<![endif]--><head><meta name="viewport" content="width=device-width"><style>
+  .fc.old-theme-fix {
+    overflow: visible;
+  }
+  .fc.old-theme-fix:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
+  .tt-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+
+  }
+  .twitter-typeahead {
+    display: inherit !important;
+  }
+  .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+  }
+  .tt-suggestion, .tt-footer {
+    display: block;
+    padding: 1px 0px 1px 10px;
+  }
+  .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+    color: #fff;
+  }
+  .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion p, .tt-footer p {
+    margin: 0;
+  }
+</style><style>
+  .spinner-container, .spinner {
+    position: absolute;
+    left:     0;
+    bottom:   0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .spinner-container {
+    z-index:  900;
+    overflow: hidden;
+
+    &.animate .spinner {
+      &.slide-up {
+        opacity: 0;
+      }
+
+      &.fade-in {
+        opacity: 0;
+      }
+    }
+  }
+
+  .spinner {
+    height:   100%;
+    opacity:  0.6;
+    background: #fff;
+
+    &.slide-up {
+      @include transition-property(opacity, bottom);
+      @include transition-duration(0.3s);
+    }
+
+    &.fade-in {
+      @include transition-property(opacity);
+      @include transition-duration(1s);
+    }
+
+    .spin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+
+  .spinner {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  .spinner-screen {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+  }
+</style><link media="all" onload="this.media=&quot;all&quot;" rel="stylesheet" type="text/css" href="/served_assets/public/jquery.modal-b7e3fb6a3704c0a2359a33962d371838618774b855128cef059add49182581c0.css"><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot; &quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;тг.&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;KZT&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Казахстанский тенге&quot;,&quot;code&quot;:&quot;KZT&quot;,&quot;rate&quot;:&quot;0.164478&quot;,&quot;format_string&quot;:&quot;%n %u&quot;,&quot;unit&quot;:&quot;тг.&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:true,&quot;currency_code&quot;:&quot;KZT&quot;,&quot;use_variants&quot;:false},&quot;vk&quot;:{&quot;pixel_active&quot;:null,&quot;price_list_id&quot;:null},&quot;new_ya_metrika&quot;:true,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;account_id&quot;:70246,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:true,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:false,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href='/page/oferta' target='blank'\u003eоферты и политики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:true,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:2,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]"><script type="text/javascript" async="" src="https://messengers.insales.ru/widget/script.js" data-messengers-app-widget="6cd34601-e7ec-4101-b616-86b87275ed06"></script><script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://top-fwz1.mail.ru/js/code.js"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-KQHMVB"></script><script type="text/javascript" async="" src="/javascripts/insales_counter.js?6"></script><script src="/packs/js/shop_bundle-8a1e792bc7fc3e09587c.js"></script><style type="text/css"></style>
+        <!--InsalesCounter -->
+        <script type="text/javascript">
+        if (typeof(__id) == 'undefined') {
+          var __id=70246;
+
+          (function() {
+            var ic = document.createElement('script'); ic.type = 'text/javascript'; ic.async = true;
+            ic.src = '/javascripts/insales_counter.js?6';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ic, s);
+          })();
+        }
+        </script>
+        <!-- /InsalesCounter -->
+    <script type="text/javascript">
+      (function() {
+        window.r46_app_installation_date = "2023-02-14 11:17:42 +0300";
+      })();
+    </script>
+
+    <script type="text/javascript">
+      (function() {
+        window.__rees_shop_id = "27fc85ed1a28c3c13886e9a7761609";
+      })();
+    </script>
+
+    <script type="text/javascript">
+      (function() {
+        (function() { var fileref = document.createElement('script'); fileref.setAttribute('type','text/javascript'); fileref.setAttribute('src', '//cdn.rees46.ru/insales.min.js'); fileref.setAttribute('async', 'true'); document.getElementsByTagName('head')[0].appendChild(fileref); })();
+      })();
+    </script><script type="text/javascript" src="//cdn.rees46.ru/insales.min.js" async="true"></script>
+
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="UcMqH9P3pIFMe6398aQ3U0uL3GpY2LeBsZ3NvlpkhSA">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#01909E">
+  <meta name="wot-verification" content="733502ed728d9505c543">
+  <meta name="yandex-verification" content="9b5f22ea6b4a1d59">
+  
+  
+ 	<title>StarShop.kz - УСЛОВИЯ ИСПОЛЬЗОВАНИЯ ВЕБ-САЙТА</title> 
+  	
+ 	 	<meta name="description" content="Правовая информация">
+  	
+  
+
+  
+  <meta name="keywords" content="Правовая информация">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" type="image/vnd.microsoft.icon" href="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/favicon.ico">
+  <link rel="shortcut icon" type="image/png" href="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/favicon.png">  
+  <link rel="stylesheet" href="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/normalize.css">
+  <link rel="stylesheet" href="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/style.css">
+  <link rel="stylesheet" href="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/fonts.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/modernizr-2.6.2.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/common.js?v=3"></script>
+  <script src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/plugins.js"></script>
+  <script src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/lazysizes.min.js" async=""></script>
+  <script src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/main.js?v=3"></script>
+  <script type="text/javascript">
+    var cv_currency_format = "{\"delimiter\":\" \",\"separator\":\".\",\"format\":\"%n %u\",\"unit\":\"тг.\",\"show_price_without_cents\":1}";
+     var in_cart_ids = "";
+    var asset_path = 'https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/';
+    var prodTitle = 'asd';
+    function initAjaxAddToCartButton(handle, onAddToCart) {
+      $(document).on('click', handle, function(e){
+        e.preventDefault();
+		if ( $(this).is('.buy') ) {
+        $(this).addClass('in_cart').html('<span class="s-hidden m-hidden">В корзине</span><span class="l-hidden"><i class="fa fa-shopping-cart"></i></span>');
+                  };
+        prodTitle = $(this).attr('data-title');
+   addOrderItem( jQuery(this).parents("form:first"), onAddToCart);
+   });
+    }
+    
+ $(function(){
+   $('body').append('<div class="opaco"></div>');
+   
+    
+   
+   
+   
+	$('.catalog-head').on('click', function(){	
+    
+		$('.mobile-catalog-toggle').toggleClass('opened');
+         $('.catalog-absolute').css('min-height',$('.catalog').height()+32+'px');
+	});
+ $(document).mouseup(function(e) {  // закрыть открытую форму при нажатии вне ее
+
+                if($(e.target).parents(".mobile-catalog-toggle").length==0 && $(e.target).parents(".main-sidebar").length==0) {  // если у элемента по которому кликнули нет родителя с классом .login - закрыть
+                    $('.mobile-catalog-toggle').removeClass('opened');
+                }
+            });
+    
+    
+   
+   
+  
+   
+   
+   
+   new InSales.Cart({
+          selector: '.buy, .js-buy-credit-button',
+          draw: function (cart) {
+           
+            if (cart.items_count == 0) {
+             $('.basket .inline small').html('<span class="hidden-480">Пора что-нибудь купить!</span>');
+            } else {
+            
+             $('.basket .inline small').html(InSales.formatMoney(cart.items_price, cv_currency_format)+' ('+cart.items_count+')');
+            }
+            
+            $('.cart-items-count').html(cart.items_count);
+            $('.cart-total-price').html(InSales.formatMoney(cart.items_price, cv_currency_format));                    
+            this.addCallback = function () {
+              this.reloadCart(function () {
+                cart.draw();
+                
+                set_preloaders_message('<div id="add_product_notification"><div class="cart-icon-wrap"><h3 class="cart-icon">Товар "'+prodTitle+'" добавлен в корзину</h3></div><div class="but-wrap"><a class="fr " href="#0" onclick="hide_preloader(); return false;">Продолжить покупки</a><button class="fl button empty" onclick="location.href=\'/cart_items\'">Оформить заказ</button></div>');
+                $.magnificPopup.close();
+                            
+              });
+            }
+           
+          }
+        });
+ });
+</script>
+ <style type="text/css">
+   
+   #slider-wrap > .grid-3 {display: none;}
+   
+</style>
+  <!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KQHMVB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KQHMVB');</script>
+
+ <!-- REES46 get current currency begin -->
+<script type="text/javascript">
+    window.r46_currency='0 тг.';
+</script>
+<!-- REES46 get current currency end --> 
+  
+  <!-- BEGIN SNOW 
+<script type="text/javascript">
+ sitePath = "/";
+ sflakesMax = 64;
+ sflakesMaxActive = 64;
+ svMaxX = 3;
+ svMaxY = 3;
+ ssnowStick = 1;
+ sfollowMouse = 1;
+ </script>
+ <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/snow.js"></script>
+<!-- END SNOW -->
+  
+<!-- BEGIN CHAT CODE {literal} -->
+
+  <!-- Cleversite chat button --
+	<script type='text/javascript'>
+		(function() { 
+			var s = document['createElement']('script');
+			s.type = 'text/javascript'; 
+			s.async = true; 
+			s.charset = 'utf-8';	
+			s.src = '//cleversite.ru/cleversite/widget_new.php?supercode=1&referer_main='+encodeURIComponent(document.referrer)+'&clid=56491EGEsa&siteNew=73723'; 
+			var ss = document['getElementsByTagName']('script')[0]; 
+			if(ss) {
+				ss.parentNode.insertBefore(s, ss);
+			} else {
+				document.documentElement.firstChild.appendChild(s);
+			};
+		})(); 
+	</script>
+<!-- / End of Cleversite chat button -->
+
+<!-- {/literal} END CHAT CODE -->
+ 
+  
+  <link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/custom-user.css">
+<link rel="stylesheet" href="https://messengers.insales.ru/assets/widget-5357502ade478ef473b2e0116a3f45ed99bfb7c1ceba53adfe7fc5b4f5cbd005.css"><script src="//cdn.rees46.ru/v3.js" async=""></script><link href="//api.rees46.ru" rel="dns-prefetch"><link href="//api.rees46.ru" rel="preconnect"><link href="//pictures.rees46.ru" rel="dns-prefetch"><link href="//pictures.rees46.ru" rel="preconnect"><style data-styled="" data-styled-version="4.3.2"></style></head>
+<body id="page">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(21514582, "init", {
+        webvisor:true,
+        ecommerce:dataLayer,
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<script type="text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/21514582" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+  
+<!-- End Google Tag Manager -->
+  <div class="crop">
+  <!--[if lt IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+  <header>
+    
+    <div class="header-sticky">
+<div class="header-content clearfix clear ">
+    <div class="wrapper">
+      <div class="grid-2 logo padded-right">
+        <a href="/"><img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/logo.png" alt=""></a>
+      </div>
+      <div class="grid-10 padded-left clearfix">
+        <div class="grid-5 fixed-menu center">
+          <nav>
+              
+            <a href="/page/action">Акция!</a>
+            
+            <a href="/page/sposoby-oplaty">Оплата</a>
+            
+            <a href="/page/pay_and_delivery">Доставка</a>
+            
+           
+           <a href="/client_account/login">Вход</a>
+           <a href="/client_account/contacts/new">Регистрация</a>
+                       
+          </nav>
+        </div>
+        <div class="grid-4 search">
+          <form action="/search" method="get" id="searchbox2">
+            <input type="text" name="q" id="search_query2" autocomplete="off" placeholder="Я ищу среди 8967 товаров..." class="rees46-instant-search">
+            <button type="submit"></button>
+          </form>
+           <div class="dropdown-menu pos_rel" id="result-ajax2" style="display: none;"> 
+                <ul class="wrapper-ajax search-autocomplete unstyled clear-list"></ul>
+              </div> 
+        </div>
+        <div class="grid-3 basket">
+          <a href="/cart_items">
+            <span class="inline">
+              Корзина
+              <small><span class="hidden-480">Пора что-нибудь купить!</span></small>
+            </span>
+          </a>
+        </div>
+      </div>
+      </div>
+    </div>
+</div> 
+    
+    
+    
+    <div class="main-menu pos_rel">
+      <div class="wrapper clearfix">
+        <ul class="clear-list fl main-menu-left">
+          
+          <li><a href="/page/action" title="Акция!" class="">Акция! </a></li>
+          
+          <li><a href="/collection/otzivi/product/otzyvy-magazina" title="Отзывы" class="">Отзывы  (1110)</a></li>
+          
+          <li><a href="/page/pay_and_delivery" title="Доставка" class="">Доставка </a></li>
+          
+          <li><a href="/page/sposoby-oplaty" title="Оплата" class="">Оплата </a></li>
+          
+          <li><a href="/page/kredit-on-line" title="Рассрочка 0%" class="">Рассрочка 0% </a></li>
+          
+          <li><a href="/page/help" title="Помощь" class="">Помощь </a></li>
+          
+        </ul>
+        <ul class="clear-list fr main-menu-right">
+          
+        	<li class="m-visible"> <a href="/client_account/login"> Вход</a> </li> <li> <a href="/client_account/contacts/new"> Регистрация</a> </li>  
+                    
+        </ul>
+      </div>
+       <div class="angle-wrap"></div>
+    </div>
+   
+    
+    <div class="header-content header-content-main clearfix clear ">
+    <div class="wrapper">
+      <div class="grid-3 logo">
+        <a href="/"><img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/logo.png" alt=""></a>
+      </div>
+      <div class="grid-9 clearfix">
+        <div class="grid-5 phone right">
+          <div class="main-phone pos_rel" data-num="8 (707) 237-9-888" data-city="Мобильный" data-time="пн.-пт. 10:00 - 18:30 | суб. 10:00 - 15:00">
+            <span>
+              <span>8 (707) 237-9-888 <i><span class="icon-chevron-thin-down"></span></i></span>
+              <small>пн.-пт. 10:00 - 18:30 | суб. 10:00 - 15:00</small>
+            </span>
+            <div class="phone-popup">
+              <div class="main-phone pos_rel" data-num="8 (707) 237-9-888" data-city="Мобильный" data-time="пн.-пт. 10:00 - 18:30 | суб. 10:00 - 15:00">
+                <span>
+                  <span>8 (707) 237-9-888 <i><span class="icon-chevron-thin-down"></span></i></span>
+                  <small>пн.-пт. 10:00 - 18:30 | суб. 10:00 - 15:00</small>
+                </span>
+              </div>
+              <ul class="clear-list choose-phone">
+                 
+                	
+                     
+                    
+                	
+                    
+                         <li class="phone-1" data-num="8 (727) 237-9-888" data-city="Алматы" data-time="пн.-пт. 10:00 - 18:30 | суб. 10:00 - 15:00">
+                          <span>
+                            <span>8 (727) 237-9-888 </span>
+                            <small>Алматы</small>
+                          </span>
+                        </li>
+                    
+                  
+                	
+                     
+                    
+                	
+                    
+                         <li class="phone-2" data-num="8 (7172) 695-888" data-city="Астана" data-time="пн.-пт. 10:00 - 18:30 | суб. 10:00 - 15:00">
+                          <span>
+                            <span>8 (7172) 695-888 </span>
+                            <small>Астана</small>
+                          </span>
+                        </li>
+                    
+                  
+                	
+                     
+                    
+                	
+                    
+                         <li class="phone-3" data-num="8 (7122) 950-444" data-city="Атырау" data-time="пн.-пт. 10:00 - 18:30 | суб. 10:00 - 15:00">
+                          <span>
+                            <span>8 (7122) 950-444 </span>
+                            <small>Атырау</small>
+                          </span>
+                        </li>
+                    
+                  
+                	
+                     
+                    
+                	
+                    
+                         <li class="phone-4" data-num="8 (7292) 468-666" data-city="Актау" data-time="пн.-пт. 10:00 - 18:30 | суб. 10:00 - 15:00">
+                          <span>
+                            <span>8 (7292) 468-666 </span>
+                            <small>Актау</small>
+                          </span>
+                        </li>
+                    
+                                  
+              </ul>
+              
+              <div class="center clear"> <a href="#callback-popup" class="button" id="callback">Позвоните мне</a><br>
+                <a href="/page/feedback">Контакты и реквизиты</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="grid-4 search">
+          <form action="/search" method="get" id="searchbox">
+            <input type="text" name="q" id="search_query" autocomplete="off" placeholder="Я ищу среди 8967 товаров..." class="rees46-instant-search">
+            <button type="submit"></button>
+          </form>
+          <div class="dropdown-menu pos_rel" id="result-ajax" style="display: none;"> 
+                <ul class="wrapper-ajax search-autocomplete unstyled clear-list"></ul>
+              </div>    
+        </div>
+        <div class="grid-3 basket">
+          <a href="/cart_items">
+            <span class="inline">
+              Корзина
+              <small><span class="hidden-480">Пора что-нибудь купить!</span></small>
+            </span>
+          </a>
+        </div>
+      </div>
+      </div>
+    </div>
+    
+    <div class="catalog-line ">
+      <div class="wrapper clearfix no_pad">
+        <div class="grid-3 main-sidebar">
+        	<div class="catalog-head button iconed-catalog">
+            	Каталог <a class="fr" href="/collection/all">Смотреть все <i class="icon-chevron-small-right"></i></a>
+            	</div>
+         </div>
+         <div class="grid-9 padded-left catalog-nav-wrap">
+         	<ul class="catalog-nav clear-list left">
+            	
+ 					<li><a href="/collection/hity-prodazh?page_size=100" title="Хиты продаж!" class="">Хиты продаж!</a></li>
+				
+ 					<li><a href="/collection/new-arrival?page_size=100" title="Новинки" class="">Новинки</a></li>
+				
+ 					<li><a href="/collection/podarki-2" title="Подарки близким" class="">Подарки близким</a></li>
+				
+ 					<li><a href="/collection/bolshie-skidki" title="Большие скидки" class="">Большие скидки</a></li>
+				
+ 					<li><a href="/collection/obogrevateli-kaminy?page_size=100" title="Обогреватели" class="">Обогреватели</a></li>
+				
+ 					<li><a href="/collection/tekstil?page_size=100" title="Одеяла и текстиль" class="">Одеяла и текстиль</a></li>
+				
+            </ul>
+         </div>
+       </div>
+     </div>
+   
+    
+
+<div class="wrapper clearfix no_pad">
+                <div class="bg_gray clearfix pos_rel" id="slider-wrap">
+                    <div class="grid-3 mobile-catalog-toggle" style="">
+                        <ul class="catalog clear-list">
+                          
+                          
+                            <li><a href="/collection/goryachie-predlozheniya" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon1.png);"><span class="inline">Горячие предложения</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/new-arrival" class="">Новое поступление</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/1st_sale14" class="">Распродажа</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/bolshie-skidki" class="">Большие Скидки</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/hity-prodazh" class="">Хиты продаж</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/vsyo-do-1000-tenge" class="">Дешевле 2000 тенге</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/tovary-dnya" class="">Товары дня</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/katalog-1" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon2.png);"><span class="inline">Все для дома</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/domashniy-dekor" class="">Домашний декор</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/nakleyki-na-stenu">Предметы декора</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/chasy-2">Часы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/fotoalbomy-2">Фотоальбомы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/ramki">Фоторамки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/vazy">Вазы, копилки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kartiny">Картины</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/tekstil" class="">Текстиль</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/shtory-zhalyuzi">Шторы, жалюзи</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kovriki-2">Коврики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/skaterti">Скатерти</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/postelnoe-belie-3">Постельное белье</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/polotentsa">Полотенца</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/podushki-3">Подушки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/odeyala-2">Одеяла</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/pokryvala-2">Покрывала</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/domashnie-tapochki-2">Домашние тапочки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/prostyni">Простыни</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-vannoy-komnaty" class="">Для ванной комнаты</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/kovriki">Коврики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/zanaveski">Занавески</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/polki-sushilki-veshalki">Полки, сушилки, вешалки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/dispensery-stakanchiki">Диспенсеры, стаканчики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/bannye-prinadlezhnosti">Банные принадлежности</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/aksessuary-2">Аксессуары</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/uborka-doma" class="">Уборка, стирка</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/shvabry-veniki-schetki">Швабры, веники, щетки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/paroochistiteli">Пароочистители</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/valiki-perchatki-tryapki">Валики, перчатки, тряпки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/stirka-glazhka">Стирка, глажка</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/hranenie-i-poryadok" class="">Хранение и порядок</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/vakuumnye-pakety">Вакуумные пакеты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/organayzery-3">Органайзеры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/etazherki-komody-polki-veshalki">Этажерки, комоды, полки, вешалки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/naduvnaya-mebel" class="">Надувная мебель</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/matratsy">Матрацы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/krovati">Кровати</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/divany">Диваны</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kresla">Кресла</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/nasosy">Насосы</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/instrumenty-3" class="">Инструменты</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/elektroinstrumenty">Электроинструменты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/ruchnoy-instrument">Ручной инструмент</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/poleznye-aksessuary" class="">Полезные аксессуары</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/sushilki-2">Сушилки для обуви, белья</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/poleznye-melochi-2">Полезные мелочи</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/grelki-mufty">Грелки, муфты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/stoliki-dlya-noutbuka">Столики для ноутбука</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/nastolnye-igry">Настольные игры</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/vse-dlya-kuhni" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon3.png);"><span class="inline">Все для кухни</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/posuda" class="">Посуда</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/stolovye-servizy-3">Столовые сервизы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/chaynye-servizy">Чайные сервизы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/blyuda-salatniki-sousniki-hlebnitsy">Блюда, салатники, соусники, хлебницы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/grafiny-stakany-chaynye-nabory">Графины, стаканы, чайные наборы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/skovorodki-kastryuli">Кастрюли</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/skovorody-kovshiki">Сковороды, ковшики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/pischevye-konteynery-banki">Пищевые контейнеры, банки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/termosy-lanch-boksy">Термосы, ланч-боксы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/nozhi-2">Ножи, разделочные доски</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/stolovye-pribory">Столовые приборы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sushilki-dlya-posudy">Сушилки для посуды</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/detskaya-posudka">Детская посудка</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/kuhonnye-prinadlezhnosti" class="">Кухонные принадлежности</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/ovoscherezki-chopery">Овощерезки, чоперы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sokovyzhimalki-blendery">Блендеры, соковыжималки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/multivarki-parovarki">Мультиварки, пароварки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/lapsherezki-myasorubki">Лапшерезки, мясорубки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/prinadlezhnosti-dlya-zagotovok">Принадлежности для заготовок</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/oformlenie-blyud">Оформление блюд</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kryshki-durshlagi-dispensery">Крышки, дуршлаги, диспенсеры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/tochilki-otkryvalki-shtopory">Точилки, открывалки, штопоры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/formy-dlya-vypechki">Формы для выпечки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/aksessuary-3">Полезные аксессуары</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/vesy-izmeritelnye-pribory-plity" class="">Весы, измерительные приборы, плиты</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/vesy-2">Весы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/izmeritelnye-pribory">Измерительные приборы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/plity">Плиты</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/sushilki-podstavki-polki" class="">Сушилки, полки</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/sushilki">Сушилки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/polki-veshalki">Полки, вешалки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/pakety-zazhimy-prihvatki" class="">Пакеты, зажимы, прихватки</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/dlya-dachi-sada-ogoroda" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon4.png);"><span class="inline">Для дачи, сада, огорода</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/basseyny" class="">Бассейны</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/naduvnye">Надувные бассейны</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/karkasnye">Каркасные бассейны</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/detskie">Детские бассейны</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/igrovye-tsentry">Игровые центры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/plavatelnye-krugi-doski-matratsy">Плавательные круги, доски, матрацы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/plavatelnye-zhilety-narukavniki">Плавательные жилеты, нарукавники</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/aksessuary-1444384404">Аксессуары, тенты</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/batuty-kacheli-gamaki" class="">Батуты, качели, гамаки</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/batuty">Батуты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kacheli">Качели, гамаки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/sadovyy-inventar" class="">Садовый инвентарь</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/landshaft-i-dizayn" class="">Ландшафт и дизайн</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/zaschita-ot-nasekomyh-gryzunov" class="">Защита от насекомых, грызунов</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/lampy-lovushki">Лампы, ловушки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/setki">Сетки, мухобойки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/domashnim-pitomtsam" class="">Домашним питомцам</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/vse-dlya-detey" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon5.png);"><span class="inline">Детям и мамам</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/uhod-za-rebenkom" class="">Уход за ребенком</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/prinadlezhnosti-dlya-kupaniya">Принадлежности для купания</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sredstva-gigieny">Туалетные принадлежности</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/detskaya-posuda">Детская посуда</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/bezopasnost-2">Безопасность</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/detskie-sumki">Детские сумки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/vse-dlya-detskoy-komnaty" class="">Все для детской комнаты</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/nochniki-proektory-2">Ночники, проекторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/uvlazhniteli">Увлажнители</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/postelnoe-belie-1444383479">Постельное белье</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/chasy-3">Часы, копилки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/organayzery-dlya-igrushek">Органайзеры для игрушек</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/zaschita-ot-nasekomyh">Защита от насекомых</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/dekor">Декор</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/igrushki-razvivayuschie-igry" class="">Игрушки и развлечения</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/igrushki">Игрушки для малышей</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/konstruktory">Конструкторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kukly-i-aksessuary">Куклы и аксессуары</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/interaktivnye-igrushki-2">Интерактивные игрушки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/mashinki">Транспорт, машинки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/radioupravlyaemye-igrushki">Радиоуправляемые игрушки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/myagkie-igrushki">Мягкие игрушки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/syuzhetno-rolevye-igrushki">Сюжетно-ролевые игрушки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/figurki">Фигурки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/igrushechnoe-oruzhie">Игрушечное оружие</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/igrovye-pristavki-2">Игровые приставки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/progulka-i-sport" class="">Спорт и развлечения</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/sportivnye-kompleksy-2">Спортивные комплексы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/basseyny-2">Бассейны</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/igrovye-kompleksy">Игровые комплексы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/plavatelnye-aksessuary-2">Плавательные аксессуары</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/igry">Игры на открытом воздухе</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/igrovye-palatki-2">Игровые палатки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/nastolnye-igry-2">Настольные игры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/golovolomki-i-pazly">Головоломки и пазлы</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/tvorchestvo-i-hobbi" class="">Творчество и хобби</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/rukodelie">Рукоделие</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/risovanie">Рисование</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/lepka">Лепка</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sdelay-sam">Сделай сам</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/muzykalnye-instrumenty">Музыкальные инструменты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sportivnye-hobbi">Спортивные хобби</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/issledovaniya-i-opyty">Исследования и опыты</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/detskiy-prazdnik" class="">Детский праздник</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/bytovaya-tehnika" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon6.png);"><span class="inline">Бытовая техника</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/kuhonnaya-tehnika-2" class="">Кухонная техника</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/neobychnaya-kuhonnaya-tehnika">Необычная кухонная техника</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/prigotovlenie-desertov-i-zakusok">Приготовление десертов и закусок</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/prigotovlenie-zagotovok">Приготовление заготовок</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/grili-shashlychnitsy">Грили, шашлычницы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/melkaya-kuhonnaya-tehnika">Мелкая кухонная техника</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/chayniki-termopoty-kofevarki">Чайники, термопоты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/tostery-sendvichnitsy">Тостеры, сендвичницы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/vafelnitsy-oreshnitsy">Вафельницы, орешницы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/ovoscherezki-chopery-2">Овощерезки, чоперы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sokovyzhimalki-blendery-2">Блендеры, миксеры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/multivarki-parovarki-2">Мультиварки, пароварки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/hlebopechki-frityurnitsy">Хлебопечки, фритюрницы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/lapsherezki-myasorubki-2">Лапшерезки, мясорубки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/yaytsevarki">Яйцеварки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sokovyzhimalki">Соковыжималки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kofemolki-kofevarki">Кофемолки, кофеварки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/tehnika-dlya-doma" class="">Техника для дома</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/domofony-dvernye-glazki-zvonki">Домофоны, дверные глазки, звонки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/otparivateli-paroochistiteli-utyugi">Отпариватели, пароочистители, утюги</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/utyugi-shveynoe-oborudovanie">Швейное оборудование</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/shvabry-veniki-schetki-2">Швабры, веники, щетки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/paroochistiteli-otparivateli-utyugi">Водонагреватели</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/vesy-3">Весы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/pylesosy">Пылесосы</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/klimaticheskaya-tehnika" class="">Климатическая техника</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/uvlazhniteli-vozduha">Увлажнители воздуха</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/ventilyatory-2">Вентиляторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/obogrevateli-kaminy">Обогреватели, камины</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/elektronika-2" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon7.png);"><span class="inline">Электроника</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/audio-videotehnika" class="">Аудио, Видеотехника</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/dvd-pleery-2">DVD плееры, ТВ приставки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/mr3-pleery">МР3 плееры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/naushniki-i-garnitury">Наушники и гарнитуры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kolonki-dinamiki">Колонки, динамики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/lazernye-proektory">Лазерные проекторы, светомузыка</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/televizory-proektory">Телевизоры, проекторы</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/bezopasnost-i-videonablyudenie" class="">Безопасность и видеонаблюдение</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/videonablyudenie">Видеоглазки, видеонаблюдение</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/videodomofony">Видеодомофоны</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/signalizatsii-ohrannye-sistemy">Сигнализации, охранные системы</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/igry-i-razvlecheniya" class="">Игры и развлечения</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/igrovye-konsoli-igry">Игровые консоли, игры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kompyuternye-garnitury">Компьютерные гарнитуры</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/foto-i-videosemka" class="">Фото и видеосъемка</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/videokamery-2">Видеокамеры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/aksessuary-dlya-fotosemki">Аксессуары для фотосъемки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/telefony-aksessuary" class="">Телефоны, аксессуары</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/telefonnye-apparaty-2">Телефонные аппараты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/akkumulyatory-powerbank">Аккумуляторы PowerBank</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/mobilnye-aksessuary">Мобильные аксессуары</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/planshety-2">Планшеты</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/osveschenie" class="">Освещение</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/fonariki-3">Фонарики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/nastolnye-lampy">Настольные лампы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/nochniki-svetilniki">Ночники, светильники</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/svetodiodnoe-osveschenie">Светодиодное освещение</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/aksessuary-1444465702" class="">Аксессуары</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/schetchiki-i-detektory-banknot" class="">Счетчики и детекторы банкнот</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/umnye-chasy" class="">Умные часы</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/zaryadnye-ustroystva-i-kabeli" class="">Зарядные устройства и кабели</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/avtotovary" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon8.png);"><span class="inline">Автотовары</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/instrumenty-1444388348" class="">Инструменты</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/avtomasterskaya">Автомастерская</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kompressory-manometry">Компрессоры, манометры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/trosy-buksirovochnye-i-krepezh">Тросы буксировочные и крепеж</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/zaryadno-puskovye-ustroystva">Зарядно-пусковые устройства</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/ohrannye-sistemy-dlya-avto" class="">Охранные системы для авто</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/signalizatsiya">Сигнализации</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/aksessuary">Аксессуары</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/gps-trekery-mayaki">GPS-трекеры, маяки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/avtozvuk-i-gromkaya-svyaz" class="">Автозвук и громкая связь</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/avotmagnitoly">Автомагнитолы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/fm-modulyatory">FM модуляторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/bluetooth-garnitury">Bluetooth гарнитуры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/gromkaya-svyaz">Громкая связь</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/elektronika-3" class="">Электроника</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/videoregistratory-2">Видеорегистраторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/videoregistratory-antiradary-s-gps-3-v-1">Видеорегистраторы-Антирадары с GPS 3-в-1</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/antiradary-zerkala-zadnego-vida">Антирадары / Радар-детекторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/assistenty-parkovki">Ассистенты парковки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/avotmagnitoly-2">Автомобильные инверторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/alkotestery-2">Алкотестеры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/gps-navigatory">GPS-навигаторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/troyniki-i-perehodniki">Зарядки, тройники и переходники</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/komfort-v-salone-2" class="">Комфорт в салоне</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/chehly-nakidki-podushki">Чехлы, накидки, подушки, коврики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/bezopasnost">Безопасность</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/stoliki">Столики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/avtoholodilniki-3">Автохолодильники</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/shtorki-ekrany-i-plenki">Шторки, экраны и пленки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/obogrevateli-ventilyatory">Обогреватели, вентиляторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/termometry-budilniki">Термометры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/zerkala-zadnego-vida-s-videoregistratorom">Зеркала заднего вида</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/chistota-v-salone" class="">Чистота и порядок</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/aromatizatory">Ароматизаторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/protivoskolzyaschie-kovriki">Противоскользящие коврики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/derzhateli-dlya-telefonov-planshetov">Держатели для телефонов, планшетов</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/organayzery-1444456835">Органайзеры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/veshalki-dlya-odezhdy">Вешалки для одежды</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kovriki-napolnye">Коврики напольные</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/schetki-i-skrebki">Щетки  и скребки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/uborka-i-uhod">Уборка и уход</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/avtoaptechki-ognetushiteli" class="">Автоаптечки, огнетушители</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/avtoaksessuary" class="">Автоаксессуары</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/avtohimiya" class="">Автохимия, автокосметика</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/krasota-i-zdorovie" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon9.png);"><span class="inline">Красота и здоровье</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/uhod-za-litsom-i-telom" class="">Уход за лицом и телом</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/trimmery">Триммеры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/manikyurno-pedikyurnye-prinadlezhnosti">Маникюрно-педикюрные принадлежности</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/miostimulyatory">Миостимуляторы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/makiyazh">Макияж</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/zabota-o-kozhe">Забота о коже</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/uhod-za-volosami-2" class="">Уход за волосами</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/bigudi">Бигуди</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/feny">Фены</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/ployki-vypryamiteli">Плойки, выпрямители</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/mashinki-dlya-strizhki">Машинки для стрижки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/aksessuary-1444457745">Аксессуары</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/zdorovie-i-gigiena" class="">Здоровье и гигиена</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/tonometry-glyukometry">Тонометры, глюкометры</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/epilyatory">Бритье и эпиляция</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/bannye-prinadlezhnosti-2">Банные принадлежности</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/elektronnye-sigarety-kalyan">Электронные сигареты, кальян</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/massazhnye-podushki-2">Массажные подушки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/korrektory-poyasa-i-plastyri">Корректоры, пояса и пластыри</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/otbelivanie-zubov">Отбеливание зубов</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/usiliteli-sluha">Усилители слуха</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/korrektsiya-figury" class="">Коррекция фигуры</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/korrektiruyuschee-belie-2">Корректирующее белье</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/poyasa-belie-dlya-pohudeniya">Средства для похудения</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/massazhery-dlya-korrektsii-figury">Массажеры для коррекции фигуры</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/ortopedicheskie-izdeliya" class="">Ортопедические изделия</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/massazh" class="">Массаж</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/massazhery-dlya-litsa">Массажеры лица</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/massazhery-dlya-tela">Массажеры тела, антицеллюлитные</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/massazhery-dlya-shei-i-spiny">Массажеры шеи и спины</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/massazhery-dlya-nog">Массажеры ног</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/massazhery-golovy">Массажеры головы</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/bizhuteriya-i-chasy" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon10.png);"><span class="inline">Бижутерия, часы, сувениры</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/chasy-1444467041" class="">Часы</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/sportivnye-chasy">Женские часы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/modnye-povsednevnye-chasy">Мужские часы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/detskie-chasy">Детские часы</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/bizhuteriya-2" class="">Бижутерия</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/braslety-3">Браслеты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/podveski">Колье, подвески</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/komplekty-3">Комплекты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/broshi-2">Броши</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sergi-3">Серьги</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/suveniry" class="">Сувениры</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/modnyy-aksessuar" class="">Модный аксессуар</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/zonty-ochki">Зонты</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/ochki">Очки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sharfy">Шарфы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/portmone">Портмоне и кошельки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/flesh-tatu">Сумки, барсетки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/dozhdeviki">Дождевики</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/zazhigalki">Зажигалки</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/sporttovary" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon11.png);"><span class="inline">Спорттовары</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/trenazhery-3" class="">Тренажеры</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/dlya-tela">Для тела</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/dlya-pressa-spiny">Для пресса, спины</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/dlya-yagodits-beder">Для ягодиц, бедер</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/dlya-ruk">Для рук</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/miostimulyatory-poyasa">Миостимуляторы, пояса</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/fitnes" class="">Фитнес</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/diski">Диски</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/obruchi-skakalki-rezinki">Обручи, скакалки, резинки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/ganteli-espandery-utyazheliteli">Гантели, эспандеры, утяжелители</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kovriki-maty">Коврики, маты</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/sportivnye-kompleksy" class="">Спортивные комплексы, игры</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/turizm-i-otdyh" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon12.png);"><span class="inline">Туризм и отдых</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/palatki-spalnye-meshki-aksessuary" class="">Палатки, мебель, спальные мешки</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/palatki-2">Палатки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/spalnye-meshki">Спальные мешки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/turisticheskaya-mebel">Туристическая мебель</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kovriki-i-pledy">Коврики и пледы</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/ohota-rybalka" class="">Охота, рыбалка</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/rybolovnye-prinadlezhnosti">Рыболовные принадлежности</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/lodki">Лодки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/nozhi-aksessuary">Ножи, аксессуары</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/binokli-podzornye-truby">Бинокли, подзорные трубы</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/grili-mangaly-posuda" class="">Грили, мангалы, посуда</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/grili-mangaly">Грили, мангалы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/turisticheskaya-posuda">Туристическая посуда</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/termosy-termokruzhki">Термосы, термокружки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/aksessuary-1444461383">Аксессуары</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/chemodany-sumki-ryukzaki" class="">Чемоданы, сумки, рюкзаки</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/termosumki-sumki-holodilniki">Термосумки, сумки-холодильники</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/turisticheskie-ryukzaki">Туристические рюкзаки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/sumki">Сумки, сумки-тележки</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/chemodany">Чемоданы</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/dorozhnye-aksessuary">Дорожные аксессуары</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/aksessuary-1497329190" class="">Аксессуары</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/podarki-2" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon13.png);"><span class="inline">Подарки близким</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/dlya-muzhchin" class="">Для мужчин</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/pape">Папе</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/bratu">Брату</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kollege-2">Коллеге</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-zhenschin-2" class="">Для женщин</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/mame">Маме</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/pldruzhke">Пoдружке</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/kollege">Коллеге</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/idealnye-podarki-na-14-fevralya">Идеальные подарки на 8 марта</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-vseh-2" class="">Для всех</a>
+                                 
+                                  <ul class="clear-list">
+                                   
+                                    <li class="catalog-3lvl"><a href="/collection/rodstvennikam">Родственникам</a></li>
+                                    
+                                    <li class="catalog-3lvl"><a href="/collection/druzyam">Друзьям</a></li>
+                                    
+                                  </ul>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-lyubimyh" class="">Для влюбленных</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-shefa" class="">Для начальника</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-sotrudnikov" class="">Для сотрудников</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-detey-2" class="">Для детей</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                          
+                            <li><a href="/collection/komplekty-1444467399" class="" style=" background-image: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/icon14.png);"><span class="inline">Комплекты</span></a>
+                          
+                              <ul class="clear-list clearfix catalog-absolute" style="min-height: 0px;">
+                               
+                                <li class="catalog-2lvl"><a href="/collection/ddya-muzhchin" class="">Для мужчин</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-zhenschin" class="">Для женщин</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-detey" class="">Для детей</a>
+                                 
+                                </li>
+                                
+                                <li class="catalog-2lvl"><a href="/collection/dlya-vseh" class="">Для всех</a>
+                                 
+                                </li>
+                                
+                              </ul>
+                              
+                          </li>
+                          
+                            
+                        </ul>
+                    </div>
+                  
+                  
+                  
+                    <div class="grid-9 clearfix slider-bg">
+                      
+                    </div>
+                    </div>
+                </div>    
+    
+    <!-- преимущества -->
+    <div class="features-wrapper">
+  		<div class="features-bg"></div>
+        <div class="features clearfix clear ">
+            <div class="wrapper">
+             
+            	
+                	
+                     
+                    
+              		              
+                    <div class="grid-3">
+                        <a href="/page/sposoby-oplaty" class="feature" style="background: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/feat1.png) 0 0 no-repeat;">
+                            <span class="title">
+                              Оплата при получении  
+                            </span>
+                            <small>
+                                или заранее. Можно в кредит. 
+                            </small>
+                        </a>
+                    </div>
+              	
+                	
+                     
+                    
+              		              
+                    <div class="grid-3">
+                        <a href="/page/pay_and_delivery" class="feature" style="background: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/feat2.png) 0 0 no-repeat;">
+                            <span class="title">
+                              Доставка по Казахстану  
+                            </span>
+                            <small>
+                               Почтой или курьером. Быстро. 
+                            </small>
+                        </a>
+                    </div>
+              	
+                	
+                     
+                    
+              		              
+                    <div class="grid-3">
+                        <a href="/page/obmen-i-vozvrat-tovara" class="feature" style="background: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/feat3.png) 0 0 no-repeat;">
+                            <span class="title">
+                              Простой обмен  
+                            </span>
+                            <small>
+                               Cоблюдаем законы, идём навстречу. 
+                            </small>
+                        </a>
+                    </div>
+              	
+                	
+                     
+                    
+              		              
+                    <div class="grid-3">
+                        <a href="/collection/otzivi/product/otzyvy-magazina" class="feature" style="background: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/feat4.png) 0 0 no-repeat;">
+                            <span class="title">
+                              Отличное качество  
+                            </span>
+                            <small>
+                               Тысячи довольных клиентов. 
+                            </small>
+                        </a>
+                    </div>
+              	
+                	
+                     
+                    
+              		              
+                    <div class="grid-3">
+                        <a href="/page/action" class="feature" style="background: url(https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/feat5.png) 0 0 no-repeat;">
+                            <span class="title">
+                              Подарки и акции  
+                            </span>
+                            <small>
+                               Выгодные. Без показухи. 
+                            </small>
+                        </a>
+                    </div>
+              	
+              
+			</div>
+    	</div>
+    </div>
+    <!-- / преимущества -->
+    
+    <style type="text/css">
+      .special-banner a {
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding-top: 2em;
+      }
+	</style>
+    
+<div class="bg_gray banners-wrapper">
+    <div class="wrapper banners clear ">
+        
+        <div class="grid-4"><a href="/page/500-tenge-skidka"><img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/banner2.jpg" alt=""></a></div>
+
+      <!-- BEGIN Баннер спецтоваров <div class="grid-4"><a href=""><img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/banner4.jpg" alt=""></a></div> END баннер спецтоваров-->
+      
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/suvenirnye-butaforskie-dengi">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/7245/310049869/compact_dengi_suvenir.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Деньги сувенирные бутафорские «Котлета бабла»</p>
+          <p class=""><span class="price">1 290 тг.</span><del class="old-price">1 500 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/plenka-shtora-zerkalnaya-solntsezaschitnaya-dlya-okon-06-h-3-m">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/5743/233920111/compact_HTB1UVtUXlKw3KVjSZFOq6yrDVXa6.jpg_q50.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Пленка-штора самоклеящаяся зеркальная солнцезащитная для окна</p>
+          <p class=""><span class="price">1 290 тг.</span><del class="old-price">1 500 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/ustroystvo-protiv-gryzunov-i-nasekomyh-pest-reject">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/3977/84455305/compact_otpugivatel-ot-komarov-gryzunov.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Устройство против грызунов и насекомых Pest Reject</p>
+          <p class=""><span class="price">4 990 тг.</span><del class="old-price">9 033 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/avtomobilnyy-obogrevatel-vozdushnyy">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/433/250945969/compact_obogrevatel_avto-1.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Автомобильный воздушный вентилятор-обогреватель SG006</p>
+          <p class=""><span class="price">5 990 тг.</span><del class="old-price">7 000 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/korrektiruyuschee-belie-dlya-muzhchin-slimnlift">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/4619/243798539/compact_slim-n-lift-shirt-white.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Корректирующее бельё для мужчин "Slim'N'Lift"</p>
+          <p class=""><span class="price">5 490 тг.</span><del class="old-price">6 000 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/skatert-prozrachnaya-gibkoe-steklo-soft-glass">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/2061/180676621/compact_1231uv_enl.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Скатерть прозрачная «Гибкое стекло» Soft Glass</p>
+          <p class=""><span class="price">7 290 тг.</span><del class="old-price">10 000 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/viniry-semnye-perfect-smile-veneers-nakladnye-zuby">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/1810/177506066/compact_viniry_perfect_smile-1000x1000.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Виниры съемные Perfect Smile Veneers [накладные зубы]</p>
+          <p class=""><span class="price">9 990 тг.</span><del class="old-price">15 000 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel" style="display: block;">       
+        <a href="/collection/hity-prodazh/product/vakuumnaya-sistema">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/984/89351128/compact_2.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Набор вакуумных крышек для консервирования и хранения продуктов с насосом «ВАКС»</p>
+          <p class=""><span class="price">3 990 тг.</span><del class="old-price">9 840 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/podushka-iz-grechnevoy-luzgi">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/1858/167601986/compact_700-nw.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Подушка из гречневой лузги Promotek {Россия, г. Ярославль}</p>
+          <p class=""><span class="price">9 990 тг.</span><del class="old-price">15 000 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/nabor-markerov-3d-touch-twin-art-v-keyse-dlya-sketchinga">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/5336/415012056/compact_marker_set_3D-TOUCH_black-4.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Набор маркеров 3D-TOUCH Twin Art в кейсе для скетчинга</p>
+          <p class=""><span class="price">2 790 тг.</span><del class="old-price">3 500 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/portativnyy-stolik">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/681/15876777/compact_foldable_table-800x800.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Портативный складной столик "Table Mate" 2</p>
+          <p class=""><span class="price">15 490 тг.</span><del class="old-price">18 500 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/kuhonnyy-kombayn-bullet-pro">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/3835/10669819/compact_megicbullet2.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Кухонный комбайн "Magic Bullet"</p>
+          <p class=""><span class="price">22 990 тг.</span><del class="old-price">28 000 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/sumka-na-trehkolesnoy-telezhke-legkaya-nosha">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/5799/242046631/compact_1.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Сумка-тележка для подъёма по ступенькам «Легкая ноша»</p>
+          <p class=""><span class="price">12 990 тг.</span><del class="old-price">16 500 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/odeyalo-elektricheskoe">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/7786/91922026/compact_Электро-одеяло-в-синюю-клеточку.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Одеяло электрическое</p>
+          <p class=""><span class="price">5 590 тг.</span><del class="old-price">6 500 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/podvesnye-vesy">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/761/30958329/compact_Электронные-весы-WeiHeng-1.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Безмен электронный WeiHeng WH-A08</p>
+          <p class=""><span class="price">3 690 тг.</span><del class="old-price">4 500 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/heavy-duty">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/1715/54101683/compact_2.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Набор ремней для крепления грузов с натяжителями Heavy Duty</p>
+          <p class=""><span class="price">5 290 тг.</span><del class="old-price">6 000 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/otpugivatel-krys-i-myshey-ultrazvukovoy-chistyy-dom">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/4587/157815275/compact_00f2f732-a9cc-e369-0d9c-344dfaa55d32_t3wg-21.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Отпугиватель крыс и мышей ультразвуковой «Чистый Дом»</p>
+          <p class=""><span class="price">7 690 тг.</span><del class="old-price">10 000 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/perehodnik-setevoy-turisticheskiy-dlya-rozetok-i-vilok-vseh-tipov-s-2husb-portami-universal-adaptor">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/4822/432370390/compact_universal_travel_adaptor_with_2xUSB.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Переходник сетевой туристический для розеток и вилок всех типов с 2хUSB портами UNIVERSAL ADAPTOR</p>
+          <p class=""><span class="price">5 590 тг.</span><del class="old-price">6 500 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/kukla-letayuschaya-feya-s-sensornym-upravleniem-aircraft-8001">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/6209/358488129/compact_letayushchaya_feya_igrushka.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Кукла «Летающая Фея» с сенсорным управлением Aircraft №8001</p>
+          <p class=""><span class="price">6 990 тг.</span><del class="old-price">9 000 тг.</del></p>
+        </div>
+        </a></div>
+      
+      <div class="grid-4 special-banner pos_rel">       
+        <a href="/collection/hity-prodazh/product/yzb0204-2013">
+        <div class="grid-5">
+         <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/mask.png" style="background: url(https://cdn.starshop.kz/images/products/1/1138/394495090/compact_1815924581_w640_h640_vorotnik-lechebnyj-tractors-700x700.jpg) center center no-repeat #fff; background-size: contain; " alt="">
+        </div>
+        <div class="grid-7">
+          <p class="title">Ортопедическая подушка-корсет тройная надувная для шеи от остеохондроза</p>
+          <p class=""><span class="price">7 790 тг.</span><del class="old-price">11 900 тг.</del></p>
+        </div>
+        </a></div>
+      
+      
+        <div class="grid-4"><a href="/page/vacation-promo"><img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/banner4.jpg" alt=""></a></div>
+    </div>
+</div>
+
+
+        </header>
+
+
+<div class="wrapper no-pad clearfix">
+      
+
+
+
+
+
+
+<div class="grid-3 col-sidebar padded-right">
+                <div class="padded-bottom side-catalog">
+                  
+                   
+                  <div class="side-block">
+                        <p class="title">Каталог</p>
+                        <a href="/collection/all" class="go-back"><i class="icon-chevron-left"></i>Каталог товаров StarShop</a>
+                    <ul class="clear-list">
+                      
+                        <li><a href="/collection/goryachie-predlozheniya" class="">Горячие предложения</a></li>
+                      
+                        <li><a href="/collection/katalog-1" class="">Все для дома</a></li>
+                      
+                        <li><a href="/collection/vse-dlya-kuhni" class="">Все для кухни</a></li>
+                      
+                        <li><a href="/collection/dlya-dachi-sada-ogoroda" class="">Для дачи, сада, огорода</a></li>
+                      
+                        <li><a href="/collection/vse-dlya-detey" class="">Детям и мамам</a></li>
+                      
+                        <li><a href="/collection/bytovaya-tehnika" class="">Бытовая техника</a></li>
+                      
+                        <li><a href="/collection/elektronika-2" class="">Электроника</a></li>
+                      
+                        <li><a href="/collection/avtotovary" class="">Автотовары</a></li>
+                      
+                        <li><a href="/collection/krasota-i-zdorovie" class="">Красота и здоровье</a></li>
+                      
+                        <li><a href="/collection/bizhuteriya-i-chasy" class="">Бижутерия, часы, сувениры</a></li>
+                      
+                        <li><a href="/collection/sporttovary" class="">Спорттовары</a></li>
+                      
+                        <li><a href="/collection/turizm-i-otdyh" class="">Туризм и отдых</a></li>
+                      
+                        <li><a href="/collection/podarki-2" class="">Подарки близким</a></li>
+                      
+                        <li><a href="/collection/komplekty-1444467399" class="">Комплекты</a></li>
+                      
+                    </ul>
+                    </div>
+                   
+                  
+                    </div>
+                   
+
+  
+                    <div class="side-banner padded-vertical">
+                        <!--<div class="side-banner padded-vertical"><a title="Различные способы доставки" href="/page/pay_and_delivery"><img class="lazyload" alt="Наша доставка по Казахстану дешевле всех!" width="292" height="182" data-src='https://cdn.starshop.kz/files/1/7050/8100746/original/banner-delivery-coral.png' /></a></div>
+<div class="side-banner padded-vertical"><a title="Доступные способы оплаты" href="/page/sposoby-oplaty"><img class="lazyload" alt="banner-payment.png" width="292" height="182" data-src='https://cdn.starshop.kz/files/1/4927/2036543/original/banner-payment.png' /></a></div>-->
+<div class="side-banner padded-vertical"><a title="Популярные товары по особым ценам" href="/collection/tovary-dnya"><img class="lazyload" alt="Каждый день новый товар товар участвует в акции!" data-src="https://cdn.starshop.kz/files/1/7409/8305905/original/banner-tovary-dnya_coral.png" width="292" height="182"></a></div>
+                    </div>
+  
+  
+  
+  <div class="js-recent--sidebar recent--sidebar clearfix hidden-900"></div>
+                </div>
+
+
+
+  <div class="grid-9 main-content padded-left" style="padding: 2.33em 3em; background: #fff;">
+     <h1>Правовая информация</h1>
+     <div class="editor-content clearfix padded-bottom" style="padding-bottom: 4em;"><h1>Правовая информация</h1>
+<p><strong>УСЛОВИЯ ИСПОЛЬЗОВАНИЯ ВЕБ-САЙТА <a href="http://www.StarShop.kz" rel="nofollow">www.StarShop.kz</a></strong></p>
+<p>ДОБРО ПОЖАЛОВАТЬ НА САЙТ <a href="http://www.StarShop.kz" rel="nofollow">www.StarShop.kz</a>&nbsp; ( <a href="http://www.Star-Shop.kz" rel="nofollow">www.Star-Shop.kz</a>&nbsp;)</p>
+<p>ПОЖАЛУЙСТА, ВНИМАТЕЛЬНО ПРОЧТИТЕ ЭТИ УСЛОВИЯ ПЕРЕД ИСПОЛЬЗОВАНИЕМ ЭТОГО ВЕБ-САЙТА (“САЙТА”). ЭТОТ САЙТ МОЖЕТ БЫТЬ ИСПОЛЬЗОВАН ТОЛЬКО ДЛЯ ИНФОРМАЦИОННЫХ ЦЕЛЕЙ. ПОЛЬЗУЯСЬ САЙТОМ ИЛИ СКАЧИВАЯ С САЙТА МАТЕРИАЛЫ, ВЫ СОГЛАШАЕТЕСЬ СОБЛЮДАТЬ УСЛОВИЯ, ПРИВЕДЕННЫЕ НИЖЕ В ЭТОМ ДОКУМЕНТЕ. ЕСЛИ ВЫ НЕ СОГЛАСНЫ СОБЛЮДАТЬ ЭТИ УСЛОВИЯ, НЕ ПОЛЬЗУЙТЕСЬ САЙТОМ И НЕ СКАЧИВАЙТЕ С НЕГО МАТЕРИАЛЫ. ПОЛЬЗУЯСЬ САЙТОМ, ВЫ ВЫРАЖАЕТЕ ВАШЕ СОГЛАСИЕ ВЫПОЛНЯТЬ ЭТИ УСЛОВИЯ.</p>
+<p><strong>StarShop </strong>разрешает вам просматривать и скачивать информацию ("Материалы") с Сайта только для вашего личного, некоммерческого использования. Это разрешение связано со следующими ограничениями: 1) вы должны сохранять на всех копиях скаченных Материалов уведомления об авторском праве и другие уведомления, содержащиеся в Материалах; 2) вы не можете каким-либо образом изменять Материалы или воспроизводить или публично демонстрировать, представлять, распространять или иным способом использовать или сообщать о них в общественных или коммерческих целях; и 3) вы не должны передавать Материалы другому лицу, если вы не предоставите ему информацию об обязательствах, вытекающих из условий использования Сайта, и если это лицо не согласится с ними. Вы принимаете условие соблюдать все представленные и время от времени обновляемые на Сайте, дополнительные ограничения. Этот Сайт, включая все Материалы, охраняется авторским правом и защищен мировыми законами об авторском праве и условиями договора. Вы принимаете условие соблюдать все законы об авторском праве при использовании этого Сайта и не допускать несанкционированного копирования Материалов. В случае если в этом документе не предусмотрено иное, <strong>StarShop </strong>не дает вам какого-либо специального права или права, вытекающего из данного документа, в отношении каких-либо патентов, торговых марок и знаков, авторских прав или вопросов, связанных с законодательством о хранении коммерческой тайны.&nbsp;</p>
+<p><strong>Учетные записи пользователей</strong></p>
+<p>От вас может потребоваться открыть учетную запись для получения доступа на определенные ограниченные разделы Сайта. В этом случае вы должны выполнить процедуру регистрации, предоставив нам полную и точную информацию согласно прилагаемой регистрационной форме. Вы также должны выбрать пароль и имя пользователя. Вы полностью несете ответственность за конфиденциальность пароля и учетной записи пользователя. Кроме того, вы полностью несете ответственность за все действия, которые будут произведены под указанной учетной записью. Вы принимаете условие незамедлительно уведомить <strong>StarShop </strong>о несанкционированном использовании вашей учетной записи или каком-либо другом нарушении условий безопасности. <strong>StarShop</strong> не несет ответственности за какие-либо потери, которые вы можете понести в результате несанкционированного использования посторонним лицом вашего пароля и учетной записи.</p>
+<p><strong>Гарантии пользователя</strong></p>
+<p>Вы гарантируете, что будете пользоваться Сайтом в соответствии с этим Соглашением, а также законами и положениями Соглашения и соблюдать все существующие и будущие правила и положения Сайта. Вы принимаете условие, что не будете использовать Сайт: (a) для передачи спама или незапрашиваемых сообщений; (b) для осуществления действий от имени <strong>StarShop</strong> или кого-либо еще; (c) для фальсификации заголовков или других манипуляций с идентифицирующей информацией, с целью скрыть источник происхождения каких-либо сообщений, передаваемых через Сайт; (d) для искажения вашего авторства под именем другого человека или организации; (e) действий, которые могут отрицательно сказаться на возможности других пользователей пользоваться Сайтом; (f) занятия деятельностью, нарушающей какие-либо применимые законы, (g) размещения или передачи каких-либо материалов каким-либо образом, нарушающих права других пользователей, а также незаконных, оскорбительных, дискредитирующих, грубых или других нежелательных материалов, а также материалов, содержащих рекламу какой-либо продукции или услуг, или (h) получения и сохранения личных данных других пользователей, если эти пользователи не выдали специального разрешения на такие действия. Если вы не соблюдаете вышеизложенные условия, вы не должны пользоваться Сайтом; это Соглашение юридически ничем не обязывает <strong>StarShop</strong>, который сохраняет за собой все законные права в отношении несоблюдения этих условий.</p>
+<p>Кроме того, вы должны соблюдать условие защищать, обезопасить и страховать от ущерба <strong>StarShop</strong>, его филиалы и должностных лиц, директоров и агентов, от всех претензий и затрат, включая вознаграждения поверенных, вытекающих из использования Сайта.</p>
+<p><strong>Изменения</strong></p>
+<p><strong>StarShop</strong> оставляет за собой право, по своему усмотрению, в любое время изменять, вносить поправки, дополнения или удалять полностью или частично какие-либо положения этого Соглашения. Изменения в этом Соглашении будут действительны после того, как сообщение об этих изменениях будет размещено на Сайте. Ваше дальнейшее использование Сайта после размещения сообщения о каких-либо изменениях в Соглашении, будет означать, что вы принимаете эти изменения.</p>
+<p><strong>StarShop</strong> в любое время без уведомления может отменять, изменять, исправлять какие-либо ошибки или упущения в каком-либо разделе Сайта, вносить другие изменения на Сайте в материалы и продукцию, программы, услуги или цены (если таковые имеются), представленные на Сайте, приостанавливать или прекращать какую-либо работу Сайта, включая наличие некоторых функций Сайта.</p>
+<p><strong>StarShop</strong> также может налагать ограничения на определенные функции и услуги или ограничивать ваш доступ к разделам Сайта или ко всему Сайту без уведомления или обязательств со своей стороны. <strong>StarShop </strong>может в любое время отменять разрешения, права и лицензии, указанные ранее, и после такой отмены вы должны незамедлительно ликвидировать все Материалы.</p>
+<p><strong>Признание прав на интеллектуальную собственность</strong></p>
+<p>Вы соглашаетесь с тем, что все права на интеллектуальную собственность (без ограничения включающие авторские права, патентные права, ноу-хау, конфиденциальную информацию, права защиты баз данных, а также права, связанные с торговыми марками и знаками (зарегистрированными или незарегистрированными) на Сайте), по праву принадлежат <strong>StarShop </strong>или владельцам лицензии. Все права, связанные с репутацией и интеллектуальной собственностью, вытекающие из использования таких прав на интеллектуальную собственность, принадлежащих <strong>StarShop</strong>, должны действовать на пользу <strong>StarShop</strong>.</p>
+<p><strong>Информация, представленная пользователем</strong></p>
+<p>Политика в отношении защиты конфиденциальности частной информации, связанная с Сайтом, защищает личную информацию, которую вы предоставляете <strong>StarShop </strong>через Сайт. Однако вы не должны отправлять через Сайт для <strong>StarShop </strong>какую-либо конфиденциальную информацию или информацию, являющуюся собственностью фирмы. Вы должны принять условие, что любая информация или материалы, которые вы или лица, действующие от вашего имени, предоставят <strong>StarShop</strong>, не будет считаться конфиденциальной информацией или собственностью фирмы. Предоставляя такую информацию или материалы <strong>StarShop</strong>, вы полностью передаете <strong>StarShop</strong> все права на интеллектуальную собственность в отношении этой информации и материалов. Следовательно, <strong>StarShop</strong> может свободно использовать, воспроизводить, демонстрировать, публично показывать, передавать, распространять, изменять, разрешать использование этой информации и материалов, и вы принимаете условие, что <strong>StarShop</strong> может свободно использовать любые мысли, идеи, коммерческие тайны, которые вы или лица, действующие от вашего имени, предоставляют<strong>StarShop </strong>. Кроме того, вы должны гарантировать, что вы не будете предоставлять <strong>StarShop</strong> какую-либо информацию или материалы, являющиеся дискредитирующими, угрожающими, непристойными, оскорбляющими или незаконными в соответствии с применимыми законами, или материалы, содержащие секретную информацию других лиц. <strong>StarShop</strong> оставляет за собой право, по своему усмотрению, удалять с Сайта любую информацию, предоставленную вами.</p>
+<p><strong>Безопасность</strong></p>
+<p>Вы не можете: (a) использовать какие-либо устройства или программное обеспечение, с помощью которого можно вмешаться в работу Сайта; или осуществлять какие-либо действия, в результате которых на структуру Сайта приходится непропорционально большая и необоснованная нагрузка (например, рассылка массовых электронных сообщений - "рассылка спама"), или вмешиваться в программное обеспечение Сайта или выполняемые им функции. Сюда входит размещение на Сайте материалов, зараженных вирусами (например, вирус «Троянский конь»), компьютерной программой типа “бомба замедленного действия” или другими факторами, которые могут нанести вред или повлиять на структуру программирования Сайта.</p>
+<p><strong>Веб-сайты третьей стороны</strong></p>
+<p><strong>StarShop</strong> не берет на себя ответственность за контроль или проверку содержания сайтов третьей стороны. <strong>StarShop </strong>также не несет ответственность за точность или надежность сайтов третьей стороны. Кроме того, <strong>StarShop </strong>предоставляет на Сайте ссылки на веб-сайты других компаний, посещая которые выйдете из этого Сайта. Вы посещаете какой-либо сайт на свой риск, и вы несете личную ответственность за принятие мер безопасности для защиты от вирусов или других опасных факторов. <strong>StarShop </strong>не предоставляет гарантию в отношении веб-сайтов, а также размещенной на них информации или каких-либо услуг или продуктов. Ссылки на другие сайты не подразумевают, что <strong>StarShop</strong>, спонсоры или индоссанты этого Сайта являются юридически уполномоченными использовать торговые марки, торговые названия, логотипы или символы авторских прав, указанных или доступных через ссылки, или что какой-либо сайт, доступный по ссылке, уполномочен использовать торговую марку, торговое название, логотип или символ авторских прав <strong>StarShop</strong>, его филиалов или дочерних компаний.</p>
+<p><strong>Внешние ссылки на Сайт</strong></p>
+<p>Все ссылки на Сайт должны быть одобрены <strong>StarShop</strong> в письменном виде. Кроме того, <strong>StarShop</strong> разрешает размещение ссылок, в которых: ссылка является текстовой ссылкой, содержащей только название <strong>StarShop</strong> и не содержащей какие-либо собственные торговые марки <strong>StarShop</strong> или владельцев лицензий;ссылка после активации пользователем отображает страницу в полноэкранном режиме в действующем и доступном для передвижения окне просмотра, а не в "рамке" внутри веб-сайта, где находится ссылка; наличие, расположение и другие аспекты ссылки не могут создать неверное впечатление, что организация, ее деятельность или продукция связаны или спонсируются <strong>StarShop</strong>, а также не повредит положительной деловой репутации, связанной с именем и торговой маркой компании <strong>StarShop</strong> или ее филиалов. <strong>StarShop</strong> оставляет за собой право отзывать разрешение на размещение ссылки в любое время по своему усмотрению.</p>
+<p><strong>Исключение подразумеваемых гарантий</strong></p>
+<p>НЕСМОТРЯ НА ТО, ЧТО БЫЛИ ПРИНЯТЫ МЕРЫ ПО ОБЕСПЕЧЕНИЮ ТОЧНОСТИ ИНФОРМАЦИИ НА САЙТЕ, <strong>StarShop</strong> НЕ НЕСЕТ В ЭТОМ ОТНОШЕНИИ НИКАКОЙ ОТВЕТСТВЕННОСТИ. МАТЕРИАЛЫ МОГУТ СОДЕРЖАТЬ НЕТОЧНОСТИ И ОПЕЧАТКИ. <strong>StarShop</strong> НЕ ГАРАНТИРУЕТ ТОЧНОСТЬ ИЛИ ПОЛНОТУ МАТЕРИАЛОВ ИЛИ НАДЕЖНОСТЬ КАКИХ-ЛИБО РЕКОМЕНДАЦИЙ, МНЕНИЙ, УТВЕРЖДЕНИЙ ИЛИ ДРУГОЙ ИНФОРМАЦИИ, ПРЕДСТАВЛЕННОЙ ИЛИ РАСПРОСТРАНЕННОЙ ЧЕРЕЗ САЙТ. ВЫ ДОЛЖНЫ ПРИНЯТЬ УСЛОВИЕ, ЧТО ВЫ НЕСЕТЕ ОТВЕТСТВЕННОСТЬ ЗА ДОВЕРИЕ К ТАКИМ МНЕНИЯМ, РЕКОМЕНДАЦИЯМ, УТВЕРЖДЕНИЯМ, ЗАМЕТКАМ ИЛИ ИНФОРМАЦИИ. ВСЕ СОДЕРЖАНИЕ ПРЕДСТАВЛЕНО "КАК ОНО ЕСТЬ" И "ПО ПРИНЦИПУ НАЛИЧИЯ". <strong>StarShop</strong> ОТКРЫТО ОТКАЗЫВАЕТСЯ ОТ КАКИХ-ЛИБО ЗАВЕРЕНИЙ ИЛИ ГАРАНТИЙ КАКОГО-ЛИБО ХАРАКТЕРА (ПРЯМЫХ ИЛИ ПОДРАЗУМЕВАЕМЫХ, БЕЗ ОГРАНИЧЕНИЯ), ВКЛЮЧАЮЩИХ ГАРАНТИИ ТОВАРНОГО СОСТОЯНИЯ, ПРИГОДНОСТИ ТОВАРА ЛИБО ГАРАНТИИ НА СООТВЕТСТВИЕ ЧЕМУ-ЛИБО, А ТАКЖЕ НЕ НАРУШЕНИЯ ПРАВ ИЛИ ГАРАНТИИ В ОТНОШЕНИИ ФУНКЦИОНИРОВАНИЯ ЭТОГО САЙТА ИЛИ ЕГО СОДЕРЖАНИЯ. <strong>StarShop</strong> НЕ ГАРАНТИРУЕТ БЕЗОПАСНОСТЬ ЭТОГО САЙТА. ВЫ ДОЛЖНЫ ПРИНЯТЬ УСЛОВИЕ, ЧТО ЛЮБАЯ ОТПРАВЛЕННАЯ ИНФОРМАЦИЯ МОЖЕТ БЫТЬ ПЕРЕХВАЧЕНА. STARSHOP НЕ ГАРАНТИРУЕТ, ЧТО САЙТ, ОБСЛУЖИВАЮЩИЕ ЕГО СЕРВЕРЫ ИЛИ ЭЛЕКТРОННЫЕ СООБЩЕНИЯ, ОТПРАВЛЕННЫЕ СО СТОРОНЫ <strong>StarShop</strong>, НЕ ЗАРАЖЕНЫ ВИРУСАМИ ИЛИ ДРУГИМИ ОПАСНЫМИ ФАКТОРАМИ. ВСЕ ТАКИЕ ГАРАНТИИ И УСЛОВИЯ ИСКЛЮЧЕНЫ В РАЗРЕШЕННОЙ ЗАКОНОМ СТЕПЕНИ.</p>
+<p><strong>Ограничение ответственности</strong></p>
+<p>НИ ПРИ КАКИХ УСЛОВИЯХ <strong>StarShop</strong> НЕ НЕСЕТ ОТВЕТСТВЕННОСТИ ЗА КАКОЙ-ЛИБО ПРЯМОЙ, КОСВЕННЫЙ, ПОБОЧНЫЙ, ПОВЛЕКШИЙ ШТРАФЫ, СПЕЦИАЛЬНЫЙ ИЛИ СЛУЧАЙНЫЙ УЩЕРБ, НАНЕСЕННЫЙ (БЕЗ ОГРАНИЧЕНИЯ) БИЗНЕСУ, ДОГОВОРНЫМ ОТНОШЕНИЯМ, ДОХОДАМ, ДАННЫМ, ИНФОРМАЦИИ ИЛИ КОММЕРЧЕСКИМ ВОЗМОЖНОСТЯМ, ВОЗНИКШИЙ В РЕЗУЛЬТАТЕ ИЛИ В СВЯЗИ С ИСПОЛЬЗОВАНИЕМ ИЛИ НЕВОЗМОЖНОСТЬЮ ИСПОЛЬЗОВАНИЯ ЭТОГО САЙТА ИЛИ ЕГО СОДЕРЖАНИЯ; ЛИБО В РЕЗУЛЬТАТЕ ИЛИ В СВЯЗИ С ЭТИМ СОГЛАШЕНИЕМ, ДАЖЕ ЕСЛИ КОМПАНИЯ LUX БЫЛА УВЕДОМЛЕНА О ВОЗМОЖНОСТИ ТАКОГО УЩЕРБА. ПОМИМО УСЛОВИЙ, УСТАНОВЛЕННЫХ В СОГЛАШЕНИИ, НИ ПРИ КАКИХ ОБСТОЯТЕЛЬСТВАХ <strong>StarShop</strong> НЕ НЕСЕТ ОТВЕТСТВЕННОСТИ ЗА КАКИЕ-ЛИБО ОШИБКИ, НЕТОЧНОСТИ, УПУЩЕНИЯ ИЛИ ДРУГИЕ НЕДОСТАТКИ, А ТАКЖЕ НЕСВОЕВРЕМЕННОСТЬ ИЛИ НЕДОСТОВЕРНОСТЬ КАКОЙ-ЛИБО ИНФОРМАЦИИ, СОДЕРЖАЩЕЙСЯ НА ЭТОМ САЙТЕ.</p>
+<p><strong>Обязательства по уменьшению нанесения ущерба</strong></p>
+<p>Согласно ответственности, определенной в данном Соглашении, вы должны принять все разумные меры для уменьшения нанесения ущерба, который может возникнуть в связи с какими-либо претензиями или действиями (по халатности, в нарушение договора или по иной причине), которые вы можете совершить против <strong>StarShop</strong>.</p>
+<p><strong>Сообщения</strong></p>
+<p>Все ссылки на "письма", "сообщения", "уведомления" и подобные выражения относятся к электронному способу связи (например, e-mail), при условии, что сторона, которая должна получить сообщение, имеет гарантии того, что сообщение было отправлено и получено.</p>
+<p><strong>Исключительное право</strong></p>
+<p>Если <strong>StarShop</strong> не соблюдает обязательства по этому Соглашению, компания должна исправить невыполнение обязательств или, по ее усмотрению, расторгнуть это Соглашение с заблаговременным уведомлением, размещенным на сайте. В максимально разрешенной законом степени этот пункт определяет ваше единственное и исключительное право защиты в отношении невыполнения обязательств со стороны <strong>StarShop </strong>.</p>
+<p><strong>Соглашение в целом и его делимость</strong></p>
+<p>Это Соглашение составляет неделимое соглашение, заключенное между <strong>StarShop</strong> и вами относительно вашего использования Сайта. Любые иски, которые могут возникнуть относительно вашего использования Сайта, должны подаваться в течение одного (1) года после возникновения претензии или основания для иска. Если по каким-либо причинам суд надлежащей юрисдикции посчитает, что какое-либо положение Соглашения или его часть не может служить основанием для иска, этому положению должна быть придана законная сила в максимальной степени, необходимой для целей Соглашения; причем и остальная часть этого Соглашения останется действительной.</p>
+<p><strong>Права третьей стороны</strong></p>
+<p>Кроме случаев, явно предусмотренных в этом Соглашении, лицо, не являющееся стороной этого Соглашения, не может выполнять какие-либо из его условий.</p></div>
+  </div>
+</div>
+
+       
+
+       
+
+    
+    
+    
+    
+			<section class="news clearfix">
+			  <div class="grid-6 news-block">
+				<div class="news-block-inner clearfix">
+				  <h2>Интересно почитать<a href="/blog" class="fr decor-link">Все статьи</a></h2>
+				  <div class="grid-6 padded-right">        
+					<div class="padded-bottom"><a style="display: block; width: 100%; height: 0; padding-bottom: 70%; overflow: hidden;" href="/blog/sezonnyy-uhod-za-obuvyu-kak-pravilno-chistit-i-hranit"><img style="width: 100%;" src="https://cdn.starshop.kz/images/articles/1/6608/1112528/medium_sezonnoe_hranenie_obuvi_blog.jpg" alt=""></a></div>
+					<p class="article-title">
+					  <a href="/blog/sezonnyy-uhod-za-obuvyu-kak-pravilno-chistit-i-hranit" class="news-link"><span>Сезонный уход за обувью: как правильно чистить и хранить</span></a>
+					</p>
+					<div class="article-preview">
+					  <a href="/blog/sezonnyy-uhod-za-obuvyu-kak-pravilno-chistit-i-hranit">
+					  Вы можете отрицать это, но факт остается фактом: закончились жаркие деньки, и впереди нас ждут прохладный ветерок, затяжные дожди, и пожелтевшая листва. Коне...
+					  </a>
+					</div>        
+				  </div>
+				  <div class="grid-6 padded-left">
+					
+					<p class="article-title padding-bottom first">
+					  <a href="/blog/sezonnyy-uhod-za-obuvyu-kak-pravilno-chistit-i-hranit" class="news-link"><span>Сезонный уход за обувью: как правильно чистить и хранить</span></a>
+					</p>       
+					
+					<p class="article-title padding-bottom ">
+					  <a href="/blog/home-alone" class="news-link"><span>Не скучаем дома: список приятных и полезных мероприятий</span></a>
+					</p>       
+					
+					<p class="article-title padding-bottom ">
+					  <a href="/blog/ne-obydennye-retsepty-blyud-na-nauryz" class="news-link"><span>Не обыденные рецепты блюд на Наурыз</span></a>
+					</p>       
+					
+					<p class="article-title padding-bottom ">
+					  <a href="/blog/ekstrennye-varianty-podarkov-na-8-marta" class="news-link"><span>Экспресс-варианты подарков на 8 Марта</span></a>
+					</p>       
+					
+					<p class="article-title padding-bottom ">
+					  <a href="/blog/o-chyom-mechtayut-zhenschiny-na-8-marta-derzhite-spisok" class="news-link"><span>О чём мечтают женщины… на 8 Марта? Держите список!</span></a>
+					</p>       
+					
+					<p class="article-title padding-bottom ">
+					  <a href="/blog/podarki-muzhchinam-na-skoruyu-ruku-ekstrennaya-shpargalka-dlya-zhenschin" class="news-link"><span>Подарки мужчинам на скорую руку. Экстренная шпаргалка для женщин.</span></a>
+					</p>       
+					
+				  </div>
+				</div>
+			  </div>		
+		<div class="grid-6 subscribe-block subscribe-block--page">
+			<div class="subscribe-block-inner clearfix">
+			  <h2>Хотите узнать как сделать покупку еще выгоднее?</h2>
+			  <p>Получите условия сегодняшней акции на электронную почту прямо сейчас.</p>
+			  <form method="post" id="subscr-action" action="https://cp.unisender.com/ru/subscribe?hash=5ce5ipdhhm77ufqixbx36c8uw3wpeqzsgfrt91jy&amp;list_ids=5196054">
+    <input type="text" class="js-name required" name="Name" placeholder="ИМЯ">
+    <input type="email" class="js-email required" name="email" onblur="if(this.value==''){this.value='введите ваш e-mail';}" onfocus="if(this.value=='введите ваш e-mail'){this.value='';}" placeholder="E-MAIL">
+    <button class="button" type="button">Узнать об акции</button>
+  <input type="hidden" name="f_2893059" value="Да"> 
+      <input name="charset" value="" type="hidden"> 
+      <input name="default_list_id" value="5196054" type="hidden">
+      <input name="overwrite" value="2" type="hidden">
+</form>
+
+			  <div class="no-spam">
+				СПАМ не рассылаем. Отписка в каждом письме.
+			  </div>
+			  <img data-src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/gift.webp" class="lazyload gift">
+			</div>
+	    </div>
+		</section>
+        
+    
+    
+    
+      
+
+        <footer class="footer--page">
+        <div class="wrapper clearfix">
+            <div class="grid-3">
+                <a href="/" class="logo">
+                    <img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/logo.png" alt="StarShop.kz">
+                </a>
+                <div class="copy">
+                    © 2013-2023<br>
+                    Магазин на диване StarShop
+                </div>
+            </div>
+            <div class="grid-7 padded-top clearfix">
+                <div class="grid-4">
+                    <span class="list-title">Покупателям</span>
+                    <ul>
+                        
+ <li><a href="/page/kak-sdelat-zakaz" title="Как сделать заказ" class="">Как сделать заказ</a></li>
+
+ <li><a href="/page/informatsiya-dlya-pokupateley-yuridicheskih-lits" title="Юридическим лицам" class="">Юридическим лицам</a></li>
+
+ <li><a href="/page/preimuschestva-starshop" title="Преимущества StarShop" class="">Преимущества StarShop</a></li>
+
+ <li><a href="/page/kredit-on-line" title="Рассрочка и кредит" class="">Рассрочка и кредит</a></li>
+
+ <li><a href="/page/agreement" title="Условия продажи" class="">Условия продажи</a></li>
+
+ <li><a href="/product/podarochnye-sertifikaty" title="Подарочные сертификаты" class="">Подарочные сертификаты</a></li>
+
+ <li><a href="/blog" title="Блог" class="">Блог</a></li>
+
+                    </ul>
+                </div>
+                <div class="grid-4">
+                    <span class="list-title">Сотрудничество</span>
+                    <ul>
+                        
+ <li><a href="/page/feedback" title="Поставщикам" class="">Поставщикам</a></li>
+
+ <li><a href="/page/sposoby-oplaty" title="Оптовикам" class="">Оптовикам</a></li>
+
+ <li><a href="/page/feedback" title="Рекламным агентам" class="">Рекламным агентам</a></li>
+
+ <li><a href="/page/feedback" title="Инвесторам" class="">Инвесторам</a></li>
+
+                    </ul>
+                </div>
+                <div class="grid-4">
+                    <span class="list-title">Сервис</span>
+                    <ul>
+                        
+ <li><a href="/page/feedback" title="Контактная информация" class="">Контактная информация</a></li>
+
+ <li><a href="/page/pravovaya-informatsiya" title="Правовая информация" class="active">Правовая информация</a></li>
+
+ <li><a href="//starshop.kz/#callmeback" title="Заказать обратный звонок" class="">Заказать обратный звонок</a></li>
+
+ <li><a href="/page/returns_exchange" title="Возврат, обмен и ремонт" class="">Возврат, обмен и ремонт</a></li>
+
+ <li><a href="/page/help#forgotpass" title="Я не помню свой пароль" class="">Я не помню свой пароль</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="grid-2 social right">
+                <span class="list-title">Будем друзьями</span>
+                <a href="//instagram.com/starshop_kz" target="_blank" class="icon-instagram"></a>
+                <a href="//vk.com/starshop_kz" target="_blank" class="icon-vk"></a>
+                <a href="//fb.com/starshop.kz" target="_blank" class="icon-facebook"></a>
+            </div>
+            <!--<div class="right clear insales">
+                <a href="http://www.insales.ru">Сделано в InSales</a>
+            </div> -->
+        </div>
+        </footer>
+
+  <div class="hidden">
+<div id="callback-popup">
+<h2>Заказ обратного звонка</h2>
+  <div class="errors" style="color: red;"></div>
+    <div class="message" style="display: none;">Спасибо за обращение!
+      <br>Скоро с вами свяжется наш менеджер.</div>
+    
+    <form method="post" action="/client_account/feedback" id="mod-fast-call_form">
+      <input name="feedback[subject]" type="hidden" size="30" value="Перезвоните мне">
+      <input name="feedback[from]" type="hidden" size="30" value="callmeback@asap.com">
+      
+      <label>Ваше имя</label>
+      <input class="txt js-name" name="feedback[name]" type="text" size="30" value="">
+      <label>Номер телефона*</label>
+      <input class="txt required js-phone" name="feedback[phone]" type="text" size="30" value="">
+      <label>Комментарий</label>
+      <textarea name="feedback[content]" size="30" value=""></textarea>
+      <div class="clear">&nbsp;</div>
+      <center>
+        <button name="commit" onclick="submitCallback('mod-fast-call_form'); return false;" id="callback-submit" class="button">Жду звонка</button>
+      </center>
+    </form>
+</div>
+</div> 
+
+       
+  <div class="hidden">
+  <div id="oneclick-popup" class="clearfix subscribe-popup grid-7 m-grid-9 s-gris-11 zoom-anim-dialog">
+    
+    <img data-src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/popup-buy-one-click.jpg" class="lazyload" alt="">
+
+    <div class="grid-6">&nbsp;</div>
+    
+    <div class="popup-content grid-6">
+      
+      <br>
+
+      <h3 class="popup-content-title is-available">Я хочу купить
+        <span class="oneclick-title"></span><span class="oneclick-modifier oneclick-variant"></span>,
+        <span class="oneclick-qty oneclick-quantity">1</span>&nbsp;шт. по цене <span class="oneclick-price"></span>
+      </h3>
+
+      <h3 class="popup-content-title no_avl not-available" style="display: none;">Я хочу купить
+        <span class="oneclick-title"></span>. Сообщите мне о поступлении.
+      </h3>
+
+      <p class="errors" style="display: none; padding: 21% 0;"></p>
+      <p class="success" style="display: none; padding: 21% 0;">Ваш заказ отправлен. Скоро наш менеджер свяжется с вами.</p>
+
+      <form class="fast-order-form" action="/client_account/feedback" method="post">
+        
+        <input name="charset" type="hidden" value="utf-8">
+        
+        <input name="feedback[placeholder_name]" class="required js-name" type="text" value="" placeholder="Введите Ваше имя и фамилию">
+        <input name="feedback[placeholder_phone]" class="required js-phone" type="text" value="" placeholder="Номер телефона">
+        
+        <input name="feedback[city]" class="is-available" type="text" value="" placeholder="Укажите город доставки">
+        <input name="feedback[from]" class="required js-email" type="text" value="" placeholder="Ваш e-mail">
+        
+        <input name="feedback[prodcount]" type="hidden" value="1">
+        
+        <input name="feedback[content]" type="hidden">
+        <input name="feedback[subject]" type="hidden">
+        
+        <input name="feedback[product_id]" type="hidden" value="">
+        <input name="feedback[product_url]" type="hidden" value="">
+        <input name="feedback[product_sku]" type="hidden" value="">
+        <input name="feedback[product_title]" type="hidden" value="">
+        
+        <input name="feedback[variant_id]" type="hidden" value="">
+        <input name="feedback[variant_sku]" type="hidden" value="">
+        <input name="feedback[variant_title]" type="hidden" value="">
+
+        <input name="feedback[price]" type="hidden" value="">
+        <input name="feedback[quantity]" type="hidden" value="1">
+        <input name="feedback[available]" type="hidden">
+
+        
+        <button type="button" class="button fast-order-send js-form-submit" id="one-click-button"><span class="button-text">Заказать</span></button>
+        <div style="line-height: 1.2; padding-top: 1em;"><small class="is-available" style="display: block; ">Наш консультант свяжется с вами, чтобы уточнить всю необходимую для доставки заказа информацию.</small>
+        <small class="not-available" style="display: none;">Консультант нашего магазина обязательно свяжется с вами, как только заинтересовавший вас товар поступит в продажу.</small></div>
+        
+      </form><!-- /.fast-order-form -->
+      
+    </div><!-- /.popup-content -->
+  </div><!-- /#oneclick-popup -->
+</div><!-- /.hidden -->
+<!-- REES46: подписка на товар в наличии -->
+<script>
+$(function(){
+    $("#one-click-button").on("click",function(){
+        var email=$("#oneclick-popup input[name*='feedback[from]'");
+        email="undefined"!=typeof email?$.trim($(email).val()):"";
+        var is_available=$('#oneclick-popup .fast-order-form input[name*="feedback[available]"]').val();
+        "undefined"!=typeof is_available&&("false"===is_available?is_available=!1:"true"===is_available&&(is_available=!0));
+        var item_id="",pattern=/^([\w-]+(?:.[\w-]+)*)@((?:[\w-]+.)*\w[\w-]{0,66}).([a-z]{2,6}(?:.[a-z]{2})?)$/i;
+        !is_available&&""!=email&&pattern.test(email)&&""!=item_id&&r46('subscribe_trigger', 'product_available', {email: email, item: item_id});
+    });
+  });
+</script>
+<!-- /REES46: подписка на товар в наличии --> 
+    
+     <div class="hidden">
+  <div id="guarantee-popup" class="clearfix subscribe-popup grid-7 m-grid-9 s-gris-11 zoom-anim-dialog">
+    
+    <img data-src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/price_guaranty_bg.png" class="lazyload" alt="">
+
+    <div class="grid-6">&nbsp;</div>
+    
+    <div class="popup-content grid-6">
+      
+      <br>
+
+      <h3 class="popup-content-title is-available">Нашли дешевле?<br>
+        Мы убедимся что такой же товар действительно стоит дешевле, снизим цену и подарим 10% от разницы в цене!
+      </h3>
+
+
+      <p class="errors" style="display: none; padding: 21% 0;"></p>
+      <p class="success" style="display: none; padding: 21% 0;">Ваш запрос отправлен. Скоро наш менеджер свяжется с вами.</p>
+
+      <form class="fast-order-form" action="/client_account/feedback" method="post">
+        
+        <input name="charset" type="hidden" value="utf-8">
+        
+        <input name="feedback[placeholder_name]" class="js-name" type="text" value="" placeholder="Введите Ваше имя и фамилию">
+        <input name="feedback[placeholder_phone]" class="required js-phone" type="text" value="" placeholder="Номер мобильного телефона">
+          <input name="feedback[from]" class="required js-email" type="text" value="" placeholder="Ваш e-mail">
+        <input name="feedback[link]" class="required" type="text" value="" placeholder="Ссылка на товар у конкурента">
+        <input name="feedback[city]" class="is-available" type="text" value="" placeholder="Куда доставить заказ">
+<textarea name="feedback[comment]" class="is-available" value="" placeholder="Комментарий" style="width: 90%; margin-bottom: 1em;"></textarea>
+        
+        <input name="feedback[prodcount]" type="hidden" value="1">
+        
+        <input name="feedback[content]" type="hidden">
+        <input name="feedback[subject]" type="hidden">
+        
+        <input name="feedback[product_id]" type="hidden" value="">
+        <input name="feedback[product_url]" type="hidden" value="">
+        <input name="feedback[product_sku]" type="hidden" value="">
+        <input name="feedback[product_title]" type="hidden" value="">
+        
+        <input name="feedback[variant_id]" type="hidden" value="">
+        <input name="feedback[variant_sku]" type="hidden" value="">
+        <input name="feedback[variant_title]" type="hidden" value="">
+
+        <input name="feedback[price]" type="hidden" value="">
+        <input name="feedback[available]" type="hidden">
+        
+        <button type="button" class="button guarantee-send js-form-submit"><span class="button-text">Сообщить</span></button>
+        <div style="line-height: 1.2; padding-top: 1em;"><small class="is-available" style="display: block; ">*Товар в магазине у конкурента должен быть в наличии, а стоимость ниже с учетом доставки. <a href="/page/darim-110-raznitsy-ot-tseny-konkurenta" target="_blank">Подробные условия акции</a></small>
+        </div>
+        
+      </form><!-- /.fast-order-form -->
+      
+    </div><!-- /.popup-content -->
+  </div><!-- /#guarantee-popup -->
+</div><!-- /.hidden -->
+<!-- REES46: подписка на товар в наличии -->
+<script>
+$(function(){
+    $(".guarantee-send").on("click",function(){
+        var email=$("#guarantee-popup input[name*='feedback[from]'");
+        email="undefined"!=typeof email?$.trim($(email).val()):"";
+        var is_available=$('#guarantee-popup .fast-order-form input[name*="feedback[available]"]').val();
+        "undefined"!=typeof is_available&&("false"===is_available?is_available=!1:"true"===is_available&&(is_available=!0));
+        var item_id="",pattern=/^([\w-]+(?:.[\w-]+)*)@((?:[\w-]+.)*\w[\w-]{0,66}).([a-z]{2,6}(?:.[a-z]{2})?)$/i;
+        !is_available&&""!=email&&pattern.test(email)&&""!=item_id&&r46('subscribe_trigger', 'product_available', {email: email, item: item_id});
+    });
+  });
+</script>
+<!-- /REES46: подписка на товар в наличии --> 
+     <div class="hidden">
+  <div id="region-popup" class="clearfix region-popup grid-7 m-grid-9 s-gris-11 zoom-anim-dialog">
+    <div class="region-popup-title clearfix">
+      
+        Выберите ваш город:
+<div class="region-popup-countries">
+        
+        
+        <a href="javascript:;" class="js-change-country region-popup-change-country is-active" data-handle="kazahstan"><img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/flag_kazahstan.png"></a>
+        
+        
+        <a href="javascript:;" class="js-change-country region-popup-change-country " data-handle="russia"><img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/flag_russia.png"></a>
+        
+        
+        <a href="javascript:;" class="js-change-country region-popup-change-country " data-handle="kirgiziya"><img src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/flag_kirgiziya.png"></a>
+        
+              </div>
+    </div>
+    <div class="grid-4 region-popup-regions-wrap">
+      <ul class="region-popup-regions-list">
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region is-active" data-handle="kz_krupnye-goroda">Крупные города</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_akmolinskaya-oblast">Акмолинская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_aktyubinskaya-oblast">Актюбинская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_almatinskaya-oblast">Алматинская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_atyrauskaya-oblast">Атырауская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_vostochno-kazahstanskaya-oblast">Восточно-Казахстанская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_jambilskaya_oblast">Жамбылская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_zko">Западно-Казахстанская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_karagandinskaya-oblast">Карагандинская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_kostanayskaya-oblast">Костанайская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_kyzylordinskaya_oblast">Кызылординская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_mangystauskaya_oblast">Мангистауская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_pavlodarskaya_oblast">Павлодарская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_severo-kazahstanskaya-oblast">Северо-Казахстанская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+        <li><a href="javascript:;" class="js-change-region region-popup-change-region " data-handle="kz_yuzhno-kazahstanskaya-oblast">Южно-Казахстанская область</a>
+        <ul class="region-popup-cities-list--mobile js-cities-list">
+      	</ul>
+        </li>
+        
+      </ul>
+    </div>
+    <div class="grid-8 region-popup-cities-wrap">
+      <ul class="region-popup-cities-list js-cities-list">
+      </ul>
+    </div>
+  </div>
+</div> 
+  
+  <div class="hidden">
+     <div id="fastview-popup" style="max-width: 740px;" class="clearfix fastview-popup grid-9 m-grid-11 s-gris-12 zoom-anim-dialog">
+  <div class="clearfix">
+    <div class="product-block clearfix">
+      
+      <div class="grid-5 m-grid-6 padded-right photo ">
+        
+        <a href="" class="img2 photo-wrap main-image-wrapper quickview-main-image">
+          <img class="main-image" src="">
+        </a>
+
+        <div class="gallery gallery--fastview">
+          
+        </div>
+
+      </div><!-- /.photo -->
+      
+      <div class="grid-7 m-grid-6 product-info">
+        
+        <h1 class="product-title"></h1>
+
+        <div class="short_description padded-vertical editor-content"></div>
+        
+        <div class="buyzone padded-bottom clearfix">
+          
+          <form action="/cart_items" method="post" id="order">
+            <div class="grid-7">
+              
+              <div class="price-block">
+                <span class="price" id="price-field"></span>
+                <del class="old-price" id="old-field"></del>
+              </div>
+              
+              <div class="quantity-block">
+                <a href="#0" class="plus icon-plus btn-number" data-target="quantity" data-type="plus"></a>
+                <a href="#0" class="minus icon-minus btn-number" data-target="quantity" data-type="minus"></a>
+                <input max="100" min="1" class="input-number" data-name="quantity" type="text" name="quantity" data-price="" value="1">
+              </div>
+
+              <div class="variants many-vars"></div>
+
+            </div>
+            
+            <div class="grid-5 buttons right">
+
+              <a href="#oneclick-popup" class="one-click-style one-click-fastview is-available fast-order" data-product-id="" data-product-url="" data-product-sku="" data-product-title="" data-variant-id="" data-variant-sku="" data-variant-title="" data-price="" data-quantity="1" data-available="true">
+                Купить в один клик
+              </a>
+              
+              <a href="" class="button  buy is-available" data-title="">В корзину</a>
+
+              <a href="#oneclick-popup" style="display: none;" class="one-click-style small-link one-click-fastview not-available fast-order" data-product-id="" data-product-url="" data-product-sku="" data-product-title="" data-variant-id="" data-variant-sku="" data-variant-title="" data-price="" data-quantity="1" data-available="true">
+                Уведомить о поступлении
+              </a>
+              <span class="button empty not-available" style="    background: transparent; display: none;">Распродано</span>
+
+            </div>
+            
+            <div class="clear">
+              <a href="" class="go-to-prod">Подробнее</a>
+            </div>
+            
+            <div class="total_qwt_price hidden"></div>
+            
+          </form><!-- /.#order -->
+        </div><!-- /.buyzone -->
+      </div><!-- /.product-info -->
+      
+      <div class="preloader"></div>
+      
+    </div><!-- /.product-block -->
+  </div><!-- /.clearfix -->
+</div><!-- /#fastview-popup -->
+
+
+
+
+
+
+     <div id="welcome-popup" class="clearfix welcome-popup ">
+  <div class="welcome-popup-inner">
+  <div class="popup-content">
+    <h3 style="margin-bottom: 0;" class="popup-content-title">ИНТЕРЕСНО ПОСМОТРЕТЬ СЕКРЕТНЫЙ КАТАЛОГ С ГРАБИТЕЛЬСКИ НИЗКИМИ ЦЕНАМИ?</h3>
+    
+    <form class="validate-me" action="https://cp.unisender.com/ru/subscribe?hash=5ce5ipdhhm77ufqixbx36c8uw3wpeqzsgfrt91jy&amp;list_ids=2145864" method="post" id="welcome-popup-form">
+      <div class="input-wrap"><i class="fa fa-user"></i><input name="Name" type="text" value="" class="js-name required" placeholder="Введите Ваше имя"></div>
+      <div class="input-wrap"><i class="fa fa-envelope"></i><input name="email" type="email" class="js-email required" value="" placeholder="Введите Ваш e-mail"></div>
+  <div class="popup-sign">На вашу электронную почту придет письмо с доступом в секретный раздел нашего магазина.</div>
+      <button type="button" class="button"><span class="button-inner"><span class="button-sign">Получить доступ</span></span></button>
+<input name="f_2893059" type="hidden" value="Да"> <input name="charset" type="hidden" value=""> <input name="default_list_id" type="hidden" value="2145864"> <input name="overwrite" type="hidden" value="2"></form>
+  </div>
+  </div>
+</div>  
+  </div>
+  <script>
+ 
+$(function(){
+  
+    var 
+    $search = $('#search_query2'),
+    procced = false,
+    interrapt = false,
+    keyupTimeoutID = '';
+  
+  $search.on( 'keyup', function(){
+    
+    var 
+      query = $search.val(),
+      path = 
+      '/search_suggestions?account_id=70246'+
+      '&locale=ru'+
+      '&hide_items_out_of_stock=false'+
+      '&query='+ $search.val();
+    
+    //console.log( path );
+    
+    clearTimeout(keyupTimeoutID);
+    
+    if( query != '' && query.length >= 3 ){
+
+      keyupTimeoutID = setTimeout( function(){
+        if( !interrapt ){
+          $.getJSON( path, 
+            function( data ){
+
+              //console.log( data );
+
+              var ids = '';
+              $.each( data.suggestions, function( index, val ){
+                ids += val.data;
+                if( index != data.suggestions.length -1 ){
+                  ids += ',';
+                }
+              });
+
+              path = '/products_by_id/'+ ids +'.json'
+
+              $.getJSON( path, 
+                function( response ){
+                  ajax_render2( response.products );
+              });
+
+              procced = false;
+              interrapt = false;
+          });
+        };
+      }, 100 );
+    }else{
+      $('#result-ajax2').fadeOut();
+    };
+  });
+  
+  function ajax_render2( products ){
+    var list = '';
+    
+    $.each( products, function( index, product ){
+      if (product.title.indexOf('Секрет') == -1 ) {
+      var li = '';
+      if(product.variants[ 0 ].quantity != 0) {
+      li = 
+        '<li class="clearfix padded">'+
+          '<a href="'+ product.url +'" class="clearfix grid-12">'+
+            '<span class="grid-4 padded"><span style="display: block; width: 50px; height: 50px; background: #fff; line-height: 50px; text-align: center;"><img src="' + product.images[0].small_url +'" alt="" style="vertical-align: middle;"></span></span><span class="grid-8"><span style="line-height: 1.2; display: inline-block; vertical-align: top;"><small>'+
+            product.title + '<span> <i>за</i> <b class="search-item-price">'+ InSales.formatMoney( product.variants[ 0 ].price, cv_currency_format) +'</b></small></span></span>'+ 
+          '</span></a>'+
+        '</li>';
+      }
+      
+      list += li;
+        }
+    });
+    $('#result-ajax2 .wrapper-ajax')
+      .html( list )
+      .show();
+    
+    $('#result-ajax2').fadeIn();
+    
+    $(this).click(function (e) {
+      if (!($(e.target).parent('#result-ajax2').length > 0)) {
+        $('#result-ajax2').fadeOut();
+      }
+    });
+  };
+  
+  
+  
+  
+  var 
+    $search = $('#search_query'),
+    procced = false,
+    interrapt = false,
+    keyupTimeoutID = '';
+  
+  $search.on( 'keyup', function(){
+    
+    var 
+      query = $search.val(),
+      path = 
+      '/search_suggestions?account_id=70246'+
+      '&locale=ru'+
+      '&hide_items_out_of_stock=false'+
+      '&query='+ $search.val();
+    
+    //console.log( path );
+    
+    clearTimeout(keyupTimeoutID);
+    
+    if( query != '' && query.length >= 3 ){
+
+      keyupTimeoutID = setTimeout( function(){
+        if( !interrapt ){
+          $.getJSON( path, 
+            function( data ){
+
+              //console.log( data );
+
+              var ids = '';
+              $.each( data.suggestions, function( index, val ){
+                ids += val.data;
+                if( index != data.suggestions.length -1 ){
+                  ids += ',';
+                }
+              });
+
+              path = '/products_by_id/'+ ids +'.json'
+
+              $.getJSON( path, 
+                function( response ){
+                  ajax_render( response.products );
+              });
+
+              procced = false;
+              interrapt = false;
+          });
+        };
+      }, 100 );
+    }else{
+      $('#result-ajax').fadeOut();
+    };
+  });
+  
+  function ajax_render( products ){
+    var list = '';
+    
+    $.each( products, function( index, product ){
+      if (product.title.indexOf('Секрет') == -1 ) {
+      var li = '';
+      if(product.variants[ 0 ].quantity != 0) {
+      li = 
+        '<li class="clearfix padded">'+
+          '<a href="'+ product.url +'" class="clearfix grid-12">'+
+            '<span class="grid-4 padded"><span style="display: block; width: 50px; height: 50px; background: #fff; line-height: 50px; text-align: center;"><img src="' + product.images[0].small_url +'" alt="" style="vertical-align: middle;"></span></span><span class="grid-8"><span style="line-height: 1.2; display: inline-block; vertical-align: top;"><small>'+
+            product.title + '<span> <i>за</i> <b class="search-item-price">'+ InSales.formatMoney( product.variants[ 0 ].price, cv_currency_format) +'</b></small></span></span>'+ 
+          '</span></a>'+
+        '</li>';
+      }
+      
+      list += li;
+        }
+    });
+    $('#result-ajax .wrapper-ajax')
+      .html( list )
+      .show();
+    
+    $('#result-ajax').fadeIn();
+    
+    $(this).click(function (e) {
+      if (!($(e.target).parent('#result-ajax').length > 0)) {
+        $('#result-ajax').fadeOut();
+      }
+    });
+  };
+});
+
+
+</script>
+
+    <script type="text/javascript">
+ $(function(){
+
+  
+  setTimeout(function(){
+   if ($.cookie('welcome') == 'closed') {
+   
+   } else {
+   
+    $.magnificPopup.open({
+  items: {
+    src: '#welcome-popup'
+  },
+  type: 'inline',
+   callbacks:  {   close: function() {
+       
+    $.cookie('welcome','closed', {path: '/'});
+        
+        
+  }
+               }
+
+  // You may add options here, they're exactly the same as for $.fn.magnificPopup call
+  // Note that some settings that rely on click event (like disableOn or midClick) will not work here
+});
+   }
+  }, 20000);
+   
+   
+ });
+</script> 
+
+<script>
+  $(function(){
+    setTimeout(function(){
+      if($(location.hash).length > 0)
+        $('html, body').scrollTop($(location.hash).offset().top - 250)
+    },2000)
+  })
+</script>
+    
+    
+
+  </div>
+  <div class="menu-overlay"></div>
+  <div class="js-buying-now buying-now">
+    <div class="buying-now-title">Только что купили</div>
+    <div class="buying-now-content js-buying-now-content">
+    </div>
+    <audio id="carteSoudCtrl">
+  		<source src="https://static.insales-cdn.com/assets/1/2640/1165904/1673179446/nastolnyy_kolokolchik.mp3" type="audio/mpeg">
+	</audio>
+  </div>
+  <script type="text/javascript">
+ $(function(){
+$('head').prepend('<meta name="viewport" content="width=device-width">');
+
+$('table.variants tr label').each(function(){
+ if ($(this).text().indexOf('Требует уточнения') != -1) {
+ $(this).parents('tr:first').addClass('hidden').hide();
+}   
+});
+ });
+</script>
+
+<script>
+<!-- Скрыть чек-бокс "Доставка не требуется" на странице оформления заказа -->
+$('form#payment b:contains("Получатель (ФИО):")').css('display', 'block');
+$('.delivery_checkbox').hide();
+
+<!-- Открывать личный кабинет в текущей странице -->
+if(location.href.indexOf("/client_account/") > -1) 
+$('a').first().attr("target", "")
+
+if(location.href.indexOf("/auth/") > -1) 
+$('a').first().attr("target", "")
+
+<!-- Отправить событие об оформленном через корзину заказе -->
+$('#order_form').submit(function(e){
+_gaq.push(['_trackEvent', 'order', 'submit', 'order_submit', 1]);
+}); 
+</script>
+
+<!-- Код ретаргетинга ВК !-->
+<script type="text/javascript">(window.Image ? (new Image()) : document.createElement('img')).src = location.protocol + '//vk.com/rtrg?r=kDeIvFnZSUHVnGt0AWY2FijHrkij2v*TKqpJuEcpEp*kU1nc/i227YoL5wqZKDpxxR6zIWRUrPtuvbciZKbpr7/hGbIkthqg942IdT/czAmCEgJbg72a2DcqS/oFZcsMSKIwi*2x3dq6Iy42m4NxISQTXOz*oe5W5GDXEKYWP/c-';</script>
+<!-- /Код ретаргетинга ВК !-->
+
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">
+var _tmr = _tmr || [];
+_tmr.push({id: "2518433", type: "pageView", start: (new Date()).getTime()});
+(function (d, w) {
+   var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true;
+   ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+   var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+   if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window);
+</script><noscript><div style="position:absolute;left:-10000px;">
+<img src="//top-fwz1.mail.ru/counter?id=2518433;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" />
+</div></noscript>
+<!-- //Rating@Mail.ru counter -->
+
+<script type="text/javascript">
+    (function (atm, doIt) {
+        // atm.order_match = '546'; // OPTIONAL: Order MATCH
+        // atm.order_value = '19.99'; // OPTIONAL: Order value
+        // atm.product_id = 'product-id'; // OPTIONAL: Product name or product ID
+
+        // Do not modify any of the code below.
+        atm.client_id = "dbe9b010af60e3a45e5b5fa65a777ff6"; // CLIENT: salem@cpc.kz
+        atm.allow_flash = false; // Is Flash plugin allowed on page
+        doIt(atm);
+    })({}, function(d){var a=document.createElement("iframe");a.style.cssText="width: 0; height: 0; border: 0; position: absolute; left: -5px;";a.src="javascript:false";var c=function(){setTimeout(function(){var c=a.contentDocument||a.contentWindow.document,b=c.createElement("script");b.src="//static-trackers.adtarget.me/javascripts/pixel.min.js";b.id="GIHhtQfW-atm-pixel";b["data-pixel"]=d.client_id;b["allow-flash"]=d.allow_flash;b.settings_obj=d;c.body.appendChild(b)},0)};a.addEventListener?a.addEventListener("load",c,!1):a.attachEvent?a.attachEvent("onload",c):a.onload=c;document.body.appendChild(a)});
+
+    //  After the pixel above is loaded, you can use custom AJAX calls to register custom events (like button clicks, form fillouts and etc. )
+    //__AtmUrls = window.__AtmUrls || [];
+    //__AtmUrls.push('add-to-cart');
+</script><iframe style="width: 0px; height: 0px; border: 0px none; position: absolute; left: -5px;" src="javascript:false"></iframe>
+<script type="text/javascript" src="/served_assets/public/shop/referer_code.js"></script>    <!-- Google Analytics Universal Code -->
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-37853801-1', 'auto');
+      
+      ga('send', 'pageview');
+    </script>
+    <!-- Facebook Pixel Code -->
+      <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.agent='plinsales';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 633057527152569);
+        fbq('track', 'PageView');
+      </script>
+      <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=633057527152569&ev=PageView&noscript=1"
+      /></noscript>
+    <!-- End Facebook Pixel Code -->
+<div class="m-modal m-modal--checkout" id="insales-quick-checkout-dialog"><div class="m-modal-wrapper"><form id="quick_checkout_form" data-address-autocomplete="https://kladr.insales.ru" action="/orders/create_with_quick_checkout.json" accept-charset="UTF-8" method="post"><button class="m-modal-close" data-modal="close"></button><div class="m-modal-heading">Заказ в один клик</div><div class="m-modal-errors"></div><input id="shipping_address_country" type="hidden" value="KZ"><div class="m-input m-input--required "><label for="client_name" class="m-input-label">Имя и отчество (не обязательно):</label><input class="m-input-field" placeholder="" type="text" id="client_name" name="client[name]" value=""></div><div class="m-input m-input--required "><label for="client_phone" class="m-input-label">Контактный телефон:</label><input class="m-input-field" placeholder="" type="tel" id="client_phone" name="client[phone]" value=""></div><div class="m-input m-input--required "><label for="client_email" class="m-input-label">Email:</label><input class="m-input-field" placeholder="Мы отправим информацию о заказе и его доставке." type="text" id="client_email" name="client[email]" value=""></div><div class="m-modal-footer"><button class="m-modal-button m-modal-button--checkout button--checkout" type="submit">Оформить заказ</button></div></form></div></div>    <script type="text/javascript">
+      (function() {
+        const widgetData = "eyJhY3RpdmUiOnRydWUsInBvc2l0aW9uIjoicmlnaHQiLCJwYWRkaW5nX3ZlcnRpY2FsIjoxMjAsInBhZGRpbmdfaG9yaXpvbnRhbCI6NzAsImNvbG9yIjoiI0ZFNkY2MSIsInNpemUiOjEsImljb24iOm51bGwsIm9ubGluZV9jaGF0Ijp7Im1vZGUiOiJsaWdodCIsImVuYWJsZWQiOnRydWUsInRpdGxlIjoi0J/RgNC40LLQtdGCISDQoSDRgNCw0LTQvtGB0YLRjNGOINCy0LDQvCDQv9C+0LTRgdC60LDQttGDLiIsImljb25fdXJsIjpudWxsLCJkZXNjcmlwdGlvbiI6ItCvINC30L3QsNGOINC+0YLQstC10YLRiyDQvdCwINCy0YHQtSDQstC+0L/RgNC+0YHRiyEiLCJkaXNwbGF5X2NsYXNzIjoiZW5hYmxlZCIsImFjdGl2YXRlZF9iZWZvcmUiOm51bGx9LCJjcmVhdGVkX2F0IjoiMjAxOS0xMi0yNFQwNjo0OTozNi4yODAyMzVaIiwidXBkYXRlZF9hdCI6IjIwMjItMDMtMjlUMTA6NTk6NDcuNjg2NDUwWiIsIm1lc3Nlbmdlcl9hY2NvdW50cyI6W3siaGFuZGxlIjoid2hhdHNhcHAiLCJ1cmxfcGF0dGVybiI6Imh0dHBzOi8vbWVzc2VuZ2Vycy5pbnNhbGVzLnJ1L3doYXRzYXBwLzc3MDcyMzc5ODg4P3RleHQ90J7RgtC/0YDQsNCy0YzRgtC1INC00LDQvdC90L7QtSDRgdC+0L7QsdGJ0LXQvdC40LUsINGH0YLQvtCx0Ysg0L3QsNGH0LDRgtGMINC00LjQsNC70L7QsyA6a2V5IiwiZGlzcGxheV9jbGFzcyI6ImVuYWJsZWQiLCJ0ZXh0IjoiV2hhdHNBcHAifSx7ImhhbmRsZSI6InRlbGVncmFtIiwidXJsX3BhdHRlcm4iOiJ0ZzovL3Jlc29sdmU/ZG9tYWluPXN0YXJzaG9wa3pfYm90XHUwMDI2c3RhcnQ9OmtleSIsImRpc3BsYXlfY2xhc3MiOiJlbmFibGVkIiwidGV4dCI6IlRlbGVncmFtIn1dLCJkaXNwbGF5X2NsYXNzIjoiZW5hYmxlZCJ9"
+const widgetToken = "6cd34601-e7ec-4101-b616-86b87275ed06"
+
+window.__MESSENGERS_DATA__ = widgetData
+window.__MESSENGERS_WIDGET_TOKEN__ = widgetToken
+
+const script = document.createElement('script')
+script.type = 'text/javascript'
+script.async = true
+script.src = "https://messengers.insales.ru/widget/script.js"
+script.setAttribute('data-messengers-app-widget', widgetToken)
+
+const link = document.createElement('link')
+link.rel = 'stylesheet'
+link.href = "https://messengers.insales.ru/assets/widget-5357502ade478ef473b2e0116a3f45ed99bfb7c1ceba53adfe7fc5b4f5cbd005.css"
+document.head.appendChild(link)
+
+const firstScript = document.getElementsByTagName('script')[0]
+firstScript.parentNode.insertBefore(script, firstScript)
+
+      })();
+    </script>
+
+<a href="#0" id="arrow-up" class="asdasd" style="display: none; position: fixed; z-index: 2147483647;"></a><div id="arrow-up-active" style="position: absolute; top: 800px; width: 100%; border-top: 1px dotted rgb(0, 255, 255); z-index: 2147483647;"></div><div class="opaco"></div><div></div></body></html>

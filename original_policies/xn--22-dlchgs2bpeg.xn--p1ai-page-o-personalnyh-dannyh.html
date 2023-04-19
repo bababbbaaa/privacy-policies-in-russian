@@ -1,0 +1,2049 @@
+<html style="" class=" js flexboxlegacy canvas canvastext no-touch"><head><style>
+  .fc.old-theme-fix {
+    overflow: visible;
+  }
+  .fc.old-theme-fix:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
+  .tt-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+
+  }
+  .twitter-typeahead {
+    display: inherit !important;
+  }
+  .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+  }
+  .tt-suggestion, .tt-footer {
+    display: block;
+    padding: 1px 0px 1px 10px;
+  }
+  .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+    color: #fff;
+  }
+  .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion p, .tt-footer p {
+    margin: 0;
+  }
+</style><style>
+  .spinner-container, .spinner {
+    position: absolute;
+    left:     0;
+    bottom:   0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .spinner-container {
+    z-index:  900;
+    overflow: hidden;
+
+    &.animate .spinner {
+      &.slide-up {
+        opacity: 0;
+      }
+
+      &.fade-in {
+        opacity: 0;
+      }
+    }
+  }
+
+  .spinner {
+    height:   100%;
+    opacity:  0.6;
+    background: #fff;
+
+    &.slide-up {
+      @include transition-property(opacity, bottom);
+      @include transition-duration(0.3s);
+    }
+
+    &.fade-in {
+      @include transition-property(opacity);
+      @include transition-duration(1s);
+    }
+
+    .spin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+
+  .spinner {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  .spinner-screen {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+  }
+</style><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot; &quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;₽&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:true,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:false,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:false},&quot;vk&quot;:{&quot;pixel_active&quot;:null,&quot;price_list_id&quot;:null},&quot;new_ya_metrika&quot;:false,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:null,&quot;account_id&quot;:135614,&quot;hide_items_out_of_stock&quot;:true,&quot;forbid_order_over_existing&quot;:false,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:false,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href='/page/oferta' target='blank'\u003eоферты и политики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:2,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]"><script async="" src="//cdn.pozvonim.com/widget/pozvonim.min.js?build=1579866366" charset="UTF-8"></script><script type="text/javascript" async="" src="https://top-fwz1.mail.ru/js/code.js"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/watch.js"></script><script type="text/javascript" async="" src="/javascripts/insales_counter.js?6"></script><script src="/packs/js/shop_bundle-8a1e792bc7fc3e09587c.js"></script><style type="text/css"></style>
+        <!--InsalesCounter -->
+        <script type="text/javascript">
+        if (typeof(__id) == 'undefined') {
+          var __id=135614;
+
+          (function() {
+            var ic = document.createElement('script'); ic.type = 'text/javascript'; ic.async = true;
+            ic.src = '/javascripts/insales_counter.js?6';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ic, s);
+          })();
+        }
+        </script>
+        <!-- /InsalesCounter -->
+
+    <title>Политика обработки персональных данных</title>
+  
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--[if IE]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+    <meta name="yandex-verification" content="3574eba39f596495">
+  	<meta name="google-site-verification" content="WEIlTJ17D0Z7s9m3qv472KBc64VFWH1ZwKy6Jbzr31k">
+    <meta name="robots" content="index,follow">
+    
+    <meta property="og:title" content="Российские двери">
+    <meta property="og:image" content="https://росдвери22.рфhttps://static.insales-cdn.com/assets/1/492/1147372/1561705059/logo.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://росдвери22.рф">
+    
+    <meta name="description" content="Политика обработки персональных данных">
+    <meta name="keywords" content="Политика обработки персональных данных">
+    <link rel="alternate" type="application/rss+xml" title="Блог..." href="/blogs/blog.atom">
+
+    
+    <link rel="icon" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/styles.css" media="all">
+  	<link rel="stylesheet" type="text/css" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/manufacturer-sprite.css" media="all">
+    <link rel="stylesheet" type="text/css" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/print.css" media="print">
+
+    
+      <link rel="stylesheet" type="text/css" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/flamp2.css" media="all"> 
+	
+
+    <link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/jquery.rating.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/served_assets/public/shop/jquery.fancybox-2.1.4/jquery.fancybox.css?1676529010">
+  	<link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/jquery.bxslider.css">
+  	<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Slab&amp;subset=cyrillic" rel="stylesheet">
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/styles-ie.css" media="all" />
+    <![endif]-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/modernize.js"></script>
+    <script src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/nivo-slider.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/jquery.MetaData.js"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/jquery.rating.pack.js"></script>
+    <script type="text/javascript" src="/served_assets/public/jquery.fancybox-2.1.4/jquery.mousewheel.pack.js?1676529010"></script>
+    <script type="text/javascript" src="/served_assets/public/jquery.fancybox-2.1.4/jquery.fancybox.pack.js?1676529010"></script>
+    <script type="text/javascript" src="/served_assets/empty.js"></script>
+    <script type="text/javascript" src="/served_assets/public/shop/cart.js?1676529010"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/jq.cookies.js"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/jquery.inputmask.js"></script>
+  	<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/nextMonth.js"></script>
+    <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/download_images_catalog.js" async=""></script>
+
+    <script type="text/javascript">
+        var cv_currency_format = "{\"delimiter\":\" \",\"separator\":\".\",\"format\":\"%n\\u0026nbsp;%u\",\"unit\":\"₽\",\"show_price_without_cents\":1}";
+        jQuery(function() {
+            new InSales.Cart({
+                selector: '.buy',
+                draw: function(cart) {
+                    var count_name = 'товар';
+
+                    if (cart.items_count == 2 || cart.items_count == 3 || cart.items_count == 4) {count_name = 'товара';} else if (cart.items_count > 4 || cart.items_count == 0) { count_name = 'товаров'; }
+                    var text = '<div class="block-title"><strong><span>Корзина</span></strong></div>';
+                    if (cart.order_lines.length == 0) {
+                        $('.parse_total_word').html('товаров');
+                        text += ' <div class="block-content basket_empty">Ваша корзина пуста</div>';
+                    } else {
+                        text += '<div class="block-content basket_full">'
+                        text +='<div class="summary"><p class="amount">В вашей корзине<a href="/cart_items"><span class="cart_items_count items_count">'+cart.items_count+'</span> <span class="cart_text">'+ count_name +'</span></a>.</p>'
+                        text+='<p class="subtotal"><span class="label">На сумму:</span><span class="price cart_total_price parse_total_price">'+InSales.formatMoney(cart.items_price, "{\"delimiter\":\" \",\"separator\":\".\",\"format\":\"%n\\u0026nbsp;%u\",\"unit\":\"₽\",\"show_price_without_cents\":1}")+'</span></p>';
+                        text+='</div>'
+                        text+='<div class="actions"><a href="/cart_items/" class="site-button" title="Checkout">Оформить</a></div>'
+                        text+=' <p class="block-subtitle">Товар(ы) в корзине:</p>'
+                        text+='<ol class="mini-products-list parse_items" id="cart-sidebar">'
+                        $(cart.order_lines).each(function(index,order_line) {
+                            text+='<li class="item odd parse_item">';
+                            text+='<a class="product-image parse_image" title="'+ order_line.title +'" href="'+ order_line.url +'" style="display: block; width: 71px; height: 71px;"><img style="max-width: 100%; max-height: 100%;" src="' + order_line.image('thumb')  + '" /></a>'
+                            text+=' <div class="product-details">'
+                            text+='<span class="remove_item"><a href="#" id="delete_' + order_line.variant_id + '" href="#" class="parse_remove_action widget-btn btn-remove"  title="Удалить позицию">x</a></span>'
+                            text+='<p class="product-name"><a href="'+ order_line.url +'" class="parse_product_url">'+ order_line.title +'</a></p>'
+                            text+='<strong id="item_quantity_' + order_line.variant_id + '" class="parse_item_quantity">'+ order_line.quantity  +'</strong> x <span class="price parse_sale_price">'+ InSales.formatMoney(order_line.sale_price, "{\"delimiter\":\" \",\"separator\":\".\",\"format\":\"%n\\u0026nbsp;%u\",\"unit\":\"₽\",\"show_price_without_cents\":1}") +'</span>'
+                            text+='</div>'
+                            text += '</li>'
+                        });
+                        text += '</ol>'
+                        text += '</div>'
+
+                    }
+                    $('.cart_text').html(count_name);
+                    $('#cart').html(text);
+                    $('.cart_items_count').html(cart.items_count);
+                    $('.cart_total_price').html(InSales.formatMoney(cart.items_price, "{\"delimiter\":\" \",\"separator\":\".\",\"format\":\"%n\\u0026nbsp;%u\",\"unit\":\"₽\",\"show_price_without_cents\":1}"));
+
+                    this.addCallback = function () {
+                        this.reloadCart(function () {
+                            cart.draw();
+                            set_preloaders_message('<div id="add_product_notification"><h3>Товар добавлен в корзину</h3><a href="#" class="closeCartMsg fl">Продолжить покупки</a><a href="/cart_items/" class="fr buy_button">Перейти в корзину</a></div>');
+                            //window.setTimeout( hide_preloader, 1000);
+
+                        });
+                    }
+
+
+                }
+            });
+
+            $('.closeCartMsg').live('click', function(e){
+
+                e.preventDefault();
+                hide_preloader();
+            });
+
+        });
+    </script>
+
+    <link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/custom-user.css">
+    <link href="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/sprity_logo.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.1.4/assets/sprites/emojione.sprites.css"></head>
+<body class="">
+<div class="wrapper">
+    <noscript>
+        <div class="noscript">
+            <div class="noscript-inner">
+                <p><strong>JavaScript seem to be disabled in your browser.</strong></p>
+                <p>You must have JavaScript enabled in your browser to utilize the functionality of this website.</p>
+            </div>
+        </div>
+    </noscript>
+    <div class="header-container">
+        <div class="header">
+            <div class="header-row">
+                <div class="page-02">
+                    <div class="logo">
+                        
+                            <a href="/" title="Российские двери" class="logo">
+                                <img src="https://static-internal.insales.ru/files/1/2500/2345412/original/rosdveri-design-logo-05.png" alt="Российские двери">
+                            </a>
+                        
+                    </div>
+
+                    <div class="indent-header-row">
+                        <div class="block-links">
+                            <ul class="links">
+                                
+                                    <li class="first ">
+                                        <a href="/page/kak-zakazat" title="Как  заказать?" style="">Как  заказать?
+                                            </a>
+                                    </li>
+                                
+                                    <li class=" ">
+                                        <a href="/page/ustanovka-dverey" title="Доставка" style="">Доставка
+                                            </a>
+                                    </li>
+                                
+                                    <li class=" ">
+                                        <a href="/page/ustanovka-dverey-2" title="Установка" style="">Установка
+                                            </a>
+                                    </li>
+                                
+                                    <li class=" ">
+                                        <a href="/page/kredit-i-rassrochka" title="Рассрочка" style="">Рассрочка
+                                            </a>
+                                    </li>
+                                
+                                    <li class=" ">
+                                        <a href="/page/otzyvy-pokupateley-internet-magazina-rossiyskie-dveri" title="Отзывы" style="">Отзывы
+                                            </a>
+                                    </li>
+                                
+                                    <li class=" ">
+                                        <a href="/page/aktsii-i-skidki" title="Акции" style="">Акции
+                                            </a>
+                                    </li>
+                                
+                                    <li class=" last">
+                                        <a href="/page/kontakty" title="Контакты" style="">Контакты
+                                            </a>
+                                    </li>
+                                
+                            </ul>
+
+                        </div>
+                        <div class="top-cart-wrapper">
+                            <img src="https://static-internal.insales.ru/files/1/1402/4187514/original/shopping-cart.png">
+                            <a href="/cart_items">Корзина</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-page">
+                <div class="header-info">
+                    <form id="search_mini_form" action="/search" method="get">
+                        
+                        <div class="form-search">
+                            <label for="search">Поиск:</label>
+                            <input autocomplete="off" id="search" name="q" value="Поиск недорогих дверей среди 2000 позиций!" onfocus="if(this.value==this.defaultValue){this.value='';}" onblur="if(this.value==''){this.value=this.defaultValue;}" class="input-text" type="text">
+                            <button type="submit" title="Поиск" class="button"><span>Поиск</span></button>
+                        </div>
+                    </form>
+                    <div class="account-phone">
+                      <a href="tel:+7 (3852) 59-14-49" itemprop="telephone" onclick="yaCounter25015097.reachGoal('call-header'); return true;" class="callibri_phone">+7 (3852) 59-14-49</a>
+                      <span>Заказывайте двери по телефону!</span>
+                  	</div>
+                    <br class="clear-block">
+
+                </div>
+            </div>
+            <div class="header-row-02">
+                <div class="block-menu">
+                    <div class="nav-container">
+                        <ul id="nav">
+                            
+                                <li class="level0 level-top first  parent">
+                                    <a href="/collection/dveri-mezhkomnatnye" class="level-top">
+                                        <span>Двери межкомнатные</span>
+                                    </a>
+                                     <span class="nav-hover-decor"></span>
+                                    
+                                        <ul class="level0">
+                                            
+                                                <li class="level1 first ">
+                                                    <a href="/collection/polnyy-katalog-mezhkomnatnyh-dverey" style="">
+                                                        <span>Полный каталог межкомнатных дверей</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-dlya-dachi-do-2500-rubley" style="">
+                                                        <span>Двери для дачи (до 2500 рублей)</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-mezhkomnatnye-dvuhstvorchatye" style="">
+                                                        <span>Двери двустворчатые</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-razdvizhnye" style="">
+                                                        <span>Двери раздвижные</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/peregorodki-mezhkomnatnye" style="">
+                                                        <span>Перегородки межкомнатные</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-skladnye" style="">
+                                                        <span>Двери складные</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-laminirovannye" style="">
+                                                        <span>Двери ламинированные</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-s-3d-pokrytiem" style="">
+                                                        <span>Двери с 3D-покрытием</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-pvh" style="">
+                                                        <span>Двери искусственный шпон (ПВХ)</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-shponirovannye" style="">
+                                                        <span>Двери натуральный шпон</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-ekoshpon" style="">
+                                                        <span>Двери экошпон</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-emal" style="">
+                                                        <span>Двери эмаль</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-mikrofleks" style="">
+                                                        <span>Двери микрофлекс</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-ecotex" style="">
+                                                        <span>Двери EcoTex</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-klyuchevskaya-fabrika-dverey" style="">
+                                                        <span>Двери "AIRON"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-duplex" style="">
+                                                        <span>Двери "Duplex"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-fly-doors" style="">
+                                                        <span>Двери "Fly Doors"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-greenline" style="">
+                                                        <span>Двери "GreenLine"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-la-stella" style="">
+                                                        <span>Двери "La Stella"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-lidman" style="">
+                                                        <span>Двери "Lidman"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-liga" style="">
+                                                        <span>Двери "LiGa"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-optima-porte" style="">
+                                                        <span>Двери "Optima Porte"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-aysberg" style="">
+                                                        <span>Двери "Porte line"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-prestigio" style="">
+                                                        <span>Двери "Prestigio"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-profil-doors" style="">
+                                                        <span>Двери "Profil Doors"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-trenddoors" style="">
+                                                        <span>Двери "TrendDoors"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-walsta" style="">
+                                                        <span>Двери "Walsta"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-verda" style="">
+                                                        <span>Двери "Верда"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-vladimirskaya-fabrika-dverey" style="">
+                                                        <span>Двери "Владимирская фабрика дверей"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-dveri-a" style="">
+                                                        <span>Двери "Двери-А"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-dveri-belorussii" style="">
+                                                        <span>Двери "Двери Белоруссии"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-dveroniks" style="">
+                                                        <span>Двери "Двероникс"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-dvernov" style="">
+                                                        <span>Двери "ДверноВ"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-dera" style="">
+                                                        <span>Двери "Дера"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-dubrava-sibir" style="">
+                                                        <span>Двери "Дубрава Сибирь"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-krona" style="">
+                                                        <span>Двери "Крона"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-ladora" style="">
+                                                        <span>Двери "Ладора"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-leskom" style="">
+                                                        <span>Двери "ЛесКом"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-markeev" style="">
+                                                        <span>Двери "Маркеев"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-okean" style="">
+                                                        <span>Двери "Океан"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-rostra" style="">
+                                                        <span>Двери "Ростра"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-rumaks" style="">
+                                                        <span>Двери "Румакс"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-sibir-profil" style="">
+                                                        <span>Двери "Сибирь Профиль"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-sobranie-2" style="">
+                                                        <span>Двери "Собрание"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  last">
+                                                    <a href="/collection/dveri-fregat" style="">
+                                                        <span>Двери "Фрегат"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                        </ul>
+                                    
+                                </li>
+                            
+                                <li class="level0 level-top   parent">
+                                    <a href="/collection/dveri-vhodnye" class="level-top">
+                                        <span>Двери входные</span>
+                                    </a>
+                                     <span class="nav-hover-decor"></span>
+                                    
+                                        <ul class="level0">
+                                            
+                                                <li class="level1 first ">
+                                                    <a href="/collection/polnyy-katalog-vhodnyh-dverey" style="">
+                                                        <span>Полный каталог входных дверей</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-s-termorazryvom" style="">
+                                                        <span>Двери с ТЕРМОРАЗРЫВОМ</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-dlya-dachi" style="">
+                                                        <span>Двери для дачи (до 8000 рублей)</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-protivopozharnye" style="">
+                                                        <span>Двери противопожарные</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-s-vnutrennim-otkryvaniem" style="">
+                                                        <span>Двери с внутренним открыванием</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-diamante-porta" style="">
+                                                        <span>Двери "Diamante Porta"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-falko" style="">
+                                                        <span>Двери "Falko"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-isoterma" style="">
+                                                        <span>Двери "Isoterma"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-sibteplo" style="">
+                                                        <span>Двери "SIBTEPLO"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-valberg" style="">
+                                                        <span>Двери "Valberg"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-vivat" style="">
+                                                        <span>Двери "Vivat"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-almaz" style="">
+                                                        <span>Двери "Алмаз"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-argus" style="">
+                                                        <span>Двери "Аргус"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-bizon" style="">
+                                                        <span>Двери "Бизон"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-bronin" style="">
+                                                        <span>Двери "Бронин"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-buldors" style="">
+                                                        <span>Двери "Бульдорс"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-garda" style="">
+                                                        <span>Двери "Гарда"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-gorod-masterov" style="">
+                                                        <span>Двери "Город Мастеров"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-zevs" style="">
+                                                        <span>Двери "Зевс"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-zsd-sibir" style="">
+                                                        <span>Двери "ЗСД Сибирь"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-yoshkar" style="">
+                                                        <span>Двери "Йошкар"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-kayzer" style="">
+                                                        <span>Двери "Кайзер"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-kosmo" style="">
+                                                        <span>Двери "Космо"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-legion" style="">
+                                                        <span>Двери "Легион"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-megi" style="">
+                                                        <span>Двери "Меги"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-retvizan" style="">
+                                                        <span>Двери "Ретвизан"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-sibiriya" style="">
+                                                        <span>Двери "Сибирия"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-sibirskiy-standart" style="">
+                                                        <span>Двери "Сибирский Стандарт"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-sibir" style="">
+                                                        <span>Двери "Сибирь"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-stel" style="">
+                                                        <span>Двери "Стел"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dveri-stroygost" style="">
+                                                        <span>Двери "СтройГост"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  last">
+                                                    <a href="/collection/dveri-tsitadel" style="">
+                                                        <span>Двери "Цитадель"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                        </ul>
+                                    
+                                </li>
+                            
+                                <li class="level0 level-top   parent">
+                                    <a href="/collection/arki-2" class="level-top">
+                                        <span>Арки межкомнатные</span>
+                                    </a>
+                                     <span class="nav-hover-decor"></span>
+                                    
+                                        <ul class="level0">
+                                            
+                                                <li class="level1 first ">
+                                                    <a href="/collection/polnyy-katalog-mezhkomnatnyh-arok" style="">
+                                                        <span>Полный каталог межкомнатных арок</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/arki-iskusstvennyy-shpon" style="">
+                                                        <span>Арки искусственный шпон</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/arki-shponirovannye" style="">
+                                                        <span>Арки шпонированные</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/arki-moderno" style="">
+                                                        <span>Арки "Moderno"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/arki-arkada" style="">
+                                                        <span>Арки "Аркада"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/arki-arsenal" style="">
+                                                        <span>Арки "Арсенал"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/arki-vladimirskaya-fabrika-dverey" style="">
+                                                        <span>Арки "Владимирская фабрика дверей"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/arki-krona" style="">
+                                                        <span>Арки "Крона"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  last">
+                                                    <a href="/collection/arki-lesma" style="">
+                                                        <span>Арки "Лесма"</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                        </ul>
+                                    
+                                </li>
+                            
+                                <li class="level0 level-top   parent">
+                                    <a href="/collection/pogonazh-i-furnitura" class="level-top">
+                                        <span>Фурнитура и погонаж</span>
+                                    </a>
+                                     <span class="nav-hover-decor"></span>
+                                    
+                                        <ul class="level0">
+                                            
+                                                <li class="level1 first ">
+                                                    <a href="/collection/ruchki-dlya-dverey" style="">
+                                                        <span>Ручки для дверей</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/furnitura-zavertki-k-ruchkam" style="">
+                                                        <span>Завертки к ручкам</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/navesy" style="">
+                                                        <span>Навесы</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/furnitura-zamki-dvernye" style="">
+                                                        <span>Замки дверные</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/furnitura-zaschelki" style="">
+                                                        <span>Защелки</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/furnitura-komplektuyuschie-dlya-razdvizhnyh-dverey" style="">
+                                                        <span>Комплектующие для раздвижных и складных дверей</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/furnitura-ogranichiteli-dvernye" style="">
+                                                        <span>Ограничители дверные</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/furnitura-rozetki" style="">
+                                                        <span>Розетки</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/bloki-korobochnye" style="">
+                                                        <span>Блоки коробочные</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dekorativnye-elementy" style="">
+                                                        <span>Декоративные элементы</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/dobornye-planki" style="">
+                                                        <span>Доборные планки</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/kapiteli" style="">
+                                                        <span>Капители</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/pogonazh-kozyryok-dlya-vhodnoy-dveri" style="">
+                                                        <span>Козырёк для входной двери</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/korobki" style="">
+                                                        <span>Коробки</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/nalichniki" style="">
+                                                        <span>Наличники</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/paneli-mezhstenovye" style="">
+                                                        <span>Панели межстеновые</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/pogonazh-plintus" style="">
+                                                        <span>Плинтус</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/pritvornye-planki" style="">
+                                                        <span>Притворные планки</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  ">
+                                                    <a href="/collection/rasshiriteli" style="">
+                                                        <span>Расширители</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  last">
+                                                    <a href="/collection/pogonazh-tsokol" style="">
+                                                        <span>Цоколь</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                        </ul>
+                                    
+                                </li>
+                            
+                                <li class="level0 level-top   parent">
+                                    <a href="/collection/uslugi" class="level-top">
+                                        <span>Услуги</span>
+                                    </a>
+                                     <span class="nav-hover-decor"></span>
+                                    
+                                        <ul class="level0">
+                                            
+                                                <li class="level1 first ">
+                                                    <a href="/collection/dostavka-i-podem" style="">
+                                                        <span>Доставка и подъем</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                                <li class="level1  last">
+                                                    <a href="/collection/ustanovka-dverey" style="">
+                                                        <span>Установка дверей</span>
+                                                    </a>
+                                                    
+                                                </li>
+                                            
+                                        </ul>
+                                    
+                                </li>
+                            
+                                <li class="level0 level-top  last ">
+                                    <a href="/collection/aktsii-i-skidki" class="level-top">
+                                        <span>Акции и скидки</span>
+                                    </a>
+                                    
+                                    
+                                </li>
+                            
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Фиксированная шапка-->
+    
+        <div id="fix_block">
+
+            <div class="fb_shapka">
+                <div class="fb_cat">
+                    <p>1+1=3 ТРЕТЬЯ ДВЕРЬ В ПОДАРОК!</p>
+                </div>
+                <div class="fb_zvonok">
+                   	Звоните! Заказывайте!
+                    <span class="fb_phone">
+                            <span id="phone" itemprop="telephone" class="callibri_phone">
+                                <span class="tel-test01">+7 (3852) 22-30-64</span>
+                                <span class="tel-test02" style="display: none;"></span>
+                            </span>
+                        </span> или
+                    <a href="#contact" data-toggle="modal" class="zakazat-zvonok" onclick="yaCounter25015097.reachGoal('zakazat-zvonok-knopka-left'); return true;">
+                        <b>закажите обратный звонок</b>
+                    </a>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        
+    <!-- Фиксированная шапка end-->
+
+  	
+  
+  	
+    <div class="slider-header">
+    	<div class="inner">
+    <div class="home-slider-wrapper">
+        <div class="bx-wrapper" style="max-width: 100%;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 87px;"><ul class="bxslider" style="width: auto; position: relative;">
+            
+                <li style="float: none; list-style: none; position: absolute; width: 1354px; z-index: 0; display: none;">
+                    <div class="info-block-slider" style="position: relative; background: #f91e25;">
+                        
+                            
+                            
+                            <a href="http://xn--22-dlchgs2bpeg.xn--p1ai/collection/polnyy-katalog-mezhkomnatnyh-dverey?page_size=30&amp;order=&amp;characteristics%5B%5D=54944753">
+                                
+
+                                <img src="https://static-eu.insales.ru/files/1/2881/7678785/original/1-плюс-1-под-шапкой.png" alt="" title="" height="87px">
+                            </a>
+                        
+                    </div>
+                </li>
+            
+                <li style="float: none; list-style: none; position: absolute; width: 1354px; z-index: 50;">
+                    <div class="info-block-slider" style="position: relative; background: #5f7d16;">
+                        
+                            
+                            
+                            <a href="https://xn--22-dlchgs2bpeg.xn--p1ai/collection/polnyy-katalog-mezhkomnatnyh-dverey?page_size=30&amp;order=&amp;characteristics%5B%5D=57043172">
+                                
+
+                                <img src="https://static-ru.insales.ru/files/1/8152/10723288/original/РД_Супер_установка-min.jpg" alt="УСТАНОВКА ВСЕГО 1190 РУБЛЕЙ!" title="УСТАНОВКА ВСЕГО 1190 РУБЛЕЙ!" height="87px">
+                            </a>
+                        
+                    </div>
+                </li>
+            
+        </ul></div><div class="bx-controls bx-has-pager"><div class="bx-pager bx-default-pager"><div class="bx-pager-item"><a href="" data-slide-index="0" class="bx-pager-link">1</a></div><div class="bx-pager-item"><a href="" data-slide-index="1" class="bx-pager-link active">2</a></div></div></div></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.bxslider').show().bxSlider({
+        auto: true,
+        mode: 'fade',
+        controls: false,
+        speed: 400,
+        pause: 4000,
+        autoHover: true,
+        randomStart: false,
+        responsive: true,
+      	pager: ($(".bxslider>li").length > 1) ? true: false
+    });
+</script>
+    </div>
+
+    
+
+    
+
+
+    <div class="page">
+        <div class="main-container
+      
+      col2-right-layout
+      
+      ">
+
+
+
+            <div class="main">
+                
+                 <div class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+  <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+    <a itemprop="item" href="http://росдвери22.рф/">
+      <span itemprop="name">Главная</span>
+    </a>
+    <meta itemprop="position" content="1">
+  </span> »
+  
+    	<span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+          <a itemprop="item" href="/page/o-personalnyh-dannyh" rel="nofollow">
+            <span itemprop="name">Политика обработки персональных данных</span>
+            <meta itemprop="position" content="2">
+          </a>
+  		</span>
+     
+</div>
+
+  
+  
+  
+  
+  
+  
+  
+                
+                <div class="col-main">
+  <div class="inside-binder bg">   
+	<div id="messages_product_view"></div>
+	<div class="page-head">
+	  <h1>Политика обработки персональных данных</h1>
+      
+      
+      <div class="editor-content"><p style="text-transform: uppercase;"><strong>Политика конфиденциальности</strong></p>
+<p class="justify">Политика конфиденциальности персональных данных (далее — Политика) действует в отношении всей информации, которую Индивидуальный предприниматель Вальтер Константин Михайлович (ИНН 222175426472) (далее — Администрация сайта) может получить о Пользователе во время использования им Сайта http://росдвери22.рф (далее Сайт), предоставляемого Администрацией сайта, а также в ходе исполнения Администрацией сайта любых соглашений и договоров с Пользователем.</p>
+<p class="justify">В настоящей политике используются следующие основные понятия:</p>
+<ul>
+<li><strong>персональные данные</strong>&nbsp;- любая информация, относящаяся к прямо или косвенно определенному или определяемому физическому лицу (субъекту персональных данных);</li>
+<li><strong>администрация сайта</strong>&nbsp;- Индивидуальный предприниматель Вальтер Константин Михайлович (ИНН 222175426472) (сайт http://росдвери22.рф), самостоятельно организующее и осуществляющее обработку персональных данных, а также определяющее цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными;</li>
+<li><strong>обработка персональных данных</strong>&nbsp;- любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных;</li>
+<li><strong>автоматизированная обработка персональных данных</strong>&nbsp;- обработка персональных данных с помощью средств вычислительной техники;</li>
+<li><strong>распространение персональных данных</strong>&nbsp;- действия, направленные на раскрытие персональных данных неопределенному кругу лиц;</li>
+<li><strong>предоставление персональных данных</strong>&nbsp;- действия, направленные на раскрытие персональных данных определенному лицу или определенному кругу лиц;</li>
+<li><strong>блокирование персональных данных</strong>&nbsp;- временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных);</li>
+<li><strong>уничтожение персональных данных&nbsp;</strong>- действия, в результате которых становится невозможным восстановить содержание персональных данных в информационной системе персональных данных и (или) в результате которых уничтожаются материальные носители персональных данных;</li>
+<li><strong>обезличивание персональных данных</strong>&nbsp;- действия, в результате которых становится невозможным без использования дополнительной информации определить принадлежность персональных данных конкретному субъекту персональных данных;</li>
+<li><strong>информационная система персональных данных</strong>&nbsp;- совокупность содержащихся в базах данных персональных данных и обеспечивающих их обработку информационных технологий и технических средств;</li>
+</ul>
+<p><strong>1. </strong> <strong>ОБЩИЕ ПОЛОЖЕНИЯ</strong></p>
+<p class="justify">1.1. Администрация сайта обрабатывает персональные данные на законной и справедливой основе для выполнения возложенных на Администрацию сайта законодательством функций, полномочий и обязанностей, осуществления прав и законных интересов Администрации сайта и Пользователей.</p>
+<p class="justify">1.2. Использование Сайта, а также его отдельных функций означает безоговорочное согласие Пользователя с настоящей Политикой и указанными в ней условиями обработки его персональных данных; в случае несогласия с этими условиями Пользователь должен воздержаться от использования Сайта.</p>
+<p><strong>2. </strong> <strong> ОБРАБОТКА И КОНФИДЕНЦИАЛЬНОСТЬ ПЕРСОНАЛЬНЫХ ДАННЫХ ПОЛЬЗОВАТЕЛЯ </strong></p>
+<p class="justify">2.1. Настоящая Политика устанавливает обязательства Администрации сайта по неразглашению и обеспечению режима защиты конфиденциальности персональных данных, которые Пользователь предоставляет при использовании Сайта.</p>
+<p class="justify">2.2. Категории персональных данных, которые Администрация сайта может собирать с Пользователей для предоставления доступа к функциям Сайта: фамилия, имя, отчество, дата рождения, месяц рождения, год рождения, место рождения, данные документов, удостоверяющих личность, адрес (регистрации по месту жительства и фактического проживания), контактные данные (номера телефонов, адреса электронной почты), метаданные пользователя сайта (cookie, данные об IP-адресе и местоположении).</p>
+<p class="justify">2.3. Администрация сайта защищает данные, которые автоматически передаются в процессе просмотра рекламных блоков и при посещении страниц на сайте Сайта, на которых установлен статистический скрипт системы ("пиксель").</p>
+<p class="justify">2.4. Настоящая Политика применима только к информации, обрабатываемой в ходе использования Сайта. Администрация сайта не контролирует и не несет ответственность за обработку информации сайтами и Сайтами третьих лиц, на которые Пользователь может перейти по ссылкам, доступным внутри Сайта.</p>
+<p class="justify">2.5. Администрация сайта не проверяет достоверность персональных данных, предоставляемых Пользователем, и не имеет возможности оценивать его дееспособность. Однако Администрация сайта исходит из того, что пользователь предоставляет достоверные и достаточные персональные данные и поддерживает их в актуальном состоянии.</p>
+<p><strong>3. </strong> <strong>ЦЕЛИ СБОРА ПЕРСОНАЛЬНЫХ ДАННЫХ ПОЛЬЗОВАТЕЛЯ</strong></p>
+<p class="justify">3.1. Администрация сайта собирает и хранит только те персональные данные, которые необходимы для предоставления полного или частичного функционала Сайта или исполнения соглашений и договоров с Пользователем, за исключением случаев, когда законодательством предусмотрено обязательное хранение персональных данных в течение определенного законом срока.</p>
+<p>3.2. Администрация сайта обрабатывает персональные данные Пользователя исключительно в следующих целях:</p>
+<ul>
+<li>осуществления хозяйственной деятельности, направленной на извлечение прибыли (включая, но, не ограничиваясь путем: розничной торговли товарами;</li>
+<li>оказание экспедиционных и транспортных услуг, необходимых для реализации продукции;</li>
+<li>организации гарантийного сервисного обслуживания;</li>
+<li>оказания снабженческих, сбытовых, юридических, финансовых, информационно-консультационных и маркетинговых услуг;</li>
+<li>исполнения договора, одной из сторон (либо выгодоприобретателем) которого является субъект персональных данных (включая трудовые отношения с работниками Оператора, отношения с контрагентами/поставщиками и с покупателями/клиентами Оператора).</li>
+</ul>
+<p style="text-transform: uppercase;"><strong>4. </strong> <strong>Условия обработки персональнЫХ ДАННЫХ Пользователей</strong></p>
+<p class="justify">4.1. Обработка персональных данных Пользователя осуществляется без ограничения срока, любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств.</p>
+<p class="justify">4.2. В отношении персональных данных Пользователя сохраняется их конфиденциальность, кроме случаев добровольного предоставления Пользователем информации о себе для общего доступа неограниченному кругу лиц. При использовании отдельных функций Сайта, Пользователь соглашается с тем, что определённая часть его персональной информации становится общедоступной.</p>
+<p class="justify">4.3. При обработке персональных данных Пользователей Администрация сайта руководствуется:</p>
+<p class="justify">4.3.1. Федеральным законом от 27.07.2006 г. № 152-ФЗ «О персональных данных»;</p>
+<p class="justify">4.3.2. Постановлением Правительства Российской Федерации от 01.11.2012 г. № 1119 «Об утверждении требований к защите персональных данных при их обработке в информационных системах персональных данных»;</p>
+<p class="justify">4.3.3. Постановлением Правительства Российской Федерации от 15.09.2008 г. № 687 «Об утверждении Положением об особенностях обработки персональных данных, осуществляемой без использования средств автоматизации»;</p>
+<p class="justify">4.3.4. Приказом ФСТЭК России от 18 февраля 2013 г. № 21 «Об утверждении Состава и содержания организационных и технических мер по обеспечению безопасности персональных данных при их обработке в информационных системах персональных данных»;</p>
+<p class="justify">4.3.5. Приказом ФСБ России от 10.07.2014 № 378 «Об утверждении Состава и содержания организационных и технических мер по обеспечению безопасности персональных данных при их обработке в информационных системах персональных данных с использованием средств криптографической защиты информации, необходимых для выполнения установленных Правительством Российской Федерации требований к защите персональных данных для каждого из уровней защищенности».</p>
+<p style="text-transform: uppercase;"><strong>5. </strong> <strong> Изменение и удаление персональных данных. Обязательное хранение данных </strong></p>
+<p class="justify">5.1. Пользователь может в любой момент изменить (обновить, дополнить) предоставленные им персональные данные или их часть, воспользовавшись функцией редактирования персональных данных в персональном разделе Сайта, в случае, если она предусмотрена Сайтом, либо направив соответствующий запрос по электронной почте, указанной в разделе 8 настоящей Политики.</p>
+<p class="justify">5.2. Пользователь также может удалить предоставленные им в рамках определенной учетной записи персональные данные, воспользовавшись соответствующей функцией в персональном разделе Сайта, в случае если она предусмотрена Сайтом, либо направив соответствующий запрос по электронной почте, указанной в разделе 10 настоящей Политики. При этом удаление аккаунта может повлечь невозможность использования Сайта как полностью, так и в части.</p>
+<p class="justify">5.3. Права, предусмотренные пп. 3.1. и 3.2. настоящей Политики могут быть ограничены в соответствии с требованиями действующего законодательства. В частности, такие ограничения могут предусматривать обязанность Администрации сайта сохранить измененную или удаленную Пользователем информацию на срок, установленный законодательством, и передать такую информацию в соответствии с законодательно установленной процедурой государственному органу.</p>
+<p><strong>6. </strong> <strong>ОБРАБОТКА ПЕРСОНАЛЬНЫХ ДАННЫХ ПРИ ПОМОЩИ ФАЙЛОВ COOKIE</strong></p>
+<p class="justify">6.1. Файлы cookie, передаваемые Администрации сайта техническим устройствам Пользователя, могут использоваться для предоставления Пользователю персонализированных функций Сайта, для персональной рекламы, которая показывается Пользователю, в статистических и исследовательских целях, а также для улучшения Сайта.</p>
+<p class="justify">6.2. Пользователь осознает, что оборудование и программное обеспечение, используемые им для посещения сайтов в сети интернет, могут обладать функцией запрещения операций с файлами cookie (для любых сайтов или для определенных сайтов), а также удаления ранее полученных файлов cookie.</p>
+<p class="justify">6.3. Администрация сайта вправе установить, что предоставление определенных функций Сайта возможно лишь при условии, что прием и получение файлов cookie разрешены Пользователем.</p>
+<p class="justify">6.4. Структура файла cookie, его содержание и технические параметры определяются Администрацией сайта и могут изменяться без предварительного уведомления Пользователя.</p>
+<p class="justify">6.5. Счетчики, размещенные на сайте или приложении Сайта, могут использоваться для анализа файлов cookie Пользователя, для сбора и обработки статистической информации об использовании Сайта, а также для обеспечения работоспособности Сайта в целом или его отдельных функций в частности. Технические параметры работы счетчиков определяются Администрацией сайта и могут изменяться без предварительного уведомления Пользователя.</p>
+<p style="text-transform: uppercase;"><strong>7. </strong> <strong> Меры, применяемые для защиты персональных данных Пользователя </strong></p>
+<p class="justify">7.1. Администрация сайта принимает необходимые и достаточные организационные и технические меры для защиты персональных данных Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий с ней третьих лиц.</p>
+<p class="justify">7.2. Меры по выполнению обязанностей Администрации сайта в обеспечении безопасности персональных данных при их обработке:</p>
+<ul>
+<li>Носители информации, содержащие персональные данные, хранятся в специальных контролируемых помещениях, расположенных в пределах границ контролируемых и охраняемых зон.</li>
+<li>Помещения, где хранятся персональные данные, и технические средства, с помощью которых производится обработка персональных данных, находятся под круглосуточной охраной.</li>
+<li>Информация доступна лишь для строго определенных работников. Производится запись (логирование) входа/выхода работников в/из операционную(ой) систему(ы), работы в автоматизированных рабочих местах, доступа к базам данных.</li>
+<li>Реализована защита информации от сбоев оборудования и вредоносного программного обеспечения. Применяется система восстановления информации.</li>
+</ul>
+<p style="text-transform: uppercase;"><strong>8. </strong> <strong>Разрешение споров</strong></p>
+<p class="justify">8.1. До обращения в суд с иском по спорам, возникающим из отношений между Пользователем и Администрацией, обязательным является предъявление претензии (письменного предложения о добровольном урегулировании спора).</p>
+<p class="justify">8.2. Получатель претензии в течение 30 календарных дней со дня получения претензии, письменно уведомляет заявителя претензии о результатах рассмотрения претензии.</p>
+<p class="justify">8.3. При не достижении соглашения спор будет передан на рассмотрение в судебный орган в соответствии с действующим законодательством Российской Федерации.</p>
+<p style="text-transform: uppercase;"><strong>9. </strong> <strong> Изменение Политики конфиденциальности. Применимое законодательство </strong></p>
+<p class="justify">9.1. Администрация сайта имеет право вносить изменения в настоящую Политику конфиденциальности. При внесении изменений в актуальной редакции указывается дата последнего обновления. Новая редакция Политики вступает в силу с момента ее размещения, если иное не предусмотрено новой редакцией Политики. Действующая редакция постоянно доступна на Сайте.</p>
+<p class="justify">9.2. К настоящей Политике и отношениям между Пользователем и Администрацией сайта, возникающим в связи с применением Политики конфиденциальности, подлежит применению право Российской Федерации.</p>
+<p style="text-transform: uppercase;"><strong>10. </strong> <strong>Обратная связь. Вопросы и предложения</strong></p>
+<p class="justify">10.1. Все предложения или вопросы по поводу настоящей Политики Пользователь вправе направлять в Службу поддержки пользователей Администрации сайта по электронной почте magazin@rosdveri22.ru, либо по адресу: г.Барнаул, ул. Северо-Западная, д. 3, оф. 202</p>
+<p style="text-transform: uppercase;"><strong>Продолжая нахождение на сайте я даю согласие на обработку персональных данных</strong></p>
+<p class="justify">Настоящим свободно, своей волей и в своем интересе <strong>даю согласие</strong> ндивидуальный предприниматель Вальтер Константин Михайлович (далее – Администрация сайта) на автоматизированную и неавтоматизированную обработку <strong>моих персональных данных (далее - ПДн)</strong>, таких как: фамилия, имя, отчество; источник захода на сайт http://росдвери22.рф (далее – Сайт) и все его поддомены, и информация поискового или рекламного запроса; адрес, <strong>для целей</strong> предоставления персонализированных функций Сайта, исполнения договоров, направления уведомлений, запросов и информации, касающихся использования Сайта, а также обработки запросов и заявок. Также даю свое согласие на предоставление Администрацией сайта моих ПДн третьим лицам – партнерам Администрации сайта. Администрация сайта вправе осуществлять обработку моих ПДн.<br> <br> Во всем остальном, что не предусмотрено настоящим Согласием, Стороны руководствуются Политикой конфиденциальности и законодательством РФ. В случае противоречия условий настоящего Согласия условиям Политики конфиденциальности подлежат применению условия Политики конфиденциальности.<br> </p></div>
+	</div>
+	<br class="clear-block">
+	</div>
+ 
+</div>
+                
+                    <div class="col-right sidebar">
+  
+
+  
+  
+
+  
+  
+</div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!--Форма обратного звонка-->
+    <div class="callback">
+    <a href="#contact" data-toggle="modal" class="zakazat-zamer">Заказать обратный звонок!</a>
+</div>
+
+<div id="thanks" class="alert alert-success" style="display: none;">
+    <a class="thanks_close">×</a>
+</div>
+<div id="contact" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">Заказать бесплатный обратный звонок!</h3>
+            </div>
+
+            <form id="feedback_form_1" action="/client_account/feedback" method="post" class="modal-body" role="form">
+                <input id="info_input_subject" type="hidden" name="feedback[subject]" value="РОСДВЕРИ - Заказ обратного звонка! ">
+                <input type="hidden" id="info_input_text_zvonok" value="Дорогой менеджер, перезвоните этому клиенту как можно скорее! Его интересует этот товар - . Источник перехода:">
+
+                <input type="hidden" id="info_input_zvonok" name="feedback[content]" value="">
+
+              <input type="hidden" name="feedback[info]" value="|||16.02.2023|РОСДВЕРИ|Заказ обратного звонка!|">
+              <input type="hidden" id="utm_zvonok" value="Без UTM метки">
+
+                <input type="hidden" id="zvonok_email_input" name="feedback[from]" value="kmvalter@mail.ru">
+                <div class="form-group">
+                    <input id="phone_name" class="form-control" type="text" placeholder="Ваше имя" name="feedback[name]">
+                </div>
+                <div class="form-group">
+                    <input id="phone_form" class="form-control" placeholder="Ваш номер телефона" type="tel" name="feedback[phone]" required="" im-insert="true">
+                </div>
+                <div class="modal-footer" style="text-align: left !important;">
+                    <!-- Блок с галочкой, о согласии обработки персональных данных. -->
+                    <div style="display: -webkit-inline-box; margin-top: -5px; padding-bottom: 0; text-align: left; font-size: 9px;">
+                        <input name="eula_accepted" id="eula_accepted" type="checkbox" checked="checked" style="margin-right: 7px; margin-top: 5px; transform:scale(1.2); opacity:0.9; cursor:pointer;">
+                        <div style="color: #6D6D6D; line-height: 15px;">
+                            Согласен(-на) с тем, что оставленная мной информация может быть использована компанией Российские двери, для обработки моего запроса. <a href="/page/o-personalnyh-dannyh" style="color: #6D6D6D;" target="blank">Подробнее о защите персональных данных</a>.
+                        </div>
+                    </div>
+                    <div style="display: block; margin-bottom: 30px; text-align: left;">
+                        <div id="error-eula" style="margin-top: 0; margin-left: 20px; display:none; font-size: 9px; color: red;">
+                            Для продолжения Вы должны подтвердить согласие обработки персональных данных.
+                        </div>
+
+                        <div style="margin-top: 7px; margin-left: -15px; margin-right: -15px; margin-bottom: -10px; border-bottom: 1px solid #e5e5e5; border-width: thin;"></div>
+                    </div>
+                    <!-- Блок с галочкой, о согласии обработки персональных данных. Конец. -->
+
+                    <span> После отправки заявки, наш менеджер перезвонит вам и уточнит всю необходимую информацию! </span>
+                    <button onclick="yaCounter25015097.reachGoal('ZVONOK-OTPRAVKA'); return true;" id="feedback_commit1" class="site-button" type="submit" title="Отправить" form="feedback_form">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    /*Обработчик блока с галочкой, о персональных данных.*/
+    $(function() {
+        // при изменении чекбокса eula_accepted
+        $('#eula_accepted').change(function(){
+            // проверить состояние checkbox (если снят)
+            if ($(this).prop('checked')==false) {
+                // то отобразить сообщение о том, что вы должны принять условия пользовательского соглашения
+                $('#error-eula').css('display','block');
+                // сделать кнопку Отправить не активной
+                $('button[id="feedback_commit1"]').prop('disabled', true);
+            } else {
+                // скрыть сообщение об ошибки      
+                $('#error-eula').css('display','none');
+                // сделать доступной кнопку Отправить для нажатия
+                $('button[id="feedback_commit1"]').prop('disabled', false);
+            }
+        });
+    });
+    /*Обработчик блока с галочкой, о персональных данных. Конец.*/
+
+
+    function setCookie_ProBup(name, value, options) {
+        options = options || {};
+        var expires = options.expires;
+        if (typeof expires == "number" && expires) {
+            var d = new Date();
+            d.setTime(d.getTime() + expires*1000);
+            expires = options.expires = d;
+        }
+        if (expires && expires.toUTCString) {
+            options.expires = expires.toUTCString();
+        }
+        value = encodeURIComponent(value);
+        var updatedCookie = name + "=" + value;
+        for(var propName in options) {
+            updatedCookie += "; " + propName;
+            var propValue = options[propName];
+            if (propValue !== true) {
+                updatedCookie += "=" + propValue;
+            }
+        }
+        document.cookie = updatedCookie;
+    }
+    function deleteCookie_ProBup(name) {
+        setCookie_ProBup(name, "", { expires: -1 });
+    }
+    function getCookie_ProBup(name) {
+        var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (decodeURIComponent(pair[0]) == variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        console.log('Query variable %s not found', variable);
+    }
+
+
+    if(!getCookie_ProBup('utm_source_code')) {
+        var utm_source = getQueryVariable('utm_source');
+        var utm_medium = getQueryVariable('utm_medium');
+
+        if(utm_source){
+            setCookie_ProBup('utm_source_code', utm_source+'-'+utm_medium, {expires:1*24*60*60});
+            $("#utm_zvonok").val(utm_source+'-'+utm_medium);
+        }
+    } else {
+        $("#utm_zvonok").val(getCookie_ProBup('utm_source_code'));
+        //console.log($("#utm_zvonok").val());
+    }
+
+</script>
+
+
+<!--<script>
+  $(document).on('ready', function() {
+    $('.thanks_close').on('click', function(e){
+      e.preventDefault();
+      $("#thanks").hide();
+    });
+    var modalFeedback = $('#contact');
+    $('#feedback_commit_1').on('click', function(e){
+      e.preventDefault();
+      var form = $('#feedback_form_1');
+      var fields = form.serialize();
+      $.ajax({
+        url: form.attr('action') + '.json',
+        type: 'post',
+        data: fields,
+        dataType: 'json',
+        beforeSend: function() {
+          show_preloader();
+        },
+        complete: function() {
+          hide_preloader();
+          modalFeedback.hide();
+          $('.modal-backdrop').hide();
+        },
+        success: function(response) {
+          if (response.status == 'ok') {
+            $("textarea[name='feedback[content]']").val("");
+            var thanks = $("#thanks");
+            thanks.html('Ваше сообщение успешно отправлено! Совсем скоро с Вами свяжется наш менеджер.');
+            thanks.show();
+            window.setTimeout(function() {
+              thanks.fadeOut("slow", function() {
+                thanks.hide();
+              });
+            }, 6000);
+          } else {
+            alert(errors_to_arr(response.errors).join("\n"));
+          }
+        }
+      });
+    })
+  });
+</script>-->
+    <!--Форма обратного звонка, end-->
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <div class="footer">
+        <div class="indent-footer">
+            <div class="page-02">
+                <div class="row-footer">
+
+                    
+                        <div class="block-footer-links">
+                            <h2>ДЛЯ ПОКУПАТЕЛЕЙ</h2>
+                            <ul>
+                                
+                                    <li><a href="/" style="">Главная</a></li>
+                                
+                                    <li><a href="/page/kak-zakazat" style="">Как заказать</a></li>
+                                
+                                    <li><a href="/page/zamer-dverey" style="">Замер дверей</a></li>
+                                
+                                    <li><a href="/page/ustanovka-dverey" style="">Доставка</a></li>
+                                
+                                    <li><a href="/page/ustanovka-dverey-2" style="">Установка дверей</a></li>
+                                
+                                    <li><a href="/page/kredit-i-rassrochka" style="">Кредит и рассрочка</a></li>
+                                
+                                    <li><a href="/page/otzyvy-pokupateley-internet-magazina-rossiyskie-dveri" style="">Отзывы</a></li>
+                                
+                                    <li><a href="/page/garantii" style="">Гарантии</a></li>
+                                
+                                    <li><a href="/page/o-personalnyh-dannyh" style="text-decoration: none; color: #D91F25; ">Политика обработки персональных данных</a></li>
+                                
+                                    <li><a href="/page/aktsii-i-skidki" style="">Акции и скидки</a></li>
+                                
+                                    <li><a href="/page/kontakty" style="">Контакты</a></li>
+                                
+                            </ul>
+                        </div>
+                    
+                    
+                        <div class="block-footer-links block-footer-links-2">
+                            <h2>МЕЖКОМНАТНЫЕ ДВЕРИ</h2>
+                            <ul>
+                                
+                                    <li><a href="/collection/polnyy-katalog-mezhkomnatnyh-dverey" style="">Полный каталог</a></li>
+                                
+                                    <li><a href="/page/dveri-mezhkomnatnye-dvuhstvorchatye" style="">Двери двустворчатые</a></li>
+                                
+                                    <li><a href="/collection/dveri-skladnye" style="">Двери складные</a></li>
+                                
+                                    <li><a href="/collection/dveri-razdvizhnye" style="">Двери раздвижные</a></li>
+                                
+                                    <li><a href="/collection/dveri-laminirovannye" style="">Двери ламинированные</a></li>
+                                
+                                    <li><a href="/collection/dveri-s-3d-pokrytiem" style="">Двери с 3D-покрытием</a></li>
+                                
+                                    <li><a href="/collection/dveri-pvh" style="">Двери искусственный шпон (ПВХ)</a></li>
+                                
+                                    <li><a href="/collection/dveri-shponirovannye" style="">Двери натуральный шпон</a></li>
+                                
+                                    <li><a href="/collection/dveri-ekoshpon" style="">Двери экошпон</a></li>
+                                
+                                    <li><a href="/collection/dveri-emal" style="">Двери эмаль</a></li>
+                                
+                                    <li><a href="/collection/dveri-duplex" style="">Двери "Duplex"</a></li>
+                                
+                                    <li><a href="/collection/dveri-la-stella" style="">Двери "La Stella"</a></li>
+                                
+                                    <li><a href="/collection/dveri-optima-porte" style="">Двери "Optima Porte"</a></li>
+                                
+                                    <li><a href="/collection/dveri-aysberg" style="">Двери "Porte line"</a></li>
+                                
+                                    <li><a href="/collection/dveri-prestigio" style="">Двери "Prestigio"</a></li>
+                                
+                                    <li><a href="/collection/dveri-profil-doors" style="">Двери "Profil Doors"</a></li>
+                                
+                                    <li><a href="/collection/dveri-verda" style="">Двери "Верда"</a></li>
+                                
+                                    <li><a href="/collection/dveri-vladimirskaya-fabrika-dverey" style="">Двери "Владимирская фабрика дверей"</a></li>
+                                
+                                    <li><a href="/collection/dveri-dveroniks" style="">Двери "Двероникс"</a></li>
+                                
+                                    <li><a href="/collection/dveri-dera" style="">Двери "Дера"</a></li>
+                                
+                                    <li><a href="/collection/dveri-okean" style="">Двери "Океан"</a></li>
+                                
+                                    <li><a href="/collection/dveri-rumaks" style="">Двери "Румакс"</a></li>
+                                
+                                    <li><a href="/collection/dveri-sibir-profil" style="">Двери "Сибирь Профиль"</a></li>
+                                
+                            </ul>
+
+                        </div>
+                    
+                    
+                        <div class="block-footer-links block-footer-links-3">
+                            <h2>ВХОДНЫЕ ДВЕРИ</h2>
+                            <ul>
+                                
+                                    <li><a href="/collection/polnyy-katalog-vhodnyh-dverey" style="">Полный каталог</a></li>
+                                
+                                    <li><a href="/collection/dveri-stalnye" style="">Стальные двери</a></li>
+                                
+                                    <li><a href="/collection/dveri-s-termorazryvom" style="">Двери с ТЕРМОРАЗРЫВОМ</a></li>
+                                
+                                    <li><a href="/collection/dveri-s-vnutrennim-otkryvaniem" style="">Двери с внутренним открыванием</a></li>
+                                
+                                    <li><a href="/collection/dveri-protivopozharnye" style="">Двери противопожарные</a></li>
+                                
+                                    <li><a href="/collection/dveri-berserker" style="">Двери "Berserker"</a></li>
+                                
+                                    <li><a href="/collection/dveri-valberg" style="">Двери "Valberg"</a></li>
+                                
+                                    <li><a href="/collection/dveri-almaz" style="">Двери "Алмаз"</a></li>
+                                
+                                    <li><a href="/collection/dveri-bronin" style="">Двери "Бронин"</a></li>
+                                
+                                    <li><a href="/collection/dveri-garda" style="">Двери "Гарда"</a></li>
+                                
+                                    <li><a href="/collection/dveri-gorod-masterov" style="">Двери "Город Мастеров"</a></li>
+                                
+                                    <li><a href="/collection/dveri-zevs" style="">Двери "Зевс"</a></li>
+                                
+                                    <li><a href="/collection/dveri-yoshkar" style="">Двери "Йошкар"</a></li>
+                                
+                                    <li><a href="/collection/dveri-kayzer" style="">Двери "Кайзер"</a></li>
+                                
+                                    <li><a href="/collection/dveri-krepost" style="">Двери "Крепость"</a></li>
+                                
+                                    <li><a href="/collection/dveri-legion" style="">Двери "Легион"</a></li>
+                                
+                                    <li><a href="/collection/dveri-megi" style="">Двери "Меги"</a></li>
+                                
+                                    <li><a href="/collection/dveri-retvizan" style="">Двери "Ретвизан"</a></li>
+                                
+                                    <li><a href="/collection/dveri-sibirskiy-standart" style="">Двери "Сибирский Стандарт"</a></li>
+                                
+                                    <li><a href="/collection/dveri-sibir" style="">Двери "Сибирь"</a></li>
+                                
+                                    <li><a href="/collection/dveri-stroygost" style="">Двери "СтройГост"</a></li>
+                                
+                                    <li><a href="/collection/dveri-tsitadel" style="">Двери "Цитадель"</a></li>
+                                
+                                    <li><a href="/collection/dveri-yakutiya" style="">Двери "Якутия"</a></li>
+                                
+                            </ul>
+                        </div>
+                    
+                    <div class="footblock"><h3>ПОЛЕЗНЫЙ СОВЕТ</h3>
+<p>Начиная выбор дверей проконсультируйтесь с нашими специалистами и вызовите замерщика. Позвоните по телефону: <strong><span class="callibri_phone" itemprop="telephone">+7 (3852) 22-30-64</span></strong> <strong>Замер - бесплатно!</strong></p></div>
+                    
+                </div>
+                <div class="row-footer-2">
+                    <ul>
+                        
+                            <li style="background:none;"><a href="/page/kontakty" style="">Обратная связь</a></li>
+                        
+                    </ul>
+                    <p class="legality"><br>© Интернет-магазин 2023 Российские двери. Все права защищены. Информация, опубликованная на сайте, не является публичной офертой или рекламой, а носит информационный характер и может быть изменена по усмотрению компании. При использовании материалов с сайта ссылка на сайт обязательна. <br><br> Разработка и продвижение интернет-магазина <a href="http://www.schneider-consult.ru/ecom.htm" target="blanc">Шнайдер Консалт</a> ©</p><br>
+                    <a href="/client_account/session/new">Вход в личный кабинет</a>
+                </div>
+            </div>
+            <div class="clear-block"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="sticky-block">
+  	
+	
+
+  	
+		  
+  		
+  
+  		
+  			
+    		<a href="http://xn--22-dlchgs2bpeg.xn--p1ai/collection/polnyy-katalog-mezhkomnatnyh-dverey?page_size=30&amp;order=&amp;characteristics%5B%5D=54944753" style="top: 0px;" data-toggle="modal" onclick="yaCounter25015097.reachGoal('podarok-left'); return true;">
+  				<img src="https://static.insales-cdn.com/files/1/1202/6390962/original/1.jpg" alt="1+1=3">
+              	
+              		<div class="product-description">Третья дверь в подарок!</div>
+              	
+  			</a>
+  		
+  	
+		  
+  		
+  
+  		
+  	
+		  
+  		
+  
+  		
+  			
+    		<a href="http://xn--22-dlchgs2bpeg.xn--p1ai/collection/polnyy-katalog-vhodnyh-dverey?page_size=30&amp;order=&amp;characteristics%5B%5D=53943002" style="top: 115px;" data-toggle="modal" onclick="yaCounter25015097.reachGoal('podarok-left'); return true;">
+  				<img src="https://static.insales-cdn.com/files/1/1200/6390960/original/3.jpg" alt="Супер цена от 890 руб">
+              	
+              		<div class="product-description">Супер цена на установку входных дверей! </div>
+              	
+  			</a>
+  		
+  	
+		  
+  		
+  
+  		
+  			
+    		<a href="http://xn--22-dlchgs2bpeg.xn--p1ai/collection/polnyy-katalog-mezhkomnatnyh-dverey?page_size=30&amp;order=&amp;characteristics%5B%5D=57043172" style="top: 230px;" data-toggle="modal" onclick="yaCounter25015097.reachGoal('podarok-left'); return true;">
+  				<img src="https://static.insales-cdn.com/files/1/4327/6590695/original/4.jpg" alt="Супер установка по цене 1190 руб">
+              	
+              		<div class="product-description">Супер цена на установку! </div>
+              	
+  			</a>
+  		
+  	
+</div>
+  
+
+
+
+<div id="modal__request-complect" class="calc__popup modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<button type="button" class="calc__popup-close" data-dismiss="modal">×</button>
+			<h2>Расчет стоимости комплекта двери</h2>
+			<div class="calc__popup-manager-text">
+				<p>Отправьте запрос чтоб узнать полную стоимость комплекта этой двери с коробкой, наличниками, фурнитурой, доставкой и установкой.</p>
+				<p>И с учетом скидок :)</p>
+			</div>
+
+			<form class="calc__popup-form" action="/client_account/feedback" method="post">
+				<div class="calc__popup-form-product"></div>
+				<div class="calc__popup-form_data">
+					<input type="hidden" class="calc__popup-form-product-input" name="feedback[dver]" value="">
+					<input type="hidden" required="" name="feedback[from]" value="noemail@anonim.user">
+					<input type="hidden" class="calc__popup-form-subject" name="feedback[subject]" value="Российские двери Барнаул - Расчет стоимости комплекта двери.">
+					<input type="hidden" class="calc__popup-form-content" data-content="Клиент хочет расчитать стоимость комплекта дверей." name="feedback[content]" value="">
+                  <input type="hidden" name="feedback[info]" value="|||16.02.2023|РОСДВЕРИ|Расчет стоимости комплекта двери|">
+					<div class="calc__popup-form-item">
+						<input class="calc__popup-form-phone" type="text" name="feedback[phone]" placeholder="Ваш телефон" im-insert="true">
+						<div class="calc__popup-form-error">Заполните телефон</div>
+					</div>
+					<button class="catalog__set-btn catalog__set-btnForm" onclick="yaCounter25015097.reachGoal('COMPLECT'); return true;">Оставить заявку</button>
+				</div>
+				<div class="calc__popup-form_send"></div>
+				<div class="calc__popup-form-alternative">Или звоните по телефону: +7 (3852) 22-30-64</div>
+			</form>
+			<div class="calc__popup-tip">
+				После отправки заявки наш специалист службы заботы о клиентах свяжется с Вами <br>
+				и расскажет про все нюансы!
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="modal__calc-complect" class="calc__popup modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<button type="button" class="calc__popup-close" data-dismiss="modal">×</button>
+			<h2>Расчет стоимости комплекта двери</h2>
+			<div class="calc__popup-block-wrap">
+				<div class="calc__popup-block calc__popup-block_com">
+					<h3>Обычный погонаж</h3>
+					<ul class="calc__popup-list"></ul>
+				</div>
+				<div class="calc__popup-block calc__popup-block_tel">
+					<h3>Телескопический погонаж <span class="calc__popup-block-desc">(без гвоздиков, легко снять и поставить наличники)</span></h3>
+					<ul class="calc__popup-list"></ul>
+				</div>
+			</div>
+			<form class="calc__popup-form" action="/client_account/feedback" method="post">
+				<div class="calc__popup-form-product"></div>
+				<div class="calc__popup-form_data">
+					<input type="hidden" class="calc__popup-form-product-input" name="feedback[dver]" value="">
+					<input type="hidden" required="" name="feedback[from]" value="noemail@anonim.user">
+					<input type="hidden" class="calc__popup-form-subject" name="feedback[subject]" value="Российские двери Барнаул - Расчет стоимости комплекта двери.">
+					<input type="hidden" class="calc__popup-form-content" data-content="Клиент хочет расчитать стоимость комплекта дверей." name="feedback[content]" value="">
+                  <input type="hidden" name="feedback[info]" value="|||16.02.2023|РОСДВЕРИ|Расчет стоимости комплекта двери|">
+					<div class="calc__popup-form-item">
+						<input class="calc__popup-form-phone" type="text" name="feedback[phone]" placeholder="Ваш телефон" im-insert="true">
+						<div class="calc__popup-form-error">Заполните телефон</div>
+					</div>
+					<button class="catalog__set-btn catalog__set-btnForm">Оставить заявку</button>
+				</div>
+				<div class="calc__popup-form_send"></div>
+				<div class="calc__popup-form-alternative">Или звоните по телефону: +7 (3852) 22-30-64</div>
+			</form>
+			<div class="calc__popup-tip">
+				После отправки заявки наш специалист службы заботы о клиентах свяжется с Вами <br>
+				и расскажет про все нюансы выбора дверей, доставки, подъема, установки и гарантий.
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<div id="modal__request-complect-stock113" class="calc__popup modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<button type="button" class="calc__popup-close" data-dismiss="modal">×</button>
+			<h2>Вау-акция 1+1=3! Больше дверей - БОЛЬШЕ выгода!</h2>
+			<div class="calc__popup-desc">
+				<p>Так как количество подарков определяется от количества дверей, то мы  индивидуально делаем расчет по каждой заявке.</p>
+			</div>
+			<div class="calc__popup-stock">
+				<img class="calc__popup-stock-img" src="https://static-internal.insales.ru/files/1/3016/5966792/original/lady-optim.png">
+				<div class="calc__popup-stock-item">
+					<div class="calc__popup-stock-num">3</div>
+					<div class="calc__popup-stock-text">3 дверей = в подарок 1 полотно.</div>
+				</div>
+				<div class="calc__popup-stock-item">
+					<div class="calc__popup-stock-num">4</div>
+					<div class="calc__popup-stock-text">4 дверей =  в подарок 1 полотно+ 1 комплект фурнитуры* (2 навеса, защелка межкомнатная Puerto L3-45, ручка межкомнатная Puerto AL 506-08 или Puerto AL 514-02).</div>
+				</div>
+				<div class="calc__popup-stock-item">
+					<div class="calc__popup-stock-num">5</div>
+					<div class="calc__popup-stock-text">в подарок 1 полотно+ 1 комплект фурнитуры* (2 навеса, защелка межкомнатная Puerto L3-45, ручка межкомнатная Puerto AL 506-08 или Puerto AL 514-02) + базовая установка** 1 двери. </div>
+				</div>
+				<div class="calc__popup-stock-item">
+					<div class="calc__popup-stock-num">6</div>
+					<div class="calc__popup-stock-text">6 дверей = в подарок 2 полотна.</div>
+				</div>
+				<div class="calc__popup-stock-item">
+					<div class="calc__popup-stock-num calc__popup-stock-num_dot">···</div>
+					<div class="calc__popup-stock-text">И т.д. 7, 8, 9 дверей еще выгоднее покупать именно в нашем магазине!</div>
+				</div>
+			</div>
+			<form class="calc__popup-form" action="/client_account/feedback" method="post">
+				<div class="calc__popup-form-product"></div>
+				<div class="calc__popup-form_data">
+					<input type="hidden" class="calc__popup-form-product-input" name="feedback[dver]" value="">
+					<input type="hidden" required="" name="feedback[from]" value="noemail@anonim.user">
+					<input type="hidden" class="calc__popup-form-subject" name="feedback[subject]" value="Российские двери Барнаул - По акции 1+1=3. Расчет стоимости комплекта двери.">
+					<input type="hidden" class="calc__popup-form-content" data-content="Клиент хочет расчитать стоимость комплекта дверей." name="feedback[content]" value="">
+                  <input type="hidden" name="feedback[info]" value="|||16.02.2023|РОСДВЕРИ|Расчет стоимости комплекта двери по акции 1+1=3|">
+					<div class="calc__popup-form-item">
+						<input class="calc__popup-form-sum" type="text" name="feedback[summ]" placeholder="Количество дверей">
+					</div>
+					<div class="calc__popup-form-item">
+						<input class="calc__popup-form-phone" type="text" name="feedback[phone]" placeholder="Ваш телефон" im-insert="true">
+						<div class="calc__popup-form-error">Заполните телефон</div>
+					</div>
+					<button class="catalog__set-btn catalog__set-btnForm" onclick="yaCounter25015097.reachGoal('PLUSONE'); return true;">Расчитать комплект</button>
+				</div>
+				<div class="calc__popup-form_send"></div>
+				<div class="calc__popup-form-alternative">Или звоните по телефону: +7 (3852) 22-30-64</div>
+			</form>
+			<div class="calc__popup-tip">
+				После отправки заявки наш специалист службы заботы о клиентах свяжется с Вами <br>
+				и расскажет про все нюансы!
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/common.js"></script>
+<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/492/1147372/1561705059/calc.js"></script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter25015097 = new Ya.Metrika({
+                    id:25015097,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    trackHash:true,
+                    ecommerce:"dataLayer"
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/25015097" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<!---------------------------------------------------------------------------->
+ <!--script type="text/javascript">
+var google_tag_params = {
+  {% if template == 'product' %}ecomm_prodid: '{{product.id}}',{% endif %}
+    ecomm_pagetype: '{% case template %}{% when 'index' %}home{% when 'search' %}searchresults{% when 'collection' %}category{% when 'product' %}product{% when 'cart' %}cart{% else %}other{% endcase %}',
+      {% if template == 'cart' %}ecomm_totalvalue: '{{cart.total_price}}',{% endif %}
+};
+</script-->
+
+
+  <script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 920073671;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+
+
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+
+
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/920073671/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>   
+
+<!--script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51124164-1', 'auto');
+ ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script-->
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-51124164-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-51124164-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+
+ gtag('config', 'UA-51124164-1');
+</script-->
+
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">
+var _tmr = _tmr || [];
+_tmr.push({id: "2520568", type: "pageView", start: (new Date()).getTime()});
+(function (d, w) {
+   var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true;
+   ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+   var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+   if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window);
+</script><noscript><div style="position:absolute;left:-10000px;">
+<img src="//top-fwz1.mail.ru/counter?id=2520568;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" />
+</div></noscript>
+<!-- //Rating@Mail.ru counter -->
+
+
+
+
+
+
+<script crossorigin="anonymous" async="" type="text/javascript" src="//api.pozvonim.com/widget/callback/v3/f0b5520b9d60d6c4faab9b8f39776f5b/connect" id="check-code-pozvonim" charset="UTF-8"></script>
+
+
+  <iframe style="display: none;" src="https://cdn.pozvonim.com/crossdomain.html?v2"></iframe></body></html>

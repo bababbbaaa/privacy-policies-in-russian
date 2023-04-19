@@ -1,0 +1,794 @@
+<html lang="ru-RU"><head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",e=>{this.persisted=e.persisted}),window.addEventListener("DOMContentLoaded",()=>{this._preconnect3rdParties()}),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}_addUserInteractionListener(e){if(document.hidden){e._triggerListener();return}this.triggerEvents.forEach(t=>window.addEventListener(t,e.userEventHandler,{passive:!0})),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler)}_removeUserInteractionListener(){this.triggerEvents.forEach(e=>window.removeEventListener(e,this.userEventHandler,{passive:!0})),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"),this._pendingClickStarted())}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this._pendingClickFinished()}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation(),this._pendingClickFinished()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach(e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))})}_waitForPendingClicks(){return new Promise(e=>{this._isClickPending?this._pendingClickFinished=e:e()})}_pendingClickStarted(){this._isClickPending=!0}_pendingClickFinished(){this._isClickPending=!1}_renameDOMAttribute(e,t,i){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(i,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t=>{if(t.hasAttribute("src")){let i=new URL(t.src).origin;i!==location.origin&&e.push({src:i,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}}),e=[...new Map(e.map(e=>[JSON.stringify(e),e])).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){console.error(e)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._waitForPendingClicks().then(()=>{this._replayClicks()}),this._emptyTrash()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e=>{e.hasAttribute("data-rocket-src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)})}async _transformScript(e){return await this._littleBreath(),new Promise(t=>{function i(){e.setAttribute("data-rocket-status","executed"),t()}function r(){e.setAttribute("data-rocket-status","failed"),t()}try{let n=e.getAttribute("data-rocket-type"),s=e.getAttribute("data-rocket-src");if(n?(e.type=n,e.removeAttribute("data-rocket-type")):e.removeAttribute("type"),e.addEventListener("load",i),e.addEventListener("error",r),s)e.src=s,e.removeAttribute("data-rocket-src");else if(navigator.userAgent.indexOf("Firefox/")>0){var a=document.createElement("script");[...e.attributes].forEach(e=>{"type"!==e.nodeName&&a.setAttribute("data-rocket-type"===e.nodeName?"type":e.nodeName,e.nodeValue)}),a.text=e.text,e.parentNode.replaceChild(a,e),i()}else e.src="data:text/javascript;base64,"+btoa(e.text)}catch(o){r()}})}async _loadScriptsFromList(e){let t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var i=document.createDocumentFragment();e.forEach(e=>{let r=e.getAttribute&&e.getAttribute("data-rocket-src")||e.src;if(r){let n=document.createElement("link");n.href=r,n.rel=t,"preconnect"!==t&&(n.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),e.crossOrigin&&(n.crossOrigin=e.crossOrigin),e.integrity&&(n.integrity=e.integrity),i.appendChild(n),this.trash.push(n)}}),document.head.appendChild(i)}_delayEventListeners(e){let t={};function i(e,i){!function e(i){!t[i]&&(t[i]={originalFunctions:{add:i.addEventListener,remove:i.removeEventListener},eventsToRewrite:[]},i.addEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.add.apply(i,arguments)},i.removeEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.remove.apply(i,arguments)});function r(e){return t[i].eventsToRewrite.indexOf(e)>=0?"rocket-"+e:e}}(e),t[e].eventsToRewrite.push(i)}function r(e,t){let i=e[t];Object.defineProperty(e,t,{get:()=>i||function(){},set(r){e["rocket"+t]=i=r}})}i(document,"DOMContentLoaded"),i(window,"DOMContentLoaded"),i(window,"load"),i(window,"pageshow"),i(document,"readystatechange"),r(document,"onreadystatechange"),r(window,"onload"),r(window,"onpageshow"),Object.defineProperty(document,"readyState",{get:()=>e.rocketReadyState,set(t){e.rocketReadyState=t}}),document.readyState="loading"}_delayJQueryReady(e){let t;function i(i){if(i&&i.fn&&!e.allJQueries.includes(i)){i.fn.ready=i.fn.init.prototype.ready=function(t){return e.domReadyFired?t.bind(document)(i):document.addEventListener("rocket-DOMContentLoaded",()=>t.bind(document)(i)),i([])};let r=i.fn.on;i.fn.on=i.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map(e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]})}return r.apply(this,arguments),this},e.allJQueries.push(i)}t=i}i(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>t,set(e){i(e)}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,document.readyState="interactive",await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){document.readyState="complete",await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach(e=>e(window).trigger("rocket-jquery-load")),await this._littleBreath();let e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){let e=new Map;document.write=document.writeln=function(t){let i=document.currentScript;i||console.error("WPRocket unable to document.write this: "+t);let r=document.createRange(),n=i.parentElement,s=e.get(i);void 0===s&&(s=i.nextSibling,e.set(i,s));let a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),n.insertBefore(a,s)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise(e=>setTimeout(e)):new Promise(e=>requestAnimationFrame(e))}_emptyTrash(){this.trash.forEach(e=>e.remove())}static run(){let e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+	<script type="rocketlazyloadscript" async="" data-rocket-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4859241862365215" crossorigin="anonymous"></script>
+	<meta name="yandex-verification" content="5dcfe7c466ae9273">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async="" data-rocket-src="https://www.googletagmanager.com/gtag/js?id=G-FCFNJKQ8DL"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FCFNJKQ8DL');
+</script>
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta property="og:title" content="Политика конфиденциальности">
+<meta property="og:description" content="Ниже, Zanimaem.kz (далее сайт), приложение Zanimaem.kz для android (далее приложение) разъясняет основн">
+<meta property="og:type" content="article">
+<meta property="og:article:published_time" content="2018-11-24 19:21:13">
+<meta property="og:article:modified_time" content="2021-08-08 09:35:33">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Политика конфиденциальности">
+<meta name="twitter:description" content="Ниже, Zanimaem.kz (далее сайт), приложение Zanimaem.kz для android (далее приложение) разъясняет основн">
+<meta name="author" content="Zanimaem.kz">
+
+	<!-- This site is optimized with the Yoast SEO plugin v20.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Политика конфиденциальности - Занимаем.kz</title><link rel="preload" as="font" href="https://zanimaem.kz/assets/themes/zanimayem/framework/assets/fonts/fontawesome-webfont.woff2?v=4.5.0" crossorigin=""><link rel="preload" as="font" href="https://fonts.gstatic.com/s/ptsans/v17/jizaRExUiTo99u79D0KExQ.woff2" crossorigin=""><style id="wpr-usedcss">:where(.wp-block-button__link){box-shadow:none;text-decoration:none;border-radius:9999px;padding:calc(.667em + 2px) calc(1.333em + 2px)}:where(.wp-block-columns.has-background){padding:1.25em 2.375em}:where(.wp-block-post-comments input[type=submit]){border:none}:where(.wp-block-file__button){border-radius:2em;padding:.5em 1em}:where(.wp-block-file__button):is(a):active,:where(.wp-block-file__button):is(a):focus,:where(.wp-block-file__button):is(a):hover,:where(.wp-block-file__button):is(a):visited{box-shadow:none;color:#fff;opacity:.85;text-decoration:none}ul{box-sizing:border-box}:where(.wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item a:not(.wp-element-button)),:where(.wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-submenu a:not(.wp-element-button)),:where(.wp-block-navigation.has-background .wp-block-navigation-item a:not(.wp-element-button)),:where(.wp-block-navigation.has-background .wp-block-navigation-submenu a:not(.wp-element-button)){padding:.5em 1em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}:where(.wp-block-search__button){border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper){padding:4px;border:1px solid #949494}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper) .wp-block-search__input{border-radius:0;border:none;padding:0 0 0 .25em}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper) .wp-block-search__input:focus{outline:0}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper) :where(.wp-block-search__button){padding:.125em .5em}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.aligncenter{clear:both}html :where(.has-border-color){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}figure{margin:0 0 1em}body{--wp--preset--color--black:#000000;--wp--preset--color--cyan-bluish-gray:#abb8c3;--wp--preset--color--white:#ffffff;--wp--preset--color--pale-pink:#f78da7;--wp--preset--color--vivid-red:#cf2e2e;--wp--preset--color--luminous-vivid-orange:#ff6900;--wp--preset--color--luminous-vivid-amber:#fcb900;--wp--preset--color--light-green-cyan:#7bdcb5;--wp--preset--color--vivid-green-cyan:#00d084;--wp--preset--color--pale-cyan-blue:#8ed1fc;--wp--preset--color--vivid-cyan-blue:#0693e3;--wp--preset--color--vivid-purple:#9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple:linear-gradient(135deg,rgba(6, 147, 227, 1) 0%,rgb(155, 81, 224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan:linear-gradient(135deg,rgb(122, 220, 180) 0%,rgb(0, 208, 130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange:linear-gradient(135deg,rgba(252, 185, 0, 1) 0%,rgba(255, 105, 0, 1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red:linear-gradient(135deg,rgba(255, 105, 0, 1) 0%,rgb(207, 46, 46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray:linear-gradient(135deg,rgb(238, 238, 238) 0%,rgb(169, 184, 195) 100%);--wp--preset--gradient--cool-to-warm-spectrum:linear-gradient(135deg,rgb(74, 234, 220) 0%,rgb(151, 120, 209) 20%,rgb(207, 42, 186) 40%,rgb(238, 44, 130) 60%,rgb(251, 105, 98) 80%,rgb(254, 248, 76) 100%);--wp--preset--gradient--blush-light-purple:linear-gradient(135deg,rgb(255, 206, 236) 0%,rgb(152, 150, 240) 100%);--wp--preset--gradient--blush-bordeaux:linear-gradient(135deg,rgb(254, 205, 165) 0%,rgb(254, 45, 45) 50%,rgb(107, 0, 62) 100%);--wp--preset--gradient--luminous-dusk:linear-gradient(135deg,rgb(255, 203, 112) 0%,rgb(199, 81, 192) 50%,rgb(65, 88, 208) 100%);--wp--preset--gradient--pale-ocean:linear-gradient(135deg,rgb(255, 245, 203) 0%,rgb(182, 227, 212) 50%,rgb(51, 167, 181) 100%);--wp--preset--gradient--electric-grass:linear-gradient(135deg,rgb(202, 248, 128) 0%,rgb(113, 206, 126) 100%);--wp--preset--gradient--midnight:linear-gradient(135deg,rgb(2, 3, 129) 0%,rgb(40, 116, 252) 100%);--wp--preset--duotone--dark-grayscale:url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale:url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow:url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red:url('#wp-duotone-blue-red');--wp--preset--duotone--midnight:url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow:url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green:url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange:url('#wp-duotone-blue-orange');--wp--preset--font-size--small:13px;--wp--preset--font-size--medium:20px;--wp--preset--font-size--large:36px;--wp--preset--font-size--x-large:42px;--wp--preset--spacing--20:0.44rem;--wp--preset--spacing--30:0.67rem;--wp--preset--spacing--40:1rem;--wp--preset--spacing--50:1.5rem;--wp--preset--spacing--60:2.25rem;--wp--preset--spacing--70:3.38rem;--wp--preset--spacing--80:5.06rem}:where(.is-layout-flex){gap:.5em}:where(.wp-block-columns.is-layout-flex){gap:2em}@font-face{font-display:swap;font-family:FontAwesome;src:url('https://zanimaem.kz/assets/themes/zanimayem/framework/assets/fonts/fontawesome-webfont.eot?v=4.5.0');src:url('https://zanimaem.kz/assets/themes/zanimayem/framework/assets/fonts/fontawesome-webfont.eot?#iefix&v=4.5.0') format('embedded-opentype'),url('https://zanimaem.kz/assets/themes/zanimayem/framework/assets/fonts/fontawesome-webfont.woff2?v=4.5.0') format('woff2'),url('https://zanimaem.kz/assets/themes/zanimayem/framework/assets/fonts/fontawesome-webfont.woff?v=4.5.0') format('woff'),url('https://zanimaem.kz/assets/themes/zanimayem/framework/assets/fonts/fontawesome-webfont.ttf?v=4.5.0') format('truetype'),url('https://zanimaem.kz/assets/themes/zanimayem/framework/assets/fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');font-weight:400;font-style:normal}.fa{display:inline-block;font:14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.fa-chevron-down:before{content:"\f078"}.fa-comments:before{content:"\f086"}.fa-bars:before{content:"\f0c9"}.addtoany_content{clear:both;margin:16px auto}.addtoany_header{margin:0 0 16px}.addtoany_list{display:inline;line-height:16px}.addtoany_list a,.widget .addtoany_list a{border:0;box-shadow:none;display:inline-block;font-size:16px;padding:0 4px;vertical-align:middle}.addtoany_list a img{border:0;display:inline-block;opacity:1;overflow:hidden;vertical-align:baseline}.addtoany_list a span{display:inline-block;float:none}.addtoany_list.a2a_kit_size_32 a{font-size:32px}.addtoany_list.a2a_kit_size_32 a:not(.addtoany_special_service)>span{height:32px;line-height:32px;width:32px}.addtoany_list a:not(.addtoany_special_service)>span{border-radius:4px;display:inline-block;opacity:1}.addtoany_list a:hover,.widget .addtoany_list a:hover{background:0 0;border:0;box-shadow:none}.addtoany_list a:hover img,.addtoany_list a:hover span{opacity:.7}.select2-container{box-sizing:border-box;display:inline-block;margin:0;position:relative;vertical-align:middle}.select2-container .select2-selection--single{box-sizing:border-box;cursor:pointer;display:block;height:28px;user-select:none;-webkit-user-select:none}.select2-container .select2-selection--single .select2-selection__rendered{display:block;padding-left:8px;padding-right:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.select2-container .select2-selection--single .select2-selection__clear{position:relative}.select2-container[dir=rtl] .select2-selection--single .select2-selection__rendered{padding-right:8px;padding-left:20px}.select2-container .select2-selection--multiple{box-sizing:border-box;cursor:pointer;display:block;min-height:32px;user-select:none;-webkit-user-select:none}.select2-container .select2-selection--multiple .select2-selection__rendered{display:inline-block;overflow:hidden;padding-left:8px;text-overflow:ellipsis;white-space:nowrap}.select2-container .select2-search--inline{float:left}.select2-container .select2-search--inline .select2-search__field{box-sizing:border-box;border:none;font-size:100%;margin-top:5px;padding:0}.select2-container .select2-search--inline .select2-search__field::-webkit-search-cancel-button{-webkit-appearance:none}.select2-dropdown{background-color:#fff;border:1px solid #aaa;border-radius:4px;box-sizing:border-box;display:block;position:absolute;left:-100000px;width:100%;z-index:1051}.select2-results{display:block}.select2-results__options{list-style:none;margin:0;padding:0}.select2-results__option{padding:6px;user-select:none;-webkit-user-select:none}.select2-results__option[aria-selected]{cursor:pointer}.select2-container--open .select2-dropdown{left:0}.select2-container--open .select2-dropdown--above{border-bottom:none;border-bottom-left-radius:0;border-bottom-right-radius:0}.select2-container--open .select2-dropdown--below{border-top:none;border-top-left-radius:0;border-top-right-radius:0}.select2-search--dropdown{display:block;padding:4px}.select2-search--dropdown .select2-search__field{padding:4px;width:100%;box-sizing:border-box}.select2-search--dropdown .select2-search__field::-webkit-search-cancel-button{-webkit-appearance:none}.select2-search--dropdown.select2-search--hide{display:none}.select2-close-mask{border:0;margin:0;padding:0;display:block;position:fixed;left:0;top:0;min-height:100%;min-width:100%;height:auto;width:auto;opacity:0;z-index:99;background-color:#fff}.select2-hidden-accessible{border:0!important;clip:rect(0 0 0 0)!important;height:1px!important;margin:-1px!important;overflow:hidden!important;padding:0!important;position:absolute!important;width:1px!important}.select2-container--default .select2-selection--single{background-color:#fff;border:1px solid #aaa;border-radius:4px}.select2-container--default .select2-selection--single .select2-selection__rendered{color:#444;line-height:28px}.select2-container--default .select2-selection--single .select2-selection__clear{cursor:pointer;float:right;font-weight:700}.select2-container--default .select2-selection--single .select2-selection__placeholder{color:#999}.select2-container--default .select2-selection--single .select2-selection__arrow{height:26px;position:absolute;top:1px;right:1px;width:20px}.select2-container--default .select2-selection--single .select2-selection__arrow b{border-color:#888 transparent transparent;border-style:solid;border-width:5px 4px 0;height:0;left:50%;margin-left:-4px;margin-top:-2px;position:absolute;top:50%;width:0}.select2-container--default[dir=rtl] .select2-selection--single .select2-selection__clear{float:left}.select2-container--default[dir=rtl] .select2-selection--single .select2-selection__arrow{left:1px;right:auto}.select2-container--default.select2-container--disabled .select2-selection--single{background-color:#eee;cursor:default}.select2-container--default.select2-container--disabled .select2-selection--single .select2-selection__clear{display:none}.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b{border-color:transparent transparent #888;border-width:0 4px 5px}.select2-container--default .select2-selection--multiple{background-color:#fff;border:1px solid #aaa;border-radius:4px;cursor:text}.select2-container--default .select2-selection--multiple .select2-selection__rendered{box-sizing:border-box;list-style:none;margin:0;padding:0 5px;width:100%}.select2-container--default .select2-selection--multiple .select2-selection__placeholder{color:#999;margin-top:5px;float:left}.select2-container--default .select2-selection--multiple .select2-selection__clear{cursor:pointer;float:right;font-weight:700;margin-top:5px;margin-right:10px}.select2-container--default .select2-selection--multiple .select2-selection__choice{background-color:#e4e4e4;border:1px solid #aaa;border-radius:4px;cursor:default;float:left;margin-right:5px;margin-top:5px;padding:0 5px}.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{color:#999;cursor:pointer;display:inline-block;font-weight:700;margin-right:2px}.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover{color:#333}.select2-container--default[dir=rtl] .select2-selection--multiple .select2-search--inline,.select2-container--default[dir=rtl] .select2-selection--multiple .select2-selection__choice,.select2-container--default[dir=rtl] .select2-selection--multiple .select2-selection__placeholder{float:right}.select2-container--default[dir=rtl] .select2-selection--multiple .select2-selection__choice{margin-left:5px;margin-right:auto}.select2-container--default[dir=rtl] .select2-selection--multiple .select2-selection__choice__remove{margin-left:2px;margin-right:auto}.select2-container--default.select2-container--focus .select2-selection--multiple{border:1px solid #000;outline:0}.select2-container--default.select2-container--disabled .select2-selection--multiple{background-color:#eee;cursor:default}.select2-container--default.select2-container--disabled .select2-selection__choice__remove{display:none}.select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple,.select2-container--default.select2-container--open.select2-container--above .select2-selection--single{border-top-left-radius:0;border-top-right-radius:0}.select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple,.select2-container--default.select2-container--open.select2-container--below .select2-selection--single{border-bottom-left-radius:0;border-bottom-right-radius:0}.select2-container--default .select2-search--dropdown .select2-search__field{border:1px solid #aaa}.select2-container--default .select2-search--inline .select2-search__field{background:0 0;border:none;outline:0;box-shadow:none;-webkit-appearance:textfield}.select2-container--default .select2-results>.select2-results__options{max-height:200px;overflow-y:auto}.select2-container--default .select2-results__option[role=group]{padding:0}.select2-container--default .select2-results__option[aria-disabled=true]{color:#999}.select2-container--default .select2-results__option[aria-selected=true]{background-color:#ddd}.select2-container--default .select2-results__option .select2-results__option{padding-left:1em}.select2-container--default .select2-results__option .select2-results__option .select2-results__group{padding-left:0}.select2-container--default .select2-results__option .select2-results__option .select2-results__option{margin-left:-1em;padding-left:2em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-2em;padding-left:3em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-3em;padding-left:4em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-4em;padding-left:5em}.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option{margin-left:-5em;padding-left:6em}.select2-container--default .select2-results__option--highlighted[aria-selected]{background-color:#5897fb;color:#fff}.select2-container--default .select2-results__group{cursor:default;display:block;padding:6px}.select2-container--classic .select2-selection--single{background-color:#f7f7f7;border:1px solid #aaa;border-radius:4px;outline:0;background-image:-webkit-linear-gradient(top,#fff 50%,#eee 100%);background-image:-o-linear-gradient(top,#fff 50%,#eee 100%);background-image:linear-gradient(to bottom,#fff 50%,#eee 100%);background-repeat:repeat-x}.select2-container--classic .select2-selection--single:focus{border:1px solid #5897fb}.select2-container--classic .select2-selection--single .select2-selection__rendered{color:#444;line-height:28px}.select2-container--classic .select2-selection--single .select2-selection__clear{cursor:pointer;float:right;font-weight:700;margin-right:10px}.select2-container--classic .select2-selection--single .select2-selection__placeholder{color:#999}.select2-container--classic .select2-selection--single .select2-selection__arrow{background-color:#ddd;border:none;border-left:1px solid #aaa;border-top-right-radius:4px;border-bottom-right-radius:4px;height:26px;position:absolute;top:1px;right:1px;width:20px;background-image:-webkit-linear-gradient(top,#eee 50%,#ccc 100%);background-image:-o-linear-gradient(top,#eee 50%,#ccc 100%);background-image:linear-gradient(to bottom,#eee 50%,#ccc 100%);background-repeat:repeat-x}.select2-container--classic .select2-selection--single .select2-selection__arrow b{border-color:#888 transparent transparent;border-style:solid;border-width:5px 4px 0;height:0;left:50%;margin-left:-4px;margin-top:-2px;position:absolute;top:50%;width:0}.select2-container--classic[dir=rtl] .select2-selection--single .select2-selection__clear{float:left}.select2-container--classic[dir=rtl] .select2-selection--single .select2-selection__arrow{border:none;border-right:1px solid #aaa;border-radius:0;border-top-left-radius:4px;border-bottom-left-radius:4px;left:1px;right:auto}.select2-container--classic.select2-container--open .select2-selection--single{border:1px solid #5897fb}.select2-container--classic.select2-container--open .select2-selection--single .select2-selection__arrow{background:0 0;border:none}.select2-container--classic.select2-container--open .select2-selection--single .select2-selection__arrow b{border-color:transparent transparent #888;border-width:0 4px 5px}.select2-container--classic.select2-container--open.select2-container--above .select2-selection--single{border-top:none;border-top-left-radius:0;border-top-right-radius:0;background-image:-webkit-linear-gradient(top,#fff 0,#eee 50%);background-image:-o-linear-gradient(top,#fff 0,#eee 50%);background-image:linear-gradient(to bottom,#fff 0,#eee 50%);background-repeat:repeat-x}.select2-container--classic.select2-container--open.select2-container--below .select2-selection--single{border-bottom:none;border-bottom-left-radius:0;border-bottom-right-radius:0;background-image:-webkit-linear-gradient(top,#eee 50%,#fff 100%);background-image:-o-linear-gradient(top,#eee 50%,#fff 100%);background-image:linear-gradient(to bottom,#eee 50%,#fff 100%);background-repeat:repeat-x}.select2-container--classic .select2-selection--multiple{background-color:#fff;border:1px solid #aaa;border-radius:4px;cursor:text;outline:0}.select2-container--classic .select2-selection--multiple:focus{border:1px solid #5897fb}.select2-container--classic .select2-selection--multiple .select2-selection__rendered{list-style:none;margin:0;padding:0 5px}.select2-container--classic .select2-selection--multiple .select2-selection__clear{display:none}.select2-container--classic .select2-selection--multiple .select2-selection__choice{background-color:#e4e4e4;border:1px solid #aaa;border-radius:4px;cursor:default;float:left;margin-right:5px;margin-top:5px;padding:0 5px}.select2-container--classic .select2-selection--multiple .select2-selection__choice__remove{color:#888;cursor:pointer;display:inline-block;font-weight:700;margin-right:2px}.select2-container--classic .select2-selection--multiple .select2-selection__choice__remove:hover{color:#555}.select2-container--classic[dir=rtl] .select2-selection--multiple .select2-selection__choice{float:right;margin-left:5px;margin-right:auto}.select2-container--classic[dir=rtl] .select2-selection--multiple .select2-selection__choice__remove{margin-left:2px;margin-right:auto}.select2-container--classic.select2-container--open .select2-selection--multiple{border:1px solid #5897fb}.select2-container--classic.select2-container--open.select2-container--above .select2-selection--multiple{border-top:none;border-top-left-radius:0;border-top-right-radius:0}.select2-container--classic.select2-container--open.select2-container--below .select2-selection--multiple{border-bottom:none;border-bottom-left-radius:0;border-bottom-right-radius:0}.select2-container--classic .select2-search--dropdown .select2-search__field{border:1px solid #aaa;outline:0}.select2-container--classic .select2-search--inline .select2-search__field{outline:0;box-shadow:none}.select2-container--classic .select2-dropdown{background-color:#fff;border:1px solid transparent}.select2-container--classic .select2-dropdown--above{border-bottom:none}.select2-container--classic .select2-dropdown--below{border-top:none}.select2-container--classic .select2-results>.select2-results__options{max-height:200px;overflow-y:auto}.select2-container--classic .select2-results__option[role=group]{padding:0}.select2-container--classic .select2-results__option[aria-disabled=true]{color:grey}.select2-container--classic .select2-results__option--highlighted[aria-selected]{background-color:#3875d7;color:#fff}.select2-container--classic .select2-results__group{cursor:default;display:block;padding:6px}.select2-container--classic.select2-container--open .select2-dropdown{border-color:#5897fb}.mfp-bg{top:0;left:0;width:100%;height:100%;z-index:1042;overflow:hidden;position:fixed;background:#0b0b0b;opacity:.8}.mfp-wrap{top:0;left:0;width:100%;height:100%;z-index:1043;position:fixed;outline:0!important;-webkit-backface-visibility:hidden}.mfp-container{text-align:center;position:absolute;width:100%;height:100%;left:0;top:0;padding:0 8px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.mfp-container:before{content:'';display:inline-block;height:100%;vertical-align:middle}.mfp-align-top .mfp-container:before{display:none}.mfp-content{position:relative;display:inline-block;vertical-align:middle;margin:0 auto;text-align:left;z-index:1045}.mfp-ajax-holder .mfp-content,.mfp-inline-holder .mfp-content{width:100%;cursor:auto}.mfp-ajax-cur{cursor:progress}.mfp-zoom-out-cur{cursor:-moz-zoom-out;cursor:-webkit-zoom-out;cursor:zoom-out}.mfp-auto-cursor .mfp-content{cursor:auto}.mfp-arrow,.mfp-close,.mfp-counter{-webkit-user-select:none;-moz-user-select:none;user-select:none}.mfp-loading.mfp-figure,.mfp-s-error .mfp-content{display:none}button.mfp-arrow,button.mfp-close{overflow:visible;cursor:pointer;background:0 0;border:0;-webkit-appearance:none;display:block;outline:0;padding:0;z-index:1046;-webkit-box-shadow:none;box-shadow:none}button::-moz-focus-inner{padding:0;border:0}.mfp-close{width:44px;height:44px;line-height:44px;position:absolute;right:0;top:0;text-decoration:none;text-align:center;opacity:.65;padding:0 0 18px 10px;color:#fff;font-style:normal;font-size:28px;font-family:Arial,Baskerville,monospace}.mfp-close:focus,.mfp-close:hover{opacity:1}.mfp-close:active{top:1px}.mfp-close-btn-in .mfp-close{color:#333}.mfp-counter{position:absolute;top:0;right:0;color:#ccc;font-size:12px;line-height:18px;white-space:nowrap}.mfp-arrow{position:absolute;opacity:.65;margin:0;top:50%;margin-top:-55px;padding:0;width:90px;height:110px;-webkit-tap-highlight-color:transparent}.mfp-arrow:active{margin-top:-54px}.mfp-arrow:focus,.mfp-arrow:hover{opacity:1}.mfp-arrow:after,.mfp-arrow:before{content:'';display:block;width:0;height:0;position:absolute;left:0;top:0;margin-top:35px;margin-left:35px;border:inset transparent}.mfp-arrow:after{border-top-width:13px;border-bottom-width:13px;top:8px}.mfp-arrow:before{border-top-width:21px;border-bottom-width:21px;opacity:.7}.mfp-iframe-holder .mfp-content{line-height:0;width:100%;max-width:900px}.mfp-iframe-scaler{width:100%;height:0;overflow:hidden;padding-top:56.25%}.mfp-iframe-scaler iframe{position:absolute;display:block;top:0;left:0;width:100%;height:100%;box-shadow:0 0 8px rgba(0,0,0,.6);background:#000}img.mfp-img{width:auto;max-width:100%;height:auto;display:block;line-height:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:40px 0;margin:0 auto}.mfp-figure{line-height:0}.mfp-figure:after{content:'';position:absolute;left:0;top:40px;bottom:40px;display:block;right:0;width:auto;height:auto;z-index:-1;box-shadow:0 0 8px rgba(0,0,0,.6);background:#444}.mfp-figure figure{margin:0}.mfp-bottom-bar{margin-top:-36px;position:absolute;top:100%;left:0;width:100%;cursor:auto}.mfp-title{text-align:left;line-height:18px;color:#f3f3f3;word-wrap:break-word;padding-right:36px}.mfp-image-holder .mfp-content{max-width:100%}@media all and (max-width:900px){.mfp-arrow{-webkit-transform:scale(.75);transform:scale(.75)}.mfp-container{padding-left:6px;padding-right:6px}}.mfp-ie7 .mfp-img{padding:0}.mfp-ie7 .mfp-bottom-bar{width:600px;left:50%;margin-left:-300px;margin-top:5px;padding-bottom:5px}.mfp-ie7 .mfp-container{padding:0}.mfp-ie7 .mfp-content{padding-top:44px}.mfp-ie7 .mfp-close{top:0;right:0;padding-top:0}.content-formatting{line-height:18px;color:#666}.content-formatting h1,.content-formatting h2,.content-formatting h3{font-weight:400;color:#050505;line-height:35px;margin-bottom:10px;padding-top:6px}.content-formatting h1{font-size:30px}.content-formatting h2{font-size:28px}.content-formatting h3{font-size:24px}.content-formatting b,.content-formatting strong{font-weight:700}.content-formatting em,.content-formatting i{font-style:italic}.content-formatting em.fa,.content-formatting i.fa{font-style:normal}.content-formatting ins{background:#008ed3;padding:0 7px;color:#fff;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}.content-formatting code,.content-formatting tt,.content-formatting var{font-size:15px;line-height:1.6}.content-formatting dl{margin:0 0 24px}.content-formatting dt{font-weight:700}.content-formatting ul{margin-bottom:1px;margin-bottom:22px}.content-formatting ul li{position:relative;list-style:none;padding-left:29px}.content-formatting ul li:before{position:absolute;top:10px;left:7px;background:#008ed3;width:5px;height:5px;content:'';-webkit-border-radius:100%;-moz-border-radius:100%;border-radius:100%}.content-formatting ul ul{margin-bottom:0}.content-formatting p{margin:0 0 24px}.content-formatting p+ul{margin-top:-8px}.content-formatting a{font-weight:400;text-decoration:underline}.content-formatting a.mag-single{position:relative;z-index:1}.content-formatting a:hover{text-decoration:none}.content-formatting a:hover img{-webkit-opacity:0.8;-moz-opacity:0.8;opacity:.8}.content-formatting .aligncenter{clear:both;display:block;margin:7px auto}.content-formatting img{max-width:100%;height:auto;vertical-align:middle;-webkit-transition:.3s;-moz-transition:.3s;-ms-transition:.3s;-o-transition:.3s}.content-formatting img.alignnone{margin:7px 15px 7px 0}.content-formatting img.aligncenter{display:block;margin-left:auto;margin-right:auto}.content-formatting table{border-collapse:collapse!important;width:100%;margin-top:15px;margin-bottom:25px;border:1px solid #ebebeb}*{margin:0;padding:0;outline:0}body,html{font:16px 'Open Sans',sans-serif;color:#666;padding:0;margin:0}img{border:none;height:auto}a{color:#3d6387;text-decoration:none}a:hover{text-decoration:underline}article,aside,footer,header,main,nav,section{display:block;position:relative}.clear{clear:both}.clear:after{content:'';display:table;clear:both}.container{position:relative;padding:0 20px;max-width:941px;margin:0 auto;overflow:hidden}::-webkit-input-placeholder{color:#999}::-moz-placeholder{color:#999}::-ms-input-placeholder{color:#999}input[type=email],input[type=password],input[type=text]{border:1px solid #d8d8d8;max-width:220px;margin:0 0 12px;padding:6px 13px;font:13px 'PT Sans',serif;color:#333;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:inset 4px 4px 5px 0 rgba(0,0,0,.06);-moz-box-shadow:inset 4px 4px 5px 0 rgba(0,0,0,.06);box-shadow:inset 4px 4px 5px 0 rgba(0,0,0,.06)}input[disabled=disabled]{background:#f9f9f9}textarea{border:1px solid #d8d8d8;height:100px;margin:0 0 12px;padding:8px 13px;font:13px 'PT Sans',serif;color:#333;resize:vertical;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:inset 4px 4px 5px 0 rgba(0,0,0,.06);-moz-box-shadow:inset 4px 4px 5px 0 rgba(0,0,0,.06);box-shadow:inset 4px 4px 5px 0 rgba(0,0,0,.06)}button::-moz-focus-inner,input[type=button]::-moz-focus-inner,input[type=reset]::-moz-focus-inner,input[type=submit]::-moz-focus-inner{border:none;padding:0;margin:0}div[class=load-more] a,input[type=button],input[type=reset],input[type=submit]{background:#38b733;border:none;margin-top:6px;padding:0 20px;height:33px;color:#fff;cursor:pointer;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;-webkit-transition:.4s;-moz-transition:.4s;transition:all .4s ease 0s}div[class=load-more] a:hover,input[type=button]:hover,input[type=reset]:hover,input[type=submit]:hover{background:#008ed3}form label.error{background:#ffecec;border:1px solid #f9cbc8;display:block;width:100%;margin:2px 0 0;padding:10px 13px;line-height:1;clear:both;color:#be6d59;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}input.error,textarea.error{border:1px solid #e25c4c;background:#fff;margin-bottom:15px}.select2 .select2-selection--single{border:1px solid #d1d1d1;height:25px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-box-shadow:inset 4px 4px 5px 0 rgba(0,0,0,.06);-moz-box-shadow:inset 4px 4px 5px 0 rgba(0,0,0,.06);box-shadow:inset 4px 4px 5px 0 rgba(0,0,0,.06)}.select2 .select2-selection--single .select2-selection__rendered{color:#535353;line-height:25px}.select2 .select2-selection--single .select2-selection__arrow{background:#008ed3;position:absolute;width:19px;height:25px;right:0;top:0}.select2 .select2-selection--single[aria-expanded=true] .select2-selection__arrow{background:#38b733}.select2 .select2-selection--single .select2-selection__arrow b{border:none;top:2px;margin-left:-5px;text-align:center}.select2 .select2-selection--single .select2-selection__arrow b:after{border:none;font-family:FontAwesome;line-height:25px;content:'\f107';color:#fff}.select2-container--open .select2-dropdown--below{border:1px solid #d1d1d1;border-top:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}.select2-container--open .select2-results__option{font-style:italic;color:#444}.select2-container--open .select2-results__option[aria-selected=true]{background:0 0;color:#528a2d}.select2-container--open .select2-results__option--highlighted[aria-selected]{background:#008ed3}.select2-container--open .select2-results__option--highlighted[aria-selected=true][aria-selected]{color:#fff}.message{color:#444;font-size:13px;line-height:18px;margin-top:20px;padding:8px 10px;text-indent:0}.message-success{background-color:#f2f9f0;border:1px solid #d5d5d5}.message-error{background-color:#faeeee;border:1px solid #d5d5d5}.tabs-container .tabs-cont .tab{display:none}.tabs-container .tabs-cont .tab.active{display:block}header{margin:0}header section{padding:28px 0 27px}header section .wrap-logo{float:left}header section .wrap-logo .logo{display:inline-block}header section .banner{float:right}header section .banner img{max-width:100%}header nav.menu-box{background:#008ed3;position:relative}header nav.menu-box .container{overflow:visible}header nav.menu-box .menu-container{position:relative;text-align:left}header nav.menu-box .menu{text-align:center;display:inline-block}header nav.menu-box.menu-left .menu{float:left;font-size:0}header nav.menu-box .menu li{position:relative;text-align:left;font-size:13px}header nav.menu-box .menu>li{display:inline-block;list-style:none}header nav.menu-box .menu>li>.item-link{border-right:1px solid #42b6f0;display:block;position:relative;height:51px;line-height:51px;padding:0 12px;color:#fff;text-transform:uppercase}header nav.menu-box .menu>li:first-child>.item-link{border-left:1px solid #42b6f0}header nav.menu-box .menu>li>.item-link:hover{text-decoration:none;-webkit-transition:.3s;-moz-transition:.3s;-ms-transition:.3s;-o-transition:.3s;transition:.3s}header nav.menu-box .menu>li:hover>.item-link:before{background:#007bb8;position:absolute;width:100%;height:4px;bottom:0;left:0;content:''}header nav.menu-box .menu>li:hover>.item-link:after{border:5px solid transparent;border-bottom:5px solid #007bb8;position:absolute;left:50%;bottom:4px;margin-left:-5px;content:''}header nav.menu-box .menu>li.current-menu-item>.item-link{background:#009eed}header nav.menu-box .menu>li ul li.current-menu-item .item-link{color:rgba(256,256,256,.5)}header nav.menu-box .menu>li>.item-link>i.arrow{font-size:.5625rem;display:inline-block;vertical-align:middle;position:relative;top:-.1875rem;padding-left:.375rem}header nav.menu-box .menu>li>.item-link>i.arrow:after,header nav.menu-box .menu>li>.item-link>i.arrow:before{-webkit-transition:opacity .3s;-moz-transition:opacity .3s;-ms-transition:opacity .3s;-o-transition:opacity .3s;transition:opacity .3s ease}header nav.menu-box .menu>li>.item-link>i.arrow:after{content:'\f077';opacity:0;position:absolute;left:.375rem}header nav.menu-box .menu>li:hover>.item-link>i.arrow:before{opacity:0}header nav.menu-box .menu>li:hover>.item-link>i.arrow:after{opacity:1}header nav.menu-box .menu ul{position:absolute;background:#007bb8;width:calc(100% - 2px);min-width:128px;margin:0 1px;top:100%;left:-999999px;display:block;list-style:none;opacity:0}header nav.menu-box .menu ul li{display:block;position:relative;list-style:none;font-size:14px}header nav.menu-box .menu>li>ul{border-top:1px solid #007bb8;z-index:95}header nav.menu-box .menu ul ul{top:0;display:block}header nav.menu-box .menu ul ul ul{z-index:96}header nav.menu-box .menu>li:hover>ul{left:0;opacity:1}header nav.menu-box .menu>li li li:hover>ul{left:100%;opacity:1}header nav.menu-box .menu li li div.item-link{cursor:default}header nav.menu-box .menu li li .item-link{display:block;position:relative;padding:.5rem 1rem;color:#fff;-webkit-transition:.3s;-moz-transition:.3s;-ms-transition:.3s;-o-transition:.3s}header nav.menu-box .menu li li .item-link:hover,header nav.menu-box .menu li li.current-menu-item>.item-link{text-decoration:none}header nav.menu-box .menu .item-link:hover i.arrow,header nav.menu-box .menu li li a.item-link:hover{opacity:.7}header nav.menu-box .menu li li .item-link i{margin-right:.3125rem}header nav.menu-box .menu li li .item-link i.arrow{position:absolute;top:50%;right:.5rem;margin:-.3125rem 0 0;font-size:.5625rem;-webkit-transition:.3s;-moz-transition:.3s;-ms-transition:.3s;-o-transition:.3s;margin-top:-.1875rem;right:.375rem}header nav.menu-box .menu li.columns-1{position:relative}header nav.menu-box .menu li.columns-1 ul{padding:.375rem 0}header nav.menu-box .menu li.columns-1 ul ul{padding:0;background:#007bb8}header nav.menu-box .menu li.columns-1 ul ul ul{padding:0;background:#262626}header nav.menu-box .menu li.columns-1 ul ul ul ul{padding:0;background:#007bb8}header nav.menu-box .menu>li.columns-1 li:hover>ul{top:0;left:100%;opacity:1}header nav.menu-box .menu li[class*=columns-]:not(.columns-1){position:static}header nav.menu-box .menu li[class*=columns-]:not(.columns-1)>ul{width:100%;font-size:0;padding:.875rem 1rem}header nav.menu-box .menu li[class*=columns-]:not(.columns-1) ul ul ul{padding:0;background:#007bb8}header nav.menu-box .menu li[class*=columns-]:not(.columns-1) ul ul ul ul{background:#262626}header nav.menu-box .menu li[class*=columns-]:not(.columns-1) ul ul ul ul ul{background:#007bb8}header nav.menu-box .menu li[class*=columns-]:not(.columns-1)>ul>li{display:inline-block;padding-left:1.5625rem;white-space:nowrap}header nav.menu-box .menu li[class*=columns-]:not(.columns-1)>ul>li:first-child{padding-left:0}header nav.menu-box .custom-menu-items{display:inline-block;color:#fff}header nav.menu-box .custom-menu-items .custom-item{cursor:pointer;display:inline-block;vertical-align:middle;position:relative;font-size:1rem;color:#fff}header nav.menu-box .custom-menu-items .custom-item .item-link{height:51px;line-height:51px;padding:0 14px}header nav.menu-box .custom-menu-items .custom-item i{position:relative;display:block;height:51px;line-height:51px;font-size:18px}header nav.menu-box .custom-menu-items .item-dropdown{background:#008ed3;position:absolute;top:100%;left:0;padding:.875rem 1rem;min-width:220px;border-top:1px solid #42b6f0;display:none;z-index:10;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}header nav.menu-box .custom-menu-items .menu-mobile-btn{display:none}header nav.menu-box .custom-menu-items .menu-mobile-btn.mobile-menu-opened i:before{content:'\f00d'}main{padding:34px 0 38px}main>.container>article{width:-moz-calc(100% - 279px);width:-webkit-calc(100% - 279px);width:calc(100% - 279px);float:left}main article .tabs .tab{position:relative;background:#008ed3;display:block;float:left;width:-moz-calc(50% - 20px);width:-webkit-calc(50% - 20px);width:calc(50% - 20px);height:46px;font-size:14px;line-height:46px;padding:0 18px;margin-right:16px;text-transform:uppercase;text-decoration:none;color:#fff;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-transition:opacity .4s;-moz-transition:opacity .4s;transition:opacity .4s ease 0s;-webkit-border-radius:6px 2px 0 0;-moz-border-radius:6px 2px 0 0;border-radius:6px 2px 0 0}main article .tabs .tab:last-child{margin-right:0}main article .tabs .tab:after{border-bottom:45px solid #008ed3;border-right:23px solid transparent;position:absolute;top:1px;right:-23px;width:0;height:0;content:''}main article .tabs .tab.active{background:#38b733;z-index:2}main article .tabs .tab.active:after{border-bottom-color:#38b733;z-index:2}main article .tabs .tab:not(.active):hover{opacity:.7}main article .content-formatting h2.title{background:#f6f6f6;margin-top:30px;margin-bottom:22px;padding:11px 18px;font-size:18px;line-height:24px;color:#444}main article .content-formatting h2.title:first-child{margin-top:0}main aside{width:244px;float:right}main aside .widget{margin-bottom:30px}main aside .widget .widget-title{background:#38b733;padding:16px 20px;color:#fff;font-weight:700;font-size:14px;text-align:center;text-transform:uppercase}main aside .widget .widget-cont{padding:18px 0 20px}main aside .widget .widget-cont ul{list-style:none}main aside .widget .widget-box{position:relative;background:#f6f6f6;padding-left:23px;padding-right:23px}main aside .widget .widget-box:before{background:url(https://zanimaem.kz/assets/themes/zanimayem/images/widget-shadow.png) no-repeat;position:absolute;width:127px;height:48px;bottom:-10px;left:0;content:'';z-index:-1}main aside .widget .widget-box:after{background:url(https://zanimaem.kz/assets/themes/zanimayem/images/widget-shadow.png) -127px 0 no-repeat;position:absolute;width:127px;height:48px;bottom:-10px;right:0;content:'';z-index:-1}main aside .zanimayem_widget_top_organizations ul li a{font-size:15px;line-height:30px}main aside .zanimayem_widget_top_organizations ul li a:hover{color:#43d17f;text-decoration:none}main aside .zanimayem_widget_reviews_organizations ul li{border-top:1px dashed #999;margin-top:18px;padding-top:17px}main aside .zanimayem_widget_reviews_organizations ul li:first-child{border-top:none;margin-top:0;padding-top:0}main aside .zanimayem_widget_reviews_organizations ul li .info{color:#444}main aside .zanimayem_widget_reviews_organizations ul li .info span{display:inline-block}main aside .zanimayem_widget_reviews_organizations ul li .info .user{position:relative;margin-right:4px}main aside .zanimayem_widget_reviews_organizations ul li .info .fa{position:relative;top:1px;margin-right:4px;font-size:16px;color:#ff7300}main aside .zanimayem_widget_reviews_organizations ul li .info .date{margin-left:4px;color:#999}main aside .zanimayem_widget_reviews_organizations ul li .desc,main aside .zanimayem_widget_reviews_organizations ul li .desc a{margin-top:7px;font-style:italic;color:#666}main aside .zanimayem_widget_recent_posts .widget-cont{padding-top:24px;padding-bottom:0}main aside .zanimayem_widget_recent_posts ul li{position:relative;border-top:1px dashed #999;margin-top:18px;padding-top:17px}main aside .zanimayem_widget_recent_posts ul li:first-child{border-top:none;margin-top:0;padding-top:0}main aside .zanimayem_widget_recent_posts ul li .image{width:49px;float:left}main aside .zanimayem_widget_recent_posts ul li .image img{display:block;width:49px;height:auto;-webkit-transition:opacity .4s;-moz-transition:opacity .4s;transition:opacity .4s ease 0s}main aside .zanimayem_widget_recent_posts ul li .image img:hover{opacity:.7}main aside .zanimayem_widget_recent_posts ul li .info{position:relative;margin-left:64px;top:-5px}main aside .zanimayem_widget_recent_posts ul li .info h3{line-height:17px}main aside .zanimayem_widget_recent_posts ul li .info h3 a{font-size:13px;font-weight:400}main aside .zanimayem_widget_recent_posts ul li .info .date{display:block;margin-top:5px;color:#999}main aside .zanimayem_widget_recent_posts .more{margin-top:14px;text-align:right}main aside .zanimayem_widget_recent_posts .more a{display:inline-block;border:1px solid #c7c7c7;padding:0 17px;height:31px;line-height:31px;color:#444;text-decoration:none;-webkit-transition:.4s;-moz-transition:.4s;transition:all .4s ease 0s}main aside .zanimayem_widget_recent_posts .more a:hover{border:1px solid #008ed3;background:#008ed3;color:#fff}main aside .zanimayem_widget_cities_organizations ul li a{font-size:15px;line-height:30px;color:#444}main aside .zanimayem_widget_cities_organizations .more{margin-top:15px;text-align:center}main aside .zanimayem_widget_cities_organizations .more a{text-transform:uppercase}main .breadcrumbs{color:#444;margin-bottom:24px}main .breadcrumbs a{color:#999;text-decoration:none}main .breadcrumbs a:hover{text-decoration:underline}main .breadcrumbs .separator{color:#999;padding:0 3px}main.page h1.post-title{font-size:20px;font-weight:400;color:#444;margin:-5px 0 22px}main.page h1.post-title+img,main.page h1.post-title+p{margin-top:38px}main.page .comments-wrap ul{padding-left:21px}main.page .comments-wrap>ul{padding-left:0}main.page .comments-wrap ul li{border-top:1px dashed #999;list-style:none;padding-top:22px;padding-left:0;margin-top:30px;clear:both}main.page .comments-wrap ul li:first-child{margin-top:0}main.page .comments-wrap>ul>li:first-child{border-top:none;padding-top:0}main.page .comments-wrap ul li:before{content:none}main.page .comments-wrap ul li ul{padding-left:64px;margin-top:30px;margin-bottom:0}main.page .comments-wrap form p{margin-bottom:0}main.page .comments-wrap form input[type=email],main.page .comments-wrap form input[type=text],main.page .comments-wrap form textarea{width:100%}main.page .comments-wrap form input[type=submit]{margin-bottom:2%}main.page .comments-wrap form label.error{top:-10px;position:relative;margin-top:0!important}main.page .comments-wrap .comment-rating{opacity:.7}main.page .comments-wrap .comment-rating>.label{float:left;margin:6px 10px 12px 0;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}main.page .comments-wrap .comment-rating .stars{float:left;margin:6px 0 12px}main.page .comments-wrap .comment-rating .stars .fa{float:left;font-size:17px;cursor:default;color:#ffc74c}main.page .comments-wrap .comment-rating .stars.move .fa{color:#ff9100}main.page .comments-wrap .comment-rating .stars.move .fa:before{content:'\f005'}main.page .navigation{margin-top:25px}main.page .navigation>*{display:inline-block;margin-right:3px;padding:4px 8px;color:#444;font-weight:700;text-transform:uppercase;-moz-transition:.3s;-ms-transition:.3s;-o-transition:.3s}main.page .navigation a:hover{background:#444;color:#fff;text-decoration:none}main.page .navigation span.title{padding-left:0}main.page .wpcf7{position:relative}main.page .wpcf7 p{margin:0}main.page .wpcf7 input{max-width:inherit}main.page .wpcf7 textarea{width:100%}main.page .wpcf7 .wpcf7-not-valid-tip{background:#ffecec;border:1px solid #f9cbc8;display:block;width:100%;padding:10px;line-height:15px;clear:both;color:#be6d59;font-size:12px;position:relative;margin-bottom:10px;z-index:1;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}main.page .wpcf7 .wpcf7-response-output{margin-top:30px;margin-bottom:0}main.page .wpcf7 .screen-reader-response{display:none}main article .catalog-filter{position:relative;padding-left:20px}main article .catalog-filter .sorting-ratings{position:absolute;top:8px;left:0}main article .catalog-filter .sorting-ratings a[data-orderby=DESC] i:before{content:'\f161';color:#444;font-size:16px}main article .catalog-filter .sorting-ratings a[data-orderby=ASC] i:after{content:'\f160';color:#444;font-size:16px}main article .catalog-filter .select2{display:block;width:25%!important;padding-left:6px;float:left}main article .catalog-filter select:first-child+.select2{padding-left:0}main article .catalog-container{margin:28px 0 45px}main article .catalog-container .item{background:#f6f6f6;margin-top:16px;padding:20px 10px;-webkit-box-shadow:0 1px 1px 0 #bababa;-moz-box-shadow:0 1px 1px 0 #bababa;box-shadow:0 1px 1px 0 #bababa}main article .catalog-container .item.sticky{border:2px solid #ff5e5e;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none}main article .catalog-container .item:first-child{margin-top:0}main article .catalog-container .item .image{width:75px;float:left}main article .catalog-container .item .image img{max-width:75px;height:auto;-webkit-transition:opacity .4s;-moz-transition:opacity .4s;transition:opacity .4s ease 0s}main article .catalog-container .item .image img:hover{opacity:.7}main article .catalog-container .item .info{width:130px;float:left;margin-left:25px;margin-right:5px}main article .catalog-container .item .info h2{margin-bottom:12px}main article .catalog-container .item .info h2 a{font-weight:400;font-size:16px;color:#005dac}main article .catalog-container .item .info h2 a:hover{color:#528a2d;text-decoration:none}main article .catalog-container .item .info .reviews{margin-top:9px;font-size:16px;color:#666}main article .catalog-container .item .info .reviews a{display:inline-block;margin-left:4px;color:#666}main article .catalog-container .item .info .reviews a:hover{color:#3d6387}main.archive-loan .form-loan .select2{width:100%!important;max-width:100%;margin-bottom:10px}main.archive-loan .form-loan .select2 .select2-selection--single .select2-selection__rendered{color:#333;font-style:normal;padding-left:12px}main.archive-loan .form-loan .select2 .select2-selection--single .select2-selection__arrow{background:#38b733;position:absolute;width:19px;height:25px;right:0;top:0}main.archive-loan .form-loan .select2 .select2-selection--single[aria-expanded=true] .select2-selection__arrow{background:#008ed3}footer{background:#23475f;padding:44px 0 62px}footer .container{overflow:visible}footer .wrap-logo{float:left}footer .wrap-logo .logo{display:inline-block}footer .wrap-logo .copyright{margin-top:8px;font-size:12px;color:#748596}footer .wrap-text{float:right}footer .wrap-text .logo{display:inline-block}footer .wrap-text .copyright{font-size:10px;color:#748596}footer .links{margin-left:45px;float:left;max-width:472px}footer .links nav.menu{margin-top:10px}footer .links nav.menu ul{list-style:none}footer .links nav.menu ul li{position:relative;float:left;padding:0 10px}footer .links nav.menu ul li:first-child{padding-left:0}footer .links nav.menu ul li:after{position:absolute;top:-1px;left:-1px;font-size:13px;color:#748596;content:'|'}footer .links nav.menu ul li:first-child:after{display:none}footer .links nav.menu ul li a{display:block;color:#748596}footer .links nav.menu ul li.current_page_item a{color:#fff}footer .counters{margin-top:25px}footer .counters img{-webkit-transition:opacity .4s;-moz-transition:opacity .4s;transition:opacity .4s ease 0s}footer .counters img:hover{opacity:.6}@media (max-width:991px){header nav.menu-box .container{position:relative;padding:0}header nav.menu-box .menu-container{padding-left:.9375rem;padding-right:.9375rem}header nav.menu-box.menu-left .menu{float:none;border-top:1px solid #007bb8;padding:.875rem 0}header nav.menu-box .menu{clear:left;display:none}header nav.menu-box .menu>li{padding-left:.9375rem;padding-right:.9375rem}header nav.menu-box .menu li{display:block!important}header nav.menu-box .menu li.opened{background:#007bb8!important}header nav.menu-box .custom-menu-items{width:100%;text-align:center}header nav.menu-box .custom-menu-items .menu-mobile-btn{display:block}header nav.menu-box .custom-menu-items .item-link.menu-mobile-btn{height:auto;line-height:auto}header nav.menu-box .menu ul{position:relative;top:0;left:0;padding:0;display:none;opacity:1;border:none!important;background:0 0!important;-webkit-transition-delay:0s;-moz-transition-delay:0s;-o-transition-delay:0s;transition-delay:0s}header nav.menu-box .menu ul ul{display:none}header nav.menu-box .menu li li:hover>ul{left:0!important}header nav.menu-box .menu>li>.item-link{border:none}header nav.menu-box .menu>li>.item-link:hover{opacity:.7}header nav.menu-box .menu>li:first-child>.item-link{border:none}header nav.menu-box .menu>li>.item-link:after,header nav.menu-box .menu>li>.item-link:before{display:none}header nav.menu-box .menu>li.current-menu-item>.item-link{background:0 0;color:rgba(256,256,256,.8)}header nav.menu-box .menu .sub-menu{padding-top:0;padding-bottom:0}header nav.menu-box .menu li li .sub-menu{padding-left:.75rem}header nav.menu-box .menu li .item-link>i.arrow{position:absolute;top:50%;right:0;padding:0;width:2.5rem;margin:-1.225rem 0 0;font-size:.75rem;line-height:2.5rem;height:100%;text-align:center;color:#fff;cursor:pointer}header nav.menu-box .menu>li>.item-link>i.arrow:after{content:''}header nav.menu-box .menu>li:hover>.item-link>i.arrow:before{opacity:1}header nav.menu-box .menu li>.item-link>i.arrow:before{content:'\f067'!important;font-size:.875rem}header nav.menu-box .menu li.opened>.item-link>i.arrow:before{content:'\f068'!important}header nav.menu-box .menu li li .item-link{padding:.5rem .6rem}header nav.menu-box .menu li li .item-link:before{content:"-";padding-right:.5rem}header nav.menu-box .menu li li li .item-link:before{content:"•"}header nav.menu-box .menu li[class*=columns-]:not(.columns-1)>ul{padding:0 .625rem}header nav.menu-box .menu li[class*=columns-]:not(.columns-1)>ul>li{padding-left:0}header nav.menu-box .menu li[class*=columns-]:not(.columns-1) ul ul ul{padding-left:.75rem}header nav.menu-box .custom-menu-items .custom-item{position:inherit}header nav.menu-box .custom-menu-items .item-dropdown{width:100%}header section .wrap-logo{float:none;text-align:center}header section .banner{display:none}footer{padding:25px 0 32px}footer .links{max-width:-webkit-calc(100% - 164px);max-width:-moz-calc(100% - 164px);max-width:calc(100% - 164px)}}@media (max-width:767px){main>.container>article{float:none;width:100%;margin-bottom:25px}main aside{float:none;width:100%}main.page .wpcf7 input[type=email],main.page .wpcf7 input[type=text]{max-width:inherit;width:100%}main.page .wpcf7 .wpcf7-response-output{margin-bottom:30px}footer .links nav.menu{margin-top:12px}footer .links nav.menu ul li{float:none}footer .links nav.menu ul li:first-child{padding-left:10px}footer .links nav.menu ul li:first-child:after{display:block}}@media (max-width:620px){main article .catalog-container .item .image{width:100%;clear:both;text-align:center}main article .catalog-container .item .info{border-bottom:1px solid #e1e1e1;width:100%;clear:both;margin:15px 0;padding-bottom:15px;text-align:center}}@media (max-width:544px){main article .tabs .tab{height:40px;line-height:40px;font-size:13px;padding-left:10px;padding-right:0}main article .tabs .tab:after{border-bottom-width:39px}main article .catalog-filter .sorting-ratings{top:18px}main article .catalog-filter{margin-top:-10px}main article .catalog-filter .select2{width:50%!important;margin-top:10px}main article .catalog-filter select:nth-child(4n+1)+.select2{padding-left:0}main article .catalog-container .item .image{width:100%;clear:both;text-align:center}main article .catalog-container .item .info{border-bottom:1px solid #e1e1e1;width:100%;clear:both;margin:15px 0 5px;padding-bottom:15px;text-align:center}}.sorting{display:flex;align-items:center}.sorting .asc,.sorting .desc{display:block;cursor:pointer;margin-left:6px}.sorting .asc:before,.sorting .desc:before{border:none;font-family:FontAwesome;font-size:25px;font-weight:700;content:'\f107';color:#38b733}.sorting .desc:before{content:'\f106';color:#42b6f0}.sorting>div{font-size:15px;display:flex;align-items:center;margin-right:20px}@media (max-width:800px){.sorting{flex-wrap:wrap}.sorting>div{margin-bottom:10px}}@media (max-width:480px){.sorting .select2-container{width:100%!important}}@media (max-width:420px){main article .tabs .tab{width:100%;float:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}main article .tabs .tab:after{display:none}main article .catalog-filter .select2{width:100%!important;padding-left:0;margin-top:10px}footer .wrap-logo{float:none;text-align:center}footer .links{float:none;margin:0;overflow:hidden;max-width:100%;width:100%}footer .links nav.menu{text-align:center}footer .links nav.menu ul li:after,footer .links nav.menu ul li:first-child:after{display:none}}@font-face{font-display:swap;font-family:'PT Sans';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/ptsans/v17/jizaRExUiTo99u79D0KExQ.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}.header-logo-image{background:url('https://zanimaem.kz/assets/uploads/2016/04/logo.png') center center no-repeat;background-size:150px,90px;width:150px;height:90px}.footer-logo-image{background:url('https://zanimaem.kz/assets/uploads/2016/04/logo-footer.png') center center no-repeat;background-size:104px,62px;width:104px;height:62px}</style>
+	<meta name="description" content="privacy policy сайта Занимаем.kz. Уважение конфиденциальности пользователей - приоритет в работе сайта.">
+	<link rel="canonical" href="https://zanimaem.kz/politika-konfidencialnosti/">
+	<meta property="og:url" content="https://zanimaem.kz/politika-konfidencialnosti/">
+	<meta property="og:site_name" content="Занимаем.kz">
+	<meta property="article:publisher" content="https://www.facebook.com/zanimaemkz/">
+	<meta property="article:modified_time" content="2021-08-08T06:35:33+00:00">
+	<meta property="og:image" content="https://zanimaem.kz/assets/uploads/2016/05/180-120.jpg">
+	<meta property="og:image:width" content="180">
+	<meta property="og:image:height" content="120">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta name="twitter:label1" content="Примерное время для чтения">
+	<meta name="twitter:data1" content="3 минуты">
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="//static.addtoany.com">
+
+
+<!-- zanimaem.kz is managing ads with Advanced Ads --><!--noptimize--><script id="zanim-ready">
+			window.advanced_ads_ready=function(e,a){a=a||"complete";var d=function(e){return"interactive"===a?"loading"!==e:"complete"===e};d(document.readyState)?e():document.addEventListener("readystatechange",(function(a){d(a.target.readyState)&&e()}),{once:"interactive"===a})},window.advanced_ads_ready_queue=window.advanced_ads_ready_queue||[];		</script>
+		<!--/noptimize--><style type="text/css"></style>
+	
+
+<style id="global-styles-inline-css" type="text/css"></style>
+
+
+
+
+
+
+
+
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="addtoany-core-js-before">
+window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overlays=[];a2a_config.templates={};a2a_localize = {
+	Share: "Отправить",
+	Save: "Сохранить",
+	Subscribe: "Подписаться",
+	Email: "E-mail",
+	Bookmark: "В закладки!",
+	ShowAll: "Показать все",
+	ShowLess: "Показать остальное",
+	FindServices: "Найти сервис(ы)",
+	FindAnyServiceToAddTo: "Найти сервис и добавить",
+	PoweredBy: "Работает на",
+	ShareViaEmail: "Поделиться по электронной почте",
+	SubscribeViaEmail: "Подписаться по электронной почте",
+	BookmarkInYourBrowser: "Добавить в закладки",
+	BookmarkInstructions: "Нажмите Ctrl+D или \u2318+D, чтобы добавить страницу в закладки",
+	AddToYourFavorites: "Добавить в Избранное",
+	SendFromWebOrProgram: "Отправлять с любого email-адреса или email-программы",
+	EmailProgram: "Почтовая программа",
+	More: "Подробнее&#8230;",
+	ThanksForSharing: "Спасибо, что поделились!",
+	ThanksForFollowing: "Спасибо за подписку!"
+};
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" async="" data-rocket-src="https://static.addtoany.com/menu/page.js" id="addtoany-core-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" id="jquery-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" async="" data-rocket-src="https://zanimaem.kz/assets/plugins/add-to-any/addtoany.min.js?ver=1.1" id="addtoany-jquery-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/themes/zanimayem/framework/assets/js/placeholders.min.js?ver=6.1.1" id="placeholders-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://zanimaem.kz/wp-json/"><link rel="alternate" type="application/json" href="https://zanimaem.kz/wp-json/wp/v2/pages/5741"><link rel="alternate" type="application/json+oembed" href="https://zanimaem.kz/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://zanimaem.kz/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;format=xml">
+
+
+<script type="application/ld+json" class="saswp-schema-markup-output">
+[{"@context":"https://schema.org/","@graph":[{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Банки","url":"/bank/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Микрокредиты","url":"https://zanimaem.kz/business-type/mikrokredity/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Займы онлайн","url":"https://zanimaem.kz/business-type/zajjmy-onlajjn/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Займы на карту","url":"https://zanimaem.kz/business-type/zajjmy-na-kartu/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Микрозаймы до зарплаты","url":"https://zanimaem.kz/business-type/mikrozajjmy-do-zarplaty/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Быстрые деньги","url":"https://zanimaem.kz/business-type/bystrye-dengi/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Брокеры","url":"https://zanimaem.kz/business-type/brokery/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Карты","url":"https://zanimaem.kz/business-type/kreditnye-karty/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Кредиты","url":"https://zanimaem.kz/business-type/kredity/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Ипотека","url":"https://zanimaem.kz/business-type/ipoteka/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Автокредиты","url":"https://zanimaem.kz/business-type/avtokredity/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Частные займы","url":"/loan/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Консультант","url":"/consultation/"},{"@context":"https://schema.org/","@type":"SiteNavigationElement","@id":"https://zanimaem.kz/#Главное меню","name":"Калькулятор","url":"https://zanimaem.kz/kreditnyjj-kalkulyator/"}]}]
+</script>
+
+<script type="rocketlazyloadscript" async="" data-rocket-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4859241862365215" crossorigin="anonymous"></script><link rel="icon" href="https://zanimaem.kz/assets/uploads/2016/05/cropped-favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="https://zanimaem.kz/assets/uploads/2016/05/cropped-favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://zanimaem.kz/assets/uploads/2016/05/cropped-favicon-180x180.png">
+<meta name="msapplication-TileImage" content="https://zanimaem.kz/assets/uploads/2016/05/cropped-favicon-270x270.png">
+<link rel="apple-touch-icon" href="https://zanimaem.kz/assets/uploads/2016/05/cropped-favicon-57x57.png">
+<link rel="apple-touch-icon" href="https://zanimaem.kz/assets/uploads/2016/05/cropped-favicon-76x76.png" sizes="76x76">
+<link rel="apple-touch-icon" href="https://zanimaem.kz/assets/uploads/2016/05/cropped-favicon-120x120.png" sizes="120x120">
+<link rel="apple-touch-icon" href="https://zanimaem.kz/assets/uploads/2016/05/cropped-favicon-152x152.png" sizes="152x152">
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>
+	<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+		var $ = jQuery;
+
+		$(document).ready(function() { 
+			if( $('section.catalog-container').length > 0 ) { 
+
+				var arr = [];
+
+				for( var i = 0; i <= $('section.catalog-container .item').length; i++ ) { 
+					
+					var block = $('section.catalog-container .item').eq(i);					
+
+					if(! block.hasClass('sticky') ) {
+
+						arr.push({ rating : parseFloat(block.find('.my_rating').attr('data-rating')), block : block });
+					}
+					
+				}
+
+				arr.sort(function (a, b) {
+				if (a.rating < b.rating) {
+					return 1;
+				}
+				if (a.rating > b.rating) {
+					return -1;
+				}
+				
+				return 0;
+				});
+
+				$.each(arr, function(index, value) { 
+					$('section.catalog-container').append(value.block);
+				});
+
+
+
+				var arr = [];
+
+				for( var i = 0; i <= $('section.catalog-container .item').length; i++ ) { 
+					
+					var block = $('section.catalog-container .item').eq(i);					
+
+					if( block.hasClass('sticky') ) {
+
+						arr.push({ rating : parseFloat(block.find('.my_rating').attr('data-rating')), block : block });
+					}
+					
+				}
+
+				arr.sort(function (a, b) {
+				if (a.rating > b.rating) {
+					return 1;
+				}
+				if (a.rating < b.rating) {
+					return -1;
+				}
+				return 0;
+				});
+
+				$.each(arr, function(index, value) { 
+					$('section.catalog-container').prepend(value.block);
+				});
+
+				
+
+			}
+		});
+	// $(document).ready(function() {
+	// 	if( $('section.catalog-container').length > 0 ) {
+
+	// 		$($('section.catalog-container .item').get().reverse()).each(function() {
+	// 			if( $(this).hasClass('sticky') ) {
+	// 				$('section.catalog-container').prepend($(this));
+	// 			}
+	// 		});
+	// 	}
+	// });
+
+
+		$(document).on('change', 'select.filter-cities', function(e) {
+			e.stopPropagation();
+			var that = $(this),
+				slug = that.find('option:selected').attr('data-slug');
+
+			location.href = '/city/'+ slug +'/'
+		});
+
+		$(document).on('click', '.sorting > div span', function() {
+			var that = $(this),
+				sortType = that.parent('div').attr('class'),
+				orderType = that.hasClass('asc') ? 'desc' : 'asc',
+				postType = that.parents('div.sorting').attr('data-type'),
+				tax = that.parents('div.sorting').attr('data-tax'),
+				termSlug = that.parents('div.sorting').attr('data-term'),
+				termId = that.parents('div.sorting').attr('data-term_id');
+
+			switch(sortType) {
+				case 'rating-sort' : 
+					sortType = 'rating';
+					break;
+
+				case 'review-sort' :
+					sortType = 'reviews';
+					break;
+			
+				case 'summ-sort' : 
+					sortType = 'summ';
+					break;
+
+				case 'limit-sort' : 
+					sortType = 'limit';
+					break;
+
+				case 'rate-sort' :
+					sortType = 'stavka';
+					break;
+			
+				case 'period-sort' : 
+					sortType = 'period';
+					break;
+			
+				case 'pay-sort' : 
+					sortType = 'perVznos';
+					break;
+			}	
+
+			$.ajax({
+				url: 'https://zanimaem.kz/wp-admin/admin-ajax.php',
+				type: 'post',
+				data: {'action' : 'sortThePosts', 'postType' : postType, 'orderType' : orderType, 'sortType' : sortType, 'term' : termSlug, 'termId' : termId, 'tax' : tax},
+				success: function(res) {
+					$('.catalog-container').html(res);
+				}
+			});
+
+		});
+	});</script>
+</head>
+<body data-rsssl="1" class="privacy-policy page-template-default page page-id-5741 aa-prefix-zanim-">
+
+	<!-- theme_hook_top --><!-- theme_hook_top -->
+	<!-- HEADER -->
+	<header class="clear">
+		<div class="container clear">
+			<section class="header clear">
+									<div class="wrap-logo">
+						<a href="https://zanimaem.kz" class="logo">
+																		<div class="header-logo-image">	</div>
+
+											<style type="text/css"></style>
+																</a>
+					</div>
+										
+				
+								
+					<div class="banner">												
+						<p><a href="https://zanimaem.kz/organization/creditplus/"><img decoding="async" class="aligncenter wp-image-12775 size-full entered lazyloaded" src="https://zanimaem.kz/assets/uploads/2018/04/760_90.png" alt="CreditPlus_760_90" data-lazy-srcset="https://zanimaem.kz/assets/uploads/2018/04/760_90.png 760w, https://zanimaem.kz/assets/uploads/2018/04/760_90-300x36.png 300w" data-lazy-sizes="(max-width: 760px) 100vw, 760px" data-lazy-src="https://zanimaem.kz/assets/uploads/2018/04/760_90.png" data-ll-status="loaded" sizes="(max-width: 760px) 100vw, 760px" srcset="https://zanimaem.kz/assets/uploads/2018/04/760_90.png 760w, https://zanimaem.kz/assets/uploads/2018/04/760_90-300x36.png 300w" width="760" height="90"><noscript><img decoding="async" class="aligncenter wp-image-12775 size-full" src="https://zanimaem.kz/assets/uploads/2018/04/760_90.png" alt="CreditPlus_760_90" width="760" height="90" srcset="https://zanimaem.kz/assets/uploads/2018/04/760_90.png 760w, https://zanimaem.kz/assets/uploads/2018/04/760_90-300x36.png 300w" sizes="(max-width: 760px) 100vw, 760px" /></noscript></a></p>
+					
+					</div>				
+							</section>
+		</div>
+
+		<nav class="menu-box menu-left clear">
+			<div class="container">
+				<div class="menu-container clear">
+
+					<!-- Custom Items -->
+					<div class="custom-menu-items">
+
+						<div class="custom-item">
+							<div class="item-link menu-mobile-btn">
+								<i class="fa fa-bars"></i>
+							</div>
+						</div>
+
+					<!--<div class="custom-item open-on-click">
+							<div class="item-link menu-search-btn">
+								<i class="fa fa-search "></i>
+							</div>
+							<div class="item-dropdown">
+								<form class="search-form" method="get" action="/">
+									<input type="text" name="s" value="" placeholder="Поиск..." />
+									<button type="submit" class="icomoon icon-search var-color-menu"></button>
+								</form>
+							</div>
+						</div> -->
+					</div>
+
+					<ul id="menu-glavnoe-menyu" class="menu"><li id="menu-item-556" class="menu-item menu-item-type-custom menu-item-object-custom columns-1"><a href="/bank/" class="item-link"><span class="head">Банки</span></a></li>
+<li id="menu-item-419" class="menu-item menu-item-type-taxonomy menu-item-object-business-type menu-item-has-children columns-1"><a href="https://zanimaem.kz/business-type/mikrokredity/" class="item-link"><span class="head">Микрокредиты</span><i class="fa fa-chevron-down arrow"></i></a>
+<ul class="sub-menu">
+	<li id="menu-item-423" class="menu-item menu-item-type-taxonomy menu-item-object-business-type"><a href="https://zanimaem.kz/business-type/zajjmy-onlajjn/" class="item-link">Займы онлайн</a></li>
+	<li id="menu-item-421" class="menu-item menu-item-type-taxonomy menu-item-object-business-type"><a href="https://zanimaem.kz/business-type/zajjmy-na-kartu/" class="item-link">Займы на карту</a></li>
+	<li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-business-type"><a href="https://zanimaem.kz/business-type/mikrozajjmy-do-zarplaty/" class="item-link">Микрозаймы до зарплаты</a></li>
+	<li id="menu-item-420" class="menu-item menu-item-type-taxonomy menu-item-object-business-type"><a href="https://zanimaem.kz/business-type/bystrye-dengi/" class="item-link">Быстрые деньги</a></li>
+</ul>
+</li>
+<li id="menu-item-12295" class="menu-item menu-item-type-taxonomy menu-item-object-business-type"><a href="https://zanimaem.kz/business-type/brokery/" class="item-link"><span class="head">Брокеры</span></a></li>
+<li id="menu-item-427" class="menu-item menu-item-type-taxonomy menu-item-object-business-type columns-1"><a href="https://zanimaem.kz/business-type/kreditnye-karty/" class="item-link"><span class="head">Карты</span></a></li>
+<li id="menu-item-428" class="menu-item menu-item-type-taxonomy menu-item-object-business-type columns-1"><a href="https://zanimaem.kz/business-type/kredity/" class="item-link"><span class="head">Кредиты</span></a></li>
+<li id="menu-item-426" class="menu-item menu-item-type-taxonomy menu-item-object-business-type columns-1"><a href="https://zanimaem.kz/business-type/ipoteka/" class="item-link"><span class="head">Ипотека</span></a></li>
+<li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-business-type columns-1"><a href="https://zanimaem.kz/business-type/avtokredity/" class="item-link"><span class="head">Автокредиты</span></a></li>
+<li id="menu-item-385" class="menu-item menu-item-type-custom menu-item-object-custom columns-1"><a href="/loan/" class="item-link"><span class="head">Частные займы</span></a></li>
+<li id="menu-item-436" class="menu-item menu-item-type-custom menu-item-object-custom columns-1"><a href="/consultation/" class="item-link"><span class="head">Консультант</span></a></li>
+<li id="menu-item-6257" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://zanimaem.kz/kreditnyjj-kalkulyator/" class="item-link"><span class="head">Калькулятор</span></a></li>
+</ul>				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- / HEADER END -->
+
+	<!-- theme_hook_content_before --><!-- theme_hook_content_before -->
+	<!-- MAIN -->
+	<main class="page clear">
+		<div class="container">
+			<article>
+									
+						<div class="breadcrumbs" vocab="http://schema.org/" typeof="BreadcrumbList"><span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" href="https://zanimaem.kz/"><span property="name">Главная</span></a><meta property="position" content="1"></span> <span class="separator">/</span> <span class="current-item" property="itemListElement" typeof="ListItem"><span property="name">Политика конфиденциальности</span><meta property="position" content="2"></span></div>
+						<h1 class="post-title">Политика конфиденциальности</h1>
+
+						<section class="content-formatting">
+							<p>Ниже, Zanimaem.kz (далее сайт), приложение Zanimaem.kz для android (далее приложение) разъясняет основные положения политики конфиденциальности пользователей:</p>
+<h2>1. Данные пользователей используемые на сайте Занимаем.kz:</h2>
+<ul>
+<li>Если посетитель оставляет комментарий на сайте, мы собираем данные указанные в форме комментария, а также IP адрес посетителя и данные user-agent браузера с целью определения спама.</li>
+<li>Это приложение использует Firebase Analytics (от Google), чтобы понять, как люди его используют. Статистическая информация всегда анонимна. Эта информация полезна для нас, чтобы улучшить приложение, поскольку она позволяет нам узнать, сколько людей используют приложение и какие части приложения им нравятся больше всего.</li>
+</ul>
+<h2>2. Для чего мы используем данные:</h2>
+<p>Принимая <a href="https://zanimaem.kz/pravila-polzovaniya-sajjtom/">условия пользования сайтом</a>, вы также соглашаетесь на сбор и обработку персональных данных, которые не могут использоваться сайтом для других целей, кроме как:</p>
+<ul class="text_list">
+<li>проведения статистических и иных исследований на основании предоставленных данных;</li>
+<li>идентификации личности пользователя;</li>
+</ul>
+<p>Сайт принимает на себя обязательства по соблюдению требований законодательства Казахстана, по защите персональных данных;</p>
+<h2>3. К персональным данным относится:</h2>
+<ul>
+<li>информация, которую сайт получает при посещении пользователем страниц сайта или приложения (IP-адрес, информация из cookie, информация о браузере пользователя, устройстве, время доступа, адрес запрашиваемой страницы, а также доменное имя провайдера интернет-услуг пользователя);</li>
+<li>информация, которую предоставляет Заявитель о себе при регистрации на сайте для заполнения Заявки на микрокредит. Такая информация обозначена на сайте и к ней относятся: фамилия, имя и отчество, адрес электронной почты, номер мобильного телефона, контактные телефоны, адрес проживания, реквизиты своего банковского счета, а также иные данные, которые автоматически передаются сайту в процессе его использования;</li>
+<li>другая информация о пользователе, предоставление которой необходимо для корректного использования сайта.</li>
+</ul>
+<h2>4. Файлы cookie</h2>
+<p>Файлы cookie – это небольшие текстовые файлы, которые передаются с сайта и хранятся на устройстве пользователя. Следует учесть, что полноценная работа с нашим сайтом доступна только при использовании файлов cookie. Отключение файлов cookie может привести к ограничению доступа к содержанию или к неполноценному функционированию сервисов, например калькулятора процентов по кредиту.</p>
+<p>Наш сайт использует следующие типы файлов cookie:</p>
+<ul>
+<li>Обязательные файлы cookie – необходимы для предоставления определенных функций и сервисов сайта, например, для доступа к защищенным страницам, регистрации и авторизации.</li>
+<li>Эксплуатационные файлы cookie – позволяют нам получать информацию о том, как пользователи используют наш сайт, например о том, как часто используется какая-либо определенная функция или сервис.</li>
+</ul>
+<p>С нашим сайтом интегрированы некоторые сервисы партнеров, такие как социальные сети и службы веб-аналитики. Наши партнеры могут установить собственные файлы cookie на устройстве пользователя, во время посещения нашего сайта.</p>
+<p>Обратите внимание, что наша Политика конфиденциальности не покрывает использование файлов cookie третьих сторон, и мы не несем ответственности за их политику конфиденциальности и работу.</p>
+<p>Вы можете настроить свое устройство так, чтобы запретить или ограничить получение файлов cookie, используя для этого функции, доступные в вашем браузере.</p>
+<h2>5. Прочее</h2>
+<p>Администрация сайта не передаёт персональные данные пользователей третьим лицам, за исключением случаев предусмотренных законодательством РК;</p>
+<p>Если вы оставляете комментарий, то сам комментарий и его метаданные сохраняются неопределенно долго. Это делается для того, чтобы определять и одобрять последующие комментарии автоматически, вместо помещения их в очередь на одобрение. Кроме того, комментарии пользователей могут проверяться автоматическим сервисом определения спама.</p>
+<p>Связаться с редакцией сайта можно через форму <a href="https://zanimaem.kz/kontakty/">обратной связи.</a></p>
+<h3></h3>
+<div class="addtoany_share_save_container addtoany_content addtoany_content_bottom"><div class="addtoany_header">Пожалуйста, поделитесь этой информацией в соцсетях!</div><div class="a2a_kit a2a_kit_size_32 addtoany_list" data-a2a-url="https://zanimaem.kz/politika-konfidencialnosti/" data-a2a-title="Политика конфиденциальности"><a class="a2a_button_facebook" href="https://www.addtoany.com/add_to/facebook?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="Facebook" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_vk" href="https://www.addtoany.com/add_to/vk?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="VK" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_odnoklassniki" href="https://www.addtoany.com/add_to/odnoklassniki?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="Odnoklassniki" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_whatsapp" href="https://www.addtoany.com/add_to/whatsapp?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="WhatsApp" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_telegram" href="https://www.addtoany.com/add_to/telegram?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="Telegram" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_viber" href="https://www.addtoany.com/add_to/viber?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="Viber" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_twitter" href="https://www.addtoany.com/add_to/twitter?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="Twitter" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_facebook_messenger" href="https://www.addtoany.com/add_to/facebook_messenger?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="Messenger" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_email" href="https://www.addtoany.com/add_to/email?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="Email" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_copy_link" href="https://www.addtoany.com/add_to/copy_link?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8" title="Copy Link" rel="nofollow noopener" target="_blank"></a></div></div>						</section>
+
+												
+												</article>
+
+			<aside id="sidebar">
+	<div id="text-12" class="widget clear widget_text"><div class="clear">			<div class="textwidget"><form action="https://www.google.kz" id="cse-search-box" target="_blank">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-4859241862365215:8616718483">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" size="55">
+    <input type="submit" name="sa" value="Поиск">
+  </div>
+</form>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://www.google.kz/coop/cse/brand?form=cse-search-box&amp;lang=ru" defer=""></script>
+</div>
+		</div></div><div id="zanimayem_widget_top_organizations-3" class="widget clear zanimayem_widget_top_organizations"><h3 class="widget-title">Топ 3 рейтинга займов</h3><div class="widget-cont widget-box clear">			<div class="widget-top-organizations-container">
+				<div class="list">
+																<ul>
+															<li><a href="https://zanimaem.kz/organization/creditplus/">1. CreditPlus</a></li>
+															<li><a href="https://zanimaem.kz/organization/zaymerkz/">2. Займер</a></li>
+															<li><a href="https://zanimaem.kz/organization/turbomoney-kz/">3. TURBOMoney.kz</a></li>
+													</ul>
+					
+									</div>
+
+			</div><!--blog_widget-->
+		</div></div><div id="custom_html-2" class="widget_text widget clear widget_custom_html"><h3 class="widget-title">Онлайн заявка во все МФО</h3><div class="widget-cont widget-box clear"><div class="textwidget custom-html-widget"><a href="https://zanimaem.kz/onlajjn-zayavka-na-vse-zajjmy-srazu/">✔️Заполните одну анкету</a></div></div></div><div id="zanimayem_widget_recent_posts-2" class="widget clear zanimayem_widget_recent_posts"><h3 class="widget-title">Акции</h3><div class="widget-cont  clear">			<div class="widget-recent-posts-container">
+				<div class="list">
+												<ul>
+								
+																			<li>
+											<div class="image">
+												<span class="thumb"><a href="https://zanimaem.kz/airpods-v-podarok-ot-bank-rbk-uchastvujj-v-akcii-i-poluchajj-krutojj-priz/" class="post-link"><img src="https://zanimaem.kz/assets/uploads/2023/02/airpods-v-podarok-ot-bank-rbk-uchastvuj-v-akcii-i-poluchaj-krutoj-priz-49x46.jpg" alt="AirPods в подарок от Bank RBK – участвуй в акции и получай крутой приз!" data-lazy-src="https://zanimaem.kz/assets/uploads/2023/02/airpods-v-podarok-ot-bank-rbk-uchastvuj-v-akcii-i-poluchaj-krutoj-priz-49x46.jpg" data-ll-status="loaded" class="entered lazyloaded" width="49" height="46"><noscript><img src="https://zanimaem.kz/assets/uploads/2023/02/airpods-v-podarok-ot-bank-rbk-uchastvuj-v-akcii-i-poluchaj-krutoj-priz-49x46.jpg" alt="AirPods в подарок от Bank RBK – участвуй в акции и получай крутой приз!" width="49" height="46" /></noscript></a></span>											</div>
+											<div class="info">
+												<h3 class="title"><a href="https://zanimaem.kz/airpods-v-podarok-ot-bank-rbk-uchastvujj-v-akcii-i-poluchajj-krutojj-priz/">AirPods в подарок от Bank RBK – участвуй в акции и получай крутой приз!</a></h3>
+												<time class="date" datetime="13.02.23">
+													13.02.23												</time>
+											</div>
+										</li>
+								
+							
+																			<li>
+											<div class="image">
+												<span class="thumb"><a href="https://zanimaem.kz/avtomobil-ot-forte-vyigrajj-avto-mechty-za-oformlenie-kredita/" class="post-link"><img src="https://zanimaem.kz/assets/uploads/2023/02/avtomobil-ot-forte-vyigraj-avto-mechty-za-oformlenie-kredita-49x46.jpg" alt="«Автомобиль от Forte» – выиграй авто мечты за оформление кредита!" data-lazy-src="https://zanimaem.kz/assets/uploads/2023/02/avtomobil-ot-forte-vyigraj-avto-mechty-za-oformlenie-kredita-49x46.jpg" data-ll-status="loaded" class="entered lazyloaded" width="49" height="46"><noscript><img src="https://zanimaem.kz/assets/uploads/2023/02/avtomobil-ot-forte-vyigraj-avto-mechty-za-oformlenie-kredita-49x46.jpg" alt="«Автомобиль от Forte» – выиграй авто мечты за оформление кредита!" width="49" height="46" /></noscript></a></span>											</div>
+											<div class="info">
+												<h3 class="title"><a href="https://zanimaem.kz/avtomobil-ot-forte-vyigrajj-avto-mechty-za-oformlenie-kredita/">«Автомобиль от Forte» – выиграй авто мечты за оформление кредита!</a></h3>
+												<time class="date" datetime="06.02.23">
+													06.02.23												</time>
+											</div>
+										</li>
+								
+							
+																			<li>
+											<div class="image">
+												<span class="thumb"><a href="https://zanimaem.kz/spisyvaem-procenty-megaakciya-dlya-klientov-acredit/" class="post-link"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2049%2046'%3E%3C/svg%3E" alt="«Списываем проценты» – мегаакция для клиентов Acredit" data-lazy-src="https://zanimaem.kz/assets/uploads/2023/02/spisyvaem-procenty-megaakciya-dlya-klientov-acredit-49x46.jpg" width="49" height="46"><noscript><img src="https://zanimaem.kz/assets/uploads/2023/02/spisyvaem-procenty-megaakciya-dlya-klientov-acredit-49x46.jpg" alt="«Списываем проценты» – мегаакция для клиентов Acredit" width="49" height="46" /></noscript></a></span>											</div>
+											<div class="info">
+												<h3 class="title"><a href="https://zanimaem.kz/spisyvaem-procenty-megaakciya-dlya-klientov-acredit/">«Списываем проценты» – мегаакция для клиентов Acredit</a></h3>
+												<time class="date" datetime="02.02.23">
+													02.02.23												</time>
+											</div>
+										</li>
+								
+							
+																			<li>
+											<div class="image">
+												<span class="thumb"><a href="https://zanimaem.kz/volna-prizov-ot-kmf-uchastvujj-v-akcii-i-poluchajj-prizy/" class="post-link"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2049%2046'%3E%3C/svg%3E" alt="Волна призов от KMF – участвуй в акции и получай призы" data-lazy-src="https://zanimaem.kz/assets/uploads/2023/01/volna-prizov-ot-kmf-uchastvuj-v-akcii-i-poluchaj-prizy-49x46.jpg" width="49" height="46"><noscript><img src="https://zanimaem.kz/assets/uploads/2023/01/volna-prizov-ot-kmf-uchastvuj-v-akcii-i-poluchaj-prizy-49x46.jpg" alt="Волна призов от KMF – участвуй в акции и получай призы" width="49" height="46" /></noscript></a></span>											</div>
+											<div class="info">
+												<h3 class="title"><a href="https://zanimaem.kz/volna-prizov-ot-kmf-uchastvujj-v-akcii-i-poluchajj-prizy/">Волна призов от KMF – участвуй в акции и получай призы</a></h3>
+												<time class="date" datetime="30.01.23">
+													30.01.23												</time>
+											</div>
+										</li>
+								
+							
+																			<li>
+											<div class="image">
+												<span class="thumb"><a href="https://zanimaem.kz/vyigrajj-1-million-akciya-ot-credit365/" class="post-link"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2049%2046'%3E%3C/svg%3E" alt="«Выиграй 1 миллион» – акция от Credit365" data-lazy-src="https://zanimaem.kz/assets/uploads/2023/01/vyigraj-1-million-akciya-ot-credit365-49x46.jpg" width="49" height="46"><noscript><img src="https://zanimaem.kz/assets/uploads/2023/01/vyigraj-1-million-akciya-ot-credit365-49x46.jpg" alt="«Выиграй 1 миллион» – акция от Credit365" width="49" height="46" /></noscript></a></span>											</div>
+											<div class="info">
+												<h3 class="title"><a href="https://zanimaem.kz/vyigrajj-1-million-akciya-ot-credit365/">«Выиграй 1 миллион» – акция от Credit365</a></h3>
+												<time class="date" datetime="16.01.23">
+													16.01.23												</time>
+											</div>
+										</li>
+								
+													</ul>
+
+						<div class="more"><a href="https://zanimaem.kz/news/">Все новости</a></div>
+					
+									</div>
+
+			</div><!--blog_widget-->
+		</div></div><div id="zanimayem_widget_recent_posts-5" class="widget clear zanimayem_widget_recent_posts"><h3 class="widget-title">Статьи</h3><div class="widget-cont  clear">			<div class="widget-recent-posts-container">
+				<div class="list">
+												<ul>
+								
+																			<li>
+											<div class="image">
+												<span class="thumb"><a href="https://zanimaem.kz/kak-rasskazat-rebenku-o-finansakh/" class="post-link"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2049%2046'%3E%3C/svg%3E" class="attachment-zanimayem-image-size-49x46 size-zanimayem-image-size-49x46 wp-post-image" alt="Как рассказать ребенку о финансах" decoding="async" title="Как рассказать ребенку о финансах" data-lazy-src="https://zanimaem.kz/assets/uploads/2023/02/kak-rasskazat-rebenku-o-finansah-49x46.jpg" width="49" height="46"><noscript><img width="49" height="46" src="https://zanimaem.kz/assets/uploads/2023/02/kak-rasskazat-rebenku-o-finansah-49x46.jpg" class="attachment-zanimayem-image-size-49x46 size-zanimayem-image-size-49x46 wp-post-image" alt="Как рассказать ребенку о финансах" decoding="async" title="Как рассказать ребенку о финансах" loading="lazy" /></noscript></a></span>											</div>
+											<div class="info">
+												<h3 class="title"><a href="https://zanimaem.kz/kak-rasskazat-rebenku-o-finansakh/">Как рассказать ребенку о финансах</a></h3>
+												<time class="date" datetime="13.02.23">
+													13.02.23												</time>
+											</div>
+										</li>
+								
+							
+																			<li>
+											<div class="image">
+												<span class="thumb"><a href="https://zanimaem.kz/nelgotnaya-ipoteka-plyusy-i-minusy-kreditovaniya-po-rynochnojj-stavke/" class="post-link"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2049%2046'%3E%3C/svg%3E" class="attachment-zanimayem-image-size-49x46 size-zanimayem-image-size-49x46 wp-post-image" alt="Нельготная ипотека: плюсы и минусы кредитования по рыночной ставке" decoding="async" title="Нельготная ипотека: плюсы и минусы кредитования по рыночной ставке" data-lazy-src="https://zanimaem.kz/assets/uploads/2023/02/nelgotnaya-ipoteka-plyusy-i-minusy-kreditovaniya-po-rynochnoj-stavke-49x46.jpg" width="49" height="46"><noscript><img width="49" height="46" src="https://zanimaem.kz/assets/uploads/2023/02/nelgotnaya-ipoteka-plyusy-i-minusy-kreditovaniya-po-rynochnoj-stavke-49x46.jpg" class="attachment-zanimayem-image-size-49x46 size-zanimayem-image-size-49x46 wp-post-image" alt="Нельготная ипотека: плюсы и минусы кредитования по рыночной ставке" decoding="async" title="Нельготная ипотека: плюсы и минусы кредитования по рыночной ставке" loading="lazy" /></noscript></a></span>											</div>
+											<div class="info">
+												<h3 class="title"><a href="https://zanimaem.kz/nelgotnaya-ipoteka-plyusy-i-minusy-kreditovaniya-po-rynochnojj-stavke/">Нельготная ипотека: плюсы и минусы кредитования по рыночной ставке</a></h3>
+												<time class="date" datetime="06.02.23">
+													06.02.23												</time>
+											</div>
+										</li>
+								
+							
+																			<li>
+											<div class="image">
+												<span class="thumb"><a href="https://zanimaem.kz/oplata-po-qr-kodu-kak-ne-poteryat-dengi/" class="post-link"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2049%2046'%3E%3C/svg%3E" class="attachment-zanimayem-image-size-49x46 size-zanimayem-image-size-49x46 wp-post-image" alt="Оплата по QR-коду: как не потерять деньги" decoding="async" title="Оплата по QR-коду: как не потерять деньги" data-lazy-src="https://zanimaem.kz/assets/uploads/2023/01/oplata-po-qr-kodu-kak-ne-poteryat-dengi-49x46.jpg" width="49" height="46"><noscript><img width="49" height="46" src="https://zanimaem.kz/assets/uploads/2023/01/oplata-po-qr-kodu-kak-ne-poteryat-dengi-49x46.jpg" class="attachment-zanimayem-image-size-49x46 size-zanimayem-image-size-49x46 wp-post-image" alt="Оплата по QR-коду: как не потерять деньги" decoding="async" title="Оплата по QR-коду: как не потерять деньги" loading="lazy" /></noscript></a></span>											</div>
+											<div class="info">
+												<h3 class="title"><a href="https://zanimaem.kz/oplata-po-qr-kodu-kak-ne-poteryat-dengi/">Оплата по QR-коду: как не потерять деньги</a></h3>
+												<time class="date" datetime="31.01.23">
+													31.01.23												</time>
+											</div>
+										</li>
+								
+													</ul>
+
+						<div class="more"><a href="https://zanimaem.kz/articles/">Все новости</a></div>
+					
+									</div>
+
+			</div><!--blog_widget-->
+		</div></div><div id="zanimayem_widget_reviews_organizations-2" class="widget clear zanimayem_widget_reviews_organizations"><h3 class="widget-title">Отзывы</h3><div class="widget-cont widget-box clear">			<div class="widget-reviews-organizations-container">
+				<div class="list">
+																<ul>
+															<li>
+									<div class="info">
+										<span class="user"><i class="fa fa-comments" aria-hidden="true"></i> Акмарал</span> | <span class="date">16.02.2023</span>
+									</div>
+									<div class="desc"><a href="https://zanimaem.kz/organization/altenge/#comment-42706">Хотела взять кредит</a></div>
+								</li>
+															<li>
+									<div class="info">
+										<span class="user"><i class="fa fa-comments" aria-hidden="true"></i> Толганай</span> | <span class="date">16.02.2023</span>
+									</div>
+									<div class="desc"><a href="https://zanimaem.kz/organization/u-soseda/#comment-42701">Пожалуйста отписать платных услуги</a></div>
+								</li>
+															<li>
+									<div class="info">
+										<span class="user"><i class="fa fa-comments" aria-hidden="true"></i> Дина</span> | <span class="date">15.02.2023</span>
+									</div>
+									<div class="desc"><a href="https://zanimaem.kz/organization/eva-zaym/#comment-42699">Здравствуйте у меня из счета отняли утром 2799??? если обратно не скинете…</a></div>
+								</li>
+													</ul>
+					
+									</div>
+
+			</div><!--blog_widget-->
+		</div></div><div id="zanimayem_widget_cities_organizations-2" class="widget clear zanimayem_widget_cities_organizations"><h3 class="widget-title">Города выдачи кредитов</h3><div class="widget-cont widget-box clear">			<div class="widget-cities-organizations-container">
+				<div class="list">
+											<ul>
+															<li><a href="https://zanimaem.kz/city/aksu/">Аксу</a></li>
+															<li><a href="https://zanimaem.kz/city/aktau/">Актау</a></li>
+															<li><a href="https://zanimaem.kz/city/aktobe/">Актобе</a></li>
+															<li><a href="https://zanimaem.kz/city/almaty/">Алматы</a></li>
+															<li><a href="https://zanimaem.kz/city/arys/">Арыс</a></li>
+															<li><a href="https://zanimaem.kz/city/astana/">Астана</a></li>
+															<li><a href="https://zanimaem.kz/city/atyrau/">Атырау</a></li>
+															<li><a href="https://zanimaem.kz/city/ayagoz/">Аягоз</a></li>
+															<li><a href="https://zanimaem.kz/city/bajjkonur/">Байконур</a></li>
+															<li><a href="https://zanimaem.kz/city/balkhash/">Балхаш</a></li>
+															<li><a href="https://zanimaem.kz/city/zhanaozen/">Жанаозен</a></li>
+															<li><a href="https://zanimaem.kz/city/zharkent/">Жаркент</a></li>
+															<li><a href="https://zanimaem.kz/city/zhezkazgan/">Жезказган</a></li>
+															<li><a href="https://zanimaem.kz/city/karaganda/">Караганда</a></li>
+															<li><a href="https://zanimaem.kz/city/kaskelen/">Каскелен</a></li>
+															<li><a href="https://zanimaem.kz/city/kentau/">Кентау</a></li>
+															<li><a href="https://zanimaem.kz/city/kokshetau/">Кокшетау</a></li>
+															<li><a href="https://zanimaem.kz/city/konaev-kapchagajj/">Конаев (Капчагай)</a></li>
+															<li><a href="https://zanimaem.kz/city/kostanajj/">Костанай</a></li>
+															<li><a href="https://zanimaem.kz/city/kulsary/">Кульсары</a></li>
+															<li><a href="https://zanimaem.kz/city/kyzylorda/">Кызылорда</a></li>
+															<li><a href="https://zanimaem.kz/city/pavlodar/">Павлодар</a></li>
+															<li><a href="https://zanimaem.kz/city/petropavlovsk/">Петропавловск</a></li>
+															<li><a href="https://zanimaem.kz/city/ridder/">Риддер</a></li>
+															<li><a href="https://zanimaem.kz/city/rudnyjj/">Рудный</a></li>
+															<li><a href="https://zanimaem.kz/city/saran/">Сарань</a></li>
+															<li><a href="https://zanimaem.kz/city/satpaev/">Сатпаев</a></li>
+															<li><a href="https://zanimaem.kz/city/semejj/">Семей</a></li>
+															<li><a href="https://zanimaem.kz/city/stepnogorsk/">Степногорск</a></li>
+															<li><a href="https://zanimaem.kz/city/talgar/">Талгар</a></li>
+															<li><a href="https://zanimaem.kz/city/taldykorgan/">Талдыкорган</a></li>
+															<li><a href="https://zanimaem.kz/city/taraz/">Тараз</a></li>
+															<li><a href="https://zanimaem.kz/city/temirtau/">Темиртау</a></li>
+															<li><a href="https://zanimaem.kz/city/turkestan/">Туркестан</a></li>
+															<li><a href="https://zanimaem.kz/city/uralsk/">Уральск</a></li>
+															<li><a href="https://zanimaem.kz/city/ust-kamenogorsk/">Усть-Каменогорск</a></li>
+															<li><a href="https://zanimaem.kz/city/shakhtinsk/">Шахтинск</a></li>
+															<li><a href="https://zanimaem.kz/city/shymkent/">Шымкент</a></li>
+															<li><a href="https://zanimaem.kz/city/ehkibastuz/">Экибастуз</a></li>
+													</ul>
+					
+									</div>
+				
+				<div class="more"><a href="https://zanimaem.kz/cities/">Все города →</a></div>
+			</div><!--blog_widget-->
+		</div></div><div id="a2a_share_save_widget-2" class="widget clear widget_a2a_share_save_widget"><h3 class="widget-title">Нашли деньги, расскажите о нас!</h3><div class="widget-cont widget-box clear"><div class="a2a_kit a2a_kit_size_32 addtoany_list"><a class="a2a_button_facebook" href="https://www.addtoany.com/add_to/facebook?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="Facebook" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_vk" href="https://www.addtoany.com/add_to/vk?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="VK" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_odnoklassniki" href="https://www.addtoany.com/add_to/odnoklassniki?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="Odnoklassniki" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_whatsapp" href="https://www.addtoany.com/add_to/whatsapp?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="WhatsApp" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_telegram" href="https://www.addtoany.com/add_to/telegram?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="Telegram" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_viber" href="https://www.addtoany.com/add_to/viber?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="Viber" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_twitter" href="https://www.addtoany.com/add_to/twitter?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="Twitter" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_facebook_messenger" href="https://www.addtoany.com/add_to/facebook_messenger?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="Messenger" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_email" href="https://www.addtoany.com/add_to/email?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="Email" rel="nofollow noopener" target="_blank"></a><a class="a2a_button_copy_link" href="https://www.addtoany.com/add_to/copy_link?linkurl=https%3A%2F%2Fzanimaem.kz%2Fpolitika-konfidencialnosti%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%D0%97%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D0%B5%D0%BC.kz" title="Copy Link" rel="nofollow noopener" target="_blank"></a></div></div></div></aside>		</div>
+	</main>
+	<!-- / MAIN END -->
+
+	<!-- theme_hook_content_after --><!-- theme_hook_content_after -->
+	<!-- FOOTER -->
+	<footer class="clear">
+		<div class="container clear">
+							<div class="wrap-logo">
+					<a href="https://zanimaem.kz" class="logo">
+																<div class="footer-logo-image"></div>
+
+										<style type="text/css"></style>
+														</a>
+
+											<div class="copyright">
+							© 2016-2023 "Занимаем.kz"								</div>
+														</div><!-- /logo -->
+			<div class="wrap-text">
+								
+						<div class="copyright">
+							<br>Телефон редакции: <p><span style="color:#ffffff">+7 727 310 2612</span></p>
+							<br>Почта: <p><span style="color:#ffffff">info@zanimaem.kz</span></p>
+							<br>Адрес: <p><span style="color:#ffffff">050059, Алматы пр. Аль-Фараби 7/4a</span></p>
+							<br>Юридическая информация: <p><span style="color:#ffffff">сайт управляется ИП Яковлев К.А.</span></p>
+															</div>
+										
+				</div><!-- /logo -->
+			
+			
+			<div class="links">
+				<nav class="menu">
+					<ul id="menu-menyu-v-podvale" class="clear"><li id="menu-item-6515" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6515"><a href="https://zanimaem.kz/o-nas/">О нас</a></li>
+<li id="menu-item-662" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-662"><a href="https://zanimaem.kz/kontakty/">Написать нам</a></li>
+<li id="menu-item-552" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-552"><a href="https://zanimaem.kz/pravila-polzovaniya-sajjtom/">Правила пользования сайтом</a></li>
+<li id="menu-item-5746" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-5741 current_page_item menu-item-5746"><a href="https://zanimaem.kz/politika-konfidencialnosti/" aria-current="page">Политика конфиденциальности</a></li>
+<li id="menu-item-922" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-922"><a href="https://zanimaem.kz/map/">Карта сайта</a></li>
+<li id="menu-item-3353" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3353"><a href="https://zanimaem.kz/news/">Акции</a></li>
+<li id="menu-item-6333" class="menu-item menu-item-type-taxonomy menu-item-object-business-type menu-item-6333"><a href="https://zanimaem.kz/business-type/kredity/">Кредиты</a></li>
+<li id="menu-item-1148" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1148"><a href="https://zanimaem.kz/articles/">Статьи</a></li>
+<li id="menu-item-6315" class="menu-item menu-item-type-taxonomy menu-item-object-business-type menu-item-6315"><a href="https://zanimaem.kz/business-type/mikrokredity/">Микрокредиты</a></li>
+<li id="menu-item-6253" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6253"><a href="https://zanimaem.kz/kreditnyjj-kalkulyator/">Кредитный калькулятор</a></li>
+</ul>				</nav>
+
+									<div class="counters">
+						<script type="rocketlazyloadscript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84099930-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- Facebook Pixel Code -->
+<script type="rocketlazyloadscript">
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '142400054604711');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=142400054604711&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+<!--LiveInternet counter--><a href="https://www.liveinternet.ru/click" target="_blank"><img id="licntE8FA" style="border:0" title="LiveInternet" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2031%2031'%3E%3C/svg%3E" alt="" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7" width="31" height="31"><noscript><img id="licntE8FA" width="31" height="31" style="border:0" 
+title="LiveInternet"
+src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+alt=""/></noscript></a><script type="rocketlazyloadscript">(function(d,s){d.getElementById("licntE8FA").src=
+"https://counter.yadro.ru/hit?t44.6;r"+escape(d.referrer)+
+((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+(s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+";h"+escape(d.title.substring(0,150))+";"+Math.random()})
+(document,screen)</script><!--/LiveInternet-->
+<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter38302050 = new Ya.Metrika({
+                    id:38302050,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/38302050" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- ZERO.kz -->
+<span id="_zero_67205">
+  <noscript>
+    <a href="http://zero.kz/?s=67205" target="_blank">
+      <img src="https://c.zero.kz/z.png?u=67205" width="88" height="31" alt="ZERO.kz" />
+    </a>
+  </noscript>
+</span>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript"><!--
+  var _zero_kz_ = _zero_kz_ || [];
+  _zero_kz_.push(["id", 67205]);
+  // Цвет кнопки
+  _zero_kz_.push(["type", 1]);
+  // Проверять url каждые 200 мс, при изменении перегружать код счётчика
+  // _zero_kz_.push(["url_watcher", 200]);
+
+  (function () {
+    var a = document.getElementsByTagName("script")[0],
+    s = document.createElement("script");
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https:" : "http:")
+    + "//c.zero.kz/z.js";
+    a.parentNode.insertBefore(s, a);
+  })(); //-->
+</script>
+<!-- End ZERO.kz -->
+<!-- Rating Mail.ru counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+var _tmr = window._tmr || (window._tmr = []);
+_tmr.push({id: "3235710", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = "https://top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "topmailru-code");
+</script><noscript><div>
+<img src="https://top-fwz1.mail.ru/counter?id=3235710;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
+</div></noscript>
+<!-- //Rating Mail.ru counter -->
+
+							<a href="https://www.instagram.com/zanimaemkz/"><img class="size-medium wp-image-7559 alignnone" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3C/svg%3E" alt="Zanimaem instagram icon" data-lazy-src="https://zanimaem.kz/assets/uploads/2019/11/iconmonstr-instagram-11-64-1.png" width="32" height="32"><noscript><img class="size-medium wp-image-7559 alignnone" src="https://zanimaem.kz/assets/uploads/2019/11/iconmonstr-instagram-11-64-1.png" alt="Zanimaem instagram icon" width="32" height="32" /></noscript></a>
+				<a href="https://www.facebook.com/zanimaemkz/"><img class="size-full wp-image-7557 alignnone" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3C/svg%3E" alt="Zanimaem facebook icon" data-lazy-src="https://zanimaem.kz/assets/uploads/2019/11/iconmonstr-facebook-5-64-1.png" width="32" height="32"><noscript><img class="size-full wp-image-7557 alignnone" src="https://zanimaem.kz/assets/uploads/2019/11/iconmonstr-facebook-5-64-1.png" alt="Zanimaem facebook icon" width="32" height="32" /></noscript></a>
+				<a href="https://www.pinterest.ru/zanimaem/"><img class="size-full wp-image-7560 alignnone" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3C/svg%3E" alt="Zanimaem Pinterest icon" data-lazy-src="https://zanimaem.kz/assets/uploads/2019/11/iconmonstr-pinterest-1-64-1.png" width="32" height="32"><noscript><img class="size-full wp-image-7560 alignnone" src="https://zanimaem.kz/assets/uploads/2019/11/iconmonstr-pinterest-1-64-1.png" alt="Zanimaem Pinterest icon" width="32" height="32" /></noscript></a>
+				
+						<a href="https://t.me/zanimaem"><img class="size-full wp-image-7560 alignnone" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3C/svg%3E" alt="Zanimaem TG icon" data-lazy-src="https://zanimaem.kz/assets/uploads/2020/11/telegram-1.png" width="32" height="32"><noscript><img class="size-full wp-image-7560 alignnone" src="https://zanimaem.kz/assets/uploads/2020/11/telegram-1.png" alt="Zanimaem TG icon" width="32" height="32" /></noscript></a>
+						<a href="https://zen.yandex.ru/id/5af72dc58c8be3edc9fe72e5"><img class="size-full wp-image-7560 alignnone" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3C/svg%3E" alt="Zanimaem ZEN icon" data-lazy-src="https://zanimaem.kz/assets/uploads/2021/06/zen_icon.png" width="32" height="32"><noscript><img class="size-full wp-image-7560 alignnone" src="https://zanimaem.kz/assets/uploads/2021/06/zen_icon.png" alt="Zanimaem ZEN icon" width="32" height="32" /></noscript></a>
+						<a href="https://twitter.com/zanimaemKZ"><img class="size-full wp-image-7560 alignnone" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3C/svg%3E" alt="Zanimaem Twitter icon" data-lazy-src="https://zanimaem.kz/assets/uploads/2022/08/twitter32.png" width="32" height="32"><noscript><img class="size-full wp-image-7560 alignnone" src="https://zanimaem.kz/assets/uploads/2022/08/twitter32.png" alt="Zanimaem Twitter icon" width="32" height="32" /></noscript></a>
+						
+						
+				<a href="//www.dmca.com/Protection/Status.aspx?ID=6409a056-5f35-4f91-bdef-d0bae9bd16bc" title="DMCA.com Protection Status" class="dmca-badge"> <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20121%2024'%3E%3C/svg%3E" alt="DMCA.com Protection Status" data-lazy-src="https://images.dmca.com/Badges/dmca-badge-w100-5x1-01.png?ID=6409a056-5f35-4f91-bdef-d0bae9bd16bc" width="121" height="24"><noscript><img src ="https://images.dmca.com/Badges/dmca-badge-w100-5x1-01.png?ID=6409a056-5f35-4f91-bdef-d0bae9bd16bc" width="121" height="24"  alt="DMCA.com Protection Status" /></noscript></a>  <script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://zanimaem.kz/assets/cache/min/1/Badges/DMCABadgeHelper.min.js?ver=1673629005" defer=""> </script>		
+				<a href="https://appgallery.cloud.huawei.com/ag/n/app/C104839491?channelId=%D0%A1%D0%B0%D0%B9%D1%82&amp;referrer=appgallery&amp;id=468ec5c829f44651b31317c570c1637f&amp;s=EDD5BB1BC5980B679B4A0B6C85DC20AD7F4940D6E4233C2753E169DCD76C5CEC&amp;detailType=0&amp;v=" title="AppGallery"> <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20106%2032'%3E%3C/svg%3E" alt="AppGallery" data-lazy-src="https://zanimaem.kz/assets/uploads/2021/10/appgalery.png" width="106" height="32"><noscript><img width="106" height="32" src ="https://zanimaem.kz/assets/uploads/2021/10/appgalery.png"  alt="AppGallery" /></noscript></a>
+				<a href="https://play.google.com/store/apps/details?id=com.mobincube.zanimaemkz.sc_5B13BK" title="Zanimaem Google Play icon"> <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20103%2032'%3E%3C/svg%3E" alt="Zanimaem Google Play icon" data-lazy-src="https://zanimaem.kz/assets/uploads/2021/10/googleplay.png" width="103" height="32"><noscript><img width="103" height="32" src ="https://zanimaem.kz/assets/uploads/2021/10/googleplay.png"  alt="Zanimaem Google Play icon" /></noscript></a></div>
+				<span style="color: #748596;">Занимаем.kz является финансовым изданием и не выдаёт кредиты.
+				Некоторые ссылки на сайте, являются партнерскими. Это означает, что мы можем заработать комиссию если вы перейдете по ссылке и оформите кредит. Условия оформления для вас, при этом не меняются. Используя такие ссылки, вы помогаете поддерживать и развивать сайт Zanimaem.kz, и мы искренне ценим вашу поддержку. При использовании материалов, ссылка на источник обязательна. </span>
+											</div><!-- /links -->
+		
+		</div>
+	</footer>
+	<!-- / FOOTER END -->
+
+	<!-- theme_hook_bottom --><!-- theme_hook_bottom -->
+	<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/cache/min/1/assets/plugins/contact-form-7/includes/swv/js/index.js?ver=1673629005" id="swv-js" defer=""></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/zanimaem.kz\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/cache/min/1/assets/plugins/contact-form-7/includes/js/index.js?ver=1673629005" id="contact-form-7-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index\\.php\/)?(.*)wp\\-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/zanimaem.kz","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://zanimaem.kz/assets/themes/zanimayem/framework/assets/js/html5.js?ver=1.1' id='xkit-prefix-html5shiv-js'></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://zanimaem.kz/assets/themes/zanimayem/framework/assets/js/css3-mediaqueries.js?ver=1.1' id='xkit-prefix-css3-mediaqueries-js'></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://zanimaem.kz/assets/themes/zanimayem/framework/assets/js/selectivizr-min.js?ver=1.1' id='xkit-prefix-selectivizr-js'></script>
+<![endif]-->
+<script type="text/javascript" id="xkit-prefix-scripts-vendors-js-extra">
+/* <![CDATA[ */
+var init_localize_object = {"ajaxurl":"https:\/\/zanimaem.kz\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/cache/min/1/assets/themes/zanimayem/framework/assets/js/scripts-vendors.js?ver=1673629005" id="xkit-prefix-scripts-vendors-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/cache/min/1/assets/themes/zanimayem/framework/modules/social-share/assets/js/social-share.js?ver=1673629005" id="xkit-prefix-social-share-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/themes/zanimayem/framework/assets/js/jquery.magnific-popup.min.js?ver=1.1" id="magnific-popup-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/themes/zanimayem/framework/assets/js/jquery.select2.min.js?ver=1.1" id="select2-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/themes/zanimayem/framework/assets/js/jquery.easing-1.3.min.js?ver=1.1" id="easing-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/themes/zanimayem/framework/assets/js/jquery.validate.min.js?ver=1.1" id="validate-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/cache/min/1/assets/themes/zanimayem/framework/assets/js/admin-custom-script.js?ver=1673629005" id="admin-custom-script-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/themes/zanimayem/framework/assets/js/jquery.validate.messages_ru.min.js?ver=1.1" id="zanimayem-validate-messages_ru-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://zanimaem.kz/assets/cache/min/1/assets/themes/zanimayem/js/init.js?ver=1673629005" id="zanimayem-init-js" defer=""></script>
+<!--noptimize--><script type="rocketlazyloadscript">!function(){window.advanced_ads_ready_queue=window.advanced_ads_ready_queue||[],advanced_ads_ready_queue.push=window.advanced_ads_ready;for(var d=0,a=advanced_ads_ready_queue.length;d<a;d++)advanced_ads_ready(advanced_ads_ready_queue[d])}();</script><!--/noptimize--><script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://zanimaem.kz/assets/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>
+
+</body></html>

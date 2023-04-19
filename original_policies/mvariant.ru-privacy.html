@@ -1,0 +1,554 @@
+<html><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+		<!-- Начало шаблона метаданных -->
+<title>Политика конфиденциальности сервиса «Мой вариант»</title>
+<meta name="KeyWords" content="политика конфиденциальности сервис мой вариант">
+<meta name="Description" content="Политика конфиденциальности сервиса «Мой вариант»">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
+<script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript" src="/js/jquery_1.11.3_jquery.min.js"></script>
+<!--script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script-->
+<!--meta name="viewport" content="width=device-width,initial-scale=1"-->
+
+  
+
+<script>
+ //alert(screen.width);
+
+	if(screen.width > 800 )
+		$("head").append('<meta name="viewport" content="width=1024">');
+	if(screen.width > 620 && screen.width <= 800)
+		$("head").append('<meta name="viewport" content="width=800">');
+		if($(window).width() > 480 && $(window).width() <= 620)
+			$("head").append('<meta name="viewport" content="width=620">');
+	
+		if($(window).width() <= 480 )
+	 		$("head").append('<meta name="viewport" content="width=390">');
+	
+	
+</script><meta name="viewport" content="width=1024">
+
+<link href="/css/common.css?v=73" rel="stylesheet" type="text/css">
+<link href="/css/inner.css?v=66" rel="stylesheet" type="text/css">
+<link href="/css/catalog.css?v=69" rel="stylesheet" type="text/css">
+
+
+
+<!--link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:400,700|Open+Sans:300,400,400i,600,700,800&amp;subset=cyrillic-ext" rel="stylesheet"-->
+
+<!--link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:300,400,400i,600,700,800&amp;subset=cyrillic-ext" rel="stylesheet"-->
+<link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&amp;subset=cyrillic-ext" rel="stylesheet">
+
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+<!--script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script-->
+<!--script type="text/javascript" src="/scripts/jquery-1.9.0.js"></script-->
+<!--script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script--> 
+
+<script>
+$(document).ready(function(){
+	$('.selectpicker').selectpicker({});
+});
+</script>
+
+<link rel="stylesheet" href="/js/bootstrap-select/bootstrap1.css">
+<link rel="stylesheet" href="/js/bootstrap-select/css/bootstrap-select.css">
+<!-- Конец шаблона метаданных -->
+
+    </head>
+    <body>
+		<div id="container">
+			
+<section class="header">	
+		<div class="container">		
+		
+		<div class="logo">
+		  <a class="desctop" href="//mvariant.ru/"><img src="/images/logo.png"></a>	
+		  <a class="mobile" href="//mvariant.ru/"><img src="/images/logo_crm_1.png"></a>
+		</div>
+				
+		<div id="mobileMenu">
+		
+			<div class="menu_line">	
+				<div class="left">
+					<a href="/agentstvam/">Агентствам</a>
+					<a href="/obmen-kvartir-bez-posrednikov/">Частным лицам</a>
+					<a href="/tarifs/">Тарифы</a>
+					<a href="/info/">Статьи</a>
+					<!--a href="/news/">Новости</a-->
+				</div>
+				<div class="right">			
+					<div class="region">
+						<div id="region_setted" class=""> <span id="header_region_name"><span id="region_found_no1">Выбрать регион</span></span> </div>	
+						<div class="region_caption" id="region_found" style="display: block; opacity: 0.494764;">
+							<div class="close"></div>
+							
+							Где вы находитесь? 
+							
+							<div class="set_region"><span class="button red" style="width:180px;" id="region_found_no">Выбрать регион</span></div>
+							
+						</div>
+						
+						<!--script type="text/javascript" src="/js/jquery.cookie.js"></script-->
+
+						<script>
+							$("#region_found").fadeIn(300);
+						
+							$("#region_found .close").click(function(){
+								$("#region_found").fadeOut(300);
+							});		
+							
+							$("#region_found_yes").click(function(){			
+								var region = $("#region_found_name").html();
+								$("#region_setted").html(region);
+								$("#region_setted").addClass("setted");
+								$("#region_found").fadeOut(300);
+								// проверить, есть ли база в выбранном регионе
+								$.ajax({
+									type: "POST",
+									url: "/index.php?mod=regions&act=set_region_form&set=1",
+									beforeSend: function( xhr ) { $("#preloader").show(); },
+									success: function(data){
+										// alert(data);
+										// если есть база перезагружаем страницу 
+										if(data.indexOf(" - YES - ") != -1) location.reload();
+										$("#preloader").hide();
+									},
+									error: function(jqXHR, textStatus){
+										
+									}
+								});
+							});
+							
+							// другой регион
+							$("#region_found_no, #region_found_no1").click(function(){
+								
+								// вывести форму выбора региона
+								$.ajax({
+									type: "POST",
+									url: "/index.php?mod=regions&act=set_region_form&set=1",
+									beforeSend: function( xhr ) { $("#preloader").show(); },
+									success: function(data){
+										//alert(data);
+										
+										$("body").append(data);
+										$("#preloader").hide();
+									},
+									error: function(jqXHR, textStatus){
+										
+									}
+								});			
+							});		
+						</script>
+							
+					</div>
+				
+		<div id="logon">
+			<span class="reg_btn" onclick="register_form();">Регистрация</span>
+			<span class="log_btn" onclick="login_form();">Вход</span>
+		</div>
+		
+	
+		<script>
+			$("#exitButton").click(function(){
+				//alert("click");
+				$.ajax({
+					url: "/index.php?exit_=1",
+					beforeSend: function( xhr ) { $("#preloader").show(); },
+					success: function(data){
+					//alert(data);
+						window.location = "/";
+					},
+					complete: function(){ }
+				}); 
+			});
+		</script>
+	
+
+				</div>		
+			</div>
+			
+		
+<!-- Начало шаблона верхнего меню -->
+<div class="menu">           
+	<ul>	
+		<li class="sub" id="catalogMenu">
+			<a href="/nedvigimost/">База объектов</a>
+			<div class="submenu">
+				<div><a href="/nedvigimost/v-yaroslavle/">Ярославль</a><a href="/nedvigimost/v-primorskom-krae/">Приморский край</a><a href="/nedvigimost/v-yaroslavskoy-oblasti/">Ярославская область</a><a href="/nedvigimost/vo-vladivostoke/">Владивосток</a><a href="/nedvigimost/v-tutaeve/">Тутаев</a><a href="/nedvigimost/v-ryibinske/">Рыбинск</a><a href="/nedvigimost/v-rostove-velikom/">Ростов</a><a href="/nedvigimost/v-gorode-buy/">Буй</a><a href="/nedvigimost/v-galiche/">Галич</a><a href="/nedvigimost/v-volgorechenske/">Волгореченск</a>
+				</div>
+			</div>
+			
+		</li>
+		<li><a href="/nedvigimost/obmen/">Обмен</a></li>		
+		<li><a href="/nedvigimost/arenda/">Аренда</a></li>		
+		<li><a href="/nedvigimost/commerce/">Коммерческая</a></li>		
+    </ul>
+</div>
+<!-- Конец шаблона верхнего меню -->
+
+
+		<div class="nav_close"><span></span><span></span></div>			
+	</div>
+	
+	<div class="mob_open">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	
+    <div class="auth_info">
+		<div class="alerts">
+			<!--a href="/nedvigimost/?filter=1&star_objects=1" class="stars">0</a-->
+		</div><a href="/registration/?type=new" class="button reg red"><span></span>Подать объявление</a>
+    </div>
+	
+	<!--script>
+		alert("header");
+		//alert($.cookie('home_region'));
+		if($.cookie('home_region') == undefined) alert($.cookie('home_region'));
+	</script-->		
+	
+<script>
+// другой регион
+		$("#region_setted").click(function(){
+			
+			// вывести форму выбора региона
+			$.ajax({
+				type: "POST",
+				url: "/index.php?mod=regions&act=set_region_form&set=1",
+				beforeSend: function( xhr ) { $("#preloader").show(); },
+				success: function(data){
+				//	alert(data);
+					
+					$("body").append(data);
+					$("#preloader").hide();
+				},
+				error: function(jqXHR, textStatus){
+					
+				}
+			});
+			
+		});
+</script>
+</div></section>	
+	
+			<div class="nav_chain"><div class="container"><a href="/">Главная</a><span>Политика конфиденциальности сервиса «Мой вариант»</span>
+</div></div>		
+			<div class="module_mobile">	
+				
+				
+<section class="content_page"><div class="container">
+		<h1>Политика конфиденциальности сервиса «Мой вариант»</h1>
+		
+		<h2>
+	ОБЩИЕ ПОЛОЖЕНИЯ</h2>
+<p>
+	Настоящая Политика Конфиденциальности регулирует сбор, обработку, хранение и использование Вашей информации, позволяющей Вас идентифицировать, и иных персональных данных, необходимых для использования и/или относящихся к использованию Вами Сервиса «Мой вариант», доступного посредством домена и вебсайта mvariant.ru, который предоставляется и управляется компанией ООО «Инет-Трейд», ОГРН 1077606006642 выдан 17.12.2007 г., серия 76 № 002372862, зарегистрированной в Российской Федерации по адресу: 150003, г. Ярославль, ул. Республиканская, д.3, корп.1, офис 401 (далее "Оператор").</p>
+<p>
+	Настоящая Политика Конфиденциальности вступает в силу с момента подтверждения принятия Вами условий настоящей Политики путем отметки пункта «Я ознакомлен, согласен и принимаю условия Политики Конфиденциальности». Пожалуйста, прочтите настоящую Политику Конфиденциальности и ознакомьтесь с ней, прежде чем предоставлять какие-либо персональные данные посредством Сервиса или с его помощью. Предоставляя какие-либо персональные данные посредством Сервиса или с его помощью, или иным образом осуществляя доступ к или использование Сервиса, Вы подтверждаете, что Вы прочли Политику Конфиденциальности и принимаете все её условия.</p>
+<p>
+	В настоящую Политику Конфиденциальности могут вноситься изменения; пожалуйста, ознакомьтесь с Политикой Конфиденциальности каждый раз, когда Вы осуществляете доступ к или использование Сервиса. Если Вы предоставляете какие-либо персональные данные на Сервисе или с его помощью, или иным образом осуществляете доступ к или использование Сервиса, будет считаться, что Вы приняли самую новую версию настоящей Политики Конфиденциальности. Если Вы не согласны с условиями сбора, обработки, хранения и использования информации, позволяющей Вас идентифицировать и иных персональных данных, установленными настоящей Политикой Конфиденциальности, Вы не вправе предоставлять какие-либо персональные данные посредством Сервиса или с его помощью, или иным образом осуществлять доступ к или использование Сервиса.</p>
+<p>
+	Персональные данные Пользователя обрабатываются в соответствии с Федеральным законом от 27.07.2006 Э 152-ФЗ «О персональных данных».</p>
+<p>
+	Принимая условия настоящей Политики Конфиденциальности, Вы подтверждаете принятие Вами решения о предоставлении своих персональных данных и даете согласие на их обработку своей волей и в своем интересе, за исключением случаев, предусмотренных частью 2 статьи 9 Федерального закона от 27.07.2006 Э 152-ФЗ «О персональных данных».</p>
+<h2>
+	СОБИРАЕМАЯ И ОБРАБАТЫВАЕМАЯ ИНФОРМАЦИЯ</h2>
+<p>
+	В определённых случаях использования Сервиса, перечисленных ниже, Сервис может запросить у Вас предоставление информации о Вас, которая позволяет Вас идентифицировать (Ваши "Персональные Данные"). Персональные Данные могут включать в себя следующие данные:</p>
+<ul>
+	<li>
+		Ваш действительный адрес электронной почты;</li>
+	<li>
+		номер мобильного телефона;</li>
+	<li>
+		иную информацию, позволяющую идентифицировать Вас как физическое лицо, которая может потребоваться Оператору и запрашиваться Оператором время от времени посредством Сервиса.</li>
+</ul>
+<p>
+	Вы соглашаетесь, что Оператор может собирать Ваши Персональные Данные в определённых случаях, таких как следующие случаи, но не ограничиваясь ими:</p>
+<ul>
+	<li>
+		когда Вы регистрируете учётную запись (Личный кабинет) в Сервисе;</li>
+	<li>
+		когда Вы осуществляете использование Сервиса в соответствии с соответствующим Вашей категории пользователей Договором-Офертой или Договором (если применимо);</li>
+	<li>
+		когда Вы заказываете посредством Сервиса Работы или Услуги;</li>
+	<li>
+		когда Вы связываетесь с Оператором посредством электронной почты либо Личного Кабинета; либо</li>
+	<li>
+		когда Вы иным образом используете функциональность Сервиса.</li>
+</ul>
+<p>
+	Вы соглашаетесь, что предоставляемые Вами посредством Сервиса Персональные Данные должны быть и будут являться соответствующими действительности, точными и полными.</p>
+<h2>
+	ПРИНЦИПЫ ОБРАБОТКИ</h2>
+<p>
+	Оператор осуществляет сбор, обработку, хранение и использование Ваших Персональных Данных в соответствии со следующими общими принципами:</p>
+<ul>
+	<li>
+		Ваши Персональные Данные всегда получаются или будут получаться исключительно от Вас, а не от какого-либо третьего лица;</li>
+	<li>
+		Ваши Персональные Данные всегда собираются, обрабатываются, хранятся и используются на законных основаниях и в полном соответствии с действующим законодательством РФ;</li>
+	<li>
+		Ваши Персональные Данные собираются, обрабатываются, хранятся и используются только в соответствии с целями обработки Персональных Данных, установленными настоящей Политикой Конфиденциальности и Вашими явно выраженными согласиями, предоставляемыми Вами в соответствии с настоящей Политикой Конфиденциальности;</li>
+	<li>
+		с Вашими Персональными Данными обращаются с соблюдением конфиденциальности и Ваши Персональные Данные обрабатываются, если и в случаях, когда это применимо, только лицами, работающими с Персональными Данными, которые заключили договоры о неразглашении, или с помощью таких лиц;</li>
+	<li>
+		Ваши Персональные Данные не будут раскрываться какому-либо третьему лицу без Вашего явно выраженного согласия на такое раскрытие, за исключением случаев, когда такое раскрытие требуется государственными органами, такими как суды или правоохранительные органы РФ;</li>
+	<li>
+		Ваши Персональные Данные собираются, обрабатываются, хранятся и используются только в течение периода, установленного настоящей Политикой Конфиденциальности;</li>
+	<li>
+		объём собираемых Персональных Данных не превышает и не будет превышать объём целей, для которых Персональные Данные собираются, обрабатываются, хранятся и используются в соответствии с настоящей Политикой Конфиденциальности; и</li>
+	<li>
+		Ваши Персональные Данные могут быть изменены или удалены в любой момент времени по Вашему запросу в соответствии с настоящей Политикой Конфиденциальности.</li>
+</ul>
+<h2>
+	ЦЕЛИ ОБРАБОТКИ</h2>
+<p>
+	Оператор собирает, обрабатывает, хранит и используют Ваши Персональные Данные исключительно для следующих целей:</p>
+<ul>
+	<li>
+		регистрации Вас в качестве пользователя Сервиса соответствующей категории;</li>
+	<li>
+		предоставления Вам функциональности Сервиса в соответствии с выбранной Вами категорией пользователей Сервиса;</li>
+	<li>
+		направления Вам промо- и рекламных материалов, и направления Вам иной информации, получение которой Вы запросили или с получением которой Вы согласились посредством Сервиса;</li>
+	<li>
+		проведения опросов пользователей Сервиса с добровольным участием, необходимых для улучшения и оптимизации взаимодействия с Сервисом, его функциональностью и службами;</li>
+	<li>
+		проведения статистических исследований, основанных на предоставленных Вами Персональных Данных и с использованием информации, полученной из опросов пользователей, пройденных Вами, для целей улучшения и оптимизации Вашего взаимодействия с Сервисом, его функциональностью и службами;</li>
+	<li>
+		направления Вам уведомлений, относящихся к Сервису и использования Вами Сервиса;</li>
+	<li>
+		таргетирования рекламных материалов.</li>
+</ul>
+<h2>
+	РЕКЛАМА И ОПРОСЫ</h2>
+<p>
+	Оператор или сторонние рекламодатели могут использовать Ваш адрес электронной почты для направления Вам уведомлений и иных информационных и промоматериалов и сообщений о новой функциональности и новых службах, доступных посредством Сервиса, или иных услугах или функциональности, и Сервис может отображать интерактивную рекламу. Настоящим Вы предоставляете Оператору Ваше явно выраженное согласие на получение таких информационных и рекламных материалов и сообщений. Ваш адрес электронной почты не будет использоваться для направления Вам нежелательных рекламных сообщений ("спам").</p>
+<h2>
+	УСЛОВИЯ ПЕРЕДАЧИ ПЕРСОНАЛЬНЫХ ДАННЫХ ТРЕТЬИМ ЛИЦАМ</h2>
+<p>
+	Оператор оставляет за собой право раскрыть Ваши Персональные Данные третьим лицам в случае наступления следующих особых обстоятельств:</p>
+<ul>
+	<li>
+		если такое раскрытие Ваших Персональных Данных требуется для целей выполнения Оператором его обязанностей в соответствии с применимым правом;</li>
+	<li>
+		если такое раскрытие необходимо в рамках использования определенного функционала Сервиса либо оказания услуги;</li>
+	<li>
+		если такое раскрытие Ваших Персональных Данных требуется в соответствии с государственными или юридическими запросами информации;</li>
+	<li>
+		если такое раскрытие Ваших Персональных Данных требуется для целей реагирования на чрезвычайную ситуацию;</li>
+	<li>
+		если такое раскрытие Ваших Персональных Данных требуется иным образом для целей защиты прав, собственности или безопасности третьих лиц.</li>
+</ul>
+<h2>
+	БЕЗОПАСНОСТЬ ДАННЫХ</h2>
+<p>
+	Оператор предпринимает необходимые и достаточные технические, организационные и административные меры для обеспечения защиты и охраны Ваших Персональных Данных от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.</p>
+<p>
+	Помните, что Вы контролируете те данные, которые сообщаете нам при использовании Сервиса. В конечном счете, Вы несете ответственность за сохранение в тайне Вашей личности, паролей и/или любой другой личной информации, находящейся в Вашем распоряжении в процессе пользования Сервиса. Будьте осторожны и ответственны в отношении Вашей личной информации. Мы не несем ответственности за использование и не можем контролировать использование другими лицами любой информации, которую Вы предоставляете им, и Вы должны соблюдать осторожность в выборе личной информации, которую Вы передаете третьим лицам через Сервис.</p>
+<h2>
+	ПОЛИТИКА В ОТНОШЕНИИ COOKIE-ФАЙЛОВ</h2>
+<p>
+	Технологии, используемые в связи с Сервисом, могут включать в себя cookie–файлы. "Сookie-файл" представляет собой небольшой файл данных, который может быть отправлен и размещён в памяти Вашего компьютера или мобильного устройства, в зависимости от того, что применимо. Оператор может использовать cookie–файлы для сбора, хранения, отслеживания информации для статистических целей, а также для целей хранения предпочтений пользователей, записи информации о сессиях использования Сервиса для целей дальнейшего улучшения функциональности Сервиса, чтобы предоставлять Вам релевантные данные и услуги. Вы можете изменить настройки приема файлов Cookies в настройках своего браузера или отключить их полностью, однако в таком случае некоторые функции Сервиса могут работать некорректно.</p>
+<p>
+	Сервис может содержать гиперссылки на иные веб-сайты или другие Интернет-ресурсы, которые не управляются Оператором. Вы самостоятельно отвечаете за ознакомление с политиками конфиденциальности таких веб-сайтов и иных Интернет-ресурсов. Настоящая Политика Конфиденциальности применяется только к Сервису.</p>
+<p>
+	Рекламодатели и иные третьи лица также могут использовать собственные cookie–файлы. Оператор не контролирует использование таких сторонних cookie–файлов.</p>
+<h2>
+	ИЗМЕНЕНИЕ ИЛИ УДАЛЕНИЕ ПЕРСОНАЛЬНЫХ ДАННЫХ</h2>
+<p>
+	Вы можете в любой момент изменить (обновить, дополнить) либо удалить предоставленные Вами персональные данные или их часть, воспользовавшись функцией редактирования персональных данных в учетной записи в Сервисе (Личный кабинет) или направив соответствующее обращение Оператору посредством электронной почты по адресу: info@mvariant.ru.</p>
+<p>
+	Персональные данные хранятся Оператором не дольше, чем этого требуют цели обработки персональных данных, если отсутствуют законные основания для дальнейшей обработки, например, если федеральным законом или Договором (Договором-Офертой) не установлен соответствующий срок хранения персональных данных.</p>
+<p>
+	Вы можете удалить предоставленную Вами в рамках своей учетной записи информацию, направив соответствующее обращение Оператору посредством электронной почты по адресу: info@mvariant.ru. Удаление учетной записи приведет к невозможности использования некоторых услуг Сервиса.</p>
+<h2>
+	СМЕНА ВЛАДЕНИЯ</h2>
+<p>
+	Будет считаться, что Вы выразили своё согласие на раскрытие и использование последующим владельцем или оператором Сервиса любой информации о Вас, включая Ваши Персональные Данные, предоставленные Оператору в соответствии с настоящей Политикой Конфиденциальности, в случае, если Оператор уступит свои права в отношении такой информации в связи со слиянием, поглощением или продажей некоторых или всех активов Оператора, или активов, относящихся к Сервису, последующему владельцу или оператору. В таком случае, продолжение использования Вами Сервиса будет означать Ваше согласие с Политикой Конфиденциальности последующего владельца или оператора Сервиса.</p>
+<h2>
+	КОНТАКТНАЯ ИНФОРМАЦИЯ</h2>
+<p>
+	Если у Вас есть какие-либо комментарии или вопросы относительно настоящей Политики Конфиденциальности, пожалуйста, свяжитесь с Оператором, используя следующую контактную информацию: info@mvariant.ru</p>
+
+<br>
+	<br>
+	<br>
+	<br>
+	<br>
+</div></section>
+
+			</div> 		
+						
+			
+    <!-- Начало шаблона футера -->
+<footer><div class="container">	
+	<a id="topButton" href="#" style="display: none;"></a>
+	
+	<!--Подключение плагина inputmask -->
+	<script src="/js/inputmask.js" type="text/javascript"></script>  
+	<script src="/js/jquery.inputmask.js" type="text/javascript"></script> 
+
+	<!--Подключение плагина для селектов -->
+	<script src="/js/bootstrap-select/bootstrap.js"></script>
+	<script src="/js/bootstrap-select/js/bootstrap-select.js"></script>
+	<script src="/js/bootstrap-select/js/i18n/defaults-ru_RU.js"></script>
+
+	<script type="text/javascript" src="/js/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox.css?v=2.1.5" media="screen">
+	
+	<script type="text/javascript" src="/js/obmen/main.js"></script>
+	<script type="text/javascript" src="/scripts/jquery.form.js"></script>
+	<script type="text/javascript" src="/js/obmen/common_func.js"></script>
+	<script type="text/javascript" src="/js/obmen/validation.js"></script>
+	
+	<script>
+	
+		$("a.modal_img").fancybox({
+			'padding': 0,
+			'autoScale': false,
+			'transitionIn': 'none',
+			'transitionOut': 'none',
+			'title': this.title,
+			'href': this.href
+		});
+		
+		
+		$('[data-fancybox=videos]').fancybox({
+			youtube : {
+				controls : 1,
+				showinfo : 0
+			},
+			vimeo : {
+				color : 'f00'
+			}
+		});
+			
+		function screenHeight(){
+			return $.browser.opera? window.innerHeight : $(window).height();
+		}
+		
+		function screenWidth(){
+			return $.browser.opera? window.innerWidth : $(window).width();
+		}
+		
+		$("#topButton").hide();
+		$(window).scroll(function(){
+			if($(window).scrollTop() > 300) { 
+				$("#topButton").show();
+				$(".nav_mobile").show();
+				
+			
+			} else {
+				$("#topButton").hide();
+				$(".nav_mobile").hide();
+				
+			}			
+			if($(window).scrollTop() > 100 && $(window).width() >= 1000) { 
+				$("section.header").addClass("scroll");			
+			} else {
+				$("section.header").removeClass("scroll");
+			}					
+			
+		});
+		$("#topButton").click(function(){
+			//alert("top");
+			$("body").animate({scrollTop:0}, '1000');
+			$("html").animate({scrollTop:0}, '1000');
+			return false;
+		});	
+		
+		$(".nav_mobile").click(function(){
+			if($(".top_mobile").hasClass("show")) {
+				$(".top_mobile").removeClass("show");
+				$(".module_mobile").css("padding-top", "0px");
+			} else {
+				$(".top_mobile").addClass("show");
+				$(".module_mobile").css("padding-top", $(".top_mobile").height()+"px");
+			}
+		});
+	</script>
+
+
+
+	<div class="left">
+			<div class="logo_bottom"><a href="/"><img src="/images/logo_bottom.png"></a></div>
+			<div class="bottom_contacts">
+				<noindex><div class="phone">+7 (4852) 58-17-58</div><br>
+				<div class="adress">г. Ярославль, ул. Республиканская, д. 3</div></noindex>
+				<div class="mail"><a href="mailto:info@mvariant.ru">info@mvariant.ru</a></div>
+			</div>
+		</div>
+		<div class="center">
+			<div class="block b1">
+				<a href="/fizlicam/">Частным лицам</a>
+				<a href="/agentstvam/">Агентствам</a>
+				<a href="/tarifs/">Тарифы</a>
+				<a href="/info/">Статьи</a>
+				
+			</div>
+			<div class="block b2">
+				<a href="/nedvigimost/">База объектов</a><a href="/nedvigimost/v-yaroslavle/">Ярославль</a><a href="/nedvigimost/v-primorskom-krae/">Приморский край</a><a href="/nedvigimost/v-yaroslavskoy-oblasti/">Ярославская область</a>			
+			</div>
+			<div class="block b3">
+				<!--a href="#">Как стать партнёром?</a>
+				<a href="#">Реклама</a-->
+				<a href="/help/">Помощь (FAQ)</a>
+				<a href="/agreement/">Пользовательское соглашение</a>
+				<a href="/oferta/">Договор оферты</a>
+				<a href="/help/support-form/">Форма обратной связи</a>				
+			</div>
+		</div>
+		<div class="right">
+			Мы в соцсетях:
+			<noindex>
+			<a href="//vk.com/mvariant_ru" target="_blank" rel="nofollow"><img src="/images/vk.png" alt="Вконтакте"></a>
+			<!--a href="//www.facebook.com/Сервис-подбора-недвижимости-Мой-вариант-163432920986117/" target="_blank" rel="nofollow"><img src="/images/fb.png" alt="Facebook"></a-->
+			</noindex>
+			
+			<div class="privacy" style="font-size:12px; color:#717171;">Используя интернет ресурс Mvariant.ru, Вы соглашаетесь на обработку Ваших персональных данных (см. <a href="/privacy/" target="_blank">Политика Конфиденциальности</a>), в противном случае Вы должны прекратить использование ресурса. </div>
+		
+		</div>
+		<!-- Yandex.Metrika counter -->
+		<script type="text/javascript">
+		   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+		   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+		   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+		   ym(47248734, "init", {
+				clickmap:true,
+				trackLinks:true,
+				accurateTrackBounce:true,
+				webvisor:true
+		   });
+		</script>
+		<noscript><div><img src="https://mc.yandex.ru/watch/47248734" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
+		
+		
+   
+</div>
+				<div class="copyright">
+				© 2023 Mvariant.ru<br></div>
+			</footer>		
+			<div id="preloader">
+				<div class="close"><span class="glyphicon glyphicon-remove"></span></div>
+				<div class="icon"></div>
+			</div>
+			
+			<script>
+				$("#preloader .close").click(function(){
+					$("#preloader").hide();
+				});
+			
+			</script>
+			
+ <!-- Конец шаблона футера -->	 
+		</div>
+		
+    
+ Общее время построения страницы: 0,013155937194824 </body></html>

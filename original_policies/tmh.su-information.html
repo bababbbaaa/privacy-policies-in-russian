@@ -1,0 +1,645 @@
+<html class="bx-core bx-no-touch bx-no-retina bx-chrome"><head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" async="" src="https://top-fwz1.mail.ru/js/code.js"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript" src="/bitrix/templates/default/js/jquery.min.js"></script>
+<script type="text/javascript">
+		$(function(){
+			catalog.init();
+			var arrPopups= [];
+			var popupAuth = {0:"auth", 1:"register", 2:"forgotpass", 3:"changepass"};
+			for (var i in popupAuth)
+			{
+				arrPopups.push ({
+					id: popupAuth[i],
+					loadfrom:"/bitrix/ajax/auth.php",
+					params: {mode:popupAuth[i]},
+					open: "."+popupAuth[i]+"_trigger",
+					addclass: "auth-box",
+					afterajax:function(obj){
+						var popupID =obj["id"];
+					}
+				});
+			};
+
+			arrPopups.push({
+				id:"popupform",
+				loadfrom:"/bitrix/ajax/popup.php",
+				params: {mode:"form",PAGE_URL:'/information/',PAGE_TITLE:'Правовая информация'},
+				addclass:"auth-box",
+				beforeajax:function(obj, trigger){
+					var code=$(trigger).attr("code");
+					obj["params"]["id"] =code;
+				},
+				open:".trigger_form",
+				hash:false
+			});
+
+			/* video */
+			arrPopups.push({
+				id:"itemvideo",
+				loadfrom:"/bitrix/ajax/popup.php",
+				params: {mode:"itemvideo"},
+				addclass:"itemvideo",
+				beforeajax:function(obj, trigger){
+					obj["params"]["video"] = $(trigger).attr("href");
+				},
+				aftershow: function(){
+					//jwplayer("itemvideo_div").resize(500,500);
+					$('#itemvideo').show();
+					},
+				onclose: function(){
+					//console.log(123);
+					//jwplayer("itemvideo_div").stop();
+					jQuery("#itemvideo").html(' ');
+				},
+				open:".trigger_video",
+				hash:false
+			});
+
+			popup.initPopupTriggers(arrPopups);
+			ajaxBlocks.initAjaxBlock("head_phones","#head_phones",PATH_UPDATE_AREAS+"head_phones.php");
+			ajaxBlocks.initTriggers();
+			$(".colorbox_picture").colorbox();
+			$(".valign").vAlign();
+			$(".hidden-box").removeClass("hidden-box");
+			var contactTabs = new SimpleTabs("ul.tabset li a",".tab-content", "tab");
+			contactTabs.init();
+		});
+	</script>
+<title>Правовая информация</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/bitrix/cache/css/s1/default/kernel_main/kernel_main.css?156922418526562" type="text/css" rel="stylesheet">
+<link href="/bitrix/cache/css/s1/default/template_af1e4ece825ec63c591715bffa460cfb/template_af1e4ece825ec63c591715bffa460cfb.css?162817373553590" type="text/css" data-template-style="true" rel="stylesheet">
+<script type="text/javascript">if(!window.BX)window.BX={};if(!window.BX.message)window.BX.message=function(mess){if(typeof mess=='object') for(var i in mess) BX.message[i]=mess[i]; return true;};</script>
+<script type="text/javascript">(window.BX||top.BX).message({'JS_CORE_LOADING':'Загрузка...','JS_CORE_NO_DATA':'- Нет данных -','JS_CORE_WINDOW_CLOSE':'Закрыть','JS_CORE_WINDOW_EXPAND':'Развернуть','JS_CORE_WINDOW_NARROW':'Свернуть в окно','JS_CORE_WINDOW_SAVE':'Сохранить','JS_CORE_WINDOW_CANCEL':'Отменить','JS_CORE_WINDOW_CONTINUE':'Продолжить','JS_CORE_H':'ч','JS_CORE_M':'м','JS_CORE_S':'с','JSADM_AI_HIDE_EXTRA':'Скрыть лишние','JSADM_AI_ALL_NOTIF':'Показать все','JSADM_AUTH_REQ':'Требуется авторизация!','JS_CORE_WINDOW_AUTH':'Войти','JS_CORE_IMAGE_FULL':'Полный размер'});</script>
+<script type="text/javascript">(window.BX||top.BX).message({'LANGUAGE_ID':'ru','FORMAT_DATE':'DD.MM.YYYY','FORMAT_DATETIME':'DD.MM.YYYY HH:MI:SS','COOKIE_PREFIX':'BITRIX_SM','SERVER_TZ_OFFSET':'10800','SITE_ID':'s1','SITE_DIR':'/','USER_ID':'','SERVER_TIME':'1676608483','USER_TZ_OFFSET':'0','USER_TZ_AUTO':'Y','bitrix_sessid':'0ff5ae5e4bb61e8712f829ccd45bc8f7'});</script>
+
+
+<script type="text/javascript" src="/bitrix/js/main/core/core.min.js?150964254575967"></script>
+<script type="text/javascript" src="/bitrix/js/main/core/core_ajax.min.js?150954421421435"></script>
+<script type="text/javascript">BX.setCSSList(['/bitrix/js/main/core/css/core.css','/bitrix/js/main/core/css/core_popup.css','/bitrix/js/main/core/css/core_date.css','/bitrix/components/beono/flashmessage/templates/.default/style.css','/bitrix/templates/default/components/bitrix/menu/top/style.css','/bitrix/templates/default/components/bitrix/search.title/default/style.css','/bitrix/templates/default/styles.css','/bitrix/templates/default/template_styles.css']); </script>
+<script type="text/javascript">
+					(function () {
+						"use strict";
+
+						var counter = function ()
+						{
+							var cookie = (function (name) {
+								var parts = ("; " + document.cookie).split("; " + name + "=");
+								if (parts.length == 2) {
+									try {return JSON.parse(decodeURIComponent(parts.pop().split(";").shift()));}
+									catch (e) {}
+								}
+							})("BITRIX_CONVERSION_CONTEXT_s1");
+
+							if (cookie && cookie.EXPIRE >= BX.message("SERVER_TIME"))
+								return;
+
+							var request = new XMLHttpRequest();
+							request.open("POST", "/bitrix/tools/conversion/ajax_counter.php", true);
+							request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+							request.send(
+								"SITE_ID="+encodeURIComponent("s1")+
+								"&sessid="+encodeURIComponent(BX.bitrix_sessid())+
+								"&HTTP_REFERER="+encodeURIComponent(document.referrer)
+							);
+						};
+
+						if (window.frameRequestStart === true)
+							BX.addCustomEvent("onFrameDataReceived", counter);
+						else
+							BX.ready(counter);
+					})();
+				</script>
+
+
+
+<script type="text/javascript" src="/bitrix/components/beono/flashmessage/templates/.default/script.js?1585919646388"></script>
+<script type="text/javascript" src="/bitrix/components/bitrix/search.title/script.min.js?14806773716110"></script>
+
+	<script type="text/javascript" src="/bitrix/templates/default/js/jcarouselLite.min.js"></script>
+	<script type="text/javascript" src="/bitrix/templates/default/js/masked.js"></script>
+	<script type="text/javascript" src="/bitrix/templates/default/js/useful.lib.js"></script>
+	<script type="text/javascript" src="/bitrix/templates/default/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script type="text/javascript" src="/bitrix/js/lib/colorbox/jquery.colorbox-min.js"></script>
+	<script type="text/javascript" src="/bitrix/templates/default/js/hash.js"></script>
+	<script type="text/javascript" src="/bitrix/templates/default/js/form.js"></script>
+	<script type="text/javascript" src="/bitrix/templates/default/js/validate.lib.js"></script>
+	<script type="text/javascript" src="/bitrix/templates/default/js/main.js"></script>
+	<script type="text/javascript" src="/bitrix/templates/default/js/tooltip.js"></script>
+
+	<link media="all" rel="stylesheet" href="/bitrix/templates/default/css/form.css">
+	<link media="all" rel="stylesheet" href="/bitrix/js/lib/colorbox/colorbox.css">
+	<link href="/bitrix/templates/default/images/favicon.ico" rel="icon" type="image/x-icon">
+	<link href="/bitrix/templates/default/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	
+<script>$(document).ready(function() {$("span").easyTooltip()}); $(document).ready(function() {$("label").easyTooltip()}); $(document).ready(function() {$("a").easyTooltip()}); $(document).ready(function() {$("li").easyTooltip()}); $(document).ready(function(){$("img").easyTooltip()}); </script>
+<script type="text/javascript">$(document).ready(function(){ $(window).scroll(function () {if ($(this).scrollTop() > 0) {$('#scroller').fadeIn();} else {$('#scroller').fadeOut();}}); $('#scroller').click(function () {$('body,html').animate({scrollTop: 0}, 400); return false;}); });</script>
+
+</head>
+<body class="inner">
+<noindex>
+<div class="advert-flashmessage" id="beono_flashmessage_1644910500">
+                    <div class="advert-flashmessage-text">Цены на сайте подлежат уточнению.
+
+
+</div>
+                    <a href="javascript:advert_flashmessage_close('1644910500', 'BITRIX_SM');" class="advert-flashmessage-close">×</a>
+</div>
+
+</noindex>
+ 
+	<div id="wrapper">
+		<div id="header">
+			
+<ul class="add-nav">
+		<li>
+				<a href="/personal/" class="auth_trigger">Личный кабинет</a></li>
+		<li>
+				<a href="/catalog/last_view/">Недавно просмотренные</a></li>
+		<li>
+				<a href="/catalog/compare/">К сравнению</a></li>
+
+</ul>
+			<div class="holder">
+				<strong class="logo"><a href="http://tmh.su">ТехноМашХолдинг</a></strong>
+				<form action="#" class="contact-box">
+					<table>
+						<tbody><tr>
+							<td>
+																<div style="width: 205px;" class="selectArea sel" id="sarea0"><span class="left"></span><span class="disabled" style="display: none;"></span><span id="mySelectText0" class="center">Москва</span><a href="javascript:showOptions(0,false)" class="selectButton"></a></div><select class="sel outtaHere" onchange="setlocation(this.value)">
+																			<option selected="" value="50">Москва</option>
+																			<option value="87">Санкт-Петербург</option>
+																			<option value="2">Нижний Новгород</option>
+																			<option value="54">Казань</option>
+																			<option value="1178">Краснодар</option>
+																			<option value="2873">Волгоград</option>
+																			<option value="1736">Симферополь</option>
+																			<option value="1534">Махачкала</option>
+																			<option value="1535">Грозный</option>
+																			<option value="51">Набережные Челны</option>
+																			<option value="4270">Уфа</option>
+																			<option value="3817">Пермь</option>
+																			<option value="52">Екатеринбург</option>
+																			<option value="49">Тюмень</option>
+																			<option value="2870">Челябинск</option>
+																			<option value="1581">Салехард</option>
+																			<option value="1108">Омск</option>
+																			<option value="1">Новосибирск</option>
+																			<option value="86">Барнаул</option>
+																			<option value="1526">Кемерово</option>
+																			<option value="53">Красноярск</option>
+																			<option value="88">Иркутск</option>
+																			<option value="89">Хабаровск</option>
+																			<option value="1527">Чита</option>
+																			<option value="1528">Якутск</option>
+																			<option value="90">Владивосток</option>
+																			<option value="1530">Южно-Сахалинск</option>
+																			<option value="1529">Петропавловск-Камчатский</option>
+																	</select>
+							</td>
+							<td rowspan="2">
+								<ul id="head_phones" class="phone">
+											<li>+7 499 705-23-34</li>
+		<li>+7 804 333-20-03</li>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							 <td class="phonefree">Бесплатный звонок по России:</td> 
+						</tr>
+					</tbody></table>
+					
+<ul class="contact-list">
+		<li>
+					<img src="/bitrix/templates/default/images/ico-skype.gif" alt="">
+				Skype: <a href="skype:">holdingtm</a></li>
+		<li>
+					<img src="/bitrix/templates/default/images/ico-messeg.gif" alt="">
+				Эл. почта: <a href="mailto:zakaz@tmh.su">zakaz@tmh.su</a></li>
+		<li>
+				<a href="" class="trigger_form" code="3">Мы вам перезвоним</a></li>
+</ul>
+				</form>
+				<div id="log-in-block">
+										<a class="auth_trigger" href="#">Вход</a> |
+						<a class="register_trigger" href="#">Регистрация</a>
+									</div>	
+				<div id="basketline_wrapper">
+				 	<ul class="cart-box">
+		
+					<li>
+						<div class="box"><img src="/bitrix/templates/default/images/ico-cart.png" alt="#" width="16" height="13"></div>
+						<div class="holder">
+							<strong><a href="/personal/cart/">Ваша корзина пуста</a></strong>
+						</div>
+					</li>
+		</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="main-nav">
+			
+<ul>
+	<!--li><a href="http://tmh.su"><span class="logos"><strong class="logo">На главную</strong></span></a></li-->
+
+			<li><a href="/catalog/"><span>Каталог</span></a></li>
+		
+			<li><a href="/reference-materials/"><span>Справочные материалы</span></a></li>
+		
+			<li><a href="/about/"><span>О компании</span></a></li>
+		
+			<li><a href="/delivery-and-payment/"><span>Доставка и оплата</span></a></li>
+		
+			<li><a href="/contacts/"><span>Контакты</span></a></li>
+		
+
+</ul>
+				<div id="title-search">
+	<form class="search" action="/search/index.php">
+		<div style="position:relative; float:left" class="input-wrapper"><input id="title-search-input" type="text" name="q" d_value="Поиск" class="text" size="40" maxlength="50" autocomplete="off"><div class="label" style="left: 0px; top: 0px; position: absolute; height: 29px; padding: 0px 9px; margin: 0px; text-align: start; color: rgb(85, 88, 91); font: 400 13px / 29px Arial, Helvetica, sans-serif;">Поиск</div></div>&nbsp;<input name="s" type="submit" class="btn-submit" value="Поиск">
+	</form>
+	<div style="clear:both"></div>
+	</div>
+<script type="text/javascript">
+var jsControl = new JCTitleSearch({
+	//'WAIT_IMAGE': '/bitrix/themes/.default/images/wait.gif',
+	'AJAX_PAGE' : '/information/',
+	'CONTAINER_ID': 'title-search',
+	'INPUT_ID': 'title-search-input',
+	'MIN_QUERY_LEN': 2
+});
+</script>
+		</div>
+		<div id="main">
+
+							<ul class="breadcrumbs"><li><a href="/" title="Перейти в раздел Главная">Главная</a></li><li><span>&nbsp;→&nbsp;</span></li><li><a href="/information/" title="Перейти в раздел Правовая информация">Правовая информация</a></li></ul>				
+									<div id="sidebar">	
+						
+<ul class="menu">
+
+
+	
+	
+		
+							<li><a href="/reference-materials/katalogi-pdf/" class="root-item">Каталоги PDF</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/reference-materials/stati/" class="root-item">Статьи</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/reference-materials/instruktsii/" class="root-item">Инструкции</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="/reference-materials/video/" class="root-item">Видео</a></li>
+			
+		
+	
+	
+
+	
+	
+		
+							<li><a href="http://tmh.su/information/" class="root-item">Правовая информация</a></li>
+			
+		
+	
+	
+
+
+</ul>
+						<div class="promobox">
+														</div>
+					</div>
+
+<div id="content" itemscope="" itemtype="https://schema.org/Product" onmousedown="return false;" onclick="return true;" oncontextmenu="return false" onselectstart="return false" oncopy="return false" ondragstart="return false">
+					<h1 itemprop="name">Правовая информация</h1>
+						 
+<h3>Условия и правила возврата товара надлежащего качества</h3>
+ 
+<div>Вы можете отказаться от заказанного товара в любое время до получения или в течение семи дней после.</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div><b>Условия возврата товара надлежащего качества:&nbsp;</b></div>
+ 
+<div> 
+  <ol> 
+    <li>Возврат товара надлежащего качества возможен в случае, если сохранены его товарный вид (упаковка, пломбы, ярлыки), потребительские свойства, а также документ, подтверждающий факт и условия покупки указанного товара (товарный чек). Для возврата товара также необходим документ, удостоверяющий личность.&nbsp;</li>
+   
+    <li>Товар надлежащего качества нельзя вернуть, если он может быть использован исключительно приобретающим его покупателем;&nbsp;</li>
+   
+    <li>Товар надлежащего качества нельзя вернуть, если он указан в&nbsp;<noindex><a href="http://www.consultant.ru/document/cons_doc_LAW_134461/?frame=4#p575" target="_blank" rel="nofollow">Перечне</a></noindex>&nbsp;непродовольственных товаров надлежащего качества, не подлежащих возврату или обмену, утвержденном Постановлением Правительства РФ от 19.01.1998 № 55.&nbsp;</li>
+   
+    <li>Если товар является частью комплекта, вернуть его можно только в составе полного комплекта.</li>
+   </ol>
+ &nbsp;Стоимость товара возвращается в течение 10 календарных дней с момента получения продавцом товара и вашей письменной заявки. При этом ТехноМашХолдинг оставляет за собой право в пределах указанного срока провести экспертизу товара с целью определения его качества и сохранности потребительских свойств. Начало течения десятидневного срока начинается в первый рабочий день, следующий за днем возврата, а десятый день, если выпадает на выходной или праздничный день, наступает в первый рабочий день, следующий после такого выходного или праздничного дня.</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Если с момента передачи товара к нам и оформления возврата прошло более 10 дней, пожалуйста, сообщите об этом по телефону контакт-центра: 8-804-333-2003.</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<h3>Условия возврата товара ненадлежащего качества</h3>
+ 
+<div> В случае, если покупателю передаётся товар с нарушением условий договора, касающихся количества, ассортимента, комплектности, тары и/или упаковки товара, покупатель может в течение 20 дней с момента получения товара известить продавца об этих нарушениях.&nbsp; </div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Если покупатель получил товар ненадлежащего качества, и это обстоятельство не было заранее оговорено продавцом, покупатель вправе предъявить требования в соответствии с положениями ст. 18 закона «О защите прав потребителей».&nbsp; </div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Любые из допустимых требований должны быть предъявлены покупателем в письменной форме посредством заполнения либо письменного направления претензии в службу по работе с клиентами. Для оформления возврата вам необходимо предъявить претензии в письменной форме, отправив «акт о возврате» и товар с полным пакетом документов (гарантийный талон, инструкция и другие документы, которые были в комплекте) нам. После получения товара и всего пакета документов, наш отдел гарантии проведёт диагностику выявленных недостатков — заводской брак или результат неправильной эксплуатации покупателем. На основе диагностики наши сотрудники примут решение об удовлетворении требований по возврату.&nbsp; </div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Сервисный центр оставляет за собой право произвести гарантийный ремонт товара с дефектами, возникшими по вине изготовителя. Если проведение ремонта невозможно, то при предъявлении экспертного заключения в установленные законом сроки осуществляется замена товара с заводским дефектом на товар надлежащего качества или возврат денежных средств.&nbsp; </div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Товар, который по результатам проведения проверки диагностики качества сервисной службой ТехноМашХолдинг был признан товаром надлежащего качества или не подпадающим под условия гарантийного обслуживания, хранится в течение шести месяцев на складе. Доставка такого товара осуществляется обратно за счёт клиента. По истечении срока хранения покупатель обязан немедленно забрать переданную вещь. При неисполнении покупателем своей обязанности забрать переданную вещь, в том числе при его уклонении от получения вещи, продавец оставляет за собой право реализовать вещь согласно положениям Гражданского Кодекса РФ.&nbsp; </div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Если товар будет признан негарантийным, повторная его отправка по вашему адресу возможна только за ваш счет. Замена товара производится только посредством возврата товара ненадлежащего качества и последующего оформления нового заказа на аналогичный товар.&nbsp; </div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div><b>Внимание!</b>&nbsp;Отличие элементов дизайна или оформления от заявленных в описании на сайте не может считаться неисправностью или нефункциональностью товара.&nbsp; </div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Для получения дополнительных консультаций и рассмотрения претензий покупателя в индивидуальном порядке просим также обращаться в службу по работе с клиентами. Пожалуйста, максимально подробно изложите возникшую проблему, прикрепите к письму фотографию повреждённого (бракованного) товара, опишите возможные решения и ожидайте ответа в течение пяти рабочих дней. ТехноМашХолдинг найдёт оптимальное для клиента решение. 
+  <br>
+ </div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<h3>Порядок возврата товара, в том числе в случае предъявления претензий к качеству товара</h3>
+ 
+<div><b> Шаг 1. </b>Заполните заявление на получение денежных средств за возвращаемый товар:&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>В заявлении обязательно укажите реквизиты для возврата денег и паспортные данные. Кроме того, если у вас есть претензии по качеству товара, подробно опишите, какие дефекты содержит возвращаемый товар. Обратите внимание, что денежные средства за товар (а в случае ненадлежащего качества и соответствующая стоимость доставки) могут быть возвращены тем способом, которым производилась оплата.&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div><b>Шаг 2.</b> Приложите товарный чек.&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div><b>Помимо документов, перечисленных выше, необходимо:</b>&nbsp;</div>
+ 
+<div> 
+  <ul> 
+    <li>передать товар в полной его комплектации и со всеми принадлежностями, указанными в технической документации (техническом паспорте или заменяющем его документе);</li>
+   
+    <li>приложить заключения сервисных центров, если покупатель ранее обращался в них для выполнения гарантийного ремонта.&nbsp;</li>
+   </ul>
+ Чтобы вернуть товар почтовым отправлением, оформите в отделении почты документ «ф. 107 Опись вложения». На нем должны быть печать и подпись сотрудника почтового отделения. Пример этого документа можно посмотреть на сайте Почты России.&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div><b>Шаг 3.</b> Сообщите нам о том, что вы отправили возврат&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Свяжитесь с нашей службой по работе с клиентами, и пришлите им номер отправки «Почтой России» (идентификатор почтового отправления указан в чеке, выданном при приёме почтового отправления) и фото/скан чека.&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Всегда спрашивайте у сотрудников почты и сотрудников пунктов выдачи заказов документ, подтверждающий отправление товара к нам. Его необходимо сохранять до тех пор, пока не будет принято решение о возврате денег или замене товара.&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Обратите внимание, что ход любого почтового отправления можно отслеживать на сайте «Почты России». Для этого необходимо ввести идентификатор почтового отправления (он указан в чеке, выданном при приёме почтового отправления).&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div><b>Шаг 4.</b> Ожидайте решения о возврате и получения денег.&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>После получения нами товара и акта о возврате, товар будет проверен на соответствие требованиям возврата. Возврат суммы, уплаченной покупателем в соответствии с договором, осуществляется неодновременно с возвратом товара клиентом: возврат указанной суммы осуществляется продавцом с согласия покупателя путём перечисления соответствующей суммы на банковский или иной счёт, указанный клиентом.&nbsp;</div>
+ 
+<div> 
+  <br>
+ </div>
+ 
+<div>Возврат товара осуществляется по адресу предоставленному центром по работе с клиентами ООО "ТехноМашХолдинг". 
+  <br>
+ </div>
+ 
+</div>
+
+	</div>
+
+		<div class="contact-block">
+			<table class="mode-box">
+				<tbody><tr>
+					<td>
+						<b>Есть вопросы?</b> 						 
+<ul> 							 
+  <li>Звоните прямо сейчас:</li>
+ 							 
+  <li><b>+7 804 333-20-03</b></li>
+ 						</ul>
+					</td>
+					<td>
+						<b>Режим работы:</b> 						 
+<ul> 							 
+  <li>пн–пт: 9:00–21:00</li>
+ 							 
+  <li>сб–вс: 10:00–19:00</li>
+ 						</ul>
+					</td>
+				</tr>
+			</tbody></table>
+			<div class="col">
+				
+<ul class="nav">
+		<li>
+				<a href="/contacts/">Контакты</a></li>
+		<li>
+				<a style="border-bottom:1px dashed" class="trigger_form" code="1" href="#">Перезвоните мне!</a></li>
+		<li>
+				<a href="/some_questions/">Частые вопросы</a></li>
+		<li>
+				<a href="/information/">Правовая информация</a></li>
+
+</ul>
+				
+				<ul class="pay-box">
+					<li>Принимаем к оплате:</li>
+					<li><a href="/delivery-and-payment/"><img src="/bitrix/templates/default/images/pay1.jpg" alt="#" width="47" height="15"></a></li>
+					<li><a href="/delivery-and-payment/"><img src="/bitrix/templates/default/images/pay2.jpg" alt="#" width="38" height="24"></a></li>
+					<li><a href="/delivery-and-payment/"><img src="/bitrix/templates/default/images/pay3.jpg" alt="#" height="24"></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="manufacturer">
+			<div class="all-more">
+				<a href="/manufacturers/" title="Кликните, чтобы увидеть весь каталог производителей"><span>Все производители</span></a>
+			</div>
+			<ul>
+							<li code="55" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_55">
+					<noindex><a href="/manufacturers/bds-maschinen/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/d87/105_57_1/bds.png" title="Оборудование компании BDS Maschinen" alt="BDS Maschinen" width="105" height="37">
+					</a></noindex>				</li>
+							<li code="81" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_81">
+					<noindex><a href="/manufacturers/exact-tools-oy/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/10e/105_57_1/экзакт.png" title="Оборудование компании EXACT TOOLS OY" alt="EXACT TOOLS OY" width="105" height="37">
+					</a></noindex>				</li>
+							<li code="69" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_69">
+					<noindex><a href="/manufacturers/ridgid/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/280/105_57_1/риджид.png" title="Оборудование компании Ridgid" alt="Ridgid" width="105" height="37">
+					</a></noindex>				</li>
+							<li code="648" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_648">
+					<noindex><a href="/manufacturers/general-pipe-cleaners/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/426/105_57_1/general.png" title="Оборудование компании General Pipe Cleaners" alt="General Pipe Cleaners" width="105" height="37">
+					</a></noindex>				</li>
+							<li code="2957" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_2957">
+					<noindex><a href="/manufacturers/electric-eel/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/135/105_57_1/135d1ae9100777ff51fe73af0d102270.png" title="Оборудование компании Electric Eel" alt="Electric Eel" width="105" height="37">
+					</a></noindex>				</li>
+							<li code="63" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_63">
+					<noindex><a href="/manufacturers/karnasch-professional-tools/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/26c/105_57_1/карнаш.png" title="Оборудование компании Karnasch" alt="Karnasch" width="105" height="37">
+					</a></noindex>				</li>
+							<li code="732" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_732">
+					<noindex><a href="/manufacturers/gazcut/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/6c0/105_57_1/gazcut.png" title="Оборудование компании Gazcut" alt="Gazcut" width="105" height="37">
+					</a></noindex>				</li>
+							<li code="626" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_626">
+					<noindex><a href="/manufacturers/tekhnomashkholding/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/045/105_57_1/tehnomashholding.png" title="Оборудование компании ТехноМашХолдинг" alt="ТехноМашХолдинг" width="105" height="37">
+					</a></noindex>				</li>
+							<li code="96" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_96">
+					<noindex><a href="/manufacturers/tonisco-systems/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/f26/105_57_1/f26a88c9c2fe52fb0f7c99b5fe9c864a.png" title="Оборудование компании TONISCO Systems" alt="TONISCO Systems" width="105" height="37">
+					</a></noindex>				</li>
+							<li code="78" style="background:white;opacity: 0.8;filter:alpha(opacity=80);" id="bx_3218110189_78">
+					<noindex><a href="/manufacturers/preus/">						<img class="valign" style="opacity: 0.4; margin-top: 15px;" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40" src="/upload/resize_cache/iblock/76d/105_57_1/преус.png" title="Оборудование компании ПРЕУС" alt="ПРЕУС" width="105" height="37">
+					</a></noindex>				</li>
+				</ul>
+		</div>
+		<div id="footer">
+
+			<span class="copyrights">© 2023 Материалы данного сайта являются собственностью ООО "ТехноМашХолдинг". Перепечатка и использование материалов сайта запрещено!</span>
+			<ul class="social">
+                    <li><noindex><a rel="nofollow" href="https://www.facebook.com/www.tmh.su" target="_blank"><img src="/bitrix/templates/default/images/fb.png" title="ТехноМашХолдинг в facebook" alt="ТехноМашХолдинг в facebook"></a></noindex></li>   
+                    <li><noindex><a rel="nofollow" href="https://twitter.com/tehnomashholdin" target="_blank"><img src="/bitrix/templates/default/images/tw.png" title="ТехноМашХолдинг в твиттер" alt="ТехноМашХолдинг в твиттер"></a></noindex></li>
+		    <li><noindex><a rel="nofollow" href="https://vk.com/tehnomashholding" target="_blank"><img src="/bitrix/templates/default/images/vk.png" title="ТехноМашХолдинг вконтакте" alt="ТехноМашХолдинг вконтакте"></a></noindex></li>
+		    <li><noindex><a rel="nofollow" href="https://www.youtube.com/c/tmhsu" target="_blank"><img src="/bitrix/templates/default/images/youtube.png" title="ТехноМашХолдинг в youtube" alt="ТехноМашХолдинг в youtube"></a></noindex></li>
+		    <li><noindex><a rel="nofollow" href="https://www.instagram.com/tmh.su/" target="_blank"><img src="/bitrix/templates/default/images/insta.png" title="ТехноМашХолдинг в instagram" alt="ТехноМашХолдинг в instagram"></a></noindex></li>
+			</ul>
+			<ul class="counter">
+				<li>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+ym(21724450, "init", {
+clickmap:true,
+trackLinks:true,
+accurateTrackBounce:true,
+webvisor:true
+});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/21724450" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">//<![CDATA[
+var _tmr = _tmr || [];
+_tmr.push({id: "2400742", type: "pageView", start: (new Date()).getTime()});
+(function (d, w) {
+   var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true;
+   ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+   var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+   if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window);
+//]]></script><noscript><div style="position:absolute;left:-10000px;">
+<img src="//top-fwz1.mail.ru/counter?id=2400742;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" />
+</div>
+</noscript>
+<!-- //Rating@Mail.ru counter -->
+
+				</li>
+			</ul>		
+		</div>
+	</div>
+	<div class="popup" id="popup_template">
+							<a class="close" href="#">&nbsp;</a>
+							<div id="popup_content">
+							</div>
+						</div>
+						
+			<script>
+			$("a[href='/personal/']").addClass("auth_trigger");
+		</script>
+	<div id="scroller" class="b-top" style="display: none;"><span class="b-top-but">наверх</span></div>
+<noindex>
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script src="//code.jivosite.com/widget/4IfC2pOnCc" async=""></script>
+<!-- {/literal} END JIVOSITE CODE -->
+</noindex>
+
+<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button id="cboxPrevious"></button><button id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div><button id="cboxClose"></button></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><div class="title-search-result"></div><div style="width: 205px;" class="optionsDivInvisible drop-sel outtaHere" id="optionsDiv0"><div class="select-top"><div class="select-top-left"></div><div class="select-top-right"></div></div><div class="select-center"><div class="select-center-right"></div><ul><li><a href="javascript:showOptions(0); selectMe('',0,0);">Москва</a></li><li><a href="javascript:showOptions(0); selectMe('',1,0);">Санкт-Петербург</a></li><li><a href="javascript:showOptions(0); selectMe('',2,0);">Нижний Новгород</a></li><li><a href="javascript:showOptions(0); selectMe('',3,0);">Казань</a></li><li><a href="javascript:showOptions(0); selectMe('',4,0);">Краснодар</a></li><li><a href="javascript:showOptions(0); selectMe('',5,0);">Волгоград</a></li><li><a href="javascript:showOptions(0); selectMe('',6,0);">Симферополь</a></li><li><a href="javascript:showOptions(0); selectMe('',7,0);">Махачкала</a></li><li><a href="javascript:showOptions(0); selectMe('',8,0);">Грозный</a></li><li><a href="javascript:showOptions(0); selectMe('',9,0);">Набережные Челны</a></li><li><a href="javascript:showOptions(0); selectMe('',10,0);">Уфа</a></li><li><a href="javascript:showOptions(0); selectMe('',11,0);">Пермь</a></li><li><a href="javascript:showOptions(0); selectMe('',12,0);">Екатеринбург</a></li><li><a href="javascript:showOptions(0); selectMe('',13,0);">Тюмень</a></li><li><a href="javascript:showOptions(0); selectMe('',14,0);">Челябинск</a></li><li><a href="javascript:showOptions(0); selectMe('',15,0);">Салехард</a></li><li><a href="javascript:showOptions(0); selectMe('',16,0);">Омск</a></li><li><a href="javascript:showOptions(0); selectMe('',17,0);">Новосибирск</a></li><li><a href="javascript:showOptions(0); selectMe('',18,0);">Барнаул</a></li><li><a href="javascript:showOptions(0); selectMe('',19,0);">Кемерово</a></li><li><a href="javascript:showOptions(0); selectMe('',20,0);">Красноярск</a></li><li><a href="javascript:showOptions(0); selectMe('',21,0);">Иркутск</a></li><li><a href="javascript:showOptions(0); selectMe('',22,0);">Хабаровск</a></li><li><a href="javascript:showOptions(0); selectMe('',23,0);">Чита</a></li><li><a href="javascript:showOptions(0); selectMe('',24,0);">Якутск</a></li><li><a href="javascript:showOptions(0); selectMe('',25,0);">Владивосток</a></li><li><a href="javascript:showOptions(0); selectMe('',26,0);">Южно-Сахалинск</a></li><li><a href="javascript:showOptions(0); selectMe('',27,0);">Петропавловск-Камчатский</a></li></ul></div><div class="select-bottom"><div class="select-bottom-left"></div><div class="select-bottom-right"></div></div></div></body></html>

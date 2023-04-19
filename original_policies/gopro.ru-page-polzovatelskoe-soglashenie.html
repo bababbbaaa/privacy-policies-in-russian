@@ -1,0 +1,3665 @@
+<html class="no-touchevents linux-magic svg-magic" data-magic-ua="chrome" data-magic-ua-ver="76"><head><style id="magiczoom-reset-css" type="text/css"></style><style>
+  .fc.old-theme-fix {
+    overflow: visible;
+  }
+  .fc.old-theme-fix:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
+  .tt-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+
+  }
+  .twitter-typeahead {
+    display: inherit !important;
+  }
+  .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+  }
+  .tt-suggestion, .tt-footer {
+    display: block;
+    padding: 1px 0px 1px 10px;
+  }
+  .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+    color: #fff;
+  }
+  .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion p, .tt-footer p {
+    margin: 0;
+  }
+</style><style>
+  .spinner-container, .spinner {
+    position: absolute;
+    left:     0;
+    bottom:   0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .spinner-container {
+    z-index:  900;
+    overflow: hidden;
+
+    &.animate .spinner {
+      &.slide-up {
+        opacity: 0;
+      }
+
+      &.fade-in {
+        opacity: 0;
+      }
+    }
+  }
+
+  .spinner {
+    height:   100%;
+    opacity:  0.6;
+    background: #fff;
+
+    &.slide-up {
+      @include transition-property(opacity, bottom);
+      @include transition-duration(0.3s);
+    }
+
+    &.fade-in {
+      @include transition-property(opacity);
+      @include transition-duration(1s);
+    }
+
+    .spin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+
+  .spinner {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  .spinner-screen {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+  }
+</style><link media="all" onload="this.media=&quot;all&quot;" rel="stylesheet" type="text/css" href="/served_assets/public/jquery.modal-b7e3fb6a3704c0a2359a33962d371838618774b855128cef059add49182581c0.css"><meta data-config="{&quot;article_id&quot;:390728}" name="page-config" content=""><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot;&quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;\u003cspan class=\&quot;rub\&quot;\u003e\u0026#x20bd;\u003c/span\u003e&quot;,&quot;show_price_without_cents&quot;:1},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;\u003cspan class=\&quot;rub\&quot;\u003e\u0026#x20bd;\u003c/span\u003e&quot;,&quot;price_separator&quot;:&quot;&quot;,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:&quot;&quot;,&quot;show_price_with_delimiter&quot;:false,&quot;show_price_without_cents&quot;:true},&quot;facebook&quot;:{&quot;pixelActive&quot;:true,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:true},&quot;vk&quot;:{&quot;pixel_active&quot;:true,&quot;price_list_id&quot;:&quot;3585&quot;},&quot;new_ya_metrika&quot;:false,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:&quot;v2&quot;,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:null,&quot;account_id&quot;:118880,&quot;hide_items_out_of_stock&quot;:false,&quot;forbid_order_over_existing&quot;:true,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:true,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Нажимая кнопку \&quot;Подтвердить заказ\&quot;, я даю своё согласие на обработку персональных данных в соответствии с \u003ca href='/blogs/servis-i-dokumenty/polzovatelskoe-soglashenie' target='blank'\u003eПользовательским соглашением\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:true,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:2,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]"><script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/11e3a4ec/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-TLD9G57"></script><script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript" async="" id="topmailru-code" src="https://top-fwz1.mail.ru/js/code.js"></script><script src="https://www.youtube.com/player_api"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-TLD9G57"></script><script type="text/javascript" async="" src="/javascripts/insales_counter.js?6"></script><script src="/packs/js/shop_bundle-16233c9b04dc8ce13e23.js"></script><style type="text/css"></style><script type="text/javascript" src="https://static.insales-cdn.com/assets/common-js/common.v2.23.27.js"></script>
+        <!--InsalesCounter -->
+        <script type="text/javascript">
+        if (typeof(__id) == 'undefined') {
+          var __id=118880;
+
+          (function() {
+            var ic = document.createElement('script'); ic.type = 'text/javascript'; ic.async = true;
+            ic.src = '/javascripts/insales_counter.js?6';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ic, s);
+          })();
+        }
+        </script>
+        <!-- /InsalesCounter -->
+    <script type="text/javascript">
+      (function() {
+        var fileref = document.createElement('script');
+        fileref.setAttribute("type","text/javascript");
+        fileref.setAttribute("src", 'https://sberbank.pimentos.net/js/notifications.min.js');
+        document.getElementsByTagName("head")[0].appendChild(fileref);
+      })();
+    </script><script type="text/javascript" src="https://sberbank.pimentos.net/js/notifications.min.js"></script>
+
+	  <title>Пользовательское соглашение</title>
+<!-- meta -->
+<meta charset="UTF-8">
+<meta name="keywords" content="Пользовательское соглашение">
+<meta name="description" content="Пользовательское соглашение - предложение организации ООО &quot;МК&quot; для физических лиц, не являющихся индивидуальными предпринимателями (для потребителей), заключить договор.">
+<meta name="robots" content="index,follow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+
+    <meta property="og:title" content="GOPRO.RU">
+    <meta property="og:image" content="https://static.insales-cdn.com/images/articles/1/426/172458/compact_agreem.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gopro.ru">
+	
+
+<!-- icons-->
+ <link rel="icon" type="image/vnd.microsoft.icon" href="https://static.insales-cdn.com/assets/1/4555/1495499/1674469895/favicon.ico">
+<!-- fixes -->
+<!--[if IE]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<!--[if lt IE 9]>
+<script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<script>
+  //<![CDATA[
+    // Initialize the GP object
+    window.GP  = window.GP || {}
+    // Load Features into the Javascript
+    GP.Feature = {"testing":{"value":true,"test_val":"this is a test"},"admin_lockout":{"value":false},"iwillgopro_weekly_winners":{"value":true},"olympics":{"value":true},"sponsorship_form":{"value":true},"threepointfive":{"value":true},"search_twerk":{"value":true},"exact_target":{"value":true},"et_mailinglist":{"value":true},"et_studio_form":{"value":true},"et_motd":{"value":true},"et_daily_giveaway":{"value":true},"et_product_registration":{"value":true},"et_firmware_update":{"value":true},"more_search_twerks":{"value":false},"vod_json_update":{"value":true},"footer_investor_link":{"value":true},"camera_mount_adminable":{"value":true},"show_sandisk_promo_images":{"value":false},"secure_forms":{"value":false},"demandware_search":{"value":true},"weekender":{"value":true},"preweekender":{"value":true}};
+    // Load ExactTarget lead sources into the Javascript
+    GP.ET_leadsources = {"footer":"1397975","potd":"1149402","votd":"1149403","hero_three_reg":"1397589","hero_three_plus_reg":"1397594","hd_hero_firmware":"1149485","hero_two_firmware":"1149433","studio_mac":"97122","studio_pc":"94962","daily_giveaway":"1397204"};
+  //]]>
+</script>
+	  <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" crossorigin="anonymous" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="https://static.insales-cdn.com/assets/1/4555/1495499/1674469895/theme.css" rel="stylesheet" type="text/css">
+
+<link href="https://static.insales-cdn.com/assets/1/4555/1495499/1674469895/responsive-tables.css" rel="stylesheet" type="text/css">
+	
+	<script>
+    
+      
+      window.dataLayer = window.dataLayer || [];
+	  dataLayer.push({'PMuserAuth' : 0});
+      
+      
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TLD9G57');
+      </script>	
+	<style type="text/css">
+.vfm--fixed[data-v-2836fdb5] {
+  position: fixed;
+}
+.vfm--absolute[data-v-2836fdb5] {
+  position: absolute;
+}
+.vfm--inset[data-v-2836fdb5] {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.vfm--overlay[data-v-2836fdb5] {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.vfm--prevent-none[data-v-2836fdb5] {
+  pointer-events: none;
+}
+.vfm--prevent-auto[data-v-2836fdb5] {
+  pointer-events: auto;
+}
+.vfm--outline-none[data-v-2836fdb5]:focus {
+  outline: none;
+}
+.vfm-enter-active[data-v-2836fdb5],
+.vfm-leave-active[data-v-2836fdb5] {
+  transition: opacity 0.2s;
+}
+.vfm-enter-from[data-v-2836fdb5],
+.vfm-leave-to[data-v-2836fdb5] {
+  opacity: 0;
+}
+.vfm--touch-none[data-v-2836fdb5] {
+  touch-action: none;
+}
+.vfm--select-none[data-v-2836fdb5] {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.vfm--resize-tr[data-v-2836fdb5],
+.vfm--resize-br[data-v-2836fdb5],
+.vfm--resize-bl[data-v-2836fdb5],
+.vfm--resize-tl[data-v-2836fdb5] {
+  width: 12px;
+  height: 12px;
+  z-index: 10;
+}
+.vfm--resize-t[data-v-2836fdb5] {
+  top: -6px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  cursor: ns-resize;
+}
+.vfm--resize-tr[data-v-2836fdb5] {
+  top: -6px;
+  right: -6px;
+  cursor: nesw-resize;
+}
+.vfm--resize-r[data-v-2836fdb5] {
+  top: 0;
+  right: -6px;
+  width: 12px;
+  height: 100%;
+  cursor: ew-resize;
+}
+.vfm--resize-br[data-v-2836fdb5] {
+  bottom: -6px;
+  right: -6px;
+  cursor: nwse-resize;
+}
+.vfm--resize-b[data-v-2836fdb5] {
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  cursor: ns-resize;
+}
+.vfm--resize-bl[data-v-2836fdb5] {
+  bottom: -6px;
+  left: -6px;
+  cursor: nesw-resize;
+}
+.vfm--resize-l[data-v-2836fdb5] {
+  top: 0;
+  left: -6px;
+  width: 12px;
+  height: 100%;
+  cursor: ew-resize;
+}
+.vfm--resize-tl[data-v-2836fdb5] {
+  top: -6px;
+  left: -6px;
+  cursor: nwse-resize;
+}
+</style><style type="text/css">[data-v-5e927378] .sales-ninja-modal-container{align-items:center;display:flex;justify-content:center}[data-v-5e927378] .sales-ninja-modal-content{background:#fff;border:1px solid #e2e8f0;border-radius:.25rem;display:flex;flex-direction:column;max-height:90%;min-width:500px;position:relative}@media screen and (max-width:500px){[data-v-5e927378] .sales-ninja-modal-content{min-width:100%}}[data-v-5e927378] .sales-ninja-modal__content{flex-grow:1;overflow-y:auto}</style><style type="text/css">#sales-ninja-app{left:0;position:absolute;top:0}</style><style type="text/css">@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Ew-.ttf) format("truetype")}@font-face{font-display:swap;font-family:Montserrat;font-style:normal;font-weight:600;src:url(https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCu170w-.ttf) format("truetype")}#start-survey-button{align-items:center;background:#4285f4;border:1px solid transparent;border-radius:2px;display:flex;height:50px;left:0;outline:none;padding-left:18px;padding-right:18px;position:fixed;text-align:center;top:60%;transform:rotate(270deg);transform-origin:0 0;transition:left 2s ease-out 2s;z-index:1030}#start-survey-button.transition-start{left:-100%}#start-survey-button img{height:24px;transform:rotate(90deg);width:24px}#start-survey-button #start-survey-button-question{color:#fff;cursor:pointer;font-family:Montserrat,sans-serif;font-size:16px;font-weight:600;line-height:150%;max-width:100%;padding:10px;vertical-align:bottom;white-space:pre-wrap}.sales-ninja-question{font-family:Montserrat,sans-serif;padding:25px}.sales-ninja-question .text-answer-area{border:1px solid #e0e0e0;border-radius:2px;box-sizing:border-box;min-height:210px;padding:10px;width:100%}.sales-ninja-question .question-container{display:flex;flex-direction:column;flex-wrap:wrap;min-height:250px;position:relative}.sales-ninja-question .questions-header{margin-bottom:36px}.sales-ninja-question .short-question{font-size:20px;font-weight:700;margin-bottom:12px}.sales-ninja-question .detailed-question{font-size:14px;margin-bottom:12px}.sales-ninja-question .question-action-container{display:flex;flex-wrap:wrap;justify-content:flex-end;margin-bottom:8px;margin-top:16px}.sales-ninja-question .question-cancel{align-items:center;background:transparent;border:1px solid #e0e0e0;border-radius:2px;box-sizing:border-box;color:#4f4f4f;display:flex;outline:none;padding:11px 38px}.sales-ninja-question .question-cancel:hover{background:#333;color:#fff}.sales-ninja-question .question-submit{align-items:center;background:#4285f4!important;border:1px solid #e0e0e0;border-radius:2px;box-sizing:border-box;color:#fff;display:flex;margin-right:5px;outline:none;padding:11px 38px}.sales-ninja-question .question-submit:hover{border:1px solid #000}.sales-ninja-question .question-submit:disabled{color:#4f4f4f}.sales-ninja-question .options-list-container .option{margin-bottom:8px}.sales-ninja-question .options-list-container .option input[type=checkbox],.sales-ninja-question .options-list-container .option input[type=radio]{display:none}.sales-ninja-question .options-list-container .option input[type=checkbox]:checked+label,.sales-ninja-question .options-list-container .option input[type=radio]:checked+label{background:#4285f4}.sales-ninja-question .options-list-container .option label{background:#f2f2f2;border-radius:2px;cursor:pointer;display:block;font-weight:400;max-width:100%;padding:11px 22px}.sales-ninja-question .options-list-container .option label:hover{background:#4285f4;color:#fff}.sales-ninja-question .options-list-container .option:last-child{margin-bottom:0}.sales-ninja-question .question-footer{cursor:pointer;height:30px}.sales-ninja-question .question-footer img{height:auto;width:90px}.sales-ninja-question .question-footer .question-footer-text{color:#b6b3b3;font-size:12px;margin-left:10px}.personalization-debug{align-items:flex-start;background:#f5f5f5;border:1.5px solid gray;border-radius:4px;bottom:5%;display:flex;flex-direction:row;font-family:Montserrat,sans-serif;font-size:14px!important;height:350px;left:-325px;outline:none;padding-left:18px;position:fixed;transition:left .5s ease-out .5s;width:350px;z-index:1030}.personalization-debug.opened{left:0}.personalization-debug .content{height:350px;overflow-y:scroll;width:325px}.personalization-debug .title{align-items:center;cursor:pointer;display:flex;height:100%;justify-content:center;white-space:nowrap;width:25px}.personalization-debug .title p{transform:rotate(-90deg);white-space:nowrap}</style><style type="text/css">.sales-ninja *,.sales-ninja :after,.sales-ninja :before{border:0 solid #e5e7eb;box-sizing:border-box}/*! tailwindcss v3.0.24 | MIT License | https://tailwindcss.com*/.sales-ninja :after,.sales-ninja :before{--tw-content:""}.sales-ninja html{-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5;-o-tab-size:4;tab-size:4}.sales-ninja body{line-height:inherit;margin:0}.sales-ninja hr{border-top-width:1px;color:inherit;height:0}.sales-ninja abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}.sales-ninja h1,.sales-ninja h2,.sales-ninja h3,.sales-ninja h4,.sales-ninja h5,.sales-ninja h6{font-size:inherit;font-weight:inherit}.sales-ninja a{color:inherit;text-decoration:inherit}.sales-ninja b,.sales-ninja strong{font-weight:bolder}.sales-ninja code,.sales-ninja kbd,.sales-ninja pre,.sales-ninja samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-size:1em}.sales-ninja small{font-size:80%}.sales-ninja sub,.sales-ninja sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}.sales-ninja sub{bottom:-.25em}.sales-ninja sup{top:-.5em}.sales-ninja table{border-collapse:collapse;border-color:inherit;text-indent:0}.sales-ninja button,.sales-ninja input,.sales-ninja optgroup,.sales-ninja select,.sales-ninja textarea{color:inherit;font-family:inherit;font-size:100%;line-height:inherit;margin:0;padding:0}.sales-ninja button,.sales-ninja select{text-transform:none}.sales-ninja [type=button],.sales-ninja [type=reset],.sales-ninja [type=submit],.sales-ninja button{-webkit-appearance:button;background-color:transparent;background-image:none}.sales-ninja :-moz-focusring{outline:auto}.sales-ninja :-moz-ui-invalid{box-shadow:none}.sales-ninja progress{vertical-align:baseline}.sales-ninja ::-webkit-inner-spin-button,.sales-ninja ::-webkit-outer-spin-button{height:auto}.sales-ninja [type=search]{-webkit-appearance:textfield;outline-offset:-2px}.sales-ninja ::-webkit-search-decoration{-webkit-appearance:none}.sales-ninja ::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}.sales-ninja summary{display:list-item}.sales-ninja blockquote,.sales-ninja dd,.sales-ninja dl,.sales-ninja figure,.sales-ninja h1,.sales-ninja h2,.sales-ninja h3,.sales-ninja h4,.sales-ninja h5,.sales-ninja h6,.sales-ninja hr,.sales-ninja p,.sales-ninja pre{margin:0}.sales-ninja fieldset{margin:0;padding:0}.sales-ninja legend{padding:0}.sales-ninja menu,.sales-ninja ol,.sales-ninja ul{list-style:none;margin:0;padding:0}.sales-ninja textarea{resize:vertical}.sales-ninja input::placeholder,.sales-ninja textarea::placeholder{color:#9ca3af;opacity:1}.sales-ninja [role=button],.sales-ninja button{cursor:pointer}.sales-ninja :disabled{cursor:default}.sales-ninja audio,.sales-ninja canvas,.sales-ninja embed,.sales-ninja iframe,.sales-ninja img,.sales-ninja object,.sales-ninja svg,.sales-ninja video{display:block;vertical-align:middle}.sales-ninja img,.sales-ninja video{height:auto;max-width:100%}.sales-ninja [hidden]{display:none}.sales-ninja *,.sales-ninja :after,.sales-ninja :before{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }.sales-ninja .static{position:static!important}.sales-ninja .absolute{position:absolute!important}.sales-ninja .mt-4{margin-top:1rem!important}.sales-ninja .mr-5{margin-right:1.25rem!important}.sales-ninja .mb-4{margin-bottom:1rem!important}.sales-ninja .mt-5{margin-top:1.25rem!important}.sales-ninja .mb-2{margin-bottom:.5rem!important}.sales-ninja .mb-10{margin-bottom:2.5rem!important}.sales-ninja .block{display:block!important}.sales-ninja .grid{display:grid!important}.sales-ninja .w-full{width:100%!important}.sales-ninja .max-w-lg{max-width:32rem!important}.sales-ninja .flex-grow{flex-grow:1!important}.sales-ninja .resize{resize:both!important}.sales-ninja .content-center{align-content:center!important}.sales-ninja .gap-1{gap:.25rem!important}.sales-ninja .self-end{align-self:flex-end!important}.sales-ninja .rounded-lg{border-radius:.5rem!important}.sales-ninja .border{border-width:1px!important}.sales-ninja .border-gray-200{--tw-border-opacity:1!important;border-color:rgb(229 231 235/var(--tw-border-opacity))!important}.sales-ninja .border-gray-300{--tw-border-opacity:1!important;border-color:rgb(209 213 219/var(--tw-border-opacity))!important}.sales-ninja .bg-slate-100{--tw-bg-opacity:1!important;background-color:rgb(241 245 249/var(--tw-bg-opacity))!important}.sales-ninja .bg-gray-50{--tw-bg-opacity:1!important;background-color:rgb(249 250 251/var(--tw-bg-opacity))!important}.sales-ninja .bg-white{--tw-bg-opacity:1!important;background-color:rgb(255 255 255/var(--tw-bg-opacity))!important}.sales-ninja .bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))!important}.sales-ninja .from-blue-500{--tw-gradient-from:#3b82f6!important;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to,rgba(59,130,246,0))!important}.sales-ninja .via-blue-600{--tw-gradient-stops:var(--tw-gradient-from),#2563eb,var(--tw-gradient-to,rgba(37,99,235,0))!important}.sales-ninja .to-blue-700{--tw-gradient-to:#1d4ed8!important}.sales-ninja .p-6{padding:1.5rem!important}.sales-ninja .p-2\.5{padding:.625rem!important}.sales-ninja .p-2{padding:.5rem!important}.sales-ninja .px-5{padding-left:1.25rem!important;padding-right:1.25rem!important}.sales-ninja .py-2\.5{padding-bottom:.625rem!important;padding-top:.625rem!important}.sales-ninja .py-2{padding-bottom:.5rem!important;padding-top:.5rem!important}.sales-ninja .text-center{text-align:center!important}.sales-ninja .text-\[12px\]{font-size:12px!important}.sales-ninja .text-\[10px\]{font-size:10px!important}.sales-ninja .text-\[14px\]{font-size:14px!important}.sales-ninja .font-medium{font-weight:500!important}.sales-ninja .tracking-wide{letter-spacing:.025em!important}.sales-ninja .text-gray-700{--tw-text-opacity:1!important;color:rgb(55 65 81/var(--tw-text-opacity))!important}.sales-ninja .text-gray-900{--tw-text-opacity:1!important;color:rgb(17 24 39/var(--tw-text-opacity))!important}.sales-ninja .text-white{--tw-text-opacity:1!important;color:rgb(255 255 255/var(--tw-text-opacity))!important}.sales-ninja .text-gray-600{--tw-text-opacity:1!important;color:rgb(75 85 99/var(--tw-text-opacity))!important}.sales-ninja .shadow-md{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1)!important;--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color)!important;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)!important}.sales-ninja .blur{--tw-blur:blur(8px)!important}.sales-ninja .blur,.sales-ninja .filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)!important}.hover\:bg-gray-100:hover{--tw-bg-opacity:1!important;background-color:rgb(243 244 246/var(--tw-bg-opacity))!important}.hover\:bg-gradient-to-br:hover{background-image:linear-gradient(to bottom right,var(--tw-gradient-stops))!important}.focus\:border-blue-500:focus{--tw-border-opacity:1!important;border-color:rgb(59 130 246/var(--tw-border-opacity))!important}.focus\:ring-blue-500:focus{--tw-ring-opacity:1!important;--tw-ring-color:rgb(59 130 246/var(--tw-ring-opacity))!important}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--tw-bg-opacity:1!important;background-color:rgb(31 41 55/var(--tw-bg-opacity))!important}}</style><script type="text/javascript" async="" charset="UTF-8" class="js-jivo-bundle" src="https://code.jivo.ru/js/bundle_ru_RU.js?rand=1676295863"></script></head>
+	<body class="adaptive template-is-article">
+      <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLD9G57"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+		<div class="page-wrapper ">
+		  <div class="page-inner">
+			<header>
+  <div class="header-wrapper">
+	<div class="header-inner layout site-padding">
+		<div class="header-inner-top group">
+			<div class="grid-2 m2-grid-6 m-grid-6 s-grid-6">
+				<a class="header-inner-top-logo" href="/">
+                  
+					<img alt="Gopro_logo" class="h-100" src="https://static.insales-cdn.com/assets/1/4555/1495499/1674469895/gopro_logo.svg">
+                  
+				</a>
+			</div>
+			<div class="grid-7 m2-hidden m-hidden s-hidden">
+				<nav>
+					<ul class="nav">
+					
+					  <li class="nav-parent ">
+						 <a target="_self" href="/collection/mounts-accessories-gopro" class="">
+							Каталог
+						 </a>
+                        
+						  
+						 <i class="fa fa-caret-up" aria-hidden="true"></i>
+						  	
+					  </li>
+					
+					  <li class="">
+						 <a target="_self" href="/page/blogs" class="">
+							Журнал
+						 </a>
+                        
+						  	
+					  </li>
+					
+					  <li class="">
+						 <a target="_self" href="/page/contacts" class="">
+							Контакты
+						 </a>
+                        
+						  	
+					  </li>
+					
+					  <li class="">
+						 <a target="_self" href="/page/delivery" class="">
+							Доставка + Оплата
+						 </a>
+                        
+						  	
+					  </li>
+						
+                      <li id="where"><a href="#">Где мой заказ?</a></li>
+					</ul>
+					
+					<span class="nav-search js-nav-search"><i class="fa fa-search" aria-hidden="true"></i></span>		
+				  
+				</nav>
+			
+			
+			</div>
+			<div class="grid-3 right m2-grid-6 m-grid-6 s-grid-6">
+				<div class="top-right-part">
+                  	<div class="top-phones top-phone-for-mobile">
+						<p class="js-moscow-phone" style="display: none;"><span>8 495 481 4953</span></p>
+						<p class="js-region-phone"><span>8 800 777 1753</span></p>
+					</div>
+					<span class="nav-search nav-search-mobile js-nav-search"><i class="fa fa-search" aria-hidden="true"></i></span>
+                    <div class="header-social">
+                      	<noindex>
+                         <a rel="nofollow" href="https://vk.cc/84Gh6n" target="_blank" class="c-gry-ltr h-c-wht">
+                            <i class="fa fa-vk" aria-hidden="true"></i>
+                          </a>
+                        </noindex>
+                    </div>
+					<div class="top-phones m2-hidden s-hidden">
+						<p class="js-moscow-phone" style="display: none;">Москва <span>8 495 481 4953</span></p>
+						<p class="js-region-phone">Россия <span>8 800 777 1753</span></p>
+					</div>
+                  <!--noindex-->
+                  <div class="top-compare js-toggle-compare-widjet"><i class="fa fa-bar-chart"></i><span class="top-cart-qwt js-compare-amount">0</span>
+                  </div>
+					<div class="top-cart js-toggle-cart-widjet">
+						<i class="icon-font icon-cart"></i>
+						<span class="top-cart-qwt js-shopcart-amount"> 0</span>
+					</div>
+                  <!--/noindex-->
+					<div class="js-menu-toggle top-bars">
+						<i class="fa fa-bars"></i>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="mobile-menu">
+			<ul class="mobile-menu-ul">
+  
+  <li class="js-mobile-sub">
+    
+    <a target="_self" href="/" class="">
+      Каталог
+    </a>
+  
+    
+    <ul class="mobile-menu-subnav js-mobile-menu-subnav">
+       
+      	
+      		<li>
+            <a class="" href="/collection/cameras-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">Камеры GoPro</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/all-for-hero9" locale-href="">              
+              <span class="mobile-menu-subnav-title">Новинки</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/sd-cards" locale-href="">              
+              <span class="mobile-menu-subnav-title">Карты памяти</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/mounts-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">Крепления</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/accessories-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">Аксессуары</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/batarei-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">Батареи и зарядные устройства</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/cases-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">Кейсы и чехлы</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/housing-frame-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">Защитные боксы</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/poles-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">Моноподы и штативы</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/na-vode-i-pod-vodoy-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">На воде и под водой</span>
+        	</a>
+        </li>
+      	
+       
+      	
+      		<li>
+            <a class="" href="/collection/repair_parts-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">Запасные части и уход</span>
+        	</a>
+        </li>
+      	
+      
+      <li>
+            <a class="" href="/collection/activity-gopro" locale-href="">              
+              <span class="mobile-menu-subnav-title">По увлечениям</span>
+        	</a>
+        </li>
+    </ul>  
+	
+    	
+   
+  </li>
+  
+  <li class="">
+    
+    <a target="_self" href="/page/blogs" class="">
+      Журнал
+    </a>
+  
+    	
+   
+  </li>
+  
+  <li class="">
+    
+    <a target="_self" href="/page/contacts" class="">
+      Контакты
+    </a>
+  
+    	
+   
+  </li>
+  
+  <li class="">
+    
+    <a target="_self" href="/page/delivery" class="">
+      Доставка + Оплата
+    </a>
+  
+    	
+   
+  </li>
+  
+  <li id="wherem"><a href="#">Где мой заказ?</a></li>
+  <li class="">
+    <a target="_self" href="/page/softwareandapp" class="">Приложения</a>
+  </li> 
+</ul>
+		</div>
+		<div class="nav-inner m-hidden">
+			<div class="layout padd">
+			 
+
+<div class="nav-item"><a class="" href="https://gopro.ru/collection/cameras-gopro" locale-href="">
+        <span class="nav-inner-title">Камеры</span>
+</a>
+  </div>
+
+ 
+
+<div class="nav-item"><a class="accs" href="/collection/mounts-accessories-gopro" locale-href="">
+        <span class="nav-inner-title">Крепления + аксессуары</span>
+</a>
+  <div class="accessories-menu">
+    
+    
+    <a class="" href="/collection/accessories-gopro" locale-href="">
+        <span class="nav-inner-title">Аксессуары</span>
+  
+</a>
+    
+    <a class="" href="/collection/mounts-gopro" locale-href="">
+        <span class="nav-inner-title">Крепления</span>
+  
+</a>
+    
+    <a class="" href="/collection/sd-cards" locale-href="">
+        <span class="nav-inner-title">Карты памяти</span>
+  
+</a>
+    
+    <a class="" href="/collection/poles-gopro" locale-href="">
+        <span class="nav-inner-title">Моноподы и штативы</span>
+  
+</a>
+    
+    <a class="" href="/collection/batarei-gopro" locale-href="">
+        <span class="nav-inner-title">Батареи и зарядные устройства</span>
+  
+</a>
+    
+    <a class="" href="/collection/housing-frame-gopro" locale-href="">
+        <span class="nav-inner-title">Защитные боксы</span>
+  
+</a>
+    
+    <a class="" href="/collection/na-vode-i-pod-vodoy-gopro" locale-href="">
+        <span class="nav-inner-title">На воде и под водой</span>
+  
+</a>
+    
+    <a class="" href="/collection/cases-gopro" locale-href="">
+        <span class="nav-inner-title">Кейсы и чехлы</span>
+  
+</a>
+    
+    <a class="" href="/collection/repair_parts-gopro" locale-href="">
+        <span class="nav-inner-title">Запасные части и уход</span>
+  
+</a>
+    </div>
+  </div>
+
+ 
+
+<div class="nav-item"><a class="" href="https://gopro.ru/collection/all-for-hero9" locale-href="">
+        <span class="nav-inner-title">Новинки</span>
+</a>
+  </div>
+
+ 
+
+<div class="nav-item"><a class="" href="https://gopro.ru/collection/sd-cards" locale-href="">
+        <span class="nav-inner-title">Карты памяти</span>
+</a>
+  </div>
+
+ 
+
+<div class="nav-item"><a class="" href="/collection/activity-gopro" locale-href="">
+        <span class="nav-inner-title">По увлечениям</span>
+</a>
+  </div>
+
+ 
+
+<div class="nav-item"><a class="" href="/page/softwareandapp" locale-href="">
+        <span class="nav-inner-title">Приложения</span>
+</a>
+  </div>
+
+
+ 
+	
+
+	
+            </div>
+		</div>	
+      
+        
+		<div class="top-search" id="top-search">  
+		  <form action="/search">
+				<input placeholder="Поиск товаров..." name="q" type="text">
+				<button><i class="fa fa-search"></i></button>
+				<span class="js-close-search"><i class="fa fa-times"></i></span>
+		 </form>
+		</div>
+		<div class="layout">
+          <!--noindex-->
+			<div class="cart-widjet">
+				<div class="cart-widjet-body">
+					<div class="js-widjet-cart cart-widjet-inner">
+					
+					</div>
+				</div>
+			</div>
+           <!--/noindex-->
+          <!--noindex-->
+			<div class="compare-widjet">
+				<div class="compare-widjet-body">
+					<div class="js-widjet-compare compare-widjet-inner">
+					
+					</div>
+				</div>
+			</div>
+           <!--/noindex-->
+		</div>
+	</div>
+    </div>
+</header>
+           
+			
+			<div class="group site-padding layout padd site-padding-blog">
+              	 
+              
+				<div class="grid-3 m-grid-12 s-grid-12 l-padded-right-2">
+					
+
+                          <div class="sidebar sidebar-blogs">
+  <div class="blogs-nav-inner">
+    <ul class="">
+      
+ 	  
+      
+      
+      
+  	 
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="" href="/blogs/istoriya-gopro">История GoPro</a>
+          <i class="fa fa-plus js-blog-toggle blog-nav-toggle"></i>
+              <ul class="hd blogs-nav-sub ">
+                
+                	
+                	
+                    
+                     <li>
+                          <a href="/blogs/istoriya-gopro/evolyutsiya-kamer-gopro" class="">
+                              Эволюция камер GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/istoriya-gopro/chtoby-dostich-uspeha-nuzhno-delat-to-chto-lyubish-istoriya-sozdaniya-gopro" class="">
+                              История создания GoPro
+                          </a>
+                      </li>
+                     
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+     
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="" href="/page/model">Модели камер</a>
+          <i class="fa fa-plus js-blog-toggle blog-nav-toggle"></i>
+              <ul class="hd blogs-nav-sub js-blogs-model-toggle ">
+                
+                	
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero11-black" class="">
+                                   Hero11 Black
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero10" class="">
+                                   HERO10  Black
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/max" class="">
+                                   MAX 
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero9-black" class="">
+                                   HERO9 Black
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero8-black" class="">
+                                   HERO8 Black
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/fusion" class="">
+                                   Fusion
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero7-black" class="">
+                                   HERO7 Black
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero7-silver" class="">
+                                   HERO7 Silver
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero7-white" class="">
+                                   HERO7 White 
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/HERO6-Black" class="">
+                                   HERO6 Black
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero5" class="">
+                                   HERO5 Black
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero-2018" class="">
+                                   HERO 2018
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/omni" class="">
+                                   Omni
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero5-session" class="">
+                                   HERO5 Session 
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero-4" class="">
+                                   HERO4 
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero-session" class="">
+                                   HERO Session 
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero-3" class="">
+                                   HERO3+
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero-3-2" class="">
+                                   HERO3
+                              </a>
+                          </li> 
+                
+                       
+                		
+                      
+                         <li>
+                           <a href="/blogs/hero" class="">
+                                   HERO 
+                              </a>
+                          </li> 
+                
+                      
+                	
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+     
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="" href="/blogs/rezhimy-i-nastroyki-kamer-gopro">Режимы и настройки</a>
+          <i class="fa fa-plus js-blog-toggle blog-nav-toggle"></i>
+              <ul class="hd blogs-nav-sub ">
+                
+                	
+                	
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/ispolzovanie-hero8-black-v-kachestve-veb-kamery" class="">
+                              Использование HERO8/9/10 Black в качестве веб-камеры
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/ispolzovanie-gopro-v-kachestve-veb-kamery" class="">
+                              Использование GoPro в качестве веб-камеры
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/6-tipichnyh-oshibok-pri-nastroyke-protune" class="">
+                              6 типичных ошибок при настройке Protune
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/kak-rabotaet-tsiklicheskaya-semka" class="">
+                              Как работает циклическая съемка?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/chto-takoe-hdr" class="">
+                              Что такое HDR?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/rezhimy-night-photo-i-night-lapse" class="">
+                              Режимы «Night Photo» и «Night Lapse»
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/v-kakom-brauzere-vladeltsam-mac-stoit-smotret-video-360" class="">
+                              В каком браузере владельцам Mac стоит смотреть видео 360˚?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/protune" class="">
+                              Режим Protune в экшн-камерах GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/kak-konvertirovat-hevc-video-v-h264" class="">
+                              Как конвертировать HEVC-видео в H.264?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/razryad-akkumulyatora-na-vyklyuchennoy-gopro" class="">
+                              Разряд аккумулятора на выключенной GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/udalenie-nenuzhnyh-faylov-s-microsd-karty" class="">
+                              Удаление ненужных файлов с microSD-карты
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/dlya-chego-nuzhny-raw-i-hdr-v-kamerah-gopro" class="">
+                              Для чего нужны формат RAW и технология HDR
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/sistemnye-fayly-na-karte-pamyati-gopro" class="">
+                              Системные файлы на карте памяти GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/zaryadka-kamer-gopro-pravila-i-rekomendatsii" class="">
+                              Зарядка камер GoPro: правила и рекомендации
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/obnovlenie-kamery-gopro-v-ruchnom-rezhime" class="">
+                              Обновление камеры GoPro в ручном режиме
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/problema-pri-obnovlenii-gopro-cherez-quik-desktop" class="">
+                              Проблема при обновлении GoPro через Quik Desktop
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/obnovlenie-kamery-gopro-cherez-programmu-quik-desktop" class="">
+                              Обновление GoPro через Quik Desktop
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/obnovlenie-gopro-cherez-prilozhenie-gopro-app" class="">
+                              Обновление GoPro через приложение GoPro App
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/problemy-pri-podklyuchenii-kamery-k-gopro-app" class="">
+                              Проблемы при подключении камеры к GoPro App
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/quik-desktop-ne-vidit-kameru-u-polzovateley-mac" class="">
+                              Quik Desktop не видит камеру у пользователей Mac
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/kakie-byvayut-razemy-v-kamerah-gopro" class="">
+                              Разъемы в камерах GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/sbros-nastroek-gopro-do-zavodskih" class="">
+                              Сброс настроек GoPro до заводских
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/rezhimy-videosemki-kamer-gopro" class="">
+                              Режимы видеосъемки GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/rezhimy-fotosemki-gopro-hero5" class="">
+                              Режимы фотосъемки HERO5
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/funktsiya-quikstories-v-prilozhenii-gopro" class="">
+                              QuikStories в приложении GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/rezhim-4k-v-kamerah-gopro" class="">
+                              Режим 4К в камерах GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/semka-na-kameru-gopro-v-rezhime-timelapse" class="">
+                              Съемка в режиме Timelapse
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/ekshn-kamera-kak-videoregistrator-tsiklicheskaya-zapis-na-gopro" class="">
+                              GoPro, как видеорегистратор
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/rezhimy-i-nastroyki-kamer-gopro/spot-meter-tochechnyy-zamer-ekspozitsii-na-gopro" class="">
+                              Spot Meter на камерах GoPro
+                          </a>
+                      </li>
+                     
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+     
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="" href="/blogs/dron-karma">Дрон Karma </a>
+          <i class="fa fa-plus js-blog-toggle blog-nav-toggle"></i>
+              <ul class="hd blogs-nav-sub ">
+                
+                	
+                	
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/obzor-korpusa-drona-gopro-karma-core-dostoynaya-zamena" class="">
+                              Обзор корпуса дрона GoPro KARMA Core: достойная замена
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/keys-ryukzak-gopro-karma-dlya-kvadrokoptera-bezopasnost-i-mobilnost-v-odnom-litse" class="">
+                              Кейс-рюкзак GoPro Karma для квадрокоптера
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/kvadrokopter-karma-ne-vidit-kameru" class="">
+                              Квадрокоптер Karma не видит камеру
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/ne-poluchaetsya-otkalibrovat-dron-karma" class="">
+                              Не получается откалибровать дрон Karma
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/dronu-karma-ne-udaetsya-poluchit-signal-gps" class="">
+                              Дрону Karma не удается получить сигнал GPS
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/ne-udaetsya-podklyuchit-kontroller-k-dronu-karma" class="">
+                              Не удается подключить контроллер к дрону Karma
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/faq-kvadrokopter-karma" class="">
+                              FAQ Квадрокоптер Karma
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/prilozhenie-k-obnovleniyu-po-28092017" class="">
+                              Приложение к обновлению ПО 28.09.2017
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/sozdanie-pary-s-prilozheniem-passenger" class="">
+                              Создание пары с приложением Passenger
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/gopro-karma-bolshe-chem-prosto-dron" class="">
+                              GoPro Karma. Больше, чем просто дрон
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/kak-opredelit-povrezhdeniya-elementov-i-uzlov-karma" class="">
+                              Как определить повреждения Karma
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/dron-karma-predosterezheniya-i-uvedomleniya" class="">
+                              Дрон Karma: предостережения и уведомления
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/kak-zaryazhat-sistemu-karma" class="">
+                              Как заряжать систему Karma
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/kak-posadit-dron" class="">
+                              Как посадить дрон
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/vklyuchenie-sistemy-karma" class="">
+                              Включение системы Karma
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/sopryazhenie-kontrollera-karma-s-dronom" class="">
+                              Сопряжение контроллера Karma с дроном
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/obnovlenie-sistemy-karma" class="">
+                              Обновление системы Karma
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/dron-karma/kak-nastroit-kontroller" class="">
+                              Как настроить контроллер Karma
+                          </a>
+                      </li>
+                     
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+     
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="" href="/blogs/stabilizatsiya-gopro">Стабилизация GoPro</a>
+          <i class="fa fa-plus js-blog-toggle blog-nav-toggle"></i>
+              <ul class="hd blogs-nav-sub ">
+                
+                	
+                	
+                    
+                     <li>
+                          <a href="/blogs/stabilizatsiya-gopro/stabilizator-feiyu-g6-ekshn-kamera-i-vash-smartfon-tri-gadzheta-v-edinoe-tseloe" class="">
+                              Feiyu G6, экшн-камера и смартфон - единое целое.
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/stabilizatsiya-gopro/obzor-stabilizatora-gopro-karma-grip" class="">
+                              Обзор стабилизатора GoPro Karma Grip
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/stabilizatsiya-gopro/vse-chto-vy-hoteli-znat-o-trehosevom-stabilizatore-feiyu-tech-g5" class="">
+                              Обзор стабилизатора Feiyu Tech G5
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/stabilizatsiya-gopro/chto-takoe-stabilizatsiya-stabilizatsiya-v-kamerah-gopro" class="">
+                              Что такое стабилизация в камерах GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/stabilizatsiya-gopro/kak-stabilizirovat-video-na-gopro-svoimi-silami-bez-elektronnogo-stabilizatora" class="">
+                              Улучшаем видео без стабилизатора для GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/stabilizatsiya-gopro/vidy-stabilizatorov-dlya-gopro" class="">
+                              Виды стабилизаторов для GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/stabilizatsiya-gopro/sravnenie-stabilizatorov-dlya-gopro" class="">
+                              Сравнение стабилизаторов для GoPro
+                          </a>
+                      </li>
+                     
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+     
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="" href="/blogs/accesories">Аксессуары</a>
+          <i class="fa fa-plus js-blog-toggle blog-nav-toggle"></i>
+              <ul class="hd blogs-nav-sub ">
+                
+                	
+                	
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-gibkogo-universalnogo-kreplenie-gopro-gumby" class="">
+                              Обзор гибкого крепления GoPro Gumby
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-zaryadnogo-ustroystva-gopro-dual-enduro-battery-charger" class="">
+                              Обзор зарядного устройства GoPro Dual Enduro Battery Charger
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-akkumulyatora-gopro-enduro-battery" class="">
+                              Обзор аккумулятора GoPro Enduro Battery
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-na-akkumulyator-rukoyatku-gopro-volta" class="">
+                              Обзор на аккумулятор-рукоятку GoPro Volta
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/the-remote-upravlenie-neskolkimi-kamerami" class="">
+                              The Remote. Управление несколькими камерами
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/the-remote-kak-ispolzovat" class="">
+                              The Remote. Как использовать?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-na-portativnuyu-svetodiodnuyu-podsvetku-gopro-zeus-mini" class="">
+                              Обзор на портативную подсветку GoPro Zeus Mini
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-na-monopod-shtativ-3-way-20" class="">
+                              Обзор на монопод-штатив 3-Way 2.0
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-na-nabor-filtrov-polarpro-shutter-dlya-hero9" class="">
+                              Обзор на набор фильтров PolarPro SHUTTER для HERO9
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-nabora-filtrov-polarpro-aqua-na-boks-hero9-black" class="">
+                              Обзор набора фильтров PolarPro AQUA на бокс HERO9 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-kryshki-s-otverstiem-dlya-skvoznoy-zaryadki-usb" class="">
+                              Обзор крышки с отверстием для сквозной зарядки USB
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-na-silikonovyy-chehol-s-remeshkom-dlya-gopro-hero9-sleeve-lanyard" class="">
+                              Обзор на силиконовый чехол с ремешком для GoPro HERO9 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/monopod-poplavok-gopro-floating-hand-grip" class="">
+                              Обзор на монопод-поплавок GoPro Floating Hand Grip
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-kapa-s-poplavkom-dlya-gopro-hero9-bite-mount-floaty" class="">
+                              Обзор на крепление-капу с поплавком для GoPro HERO9
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/keys-gopro-casey-lite" class="">
+                              Обзор кейса GoPro Casey LITE
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/the-remote-obnovlennyy-pult-ot-gopro" class="">
+                              The Remote — обновленный пульт от GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kompaktnost-i-funktsional-mediamodul-s-mikrofonom-i-hdmi-dlya-gopro-hero8" class="">
+                              Медиамодуль с микрофоном и HDMI для GoPro HERO8
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/hero9-black-modul-obektiva-max" class="">
+                              HERO9 Black - Модуль объектива MAX
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/hero9-black-dvoynoe-zaryadnoe-ustroystvo-akkumulyator" class="">
+                              HERO9 Black - Двойное зарядное устройство + аккумулятор
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/hero9-black-zaschitnyy-boks" class="">
+                              Водонепроницаемый бокс для камеры HERO9 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/zaschitnye-stekla-na-displey-i-obektiv-hero8-polnaya-bezopasnost" class="">
+                              Защитные стекла на дисплей и объектив HERO8 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/krepezhnoe-osnovanie-dlya-kamery-hero8-i-max-gopro-finger-replacement" class="">
+                              Крепежное основание для камеры HERO8 и MAX
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/zapasnaya-kryshka-dlya-gopro-max-obzor-dlya-apgreyda-kamery" class="">
+                              Запасная крышка для GoPro Max
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-krepezhnogo-koltsa-gopro-karma-mounting-ring-svobodnye-ruki-bez-drozhi-v-kadre" class="">
+                              GoPro Karma Mounting Ring: свободные руки без дрожи в кадре
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-korpusa-drona-gopro-karma-core-dostoynaya-zamena" class="">
+                              Обзор корпуса дрона GoPro KARMA Core: достойная замена
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/bystroe-pitanie-dlya-gopro-zaryadnoe-ustroystvo-dual-battery-charger-dlya-hero5-hero6-hero7-black" class="">
+                              Зарядное устройство Dual Battery Charger для HERO5/6/7 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/keys-ryukzak-gopro-karma-dlya-kvadrokoptera" class="">
+                              Кейс-рюкзак GoPro Karma для квадрокоптера
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-adapter-dlya-stoyki-mikrofona-gopro-mic-stand-adapter-abqrm-001" class="">
+                              Крепление для стойки микрофона GoPro Mic Stand Adapter
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-na-truburamu-11-18-mm-gopro-handlebar-seatpost-pole-mount" class="">
+                              Крепление на трубу/раму  GoPro Handlebar Seatpost Pole Mount
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/krepleniya-na-shtativ-tripod-mounts" class="">
+                              Крепления на штатив Tripod Mounts
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/zaryadnoe-ustroystvo-gopro-karma-replacement-wall-charger" class="">
+                              Зарядное устройство Karma Replacement Wall Charger
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-pod-sedlo-velosipeda-gopro-pro-seat-rail-mount" class="">
+                              Крепление под седло велосипеда GoPro Pro Seat Rail Mount
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-na-truburamu-35-63-mm-gopro-roll-bar-mount" class="">
+                              Крепление на трубу/раму 35-63 мм GoPro Roll Bar Mount
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-na-karkastruburamu-35-63-mm-gopro-large-tube-mount" class="">
+                              Крепление на каркас/трубу/раму 35-63 мм GoPro Large Tube Mount
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/poplavok-na-boks-dlya-kamer-gopro-floaty-hero678-aflty-005" class="">
+                              Поплавок на бокс для камер GoPro Floaty HERO6/7/8 (AFLTY-005)
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/vodonepronitsaemyy-boks-dlya-gopro-hero7-whitesilver-super-suit" class="">
+                              Водонепроницаемый бокс для GoPro HERO7 White/Silver Super Suit
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/hero8-black-zaschita-perednih-linz" class="">
+                              HERO8 Black - защита передних линз
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/zaryadnoe-ustroystvo-dlya-dvuh-akkumulyatornyh-batarey-hero5678" class="">
+                              Зарядное устройство для аккумуляторных батарей HERO5/6/7/8
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/zaryadnoe-ustroystvo-dlya-dvuh-akkumulyatornyh-batarey-gopro-fusion-dual-battery-charger-battery" class="">
+                              Зарядное устройство для аккумуляторов GoPro FUSION
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-na-dosku-dlya-serfingaveyka-gopro-surf-mounts" class="">
+                              Крепление на доску для серфинга/вейка GoPro Surf Mounts
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/poplavok-floaty-dlya-kamery-gopro-hero8" class="">
+                              Поплавок Floaty для камеры GoPro HERO8
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/nabor-dlya-dopolnitelnoy-fiksatsii-gopro-camera-tethers" class="">
+                              Дополнительная фиксация GoPro Camera Tethers
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-adapter-dlya-stoyki-mikrofona-gopro-mic-stand-adapter" class="">
+                              Крепление-адаптер для стойки микрофона GoPro Mic Stand Adapter
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kleyaschiesya-platformy-dlya-fusion-gopro-fusion-mounts" class="">
+                              Клеящиеся платформы для FUSION GoPro Fusion Mounts
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/detskoe-kreplenie-na-grud-gopro-jr-chesty-chest-harness" class="">
+                              Детское крепление на грудь GoPro Jr. Chesty: Chest Harness
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/zaryadnoe-ustroystvo-dlya-dvuh-akkumulyatornyh-batarey-gopro-max-dual-battery-charger-battery" class="">
+                              Зарядное устройство GoPro MAX Dual Battery Charger + Battery
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/keys-dlya-kamery-i-aksessuarov-gopro-compact-case" class="">
+                              Кейс для камеры и аксессуаров GoPro Compact Case
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/setevoe-zaryadnoe-ustroystvo-gopro-supercharger-2" class="">
+                              Сетевое зарядное устройство GoPro Supercharger
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-na-rullyzhnye-palki-gopro-handlebarseatpostpole-mount" class="">
+                              Крепление GoPro Handlebar/Seatpost/Pole Mount
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/akkumulyator-dlya-kamery-gopro-fusion-battery" class="">
+                              Аккумулятор для камеры GoPro Fusion Battery
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/ryukzak-gopro-seeker" class="">
+                              Рюкзак GoPro Seeker
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/keys-gopro-casey" class="">
+                              Кейс GoPro Casey
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/monopod-poplavok-gopro-the-handler" class="">
+                              Монопод-поплавок GoPro The Handler
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/monopod-shtativ-gopro-3-way-mount-griparmtripod" class="">
+                              Монопод-штатив GoPro 3-Way Mount - Grip/Arm/Tripod
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/monopod-teleskopicheskiy-gopro-el-grande-97sm" class="">
+                              Монопод телескопический GoPro El Grande 97см
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-na-ventiliruemyy-shlem-gopro-vented-helmet-strap-mount" class="">
+                              Крепление на шлем GoPro Vented Helmet Strap Mount
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/hero8-black-floaty" class="">
+                              HERO8 Black Floaty - установка и извлечение камеры
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/zaschitnyy-chehol-i-linza-rollcage-dlya-hero8-black" class="">
+                              Защитный чехол и линза Rollcage для HERO8 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/nabor-zaschitnyh-kryshek-replacement-lens-caps-dlya-gopro-max" class="">
+                              Набор крышек Replacement Lens Caps для GoPro MAX
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/media-modul-hero8-black" class="">
+                              Медиа-модуль – HERO8 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/nevozmozhno-polnostyu-zakryt-monopod-gopro-3-way-mount" class="">
+                              Невозможно полностью закрыть  монопод GoPro 3-Way
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/nabor-aksessuarov-gopro-adventure-kit-vse-neobhodimoe-v-odnom-meste" class="">
+                              GoPro Adventure Kit – все необходимое в одном месте
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/nabor-aksessuarov-gopro-sport-kit-byt-svobodnym-v-semke" class="">
+                              Набор аксессуаров GoPro Sport Kit – быть свободным в съемке
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/zheltyy-silikonovyy-chehol-s-remeshkom-gopro-s-avtografom-zvezdy" class="">
+                              Желтый чехол GoPro с автографом звезды
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/spravka-o-dvoynom-bloke-pitaniya-dlya-kamery-fusion" class="">
+                              Справка о двойном блоке питания для камеры Fusion
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/obzor-populyarnyh-gopro-monopodov-sravnivaem-i-vybiraem" class="">
+                              Обзор популярных GoPro моноподов. Сравниваем и выбираем
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/dopolnitelnyy-vneshniy-akkumulyator-gopro-portable-power-pack" class="">
+                              Внешний аккумулятор GoPro Portable Power Pack
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/podrobno-o-kreplenii-dlya-muzykalnyh-instrumentov-gopro-the-jam-adjustable-music-amclp-001" class="">
+                              Знакомство с креплением GoPro The Jam-Adjustable
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/pult-upravleniya-wi-fi-smart-remote" class="">
+                              Пульт управления Wi-Fi Smart Remote
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/vodonepronitsaemyy-boks-gopro-super-suit-housing-kogda-upakovka-imeet-znachenie" class="">
+                              Super Suit Housing: когда упаковка имеет значение
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-kapa-dlya-polnoy-svobody-semki" class="">
+                              Крепление-капа для полной свободы съемки
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-upryazhka-dlya-sobak-gopro-fetch-dog-harness-adogm-001" class="">
+                              Крепление-упряжка для собак GoPro Fetch Dog Harness
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-na-ruku-gopro-hand-wrist-strap-svobodnye-ruki-dlya-dlitelnoy-semki" class="">
+                              GoPro Hand + Wrist Strap – свобода рук для долгой съемки
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/karty-pamyati-sandisk-nadezhnye-aksessuary-dlya-gopro" class="">
+                              Карты памяти Sandisk – надежные аксессуары для GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/vakuumnaya-prisoska-dlya-ekshn-kamery-poymay-interesnye-kadry" class="">
+                              Присоска Suction Cup Mount. Кому это нужно?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kreplenie-na-grud-gopro-chesty-svoboda-dinamicheskoy-semki" class="">
+                              GoPro Chesty – твоя свобода движения
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/komplekt-gopro-travel-kit-aksessuary-dlya-videoblogerov-i-turistov" class="">
+                              GoPro Travel Kit - видеоблогерам и туристам
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/lacie-dji-copilot-ne-ogranichivay-sebya-v-obemah" class="">
+                              LaCie DJI Copilot – не ограничивай себя в объемах!
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/vsya-pravda-o-vneshnem-zhestkom-diske-lacie-rugged-mini-usb-c-1t-a-stoit-li-priobretat" class="">
+                              Какой купить внешний жесткий диск?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/zachem-vashey-gopro-neskolko-shtativov-s-raznymi-preimuschestvami-dostatochno-joby-gorillapod-500" class="">
+                              Штатив Joby GorillaPod 500 Action
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/teleskopicheskiy-monopod-shtativ-fusion-grip" class="">
+                              Телескопический монопод-штатив Fusion Grip
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/tryohosevoy-stabilizator-dlya-smartfona-feiyu-tech-spg-2" class="">
+                              Стабилизатор для смартфона Feiyu Tech SPG 2
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kinohlopushka-ot-istokov-proshlogo-do-nashego-vremeni" class="">
+                              Кинохлопушка – от истоков прошлого до нашего времени
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/nomad-wireless-hub-vsyo-v-poryadke-spasibo-zaryadke" class="">
+                              Nomad Wireless Hub – всё в порядке, спасибо зарядке
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/sp-connect-case-velosipednyy-keys-dlya-fanatov-gopro" class="">
+                              SP Connect Case – велосипедный кейс для фанатов GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kinomatografichnaya-kartinka-vashego-mavic-air" class="">
+                              Киноматографичная картинка вашего Mavic Air
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/novyy-obraz-tvoey-gopro" class="">
+                              Новый образ твоей GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/octomask-maska-s-krepleniem-dlya-gopro" class="">
+                              Octomask – маска с креплением для GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/aksessuary-manfrotto-mechtay-o-bolshem" class="">
+                              Аксессуары Manfrotto – мечтай о большем
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/ispolzovanie-polusfery-kupola-s-kameroy-gopro" class="">
+                              Использование полусферы-купола с камерой GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kak-hranit-i-perenosit-otsnyatyy-material-s-gopro" class="">
+                              Как хранить и переносить отснятый материал с GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/fonari-dlya-kamer-gopro" class="">
+                              Фонари для камер GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/samye-dlinnye-selfi-palki-dlya-gopro" class="">
+                              Самые длинные селфи-палки для GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/top-7-luchshih-keysov-dlya-gopro" class="">
+                              Топ-7 лучших кейсов для GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/aksessuary-thule-dlya-nastoyaschih-gikov-ekshn-smok-na-gopro" class="">
+                              Аксессуары Thule для настоящих гиков экшн-съемок
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kak-zakrepit-gopro-na-shlem" class="">
+                              Как закрепить экшн-камеру GoPro на шлем
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/rekomenduemye-microsd-karty-dlya-gopro-hero5" class="">
+                              Рекомендуемые microSD карты для GoPro HERO5
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/kak-uluchshit-kachestvo-podvodnoy-semki-na-gopro-s-pomoschyu-svetofiltrov" class="">
+                              Фильтры для GoPro для съемки под водой
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/dlya-chego-svetofiltry-kamere-gopro-i-kakoy-filtr-vybrat" class="">
+                              Для чего светофильтры камере GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/accesories/semnye-kleyaschiesya-platformy-dlya-muzykalnyh-instrumentov" class="">
+                              Съемные платформы для музыкальных инструментов
+                          </a>
+                      </li>
+                     
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+     
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="" href="/blogs/sovety-po-semke">Советы по съемке</a>
+          <i class="fa fa-plus js-blog-toggle blog-nav-toggle"></i>
+              <ul class="hd blogs-nav-sub ">
+                
+                	
+                	
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/sovety-po-syomke-foto-na-hero10-black-ot-trevisa-byorka" class="">
+                              Советы по съёмке фото на HERO10 Black от Трэвиса Бёрка
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/4-soveta-po-semeynoy-fotosemke-ot-vitse-prezidenta-gopro" class="">
+                              4 совета по семейной фотосъемке от вице-президента GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/rukovodstvo-po-semke-molniy-na-gopro" class="">
+                              Руководство по съемке молний на GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/5-pro-sovetov-ot-nomadasaurus" class="">
+                              5 Pro-советов от NOMADASAURUS
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/19-neochevidnyh-veschey-kotorye-mozhet-vasha-gopro" class="">
+                              19 неочевидных вещей, которые может ваша GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/5-pro-sovetov-ot-baki-zaynal" class="">
+                              5 Pro-советов от Баки Зайнал
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/5-pro-sovetov-ot-nikol-ramkomut" class="">
+                              5 Pro-советов от Николь Рамкомут
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/5-pro-sovetov-ot-endryu-santana" class="">
+                              5 Pro-советов от Эндрю Сантана
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/5-pro-sovetov-po-semke-kayakinga" class="">
+                              5 Pro-советов по съемке каякинга на GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/sovety-po-semke-nochnogo-neba-na-gopro-hero8-black" class="">
+                              Советы по съемке ночного неба на GoPro HERO8 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/10-sovetov-po-sozdaniyu-idealnyh-rolikov-quikstory" class="">
+                              10 советов по созданию идеальных роликов QuikStory
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/krutye-sovety-po-semke-na-hero8-black" class="">
+                              Крутые советы по съемке на HERO8 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/sovety-dlya-teh-kto-lyubit-poplavat-s-gopro" class="">
+                              Советы для тех, кто любит поплавать с GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/kak-snyat-nochnoe-nebo-na-gopro" class="">
+                              Как снять ночное небо на GoPro HERO7 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/kak-snyat-feyerverk-na-gopro" class="">
+                              Как снять фейерверк на GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/kak-sdelat-luchshiy-kadr-na-hero7-black" class="">
+                              Как сделать лучший кадр на HERO7 Black
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/vybor-tehniki-dlya-blogera-v-pogone-za-idealnym-kachestvom-semki" class="">
+                              Выбор техники для блогера: в погоне за идеальным качеством съемки
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/sovety-pri-semke-na-kameru-gopro" class="">
+                              Советы при съемке на камеру GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/sovety-po-semke/kak-snyat-horoshie-kadry" class="">
+                              Как снять хорошие кадры
+                          </a>
+                      </li>
+                     
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+     
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="" href="/blogs/faq">FAQ</a>
+          <i class="fa fa-plus js-blog-toggle blog-nav-toggle"></i>
+              <ul class="hd blogs-nav-sub ">
+                
+                	
+                	
+                    
+                     <li>
+                          <a href="/blogs/faq/aktualnaya-informatsiya-o-proverke-seriynyh-nomerov-kamer-gopro" class="">
+                              Информация о проверке серийных номеров камер GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-player-kak-ispolzovat-reelsteady" class="">
+                              GoPro Player: Как использовать ReelSteady
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-quik-kak-sozdat-otdelnoe-foto-iz-video" class="">
+                              GoPro Quik. Как создать отдельное фото из видео
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/hero9-hero10-zelenyy-ekran-ili-samoproizvolnaya-perezagruzka" class="">
+                              HERO9/10: зеленый экран или самопроизвольная перезагрузка
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-quik-provodnoe-podklyuchenie-kamery-k-smartfonu" class="">
+                              GoPro Quik. Проводное подключение камеры к смартфону
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/quik-dlya-mobilnyh-ustroystv-pochemu-ya-ne-mogu-uvidet-polnoe-izobrazhenie" class="">
+                              Приложение Quik отображает не полное изображение
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-quik-predostavlenie-prav-dostupa-k-fotoalbomu-ios" class="">
+                              Quik: предоставление доступа к фотоальбому iOS
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-ispolzovat-sensornyy-zum-na-kamerah-gopro" class="">
+                              Как использовать сенсорный зум на камерах GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kamera-peregrevaetsya-pri-podklyuchenii-k-vneshnemu-istochniku-pitaniya" class="">
+                              Камера перегревается при подключении к внешнему питанию
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/informatsiya-o-sertifikatah-iecex-ili-atex" class="">
+                              Информация о сертификатах IECEx или ATEX
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/opisanie-formata-hevc" class="">
+                              Описание формата HEVC
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-quik-video-preryvaetsya-vo-vremya-vosproizvedeniya-i-montazha" class="">
+                              GoPro Quik. Видео прерывается во время воспроизведения
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-quik-kak-sozdavat-montirovat-i-publikovat-video" class="">
+                              Как создавать, монтировать и публиковать видео
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-quik-kak-ispolzovat-mural" class="">
+                              GoPro Quik. Как использовать Mural
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-max-nastraivaem-kameru-pered-pervoy-syomkoy" class="">
+                              GoPro MAX – настраиваем камеру перед первой съёмкой
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/19-neochevidnyh-veschey-kotorye-mozhet-vasha-gopro" class="">
+                              19 неочевидных вещей, которые может ваша GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/programmy-dlya-prosmotra-i-redaktirovaniya-video" class="">
+                              Программы для просмотра и редактирования видео
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/chasto-zadavaemye-voprosy-o-prilozhenii-reelsteady-go" class="">
+                              FAQ ReelSteady GO
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-predotvratit-volny-ili-iskazhenie-na-video" class="">
+                              Как предотвратить волны или искажение на видео
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-dobavit-bolee-odnoy-muzykalnoy-dorozhki-v-quik" class="">
+                              Как добавить более одной музыкальной дорожки в Quik
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-dobavit-muzyku-v-prilozhenie-quik" class="">
+                              Как добавить музыку в приложение Quik
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/rekomenduemye-zaryadnye-ustroystva" class="">
+                              Рекомендуемые зарядные устройства
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-quik-pochemu-postoyanno-zavershaetsya-moy-seans-raboty" class="">
+                              GoPro Quik: постоянно завершается сеанс работы
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/albomnaya-ili-portretnaya-orientatsiya" class="">
+                              Альбомная или портретная ориентация?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/rabota-kamery-pri-ekstremalnyh-temperaturah" class="">
+                              Работа камеры при экстремальных температурах
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/standartnyy-format-imeni-faylov-s-kamery-gopro" class="">
+                              Стандартный формат имени файлов с камеры GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kody-oshibok-avtovygruzki-v-gopro-plus" class="">
+                              Коды ошибок автовыгрузки в GoPro PLUS
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/chasto-zadavaemye-voprosy-po-avtovygruzke-gopro-plus" class="">
+                              FAQ по автовыгрузке материала в GoPro Plus
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/avtovygruzka-vashih-materialov-v-oblako-s-pomoschyu-gopro-plus" class="">
+                              Автовыгрузка материалов в облако с помощью GoPro PLUS
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/v-prilozhenii-gopro-ne-zapuskaetsya-predvaritelnyy-prosmotr-v-realnom-vremeni" class="">
+                              Не работает просмотр в реальном времени в приложении GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/mural-novaya-funktsiya-v-prilozhenii-gopro-app" class="">
+                              Mural — новая функция в приложении GoPro App
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/ispolzovanie-dronov-na-territorii-rf" class="">
+                              Использование дронов на территории РФ
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-vypolnyat-ochistku-kamery-gopro" class="">
+                              Как выполнять очистку камеры GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kamera-gopro-zavisaet" class="">
+                              Камера GoPro «зависает»
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/strany-v-kotoryh-vozmozhna-zamena-povrezhdennoy-kamery-po-podpiske-gopro-plus" class="">
+                              Замена поврежденной камеры по подписке GoPro Plus
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kakie-vozmozhnosti-predostavlyaet-podpiska-gopro-plus-2" class="">
+                              Какие возможности предоставляет подписка GoPro Plus?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-opublikovat-materialy-iz-gopro-plus-v-sotsialnyh-setyah" class="">
+                              Как опубликовать файлы из GoPro Plus в социальных сетях
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-dobavit-materialy-v-gopro-plus" class="">
+                              Как добавить материалы в GoPro PLUS
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-plus-mobilnaya-vygruzka" class="">
+                              GoPro Plus: мобильная выгрузка
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-webcam-chasto-zadavaemye-voprosy-i-ustranenie-nepoladok" class="">
+                              GoPro Webcam: часто задаваемые вопросы и устранение неполадок
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-ispolzovat-reelsteady-go" class="">
+                              Как использовать ReelSteady GO
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/ischem-kornevoy-katalog-sd-karty" class="">
+                              Ищем корневой каталог SD-карты
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/upravlenie-kameroy-hero8-black-pri-pomoschi-qr-kodov" class="">
+                              Управление камерой HERO8 Black при помощи QR-кодов
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/funktsiya-superview" class="">
+                              Функция SuperView
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/chto-takoe-vyravnivanie-gorizonta" class="">
+                              Что такое выравнивание горизонта?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/pogovorim-o-gopro-labs" class="">
+                              Поговорим о GoPro Labs
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/nepreryvnaya-fotosemka" class="">
+                              Непрерывная фотосъемка
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kamera-ne-raspoznaetsya-prilozheniem-quik-dlya-pk-mac" class="">
+                              Камера не распознается приложением Quik для ПК (Mac)
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kamera-ne-raspoznaetsya-prilozheniem-quik-dlya-pk-windows" class="">
+                              Камера не распознается приложением Quik для ПК (Windows)
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/minimalnye-sistemnye-trebovaniya-dlya-hevc" class="">
+                              Минимальные системные требования для HEVC
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/karta-pamyati-ne-vstavlyaetsya-v-slot" class="">
+                              Карта памяти не вставляется в слот
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/net-signala-pri-vyvode-cherez-hdmi" class="">
+                              Нет сигнала при выводе через HDMI
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/chto-takoe-gopro-vr-player-dlya-nastolnyh-pk" class="">
+                              Что такое GoPro VR Player для настольных ПК?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/ispolzovanie-hero8-black-v-kachestve-veb-kamery" class="">
+                              Использование HERO8/9/10 Black в качестве веб-камеры
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kvadrokopter-karma-ne-vidit-kameru" class="">
+                              Квадрокоптер Karma не видит камеру
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kontrol-ekspozitsii" class="">
+                              Контроль экспозиции
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/ne-poluchaetsya-otkalibrovat-dron-karma" class="">
+                              Не получается откалибровать дрон Karma
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/hero8-black-predustanovki" class="">
+                              HERO8 Black - Предустановки
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/dronu-karma-ne-udaetsya-poluchit-signal-gps" class="">
+                              Дрону Karma не удается получить сигнал GPS
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-max-i-hero8-black-ne-vklyuchayutsya" class="">
+                              GoPro MAX и HERO8/9/10 Black не включаются
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/ne-poluchaetsya-vypolnit-obedinenie-kontrollera-i-drona-karma" class="">
+                              Не удается подключить контроллер к дрону Karma
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/informatsiya-o-vneshnem-mikrofone-s-adapter-na-35-millimetra" class="">
+                              Информация о внешнем микрофоне с адаптер на 3,5 миллиметра
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/importiruem-mediafayly-ispolzuya-prilozhenie-quik-dlya-pk" class="">
+                              Импорт файлов через приложение Quik для ПК
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-izmenit-kodek-szhatiya-video-v-gopro" class="">
+                              Как изменить кодек сжатия видео в GoPro?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/voprosy-po-litsenzirovaniyu-materialov-pri-rabote-s-gopro-app-i-quik" class="">
+                              Лицензирование материалов при работе с GoPro App и Quik
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/chto-takoe-auto-image-rotation" class="">
+                              Что такое Auto Image Rotation?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/prosmotr-kopirovanie-i-udalenie-mediafaylov-v-gopro-app" class="">
+                              Просмотр, копирование и удаление файлов в GoPro App
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-importirovat-fayly-s-kamery-na-kompyuter-mac" class="">
+                              Как импортировать файлы с камеры на компьютер — Mac?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/minimalnye-sistemnye-trebovaniya-dlya-quikstories" class="">
+                              Минимальные системные требования для QuikStories
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-vygruzit-otsnyatye-taymlaps-video-v-instagram" class="">
+                              Как выгрузить отснятые таймлапс-видео в Instagram?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/pravilnoe-ispolzovanie-funktsii-perekomponovka-v-gopro-player" class="">
+                              Функция «Перекомпоновка» в GoPro Player
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/rendering-video-v-gopro-player" class="">
+                              Рендеринг видео в GoPro Player
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/vneshnie-mikrofony-dlya-ekshn-kamer-gopro" class="">
+                              Внешние микрофоны для экшн-камер GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-rabotaet-tsiklicheskaya-semka" class="">
+                              Как работает циклическая съемка?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/podderzhka-sfericheskih-materialov-v-prilozhenii-gopro" class="">
+                              Поддержка сферических материалов в GoPro App
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/rendering-video-s-pomoschyu-prilozheniya-gopro-max-exporter" class="">
+                              Рендеринг видео с помощью приложения GoPro MAX Exporter
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-ustranit-preryvistoe-vosproizvedenie-v-gopro-player" class="">
+                              Прерывистое воспроизведение в GoPro Player
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-ispolzovat-funktsiyu-perekomponovka-v-prilozhenii-gopro-app" class="">
+                              Функция «перекомпоновка» в GoPro App
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/chto-takoe-hdr" class="">
+                              Что такое HDR?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-fx-reframe" class="">
+                              GoPro FX Reframe
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/max-rezhimy-hero-i-sfericheskiy" class="">
+                              MAX - режимы HERO и сферический
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-max-exporter" class="">
+                              GoPro Max Exporter
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/gopro-player" class="">
+                              GoPro Player
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/chto-takoe-stabilizatsiya-hypersmooth-20" class="">
+                              Что такое стабилизация HyperSmooth 2.0?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-pravilno-polzovatsya-rezhimami-night-photo-i-night-lapse" class="">
+                              Режимы «Night Photo» и «Night Lapse»
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/nabor-zaschitnyh-linz-replacement-protective-lens-dlya-gopro-max" class="">
+                              Набор защитных линз Replacement Protective Lens для Gopro MAX
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/zapasnaya-kryshka-dlya-hero8-gopro-replacement-door" class="">
+                              Запасная крышка для HERO8 GoPro Replacement Door
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/ustanovka-krepleniya-na-dosku-dlya-bugi-serfinga" class="">
+                              Установка крепления на доску для буги-серфинга
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-zagruzit-3d-video-na-youtube" class="">
+                              Как загрузить 3D-видео на YouTube
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/nevozmozhno-polnostyu-zakryt-monopod-gopro-3-way-mount" class="">
+                              Невозможно полностью закрыть  монопод GoPro 3-Way
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-ispolzovat-gps-datchiki-v-programme-quik-dlya-pk" class="">
+                              Как использовать GPS датчики в программе Quik для ПК
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-obedinit-neskolko-video-sozdannyh-v-quik-mobile" class="">
+                              Как объединить несколько видео, созданных в Quik Mobile
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/funktsiya-clip-and-share-v-quik-desktop" class="">
+                              Функция Clip and Share в Quik Desktop
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-uluchshit-proizvoditelnost-batarei-v-holodnuyu-pogodu" class="">
+                              Как увеличить время работы в холодную погоду
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-ispolzovat-windows-phone-s-prilozheniem-gopro" class="">
+                              Как использовать Windows Phone с приложением GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-vypolnit-prinuditelnyy-sbros-nastroek-karma-grip" class="">
+                              Как выполнить принудительный сброс настроек Karma Grip
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-zakrepit-remeshok-k-boksu-bez-ushka-na-petle-zadney-kryshki" class="">
+                              Как закрепить ремешок к боксу без ушка на петле задней крышки
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-zamenit-montazhnye-koltsa-na-kamere-gopro-max" class="">
+                              Как заменить монтажные кольца на камере GoPro MAX
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-ispolzovat-prilozhenie-gopro-dlya-nochnoy-fotografii" class="">
+                              Как использовать приложение GoPro для ночной фотографии
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/faq/kak-podelitsya-video-s-gopro-v-sotsialnyh-setyah" class="">
+                              Как поделиться видео с GoPro в социальных сетях
+                          </a>
+                      </li>
+                     
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+     
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="" href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro">Интересное не GoPro</a>
+          <i class="fa fa-plus js-blog-toggle blog-nav-toggle"></i>
+              <ul class="hd blogs-nav-sub ">
+                
+                	
+                	
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/karty-pamyati-sandisk-nadezhnye-aksessuary-dlya-gopro" class="">
+                              Карты памяти Sandisk – надежные аксессуары для GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/portativnyy-nakopitel-lacie-dji-copilot-ne-ogranichivay-sebya-v-obemah" class="">
+                              LaCie DJI Copilot – не ограничивай себя в объемах!
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/vsya-pravda-o-vneshnem-zhestkom-diske-lacie-rugged-mini-usb-c-1t-a-stoit-li-priobretat" class="">
+                              Какой купить внешний жесткий диск?
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/insta360-one-x-luchshaya-kamera-2018-goda" class="">
+                              Insta360 One X – панорамное видео в кармане!
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/insta360-nano-kamera-360-gradusov" class="">
+                              Insta360 Nano - камера 360 градусов
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/dji-osmo-pocket" class="">
+                              DJI OSMO POCKET - карманный стедикам с камерой
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/stabilizator-feiyu-tech-g6-dlya-kamer-gopro" class="">
+                              Стабилизатор Feiyu Tech G6 для камер GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/stabilizator-dlya-smartfona-feiyu-tech-spg-2" class="">
+                              Стабилизатор для смартфона Feiyu Tech SPG 2
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/kinomatografichnaya-kartinka-vashego-mavic-air" class="">
+                              Киноматографичная картинка вашего Mavic Air
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/sp-connect-case-velosipednyy-keys-dlya-fanatov-gopro" class="">
+                              SP Connect Case – велосипедный кейс для фанатов GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/nomad-wireless-hub-vsyo-v-poryadke-spasibo-zaryadke" class="">
+                              Nomad Wireless Hub – всё в порядке, спасибо зарядке
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/kinohlopushka-ot-istokov-proshlogo-do-nashego-vremeni" class="">
+                              Кинохлопушка – от истоков прошлого до нашего времени
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/miggopictarone" class="">
+                              Miggo Pictar One: из телефона в фотокамеру
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/aksessuary-manfrotto-mechtay-o-bolshem" class="">
+                              Аксессуары Manfrotto – мечтай о большем
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/aksessuary-thule-dlya-nastoyaschih-gikov-ekshn-smok-na-gopro" class="">
+                              Аксессуары Thule для настоящих гиков экшн-съемок
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/produktsiya-thule-vozmi-svoyu-zhizn-s-soboy" class="">
+                              Продукция Thule - возьми свою жизнь с собой
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/ispolzovanie-polusfery-kupola-s-kameroy-gopro" class="">
+                              Использование полусферы-купола с камерой GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/octomask-maska-dlya-dayvinga-s-krepleniem-dlya-gopro" class="">
+                              Octomask – маска с креплением для GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/qudos-action-light-fonar-dlya-gopro" class="">
+                              Qudos Action Light – фонарь для GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/interesnye-shtuki-ne-svyazannye-s-gopro/balans-bordy-mp-boards-trenazhery-ravnovesiya" class="">
+                              Баланс борды – тренажеры равновесия
+                          </a>
+                      </li>
+                     
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+     
+       	
+      <li class="blogs-nav-inner-link">
+        <a class="blogs-nav-inner-link-current" href="/blogs/servis-i-dokumenty">Сервис и документы</a>
+          <i class="fa fa-minus  js-blog-toggle blog-nav-toggle"></i>
+              <ul class="  blogs-nav-sub ">
+                
+                	
+                	
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/pokupay-v-kredit-so-sberom" class="">
+                              Покупай в кредит сo Сбером
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/podarochnaya-karta-gopro" class="">
+                              Электронная подарочная карта GoPro
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/vse-chto-vam-nuzhno-znat-o-vozvrate" class="">
+                              Все, что вам нужно знать о возврате
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/rukovodstvo-polzovatelya" class="">
+                              Руководство пользователя
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/znaki-sootvetstviya-rostest-rst-i-eac" class="">
+                              Знаки соответствия – РСТ и EAC
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/kak-izbezhat-poddelok" class="">
+                              Как избежать проблем с гарантией
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/garantiynoe-obsluzhivanie" class="">
+                              Гарантийное обслуживание
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/polzovatelskoe-soglashenie" class="active">
+                              Пользовательское соглашение
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/politika-konfidentsialnosti" class="">
+                              Политика конфиденциальности
+                          </a>
+                      </li>
+                    
+                     <li>
+                          <a href="/blogs/servis-i-dokumenty/publichnaya-oferta" class="">
+                              Публичная оферта
+                          </a>
+                      </li>
+                     
+                
+                
+                 
+              </ul>
+         
+        
+      </li>
+    
+    </ul>
+    
+  </div>
+
+ <div class="tags">
+	<div class="tags-header">
+        <div class="tags-header-title">Облако тегов</div>
+      </div><!-- /.tags-header -->	
+
+    <div class="tags sidebar sidebar-blogs">
+      
+  <div class="tags-cloud-wrapper">
+    <ul class="tags-cloud">
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/garantiya" title="Гарантия" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/garantiya" class="tag-text ">
+            Гарантия
+        </span>  <span class="tag-count">3</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/instruktsiya" title="Инструкция" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/instruktsiya" class="tag-text ">
+            Инструкция
+        </span>  <span class="tag-count">2</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/vozvrat" title="Возврат" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/vozvrat" class="tag-text ">
+            Возврат
+        </span>  <span class="tag-count">2</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/polzovatelskoe-soglashenie" title="Пользовательское соглашение" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/polzovatelskoe-soglashenie" class="tag-text ">
+            Пользовательское соглашение
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/politika-konfidentsialnosti" title="Политика конфиденциальности" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/politika-konfidentsialnosti" class="tag-text ">
+            Политика конфиденциальности
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/podarochnaya-karta" title="Подарочная карта" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/podarochnaya-karta" class="tag-text ">
+            Подарочная карта
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/seriynyy-nomer" title="Серийный номер" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/seriynyy-nomer" class="tag-text ">
+            Серийный номер
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/dostavka" title="Доставка" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/dostavka" class="tag-text ">
+            Доставка
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/rukovodstvo-polzovatelya" title="Руководство пользователя" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/rukovodstvo-polzovatelya" class="tag-text ">
+            Руководство пользователя
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/oplata" title="Оплата" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/oplata" class="tag-text ">
+            Оплата
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/publichnaya-oferta" title="Публичная оферта" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/publichnaya-oferta" class="tag-text ">
+            Публичная оферта
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/sertifikatsiya" title="Сертификация" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/sertifikatsiya" class="tag-text ">
+            Сертификация
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+        
+        
+
+        
+
+        <li class=" ">
+          <a href="/blogs/servis-i-dokumenty/tags/remont-i-servis" title="Ремонт и сервис" class="tag-link">
+          <span href="/blogs/servis-i-dokumenty/tags/remont-i-servis" class="tag-text ">
+            Ремонт и сервис
+        </span>  <span class="tag-count">1</span></a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+
+
+
+    </div><!-- /.tags -->
+ </div><!-- /.tags -->
+
+</div>  
+
+                      
+				</div>
+              
+				<div class="grid-9 m-grid-12 s-grid-12 l-padded-left-2">
+					<div class="article page-content container">
+	<div class="page-header">
+		<h1>
+		  Пользовательское соглашение
+		</h1>
+      
+      
+      
+      <span class="readtime">Время чтения: 7 мин.</span>
+	</div>
+    <div class="article-body">
+      <div class="article-header">
+
+
+  
+
+</div>
+
+<div class="article-body editor">
+  <p>Настоящий документ «Пользовательское соглашение» (далее - Соглашение) представляет собой предложение ООО «МК», размещенное на сайте www.gopro.ru (далее - «Сайт»), заключить договор на изложенных ниже условиях Соглашения.</p>
+<p>&nbsp;</p>
+<p><strong>&nbsp; &nbsp; 1. Общие положения</strong></p>
+<p>1.1. Вы настоящим подтверждаете, что с момента регистрации на Сайте и в течение времени пользования Сайтом, а также персонализированными сервисами Сайта, вы являетесь Пользователем Сайта вплоть до вашего личного обращения в администрацию Сайта с требованием об отказе от любых взаимоотношений с Сайтом.</p>
+<p>1.2. Использование вами Сайта любым способом и в любой форме в пределах его объявленных функциональных возможностей, включая:</p>
+<p>а) просмотр размещенных на Сайте материалов;</p>
+<p>б) регистрация и/или авторизация на Сайте;</p>
+<p>в) размещение или отображение на Сайте любых материалов, включая, но не ограничиваясь такими как: тексты, гипертекстовые ссылки, изображения, аудио и видеофайлы, сведения и/или иная информация;</p>
+<p>создает договор на условиях настоящего Соглашения в соответствии с положениями ст.437 и 438 Гражданского кодекса Российской Федерации.</p>
+<p>1.3. Воспользовавшись любой из указанных выше возможностей по использованию Сайта, вы подтверждаете, что:</p>
+<p>а) ознакомились с условиями настоящего Соглашения в полном объеме до начала использования Сайта;</p>
+<p>б) принимаете все условия настоящего Соглашения в полном объеме без каких-либо изъятий и ограничений с вашей стороны и обязуетесь их соблюдать или прекратить использование Сайта. Если вы не согласны с условиями настоящего Соглашения или не имеете права на заключение договора на их основе, вам следует незамедлительно прекратить любое использование Сайта;</p>
+<p>в) Соглашение (в том числе любая из его частей) может быть изменено Сайтом без какого-либо специального уведомления. Новая редакция Соглашения вступает в силу с момента ее размещения на Сайте либо доведения до сведения Пользователя в иной удобной форме, если иное не предусмотрено новой редакцией Соглашения.</p>
+<p><strong>&nbsp; &nbsp; 2. Общие условия пользования Сайтом</strong></p>
+<p>2.1. Сайт осуществляет продажу&nbsp;<a href="https://gopro.ru/collection/mounts-accessories">товара</a>&nbsp;посредством веб-ресурса www.gopro.ru и сопутствующих сервисных служб Сайта.&nbsp;</p>
+<p>2.2. Сайт осуществляет&nbsp;<a href="https://gopro.ru/page/delivery">доставку</a>&nbsp;товара способами, определенными в Части 5 настоящего Соглашения.&nbsp;</p>
+<p>2.3. Сайт предоставляет доступ к персонализированным сервисам Сайта для получения наиболее полной информации по интересующему вас товару, создания рейтингов и мнений, участия в конкурсных программах и иных акциях, проводимых Сайтом.</p>
+<p>2.4. Настоящим вы даете своё добровольное согласие на информирование вас обо всех действиях Сайта, связанных с продажей товара и/или оказанием услуг, в том числе о статусе выполнения заказа, а также об иных событиях любого характера, относящихся к сервисам Сайта.&nbsp;</p>
+<p>2.5. Согласие на получение рассылки:<br>Подписываясь на SMS- и email-рассылку www.gopro.ru или третьих лиц, уполномоченных на рассылку от имени&nbsp;www.gopro.ru, в сети Интернет&nbsp;www.gopro.ru, я соглашаюсь получать информационную рассылку на телефон и электронный адрес, указанный мной при подписке через сервис подписки информационной рассылки на сайте&nbsp;www.gopro.ru. Я проинформирован о том, что в случае, если у меня возникнет желание отказаться от информационной рассылки&nbsp;www.gopro.ru, мне будет необходимо самостоятельно перейти по ссылке «Отписаться от рассылки», указанной в тексте отправляемых сайтом сообщений с электронного адреса&nbsp;Сайта&nbsp;sales@gopro.ru &nbsp;или же сообщить о несогласии получения информационных рассылок по адресам, указанным в разделе «Контакты» данного Соглашения. Я также даю разрешение&nbsp;Сайту или третьим лицам, уполномоченным на рассылку от имени&nbsp;Сайта, собирать, хранить и обрабатывать все переданные мною в адрес&nbsp;Сайта&nbsp;<a href="https://gopro.ru/blogs/servis-i-dokumenty/politika-konfidentsialnosti">персональные данные</a>&nbsp;(в том числе фамилию, имя, отчество и адрес электронной почты) с целью информирования о новостях и других событиях&nbsp;Сайта. &nbsp;</p>
+<p>2.6. Вы соглашаетесь, что Сайт не несет никакой ответственности за задержки, сбои, неверную или несвоевременную доставку, удаление или несохранность каких-либо уведомлений. При этом Сайт оставляет за собой право повторного направления любого уведомления, в случае его неполучения Вами.&nbsp;<br>2.7. Все вопросы по информационной поддержке Вы можете задать по адресу sales@gopro.ru.</p>
+<p>2.8. Вы признаёте, что сопровождающее товар описание на Сайте не претендует на исчерпывающую информативность и может содержать неточности. Вы вправе направить все замечания по неточному описанию товара Сайту по адресу&nbsp;sales@gopro.ru.</p>
+<p>2.9. Вы признаёте, что Сайт прилагает достаточные усилия, чтобы внешний вид, упаковка и характеристики товаров соответствовали описаниям, приведенным в каталоге Сайта. Одновременно Сайт доводит до вашего сведения, что фактические внешний вид, упаковка и характеристики товара могут отличаться от этих описаний в случае ассортиментного товара, а также в случае внесения изменений в товар непосредственно производителем.<br>2.10. Вы проинформированы, что цена и наличие товара на Сайте изменяется на круглосуточно без предварительного уведомления об этом и указываются в индивидуальном статусе и подробной карточке товара, отображаемым в каталоге на Сайте.&nbsp;</p>
+<p><strong>&nbsp; &nbsp; 3.1 Обязательства Пользователя при использовании Сайта</strong></p>
+<p>3.1. Вы соглашаетесь не использовать сервисы Сайта с целью:&nbsp;<br>3.1.1. загрузки контента, который является незаконным, нарушает любые права третьих лиц; пропагандирует насилие, жестокость, ненависть и/или дискриминацию по расовому, национальному, половому, религиозному, социальному признакам; содержит недостоверные сведения и/или оскорбления в адрес конкретных лиц, организаций, органов власти;&nbsp;<br>3.1.2. побуждения к совершению противоправных действий, а также содействия лицам, действия которых направлены на нарушение ограничений и запретов, действующих на территории РФ;<br>3.1.3. нарушения прав несовершеннолетних лиц и/или причинение им вреда в любой форме;&nbsp;<br>3.1.4. ущемления прав меньшинств;&nbsp;<br>3.1.5. выдачи себя за другого человека или представителя организации и/или сообщества без достаточных на то прав, в том числе за сотрудников Сайта;<br>3.1.6. введения в заблуждение относительно свойств и характеристик каких-либо товаров из каталога на Сайте; некорректного сравнения товаров, а также формирования негативного отношения к лицам, (не) пользующимся определенными товарами, или осуждения таких лиц;<br>3.1.7. загрузки контента, который вы не имеете права делать доступным по законодательству РФ или согласно каким-либо контрактным отношениям;&nbsp;<br>3.1.8. загрузки контента, который затрагивает и/или содержит какой-либо патент, торговый знак, коммерческую тайну, фирменное наименование, авторские и смежные с ними права, а равно прочие права на результаты интеллектуальной деятельности, принадлежащие или правомерно используемые третьими лицами;&nbsp;<br>3.1.9. загрузки не разрешенной специальным образом рекламной информации и/или спама;&nbsp;<br>3.1.10. сбора и обработки персональных данных, информации о частной жизни любых лиц;&nbsp;<br>3.1.11. нарушения нормальной работы Сайта;<br>3.1.12. нарушения российских или международных норм права.</p>
+<p>3.2. Вы соглашаетесь не использовать на Сайте бранных слов, непристойных и оскорбительных образов, сравнений и выражений, в том числе в отношении пола, расы, национальности, профессии, социальной категории, возраста, языка человека и гражданина, а также в отношении организаций, органов власти, официальных государственных символов (флагов, гербов, гимнов), религиозных символов, объектов культурного наследия (памятников истории и культуры).</p>
+<p>3.3. Вы признаете и соглашаетесь, что Сайт имеет право (но не обязанность) по своему усмотрению отказать в размещении и/или удалить любой контент, доступный через сервисы Сайта.</p>
+<p><strong>&nbsp; &nbsp; 4. Политика конфиденциальности</strong></p>
+<p>4.1. Условия&nbsp;<a href="https://gopro.ru/blogs/servis-i-dokumenty/politika-konfidentsialnosti">Политики конфиденциальности</a>&nbsp;и отношения между вами и Сайтом, связанные с обработкой персональных данных, регулируются Федеральным Законом РФ №152-ФЗ от 27 июля 2006г. «О персональных данных».&nbsp;</p>
+<p>4.2. Политика конфиденциальности действует в отношении персональных данных, которые Сайт получил или может получить от вас при регистрации и/или оформлении заказа на Сайте, и необходимые для выполнения обязательств со стороны Сайта в отношении приобретаемого вами товара/услуги и/или вашего доступа к сервисам Сайта.&nbsp;</p>
+<p>4.3. Политика конфиденциальности доступна по <a href="https://gopro.ru/blogs/servis-i-dokumenty/politika-konfidentsialnosti">ссылке</a>.</p>
+<p><strong>&nbsp; &nbsp; 5. Условия приобретения и доставки товара</strong></p>
+<p>5.1. Вы можете приобрести товар на Сайте, оплатив его следующими способами: наличными, кредитной картой, электронными деньгами, с лицевого счёта мобильного телефона, банковским переводом по квитанции, подарочным сертификатом.</p>
+<p>5.2. Настоящим вы соглашаетесь, что выбранный вами способ оплаты не подлежит изменению с момента оформления заказа на Сайте.&nbsp;</p>
+<p>5.3. Настоящим вы соглашаетесь, что подтверждение заказа, оплаченного электронными деньгами, кредитной картой, с личного счета мобильного телефона, банковским переводом, происходит только после подтверждения списания денежных средств в счёт оплаты заказа.&nbsp;</p>
+<p>5.4. Вы подтверждаете, что оплата заказа электронными деньгами, кредитной картой, с личного счета мобильного телефона должна быть произведена в течение 5 календарных дней с момента его оформления на Сайте. Вы соглашаетесь, что в случае неоплаты заказа по истечении указанного срока, заказ может быть аннулирован.&nbsp;</p>
+<p>5.5. Сайт осуществляет&nbsp;<a href="https://gopro.ru/page/delivery">доставку</a>&nbsp;товара следующими способами: служба доставки Сайта (курьерская доставка или доставка в пункт самовывоза), почтовая доставка курьерскими службами: EMS и CDEK. Вы вправе выбрать любой удобный для вас способ доставки в соответствии с условиями доставки в свой регион/страну или исходя из своих предпочтений.&nbsp;</p>
+<p>5.6. Вы соглашаетесь, что в случае невозможности передачи вам товара по вашей вине, в том числе нарушения вами срока, в течение которого вы обязаны забрать товар, будет расцениваться Сайтом как ваш отказ от товара. При этом товар возвращается Сайту, а заказ считается аннулированным.&nbsp;</p>
+<p>5.7. В случае вашего отказа от товара, а также в случае отсутствия заказанного вами товара, перечисленная Сайту предоплата за товар, за исключением расходов Сайта на доставку товара, будет возвращена вам не позднее чем через 10 календарных дней с даты предъявления.&nbsp;</p>
+<p>5.8. Все вопросы, связанные со сроками и условиями доставки товара, вы можете направить в Сайту по адресу –&nbsp;<a href="mailto:sales@gopro.ru">sales@gopro.ru</a></p>
+<p><strong>&nbsp; &nbsp; 6. Ответственность</strong></p>
+<p>6.1. Сервисы Сайта могут содержать ссылки на другие ресурсы. Вы признаете и соглашаетесь с тем, что Сайт не несет никакой ответственности за доступность этих ресурсов и за их контент, а также за любые последствия, связанные с использованием вами контента этих ресурсов.</p>
+<p>6.2. Вы также соглашаетесь с тем, что Сайт не несёт никакой ответственности за ваши персональные данные, которые вы предоставляете сторонним ресурсам и/или иным третьим лицам в случае перехода на них с Сайта.</p>
+<p>6.3. Вы подтверждаете, что Сайт не отвечает за возможную потерю и/или порчу данных, которая может произойти из-за нарушения вами положений настоящего Соглашения, а также неправильного доступа и/или использования персонализированных сервисов Сайта.</p>
+<p>6.4. Ответственность за действия несовершеннолетних, включая приобретение ими товаров из каталога на Сайте, лежит на законных представителях несовершеннолетних.</p>
+<p>6.5. Вы соглашаетесь, что в случае неисполнения и/или ненадлежащего исполнения Сайтом обязательств по продаже и/или доставке вам товара в связи с предоставлением вами недостоверных и/или недействительных данных о себе, а равно невыполнение вами условий настоящего Соглашения, Сайт ответственности не несет.</p>
+<p>&nbsp;</p>
+<ol>
+<li><strong> Реквизиты Сайта</strong></li>
+</ol>
+<p>ООО «МК»</p>
+<p>ОГРН 5167746417504</p>
+<p>ИНН/КПП 7736284876/773601001</p>
+<p>ОАО “АЛЬФА-БАНК”</p>
+<p>БИК 044525593</p>
+<p>р/с 40702810002590001703</p>
+<p>к/с 30101810200000000593</p>
+<p>Юридический адрес:</p>
+<p>127521, г. Москва, м. Марьина роща, <span>12-й проезд Марьиной Рощи, д.8с2 (лофт-квартал Studio 12). Вход со стороны 13-ого проезда Марьиной Рощи</span></p>
+<p>Адрес для юридически значимых сообщений: 127521, г. Москва, А/Я №6.</p>
+<p>Электронная почта для обращений – sales@gopro.ru</p>
+<p>&nbsp;</p>
+<p>С текстом Публичной оферты вы можете ознакомиться&nbsp;<a href="https://gopro.ru/blogs/servis-i-dokumenty/publichnaya-oferta">здесь</a>.&nbsp;</p>
+</div>
+      
+    </div>
+</div>
+				</div>
+              
+			</div>
+			
+            
+            
+  
+            
+		  </div>
+		  <footer class=" padd">
+	<div class="footer-inner layout m-center s-center">
+	<div class="footer-inner-row footer-inner-row-first group">
+		<div class="cell-2 cell-12-sm">
+			<div class="footer-inner-menu-title">Каталог товаров</div>
+			<ul class="footer-inner-menu">
+
+               
+              <li><a href="/collection/cameras-gopro">Камеры GoPro</a></li>
+               
+              <li><a href="/collection/all-for-hero9">Новинки</a></li>
+               
+              <li><a href="/collection/sd-cards">Карты памяти</a></li>
+               
+              <li><a href="/collection/mounts-gopro">Крепления</a></li>
+               
+              <li><a href="/collection/accessories-gopro">Аксессуары</a></li>
+               
+              <li><a href="/collection/batarei-gopro">Батареи и зарядные устройства</a></li>
+               
+              <li><a href="/collection/cases-gopro">Кейсы и чехлы</a></li>
+               
+              <li><a href="/collection/housing-frame-gopro">Защитные боксы</a></li>
+               
+              <li><a href="/collection/poles-gopro">Моноподы и штативы</a></li>
+               
+              <li><a href="/collection/na-vode-i-pod-vodoy-gopro">На воде и под водой</a></li>
+               
+              <li><a href="/collection/repair_parts-gopro">Запасные части и уход</a></li>
+              
+			</ul>
+		</div>
+		<div class="cell-2 cell-12-sm cell-grow">
+			<div class="footer-inner-menu-title">Покупателям</div>
+			<ul class="footer-inner-menu">
+			
+				<li><a href="/page/giftcard" class="">Подарочные карты</a></li>
+			
+				<li><a href="/page/delivery" class="">Доставка и оплата</a></li>
+			
+				<li><a href="/page/return" class="">Возврат товара</a></li>
+			
+				<li><a href="/page/review" class="">Отзывы о компании</a></li>
+			
+				<li><a href="/page/compare" class="">Сравнение камер GoPro</a></li>
+			
+				<li><a href="/page/public-oferta" class="">Публичная оферта</a></li>
+			
+				<li><a href="/page/polzovatelskoe-soglashenie" class="">Пользовательское соглашение</a></li>
+			
+				<li><a href="/page/privacy_policy" class="">Политика конфиденциальности</a></li>
+			
+				<li><a href="/page/sitemap" class="">Карта сайта</a></li>
+			
+              
+               
+              	<li class="advice-link-footer"><a href="#" class="">Дайте нам совет</a></li>
+              
+              	<!--<li class="tour-link-footer"><a href="#" class="">3D-тур по магазину</a></li>-->
+			</ul>
+		</div>
+		<div class="cell-2 cell-12-sm">
+			<div class="footer-inner-menu-title">Сервис</div>
+			<ul class="footer-inner-menu">              
+              <li class="where-link-footer"><a href="#" class="">Где мой заказ</a></li>
+			
+				<li><a href="/page/warranty-service" class="">Гарантийное обслуживание</a></li>
+			
+				<li><a href="/page/to-avoid-fakes" class="">Как избежать проблем с гарантией</a></li>
+			
+				<li><a href="/page/rostest" class="">РСТ и ЕАС</a></li>
+			
+				<li><a href="/page/files" class="">Руководство пользователя</a></li>
+			
+				<li><a href="/page/support" class="">Журнал</a></li>
+			
+				<li><a href="/page/faq" class="">F.A.Q.</a></li>
+			
+			</ul>
+		
+		</div>
+		<div class="cell-2 cell-12-sm cell-grow cont">
+			<div class="footer-inner-menu-title">Контакты</div>
+			<ul class="footer-inner-menu">
+              	<li><a href="/page/contacts">Контакты</a>
+              	<!--<li><a href="/page/vacancies">Вакансии</a></li>-->
+                </li><li><a href="/page/courer-delivery-citys">Города доставки</a> </li>
+             	<!--<li><a href="/page/about">Магазин камер и аксессуаров GoPro</a> </li>   -->           
+              	<!--<li class="tour-link-footer"><a href="#" class="">3D-тур по магазину</a></li>-->
+				<!--<li>г.Москва, Б.Новодмитровская, 36с7  </li>-->
+              	<!--<li>Магазин работает на самовывоз, также доступен онлайн-заказ с доставкой</li>-->
+				<!--<li>Ежедневно с 10:00 до 20:00 (МСК)  </li>-->
+              <li>Ежедневно с 10:00 до 20:00 (МСК)  </li>
+				<li>Тел. 8 800 777 1753  </li>
+                <li>Тел. 8 495 481 4953  </li>
+              <li>Адрес для юридически значимых сообщений:<br>127521, г. Москва, А/Я №6</li>
+              	<!--<li><a href="/page/contacts">Как добраться</a> </li>-->
+              <li><a href="/page/vacancies">Вакансии</a></li>
+			</ul>
+		</div>
+		<div class="cell-2 cell-12-sm">
+			<div class="footer-inner-menu-title">Рассылка</div>
+			<form action="//gopro.us12.list-manage.com/subscribe/post?u=dbc2cfbf2d6144efce80dd651&amp;id=6cd231fbc0" method="post" name="mc-embedded-subscribe-form" class="footer-subscribe-form">
+              <input name="EMAIL" class="required" type="text" placeholder="E-mail">
+              <button class="submit-igree js-subscribe">Подписаться</button>
+              <div id="response"></div>
+              <div class="agree-wrapper">
+                <input id="i_agree" class="i-agree checkbox-field" type="checkbox" checked="checked">
+                <label class="checkbox-label" for="i_agree">Я подтверждаю, что я старше 18 лет, и даю добровольное согласие на обработку и хранение своих персональных данных в соответствии с <a href="/page/polzovatelskoe-soglashenie">Пользовательским соглашением</a>.</label>
+            </div>
+         	</form>
+          <div class="yandex_button"><div><a href="https://market.yandex.ru/shop/243704/reviews" rel="nofollow" target="_blank"></a><span>Понравился магазин?</span>Оцените на Яндекс Маркет</div><iframe src="https://yandex.ru/sprav/widget/rating-badge/201777154777" width="150" height="50" frameborder="0"></iframe></div>
+		</div>
+	</div>
+		
+		<div class="footer-inner-row group">
+			<div class="grid-8 m-grid-12 s-grid-12">
+				<div class="footer-inner-text">
+                  © Магазин камер и аксессуаров GoPro. OOO "МК" ОГРН 5167746417504 ИНН/КПП 7736284876/773601001 <br>
+ Информация на сайте не является публичной офертой <br>
+                     
+				</div>
+			</div>
+			<div class="grid-4 m-grid-12 s-grid-12 l-right m-center s-center">
+				<div class="footer-inner-soc">
+                  <a rel="nofollow" href="https://zen.yandex.ru/id/5b7d672ee9d9d000a9544145" target="_blank" class="c-gry-ltr h-c-wht">
+                            <i class="fa fa-z" aria-hidden="true"></i>
+                          </a>
+                         <a rel="nofollow" href="https://vk.com/magazinkamer" target="_blank" class="c-gry-ltr h-c-wht">
+                            <i class="fa fa-vk" aria-hidden="true"></i>
+                          </a>
+			 <a rel="nofollow" href="https://www.youtube.com/user/GoProCamera" target="_blank" class="c-gry-ltr h-c-wht">
+				<i class="fa fa-youtube-play" aria-hidden="true"></i>
+			  </a>
+				<a rel="nofollow" href="https://twitter.com/gopro?lang=ru" target="_blank" class="c-gry-ltr h-c-wht">
+				<i class="fa fa-twitter" aria-hidden="true"></i>
+			  </a>
+				<a rel="nofollow" href="https://www.pinterest.com/GoPro/" target="_blank" class="c-gry-ltr h-c-wht pinterest">
+					<i class="fa fa-pinterest-p" aria-hidden="true"></i>
+				</a>
+                <a href="https://camera.ru/" target="_blank" class="c-gry-ltr h-c-wht">
+					<i class="fa fa-gp-p" aria-hidden="true"></i>
+				</a>
+			</div>
+			
+			</div>
+		</div>
+	</div>
+</footer>
+		</div>
+	  <script>
+  Shop.money.set('{\"delimiter\":\"\",\"separator\":\".\",\"format\":\"%n\\u0026nbsp;%u\",\"unit\":\"\\u003cspan class=\\\"rub\\\"\\u003e\\u0026#x20bd;\\u003c/span\\u003e\",\"show_price_without_cents\":1}');
+  Site.cart_url = '/cart_items';
+
+  Site.product_status = '';
+
+  Site.client_group = {
+    id: '',
+    title: '',
+    discount: '',
+    discount_description: ''
+  };
+
+  Site.template = 'article';
+  Site.locale = 'ru';
+
+  Site.language = {
+    locale: 'ru',
+    not_default: false
+  };
+
+  Site.account = {
+    id: '118880',
+    hide_items: 'false',
+    email: 'order@gopro.ru',
+    enable_comparison: true
+  };
+
+  var fileUrl = {}
+  
+  
+  
+
+
+
+  Products.setConfig({
+    initOption: true,
+
+    filtered: true,
+    decimal: {
+      mmt: 0, // мм
+      cmt: 0, // см
+      dmt: 0, // дм
+      mtr: 0, // м
+      kmt: 0, // км
+      mtk: 0, // м2
+      dmk: 0, // дм2
+      mlt: 0, // мл
+      cmq: 0, // см3
+      ltr: 0, // л
+      dmq: 0, // дм3
+      mtq: 0, // м3
+      grm: 0, // г
+      kgm: 3, // кг
+      tne: 0, // т
+      hur: 0, // ч
+      nbb: 0, // боб
+      lef: 1, // л.
+      set: 0, // набор
+      npr: 0, // пар
+      npl: 0, // рул
+      nmp: 0, // упак
+      dzp: 0, // дюжина упак
+      cnp: 0, // 100 упак
+      pce: 0, // шт
+      cen: 0, // 100 шт
+      mil: 0, // тыс. шт
+      box: 0, // ящ
+      sct: 0, // секц
+      btl: 0 // флак
+    },
+	fileUrl: fileUrl,
+	options: {
+    'Модификация': 'option-span',
+	'Цвет': 'option-image',
+	'Размер': 'option-span',
+    'Модель':'option-span'
+  },
+    labels: {
+     'цвет': 'Есть вот такие цвета'
+    }
+  });
+
+  Site.messages = {
+    "cartIsEmpty": "Ваша корзина пуста",
+    "productAddedToCart": "Товар добавлен в корзину",
+    "productRemovedFromCart": "Товар удален из корзины",
+    "productAddedToComparison": "Товар добавлен в сравнение",
+    "productRemovedFromComparison": "Товар удален из сравнения",
+    "maximumNumberOfComparable": "Достигнуто максимальное количество сравниваемых товаров",
+    "comparisonIsEmpty": "Список сравнения пуст",
+    "imageNotUploaded": "Изображение не загружено"
+  };
+
+</script>
+<script>
+  //<![CDATA[
+    GP.strings = /*<sl:translate_json>*/ {"products":{"out_of_stock":"This item is currently out of stock.","ships_in_24h":"Usually ships within 24 hrs.","availability":"Availability","in_stock":"In stock","model_number":"Model Number","ship_to":"This product is not available <br>in your selected ship-to country","free_shipping":"Free Shipping","guarantee":"30 Day Money Back Guarantee","cart_link_enabled":"Add to Cart","cart_link_disabled":"Out of Stock","promo_1":{"title":"Free Shipping","message":"Get free ground shipping on all U.S. orders. No minimum order, and no code required - just select FREE GROUND SHIPPING at checkout.","countries":["US"]},"promo_2":{"title":"30 Day Money Back Guarantee","message":"If at any time within 30 days of receiving your order you are not 100% satisfied with your GoPro products, you may return the items to us for a full refund. No questions asked."}}} /*</sl:translate_json>*/
+  //]]>
+</script>
+
+
+
+
+<script src="https://static.insales-cdn.com/assets/1/4555/1495499/1674469895/theme.js"></script>
+<script src="https://static.insales-cdn.com/assets/1/4555/1495499/1674469895/responsive-tables.js" async=""></script>
+
+	  <!-- Cart item -->
+<script type="text/template" data-template-id="cart-widget-item">
+ <div class="cart-widjet-header">
+	<span>Ваша корзина</span>
+	<i class='fa fa-times js-cart-widjet-close'></i>
+ </div>
+ <div class="cart-widget-item-wrapper">
+  <% _.forEach(order_lines, function(item) { %>
+    <div class="cart-item  data-product-id="<%= item.product.id %>" data-item-id="<%= item.id %>"">
+	 <div class="group">
+		<div class="grid-2">
+			<div class="item-image-wrapper">
+			<span class="item-image-link">
+				<img title='<%= item.title %>' alt='<%= item.title %>' src="<%= item.product.first_image.small_url %>" class="item-image">
+			</span>
+			</div>
+		</div>
+		<div class="grid-2 center">
+			<span class="item-quantity"><%= item.quantity %></span>
+		</div>
+		<div class="grid-8">
+		   <div class="item-title">
+			 <a href="<%= item.product_url %>">
+				<%= item.title %>
+			 </a>	
+			 <span class="item-remove" data-item-delete="<%= item.id %>">
+				  <i class="fa fa-times"></i>
+			 </span>
+			</div>
+		    <div class="item-price">
+				 <%= Math.floor(item.sale_price) %><span class="rub">&nbsp;&#x20bd;</span>
+			</div>
+		</div>
+	 </div>
+	
+    </div>
+  <% }); %>
+  </div>
+	 <div class="cart-item-itogo center">
+		Итого: <span class="item-summ js-shopcart-total-summ"><%= Math.floor(total_price) %><span class="rub">&nbsp;&#x20bd;</span></span>
+	 </div>	
+	 <div class="cart-item-link">
+		<a href="/cart_items">В корзину <i class="fa fa-angle-right"></i></a>
+	 </div>
+</script>
+      <!-- Compare item -->
+<script type="text/template" data-template-id="compare-widget-item">
+ <% var count = 0 %>
+ <div class="compare-widjet-header">
+	<span>Сравнение</span>
+	<i class='fa fa-times js-compare-widjet-close'></i>
+ </div>
+ <div class="compare-widget-item-wrapper">
+ <% _.forEach(products, function(item) { %>
+  <div class="cart-item"  data-compared-id="<%= item.id %>"">
+	 <div class="group">
+		<div class="grid-4">
+			<div class="item-image-wrapper">
+			<span class="item-image-link">
+				<img title='<%= item.title %>' alt='<%= item.title %>' src="<%= item.first_image.small_url %>" class="item-image">
+			</span>
+			</div>
+		</div>		
+		<div class="grid-6">
+		   <div class="item-title">
+			 <a href="<%= item.url %>">
+				<%= item.title %>
+			 </a>
+           </div>
+  		</div>
+        <div class="grid-2">
+               <span class="item-remove" data-compare-delete="<%= item.id %>">
+				  <i class="fa fa-times"></i>
+  				</span>
+		</div>
+	 </div>
+	
+    </div>
+  <% }); %>
+  </div>
+	 <div class="cart-item-link">
+		<a href="/compares">Перейти к сравнению <i class="fa fa-angle-right"></i></a>
+	 </div>
+</script>
+      <div class="form_shadow">
+</div>
+<div id="tour-modal" class="feedback-modal">  
+  <a class="closemsg" href="#"></a>
+<iframe src="https://www.google.com/maps/embed?pb=!4v1541010366278!6m8!1m7!1sCAoSLEFGMVFpcFBXbFIzeEhIWVBhZGRTbFhxa2JMSTdFVjhId1cwRUNQbGNPV1pv!2m2!1d55.80578327354392!2d37.58520517498255!3f345.1!4f0.7199999999999989!5f0.8160813932612223%22" style="border:0" allowfullscreen="" width="600" height="450" frameborder="0"></iframe>  
+</div>
+<div id="advice-modal" class="feedback-modal">
+  <a class="closemsg" href="#"></a>
+  <div class="feedback-title">
+   Дайте нам совет
+  </div>
+  <div class="feedback-desc">
+  	<p>Мы ценим своих покупателей и постоянно работаем над качеством сервиса. Здорово, что вы нам в этом 
+      помогаете! Напишите нам, что мы можем улучшить?</p></div>
+  <form id="advice-form" class="form feedback" action="/client_account/feedback" method="post">    
+
+    <div class="feedback-row hide">
+      <div class="feedback-field-wrap">
+        <textarea placeholder="Текст сообщения" name="feedback[content]" rows="4" class="feedback-field required"></textarea>
+      </div>
+    </div>
+
+    <input type="hidden" name="feedback[subject]" value="Сообщение из формы Дайте нам совет">
+    
+    <div class="feedback-row form-error">
+    </div>
+    <div class="feedback-row form-done text-center">
+    </div>
+    <div class="feedback-row text-center">
+      <button type="submit" name="button" class="feedback-submit-advice button is-transparent">
+       Отправить
+      </button>
+    </div>
+    
+  </form>
+</div>
+<div id="where-modal" class="feedback-modal">
+  <a class="closemsg" href="#"></a>
+  <div class="feedback-title">
+  Где мой заказ?
+  </div>
+  <div class="where-wrapper">
+  	<div class="feedback-desc"><p>Введите номер заказа, чтобы узнать, где он находится</p></div>
+  	<div class="where-number-wrapper"><div class="where-number" id="where-number"></div></div>
+  	<div class="where-request-wrapper"><div class="where-request" id="where-request"></div></div>
+  	<form id="where-form" class="form where" action="">    
+
+    	<div class="feedback-row hide">
+      		<div class="feedback-field-wrap">
+        		<input type="text" placeholder="Номер заказа" name="where_order" id="where_order" class="where-field required">
+        		<button id="submit-where" type="submit" name="button" class="submit-where button is-transparent">   Отправить</button>
+      		</div>
+    	</div>    
+        <div class="feedback-row form-error"></div>
+        <div class="feedback-row form-done text-center">
+    </div>
+    <div class="feedback-row text-center"> </div>    
+  </form>
+</div>
+</div> 
+      <!-- Rating@Mail.ru counter -->
+<script type="text/javascript">
+var _tmr = window._tmr || (window._tmr = []);
+_tmr.push({id: "3190683", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "topmailru-code");
+</script><noscript><div>
+<img src="//top-fwz1.mail.ru/counter?id=3190683;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
+</div></noscript>
+<!-- //Rating@Mail.ru counter -->
+
+<!-- Rating@Mail.ru counter dynamic remarketing appendix -->
+<script type="text/javascript">
+var _tmr = _tmr || [];
+// var idsMass = []; $('form[data-product-id]').each(function(i, element) { idsMass[i] = $(element).data('productId'); }); idsMass = Array.from(new Set(idsMass));
+_tmr.push({
+  type: 'itemView',
+  productid: [],
+  pagetype: 'other',
+  list: '1',
+  totalvalue: ''
+});
+</script> 
+<!-- // Rating@Mail.ru counter dynamic remarketing appendix -->
+	<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter24184612 = new Ya.Metrika2({
+                    id:24184612,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    ecommerce:"dataLayer"
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks2");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/24184612" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script>
+if ($.cookie('regUser') != null) {
+window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event' : 'PMfrmOrder'});
+
+}
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TLD9G57');
+</script>
+
+
+<!-- Sales Ninja -->
+<script type="text/javascript" src="https://bundle.sales-ninja.me/userBundle.js"></script>
+
+<script>
+	SalesNinja.init('6bef2165-b2d5-4772-8e5a-11743c58dfdb');
+	SalesNinja.start();
+</script>
+<!-- /Sales Ninja -->
+<script>
+/*
+setTimeout(function() {
+// UA transaction upload code starts here
+  ga('pmTrack.require', 'ecommerce', 'ecommerce.js');
+  ga('pmTrack.ecommerce:addTransaction', {
+    'id': {{order.number}},
+    'affiliation': 'gopro.ru', 
+    'revenue': {{order.total_price}}
+  });
+  {% for item in order.items %}
+    ga('pmTrack.ecommerce:addItem', {
+      'id': {{order.number}},
+      'price': {{item.sale_price}},
+      'quantity': {{item.quantity}}
+     });
+  {% endfor %} 
+  ga('pmTrack.ecommerce:send');
+
+
+ }, 4000);
+  */
+</script>
+<script>dataLayer.push({'event':'success_order','transaction_id':'{{order.number}}'});</script>
+
+<!-- Jivosite Chat -->
+<script src="//code.jivo.ru/widget/17hGolSAyF" async=""></script>
+<!-- end Jivosite Chat --><script type="text/javascript" src="/served_assets/public/shop/referer_code.js"></script><!-- VK Pixel Code -->
+<div id="vk_api_transport"><script type="text/javascript" src="https://vk.com/js/api/openapi.js?169" async=""></script></div>
+<script type="text/javascript">
+  window.vkAsyncInit = function() {
+    VK.Retargeting.Init("VK-RTRG-227686-5zaSS");
+    VK.Retargeting.Hit();
+    
+    
+  };
+
+setTimeout(function() {
+    var el = document.createElement("script");
+    el.type = "text/javascript";
+    el.src = "https://vk.com/js/api/openapi.js?169";
+    el.async = true;
+    document.getElementById("vk_api_transport").appendChild(el);
+  }, 0);
+</script>
+<noscript><img src="https://vk.com/rtrg?p=VK-RTRG-227686-5zaSS" style="position:fixed; left:-999px;" alt=""/>
+</noscript>
+<!-- End VK Pixel Code -->
+<div class="m-modal m-modal--checkout" id="insales-quick-checkout-dialog"><div class="m-modal-wrapper"><form id="quick_checkout_form" data-address-autocomplete="https://kladr.insales.ru" action="/orders/create_with_quick_checkout.json" accept-charset="UTF-8" method="post"><button class="m-modal-close" data-modal="close"></button><div class="m-modal-heading">Завершить заказ в 1 клик</div><div class="m-modal-errors"></div><input id="shipping_address_country" type="hidden" value="RU"><div class="m-input m-input--required "><label for="client_name" class="m-input-label">Имя:</label><input class="m-input-field" placeholder="" type="text" id="client_name" name="client[name]" value=""></div><div class="m-input m-input--required "><label for="client_phone" class="m-input-label">Контактный телефон:</label><input class="m-input-field" placeholder="Например: +7(926)111-11-11" type="tel" id="client_phone" name="client[phone]" value=""></div><div class="m-input m-input--required m-input--checkbox"><label for="client_consent_to_personal_data" class="m-input-label">Согласие на обработку персональных данных</label><input type="hidden" name="client[consent_to_personal_data]" value="0" id="" class=""><input type="checkbox" name="client[consent_to_personal_data]" value="1" id="client_consent_to_personal_data" checked="1"><span></span><div class="m-input-caption">Нажимая кнопку "Подтвердить заказ", я даю своё согласие на обработку персональных данных в соответствии с <a href="/blogs/servis-i-dokumenty/polzovatelskoe-soglashenie" target="blank">Пользовательским соглашением</a>.</div></div><div class="m-modal-footer"><button class="m-modal-button m-modal-button--checkout button--checkout" type="submit">Оформить заказ</button></div><input type="hidden" name="lang" value=""></form></div></div>
+<div id="insales-quick-checkout-msg" class="m-modal m-modal--msg">
+<div class="m-modal-wrapper">
+<button class="button m-button m-modal-close" data-modal="close"></button>
+<div class="m-modal-msg center"></div>
+</div>
+</div><div class="magic-hidden-wrapper"></div><div id="sales-ninja-app" data-v-app=""><div class="sales-ninja"><!----><!----></div></div></body></html>

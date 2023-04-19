@@ -1,0 +1,676 @@
+<html lang="en"><head><meta charset="utf-8"><link rel="shortcut icon" href="/favicon.ico"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="theme-color" content="#000000"><link rel="manifest" href="/manifest.json"><title>MarketProfit</title><meta name="yandex-verification" content="78cc0112522785ee"><meta name="google-site-verification" content="hxUpY8PrWpCuE2Tpj2jnLefzoyeWO-19Ukhk2PKwJh8"><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-MLV83LS"></script><script>!function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-MLV83LS",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer")</script><link href="/static/css/2.822910d5.chunk.css" rel="stylesheet"><link href="/static/css/main.24e56f4b.chunk.css" rel="stylesheet"><style type="text/css">.apexcharts-canvas {
+  position: relative;
+  user-select: none;
+  /* cannot give overflow: hidden as it will crop tooltips which overflow outside chart area */
+}
+
+
+/* scrollbar is not visible by default for legend, hence forcing the visibility */
+.apexcharts-canvas ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 6px;
+}
+
+.apexcharts-canvas ::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+
+.apexcharts-inner {
+  position: relative;
+}
+
+.apexcharts-text tspan {
+  font-family: inherit;
+}
+
+.legend-mouseover-inactive {
+  transition: 0.15s ease all;
+  opacity: 0.20;
+}
+
+.apexcharts-series-collapsed {
+  opacity: 0;
+}
+
+.apexcharts-tooltip {
+  border-radius: 5px;
+  box-shadow: 2px 2px 6px -4px #999;
+  cursor: default;
+  font-size: 14px;
+  left: 62px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 12;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-tooltip.apexcharts-active {
+  opacity: 1;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light {
+  border: 1px solid #e3e3e3;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.apexcharts-tooltip.apexcharts-theme-dark {
+  color: #fff;
+  background: rgba(30, 30, 30, 0.8);
+}
+
+.apexcharts-tooltip * {
+  font-family: inherit;
+}
+
+
+.apexcharts-tooltip-title {
+  padding: 6px;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+  background: #ECEFF1;
+  border-bottom: 1px solid #ddd;
+}
+
+.apexcharts-tooltip.apexcharts-theme-dark .apexcharts-tooltip-title {
+  background: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid #333;
+}
+
+.apexcharts-tooltip-text-value,
+.apexcharts-tooltip-text-z-value {
+  display: inline-block;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.apexcharts-tooltip-text-z-label:empty,
+.apexcharts-tooltip-text-z-value:empty {
+  display: none;
+}
+
+.apexcharts-tooltip-text-value,
+.apexcharts-tooltip-text-z-value {
+  font-weight: 600;
+}
+
+.apexcharts-tooltip-marker {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  top: 0px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.apexcharts-tooltip-series-group {
+  padding: 0 10px;
+  display: none;
+  text-align: left;
+  justify-content: left;
+  align-items: center;
+}
+
+.apexcharts-tooltip-series-group.apexcharts-active .apexcharts-tooltip-marker {
+  opacity: 1;
+}
+
+.apexcharts-tooltip-series-group.apexcharts-active,
+.apexcharts-tooltip-series-group:last-child {
+  padding-bottom: 4px;
+}
+
+.apexcharts-tooltip-series-group-hidden {
+  opacity: 0;
+  height: 0;
+  line-height: 0;
+  padding: 0 !important;
+}
+
+.apexcharts-tooltip-y-group {
+  padding: 6px 0 5px;
+}
+
+.apexcharts-tooltip-box, .apexcharts-custom-tooltip {
+  padding: 4px 8px;
+}
+
+.apexcharts-tooltip-boxPlot {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.apexcharts-tooltip-box>div {
+  margin: 4px 0;
+}
+
+.apexcharts-tooltip-box span.value {
+  font-weight: bold;
+}
+
+.apexcharts-tooltip-rangebar {
+  padding: 5px 8px;
+}
+
+.apexcharts-tooltip-rangebar .category {
+  font-weight: 600;
+  color: #777;
+}
+
+.apexcharts-tooltip-rangebar .series-name {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.apexcharts-xaxistooltip {
+  opacity: 0;
+  padding: 9px 10px;
+  pointer-events: none;
+  color: #373d3f;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 10;
+  background: #ECEFF1;
+  border: 1px solid #90A4AE;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-xaxistooltip.apexcharts-theme-dark {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.apexcharts-xaxistooltip:after,
+.apexcharts-xaxistooltip:before {
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.apexcharts-xaxistooltip:after {
+  border-color: rgba(236, 239, 241, 0);
+  border-width: 6px;
+  margin-left: -6px;
+}
+
+.apexcharts-xaxistooltip:before {
+  border-color: rgba(144, 164, 174, 0);
+  border-width: 7px;
+  margin-left: -7px;
+}
+
+.apexcharts-xaxistooltip-bottom:after,
+.apexcharts-xaxistooltip-bottom:before {
+  bottom: 100%;
+}
+
+.apexcharts-xaxistooltip-top:after,
+.apexcharts-xaxistooltip-top:before {
+  top: 100%;
+}
+
+.apexcharts-xaxistooltip-bottom:after {
+  border-bottom-color: #ECEFF1;
+}
+
+.apexcharts-xaxistooltip-bottom:before {
+  border-bottom-color: #90A4AE;
+}
+
+.apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:after {
+  border-bottom-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:before {
+  border-bottom-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-xaxistooltip-top:after {
+  border-top-color: #ECEFF1
+}
+
+.apexcharts-xaxistooltip-top:before {
+  border-top-color: #90A4AE;
+}
+
+.apexcharts-xaxistooltip-top.apexcharts-theme-dark:after {
+  border-top-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-xaxistooltip-top.apexcharts-theme-dark:before {
+  border-top-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-xaxistooltip.apexcharts-active {
+  opacity: 1;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-yaxistooltip {
+  opacity: 0;
+  padding: 4px 10px;
+  pointer-events: none;
+  color: #373d3f;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 10;
+  background: #ECEFF1;
+  border: 1px solid #90A4AE;
+}
+
+.apexcharts-yaxistooltip.apexcharts-theme-dark {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.apexcharts-yaxistooltip:after,
+.apexcharts-yaxistooltip:before {
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.apexcharts-yaxistooltip:after {
+  border-color: rgba(236, 239, 241, 0);
+  border-width: 6px;
+  margin-top: -6px;
+}
+
+.apexcharts-yaxistooltip:before {
+  border-color: rgba(144, 164, 174, 0);
+  border-width: 7px;
+  margin-top: -7px;
+}
+
+.apexcharts-yaxistooltip-left:after,
+.apexcharts-yaxistooltip-left:before {
+  left: 100%;
+}
+
+.apexcharts-yaxistooltip-right:after,
+.apexcharts-yaxistooltip-right:before {
+  right: 100%;
+}
+
+.apexcharts-yaxistooltip-left:after {
+  border-left-color: #ECEFF1;
+}
+
+.apexcharts-yaxistooltip-left:before {
+  border-left-color: #90A4AE;
+}
+
+.apexcharts-yaxistooltip-left.apexcharts-theme-dark:after {
+  border-left-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-yaxistooltip-left.apexcharts-theme-dark:before {
+  border-left-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-yaxistooltip-right:after {
+  border-right-color: #ECEFF1;
+}
+
+.apexcharts-yaxistooltip-right:before {
+  border-right-color: #90A4AE;
+}
+
+.apexcharts-yaxistooltip-right.apexcharts-theme-dark:after {
+  border-right-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-yaxistooltip-right.apexcharts-theme-dark:before {
+  border-right-color: rgba(0, 0, 0, 0.5);
+}
+
+.apexcharts-yaxistooltip.apexcharts-active {
+  opacity: 1;
+}
+
+.apexcharts-yaxistooltip-hidden {
+  display: none;
+}
+
+.apexcharts-xcrosshairs,
+.apexcharts-ycrosshairs {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-xcrosshairs.apexcharts-active,
+.apexcharts-ycrosshairs.apexcharts-active {
+  opacity: 1;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-ycrosshairs-hidden {
+  opacity: 0;
+}
+
+.apexcharts-selection-rect {
+  cursor: move;
+}
+
+.svg_select_boundingRect, .svg_select_points_rot {
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.apexcharts-selection-rect + g .svg_select_boundingRect,
+.apexcharts-selection-rect + g .svg_select_points_rot {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.apexcharts-selection-rect + g .svg_select_points_l,
+.apexcharts-selection-rect + g .svg_select_points_r {
+  cursor: ew-resize;
+  opacity: 1;
+  visibility: visible;
+}
+
+.svg_select_points {
+  fill: #efefef;
+  stroke: #333;
+  rx: 2;
+}
+
+.apexcharts-svg.apexcharts-zoomable.hovering-zoom {
+  cursor: crosshair
+}
+
+.apexcharts-svg.apexcharts-zoomable.hovering-pan {
+  cursor: move
+}
+
+.apexcharts-zoom-icon,
+.apexcharts-zoomin-icon,
+.apexcharts-zoomout-icon,
+.apexcharts-reset-icon,
+.apexcharts-pan-icon,
+.apexcharts-selection-icon,
+.apexcharts-menu-icon,
+.apexcharts-toolbar-custom-icon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  line-height: 24px;
+  color: #6E8192;
+  text-align: center;
+}
+
+.apexcharts-zoom-icon svg,
+.apexcharts-zoomin-icon svg,
+.apexcharts-zoomout-icon svg,
+.apexcharts-reset-icon svg,
+.apexcharts-menu-icon svg {
+  fill: #6E8192;
+}
+
+.apexcharts-selection-icon svg {
+  fill: #444;
+  transform: scale(0.76)
+}
+
+.apexcharts-theme-dark .apexcharts-zoom-icon svg,
+.apexcharts-theme-dark .apexcharts-zoomin-icon svg,
+.apexcharts-theme-dark .apexcharts-zoomout-icon svg,
+.apexcharts-theme-dark .apexcharts-reset-icon svg,
+.apexcharts-theme-dark .apexcharts-pan-icon svg,
+.apexcharts-theme-dark .apexcharts-selection-icon svg,
+.apexcharts-theme-dark .apexcharts-menu-icon svg,
+.apexcharts-theme-dark .apexcharts-toolbar-custom-icon svg {
+  fill: #f3f4f5;
+}
+
+.apexcharts-canvas .apexcharts-zoom-icon.apexcharts-selected svg,
+.apexcharts-canvas .apexcharts-selection-icon.apexcharts-selected svg,
+.apexcharts-canvas .apexcharts-reset-zoom-icon.apexcharts-selected svg {
+  fill: #008FFB;
+}
+
+.apexcharts-theme-light .apexcharts-selection-icon:not(.apexcharts-selected):hover svg,
+.apexcharts-theme-light .apexcharts-zoom-icon:not(.apexcharts-selected):hover svg,
+.apexcharts-theme-light .apexcharts-zoomin-icon:hover svg,
+.apexcharts-theme-light .apexcharts-zoomout-icon:hover svg,
+.apexcharts-theme-light .apexcharts-reset-icon:hover svg,
+.apexcharts-theme-light .apexcharts-menu-icon:hover svg {
+  fill: #333;
+}
+
+.apexcharts-selection-icon,
+.apexcharts-menu-icon {
+  position: relative;
+}
+
+.apexcharts-reset-icon {
+  margin-left: 5px;
+}
+
+.apexcharts-zoom-icon,
+.apexcharts-reset-icon,
+.apexcharts-menu-icon {
+  transform: scale(0.85);
+}
+
+.apexcharts-zoomin-icon,
+.apexcharts-zoomout-icon {
+  transform: scale(0.7)
+}
+
+.apexcharts-zoomout-icon {
+  margin-right: 3px;
+}
+
+.apexcharts-pan-icon {
+  transform: scale(0.62);
+  position: relative;
+  left: 1px;
+  top: 0px;
+}
+
+.apexcharts-pan-icon svg {
+  fill: #fff;
+  stroke: #6E8192;
+  stroke-width: 2;
+}
+
+.apexcharts-pan-icon.apexcharts-selected svg {
+  stroke: #008FFB;
+}
+
+.apexcharts-pan-icon:not(.apexcharts-selected):hover svg {
+  stroke: #333;
+}
+
+.apexcharts-toolbar {
+  position: absolute;
+  z-index: 11;
+  max-width: 176px;
+  text-align: right;
+  border-radius: 3px;
+  padding: 0px 6px 2px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.apexcharts-menu {
+  background: #fff;
+  position: absolute;
+  top: 100%;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 3px;
+  right: 10px;
+  opacity: 0;
+  min-width: 110px;
+  transition: 0.15s ease all;
+  pointer-events: none;
+}
+
+.apexcharts-menu.apexcharts-menu-open {
+  opacity: 1;
+  pointer-events: all;
+  transition: 0.15s ease all;
+}
+
+.apexcharts-menu-item {
+  padding: 6px 7px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.apexcharts-theme-light .apexcharts-menu-item:hover {
+  background: #eee;
+}
+
+.apexcharts-theme-dark .apexcharts-menu {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .apexcharts-canvas:hover .apexcharts-toolbar {
+    opacity: 1;
+  }
+}
+
+.apexcharts-datalabel.apexcharts-element-hidden {
+  opacity: 0;
+}
+
+.apexcharts-pie-label,
+.apexcharts-datalabels,
+.apexcharts-datalabel,
+.apexcharts-datalabel-label,
+.apexcharts-datalabel-value {
+  cursor: default;
+  pointer-events: none;
+}
+
+.apexcharts-pie-label-delay {
+  opacity: 0;
+  animation-name: opaque;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+}
+
+.apexcharts-canvas .apexcharts-element-hidden {
+  opacity: 0;
+}
+
+.apexcharts-hide .apexcharts-series-points {
+  opacity: 0;
+}
+
+.apexcharts-gridline,
+.apexcharts-annotation-rect,
+.apexcharts-tooltip .apexcharts-marker,
+.apexcharts-area-series .apexcharts-area,
+.apexcharts-line,
+.apexcharts-zoom-rect,
+.apexcharts-toolbar svg,
+.apexcharts-area-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+.apexcharts-line-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+.apexcharts-radar-series path,
+.apexcharts-radar-series polygon {
+  pointer-events: none;
+}
+
+
+/* markers */
+
+.apexcharts-marker {
+  transition: 0.15s ease all;
+}
+
+@keyframes opaque {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/* Resize generated styles */
+
+@keyframes resizeanim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.resize-triggers {
+  animation: 1ms resizeanim;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.resize-triggers,
+.resize-triggers>div,
+.contract-trigger:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.resize-triggers>div {
+  background: #eee;
+  overflow: auto;
+}
+
+.contract-trigger:before {
+  width: 200%;
+  height: 200%;
+}</style></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"><div class="fade page-sidebar-fixed show page-container 
+          page-header-fixed 
+          
+          
+          
+          
+          
+         
+				"><div><div id="header" class="header navbar-default"><div class="navbar-header"><a style="text-decoration: none;" href="/"><div class="navbar-brand"><b>Market</b> Profit</div></a><button type="button" class="navbar-toggle pt-0 pb-0 mr-0"></button><button type="button" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div><ul class="navbar-nav navbar-right"><li class="navbar-form"><form name="search_form"><div class="form-group"><input style="text-overflow: ellipsis;" type="text" class="form-control" placeholder="Поиск товара по ID" value=""><button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button></div></form></li><div class="buttons__group"><a href="/login"><button class="button button__log"><span>Войти</span></button></a><a href="/register"><button class="button button__reg"><span>Регистрация</span></button></a></div></ul></div><div id="sidebar" class="sidebar "><div class="scrollbar-container height-full ps"><ul class="nav"><li class="nav-header">Навигация</li><li class="closed main"><a href="/main">  <i class="fas fa-home"></i>  <span>Главная </span> </a></li><li class="closed tariffs"><a href="/tariffs">  <i class="fas fa-credit-card"></i>  <span>Тарифы </span> </a></li><li class="closed search"><a href="/wildberries/search">  <i class="fa fa-search"></i>  <span>Поиск <span class="label label-theme m-l-5">Новое</span></span> </a></li><li class="closed new"><a href="/wildberries/new">  <i class="fab fa-neos"></i>  <span>Новинки <span class="label label-theme m-l-5">Новое</span></span> </a></li><li class="closed brands"><a href="/wildberries/brands">  <i class="fab fa-black-tie"></i>  <span>Бренды </span> </a></li><li class="closed categories"><a href="/wildberries/categories">  <i class="fas fa-list-alt"></i>  <span>Категории </span> </a></li><li class="closed sellers"><a href="/wildberries/sellers">  <i class="fas fa-users"></i>  <span>Продавцы </span> </a></li><li class="closed stocks"><a href="/wildberries/stocks">  <i class="fas fa-cubes"></i>  <span>Склады </span> </a></li><li class="closed favorites"><a href="/wildberries/favorites">  <i class="fas fa-heart"></i>  <span>Избранные Товары </span> </a></li><li class="closed has-sub help"><a href="/help"><b class="caret"></b>   <i class="fa fa-question-circle"></i> <span>Поддержка </span> </a><ul class="sub-menu d-none"><li class="closed 79208745602"><a target="_blank" rel="noreferrer" href="https://wa.me/79208745602">    <span>WhatsApp </span> </a></li><li class="closed Marketprofit_WB"><a target="_blank" rel="noreferrer" href="https://t.me/Marketprofit_WB">    <span>Telegram </span> </a></li></ul></li></ul><div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div></div><div class="sidebar-bg"></div><div class="sidebar-mobile-dismiss"></div><div class="content 
+             "><div class="main"><ol class="breadcrumb float-xl-right"><li class="breadcrumb-item"><a href="/">Главная</a></li><li class="breadcrumb-item active">Политика конфиденциальности</li></ol><h1 class="page-header">Политика конфиденциальности</h1><div class="panel panel-inverse   "><div class="panel-heading"><h4 class="panel-title d-flex" style="align-items: center;"> ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</h4><div class="panel-heading-btn"><button class="btn btn-xs btn-icon btn-circle btn-default"><i class="fa fa-expand"></i></button>&nbsp;&nbsp;</div></div><div class="panel-body  undefined"><div class="terms"><p>Настоящая Политика конфиденциальности (далее – Политика) определяет общие принципы и порядок обработки Данных и Персональных данных Пользователей сайта <b>marketprofit.ru</b> и меры по обеспечению их безопасности сайтом <b>marketprofit.ru</b>.</p><h3>ТЕРМИНЫ</h3><ul>Стороны используют следующие значения терминов:<li><i>a.</i><b>Персональные данные</b>&nbsp;– любая информация, относящаяся прямо или косвенно к определенному или определяемому Пользователю сайта marketprofit.ru;</li><li><i>b.</i><b>Данные</b>&nbsp;– данные о Пользователе (не входящие в понятие Персональных данных).</li><li><i>c.</i><b> Обработка Персональных данных</b>– любые действие (операция) или совокупность действий (операций), совершаемых Оператором с использованием средств автоматизации или без использования таких средств с Персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление и уничтожение Персональных данных.</li><li><i>d.</i><b>Пользователь (Заказчик)</b>&nbsp;- физическое и/или юридическое лицо, имеющее доступ к Сайту, посредством сети Интернет и/или использующее сайт marketprofit.ru.</li><li><i>e.</i><b>Субъект персональных данных</b> -&nbsp;Пользователь (Заказчик), к которому относятся Персональные данные.</li><li><i>f.</i><b>Законодательство</b>– действующее законодательство Российской Федерации.</li><li><i>g.</i><b>Оператор</b>&nbsp;– ИП «Хасанов Александр Игоревич», самостоятельно или совместно с другими лицами организующее и (или) осуществляющее обработку Персональных данных, а также определяющее цели обработки Персональных данных, состав Персональных данных, подлежащих обработке, действия (операции), совершаемые с Персональными данными.</li><li><i>h.</i><b>Сайт</b>– сайт, расположенный в сети Интернет по адресу marketprofit.ru или любой другой адрес в домене marketprofit.ru.</li></ul><h3>1. ОБЩИЕ ПОЛОЖЕНИЯ</h3><ul><li><i>1.1.</i> Политика в отношении обработки Персональных данных (далее по тексту – Персональные данные) разработана в соответствии с положениями ФЗ от 27.07.2006 № 152-ФЗ «О персональных данных» (с изменениями и дополнениями), другими нормативными правовыми актами и определяет порядок работы с Персональными данными Пользователей и (или) передаваемых Пользователями и требования к обеспечению их безопасности.</li><li><i>1.2.</i> Принимая условия Политики, Пользователь тем самым дает свое согласие на обработку его Персональных данных, указанных в Политике конфиденциальности.</li></ul><h3>2. ПРИНЦИПЫ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ</h3><ul><li><i>2.1.</i> Обработка Персональных данных Оператором осуществляется в соответствии со следующими принципами:</li><ul><li><i>2.1.1.</i> Законность и справедливая основа обработки Персональных данных. Оператор принимает все необходимые меры по выполнению требований Законодательства, не обрабатывает Персональные данные в случаях, когда это не допускается Законодательством, не использует Персональные данные во вред Пользователю.</li><li><i>2.1.2.</i> Обработка только тех Персональных данных, которые отвечают заранее объявленным целям их обработки. Соответствие содержания и объема обрабатываемых Персональных данных заявленным целям обработки. Недопущение обработки Персональных данных, несовместимых с целями сбора Персональных данных, а также избыточных по отношению к заявленным целям их обработки. Оператор обрабатывает Персональные данные исключительно в целях, указанных в п.4.2 Политики.</li><li><i>2.1.3.</i> Обеспечение точности, достаточности и актуальности Персональных данных по отношению к целям обработки Персональных данных. Оператор принимает все разумные меры по поддержке актуальности обрабатываемых Персональных данных, включая, но не ограничиваясь реализацией права каждого Субъекта персональных данных получать для ознакомления свои Персональные данные и требовать от Оператора их уточнения, блокирования или уничтожения (удаления) в случае, если Персональные данные являются неполными, устаревшими, неточными, незаконно полученными или не являются необходимыми для заявленных выше целей обработки.</li><li><i>2.1.4.</i> Хранение Персональных данных в форме, позволяющей определить Пользователя Персональных данных, не дольше, чем этого требуют цели обработки Персональных данных, если срок хранения Персональных данных не установлен Законодательством, договором, стороной которого или выгодоприобретателем по которому является Пользователь Персональных данных.</li><li><i>2.1.5.</i> Недопустимость объединения созданных для несовместимых между собой целей баз данных информационных систем Персональных данных.</li></ul></ul><h3>3. УСЛОВИЯ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ</h3><ul><li><i>3.1.</i> Обработка Персональных данных Оператором допускается в следующих случаях:<ul><li><i>3.1.1.</i> При наличии согласия Пользователя на обработку его Персональных данных. Заполняя соответствующие электронные формы регистрации и/или отправляя свои персональные данные Оператору, Пользователь соглашается с условиями данной Политики и Договора оказания услуг (публичной оферты) Сайта, и дает свое согласие на обработку Персональных данных.</li><li><i>3.1.2.</i> Персональные данные подлежат опубликованию или обязательному раскрытию только в соответствии с Законодательством РФ.</li></ul></li><li><i>3.2.</i> Оператор не раскрывает третьим лицам и не распространяет Персональные данные без согласия Пользователя, если иное не предусмотрено Законодательством.</li><li><i>3.3.</i> Оператор не обрабатывает Персональные данные, относящиеся к специальным категориям и касающиеся расовой и национальной принадлежности, политических взглядов, религиозных или философских убеждений, интимной жизни и здоровья Субъекта персональных данных, о членстве Субъекта персональных данных в общественных объединениях, за исключением случаев, прямо предусмотренных Законодательством.</li><li><i>3.4.</i> Предоставляя Пользователям возможность использования Сайта, Оператор, действуя разумно и добросовестно, считает, что Пользователь: 3.4.1. Обладает всеми необходимыми правами, позволяющими ему регистрироваться и авторизовываться на Сайте и использовать его. 3.4.2. Осознает, что некоторые виды информации, переданные им другим Пользователям, не могут быть удалены самим Пользователем.</li><li><i>3.5.</i> Оператор не проверяет достоверность получаемой (собираемой) информации о Пользователях, за исключением случаев, когда такая проверка необходима в целях исполнения положений действующего применимого законодательства и/или обязательств перед Пользователем.</li></ul><h3>4. СБОР И ОБРАБОТКА ПЕРСОНАЛЬНЫХ ДАННЫХ И ИНЫХ ДАННЫХ</h3><ul><li><i>4.1.</i> Оператор собирает и хранит только те Персональные данные, которые необходимы для предоставления услуг Пользователю, для осуществления рассылки материалов информационно-рекламного характера Пользователю посредством Сайта. При этом сбор Персональных данных может осуществляться как посредством Сайта, так и в офисе, на сервере Оператора.</li><li><i>4.2.</i> Оператор обрабатывает Персональные данные в целях: 4.2.1. Информирования Пользователя об услугах Оператора или партнеров Оператора. 4.2.2. Заключения договора между Оператором и Пользователем. 4.2.3. Выполнения договорных обязательств перед Пользователем. 4.2.4. Проведения статистических и иных исследований на основе обезличенных персональных данных.</li><li><i>4.3.</i> Оператор обрабатывает следующие Персональные данные: Имя; Фамилия; Отчество; Адрес электронной почты; Контактный телефон; IP-адрес; Платежные реквизиты,Cookie.</li><li><i>4.4.</i> Оператор обрабатывает следующую иную информацию/данные: 4.4.1. Стандартные технические и иные данные, автоматически получаемые Оператором при доступе Пользователя к Сайту и последующих действиях Пользователя на Сайте (месторасположение в определенный момент времени, IP-адрес, вид операционной системы устройства Пользователя, разделы Сайта, посещаемые Пользователем). 4.4.2. Информация, полученная в результате действий Пользователя на Сайте. 4.4.3. Информация, полученная в результате действий других Пользователей на Сайте. 4.4.4. Дополнительная информация, добровольно направляемая Пользователем Оператору, имеющая непосредственное отношение к предоставляемым услугам Сайта.</li><li><i>4.5.</i> В отношении Персональных данных и иных Данных Пользователя сохраняется их конфиденциальность, кроме случаев, когда указанные данные являются общедоступными.</li><li><i>4.6.</i> Оператор имеет право сохранять архивную копию Персональных данных и иных Данных, в том числе после удаления аккаунта Пользователя.</li><li><i>4.7.</i> Оператор имеет право передавать Персональные данные и иные Данные Пользователя без согласия Пользователя следующим лицам: 4.7.1. Государственным органам, в том числе органам дознания и следствия, и органам местного самоуправления по их мотивированному запросу. 4.7.2. Партнерам Оператора c целью выполнения договорных обязательств перед Пользователем. 4.7.3. В иных случаях, прямо предусмотренных действующим законодательством РФ.</li><li><i>4.8.</i> Оператор имеет право передавать Персональные данные и иные Данные третьим лицам, не указанным в п. 4.7 настоящей Политики, в следующих случаях: 4.8.1. Пользователь выразил свое согласие на такие действия. 4.8.2. Передача необходима в рамках использования Пользователем Сайта. 4.8.3. Передача происходит в рамках продажи или иной передачи бизнеса (полностью или в части), при этом к приобретателю переходят все обязательства по соблюдению условий настоящей Политики.</li><li><i>4.9.</i> Пользователь вправе в любое время исключительно по личному заявлению отозвать данное им согласие на обработку Персональных данных. При получении Оператором Персональных данных запроса, содержащего отзыв Субъекта Персональных данных согласия на обработку Персональных данных, Оператор в течение 30 (тридцати) календарных дней с момента его получения обязан удалить Персональные данные. Персональные данные Пользователя удаляются из Сайта при удалении Оператором информации, размещаемой Пользователем, а также Личного кабинета Пользователя по запросу Пользователя или по собственной инициативе в случаях, предусмотренных Договором оказания услуг (публичной офертой). После удаления Персональных данных Пользователя из Сайта Оператор хранит их на своих электронных носителях в течение установленного законодательством Российской Федерации срока.</li><li><i>4.10</i>. Сайт использует технологию cookie – небольшие текстовые файлы, размещаемые на компьютере пользователей с целью анализа их пользовательской активности. Собранная при помощи cookie информация не может идентифицировать Пользователя. Информация будет обрабатывать эту информацию для оценки использования Пользователем Сайта, составления отчетов о деятельности Сайта. Пользователь может отказаться от использования файлов cookie, выбрав соответствующие настройки на Сайте.</li><li><i>4.11. </i> Согласие Пользователя на обработку Персональных данных предоставляется без ограничения срока его действия.</li><li><i>4.12</i>. Хранение Персональных данных осуществляется на серверах, расположенных на территории Российской Федерации.</li><li><i>4.13</i>. Пользователь дает Оператору согласие на трансграничную передачу своих Персональных данных.</li><li><i>4.14</i>. Пользователь имеет право на доступ к своим Персональным данным и их копирование.</li></ul><h3>5. ИЗМЕНЕНИЕ ПЕРСОНАЛЬНЫХ ДАННЫХ</h3><ul><li><i>5.1.</i> Пользователь может в любой момент изменить (обновить, дополнить) Персональные данные, информацию о себе в своем Личном кабинете на Сайте, при условии, что такие изменения и исправления содержат актуальную и достоверную информацию, посредством направления письменного заявления Оператору или внесения изменений в своем Личном кабинете на Сайте.</li><li><i>5.2.</i> Пользователь в любой момент имеет право запросить удаление Персональные данных / Данных.</li></ul><h3>6. КОНФИДЕНЦИАЛЬНОСТЬ ПЕРСОНАЛЬНЫХ ДАННЫХ</h3><ul><li><i>6.1.</i> Оператор обеспечивает конфиденциальность обрабатываемых им Персональных данных / Данных в порядке, предусмотренном Законодательством. Обеспечение конфиденциальности не требуется в отношении:<ul><li><i>6.1.1.</i> Персональных данных после их обезличивания;</li><li><i>6.1.2.</i> Персональных данных, доступ неограниченного круга лиц к которым предоставлен Пользователем либо по его просьбе (далее – Персональные данные, сделанные общедоступными Пользователем);</li><li><i>6.1.3.</i> Персональных данных, подлежащих опубликованию или обязательному раскрытию в соответствии с Законодательством.</li></ul></li><li><i>6.2.</i> Не является нарушением конфиденциальности Персональных данных предоставление Оператором информации третьим лицам, действующим на основании договора с Оператором, для исполнения обязательств перед Пользователем.</li><li><i>6.3.</i> Обеспечение безопасности Персональных данных достигается, в частности, но не ограничиваясь следующими мерами:<ul><li><i>6.3.1.</i> Определением угроз безопасности Персональных данных при их обработке в информационных системах Персональных данных;</li><li><i>6.3.2.</i> Применением организационных и технических мер по обеспечению безопасности персональных данных при их обработке в информационных системах Персональных данных, необходимых для выполнения требований к защите персональных данных, исполнение которых обеспечивает установленные Правительством Российской Федерации уровни защищенности Персональных данных;</li><li><i>6.3.3.</i> Обнаружением фактов несанкционированного доступа к Персональным данным и принятием мер;</li><li><i>6.3.4.</i> Восстановлением Персональных данных, модифицированных или уничтоженных вследствие несанкционированного доступа к ним;</li><li><i>6.3.5.</i> Установлением правил доступа к Персональным данным, обрабатываемым в информационной системе персональных данных, а также обеспечением регистрации и учета всех действий, совершаемых с Персональными данными в информационной системе персональных данных;</li><li><i>6.3.6.</i> Контролем за принимаемыми мерами по обеспечению безопасности Персональных данных и уровня защищенности информационных систем Персональных данных.</li><li><i>6.3.7.</i> Иными мерами по обеспечению конфиденциальности Персональных данных.</li></ul></li><li><i>6.4.</i> В случае обнаружения утечки или несанкционированного доступа к Персональным данным лиц, на которых распространяется действие GDPR (Общий регламент защиты персональных данных, принятый Постановлением Европейского Союза № 2016/679 от 27.04.2016), Оператор обязан в срок, не более 72 часов, уведомить об этом Пользователя и компетентный надзорный орган.<ul><li><i>6.4.1.</i> Уведомление об утечке не направляется в любом из нижеперечисленных случаев:<ul><li><i>6.4.1.1.</i> Утечка не может обернуться рисками для прав и свобод физических лиц;</li><li><i>6.4.1.2.</i> Оператор принял надлежащие технические и организационные меры защиты, в том числе посредством криптографической защиты;</li><li><i>6.4.1.3.</i> Требуются несоразмерные усилия, в результате чего осуществляется сообщение для всеобщего сведения.</li></ul></li></ul></li><li><i>6.5.</i> Любое лицо, которое понесло материальный или нематериальный ущерб в результате нарушения соблюдения конфиденциальности Персональных данных, обладает правом на получение компенсации. Оператор не несет ответственности за ущерб в случае, если повлекшие его события, действия не являются обязательством Оператора.</li><li><i>6.6.</i> Пользователь обязуется соблюдать конфиденциальность своих авторизационных данных (логина, пароля и иных), которые он использует на Сайте, и не сообщать их третьим лицам без предварительного уведомления Оператора.</li><li><i>6.7.</i> Пользователь обязан незамедлительно уведомить Оператора об угрозе несанкционированного использования авторизационных данных. В случае поступления такого уведомления от Пользователя либо из иного источника, Оператор вправе сменить авторизационные данные Пользователя и сообщить их Пользователю только после его дополнительной идентификации.</li></ul><h3>7. СОГЛАСИЕ ПОЛЬЗОВАТЕЛЯ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ</h3><ul><li><i>7.1.</i> Пользователь принимает решение о предоставлении своих Персональных данных Оператору и дает согласие на их обработку свободно, своей волей и в своем интересе. Согласие на обработку Персональных данных должно быть конкретным, информированным и сознательным и предоставляется Пользователем путем проставления отметки (галочки) в окошке «Ознакомлен и согласен с условиями Политики конфиденциальности» при регистрации на Сайте Оператора.</li><li><i>7.2.</i> Персональные данные лиц, вступивших в договорные обязательства с Оператором, содержащиеся в единых государственных реестрах юридических лиц и индивидуальных предпринимателей, являются открытыми и общедоступными, за исключением сведений о номере, дате выдачи и органе, выдавшем документ, удостоверяющий личность физического лица. Охраны их конфиденциальности и согласия Пользователей на обработку не требуется.</li><li><i>7.3.</i> В случае поступления запросов из организаций, не обладающих соответствующими полномочиями, Оператор обязан получить предварительное согласие Пользователя на предоставление его Персональных данных и предупредить лиц, получающих Персональные данные, о том, что эти данные могут быть использованы лишь в целях, для которых они сообщены, а также требовать от этих лиц подтверждения того, что это правило будет (было) соблюдено.</li><li><i>7.4.</i> Предоставляя согласие на обработку Персональных данных, Пользователь подтверждает, что он действует на законных основаниях и обладает всеми необходимыми правами и не нарушает своими действиями законные права и интересы третьих лиц, а также действующее законодательство Российской Федерации.</li><li><i>7.5.</i> Пользователь имеет право возражать против обработки Персональных данных и иных Данных, а также право на ограничение обработки его Персональных данных Оператором.</li></ul><h3>8. ПРАВА СУБЪЕКТОВ ПЕРСОНАЛЬНЫХ ДАННЫХ</h3><ul><li><i>8.1.</i> Пользователь имеет право на получение информации, касающейся обработки его Персональных данных / Данных. Пользователь вправе требовать от Оператора уточнения его Персональных данных, их блокирования или уничтожения (удаления) в случае, если Персональные данные являются неполными, устаревшими, неточными, незаконно полученными или не являются необходимыми для заявленной цели обработки, а также принимать предусмотренные законом меры по защите своих прав. Пользователь имеет право на копирование, передачу Персональных данных другой платформе/сервису.</li><li><i>8.2.</i> Если Пользователь считает, что Оператор осуществляет обработку его Персональных данных с нарушением требований Законодательства или иным образом нарушает его права и свободы, Пользователь вправе обжаловать действия или бездействие Оператора в уполномоченном органе по защите прав Субъектов Персональных данных или в судебном порядке.</li></ul><h3>9. ПЕРСОНАЛЬНЫЕ ДАННЫЕ ТРЕТЬИХ ЛИЦ, ИСПОЛЬЗУЕМЫЕ ПОЛЬЗОВАТЕЛЯМИ</h3><ul><li><i>9.1.</i> Используя Сайт, Пользователь имеет право заносить данные третьих лиц для получения рассылки материалов рекламно-информационного характера.</li><li><i>9.2.</i> Пользователь обязуется получить предварительное согласие Субъекта Персональных данных на их использование посредством Сайта. Пользователь самостоятельно несет ответственность за отсутствие такого согласия и обязан возместить Оператору связанные с отсутствием согласия убытки. Оператор не несет ответственности в случае незаконной передачи Пользователем Персональных данных третьего лица.</li><li><i>9.3.</i> Оператор обязуется предпринять необходимые меры для обеспечения сохранности Персональных данных третьих лиц, занесенных Пользователем.</li></ul><h3>10. ИНЫЕ ПОЛОЖЕНИЯ</h3><ul><li><i>10.1.</i> К настоящей Политике и отношениям между Пользователем и Оператором, возникающим в связи с применением Политики, подлежит к применению право Российской Федерации.</li><li><i>10.2.</i> Если по тем или иным причинам одно или несколько положений Политики будут признаны недействительными или не имеющими юридической силы, это не оказывает влияния на действительность или применимость остальных положений Политики конфиденциальности.</li><li><i>10.3.</i> Пользователь осведомлен и согласен, что телефонные разговоры с Оператором могут быть записаны в целях контроля качества работы Оператора.</li><li><i>10.4.</i> Оператор имеет право в любой момент изменять настоящую Политику (полностью или в части) в одностороннем порядке без предварительного согласования с Пользователем. Все изменения вступают в силу с момента публикации таких изменений на Сайте.</li><li><i>10.5.</i> Пользователь обязуется самостоятельно следить за изменениями Политики путем ознакомления с актуальной редакцией.</li><li><i>10.6.</i> Актуальная версия Политики в любое время доступна по адресу: (<a href="https://my.marketprofit.ru/privacy">https://my.marketprofit.ru/privacy</a>).</li></ul></div></div></div></div></div><div class="scroll-to-top"></div><div id="footer" class="footer"><div class="" style="font-size: 1rem; font-weight: bold; margin: 0.5rem auto; text-align: center;">Copyright © 2023 by MarketProfit</div><div style="display: flex; align-items: center; justify-content: space-between;" class="footer__desc"><div style="display: flex; flex-direction: column; width: 42%;"><a href="/terms">Условия использования</a><a href="/privacy">Политика конфеденциальности</a><a href="/tariffs">Информация об оплате</a></div><div class="footer_contacts"><a class="mailto" href="mailto:support@marketprofit.ru"><i class="fa fa-envelope fa-lg m-r-5"></i>support@marketprofit.ru</a><div class="" style="display: flex;"><a href="https://www.youtube.com/channel/UC2VhfJbvIfzxV2Iuxcx6qFA" rel="noopener noreferrer" target="_blank" class="youtube" style="display: flex; align-items: center;"><i class="fab fa-youtube fa-2x m-r-10"></i></a><a href="https://t.me/marketprofit_news" rel="noopener noreferrer" target="_blank" class="telegram" style="display: flex; align-items: center;"><i class="fab fa-telegram fa-2x m-r-10"></i></a></div></div></div></div></div></div></div><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MLV83LS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>!function(e){function r(r){for(var n,f,i=r[0],l=r[1],a=r[2],c=0,s=[];c<i.length;c++)f=i[c],Object.prototype.hasOwnProperty.call(o,f)&&o[f]&&s.push(o[f][0]),o[f]=0;for(n in l)Object.prototype.hasOwnProperty.call(l,n)&&(e[n]=l[n]);for(p&&p(r);s.length;)s.shift()();return u.push.apply(u,a||[]),t()}function t(){for(var e,r=0;r<u.length;r++){for(var t=u[r],n=!0,i=1;i<t.length;i++){var l=t[i];0!==o[l]&&(n=!1)}n&&(u.splice(r--,1),e=f(f.s=t[0]))}return e}var n={},o={1:0},u=[];function f(r){if(n[r])return n[r].exports;var t=n[r]={i:r,l:!1,exports:{}};return e[r].call(t.exports,t,t.exports,f),t.l=!0,t.exports}f.m=e,f.c=n,f.d=function(e,r,t){f.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},f.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},f.t=function(e,r){if(1&r&&(e=f(e)),8&r)return e;if(4&r&&"object"==typeof e&&e&&e.__esModule)return e;var t=Object.create(null);if(f.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:e}),2&r&&"string"!=typeof e)for(var n in e)f.d(t,n,function(r){return e[r]}.bind(null,n));return t},f.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return f.d(r,"a",r),r},f.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},f.p="/";var i=this["webpackJsonpmarketprofit-front"]=this["webpackJsonpmarketprofit-front"]||[],l=i.push.bind(i);i.push=r,i=i.slice();for(var a=0;a<i.length;a++)r(i[a]);var p=l;t()}([])</script><script src="/static/js/2.d85e6588.chunk.js"></script><script src="/static/js/main.d2eaaa2c.chunk.js"></script><svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs><polyline id="SvgjsPolyline1003" points="0,0"></polyline><path id="SvgjsPath1004" d="M0 0 "></path></svg></body></html>

@@ -1,0 +1,670 @@
+<html prefix="og: https://ogp.me/ns#" lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",e=>{this.persisted=e.persisted}),window.addEventListener("DOMContentLoaded",()=>{this._preconnect3rdParties()}),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}_addUserInteractionListener(e){if(document.hidden){e._triggerListener();return}this.triggerEvents.forEach(t=>window.addEventListener(t,e.userEventHandler,{passive:!0})),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler)}_removeUserInteractionListener(){this.triggerEvents.forEach(e=>window.removeEventListener(e,this.userEventHandler,{passive:!0})),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"),this._pendingClickStarted())}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this._pendingClickFinished()}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation(),this._pendingClickFinished()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach(e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))})}_waitForPendingClicks(){return new Promise(e=>{this._isClickPending?this._pendingClickFinished=e:e()})}_pendingClickStarted(){this._isClickPending=!0}_pendingClickFinished(){this._isClickPending=!1}_renameDOMAttribute(e,t,i){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(i,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t=>{if(t.hasAttribute("src")){let i=new URL(t.src).origin;i!==location.origin&&e.push({src:i,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}}),e=[...new Map(e.map(e=>[JSON.stringify(e),e])).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){console.error(e)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._waitForPendingClicks().then(()=>{this._replayClicks()}),this._emptyTrash()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e=>{e.hasAttribute("data-rocket-src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)})}async _transformScript(e){return await this._littleBreath(),new Promise(t=>{function i(){e.setAttribute("data-rocket-status","executed"),t()}function r(){e.setAttribute("data-rocket-status","failed"),t()}try{let n=e.getAttribute("data-rocket-type"),s=e.getAttribute("data-rocket-src");if(n?(e.type=n,e.removeAttribute("data-rocket-type")):e.removeAttribute("type"),e.addEventListener("load",i),e.addEventListener("error",r),s)e.src=s,e.removeAttribute("data-rocket-src");else if(navigator.userAgent.indexOf("Firefox/")>0){var a=document.createElement("script");[...e.attributes].forEach(e=>{"type"!==e.nodeName&&a.setAttribute("data-rocket-type"===e.nodeName?"type":e.nodeName,e.nodeValue)}),a.text=e.text,e.parentNode.replaceChild(a,e),i()}else e.src="data:text/javascript;base64,"+btoa(e.text)}catch(o){r()}})}async _loadScriptsFromList(e){let t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var i=document.createDocumentFragment();e.forEach(e=>{let r=e.getAttribute&&e.getAttribute("data-rocket-src")||e.src;if(r){let n=document.createElement("link");n.href=r,n.rel=t,"preconnect"!==t&&(n.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),e.crossOrigin&&(n.crossOrigin=e.crossOrigin),e.integrity&&(n.integrity=e.integrity),i.appendChild(n),this.trash.push(n)}}),document.head.appendChild(i)}_delayEventListeners(e){let t={};function i(e,i){!function e(i){!t[i]&&(t[i]={originalFunctions:{add:i.addEventListener,remove:i.removeEventListener},eventsToRewrite:[]},i.addEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.add.apply(i,arguments)},i.removeEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.remove.apply(i,arguments)});function r(e){return t[i].eventsToRewrite.indexOf(e)>=0?"rocket-"+e:e}}(e),t[e].eventsToRewrite.push(i)}function r(e,t){let i=e[t];Object.defineProperty(e,t,{get:()=>i||function(){},set(r){e["rocket"+t]=i=r}})}i(document,"DOMContentLoaded"),i(window,"DOMContentLoaded"),i(window,"load"),i(window,"pageshow"),i(document,"readystatechange"),r(document,"onreadystatechange"),r(window,"onload"),r(window,"onpageshow")}_delayJQueryReady(e){let t;function i(i){if(i&&i.fn&&!e.allJQueries.includes(i)){i.fn.ready=i.fn.init.prototype.ready=function(t){return e.domReadyFired?t.bind(document)(i):document.addEventListener("rocket-DOMContentLoaded",()=>t.bind(document)(i)),i([])};let r=i.fn.on;i.fn.on=i.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map(e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]})}return r.apply(this,arguments),this},e.allJQueries.push(i)}t=i}i(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>t,set(e){i(e)}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach(e=>e(window).trigger("rocket-jquery-load")),await this._littleBreath();let e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){let e=new Map;document.write=document.writeln=function(t){let i=document.currentScript;i||console.error("WPRocket unable to document.write this: "+t);let r=document.createRange(),n=i.parentElement,s=e.get(i);void 0===s&&(s=i.nextSibling,e.set(i,s));let a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),n.insertBefore(a,s)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise(e=>setTimeout(e)):new Promise(e=>requestAnimationFrame(e))}_emptyTrash(){this.trash.forEach(e=>e.remove())}static run(){let e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	
+<!-- Поисковая оптимизация от Rank Math Pro - https://s.rankmath.com/home -->
+<title>Политика конфиденциальности персональных данных</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Montserrat%3A400%2C400i%2C700&amp;subset=cyrillic&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat%3A400%2C400i%2C700&amp;subset=cyrillic&amp;display=swap" media="all" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat%3A400%2C400i%2C700&#038;subset=cyrillic&#038;display=swap" /></noscript>
+<meta name="description" content="Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 №152-ФЗ «О персональных данных» и">
+<meta name="robots" content="nofollow, noindex, noimageindex, noarchive, nosnippet">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Политика конфиденциальности персональных данных">
+<meta property="og:description" content="Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 №152-ФЗ «О персональных данных» и">
+<meta property="og:url" content="https://evgenev.ru/privacy/">
+<meta property="og:site_name" content="Evgenev.ru">
+<meta property="article:publisher" content="https://web.facebook.com/EvgenevRu-%D0%B1%D0%BB%D0%BE%D0%B3-%D0%BF%D1%80%D0%BE-%D1%84%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D1%8B-%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%81%D0%B0%D0%BC%D0%BE%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D0%B5-100300895694358">
+<meta property="article:author" content="https://web.facebook.com/evgeniy.volik.56">
+<meta property="og:updated_time" content="2021-07-23T01:24:10+05:00">
+<meta property="og:image" content="https://evgenev.ru/wp-content/uploads/2021/10/logo.png">
+<meta property="og:image:secure_url" content="https://evgenev.ru/wp-content/uploads/2021/10/logo.png">
+<meta property="og:image:width" content="1021">
+<meta property="og:image:height" content="570">
+<meta property="og:image:alt" content="Бесплатные курсы">
+<meta property="og:image:type" content="image/png">
+<meta property="article:published_time" content="2021-07-23T01:24:08+05:00">
+<meta property="article:modified_time" content="2021-07-23T01:24:10+05:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Политика конфиденциальности персональных данных">
+<meta name="twitter:description" content="Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 №152-ФЗ «О персональных данных» и">
+<meta name="twitter:site" content="@evg_voliks">
+<meta name="twitter:creator" content="@evg_voliks">
+<meta name="twitter:image" content="https://evgenev.ru/wp-content/uploads/2021/10/logo.png">
+<meta name="twitter:label1" content="Время чтения">
+<meta name="twitter:data1" content="Меньше минуты">
+<script type="application/ld+json" class="rank-math-schema-pro">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://evgenev.ru/#organization","name":"EvgenevRU - \u041e\u043d\u043b\u0430\u0439\u043d-\u041f\u0440\u043e\u0444\u0435\u0441\u0441\u0438\u0438 \u0432 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442\u0435","sameAs":["https://web.facebook.com/EvgenevRu-%D0%B1%D0%BB%D0%BE%D0%B3-%D0%BF%D1%80%D0%BE-%D1%84%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D1%8B-%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%81%D0%B0%D0%BC%D0%BE%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D0%B5-100300895694358","https://twitter.com/evg_voliks"],"logo":{"@type":"ImageObject","@id":"https://evgenev.ru/#logo","url":"https://evgenev.ru/wp-content/uploads/2021/07/cropped-coin-1.png","contentUrl":"https://evgenev.ru/wp-content/uploads/2021/07/cropped-coin-1.png","caption":"Evgenev.ru","inLanguage":"ru-RU","width":"512","height":"512"}},{"@type":"WebSite","@id":"https://evgenev.ru/#website","url":"https://evgenev.ru","name":"Evgenev.ru","alternateName":"Evgenev.ru","publisher":{"@id":"https://evgenev.ru/#organization"},"inLanguage":"ru-RU"},{"@type":"ImageObject","@id":"https://evgenev.ru/wp-content/uploads/2021/10/logo.png","url":"https://evgenev.ru/wp-content/uploads/2021/10/logo.png","width":"1021","height":"570","caption":"\u0411\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u044b\u0435 \u043a\u0443\u0440\u0441\u044b","inLanguage":"ru-RU"},{"@type":"WebPage","@id":"https://evgenev.ru/privacy/#webpage","url":"https://evgenev.ru/privacy/","name":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445","datePublished":"2021-07-23T01:24:08+05:00","dateModified":"2021-07-23T01:24:10+05:00","isPartOf":{"@id":"https://evgenev.ru/#website"},"primaryImageOfPage":{"@id":"https://evgenev.ru/wp-content/uploads/2021/10/logo.png"},"inLanguage":"ru-RU"},{"@type":"Person","@id":"https://evgenev.ru/privacy/#author","name":"\u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0412\u043e\u043b\u0438\u043a","image":{"@type":"ImageObject","@id":"https://secure.gravatar.com/avatar/9444bc7c8f055df76b741088ade3c24e?s=96&amp;d=wavatar&amp;r=g","url":"https://secure.gravatar.com/avatar/9444bc7c8f055df76b741088ade3c24e?s=96&amp;d=wavatar&amp;r=g","caption":"\u0415\u0432\u0433\u0435\u043d\u0438\u0439 \u0412\u043e\u043b\u0438\u043a","inLanguage":"ru-RU"},"sameAs":["https://evgenev.ru","https://twitter.com/@evg_voliks"],"worksFor":{"@id":"https://evgenev.ru/#organization"}},{"@type":"BlogPosting","headline":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445","datePublished":"2021-07-23T01:24:08+05:00","dateModified":"2021-07-23T01:24:10+05:00","author":{"@id":"https://evgenev.ru/privacy/#author"},"publisher":{"@id":"https://evgenev.ru/#organization"},"description":"\u041d\u0430\u0441\u0442\u043e\u044f\u0449\u0430\u044f \u043f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u0441\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0430 \u0432 \u0441\u043e\u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0438\u0438 \u0441 \u0442\u0440\u0435\u0431\u043e\u0432\u0430\u043d\u0438\u044f\u043c\u0438 \u0424\u0435\u0434\u0435\u0440\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0437\u0430\u043a\u043e\u043d\u0430 \u043e\u0442 27.07.2006 \u2116152-\u0424\u0417 \u00ab\u041e \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445\u00bb \u0438","name":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0445 \u0434\u0430\u043d\u043d\u044b\u0445","@id":"https://evgenev.ru/privacy/#richSnippet","isPartOf":{"@id":"https://evgenev.ru/privacy/#webpage"},"image":{"@id":"https://evgenev.ru/wp-content/uploads/2021/10/logo.png"},"inLanguage":"ru-RU","mainEntityOfPage":{"@id":"https://evgenev.ru/privacy/#webpage"}}]}</script>
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<link rel="stylesheet" id="wp-block-library-css" href="https://evgenev.ru/wp-includes/css/dist/block-library/style.min.css" media="all">
+<style id="wp-block-library-theme-inline-css" type="text/css">
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-top:4px solid;border-bottom:4px solid;margin-bottom:1.75em;color:currentColor}.wp-block-pullquote__citation,.wp-block-pullquote cite,.wp-block-pullquote footer{color:currentColor;text-transform:uppercase;font-size:.8125em;font-style:normal}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;position:relative;font-style:normal}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:"0 0 1em 0"}.wp-block-table thead{border-bottom:3px solid}.wp-block-table tfoot{border-top:3px solid}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video{margin:0 0 1em}.wp-block-template-part.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}
+</style>
+<link rel="stylesheet" id="classic-theme-styles-css" href="https://evgenev.ru/wp-includes/css/classic-themes.min.css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 19.5px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36.5px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--normal: 22px;--wp--preset--font-size--huge: 49.5px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+
+<link rel="stylesheet" id="reboot-style-css" href="https://evgenev.ru/wp-content/themes/reboot/assets/css/style.min.css" media="all">
+<link rel="stylesheet" id="tablepress-default-css" href="https://evgenev.ru/wp-content/tablepress-combined.min.css" media="all">
+<link rel="stylesheet" id="reboot-style-child-css" href="https://evgenev.ru/wp-content/themes/reboot_child/style.css" media="all">
+<style id="rocket-lazyload-inline-css" type="text/css">
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:url(https://evgenev.ru/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}.wp-embed-responsive .wp-has-aspect-ratio .rll-youtube-player{position:absolute;padding-bottom:0;width:100%;height:100%;top:0;bottom:0;left:0;right:0}
+</style>
+<script id="jquery-core-js" src="https://evgenev.ru/wp-includes/js/jquery/jquery.min.js" data-rocket-status="executed"></script>
+<script id="jquery-migrate-js" src="https://evgenev.ru/wp-includes/js/jquery/jquery-migrate.min.js" data-rocket-status="executed"></script>
+<style>.pseudo-clearfy-link { color: #008acf; cursor: pointer;}.pseudo-clearfy-link:hover { text-decoration: none;}</style><link rel="icon" href="https://evgenev.ru/icons.svg" type="image/svg+xml">
+<meta name="yandex-verification" content="5fb40e27c357089b"><link rel="preload" href="https://evgenev.ru/wp-content/themes/reboot/assets/fonts/wpshop-core.ttf" as="font" crossorigin="">
+    <style>@media (min-width: 768px){.site-header{padding-top:22px}}@media (min-width: 768px){.site-header{padding-bottom:22px}}.site-logotype{max-width:555px}.site-logotype img{max-height:55px}.scrolltop:before{color:#00b74f}body{background-color:#fcfcfc}::selection, .card-slider__category, .card-slider-container .swiper-pagination-bullet-active, .post-card--grid .post-card__thumbnail:before, .post-card:not(.post-card--small) .post-card__thumbnail a:before, .post-card:not(.post-card--small) .post-card__category,  .post-box--high .post-box__category span, .post-box--wide .post-box__category span, .page-separator, .pagination .nav-links .page-numbers:not(.dots):not(.current):before, .btn, .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle, .comment-respond .form-submit input, .page-links__item{background-color:#29b56a}.entry-image--big .entry-image__body .post-card__category a, .home-text ul:not([class])>li:before, .page-content ul:not([class])>li:before, .taxonomy-description ul:not([class])>li:before, .widget-area .widget_categories ul.menu li a:before, .widget-area .widget_categories ul.menu li span:before, .widget-area .widget_categories>ul li a:before, .widget-area .widget_categories>ul li span:before, .widget-area .widget_nav_menu ul.menu li a:before, .widget-area .widget_nav_menu ul.menu li span:before, .widget-area .widget_nav_menu>ul li a:before, .widget-area .widget_nav_menu>ul li span:before, .page-links .page-numbers:not(.dots):not(.current):before, .page-links .post-page-numbers:not(.dots):not(.current):before, .pagination .nav-links .page-numbers:not(.dots):not(.current):before, .pagination .nav-links .post-page-numbers:not(.dots):not(.current):before, .entry-image--full .entry-image__body .post-card__category a, .entry-image--fullscreen .entry-image__body .post-card__category a, .entry-image--wide .entry-image__body .post-card__category a{background-color:#29b56a}.comment-respond input:focus, select:focus, textarea:focus, .post-card--grid.post-card--thumbnail-no, .post-card--standard:after, .post-card--related.post-card--thumbnail-no:hover, .spoiler-box, .btn-primary, .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle, .inp:focus, .entry-tag:focus, .entry-tag:hover, .search-screen .search-form .search-field:focus, .entry-content ul:not([class])>li:before, .text-content ul:not([class])>li:before, .page-content ul:not([class])>li:before, .taxonomy-description ul:not([class])>li:before, .entry-content blockquote,
+        .input:focus, input[type=color]:focus, input[type=date]:focus, input[type=datetime-local]:focus, input[type=datetime]:focus, input[type=email]:focus, input[type=month]:focus, input[type=number]:focus, input[type=password]:focus, input[type=range]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=text]:focus, input[type=time]:focus, input[type=url]:focus, input[type=week]:focus, select:focus, textarea:focus{border-color:#29b56a !important}.post-card--small .post-card__category, .post-card__author:before, .post-card__comments:before, .post-card__date:before, .post-card__like:before, .post-card__views:before, .entry-author:before, .entry-date:before, .entry-time:before, .entry-views:before, .entry-content ol:not([class])>li:before, .text-content ol:not([class])>li:before, .entry-content blockquote:before, .spoiler-box__title:after, .search-icon:hover:before, .search-form .search-submit:hover:before, .star-rating-item.hover,
+        .comment-list .bypostauthor>.comment-body .comment-author:after,
+        .breadcrumb a, .breadcrumb span,
+        .search-screen .search-form .search-submit:before, 
+        .star-rating--score-1:not(.hover) .star-rating-item:nth-child(1),
+        .star-rating--score-2:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-2:not(.hover) .star-rating-item:nth-child(2),
+        .star-rating--score-3:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-3:not(.hover) .star-rating-item:nth-child(2), .star-rating--score-3:not(.hover) .star-rating-item:nth-child(3),
+        .star-rating--score-4:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-4:not(.hover) .star-rating-item:nth-child(2), .star-rating--score-4:not(.hover) .star-rating-item:nth-child(3), .star-rating--score-4:not(.hover) .star-rating-item:nth-child(4),
+        .star-rating--score-5:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(2), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(3), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(4), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(5){color:#29b56a}a:hover, a:focus, a:active, .spanlink:hover, .entry-content a:not(.wp-block-button__link):hover, .entry-content a:not(.wp-block-button__link):focus, .entry-content a:not(.wp-block-button__link):active, .top-menu ul li>span:hover, .main-navigation ul li a:hover, .main-navigation ul li span:hover, .footer-navigation ul li a:hover, .footer-navigation ul li span:hover, .comment-reply-link:hover, .pseudo-link:hover, .child-categories ul li a:hover{color:#29b56a}.top-menu>ul>li>a:before, .top-menu>ul>li>span:before{background:#29b56a}.child-categories ul li a:hover, .post-box--no-thumb a:hover{border-color:#29b56a}.post-box--card:hover{box-shadow: inset 0 0 0 1px #29b56a}.post-box--card:hover{-webkit-box-shadow: inset 0 0 0 1px #29b56a}.main-navigation, .footer-navigation, .footer-navigation .removed-link, .main-navigation .removed-link, .main-navigation ul li>a, .footer-navigation ul li>a{color:#020202}body{font-size:17px;line-height:1.8;}.main-navigation ul li a, .main-navigation ul li span, .footer-navigation ul li a, .footer-navigation ul li span{font-size:17px;line-height:1.6;}.h1, h1:not(.site-title){font-size:1.9em;line-height:1.4;}.h2, .related-posts__header, .section-block__title, h2{font-size:1.75em;}.h3, h3{font-size:1.5em;}body{margin-bottom: 0}@media (max-width: 991px){.widget-area{display: block; margin: 0 auto}}</style>
+<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><link rel="icon" href="https://evgenev.ru/wp-content/uploads/2021/12/cropped-coin-32x32.png" sizes="32x32">
+<link rel="icon" href="https://evgenev.ru/wp-content/uploads/2021/12/cropped-coin-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://evgenev.ru/wp-content/uploads/2021/12/cropped-coin-180x180.png">
+<meta name="msapplication-TileImage" content="https://evgenev.ru/wp-content/uploads/2021/12/cropped-coin-270x270.png">
+		<style type="text/css" id="wp-custom-css">
+			.entry-content mark {
+background-color: #ffff8e;
+}
+.main-navigation ul {
+  justify-content: center;
+}
+
+		</style>
+		<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>    <meta name="robots" content="max-image-preview:large">
+
+<meta name="UFFILIATES" content="ok">
+
+<meta name="wot-verification" content="e46fe67412e9056f066c">
+
+
+
+<!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym");
+
+   ym(83447896, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/83447896" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<meta name="p:domain_verify" content="1a244b0e5d1c7ecf793c3815e34757a2">
+<meta name="wmail-verification" content="f95be3f9304dea6dc279be8e2eafa1b3">
+
+<meta name="yandex-verification" content="5fb40e27c357089b">
+
+<meta name="google-site-verification" content="kp9TMwcIst6fKbUGr11Ww-CauXC8NwqatIfOWjzSmSc">
+
+<link href="https://evgenev.ru/wp-includes/js/jquery/jquery.min.js" rel="preload" as="script"><link href="https://evgenev.ru/wp-includes/js/jquery/jquery-migrate.min.js" rel="preload" as="script"><link href="https://evgenev.ru/wp-content/themes/reboot/assets/js/scripts.min.js" rel="preload" as="script"><link href="https://evgenev.ru/wp-content/plugins/tablepress/js/jquery.datatables.min.js" rel="preload" as="script"><link href="https://www.googletagmanager.com/gtag/js?id=UA-203582185-1" rel="preload" as="script"></head>
+
+<body class="privacy-policy page-template-default page page-id-2656 wp-embed-responsive sidebar-right">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0.49803921568627"></feFuncR><feFuncG type="table" tableValues="0 0.49803921568627"></feFuncG><feFuncB type="table" tableValues="0 0.49803921568627"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 0.27843137254902"></feFuncG><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0"></feFuncR><feFuncG type="table" tableValues="0 0.64705882352941"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.78039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.94901960784314"></feFuncG><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.44705882352941 0.4"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.098039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.66274509803922"></feFuncG><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg>
+
+<div id="page" class="site">
+    <a class="skip-link screen-reader-text" href="#content">Перейти к содержанию</a>
+
+    <div class="search-screen-overlay js-search-screen-overlay"></div>
+    <div class="search-screen js-search-screen">
+        
+<form role="search" method="get" class="search-form" action="https://evgenev.ru/">
+    <label>
+        <span class="screen-reader-text">Search for:</span>
+        <input type="search" class="search-field" placeholder="Поиск…" value="" name="s">
+    </label>
+    <button type="submit" class="search-submit"></button>
+</form>    </div>
+
+    
+
+<header id="masthead" class="site-header full" itemscope="" itemtype="http://schema.org/WPHeader">
+    <div class="site-header-inner fixed">
+
+        <div class="humburger js-humburger"><span></span><span></span><span></span></div>
+
+        
+<div class="site-branding">
+
+    <div class="site-logotype"><a href="https://evgenev.ru/"><img src="https://evgenev.ru/wp-content/uploads/2021/07/coin-1.png" alt="Evgenev.ru" data-lazy-src="https://evgenev.ru/wp-content/uploads/2021/07/coin-1.png" data-ll-status="loaded" class="entered lazyloaded" width="512" height="512"><noscript><img src="https://evgenev.ru/wp-content/uploads/2021/07/coin-1.png" width="512" height="512" alt="Evgenev.ru"></noscript></a></div><div class="site-branding__body"><div class="site-title"><a href="https://evgenev.ru/">Evgenev.ru</a></div><p class="site-description">Блог про обучение и финансы</p></div></div><!-- .site-branding -->
+<div class="social-links">
+    <div class="social-buttons social-buttons--square social-buttons--circle">
+
+    <span class="social-button social-button--twitter js-link" data-href="aHR0cHM6Ly9zb3VuZGNsb3VkLmNvbS9ldmdlbmV2cnU=" data-target="_blank"></span><span class="social-button social-button--telegram js-link" data-href="aHR0cHM6Ly90Lm1lL2V2Z2VuZXZfcnU=" data-target="_blank"></span><span class="social-button social-button--youtube js-link" data-href="aHR0cHM6Ly93d3cueW91dHViZS5jb20vY2hhbm5lbC9VQ2FSeVVsVE1aZHVnSlNWQkZ2LTFBRVEv" data-target="_blank"></span><span class="social-button social-button--instagram js-link" data-href="aHR0cHM6Ly9ldmdlbmV2cnUudHVtYmxyLmNvbS8=" data-target="_blank"></span><span class="social-button social-button--tiktok js-link" data-href="aHR0cHM6Ly93d3cudGlrdG9rLmNvbS9AZXZnZW5ldl9ydQ==" data-target="_blank"></span><span class="social-button social-button--pinterest js-link" data-href="aHR0cHM6Ly93d3cucGludGVyZXN0LnJ1L2V2Z2VuZXZibG9nLw==" data-target="_blank"></span><span class="social-button social-button--yandexzen js-link" data-href="aHR0cHM6Ly96ZW4ueWFuZGV4LnJ1L2lkLzYxNjkzZjY3NTg0ZjRmNTBjZTgyMTVkMA==" data-target="_blank"></span>
+    </div>
+</div>
+
+<div class="top-menu"><ul id="top-menu" class="menu"><li id="menu-item-2199" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children menu-item-2199"><a href="https://evgenev.ru">Главная</a>
+<ul class="sub-menu">
+	<li id="menu-item-226794" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-226794"><a href="https://evgenev.ru/online-school-promotions/">🔥Акции онлайн-школ</a></li>
+	<li id="menu-item-259644" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-259644"><a href="https://evgenev.ru/all-kz-courses/">Курсы  в Казахстане (Алматы, Нур-султан)</a></li>
+	<li id="menu-item-239767" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-239767"><a href="https://evgenev.ru/zarabotok-v-internete/">Заработок</a></li>
+	<li id="menu-item-245932" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-245932"><a href="https://evgenev.ru/top-luchshix-bukmekerskix-kontor/">Лучшие букмекерские конторы России</a></li>
+	<li id="menu-item-257256" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-257256"><a href="https://evgenev.ru/all-loans-sites/">Каталог займов для юзеров:)</a></li>
+</ul>
+</li>
+<li id="menu-item-226365" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-226365"><a href="https://evgenev.ru/o-project/">О проекте</a>
+<ul class="sub-menu">
+	<li id="menu-item-259046" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-259046"><a href="https://evgenev.ru/smi-about-us/">СМИ о нас</a></li>
+</ul>
+</li>
+<li id="menu-item-235439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-235439"><a href="https://evgenev.ru/contact/">Контакты</a></li>
+</ul></div>                <div class="header-search">
+                    <span class="search-icon js-search-icon"></span>
+                </div>
+            
+    </div>
+</header><!-- #masthead -->
+
+
+    
+    
+    <nav id="site-navigation" class="main-navigation fixed" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+        <div class="main-navigation-inner full">
+            <div class="menu-glavnoe-menyu-container"><ul id="header_menu" class="menu"><li id="menu-item-239755" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-239755"><a href="https://evgenev.ru/free-programming-courses/">Программирование</a></li>
+<li id="menu-item-239761" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-239761"><a href="https://evgenev.ru/free-marketing-courses/">Маркетинг</a></li>
+<li id="menu-item-239756" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-239756"><a href="https://evgenev.ru/design/">Дизайн</a></li>
+<li id="menu-item-239757" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-239757"><a href="https://evgenev.ru/cgi/">Графика</a></li>
+<li id="menu-item-239759" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-239759"><a href="https://evgenev.ru/biznes/">Бизнес</a></li>
+<li id="menu-item-262876" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-262876"><a href="https://evgenev.ru/free-management-courses/">Менеджмент</a></li>
+<li id="menu-item-239760" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-239760"><a href="https://evgenev.ru/languages/">Языки</a></li>
+<li id="menu-item-239864" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-239864"><a href="https://evgenev.ru/free-gamedesign-courses/">Игры</a></li>
+<li id="menu-item-251654" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-251654"><a href="https://evgenev.ru/free-partners-all/">Партнёрки</a></li>
+</ul></div>        </div>
+    </nav><!-- #site-navigation -->
+
+    
+
+    <div class="mobile-menu-placeholder js-mobile-menu-placeholder"></div>
+    
+	
+    <div id="content" class="site-content fixed">
+
+        
+        <div class="site-content-inner">
+    
+        
+        <div id="primary" class="content-area" itemscope="" itemtype="http://schema.org/Article">
+            <main id="main" class="site-main">
+
+                
+<article id="post-2656" class="article-post post-2656 page type-page status-publish ">
+
+    
+        <div class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><span class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a href="https://evgenev.ru/" itemprop="item"><span itemprop="name">evgenev</span></a><meta itemprop="position" content="0"></span></div>
+                                <h1 class="entry-title" itemprop="headline">Политика конфиденциальности персональных данных</h1>
+                    
+        
+        
+    
+	<div class="entry-content" itemprop="articleBody">
+		<div class="table-of-contents"><!--noindex--><div class="table-of-contents__header"><span class="table-of-contents__hide js-table-of-contents-hide">Что будет в статье</span></div><ol class="table-of-contents__list js-table-of-contents-list" style="display:none;">
+<li class="level-1"><a href="#1-obschie-polozheniya">1. Общие положения</a></li><li class="level-1"><a href="#2-osnovnye-ponyatiya-ispolzuemye-v-politike">2. Основные понятия, используемые в Политике</a></li><li class="level-1"><a href="#3-operator-mozhet-obrabatyvat-sleduyuschie">3. Оператор может обрабатывать следующие персональные данные Пользователя</a></li><li class="level-1"><a href="#4-tseli-obrabotki-personalnyh-dannyh">4. Цели обработки персональных данных</a></li><li class="level-1"><a href="#5-pravovye-osnovaniya-obrabotki-personalnyh">5. Правовые основания обработки персональных данных</a></li><li class="level-1"><a href="#6-poryadok-sbora-hraneniya-peredachi-i-drugih">6. Порядок сбора, хранения, передачи и других видов обработки персональных данных</a></li><li class="level-1"><a href="#7-transgranichnaya-peredacha-personalnyh">7. Трансграничная передача персональных данных</a></li><li class="level-1"><a href="#8-zaklyuchitelnye-polozheniya">8. Заключительные положения</a></li></ol><!--/noindex--></div><h2 id="1-obschie-polozheniya">1. Общие положения</h2>
+
+
+
+<p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 №152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые&nbsp;владельцем https://evgenev.ru/&nbsp;(далее – Оператор).</p>
+
+
+
+<p>1.1. Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.</p>
+
+
+
+<p>1.2. Настоящая политика Оператора в отношении обработки персональных данных применяется ко всей информации, которую Оператор может получить о посетителях веб-сайта&nbsp;https://evgenev.ru/.&nbsp;</p>
+
+
+
+<h2 id="2-osnovnye-ponyatiya-ispolzuemye-v-politike">2. Основные понятия, используемые в Политике</h2>
+
+
+
+<p>2.1. Автоматизированная обработка персональных данных – обработка персональных данных с помощью средств вычислительной техники;</p>
+
+
+
+<p>2.2. Блокирование персональных данных – временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных);</p>
+
+
+
+<p>2.3. Веб-сайт – совокупность графических и информационных материалов, а также программ для ЭВМ и баз данных, обеспечивающих их доступность в сети интернет по сетевому адресу&nbsp;https://evgenev.ru/;</p>
+
+
+
+<p>2.4. Информационная система персональных данных — совокупность содержащихся в базах данных персональных данных, и обеспечивающих их обработку информационных технологий и технических средств;</p>
+
+
+
+<p>2.5. Обезличивание персональных данных — действия, в результате которых невозможно определить без использования дополнительной информации принадлежность персональных данных конкретному Пользователю или иному субъекту персональных данных;</p>
+
+
+
+<p>2.6. Обработка персональных данных – любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных;</p>
+
+
+
+<p>2.7. Оператор – государственный орган, муниципальный орган, юридическое или физическое лицо, самостоятельно или совместно с другими лицами организующие и (или) осуществляющие обработку персональных данных, а также определяющие цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными;</p>
+
+
+
+<p>2.8. Персональные данные – любая информация, относящаяся прямо или косвенно к определенному или определяемому Пользователю веб-сайта&nbsp;https://evgenev.ru/</p>
+
+
+
+<p>2.9. Пользователь – любой посетитель веб-сайта&nbsp;https://evgenev.ru/;</p>
+
+
+
+<p>2.10. Предоставление персональных данных – действия, направленные на раскрытие персональных данных определенному лицу или определенному кругу лиц;</p>
+
+
+
+<p>2.11. Распространение персональных данных – любые действия, направленные на раскрытие персональных данных неопределенному кругу лиц (передача персональных данных) или на ознакомление с персональными данными неограниченного круга лиц, в том числе обнародование персональных данных в средствах массовой информации, размещение в информационно-телекоммуникационных сетях или предоставление доступа к персональным данным каким-либо иным способом;</p>
+
+
+
+<p>2.12. Трансграничная передача персональных данных – передача персональных данных на территорию иностранного государства органу власти иностранного государства, иностранному физическому или иностранному юридическому лицу;</p>
+
+
+
+<p>2.13. Уничтожение персональных данных – любые действия, в результате которых персональные данные уничтожаются безвозвратно с невозможностью дальнейшего восстановления содержания персональных данных в информационной системе персональных данных и (или) уничтожаются материальные носители персональных данных.&nbsp;</p>
+
+
+
+<h2 id="3-operator-mozhet-obrabatyvat-sleduyuschie">3. Оператор может обрабатывать следующие персональные данные Пользователя</h2>
+
+
+
+<p>3.1.&nbsp;<mark>Фамилия, имя, отчество;</mark></p>
+
+
+
+<p>3.2.&nbsp;<mark>Электронный адрес;</mark></p>
+
+
+
+<p>3.3. Также на сайте происходит сбор и обработка обезличенных данных о посетителях (в т. ч. файлов «cookie») с помощью сервисов интернет-статистики («Яндекс.Метрика», Google Analytics и других).</p>
+
+
+
+<p>3.4. Вышеперечисленные данные далее по тексту Политики объединены общим понятием Персональные данные.&nbsp;</p>
+
+
+
+<h2 id="4-tseli-obrabotki-personalnyh-dannyh">4. Цели обработки персональных данных</h2>
+
+
+
+<p>4.1. Цель обработки персональных данных Пользователя —&nbsp;<mark>предоставление доступа Пользователю к сервисам, информации и/или материалам, содержащимся на веб-сайте</mark>.</p>
+
+
+
+<p>4.2. Также Оператор имеет право направлять Пользователю уведомления о новых продуктах и услугах, специальных предложениях и различных событиях. Пользователь всегда может отказаться от получения информационных сообщений, направив Оператору письмо на адрес электронной почты&nbsp;lucky@evgenev.ru/&nbsp;с пометкой «Отказ от уведомлений о новых продуктах и услугах и специальных предложениях».</p>
+
+
+
+<p>4.3. Обезличенные данные Пользователей, собираемые с помощью сервисов интернет-статистики, служат для сбора информации о действиях Пользователей на сайте, улучшения качества сайта и его содержания.&nbsp;</p>
+
+
+
+<h2 id="5-pravovye-osnovaniya-obrabotki-personalnyh">5. Правовые основания обработки персональных данных</h2>
+
+
+
+<p>5.1. Оператор обрабатывает персональные данные Пользователя только в случае их заполнения и/или отправки Пользователем самостоятельно через специальные формы, расположенные на сайте&nbsp;https://evgenev.ru. Заполняя соответствующие формы и/или отправляя свои персональные данные Оператору, Пользователь выражает свое согласие с данной Политикой.</p>
+
+
+
+<p>5.2. Оператор обрабатывает обезличенные данные о Пользователе в случае, если это разрешено в настройках браузера Пользователя (включено сохранение файлов «cookie» и использование технологии JavaScript).&nbsp;</p>
+
+
+
+<h2 id="6-poryadok-sbora-hraneniya-peredachi-i-drugih">6. Порядок сбора, хранения, передачи и других видов обработки персональных данных</h2>
+
+
+
+<p>Безопасность персональных данных, которые обрабатываются Оператором, обеспечивается путем реализации правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований действующего законодательства в области защиты персональных данных.</p>
+
+
+
+<p>6.1. Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.</p>
+
+
+
+<p>6.2. Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства.</p>
+
+
+
+<p>6.3. В случае выявления неточностей в персональных данных, Пользователь может актуализировать их самостоятельно, путем направления Оператору уведомление на адрес электронной почты Оператора&nbsp;lucky@evgenev.ru&nbsp;с пометкой «Актуализация персональных данных».</p>
+
+
+
+<p>6.4. Срок обработки персональных данных является неограниченным. Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора&nbsp;lucky@evgenev.ru/&nbsp;с пометкой «Отзыв согласия на обработку персональных данных».&nbsp;</p>
+
+
+
+<h2 id="7-transgranichnaya-peredacha-personalnyh">7. Трансграничная передача персональных данных</h2>
+
+
+
+<p>7.1. Оператор до начала осуществления трансграничной передачи персональных данных обязан убедиться в том, что иностранным государством, на территорию которого предполагается осуществлять передачу персональных данных, обеспечивается надежная защита прав субъектов персональных данных.</p>
+
+
+
+<p>7.2. Трансграничная передача персональных данных на территории иностранных государств, не отвечающих вышеуказанным требованиям, может осуществляться только в случае наличия согласия в письменной форме субъекта персональных данных на трансграничную передачу его персональных данных и/или исполнения договора, стороной которого является субъект персональных данных.&nbsp;</p>
+
+
+
+<h2 id="8-zaklyuchitelnye-polozheniya">8. Заключительные положения</h2>
+
+
+
+<p>8.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты&nbsp;lucky@evgenev.ru/.</p>
+
+
+
+<p>8.2. В данном документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены ее новой версией.</p>
+
+
+
+<p>8.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу&nbsp;https://evgenev.ru/privacy</p>	</div><!-- .entry-content -->
+
+</article>
+
+
+    <div class="entry-social">
+                    <div class="entry-bottom__header">Поделиться с друзьями</div>
+        
+                <div class="social-buttons"><span class="social-button social-button--vkontakte" data-social="vkontakte" data-image=""><span data-counter="vkontakte"></span></span><span class="social-button social-button--facebook" data-social="facebook"><span data-counter="facebook"></span></span><span class="social-button social-button--telegram" data-social="telegram"></span><span class="social-button social-button--odnoklassniki" data-social="odnoklassniki"><span data-counter="odnoklassniki"></span></span><span class="social-button social-button--twitter" data-social="twitter"></span><span class="social-button social-button--tumblr" data-social="tumblr"><span data-counter="tumblr"></span></span><span class="social-button social-button--pinterest" data-social="pinterest" data-url="https://evgenev.ru/privacy/" data-title="Политика конфиденциальности персональных данных" data-description="1. Общие положения Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 №152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые&nbsp;владельцем https://evgenev.ru/&nbsp;(далее – Оператор). 1.1. Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и […]" data-image=""><span data-counter="pinterest"></span></span></div>            </div>
+
+
+
+<meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://evgenev.ru/privacy/" content="Политика конфиденциальности персональных данных">
+<meta itemprop="dateModified" content="2021-07-23">
+<meta itemprop="datePublished" content="2021-07-23T01:24:08+05:00">
+<meta itemprop="author" content="Евгений Волик">
+<div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization" style="display: none;"><div itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject"><img itemprop="url image" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3C/svg%3E" alt="Evgenev.ru" data-lazy-src="https://evgenev.ru/wp-content/uploads/2021/07/coin-1.png" width="512" height="512"><noscript><img width="512" height="512" itemprop="url image" src="https://evgenev.ru/wp-content/uploads/2021/07/coin-1.png" alt="Evgenev.ru"></noscript></div><meta itemprop="name" content="Evgenev.ru"><meta itemprop="telephone" content="Evgenev.ru"><meta itemprop="address" content="https://evgenev.ru"></div>
+            </main><!-- #main -->
+        </div><!-- #primary -->
+
+        
+<aside id="secondary" class="widget-area" itemscope="" itemtype="http://schema.org/WPSideBar">
+    <div class="sticky-sidebar js-sticky-sidebar">
+
+        
+        <div id="block-51" class="widget widget_block"><p>
+</p><table id="tablepress-11" class="tablepress tablepress-id-11">
+<thead>
+<tr class="row-1 odd">
+	<th class="column-1">Где учиться бесплатно</th>
+</tr>
+</thead>
+<tbody class="row-hover">
+<tr class="row-2 even">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/how-make-crypto/" target="_blank" rel="noopener"> Как делать крипту с нуля? </a> </td>
+</tr>
+<tr class="row-3 odd">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-programming-courses/" target="_blank" rel="noopener">Программирование </a> </td>
+</tr>
+<tr class="row-4 even">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-marketing-courses/" target="_blank" rel="noopener">Маркетинг </a> </td>
+</tr>
+<tr class="row-5 odd">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-gamedesign-courses/" target="_blank" rel="noopener">Геймдизайн </a> </td>
+</tr>
+<tr class="row-6 even">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-context-courses/" target="_blank" rel="noopener">Контекстная реклама</a> </td>
+</tr>
+<tr class="row-7 odd">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-smm-courses/" target="_blank" rel="noopener">SMM-продвижение </a> </td>
+</tr>
+<tr class="row-8 even">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-target-courses/" target="_blank" rel="noopener">Таргетированная реклама </a> </td>
+</tr>
+<tr class="row-9 odd">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-courses-all/" target="_blank" rel="noopener">Бесплатные курсы </a> </td>
+</tr>
+<tr class="row-10 even">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/all-web-professions/" target="_blank" rel="noopener">Все профессии </a> </td>
+</tr>
+<tr class="row-11 odd">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-university-courses/" target="_blank" rel="noopener">ТОП Онлайн-университетов </a> </td>
+</tr>
+<tr class="row-12 even">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-3d-courses/" target="_blank" rel="noopener">Все курсы 3D </a> </td>
+</tr>
+<tr class="row-13 odd">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-invest-courses/" target="_blank" rel="noopener">Инвестирование </a> </td>
+</tr>
+<tr class="row-14 even">
+	<td class="column-1">🔥 <a href="https://evgenev.ru/free-busness-courses/" target="_blank" rel="noopener">Бизнес </a> </td>
+</tr>
+</tbody>
+</table>
+<!-- #tablepress-11 from cache --><p></p>
+</div>
+        
+    </div>
+</aside><!-- #secondary -->
+
+    
+    
+
+</div><!--.site-content-inner-->
+
+
+</div><!--.site-content-->
+
+
+
+
+
+<div class="site-footer-container site-footer-container--disable-sticky site-footer-container--equal-width">
+
+    
+
+    <footer id="colophon" class="site-footer site-footer--style-gray full">
+        <div class="site-footer-inner fixed">
+
+            <div class="footer-widgets footer-widgets-3"><div class="footer-widget"><div id="block-55" class="widget widget_block widget_text">
+<p style="font-size:30px"><strong>EVGENEV.RU</strong></p>
+</div><div id="block-56" class="widget widget_block widget_text">
+<p>На данном блоге вы узнаете о лучших и бесплатных онлайн-курсов на 2023 год. Также будут крутые материалы на тему финансов и развлечении.</p>
+</div><div id="wpshop_widget_social_links-3" class="widget widget_wpshop_widget_social_links">
+<div class="social-links">
+    <div class="social-buttons social-buttons--square social-buttons--circle">
+
+    <span class="social-button social-button--twitter js-link" data-href="aHR0cHM6Ly9zb3VuZGNsb3VkLmNvbS9ldmdlbmV2cnU=" data-target="_blank"></span><span class="social-button social-button--telegram js-link" data-href="aHR0cHM6Ly90Lm1lL2V2Z2VuZXZfcnU=" data-target="_blank"></span><span class="social-button social-button--youtube js-link" data-href="aHR0cHM6Ly93d3cueW91dHViZS5jb20vY2hhbm5lbC9VQ2FSeVVsVE1aZHVnSlNWQkZ2LTFBRVEv" data-target="_blank"></span><span class="social-button social-button--instagram js-link" data-href="aHR0cHM6Ly9ldmdlbmV2cnUudHVtYmxyLmNvbS8=" data-target="_blank"></span><span class="social-button social-button--tiktok js-link" data-href="aHR0cHM6Ly93d3cudGlrdG9rLmNvbS9AZXZnZW5ldl9ydQ==" data-target="_blank"></span><span class="social-button social-button--pinterest js-link" data-href="aHR0cHM6Ly93d3cucGludGVyZXN0LnJ1L2V2Z2VuZXZibG9nLw==" data-target="_blank"></span><span class="social-button social-button--yandexzen js-link" data-href="aHR0cHM6Ly96ZW4ueWFuZGV4LnJ1L2lkLzYxNjkzZjY3NTg0ZjRmNTBjZTgyMTVkMA==" data-target="_blank"></span>
+    </div>
+</div>
+
+</div><div id="block-57" class="widget widget_block widget_text">
+<p style="font-size:11px">Копировании материалов с данного сайта возможно лишь с активной ссылкой на источник.</p>
+</div><div id="block-60" class="widget widget_block">
+<blockquote class="wp-block-quote">
+<p>Упомянутые в некоторых статьях Instagram (Инстаграм) и Facebook (Фейсбук) принадлежат компании Meta, которая признана экстремистской организацией и запрещена в РФ.</p>
+</blockquote>
+</div></div><div class="footer-widget"><div id="nav_menu-3" class="widget widget_nav_menu"><div class="widget-header">МЕНЮ</div><div class="menu-osnovnaya-navigatsiya-container"><ul id="menu-osnovnaya-navigatsiya" class="menu"><li id="menu-item-42" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42"><a target="_blank" rel="noopener" href="https://evgenev.ru/programming/">Программирование</a></li>
+<li id="menu-item-4020" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4020"><a href="https://evgenev.ru/marketing/">Маркетинг</a></li>
+<li id="menu-item-226034" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-226034"><a href="https://evgenev.ru/design/">Дизайн</a></li>
+<li id="menu-item-226367" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-226367"><a href="https://evgenev.ru/cgi/">Графика</a></li>
+<li id="menu-item-41" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-41"><a target="_blank" rel="noopener" href="https://evgenev.ru/languages/">Иностранные языки</a></li>
+<li id="menu-item-237535" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-237535"><a href="https://evgenev.ru/hobby/">Хобби</a></li>
+<li id="menu-item-237536" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-237536"><a href="https://evgenev.ru/soft-skills/">Soft Skills</a></li>
+<li id="menu-item-231867" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-231867"><a href="https://evgenev.ru/marketolog/">Маркетолог</a></li>
+<li id="menu-item-231866" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-231866"><a href="https://evgenev.ru/analytics/">Аналитика</a></li>
+<li id="menu-item-237545" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-237545"><a href="https://evgenev.ru/zarabotok-v-internete/">Заработок в интернете</a></li>
+<li id="menu-item-237543" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-237543"><a href="https://evgenev.ru/top-7-rabot-na-domu/">Работа на дому</a></li>
+<li id="menu-item-237544" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-237544"><a href="https://evgenev.ru/17-luchshih-rabot-v-internete/">Работа в интернете</a></li>
+<li id="menu-item-237542" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-237542"><a href="https://evgenev.ru/23-moshchnyh-udalyonnyh-rabot/">Удалённая работа</a></li>
+<li id="menu-item-232862" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-232862"><a href="https://evgenev.ru/lichnyy-kabinet-vayldberriz-vhod/">Вайлдберриз</a></li>
+<li id="menu-item-232903" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-232903"><a href="https://evgenev.ru/ozon-vhod-v-lichnyj-kabinet/">Озон</a></li>
+<li id="menu-item-237538" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-237538"><a href="https://evgenev.ru/free-xyzschool-courses/">Xyz School</a></li>
+<li id="menu-item-237537" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-237537"><a href="https://evgenev.ru/free-skillbox-courses/">Skillbox</a></li>
+<li id="menu-item-237539" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-237539"><a href="https://evgenev.ru/free-geekbrains-courses/">GeekBrains</a></li>
+</ul></div></div></div><div class="footer-widget"><div id="block-54" class="widget widget_block widget_text">
+<p><strong>КАТЕГОРИИ</strong></p>
+</div><div id="block-53" class="widget widget_block widget_categories"><ul class="wp-block-categories-list wp-block-categories">	<li class="cat-item cat-item-457"><a href="https://evgenev.ru/geekbrains/">Geekbrains</a> (13)
+</li>
+	<li class="cat-item cat-item-460"><a href="https://evgenev.ru/skillbox/">Skillbox</a> (6)
+</li>
+	<li class="cat-item cat-item-223"><a href="https://evgenev.ru/soft-skills/">Soft Skills</a> (50)
+</li>
+	<li class="cat-item cat-item-278"><a href="https://evgenev.ru/analytics/">Аналитика</a> (24)
+</li>
+	<li class="cat-item cat-item-458"><a href="https://evgenev.ru/books/">Бесплатные книги</a> (2)
+</li>
+	<li class="cat-item cat-item-98"><a href="https://evgenev.ru/biznes/">Бизнес</a> (12)
+</li>
+	<li class="cat-item cat-item-452"><a href="https://evgenev.ru/videouroki/">Видеоуроки</a> (3)
+</li>
+	<li class="cat-item cat-item-66"><a href="https://evgenev.ru/cgi/">Графика</a> (19)
+</li>
+	<li class="cat-item cat-item-60"><a href="https://evgenev.ru/design/">Дизайн</a> (59)
+</li>
+	<li class="cat-item cat-item-456"><a href="https://evgenev.ru/dlya-detey/">Для детей</a> (2)
+</li>
+	<li class="cat-item cat-item-423"><a href="https://evgenev.ru/ege/">ЕГЭ</a> (16)
+</li>
+	<li class="cat-item cat-item-455"><a href="https://evgenev.ru/money/">Заработок в интернете</a> (8)
+</li>
+	<li class="cat-item cat-item-410"><a href="https://evgenev.ru/zdorove/">Здоровье</a> (8)
+</li>
+	<li class="cat-item cat-item-7"><a href="https://evgenev.ru/languages/">Иностранные языки</a> (11)
+</li>
+	<li class="cat-item cat-item-228"><a href="https://evgenev.ru/kino/">Кино</a> (5)
+</li>
+	<li class="cat-item cat-item-412"><a href="https://evgenev.ru/kontent/">Контент</a> (3)
+</li>
+	<li class="cat-item cat-item-448"><a href="https://evgenev.ru/crypto/">Криптовалюта</a> (27)
+</li>
+	<li class="cat-item cat-item-37"><a href="https://evgenev.ru/marketing/">Маркетинг</a> (61)
+</li>
+	<li class="cat-item cat-item-282"><a href="https://evgenev.ru/marketolog/">Маркетолог</a> (16)
+</li>
+	<li class="cat-item cat-item-334"><a href="https://evgenev.ru/music/">Музыка</a> (10)
+</li>
+	<li class="cat-item cat-item-103"><a href="https://evgenev.ru/multimedia/">Мультимедиа</a> (4)
+</li>
+	<li class="cat-item cat-item-1"><a href="https://evgenev.ru/edu/">Обучение</a> (148)
+</li>
+	<li class="cat-item cat-item-435"><a href="https://evgenev.ru/oge/">ОГЭ</a> (17)
+</li>
+	<li class="cat-item cat-item-417"><a href="https://evgenev.ru/onlayn-shkoly/">Онлайн-Школы</a> (54)
+</li>
+	<li class="cat-item cat-item-454"><a href="https://evgenev.ru/affiliate/">Партнёрские программы</a> (1)
+</li>
+	<li class="cat-item cat-item-8"><a href="https://evgenev.ru/programming/">Программирование</a> (105)
+</li>
+	<li class="cat-item cat-item-459"><a href="https://evgenev.ru/professii/">Профессии</a> (26)
+</li>
+	<li class="cat-item cat-item-450"><a href="https://evgenev.ru/entertainment/">Развлечения</a> (102)
+</li>
+	<li class="cat-item cat-item-449"><a href="https://evgenev.ru/services/">Сервисы</a> (29)
+</li>
+	<li class="cat-item cat-item-215"><a href="https://evgenev.ru/management/">Управление</a> (37)
+</li>
+	<li class="cat-item cat-item-220"><a href="https://evgenev.ru/finansy/">Финансы</a> (297)
+</li>
+	<li class="cat-item cat-item-409"><a href="https://evgenev.ru/hobby/">Хобби</a> (5)
+</li>
+	<li class="cat-item cat-item-451"><a href="https://evgenev.ru/wordpress-templates/">Шаблоны Wordpress</a> (6)
+</li>
+</ul></div></div></div>
+            
+<div class="footer-bottom">
+    <div class="footer-info">
+        © 2021-2023 Блог Evgenev.ru  | 
+ <a rel="noreferrer noopener" href="https://evgenev.ru/privacy/" target="_blank">Политика конфиденциальности</a>  |  <a rel="noreferrer noopener" href="https://evgenev.ru/user-agreement/" target="_blank">Пользовательское соглашение</a>
+	        </div>
+
+    <div class="footer-counters"><!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async="" data-rocket-src="https://www.googletagmanager.com/gtag/js?id=UA-203582185-1"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-203582185-1');
+</script>
+
+
+<!-- Rating Mail.ru counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+var _tmr = window._tmr || (window._tmr = []);
+_tmr.push({id: "3257246", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = "https://top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "topmailru-code");
+</script><noscript><div>
+<img src="https://top-fwz1.mail.ru/counter?id=3257246;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
+</div></noscript>
+<!-- //Rating Mail.ru counter -->
+
+</div></div>
+        </div>
+    </footer><!--.site-footer-->
+</div>
+
+
+    <button type="button" class="scrolltop js-scrolltop" data-mob="on"></button>
+
+</div><!-- #page -->
+
+<script type="rocketlazyloadscript">var pseudo_links = document.querySelectorAll(".pseudo-clearfy-link");for (var i=0;i<pseudo_links.length;i++ ) { pseudo_links[i].addEventListener("click", function(e){   window.open( e.target.getAttribute("data-uri") ); }); }</script><script type="rocketlazyloadscript">document.addEventListener("copy", (event) => {var pagelink = "\nИсточник: https://evgenev.ru/privacy";event.clipboardData.setData("text", document.getSelection() + pagelink);event.preventDefault();});</script><script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/dizajner-odezhdy\/|\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index\\.php\/)?(.*)wp\\-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/evgenev.ru","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" id="reboot-scripts-js-extra">
+/* <![CDATA[ */
+var settings_array = {"rating_text_average":"\u0441\u0440\u0435\u0434\u043d\u0435\u0435","rating_text_from":"\u0438\u0437","lightbox_display":"1","sidebar_fixed":"1"};
+var wps_ajax = {"url":"https:\/\/evgenev.ru\/wp-admin\/admin-ajax.php","nonce":"a0cfb10123"};
+var wpshop_views_counter_params = {"url":"https:\/\/evgenev.ru\/wp-admin\/admin-ajax.php","nonce":"a0cfb10123","is_postviews_enabled":"","post_id":"2656"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-src="https://evgenev.ru/wp-content/themes/reboot/assets/js/scripts.min.js" id="reboot-scripts-js"></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://evgenev.ru/wp-content/plugins/tablepress/js/jquery.datatables.min.js" id="tablepress-datatables-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+jQuery(function($){
+var DT_language={"ru_RU":{"info":"Записи с _START_ до _END_ из _TOTAL_ записей","infoEmpty":"Записи с 0 до 0 из 0 записей","infoFiltered":"(отфильтровано из _MAX_ записей)","infoPostFix":"","lengthMenu":"Показать _MENU_ записей","processing":"Подождите...","search":"Поиск:","zeroRecords":"Записи отсутствуют.","paginate":{"first":"Первая","previous":"Предыдущая","next":"Следующая","last":"Последняя"},"aria":{"sortAscending":": активировать для сортировки столбца по возрастанию","sortDescending":": активировать для сортировки столбцов по убыванию"},"decimal":",","thousands":"."}};
+$('#tablepress-11').DataTable({"language":DT_language["ru_RU"],"stripeClasses":["even","odd"],"ordering":false,"paging":false,"searching":false,"info":false});
+});
+</script><script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://evgenev.ru/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script><script>function lazyLoadThumb(e){var t='<img data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<button class="play" aria-label="play Youtube video"></button>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?'':'&'+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var e,t,p,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),a[t].appendChild(e),p=e.querySelector('.play'),p.onclick=lazyLoadYoutubeIframe});</script>
+
+
+
+
+</body></html>

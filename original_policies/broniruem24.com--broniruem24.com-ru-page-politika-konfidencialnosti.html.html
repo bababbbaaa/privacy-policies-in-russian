@@ -1,0 +1,1011 @@
+<html lang="ru"><head>
+
+	<link rel="stylesheet" type="text/css" href="/js/select2/select2.css">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/css/rating/rating.css">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/css/ui/jquery-ui.multiselect.css">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/css/redmond/jquery-ui-1.7.1.custom.css">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/css/ui.slider.extras.css">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/css/form.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/js/superfish/css/superfish.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/js/new/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/js/leaflet/leaflet-0.7.2/leaflet.css">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/js/leaflet/leaflet-0.7.2/dist/MarkerCluster.css">
+<link rel="stylesheet" type="text/css" href="/themes/atlas/js/leaflet/leaflet-0.7.2/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" type="text/css" href="/js/sumoselect/sumoselect.css">
+<link rel="stylesheet" type="text/css" href="/assets/d00394ab/jquery.fancybox-1.3.4.css">
+<script type="text/javascript" async="" src="//code.jivosite.com/script/widget/oAKFr5XYJr"></script><script src="https://connect.facebook.net/ru_RU/sdk.js?hash=c03a0748146a4eabc690c3b87f7f14eb" async="" crossorigin="anonymous"></script><script id="facebook-jssdk" src="//connect.facebook.net/ru_RU/sdk.js#xfbml=1&amp;appId=156980054356120&amp;version=v2.0"></script><script type="text/javascript" async="" id="topmailru-code" src="https://top-fwz1.mail.ru/js/code.js"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript" src="/assets/eb388933/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/eb388933/jui/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/assets/eb388933/jquery.metadata.js"></script>
+<script type="text/javascript" src="/assets/eb388933/jquery.rating.js"></script>
+<script type="text/javascript" src="/js/select2/select2.full.min.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/jquery.multiselect.min.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/jquery.dropdownPlain.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/common.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/ion.rangeSlider.min.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/leaflet/leaflet-0.7.2/leaflet.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/leaflet/leaflet-0.7.2/dist/leaflet.markercluster-src.js"></script>
+<script type="text/javascript" src="/assets/d00394ab/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="/assets/d00394ab/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+
+	var sliderRangeFields = false;
+	var cityField = false;
+	var referenceField = false;
+	var loc = 1;
+	var countFiled = 8;
+	var isInner = 1;
+	var heightField = 38;
+	var advancedIsOpen = 0;
+	var compact = 1;
+	var minHeight = isInner ? 80 : 360;
+	var searchCache = [];
+	var objType = 0;
+	var useSearchCache = false;
+
+	var search = {
+		init: function(){
+
+			if(sliderRangeFields){
+				$.each(sliderRangeFields, function() {
+					search.initSliderRange(this.params);
+				});
+			}
+
+
+			if(referenceField){
+				$("#references")
+					.multiselect({
+						noneSelectedText: "Удобства",
+						checkAllText: "Выбрать все",
+						uncheckAllText: "Очистить",
+						selectedText: "выбрано # из # доступных",
+						//minWidth: cityField.minWidth,
+						classes: "search-input-new search-reference",
+						multiple: "false",
+						selectedList: 1,
+						width: 289,
+					}).multiselectfilter({
+						label: "Быстрый поиск",
+						placeholder: "Введите первые буквы названия",
+						width: 185
+					});
+			}
+
+
+			if(countFiled <= 6){
+				if(advancedIsOpen){
+					if(isInner){
+						search.innerSetAdvanced();
+					}else{
+						search.indexSetNormal();
+						$('#more-options-link').hide();
+					}
+				} else if(!isInner){
+					$('#more-options-link').hide();
+				}
+			} else {
+				if(!isInner){
+					$('#more-options-link').show();
+				}
+
+				if(advancedIsOpen){
+					if(isInner){
+						search.innerSetAdvanced();
+					} else {
+						search.indexSetAdvanced();
+					}
+				}
+			}
+
+			if($("#search_term_text").length){
+				search.initTerm();
+			}
+
+		},
+
+		initTerm: function(){
+			$(".search-term input#search_term_text").keypress(function(e) {
+				var code = (e.keyCode ? e.keyCode : e.which);
+				if(code == 13) { // Enter keycode
+					prepareSearch();
+					return false;
+				}
+			});
+		},
+
+		initSliderRange: function(sliderParams){
+			$( "#slider-range-"+sliderParams.field ).slider({
+				range: true,
+				min: sliderParams.min,
+				max: sliderParams.max,
+				values: [ sliderParams.min_sel , sliderParams.max_sel ],
+				step: sliderParams.step,
+				slide: function( e, ui ) {
+					$( "#"+sliderParams.field+"_min_val" ).html( ui.values[ 0 ] );
+					$( "#"+sliderParams.field+"_min" ).val( ui.values[ 0 ] );
+					$( "#"+sliderParams.field+"_max_val" ).html( ui.values[ 1 ] );
+					$( "#"+sliderParams.field+"_max" ).val( ui.values[ 1 ] );
+				},
+				stop: function(e, ui) {  changeSearch(); }
+			});
+		},
+
+		indexSetNormal: function(){
+			$(".forma").animate({"height" : "380"});
+			$("div.index-header-form").animate({"height" : "334"});
+			$("div.searchform-index").animate({"height" : "367"});
+			$("#more-options-link").html("Больше параметров");
+			advancedIsOpen = 0;
+		},
+
+		indexSetAdvanced: function(){
+			var height = search.getHeight();
+			if (loc) {
+				$(".forma").animate({"height" : height + 210});
+				$("div.index-header-form").animate({"height" : height + 210});
+				$("div.searchform-index").animate({"height" : height + 210});
+			}
+			else {
+				$(".forma").animate({"height" : height + 170});
+				$("div.index-header-form").animate({"height" : height + 170});
+				$("div.searchform-index").animate({"height" : height + 170});
+			}
+
+			$("#more-options-link").html("Меньше параметров");
+			advancedIsOpen = 1;
+		},
+
+		innerSetNormal: function(){
+			$("div.filtr").addClass("collapsed");
+			advancedIsOpen = 0;
+		},
+
+		innerSetAdvanced: function(){
+            if($(window).height >= 1024){
+                var height = search.getHeight();
+                $("div.filtr").removeClass("collapsed").animate({"height" : height });
+                $("#search_form").animate({"height" : height});
+            }
+            advancedIsOpen = 1;
+		},
+
+		getHeight: function(){
+			var height = countFiled * heightField + 30;
+
+			if(height < minHeight){
+				return minHeight;
+			}
+
+			return isInner ? height/2 + 20 : height;
+		},
+
+		renderForm: function(obj_type_id){
+			$('#search_form').html(searchCache[obj_type_id].html);
+
+			//alert($('#search_form .header-form-line').length);
+			if($('#search_form .header-form-line').length > 6 && !isInner){
+				$('#search_form .header-form-line:gt(5)').detach();
+			}
+
+			sliderRangeFields = searchCache[obj_type_id].sliderRangeFields;
+			cityField = searchCache[obj_type_id].cityField;
+			countFiled = searchCache[obj_type_id].countFiled + (loc ? 2 : 0);
+			search.init();
+			if(!useSearchCache){
+				delete(searchCache[obj_type_id]);
+			}
+			changeSearch();
+		}
+	}
+
+	$(function(){
+		search.init();
+
+		$('#objType').live('change', function(){
+			var obj_type_id = $(this).val();
+			if(typeof searchCache[obj_type_id] == 'undefined'){
+				$.ajax({
+					url: BASE_URL + '/quicksearch/main/loadForm?' + $('#search-form').serialize(),
+					dataType: 'json',
+					type: 'GET',
+					data: { obj_type_id: obj_type_id, is_inner: 1, compact: advancedIsOpen ? 0 : 1 },
+					success: function(data){
+						if(data.status == 'ok'){
+							searchCache[obj_type_id] = [];
+							//searchCache[obj_type_id].html = data.html;
+//alert(obj_type_id);
+							searchCache[obj_type_id].sliderRangeFields = data.sliderRangeFields;
+							searchCache[obj_type_id].cityField = data.cityField;
+							searchCache[obj_type_id].countFiled = data.countFiled;
+							search.renderForm(obj_type_id);
+
+							//$(".chosen-select").chosen({});
+                            $(".chosen-select").select2().on("change", function(){
+                                changeSearch();
+                            });
+						}
+					}
+				})
+			} else {
+				search.renderForm(obj_type_id);
+			}
+		});
+
+		if(isInner){
+			$("#more-options-link-inner, #more-options-img").live('click', function(){
+				if (advancedIsOpen) {
+					search.innerSetNormal();
+				} else {
+					search.innerSetAdvanced();
+				}
+			});
+		} else {
+			$("#more-options-link").live('click', function(){
+				if(advancedIsOpen){
+					search.indexSetNormal();
+				} else {
+					search.indexSetAdvanced();
+				}
+			});
+		}
+
+		if(isInner && !compact){
+			search.innerSetAdvanced();
+		}
+	});
+
+
+function prepareSearch() {
+	var term = $(".search-term input#search_term_text").val();
+
+	if (term != 'Поиск по описанию или адресу') {
+		if (term.length >= 4) {
+			term = term.split(" ");
+			term = term.join("+");
+			$("#do-term-search").val(1);
+				window.location.replace("https://broniruem24.com/ru/search?term="+term+"&do-term-search=1");
+			} else {
+				alert('Минимум 4 символов');
+		}
+	}
+}
+
+		function doSearchAction() {
+			if($("#search_term_text").length){
+				var term = $(".search-term input#search_term_text").val();
+				if (term.length < 4 || term == "Поиск по описанию или адресу") {
+					$(".search-term input#search_term_text").attr("disabled", "disabled");
+				}
+			}
+
+			$("#search-form").submit();
+		}
+
+
+		var BASE_URL = '';
+		var params = {
+			change_search_ajax: 1
+		}
+	
+/*]]>*/
+</script>
+<title>Broniruem24 - Квартиры посуточно - Ошибка</title>
+	<meta name="description" content="Сайт по аренде квартир посуточно без посредников в России и Украине. База более 2000 квартир">
+	<meta name="keywords" content="">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link href="//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp;subset=cyrillic-ext,latin,latin-ext,cyrillic" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/themes/atlas/css/reset.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="/themes/atlas/css/style.css?rev=7" type="text/css" media="screen">
+	<link rel="stylesheet" href="/themes/atlas/css/new/style.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="/themes/atlas/css/new/media_screen.css" type="text/css" media="screen">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+	<link rel="stylesheet" href="/themes/atlas/css/magnific-popup.css" type="text/css">
+	<link rel="stylesheet" href="/themes/atlas/css/ion.rangeSlider.css" type="text/css">
+	<link rel="stylesheet" href="/themes/atlas/css/ion.rangeSlider.skinHTML5.css" type="text/css">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	
+	<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<link rel="stylesheet" href="/themes/atlas/css/ie.css">
+	<![endif]-->	
+<style id="abu-collapse-styles" type="text/css"></style><style type="text/css">div#messages{position:fixed;top:50px;right:0px;width:250px;margin:0px;padding:7px;background:transparent;z-index:2}div#messages div{cursor: pointer;color:#fff;padding:7px;margin-bottom:7px;-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;opacity:0.65;background:#888;font: normal 12px 'Georgia'}div#messages div.error{background:#98001b}	div#messages div.message{background:#0d8529}div#messages div.warning{background:#dd6; color:#333}</style><style type="text/css" data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget css:fb.css.customer_chat_plugin_iframe">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:'lucida grande', tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:'lucida grande', tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://connect.facebook.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://connect.facebook.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://connect.facebook.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://connect.facebook.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}
+.fb_mpn_mobile_landing_page_slide_out{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_out_from_left{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out_from_left;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_up{animation-duration:500ms;animation-name:fb_mpn_landing_page_slide_up;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_in{animation-duration:300ms;animation-name:fb_mpn_bounce_in;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out{animation-duration:300ms;animation-name:fb_mpn_bounce_out;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out_v2{animation-duration:300ms;animation-name:fb_mpn_fade_out;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_v2{animation-duration:300ms;animation-name:fb_bounce_in_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_from_left{animation-duration:300ms;animation-name:fb_bounce_in_from_left;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_v2{animation-duration:300ms;animation-name:fb_bounce_out_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_from_left{animation-duration:300ms;animation-name:fb_bounce_out_from_left;transition-timing-function:ease-in}.fb_invisible_flow{display:inherit;height:0;overflow-x:hidden;width:0}@keyframes fb_mpn_landing_page_slide_out{0%{margin:0 12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;margin:0 24px;width:60px}}@keyframes fb_mpn_landing_page_slide_out_from_left{0%{left:12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;left:12px;width:60px}}@keyframes fb_mpn_landing_page_slide_up{0%{bottom:0;opacity:0}100%{bottom:24px;opacity:1}}@keyframes fb_mpn_bounce_in{0%{opacity:.5;top:100%}100%{opacity:1;top:0}}@keyframes fb_mpn_fade_out{0%{bottom:30px;opacity:1}100%{bottom:0;opacity:0}}@keyframes fb_mpn_bounce_out{0%{opacity:1;top:0}100%{opacity:.5;top:100%}}@keyframes fb_bounce_in_v2{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}50%{transform:scale(1.03, 1.03);transform-origin:bottom right}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}}@keyframes fb_bounce_in_from_left{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}50%{transform:scale(1.03, 1.03);transform-origin:bottom left}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}}@keyframes fb_bounce_out_v2{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}}@keyframes fb_bounce_out_from_left{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}}@keyframes slideInFromBottom{0%{opacity:.1;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}@keyframes slideInFromBottomDelay{0%{opacity:0;transform:translateY(100%)}97%{opacity:0;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}</style></head>
+<body class="inner" style="overflow-x: hidden;"><div id="messages"></div><script type="text/javascript" src="/js/sumoselect/jquery.sumoselect.min.js"></script>
+
+
+	
+	<noscript><div class="noscript">Разрешите JavaScript в вашем браузере для комфортного использования сайта.</div></noscript>
+
+
+
+
+	<div class="header">
+		<div class="top-header">
+			<div class="content">
+				<ul class="float_l">
+					<!-- <li><a href=""><i class="icon-eye"></i>Просмотренные</a></li> -->
+					<li><a href="/ru/comparisonList"><i class="icon-list"></i>Список сравнения</a></li>
+					<!-- <li><a href=""><i class="icon-star"></i>Избранное (0)</a></li> -->
+				</ul>
+				<ul class="float_r">
+					<li class="top-button-login"><a href="/ru/usercpanel" class="popup-modal "><i class="icon-user"></i>Вход</a></li>
+					<li class="top-button-register"><a href="/ru/site/register" class="popup-modal top-button-register"><i class="icon-edit"></i>Регистрация</a></li>
+					<li id="logout-hidden" style="display: none;"><a href="/ru/site/logout">Выйти</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="float_l header_contacts">
+				<p>Служба поддержки: <br><strong>+7 (499) 112-07-44</strong> <br><span>с 10:00 — 20:00 по МСК</span> <br><a href="mailto:info@broniruem24.com">info@broniruem24.com</a></p>
+			</div>
+			<div class="float_r header_other">
+				<a href="//broniruem24.com/" class="logo"><img src="/img/new-style/logo.png" alt="">Бронируем24 — квартиры посуточно</a>
+				<label for="">
+					Валюта
+										<div class="right">
+												
+													<div class="dotted_currency"></div>
+							<div class="new_select_2">
+								<input id="currency_RUR" type="hidden" value="/broniruem24.com/ru/page/politika-konfidencialnosti.html/currency/RUR/lang/ru" name="RUR"><input id="currency_USD" type="hidden" value="/broniruem24.com/ru/page/politika-konfidencialnosti.html/currency/USD/lang/ru" name="USD"><input id="currency_UAH" type="hidden" value="/broniruem24.com/ru/page/politika-konfidencialnosti.html/currency/UAH/lang/ru" name="UAH"><form action="//broniruem24.com/ru/page/politika-konfidencialnosti.html" method="post">
+<div style="display:none"><input type="hidden" value="5b1b2b9aff6f6719ee1332ac0c224ee3b0f8124b" name="YII_CSRF_TOKEN"></div><select onchange="this.form.action=$(&quot;#currency_&quot;+this.value).val(); this.form.submit(); return false;" class="currency" name="currency" id="currency">
+<option value="RUR">руб.</option>
+<option value="USD" selected="selected">$</option>
+<option value="UAH">грн.</option>
+</select></form>							</div>
+											</div>
+								</label>
+				<a href="//broniruem24.com/ru/site/register" class="btn href-change-button">Сдать жильё бесплатно</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="menu">
+			<div class="content">
+			<div id="mobile-menu">≡</div>
+				<ul class="mobile-menu-list">
+					<li><a href="/ru/search">Квартиры</a></li>
+					<li><a href="/ru/page/bronirovanie-otelej-onlajn.html">Отели</a></li>
+					<li><a href="/ru/page/poisk-deshevyh-aviabiletov.html">Авиа</a>
+					<ul>
+	<li><a href="https://avia.broniruem24.com/">Поиск дешёвых билетов</a></li>
+	<li><a href="/ru/page/kompensacija-za-zaderzhku-ili-otmenu-rejsa.html">Компенсация за задержку/отмену рейса</a></li>
+		<li><a href="/ru/page/deshevye-aviabilety-podpiska-na-e-mail.html">Уведомления об изменении цен</a></li>
+			<li><a href="http://avia.broniruem24.com/map/?marker=146998">Карта низких цен</a></li>
+			<li><a href="/ru/page/poisk-deshevyh-aviabiletov.html">Почему дешевле на Бронируем24?</a></li>
+</ul>			
+					</li>
+					<li><a href="/ru/page/arenda-avto.html">Аренда авто</a></li>
+					<li><a href="/ru/page/transfer.html">Трансфер</a></li>
+					<li><a href="/ru/faq">Туристу</a>
+						<ul>
+	<li><a href="/ru/blog">Блог о путешествиях</a></li>
+	<li><a href="/ru/page/kuda-poehat-v-otpusk.html">Отпуск</a></li>
+</ul>
+					</li>				
+					<li><a href="/ru/page/o-kompanii.html">О сервисе</a>
+						<ul>					
+	<li><a href="/ru/page/kontakty.html">Контакты</a></li>					
+	<li><a href="/ru/page/otzyvy-o-nas.html">Отзывы</a></li>
+</ul>
+					</li>				
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div id="page">
+		<div class="line_header" style="display: none;">
+			<div class="main_header">
+				<div class="left">
+					<nav class="switch-menu">
+						<span>Меню</span>
+
+						<ul class="line_menu hide-780 dropDownNav" id="nav">
+<li><a href="javascript: void(0);">О компании</a>
+<ul>
+<li><a href="https://broniruem24.com/ru/page/o-kompanii.html">О Broniruem24</a></li>
+<li><a href="https://broniruem24.com/ru/page/otzyvy-o-nas.html">Отзывы</a></li>
+<li><a href="http://broniruem24.com/ru/news">Новости сервиса</a></li>
+<li><a href="https://broniruem24.com/ru/page/polzovatelskoe-soglashenie.html">Соглашение</a></li>
+<li><a href="http://broniruem24.com/sitemap">Карта сайта</a></li>
+<li><a href="https://broniruem24.com/ru/page/kontakty.html">Контакты</a></li>
+</ul>
+</li>
+<li><a href="javascript: void(0);">Личный кабинет</a>
+<ul>
+<li><a href="http://broniruem24.com/ru/usercpanel">Войти</a></li>
+<li><a href="http://broniruem24.com/ru/site/register">Зарегистрироваться</a></li>
+<li><a href="http://broniruem24.com/ru/site/recover">Забыли пароль?</a></li>
+</ul>
+</li>
+</ul>					</nav>
+				</div>
+
+									<div class="right">
+												
+													<div class="dotted_currency"></div>
+							<div class="new_select">
+								<input id="currency_RUR" type="hidden" value="/broniruem24.com/ru/page/politika-konfidencialnosti.html/currency/RUR/lang/ru" name="RUR"><input id="currency_USD" type="hidden" value="/broniruem24.com/ru/page/politika-konfidencialnosti.html/currency/USD/lang/ru" name="USD"><input id="currency_UAH" type="hidden" value="/broniruem24.com/ru/page/politika-konfidencialnosti.html/currency/UAH/lang/ru" name="UAH"><form action="//broniruem24.com/ru/page/politika-konfidencialnosti.html" method="post">
+<div style="display:none"><input type="hidden" value="5b1b2b9aff6f6719ee1332ac0c224ee3b0f8124b" name="YII_CSRF_TOKEN"></div><select onchange="this.form.action=$(&quot;#currency_&quot;+this.value).val(); this.form.submit(); return false;" class="currency" name="currency" id="currency">
+<option value="RUR">руб.</option>
+<option value="USD" selected="selected">$</option>
+<option value="UAH">грн.</option>
+</select></form>							</div>
+											</div>
+							</div>
+		</div>
+		<!--<div class="body_background"></div>-->
+
+		<div class="bg bg-2">
+			<!-- header -->
+			<!--<div class="body_background"></div>-->
+			<div class="header" style="display: none;">
+				<div class="logo">
+					<a title="Перейти на главную страницу" href="https://broniruem24.com/ru">
+						<img src="/themes/atlas/images/logo.png" alt="Broniruem24 - Квартиры посуточно">Бронируем24 – Квартиры посуточно
+					</a>
+				</div>
+
+									<div class="tel">
+													<span>+7 (499) 112-07-44</span>
+																			<br>							<div class="mail">
+								<span class="email" id="e569770342"><a href="mailto:info@broniruem24.com">info@broniruem24.com</a></span><script type="text/javascript">/*<![CDATA[*/eval("var a=\"dRHNShAE1xpVj3DI@6bYWvaz_7CtMFyu5Z0Gf.Qqg4JTr29sekXKniP8OolULwBc+-m\";var b=a.split(\"\").sort().join(\"\");var c=\"kP983Jl8Pklw2ihEHT8i\";var d=\"\";for(var e=0;e<c.length;e++)d+=b.charAt(a.indexOf(c.charAt(e)));document.getElementById(\"e569770342\").innerHTML=\"<a href=\\\"mailto:\"+d+\"\\\">\"+d+\"</a>\"")/*]]>*/</script>							</div>
+											</div>
+							</div>
+
+			<div class="menu" style="display: none;">
+				<div id="mobnav-btn">Меню</div>
+				<ul class="sf-menu header_menu sf-js-enabled" id="sf-menu-id">
+<li class="active"><a href="/ru">Главная</a></li>
+<li><a href="javascript: void(0);" class="sf-with-ul">Арендодателю</a>
+<div class="mobnav-subarrow"></div>
+
+<ul style="display: block;">
+<li><a href="https://broniruem24.com/ru/page/pravila-razmeshchenija-objavlenij.html">Правила размещения</a></li>
+<li><a href="https://broniruem24.com/ru/page/voprosy-i-otvety-dlja-arendodatelej.html">Как работать с сервисом?</a></li>
+<li><a href="https://broniruem24.com/ru/page/reklama-na-sajte.html">Реклама на сайте</a></li>
+<li><a href="http://broniruem24.com/ru/news">Полезные советы</a></li>
+</ul>
+</li>
+<li><a href="javascript: void(0);" class="sf-with-ul">Туристу</a>
+<div class="mobnav-subarrow"></div>
+
+<ul style="display: block;">
+<li><a href="/ru/faq">Как работать с сервисом?</a></li>
+<li><a href="http://broniruem24.com/ru/blog">Блог о путешествиях</a></li>
+<li><a href="https://broniruem24.com/ru/page/kuda-poehat-v-otpusk.html">Отпуск</a></li>
+</ul>
+</li>
+<li><a href="javascript: void(0);" class="sf-with-ul">Дополнительно</a>
+<div class="mobnav-subarrow"></div>
+
+<ul style="display: block;">
+<li><a href="/ru/menumanager/main/view/id/8">Поиск на карте</a></li>
+<li><a href="/ru/sitemap">Карта сайта</a></li>
+</ul>
+</li>
+</ul>			</div></div>
+
+		
+<div class="content-breadcrumbs">
+				<div class="breadcrumbs">
+<a class="path" href="/">Главная</a> / <a href="javascript: void(0);">Ошибка</a></div>			</div>
+
+
+		
+	<div class="content">
+
+<form id="search-form" action="/ru/search" method="get" class="inner-search-form">
+<div id="toggle-search-form-button" class="active"></div>
+	<input type="hidden" value="0" name="currency">
+	<div id="search_form" style="display: none;">
+				<div class="item" style="position:absolute; top:15px;">
+	<p class="form-title" style="color: black;margin-bottom: 15px">Где вы хотите жить?</p>
+        <select class="select-box" name="objType" id="objType">
+<option value="0" selected="selected">Выберите</option>
+<option value="1">Квартира</option>
+<option value="17">Комната в квартире</option>
+<option value="2">Дом</option>
+<option value="18">Мини-отель</option>
+<option value="19">Хостел</option>
+</select></div><input type="hidden" id="apType" name="apType" value="0">
+
+<div class="item" style="display:none">
+    		<select class="select-box searchField" name="apType" id="apType">
+<option value="0">Тип объявления</option>
+<option value="3">аренда посуточно</option>
+<option value="5">аренда помесячно</option>
+<option value="4">аренда понедельно</option>
+</select></div>
+
+
+
+<div class="item search_inner_row" style="position:absolute;right:10px;top:10px">
+    <p class="form-title" style="color: black">В какой город Вы едете?</p>
+    <select name="city[]" data-placeholder="Выберите город" class="chosen-select  select-box select2-hidden-accessible" style="decoration:none" tabindex="-1" aria-hidden="true"><option value="">Все</option> <optgroup label="Россия"><option value="18079">Адлер</option><option value="38036">Алупка</option><option value="37989">Алушта</option><option value="18076">Анапа</option><option value="18346">Архангельск</option><option value="18379">Астрахань</option><option value="17861">Балашиха</option><option value="18254">Барнаул</option><option value="18454">Белгород</option><option value="18741">Братск</option><option value="18472">Брянск</option><option value="19578">Владивосток</option><option value="19889">Владикавказ</option><option value="18539">Владимир</option><option value="18572">Волгоград</option><option value="18573">Волжский (Волгоградская обл.)</option><option value="18607">Вологда</option><option value="18633">Воронеж</option><option value="18089">Геленджик</option><option value="37990">Евпатория</option><option value="18095">Ейск</option><option value="18131">Екатеринбург</option><option value="18711">Иваново</option><option value="20162">Ижевск</option><option value="18740">Иркутск</option><option value="19212">Йошкар-Ола</option><option value="18206">Казань</option><option value="18799">Калининград</option><option value="18837">Калуга</option><option value="18920">Кемерово</option><option value="38033">Керчь</option><option value="18951">Киров (Кировская обл.)</option><option value="20217">Комсомольск-на-Амуре</option><option value="19027">Кострома</option><option value="18072">Краснодар</option><option value="19052">Красноярск</option><option value="19125">Курган</option><option value="19146">Курск</option><option value="38039">Кучугуры</option><option value="19174">Липецк</option><option value="20253">Магнитогорск</option><option value="18667">Махачкала</option><option value="17849">Москва</option><option value="19252">Мурманск</option><option value="18207">Набережные Челны</option><option value="20100">Нижневартовск</option><option value="19280">Нижний Новгород</option><option value="18132">Нижний Тагил</option><option value="18921">Новокузнецк</option><option value="18074">Новороссийск</option><option value="19373">Новосибирск</option><option value="19407">Омск</option><option value="19478">Орел</option><option value="19438">Оренбург</option><option value="19501">Пенза</option><option value="19533">Пермь</option><option value="18891">Петрозаводск</option><option value="17850">Подольск</option><option value="19929">Пятигорск</option><option value="19646">Ростов-на-Дону</option><option value="19707">Рязань</option><option value="38020">Саки</option><option value="19737">Самара</option><option value="38031">Санкт-Петербург</option><option value="19228">Саранск</option><option value="19774">Саратов</option><option value="37991">Севастополь</option><option value="37992">Симферополь</option><option value="19898">Смоленск</option><option value="18073">Сочи</option><option value="19928">Ставрополь</option><option value="18393">Стерлитамак</option><option value="38029">Судак</option><option value="20099">Сургут</option><option value="19647">Таганрог</option><option value="19966">Тамбов</option><option value="19988">Тверь</option><option value="19738">Тольятти</option><option value="20032">Томск</option><option value="20066">Тула</option><option value="20098">Тюмень</option><option value="18508">Улан-Удэ</option><option value="20189">Ульяновск</option><option value="18392">Уфа</option><option value="37993">Феодосия</option><option value="20216">Хабаровск</option><option value="20346">Чебоксары</option><option value="20252">Челябинск</option><option value="18608">Череповец</option><option value="20301">Чита</option><option value="38038">Щелкино</option><option value="38032">Южный берег Крыма</option><option value="19815">Якутск</option><option value="37994">Ялта</option><option value="20386">Ярославль</option></optgroup> <optgroup label="Украина"><option value="38030">Бердичев</option><option value="37979">Бердянск</option><option value="38025">Берегово</option><option value="37986">Борисполь</option><option value="37970">Винница</option><option value="38021">Горловка</option><option value="37972">Днепр</option><option value="37974">Донецк</option><option value="37977">Житомир</option><option value="37980">Запорожье</option><option value="37983">Ивано-Франковск</option><option value="38008">Каменец-Подольский</option><option value="37984">Киев</option><option value="37987">Кировоград</option><option value="37973">Кривой Рог</option><option value="37996">Луганск</option><option value="37971">Луцк</option><option value="37997">Львов</option><option value="38018">Макеевка</option><option value="38017">Мариуполь</option><option value="38001">Миргород</option><option value="38022">Моршин</option><option value="37999">Николаев</option><option value="38000">Одесса</option><option value="38002">Полтава</option><option value="38003">Ровно</option><option value="38027">Северодонецк</option><option value="38004">Сумы</option><option value="37998">Трускавец</option><option value="38010">Умань</option><option value="38006">Харьков</option><option value="38007">Херсон</option><option value="38023">Хмельницкий</option><option value="38011">Черкассы</option><option value="38013">Чернигов</option><option value="38016">Черноморск</option><option value="38005">Шостка</option><option value="38035">Южный</option><option value="38024">Яремче</option></optgroup></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 260px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="50" aria-labelledby="select2-city[]-ik-container"><span class="select2-selection__rendered" id="select2-city[]-ik-container"><span class="select2-selection__placeholder">Выберите город</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
+
+<div class="item search_inner_row" id="metro-block" style="width:240px;display: block;position:absolute;right:20px;top:110px ">
+        <div class="formacontrol">
+        <div class="SumoSelect" tabindex="0"><select id="metro" class="width290 search-input-new  searchField" multiple="multiple" style="width: 242px; display: none;" name="metro[]">
+</select><p class="CaptionCont SlectBox" style="width:242px;"><span class="placeholder">Выберите район</span><label><i></i></label></p><div class="optWrapper multiple"><ul class="options"></ul><div class="MultiControls"><p class="btnOk">OK</p><p class="btnCancel">Cancel</p></div></div></div><script>$('#metro').SumoSelect({captionFormat: 'Выбрано {0} района', selectAlltext: 'Выбрать все', placeholder: 'Выберите район', csvDispCount:1});</script>    </div>
+</div><div class="item" style="position: absolute; top:15px; left:330px;">
+	<p class="form-title" style="margin-bottom: -10px">Количество комнат</p>
+
+	<div class="radio-buttons">
+		<div class="item " value="1" onclick="$('#rooms').val(1);changeSearch();">1</div>
+		<div class="item " value="2" onclick="$('#rooms').val(2);changeSearch();">2</div>
+		<div class="item " value="3" onclick="$('#rooms').val(3);changeSearch();">3</div>
+		<div class="item " value="4" onclick="$('#rooms').val(4);changeSearch();">4+</div>
+	</div>
+	<input type="hidden" value="0" name="rooms" id="rooms" onchange="focusSubmit($('input#rooms'));">
+	</div><div class="item item-big" style="position: absolute; top: 150px; float:left">
+    <p class="form-title" style="margin-bottom: -10px">Удобства</p>
+    <input type="hidden" value="" name="references">
+
+   <div class="item">
+       
+        <div id="dv_89" class="check-box " value="false">Холодильник</div>
+        <input id="in_89" type="hidden" value="" name="">
+               <div id="dv_81" class="check-box " value="false">Стиральная машина</div>
+        <input id="in_81" type="hidden" value="" name="">
+
+    </div>
+    <div class="item">
+                <div id="dv_55" class="check-box " value="false">Посудомоечная машина</div>
+        <input id="in_55" type="hidden" value="" name="">
+                <div id="dv_67" class="check-box " value="false">Микроволновка</div>
+        <input id="in_67" type="hidden" value="" name="">
+
+    </div>
+    <div class="item">
+                <div id="dv_48" class="check-box " value="false">Wi-Fi</div>
+        <input id="in_48" type="hidden" value="" name="">
+                <div id="dv_86" class="check-box " value="false">Кондиционер</div>
+        <input id="in_86" type="hidden" value="" name="">
+
+    </div>
+
+
+</div>
+
+<div class="item" style="position: absolute; top: 15px; left: 570px">
+	<p class="form-title">Бюджет на жильё в сутки</p>
+
+	<span class="irs js-irs-0"><span class="irs"><span class="irs-line" tabindex="-1"><span class="irs-line-left"></span><span class="irs-line-mid"></span><span class="irs-line-right"></span></span><span class="irs-min">100</span><span class="irs-max">50 000</span><span class="irs-from">0</span><span class="irs-to">0</span><span class="irs-single">0</span></span><span class="irs-grid"></span><span class="irs-bar"></span><span class="irs-shadow shadow-from"></span><span class="irs-shadow shadow-to"></span><span class="irs-slider from"></span><span class="irs-slider to"></span></span><input id="priceTo" name="price" value="0" type="text" class="range-slider irs-hidden-input" readonly="">
+
+	
+	<input id="priceMax" name="price" value="0" type="hidden">
+<!--	<input id="priceMax" name="price_max" value="0" type="text">
+-->
+</div>
+
+			<div style="position: absolute; left: 865px; top: 190px;" class="search-action-button">
+            <a style="width:195px;padding-left:50px;" href="javascript: void(0);" onclick="doSearchAction();" class="btn">Подобрать жилье</a>
+			<div style="display:none" id="search-result">Найдено: <span id="btnleft"></span></div>
+</div>
+
+
+
+
+	
+<script>
+	
+	    $('#toggle-search-form-button').on('click', function(){
+	    $('#search_form').slideToggle(500);
+	    $(this).toggleClass('active');
+		});
+	if (window.matchMedia("(min-width: 1300px)").matches) {
+	}
+	
+
+</script>
+		<div class="clear"></div>
+	</div></form> <!-- /bg ( from layouts/main.php ) -->
+
+	<div class="content">
+
+
+		<div class="content_news">
+			
+
+			<div class="main-content-wrapper">
+														<div class="clear"></div>
+								
+								
+<h2 class="title highlight-left-right">
+	<span>Ошибка 404</span>
+</h2>
+<div class="clear"></div><br>
+
+<div class="flash-error">
+	Невозможно обработать запрос "broniruem24.com/ru/page/politika-konfidencialnosti.html".</div>			</div>
+		</div>
+	</div>
+	
+							
+		<div>
+						
+			</div></div>
+			<div class="footer">
+		<div class="content">
+			<div class="float_l">
+				<p><a href="//broniruem24.com/ru/page/o-kompanii.html"><strong>О сервисе Бронируем24</strong></a></p>
+				<p>
+					<a href="//broniruem24.com/ru/page/polzovatelskoe-soglashenie.html">Договор оферты</a><br>
+					<a href="//broniruem24.com/ru/page/politika-konfidencialnosti.html">Политика конфиденциальности</a><br>
+					<a href="//broniruem24.com/ru/page/kontakty.html">Контакты</a><br>
+					<a href="//broniruem24.com/sitemap.xml">Карта сайта</a>
+				</p>
+				<p><a href="//broniruem24.com/ru/page/otzyvy-o-nas.html">Отзывы гостей</a><br>
+				<a href="//broniruem24.com/ru/page/reklama-na-sajte.html">Услуги и тарифы</a></p>
+	<img alt="visa" src="/img/pay-and-go/oplata/visa.png" style="height: 43px; width: 80px;"><img alt="mastercard" src="/img/pay-and-go/oplata/mc.png" style="height: 43px; width: 80px;"> <img alt="мир" src="/img/pay-and-go/oplata/mir.png" style="height: 43px; width: 80px;">
+			</div>
+			<div class="float_l">
+				<p>
+					<a href="//broniruem24.com/ru/faq"><strong>Арендатору/Туристу</strong></a><br>
+					<a href="//broniruem24.com/ru/search">Квартиры</a><br>
+					<a href="//broniruem24.com/ru/page/bronirovanie-otelej-onlajn.html">Отели</a><br>
+					<a href="//broniruem24.com/ru/page/poisk-deshevyh-aviabiletov.html">Авиа билеты</a><br>
+					<a href="//broniruem24.com/ru/page/arenda-avto.html">Аренда авто</a><br>
+					<a href="//broniruem24.com/ru/page/transfer.html">Трансфер</a><br>
+					<a href="//broniruem24.com/ru/blog">Блог о путешествиях</a><br>
+					<a href="//broniruem24.com/ru/page/kuda-poehat-v-otpusk.html">Отпуск</a>
+				</p>
+				<p>
+					<a href="//broniruem24.com/ru/page/voprosy-i-otvety-dlja-arendodatelej.html"><strong>Арендодателю</strong></a><br>
+					<a href="//broniruem24.com/ru/page/pravila-razmeshchenija-objavlenij.html">Правила размещения</a><br>
+					<a href="//broniruem24.com/ru/page/reklama-na-sajte.html">Добавить объявление</a><br>
+					<a href="//broniruem24.com/ru/news">Полезные советы</a>
+				</p>
+			</div>
+			<div class="float_l">
+				<p><strong>Служба поддержки:</strong></p>
+				<p><strong>+7 (499) 112-07-44</strong><br> <a href="mailto:info@broniruem24.com">info@broniruem24.com</a><br>
+				<strong>10:00 – 20:00 по МСК</strong></p>
+				<a href="//broniruem24.com/ru/site/register" class="btn href-change-button">Сдать жильё бесплатно</a>
+			</div>
+			<div class="float_r">
+				<ul class="soc">
+					<li><a href="//vk.com/broniruem24" target="_blank"><img src="/img/new-style/vk.png" alt=""></a></li>
+					<li><a href="//www.facebook.com/broniruem24" target="_blank"><img src="/img/new-style/fb.png" alt=""></a></li>
+					<li><a href="https://twitter.com/broniruem24" target="_blank"><img src="/img/new-style/tw.png" alt=""></a></li>
+				</ul>
+				<script type="text/javascript" src="//vk.com/js/api/openapi.js?125"></script>
+				<!-- VK Widget -->
+				<div id="vk_groups" style="width: 270px; height: 258px; background: none;"><iframe name="fXD7d395" src="https://vk.com/widget_community.php?app=0&amp;width=270px&amp;_ver=1&amp;gid=60509301&amp;mode=3&amp;color1=FFFFFF&amp;color2=000000&amp;color3=5E81A8&amp;class_name=&amp;height=400&amp;url=https%3A%2F%2Fbroniruem24.com%2F%2Fbroniruem24.com%2Fru%2Fpage%2Fpolitika-konfidencialnosti.html&amp;referrer=&amp;title=Broniruem24%20-%20%D0%9A%D0%B2%D0%B0%D1%80%D1%82%D0%B8%D1%80%D1%8B%20%D0%BF%D0%BE%D1%81%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%BE%20-%20%D0%9E%D1%88%D0%B8%D0%B1%D0%BA%D0%B0&amp;1865647d870" scrolling="no" id="vkwidget1" style="overflow: hidden; height: 258px;" width="270" height="185" frameborder="0"></iframe></div>
+				<script type="text/javascript">
+				VK.Widgets.Group("vk_groups", {redesign: 1, mode: 3, width: "270", height: "400", color1: 'FFFFFF', color2: '000000', color3: '5E81A8'}, 60509301);
+				</script>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="copyright">
+		<div class="content">
+			<p class="float_l">© Сервис Бронируем24, 2013-2022. Посуточная аренда квартир и другого жилья в Крыму, России и Украине. Горящие туры, дешёвые авиабилеты, круизы со скидкой и полезные советы туристам. НПД Соин М.С. ИНН 920300015887</p>
+			<p class="float_r">Создание сайта: <a href="//1ps.ru" target="_blank">1PS.RU</a></p>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="clear"></div>
+		</div>
+
+		<!-- Yandex.Metrika counterr -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(22455091, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        trackHash:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/22455091" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type="text/javascript">
+(function(){ var widget_id = 'oAKFr5XYJr';var d=document;var w=window;function l(){
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+<!-- {/literal} END JIVOSITE CODE -->
+	<!-- Google counter -->
+	<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-7823193-10', 'broniruem24.com');
+		  ga('send', 'pageview');
+
+		</script>
+		<!-- /Google counter -->
+		<div id="loading" style="display:none;">Загрузка содержимого...</div>
+		<div id="toTop">^ Наверх</div>
+			
+	<div id="top"><img src="/img/new-style/on-top.png" alt=""></div>
+	<div align="center">
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">
+var _tmr = _tmr || [];
+_tmr.push({id: "2621469", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "topmailru-code");
+</script><noscript><div style="position:absolute;left:-10000px;">
+<img src="//top-fwz1.mail.ru/counter?id=2621469;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" />
+</div></noscript>
+<!-- //Rating@Mail.ru counter -->
+<!-- begin of Top100 code -->
+<div hidden="">
+<script id="top100Counter" type="text/javascript" src="//counter.rambler.ru/top100.jcn?3133570"></script>
+<noscript>
+<!-- <a href="//top100.rambler.ru/navi/3133570/">
+<img src="//counter.rambler.ru/top100.cnt?3133570" alt="Rambler's Top100" border="0" />
+
+</a>
+ -->
+</noscript>
+<!-- end of Top100 code -->
+		<!--LiveInternet counter--><script type="text/javascript"><!--
+		document.write("<a href='//www.liveinternet.ru/click' "+
+		"target=_blank><img src='//counter.yadro.ru/hit?t44.10;r"+
+		escape(document.referrer)+((typeof(screen)=="undefined")?"":
+		";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+		screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+		";"+Math.random()+
+		"' alt='' title='LiveInternet' "+
+		"border='0' width='31' height='31'><\/a>")
+		//--></script><a href="//www.liveinternet.ru/click" target="_blank"><img src="//counter.yadro.ru/hit?t44.10;r;s1366*768*24;uhttps%3A//broniruem24.com//broniruem24.com/ru/page/politika-konfidencialnosti.html;0.26709826979213724" alt="" title="LiveInternet" width="31" height="31" border="0"></a><!--/LiveInternet-->
+		<!-- facebook -->
+		<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&appId=156980054356120&version=v2.0";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<!-- /facebook -->
+
+		</div>
+	</div>
+
+
+
+	
+
+<input type="hidden" value="RUR" name="currency">
+	<style>
+		#search_form .irs-min:after {
+			content:' руб.';
+		}
+
+		#search_form .irs-max:after {
+			content:' руб.';
+		}
+	</style>
+	<script>
+
+		
+		$("#search_form input.range-slider").ionRangeSlider({
+			min: 100,
+			type: 'double',
+			max: 50000,
+			from: 100,
+			step: 10
+		});
+
+		
+		$("#search_form input.range-slider").on('input change', function(){
+			var sliderValue = $("#search_form input.range-slider").val();
+			var min  = sliderValue.split(';')[0];
+			var max  = sliderValue.split(';')[1];
+			$('#priceTo').attr('value', min);
+			//$('#priceMin').attr('value', min);
+			$('#priceMax').attr('value', max);
+			changeSearch();
+		});
+
+
+	</script>
+
+<script>
+	$(document).ready(function () {
+
+var logout = $('.line_header .dropDownNav li a:contains("Выйти")')
+if(logout.length > 0) {
+	$('#logout-hidden').show();
+	$('.href-change-button').attr('href', '/ru/usercpanel');
+	$('.top-button-login a').html('<i class="icon-user"></i>Личный кабинет');
+	$('.top-button-register').remove();
+}
+
+});
+</script>
+
+
+
+<script type="text/javascript" src="/themes/atlas/js/habra_alert.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/scrollto.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/superfish/js/superfish.js"></script>
+<script type="text/javascript" src="/themes/atlas/js/new/script.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+
+				$.ajaxPrefilter(function(options, originalOptions, jqXHR){
+					if(originalOptions.type){
+						var type = originalOptions.type.toLowerCase();
+					} else {
+						var type = "";
+					}
+
+					if(type == "post" && typeof originalOptions.data === "object"){
+						options.data = $.extend(originalOptions.data, { "YII_CSRF_TOKEN": "5b1b2b9aff6f6719ee1332ac0c224ee3b0f8124b" });
+						options.data = $.param(options.data);
+					}
+				});
+			
+
+			$(document).on("click", "a.compare-label", function() {
+				apId = $(this).attr("id");
+				apId = apId.replace("compare_label", "");
+
+				if ($(this).attr("data-rel-compare") == "false") {
+					if (apId) {
+						var checkboxCompare = $("#compare_check"+apId);
+
+						if (checkboxCompare.is(":checked"))
+							checkboxCompare.prop("checked", false);
+						else {
+							checkboxCompare.prop("checked", true);
+						}
+						addCompare(apId);
+					}
+				}
+			});
+
+			$(document).on("change", ".compare-check", function() {
+				apId = $(this).attr("id");
+				apId = apId.replace("compare_check", "");
+
+				addCompare(apId);
+			});
+
+			function addCompare(apId) {
+				apId = apId || 0;
+
+				if (apId) {
+					var controlCheckedCompare = $("#compare_check"+apId).prop("checked");
+
+					if (!controlCheckedCompare) {
+						deleteCompare(apId);
+					}
+					else {
+						$.ajax({
+							type: "POST",
+							url: "/ru/comparisonList/main/add",
+							data: {apId: apId},
+							beforeSend: function(){
+
+							},
+							success: function(html){
+								if (html == "ok") {
+									$("#compare_label"+apId).html("Перейти к сравнению");
+									$("#compare_label"+apId).prop("href", "/ru/comparisonList");
+									$("#compare_label"+apId).attr("data-rel-compare", "true");
+								}
+								else {
+									$("#compare_check"+apId).prop("checked", false);
+
+									if (html == "max_limit") {
+										$("#compare_label"+apId).html("Максимум: 6 объявлений");
+									}
+									else {
+										$("#compare_label"+apId).html("Ошибка");
+									}
+								}
+							}
+						});
+					}
+				}
+			}
+
+			function deleteCompare(apId) {
+				$.ajax({
+					type: "POST",
+					url: "/ru/comparisonList/main/del",
+					data: {apId: apId},
+					success: function(html){
+						if (html == "ok") {
+							$("#compare_label"+apId).html("Сравнить");
+							$("#compare_label"+apId).prop("href", "javascript:void(0);");
+							$("#compare_label"+apId).attr("data-rel-compare", "false");
+						}
+						else {
+							$("#compare_check"+apId).prop("checked", true);
+							$("#compare_label"+apId).html("Ошибка");
+						}
+					}
+				});
+			}
+		
+jQuery(function($) {
+
+		focusSubmit($("select#objType"));
+	
+
+				focusSubmit($("select#apType"));
+			
+
+            $(".chosen-select").select2({
+				"language": {
+				       "noResults": function(){
+				           return "Ничего не найдено";
+				       }
+				   }
+        	}).on("change", function(){
+        		var cityID = $(this).val();
+        		$.ajax({
+        			url: "/ru/metroStations/main/getMetroStations",
+        			type: "get",
+        			data: "city="+cityID+"&type=0&onlyWithAds=1",
+        			dataType: "json",
+        			success: function(result){
+							if (result.dropdownMetro) {
+								//$("#metro-block").show();
+								$("#metro").html(result.dropdownMetro);
+								//$("#metro").trigger("chosen:updated");
+								$("#metro")[0].sumo.reload();
+							}
+							else {
+								//$("#metro-block").hide();
+								$("#metro").html("");
+								$("#metro")[0].sumo.reload();
+							}
+						}
+        		});
+
+                changeSearch();
+            });
+        
+	focusSubmit($("input#rooms"));	
+
+			$("#inner_open_button").show();
+	
+
+			$("#sf-menu-id").superfish( {hoverClass: "sfHover", delay: 100, animationOut: {opacity:"hide"}, animation: {opacity:"show"}, cssArrows: false, dropShadows: false, speed: "fast", speedOut: 1 });
+		
+
+			$('a.fancy').fancybox({'ajax':{'data':'isFancy=true'},'titlePosition':'inside','onClosed':function(){
+					var capClick = $("#yw0_button");
+					if(typeof capClick !== "undefined")	capClick.click();
+				}});
+		
+});
+/*]]>*/
+</script>
+
+<div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div></body></html>

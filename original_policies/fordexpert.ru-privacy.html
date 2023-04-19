@@ -1,0 +1,1519 @@
+<html lang="ru"><head>
+
+  <meta charset="utf-8">
+<title>ФОРД-ЭКСПЕРТ - Политика конфиденциальности</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/public/images/favicons/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/public/images/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/public/images/favicons/manifest.json">
+  <link rel="mask-icon" color="#5bbad5" href="/public/images/favicons/safari-pinned-tab.svg">
+  <meta name="msapplication-TileImage" content="/public/images/favicons/mstile-144x144.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+  <link rel="canonical" href="http://fordexpert.ru/privacy/">
+  <meta name="keywords" content="ford mazda hyundai kia автозапчасти Алтуфьево Мытищи в наличии форд мазда хюндай хендэ киа">
+  <meta name="description" content="Автозапчасти FORD MAZDA HYUNDAI KIA">
+
+
+    <link rel="stylesheet" href="/templates/_default/libs/jquery-ui-1.12.1/jquery-ui.structure.css">
+  <link rel="stylesheet" href="/templates/_default/libs/jquery-ui-1.12.1/jquery-ui.icons.css">
+  <link rel="stylesheet" href="/templates/_default/libs/fontawesome-free-5.14.0-web/css/all.css">
+  <link rel="stylesheet" href="/templates/_default/css/theme-bs-cerulean.css?45">
+  <link rel="stylesheet" href="/templates/_default/css/site_v4.css?99">
+  <link rel="stylesheet" href="/templates/_default/libs/sortable/sortable-theme-bootstrap.css" media="screen">
+    
+
+
+    <script type="text/javascript" src="/templates/_default/libs/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="/templates/_default/libs/bootstrap-4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/templates/_default/libs/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="/templates/_default/libs/jquery.ui.touch-punch.min.js"></script>
+  <script type="text/javascript" src="/templates/_default/libs/datepicker-ru.js"></script>   <script type="text/javascript" src="/templates/_default/libs/spin.min.js"></script><style type="text/css"></style>
+  <script type="text/javascript" src="/templates/_default/libs/jquery.spin.js"></script>
+  <script type="text/javascript" src="/templates/_default/libs/nicescroll/jquery.nicescroll.min.js"></script>
+
+  <script type="text/javascript" src="/public/js/site.js?16"></script>
+
+
+      
+        <script type="text/javascript" src="/templates/_default/libs/textfill/jquery.textfill.js"></script>
+    
+      <script>
+        $(document).ready(function() {
+          var save_brand_size = function(el){
+            var font_size=$(el).find('a.navbar-brand').css('font-size');
+            if (font_size){
+              document.cookie='shop_brand_size='+font_size+'; path=/';
+            };
+          };
+          $('.top_menu_brand').textfill({'innerTag':'a.navbar-brand','maxFontPixels':24,'success':save_brand_size});
+          $(window).on('resize',function(){
+            $('.top_menu_brand').find('a.navbar-brand').css('font-size','').end().textfill({'innerTag':'a.navbar-brand','maxFontPixels':24,'success':save_brand_size});
+          });
+        });
+      </script>
+    
+
+        
+        <script>
+$(document).ready(function() {
+  var $left_menu=$('#left_menu');
+  $(window).load(function(){
+    if ($left_menu.hasClass('menu_hidden')){
+      $('#content-main').css('min-height',$left_menu.height());
+     };
+  });
+
+  $.fn.animateRotate = function(from_angle, angle, duration, easing, complete) { //http://stackoverflow.com/questions/15191058/css-rotation-cross-browser-with-jquery-animate
+    var args = $.speed(duration, easing, complete);
+    var step = args.step;
+    return this.each(function(i, e) {
+      args.complete = $.proxy(args.complete, e);
+      args.step = function(now) {
+        $.style(e, 'transform', 'rotate(' + now + 'deg)');
+        if (step) return step.apply(e, arguments);
+      };
+      $({deg: from_angle}).animate({deg: angle}, args);
+    });
+   };
+
+  var hide_left_menu = function(duration){
+    var x=$left_menu.offset().left;
+    var y=$left_menu.offset().top;
+    ow=$left_menu.outerWidth();
+    $left_menu.data('ow',ow);
+    w=$left_menu.width();
+    $left_menu.data('w',w);
+    var offset=$('#content-main').parent().offset();
+    $('#content-main').css('min-height',$left_menu.height());
+    $('#left_menu_widgets').css('display','none');
+
+    var cm_ow=$('#content-main').outerWidth();
+    var cm_x=$('#content-main').offset().left-parseFloat($('#content-main').css('padding-left'));
+    var cm_y=$('#content-main').offset().top+parseFloat($('#content-main').css('padding-top'));
+    
+    $left_menu.css('cssText','left:'+(x+parseFloat($left_menu.css('padding-left')))+'px; top:'+y+'px; padding-left:0 !important; width:'+ow+'px; position:absolute;')
+      .find('span.text').addClass('d-none').end()
+      //.animate({left:"-="+ow},duration,function(){
+      .animate({left:0,top:(cm_y-16+26),width:25},duration,function(){
+        $(this)
+          .addClass('p-0 menu_hidden')
+          .css({'position':'absolute','width':'24px','padding-left':''})
+          .removeClass('menu_shown px-sm-1 px-lg-2')
+          .find('#leftMenuAccordion').addClass('p-0 shadow').end()
+          .find('.left_menu_group_button').removeClass('d-flex').addClass('d-none').end()
+          .find('.collapse').css('display','block').addClass('mb-2').end()
+          .find('.list-group-item').removeClass('p-2 text-truncate').addClass('px-0 py-1 list-group-item-light').end()
+          .find('.list-group-item .fas').removeClass('mr-1').end()
+          .find('.list-group:last').removeClass('mt-4').end()
+          .closest('div.container-fluid.row').addClass('menu_hidden').end();
+
+        document.cookie="left_menu_hidden=1;path=/";
+        $('#content-main').css('min-height',$(this).height());
+        window.scroll(0, 0);
+      });
+    $('#content-main').css({left:cm_x,width:cm_ow})
+      .animate({left:"-="+ow,width:"+="+ow},duration,function(){
+        $(this)
+         .removeClass('col-xl-10 col-lg-9 col-md-9')
+         .addClass('col-sm-12')
+         .css({width:'',left:''});
+        $(document).trigger('resize');
+      });
+    //$('#left_menu_toggle').animate({left:"-="+ow}).animateRotate(0,180,duration);
+    $('#left_menu_toggle')  //.removeClass('btn-secondary').addClass('btn-primary')
+      .find('span.fas').animateRotate(0,180,duration);
+
+  };
+
+  var show_left_menu = function(duration){
+    var ow=$left_menu.data('ow');
+    var w=$left_menu.data('w');
+    //console.log(((ow-w)/2));
+    var x=$('#content-main').offset().left;
+    var cm_y=$('#content-main').offset().top+parseFloat($('#content-main').css('padding-top'));
+    var offset=$left_menu.offset();
+    $left_menu
+      .removeClass('menu_hidden p-0')
+      .addClass('px-sm-1 px-lg-2')
+      .find('.list-group-item').addClass('p-2').removeClass('px-0 py-1 list-group-item-light').end()
+      .find('.collapse').css('display','').removeClass('mb-2').end()
+      .find('.left_menu_group_button').addClass('d-flex').removeClass('d-none').end()
+      .find('#leftMenuAccordion').removeClass('p-0 shadow').end()
+      .find('.list-group:last').addClass('mt-2').end()
+      .animate({left:x,top:cm_y+26,opacity:1,width:ow},duration,function(){
+        $(this)
+          .removeClass('p-0')
+          .addClass('menu_shown')
+          .css({left:'',top:'',position:'','padding-left':'',width:'','min-hegith':''})
+          .find('span.text').removeClass('d-none').end()
+          .find('.list-group-item .fas').addClass('mr-1').removeClass('text-muted').end()
+          .closest('div.container-fluid.row').removeClass('menu_hidden').end()
+        ;
+
+      //if ($(this).data('window_resized')){
+      //  $(this).data('window_resized','');
+      //  setTimeout(update_left_menu_toggle,duration+50);
+      // };
+        $('#left_menu_widgets').css('display','');
+        document.cookie="left_menu_hidden=0; path=/; expires=Tue, 01 Jan 2000 00:00:00 GMT";
+        window.scroll(0, $left_menu.offset().top-125);
+      });
+    $('#content-main').animate({left:"+="+ow,width:"-="+ow},duration,function(){
+      $(this).removeClass('col-sm-12').addClass('col-xl-10 col-lg-9 col-md-9').css({left:'',width:'','min-height':''});
+      $(document).trigger('resize');
+    });
+
+    $('#left_menu_toggle').animate({left:x+5,'top':(offset.top-12),'width':74},duration,function(){//.addClass('btn-secondary').removeClass('btn-primary')
+      $(this).css({'left':'','top':'','width':''});
+    }).find('span.fas').animateRotate(180,0,duration);
+
+  };
+
+  $('#left_menu_toggle').on('click',function(){
+    if ($left_menu.hasClass('menu_shown')){
+      hide_left_menu(200);
+      $(this).attr('title','Развернуть меню')
+     } else if ($left_menu.hasClass('menu_hidden')){
+      show_left_menu(200);
+      $(this).attr('title','Свернуть меню')
+     };
+  });
+
+  $left_menu.find('.list-group-item .fas').tooltip({position: { my: "left+10 center", at: "right center" },tooltipClass :'right'});
+
+  //Кнопка отображения ссылки на главное меню, когда его нет на экране
+  $('#menu_scroll_helper').on('click',function(){
+    window.scroll(0, $left_menu.offset().top-125);
+  });
+  $(window).on('scroll resize load',function(){
+    if ($left_menu.length==0){ //Если левого меню нет
+      return;
+     };
+    if ($left_menu.hasClass('menu_hidden')){
+      $('#menu_scroll_helper:visible').hide();
+      return;
+     };
+    var lm_top=$left_menu.offset().top;
+    var scrollbottom=$(document).scrollTop()+$(window).height();
+
+    if (lm_top>scrollbottom){
+      $('#menu_scroll_helper:hidden').show('fast');
+     } else {
+      $('#menu_scroll_helper:visible').hide('fast');
+     };
+  });
+
+  $('#leftMenuAccordion .collapse').on('show.bs.collapse',function(){
+    $(this).prev().find('.fas').animateRotate(0,180,200);//.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+  }).on('hide.bs.collapse',function(){
+    $(this).prev().find('.fas').animateRotate(180,0,200);//.addClass('fa-chevron-down').removeClass('fa-chevron-up');
+  });
+});
+</script>
+
+
+        <script>
+$(document).ready(function() {
+
+  var current_search_type='number';
+
+
+  $('#searchbox').on('paste',function(e){
+    if (current_search_type!='number'){return;};
+    if (typeof(e.originalEvent)=='undefined'){return;};
+    if (typeof(e.originalEvent.clipboardData)=='undefined'){return;};
+    //e.stopPropagation();
+    var text=e.originalEvent.clipboardData.getData('text/plain');
+    var replaceArray = function(replaceString,find, replace) {
+      var regex; 
+      for (var i = 0; i < find.length; i++) {
+        regex = new RegExp(find[i], "g");
+        replaceString = replaceString.replace(regex, replace[i]);
+       }
+      return replaceString;
+     };
+    if (text.match(/[ЙЦГШЩЪФЫПЛДЖЭЯЧИЬБЮУ]/i)){
+      //Первый случай - если в номере есть чисто русские буквы - значит номер должен быть 100% русский
+      if (!$('#search_form .rus_num').hasClass('rus_enabled')){
+        $('#search_form .rus_num').trigger('click');
+       };
+     } else if (text.match(/[A-Z]/i)){
+      //Второй случай если в номере есть латинские буквы - заменяем все русские на однотипные латинские
+      if ($('#search_form .rus_num').hasClass('rus_enabled')){
+        $('#search_form .rus_num').trigger('click');
+       };
+     };
+  });
+  $('#search_form .rus_num').on('click',function(event){
+    if ($(this).hasClass('rus_enabled')){
+      $(this).removeClass('rus_enabled')
+      var img=$(this).find('img');
+      img.attr('src',img.data('img-disabled'));
+      document.cookie='search_rus=0; path=/';
+      $('#searchbox')
+        .shopkais_replace_input({'config':'nd'})
+        .focus();
+     } else {
+      $(this).addClass('rus_enabled');
+      var img=$(this).find('img');
+      img.attr('src',img.data('img-enabled'));
+      document.cookie='search_rus=1; path=/';
+      $('#searchbox')
+        .shopkais_replace_input({'config':'nd_rus'})
+        .focus();
+     };
+  });
+  var getCookie = function (name) {//https://learn.javascript.ru/cookie
+    let matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : '';
+  } 
+  $('#search_sel_number').on('click',function(event){
+    event.preventDefault(); //Чтобы к URL не добавлялся #
+    if (current_search_type!='number') {
+      $('#searchbox').val('');
+     };
+    current_search_type='number';
+    $('#search_sel').html($(this).html());
+    $('form.search').attr('action','/search/');
+    $('#searchbox').attr('maxlength','30')
+      .attr('pattern','.*')
+      .attr('placeholder','Введите номер детали')
+      .attr('title','Введите номер детали')
+      .attr('name','detal')
+      .autocomplete( "enable" )
+      .focus();
+    if (getCookie('search_rus')==1){
+      $('#searchbox').shopkais_replace_input({'config':'nd_rus'})
+      let img=$('#search_form .rus_num img');
+      img.attr('src',img.data('img-enabled'))
+     } else {
+      $('#searchbox').shopkais_replace_input({'config':'nd'})
+      let img=$('#search_form .rus_num img');
+      img.attr('src',img.data('img-disabled'))
+     };
+    $('[data-toggle="dropdown"]').parent().removeClass('open');
+    $('#search_form .rus_num').show();
+  });
+
+  $('#search_sel_ean').on('click',function(event){
+    event.preventDefault(); //Чтобы к URL не добавлялся #
+    if (current_search_type!='ean') {
+      $('#searchbox').val('');
+     };
+    current_search_type='ean';
+    $('#search_sel').html($(this).html());
+    $('form.search').attr('action','/search/');
+    $('#searchbox').attr('maxlength','15')
+      .attr('pattern','\\d{13}')
+      .attr('placeholder','Введите код EAN13')
+      .attr('title','Введите код EAN13, содержащий 13 символов')
+      .attr('name','ean13')
+      .autocomplete( "disable" )
+      .shopkais_replace_input({'config':'ean13'})
+      .focus();
+    $('[data-toggle="dropdown"]').parent().removeClass('open');
+    $('#search_form .rus_num').hide();
+  });
+  $('#search_sel_vin').on('click',function(event){
+    event.preventDefault(); //Чтобы к URL не добавлялся #
+    if (current_search_type!='vin') {
+      $('#searchbox').val('');
+     };
+    current_search_type='vin';
+    $('#search_sel').html($(this).html());
+    $('form.search').attr('action','/oe_ext_1/');
+    $('#searchbox').attr('maxlength','20')
+      .attr('pattern','.{17}')
+      .attr('placeholder','Введите VIN-номер')
+      .attr('title','Введите номер VIN, содержащий 17 символов')
+      .attr('name','vinsearch')
+      .autocomplete( "disable" )
+      .shopkais_replace_input({'config':'vin'})
+      .focus();
+    $('[data-toggle="dropdown"]').parent().removeClass('open');
+    $('#search_form .rus_num').hide();
+  });
+  $('#search_sel_frame').on('click',function(event){
+    event.preventDefault(); //Чтобы к URL не добавлялся #
+    if (current_search_type!='frame') {
+      $('#searchbox').val('');
+     };
+    current_search_type='frame';
+    $('#search_sel').html($(this).html());
+    $('form.search').attr('action','/oe_ext_1/');
+    $('#searchbox').attr('maxlength','16')
+      .attr('pattern','.+\-.+')
+      .attr('placeholder','Введите номер Frame')
+      .attr('title','Введите номер Frame через тире: xxxxx-xxxxxx')
+      .attr('name','framesearch')
+      .autocomplete( "disable" )
+      .shopkais_replace_input({'config':'frameno'})
+      .focus();
+    $('[data-toggle="dropdown"]').parent().removeClass('open');
+    $('#search_form .rus_num').hide();
+  });
+  $('#search_sel_name').on('click',function(event){
+    event.preventDefault(); //Чтобы к URL не добавлялся #
+    if (current_search_type!='name') {
+      $('#searchbox').val('');
+     };
+    current_search_type='name';
+    $('#search_sel').html($(this).html());
+    $('form.search').attr('action','/search/');
+    $('#searchbox').attr('maxlength','255')
+      .attr('pattern','.*')
+      .attr('placeholder','Введите наименование')
+      .attr('title','Введите наименование детали')
+      .attr('name','name')
+      .autocomplete( "disable" )
+      .focus();
+    if ($('#searchbox').data().hasOwnProperty('customShopkais_replace_input')){
+      $('#searchbox').shopkais_replace_input('destroy');
+     };
+    $('[data-toggle="dropdown"]').parent().removeClass('open');
+    $('#search_form .rus_num').hide();
+  });
+
+//Проверка кода EAN/UPC http://wiki.pentaho.com/pages/viewpage.action?pageId=22577446
+  String.prototype.reverse = function(){
+    splitext = this.split("");
+    revertext = splitext.reverse();
+    reversed = revertext.join("");
+    return reversed;
+   }   
+  // function to calculate EAN / UPC checkdigit
+  function eanCheckDigit(s){
+    var result = 0;
+    var rs = s.reverse();
+    for (counter = 0; counter < rs.length; counter++){
+      result = result + parseInt(rs.charAt(counter)) * Math.pow(3, ((counter+1) % 2));
+     }
+    return (10 - (result % 10)) % 10;
+   }
+  function check_ean(s){
+    if (s.length!=13){return false;};
+    var ean=s.substr(0,12);
+    var chk=s.substr(12,1);
+    return (chk==eanCheckDigit(ean));
+   }
+
+  //Стандартный рендерер
+  var standard_render = function(ul, item) {
+    return $( "<li>" )
+       .append('<div>'+item.label+'</div>')
+       .appendTo(ul);
+   };
+
+  var encodeHtmlStr = function(rawStr){
+     return rawStr.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+       return '&#'+i.charCodeAt(0)+';';
+     });
+  };
+
+  //Обработка ввода формы. Отключение поля. Вывод баннера.
+  $("#search_form").on("submit",function(event){
+    if ($("#searchbox").val()=='') {
+      event.preventDefault();
+      return false;
+     };
+    if (current_search_type=='ean'){
+      if (check_ean($("#searchbox").val())==false){
+        alert('Введен код EAN13 с ошибкой. Убедитесь в правильности написания.');
+        return false;
+       };
+     };
+    $("#searchbox").prop('readonly',true);
+    $("#searchbox").autocomplete( "destroy" );
+    if (current_search_type=='number'){
+      var banner_html='<div class="loading_banner"><h1>Поиск предложений по номеру '+encodeHtmlStr($("#searchbox").val())+'...</h1><div class="background-image"></div></div>';
+     } else if (current_search_type=='ean'){
+      var banner_html='<div class="loading_banner"><h1>Поиск предложений по штрих-коду '+encodeHtmlStr($("#searchbox").val())+'...</h1><div class="background-image"></div></div>';
+     } else if (current_search_type=='vin'){
+      var banner_html='<div class="loading_banner"><h1>Производится поиск по VIN '+encodeHtmlStr($("#searchbox").val())+'...</h1><div class="background-image"></div></div>';
+     } else if (current_search_type=='frame'){
+      var banner_html='<div class="loading_banner"><h1>Производится поиск по номеру Frame '+encodeHtmlStr($("#searchbox").val())+'...</h1><div class="background-image"></div></div>';
+     } else if (current_search_type=='name'){
+      var banner_html='<div class="loading_banner"><h1>Поиск предложений по наименованию '+encodeHtmlStr($("#searchbox").val())+'...</h1><div class="background-image"></div></div>';
+     } else {
+      var banner_html='<div class="loading_banner"><h1>Поиск предложений по описанию '+encodeHtmlStr($("#searchbox").val())+'...</h1><div class="background-image"></div></div>';
+     };
+    var banner = $(banner_html).prependTo($("#content-main"));
+    //if ($('footer').length){
+      //banner.height($('footer').offset().top - $('#content-main').offset().top-4);  //Обновляем высоту баннера
+    // };
+    //banner.delay(1000).fadeIn(500);
+    banner.delay(1000).css({'opacity':'0'}).animate({'opacity':'1'},500);
+   });
+  //$( window ).resize(function() { //Обновляем высоту баннера
+  //  if ($('.loading_banner:visible').length>0){
+  //    $('.loading_banner').height($('footer').offset().top-$('.loading_banner').offset().top-4);
+  //   };
+  // });
+
+  var search_source_handler = function(request, response){
+      var $this = $(this);
+      var $element = $(this.element);
+      var jqXHR = $element.data('jqXHR');
+      if (jqXHR) jqXHR.abort();
+      $element.data('jqXHR',$.ajax({
+        type: 'GET', dataType: 'json',url: "/search_hint/",timeout: 5000,
+        data:{
+          term: request.term
+         }
+       })
+      .done(response)
+      .fail(function(){
+         response({})
+       })
+      .always(function(){
+         $this.removeData('jqXHR');
+       })
+      ); //$element.data('jqXHR',$.ajax({
+    }//var search_source_handler = function(request, response){
+
+  var register_autocomplete_hint = function(){
+    $("#searchbox").autocomplete({
+       source: search_source_handler
+      ,minLength: 3
+      ,select: function( event, ui ) {
+        if (ui.item){
+          //$("#searchbox").autocomplete( "destroy" );
+          $("#searchbox").val(ui.item.value);
+          $("#searchbox").prop('readonly',true);
+          $("#search_form").submit();
+         }
+      }
+    }).data("ui-autocomplete")._renderItem=standard_render;
+  };
+  register_autocomplete_hint();
+
+  if (['ean','vin','frame','name','number'].indexOf(current_search_type)!=-1){$('#search_sel_'+current_search_type).trigger('click');};
+
+  $("#searchbox").on("focusin",function(event){
+    $('#search_form>div').css({'outline-width':'100vmax','outline-color':'rgba(0,0,0,0.0)','outline-style':'solid'}).animate({'outline-color':'rgba(0,0,0,0.4)'},500);//,'flex-grow':1
+  });
+  $("#search_form").on("submit",function(){
+    $('#search_form>div').animate({'outline-color':'rgba(0,0,0,0.0)'},500,function(){
+      $('#search_form>div').css({'outline-width':'','outline-color':'','outline-style':''})
+    });
+  });
+  $("#searchbox").on("focusout",function(event){
+    $('#search_form>div').css({'outline':''}); //,'flex-grow':0
+  });
+  $("#searchbox").blur();//Снимаем автофокусировку при загрузке страницы
+
+})
+</script>
+           
+
+        
+<script>
+$(document).ready(function() {
+  $('#search_mini').on('click',function(){
+    //if $(this).data('state')
+    $('#search_form').removeClass('d-none').css({'position':'absolute','padding':'6px','width':'100%','z-index':'1'});
+    $('#searchbox').focus();
+    $(document).on('focusout',function(event){
+      if ($('#search_form').has(event.relatedTarget).length == 0){
+        $('#search_form').addClass('d-none').css({'position':'','padding':'','width':'','z-index':''});
+        $(this).off('focusout');
+       };
+    });
+  });
+  $('.basket_link').on('click',function(){
+    var banner_html='<div class="loading_banner"><h1>Производится актуализация цен в корзине...</h1><div class="background-image"></div></div>';
+    var banner = $(banner_html).prependTo($("#content-main"));
+    banner.delay(1000).css({'opacity':'0'}).animate({'opacity':'1'},500);
+  });
+});
+</script>
+
+              <script type="text/javascript" src="/templates/_default/libs/jquery.mask.min.js"></script>
+                
+
+<script>
+  var display_login_form;
+  var make_new_user_form; //Объявляем глобально
+
+  $(document).ready(function() {
+    $.fn.spin.presets.login_dialog_preset = {
+      lines: 16, length: 25 , width: 10, radius: 30, scale: 1.5,
+      corners: 1, color: '#000', opacity: 0.25, rotate: 0, direction: 1,
+      speed: 1, trail: 60, fps: 20, zIndex: 2e9, className: 'spinner',
+      top: '50%', left: '50%', position: 'relative', shadow: false, hwaccel: true
+    };
+
+    var submitEnter = function(event){
+      if (event.keyCode == $.ui.keyCode.ENTER) {
+        buttons=$(event.currentTarget).closest('.ui-dialog').find('.ui-dialog-buttonpane button');
+        if (buttons.length>0){
+          buttons[(buttons.length-1)].click();
+         };
+        return false;
+       };
+    };
+
+    var validateEmail = function (email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    };
+
+    var restore_password = function(evt){
+      evt.stopPropagation(); //Чтобы предотвратить бабблинг
+      evt.preventDefault(); //Чтобы URL не менялся на #\
+      var $login=login_dialog.dialog("instance").uiDialog.find('input[name=login]');
+      if ($login.val()==''){
+        $login.focus();
+        alert('Введите свой E-mail.');
+        return false;
+       };
+
+      $.ajax({
+        url:'/login/',
+        type:'post',
+        dataType:'json',
+        cache: false,
+        data:{
+          action: 'remember_password', 
+          login: $login.val()
+         },
+        beforeSend : function(){
+          login_dialog.dialog( "option", "title", "Отправка запроса..." );
+          login_dialog.dialog( "option", "height", 350);
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin('login_dialog_preset');
+         }
+       })
+      .always(function(){
+        login_dialog.dialog( "option", "title", "Вход в личный кабинет" );
+        login_dialog.dialog( "option", "height", 'auto');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','block');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin(false);
+       })
+      .fail(function(req) {
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка обмена данных. Попробуйте еще раз.");
+       })
+      .done(function(json) {
+        if ( (typeof(json)=='undefined') || (json=='') ){
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+          
+        if (!$.isEmptyObject(json.error)) {
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text(json.error);
+          login_dialog.dialog("instance").uiDialog.effect( "shake", {distance: 10} );
+          return;
+         };
+        if (typeof(json.ok) == "undefined") {
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        alert('Инструкции по восстановлению доступа были отправлены вам на почту.');
+       });//done
+    };
+
+    var need_more = function(auth_level){
+      login_dialog.dialog("instance").uiDialog.find('div.current').css('display','none');
+      login_dialog.dialog("instance").uiDialog.find('div.current').removeClass('current');
+      login_dialog.dialog("instance").uiDialog.find('div#logout').css('display','block');
+      login_dialog.dialog("instance").uiDialog.find('div#logout').addClass('current');
+      login_dialog.dialog("instance").uiDialog.find("div.alert.alert-danger").css('display','none');
+      login_dialog.dialog("option",{
+        title:'Недостаточно прав',
+        width:420,
+        buttons: [{
+           html:'<span class="fas fa-home"></span> На главную',
+           click : function(){window.location.assign("/")},
+           class : 'btn btn-primary'
+          },{
+           html:'<span class="fas fa-user"></span> Сменить пользователя',
+           click: try_to_logout,
+           class : 'btn btn-light border'
+          }
+        ] //buttons
+      });
+
+      login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+      login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").html('Для доступа к этой странице вам необходимы права уровня <strong>'+auth_level+'</strong>');
+    };
+
+
+    var need_auth = function(auth_level){
+      login_dialog.dialog("instance").uiDialog.find('div.current').css('display','none');
+      login_dialog.dialog("instance").uiDialog.find('div.current').removeClass('current');
+      login_dialog.dialog("instance").uiDialog.find("div.alert.alert-danger").css('display','none');
+      login_dialog.dialog("option",{
+        title:'Требуется произвести вход',
+        width:420,
+        buttons: [{
+          html:'<span class="fas fa-home"></span> На главную',
+          click : function(){window.location.assign("/")},
+          class : 'btn btn-primary'
+         },{
+          html: 'Вход <span class="fas fa-chevron-right"></span>',
+          click: display_login_form,
+          class:'btn btn-light border'
+         }] //buttons
+      });
+
+      login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+      login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").html('Требуется произвести вход в систему.<br>Для доступа к этой странице вам необходимы права уровня <strong>'+auth_level+'</strong>');
+    };
+
+    //Функция выхода. На данный момент она может возникать только в случае, когда требуется повышение прав.
+    var try_to_logout = function(){
+      $.ajax({
+        url:'/login/',
+        type:'post',
+        cache: false,
+        data:{
+          action: 'logout_interactive'
+         },
+        beforeSend : function(){
+          login_dialog.dialog( "option", "title", "Попытка выхода..." );
+          login_dialog.dialog( "option", "height", 350);
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin('login_dialog_preset');
+         }
+       })
+      .always(function(){
+        login_dialog.dialog( "option", "title", "Вход в личный кабинет" );
+        login_dialog.dialog( "option", "height", 'auto');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','block');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin(false);
+       })
+      .fail(function(req) {
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка обмена данных. Попробуйте еще раз.");
+       })
+      .done(function(output) {
+        if ( (typeof(output)=='undefined') || (output=='') ){
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+             
+        var json; //массив с ответом
+        try {
+          json = $.parseJSON(output);
+         } catch (e) {
+          console.log(e);
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        if (typeof(json.ok) == "undefined") {
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        display_login_form();
+      });//done
+    };
+
+    var try_to_login = function(){
+      var $login=login_dialog.dialog("instance").uiDialog.find('div#login input[name=login]');
+      if ($login.val()==''){
+        $login.focus();
+        alert('Введите адрес E-Mail.');
+        return false;
+       };
+      var $password=login_dialog.dialog("instance").uiDialog.find('div#login input[name=password]');
+      if ($password.val()==''){
+        $login.focus();
+        alert('Введите пароль.');
+        return false;
+       };
+      $.ajax({
+        url:'/login/',
+        type:'post',
+        cache: false,
+        data:{
+          action: 'login_interactive',
+          login: login_dialog.dialog("instance").uiDialog.find('div#login input[name=login]').val(),
+          password: login_dialog.dialog("instance").uiDialog.find('div#login input[name=password]').val(),
+          save:login_dialog.dialog("instance").uiDialog.find('div#login input[name=save]').prop('checked')
+         },
+        beforeSend : function(){
+          login_dialog.dialog( "option", "height", 350);
+          login_dialog.dialog( "option", "title", "Производится попытка входа..." );
+          login_dialog.dialog("widget").find("button").addClass("ui-state-disabled").prop("disabled", true);
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin('login_dialog_preset');
+         }
+       })
+      .always(function(){
+        login_dialog.dialog( "option", "height", 'auto');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','block');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin(false);
+        login_dialog.dialog("widget").find("button").removeClass("ui-state-disabled").prop("disabled", false);
+       })
+      .fail(function(req) {
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка обмена данных. Попробуйте еще раз.");
+       })
+      .done(function(output) {
+        if ( (typeof(output)=='undefined') || (output=='') ){
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+             
+        var json; //массив с ответом
+        try {
+          json = $.parseJSON(output);
+         } catch (e) {
+          //console.log(e);
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        if (!$.isEmptyObject(json.error)) {
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text(json.error);
+          login_dialog.dialog("instance").uiDialog.effect( "shake", {distance: 10} );
+          return;
+         };
+        if (typeof(json.ok) == "undefined") {
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        login_dialog.dialog( "option", "title", "Успешный вход." );
+        login_dialog.dialog( "option", "buttons", {} );
+        login_dialog.dialog( "option", "height", 350);
+        if (json.prices_updated){
+          alert('Внимание! Цены в вашей корзине были обновлены в соответствии с вашей персональной скидкой.');
+         };
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','none');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin('login_dialog_preset');
+        location.reload();
+       });//done
+    };
+
+    var login_dialog = $( "#login_form" ).dialog({
+       autoOpen: false,
+       modal: true,
+       width:'auto',
+       title: "Вход в личный кабинет",
+       closeText: "Закрыть",
+       height:'auto',
+       open: function(){
+         $('#wrapper').addClass('blur');
+       }, //open
+       close: function(){
+         $('#wrapper').removeClass('blur');
+       }, //open
+       //show: {effect: 'fade', duration: 250},
+       //hide: {effect: 'fade', duration: 250},
+    }); //dialog
+    login_dialog.dialog("instance").uiDialog
+      .find('#restore_password').on('click',restore_password).end()
+      .find('#login')
+        .find('input[name=password]').on('keypress',submitEnter).end()
+        .find('input[name=login]').on('keypress',submitEnter).end()
+      .end()
+      .find('.ui-dialog-titlebar-close')
+        .css({'text-indent':'initial','line-height':'1rem','height':'24px','width':'24px','margin-top':'-12px'})
+        .html('<span class="fas fa-times"></span>')
+        .on('touchend',function(){$(this).trigger('click');});
+
+    display_login_form = function(){
+      login_dialog.dialog("option",{
+        width:350,
+        title: 'Вход в личный кабинет',
+        buttons: [
+               {html: '<span class="fas fa-user-plus"></span> Я новый пользователь',
+          click: function(){make_new_user_form();},
+          class:'btn btn-light border'},
+               {html: 'Вход <span class="fas fa-chevron-right"></span>',
+          click:try_to_login,
+          class:'btn btn-primary'}
+         ]
+       });
+      login_dialog.dialog("open");
+      login_dialog.dialog("instance").uiDialog
+        .find('div.current').css('display','none').removeClass('current').end()
+        .find('div#login').addClass('current').css('display','block').end()
+        .find("div.alert.alert-danger").css('display','none').end()
+        .find('input[name=login]').removeAttr('readonly');
+    };
+
+    var display_log_form_strict = function(){
+      display_login_form();
+      //Убираем крестик
+      login_dialog.dialog("instance").uiDialog.find('.ui-dialog-titlebar-close').hide();
+      login_dialog.dialog("option",{closeOnEscape: false, title:'Требуется произвести вход'});
+      login_dialog.on("dialogbeforeclose", function () { return false; });
+    };
+
+
+    $('.login_link').on('click',function(evt){
+      evt.stopPropagation(); //Чтобы предотвратить бабблинг
+      evt.preventDefault(); //Чтобы URL не менялся на #
+      display_login_form();
+    });
+
+  
+      
+
+    $.fn.spin.presets.check_email_preset = {
+       lines:  8  , length: 12  , width:  8  , radius: 10
+     , scale: 0.25 , corners: 0  , color: '#000', opacity: 0.10 , rotate: 0 , direction: 1 
+     , speed: 1 , trail: 60 , fps: 20, zIndex: 2e9 , className: 'spinner' , top: '-5px'
+     , left: '7px', shadow: false , hwaccel: true , position: 'relative'
+    };
+
+    $('.register_link').on('click',function(evt){
+      evt.stopPropagation(); //Чтобы предотвратить бабблинг
+      evt.preventDefault(); //Чтобы URL не менялся на #
+      make_new_user_form();
+    });
+
+    make_new_user_form = function(){
+      login_dialog.dialog("open");
+      login_dialog.dialog("option",{title:'Регистрация нового пользователя',
+       height:'auto',
+       width:400,
+       buttons: [
+         {
+          html:'Завершить регистрацию <span class="fas fa-chevron-right"></span>',
+          click: try_to_register,
+          class:'btn btn-primary'
+         }
+        ] //buttons
+       });
+      login_dialog.dialog("instance").uiDialog
+        .find('div.current').css('display','none').removeClass('current').end()
+        .find('#new_user').css('display','block').addClass('current').end()
+        .find("div.alert.alert-danger").css('display','none').end();
+      update_req_fields();
+    };
+
+    var check_email=function(evt){
+      if (login_dialog.dialog("instance").uiDialog.find('div#new_user button#check_email').hasClass('disabled')){
+        return false;
+       };
+      var cfio=login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=cfio]').val().trim();
+      if (cfio.search(/[а-яА-я]{2,}/)==-1){
+        login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=cfio]').focus();
+        alert('ФИО должно быть заполнено по-русски.');
+        return false;
+       };
+      var cemail=login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=cemail]').val();
+      if (cemail==''){
+        login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=cemail]').focus();
+        alert('Введите E-mail.');
+        return false;
+       } else if (!validateEmail(cemail)){
+        login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=cemail]').focus();
+        alert('Введенный адрес E-mail не соответствует стандарту.');
+        return false;
+       };
+      var imrobot=login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=imrobot]').val();
+
+      $.ajax({
+        url:'/login/',
+        type:'post',
+        dataType:'json',
+        cache: false,
+        data:{
+          action: 'check_email', 
+          cemail: cemail,
+          cfio:cfio,
+          imrobot:imrobot
+         },
+        beforeSend : function(){
+          //login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find('div.check_email')
+            .find("button#check_email").addClass('disabled').attr('title','Идет проверка...').prop('disabled',true)
+              .find("span.text").text('Проверка').end()
+              .find(".check_email_icon").removeClass('fas fa-check-circle fa-minus-circle fa-question-circle').spin('check_email_preset').end()
+            .end()
+            .find('.error-text').text('');
+         }
+       })
+      .always(function(){
+        login_dialog.dialog("instance").uiDialog
+            .find("button#check_email").removeClass('disabled').attr('title','Проверить введенный E-mail').prop('disabled',false)
+              .find("span.text").text('Проверить').end()
+              .find(".check_email_icon").spin(false);
+       })
+      .fail(function(req) {
+        login_dialog.dialog("instance").uiDialog.find("div.check_email .error-text").text("Произошла неизвестная ошибка. Повторите попытку.");
+       })
+      .done(function(json) {
+        if ( (typeof(json)=='undefined') || (json=='') ){
+          login_dialog.dialog("instance").uiDialog.find("div.check_email .error-text").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+             
+        if (!$.isEmptyObject(json.error)) {
+          login_dialog.dialog("instance").uiDialog.find('div#new_user')
+            .find("button#check_email").attr('title',json.error)
+              .find("span.text").text('Ошибка').end()
+              .find(".check_email_icon").addClass('fas fa-minus-circle').removeClass('fa-question-circle').end()
+            .end()
+            .find('input[name=cemail]').focus().end()
+            .find("div.check_email .error-text").text(json.error);
+          login_dialog.dialog("instance").uiDialog.effect( "shake", {distance: 10} );
+          return;
+         };
+        if (typeof(json.ok) == "undefined") {
+          login_dialog.dialog("instance").uiDialog.find("div.check_email .error-text").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        login_dialog.dialog("instance").uiDialog.find("button#check_email")
+          .attr('title','Код проверки был отправлен вам на E-mail, дождитесь получения и введите его в поле ниже.')
+          .find("span.text").text('Проверено').end()
+          .find(".check_email_icon").addClass('fas fa-check-circle').removeClass('fa-question-circle').end()
+        .end().find('input[type=text],input[type=number],input[type=email]').prop('readonly',false)
+        .end().find('select,input[type=checkbox],input[type=radio]').prop('disabled',false);
+        if (typeof(json.pin)!= "undefined"){
+          login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=pin]').val(json.pin);
+         } else {
+          alert('Проверочный код был отправлен на указанный адрес E-mail.\nДождитесь его получения и введите значение в поле ниже.');
+          login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=pin]').attr('title','Проверочный код был отправлен на указанный адрес E-mail. Дождитесь его получения и введите значение.').focus();
+         };
+        login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=pin]').attr('readonly',false);
+       });//done
+    };
+
+    var make_fake_email = function(){
+      $.ajax({
+        url:'/login/',
+        type:'post',
+        dataType:'json',
+        cache: false,
+        data:{
+          action: 'make_fake_email'
+         },
+        beforeSend : function(){
+          //login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find('div.check_email')
+            .find("button#check_email").addClass('disabled').attr('title','Идет создание...').prop('disabled',true)
+              .find("span.text").text('Создание').end()
+              .find(".check_email_icon").removeClass('fas fa-check-circle fa-minus-circle fa-question-circle').spin('check_email_preset').end()
+            .end()
+            .find('.error-text').text('');
+         }
+       })
+      .always(function(){
+        login_dialog.dialog("instance").uiDialog
+            .find("button#check_email").removeClass('disabled').attr('title','Проверить введенный E-mail').prop('disabled',false)
+              .find("span.text").text('Проверить').end()
+              .find(".check_email_icon").spin(false);
+       })
+      .fail(function(req) {
+        login_dialog.dialog("instance").uiDialog.find("div.check_email .error-text").text("Произошла неизвестная ошибка. Повторите попытку.");
+       })
+      .done(function(json) {
+        if ( (typeof(json)=='undefined') || (json=='') ){
+          login_dialog.dialog("instance").uiDialog.find("div.check_email .error-text").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+             
+        if (!$.isEmptyObject(json.error)) {
+          login_dialog.dialog("instance").uiDialog.find('div#new_user')
+            .find("button#check_email").attr('title',json.error)
+              .find("span.text").text('Ошибка').end()
+              .find(".check_email_icon").addClass('fas fa-minus-circle').removeClass('fa-question-circle').end()
+            .end()
+            .find('input[name=cemail]').focus().end()
+            .find("div.check_email .error-text").text(json.error);
+          login_dialog.dialog("instance").uiDialog.effect( "shake", {distance: 10} );
+          return;
+         };
+        if (typeof(json.ok) == "undefined") {
+          login_dialog.dialog("instance").uiDialog.find("div.check_email .error-text").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        if (typeof(json.cemail) == "undefined") {
+          login_dialog.dialog("instance").uiDialog.find("div.check_email .error-text").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        if (typeof(json.pin) == "undefined") {
+          login_dialog.dialog("instance").uiDialog.find("div.check_email .error-text").text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        login_dialog.dialog("instance").uiDialog.find("button#check_email")
+          .attr('title','Код проверки был отправлен вам на E-mail, дождитесь получения и введите его в поле ниже.')
+          .find("span.text").text('Проверено').end()
+          .find(".check_email_icon").addClass('fas fa-check-circle').removeClass('fa-question-circle').end()
+        .end().find('input[type=text],input[type=number],input[type=email]').prop('readonly',false)
+        .end().find('select,input[type=checkbox],input[type=radio]').prop('disabled',false);
+        login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=pin]').val(json.pin);
+        login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=cemail]').val(json.cemail);
+        login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=pin]').attr('readonly',false);
+        update_req_fields();
+       });//done
+    }; //make_fake_email
+
+    var try_to_register = function(){
+      login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','none');
+
+      var got_error=false;
+      var post_data={action: 'register_interactive'};
+
+      var user_type=login_dialog.dialog("instance").uiDialog.find('input[name=is_company]:checked').length;
+      login_dialog.dialog("instance").uiDialog.find('input,select').each(function(){
+        if ($(this).attr('type')=='checkbox'){
+          if ($(this).prop('checked')){
+            post_data[$(this).attr('name')]=$(this).val();
+           };
+          return;
+         };
+        if ($(this).hasClass('req_'+(user_type?'comp':'fl'))&&($(this).val().trim()=='')){
+          $(this).focus();
+          alert("Введите значение в поле "+$(this).attr('placeholder')+".");
+          got_error=true;
+          return false;
+         };
+        if (($(this).next('.form-control-feedback'))&&($(this).next('.form-control-feedback').hasClass('fa-exclamation-triangle'))){
+          $(this).focus();
+          alert("Введите корректное значение в поле "+$(this).attr('placeholder')+".");
+          got_error=true;
+          return false;
+         };
+        post_data[$(this).attr('name')]=$(this).val();
+       });
+      //console.log(post_data);return false;
+      if (got_error){return false;};
+      if ((login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=eula_accept]:visible').length)&!(login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=eula_accept]').prop('checked'))){
+        alert("Вы должны согласиться с условиями пользовательского соглашения.");
+        return false;
+       };
+
+      $.ajax({
+        url:'/login/',
+        type:'post',
+        cache: false,
+        data:post_data,
+        beforeSend : function(){
+          login_dialog.dialog( "option", "title", "Сохранение данных..." );
+          login_dialog.dialog( "option", "height", 350);
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','none');
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin('login_dialog_preset');
+          login_dialog.dialog("widget").find("button").addClass("ui-state-disabled").prop("disabled", true);
+         }
+       })
+      .always(function(){
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','block');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin(false);
+        login_dialog.dialog( "option", "title", "Регистрация нового пользователя" );
+        login_dialog.dialog( "option", "height", 'auto');
+        login_dialog.dialog("widget").find("button").removeClass("ui-state-disabled").prop("disabled", false);
+       })
+      .fail(function(req) {
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block').text("Произошла неизвестная ошибка обмена данных. Попробуйте еще раз.");
+       })
+      .done(function(output) {
+        if ( (typeof(output)=='undefined') || (output=='') ){
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block').text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+             
+        var json; //массив с ответом
+        try {
+          json = $.parseJSON(output);
+         } catch (e) {
+          //console.log(e);
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block').text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        if (!$.isEmptyObject(json.error)) {
+          login_dialog.dialog("option",{'height':385});
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block').text(json.error);
+          login_dialog.dialog("instance").uiDialog.effect( "shake", {distance: 10} );
+          return;
+         };
+        if (typeof(json.ok) == "undefined") {
+          login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.alert.alert-danger").css('display','block').text("Произошла неизвестная ошибка. Повторите попытку.");
+          return;
+         };
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content div.current").css('display','none');
+        login_dialog.dialog("instance").uiDialog.find(".ui-dialog-content").spin('login_dialog_preset');
+        if (json.prices_updated){
+          alert('Внимание! Цены в вашей корзине были обновлены в соответствии с вашей персональной скидкой.');
+         };
+
+        login_dialog.dialog("option", {"height":350,"title":"Успешная регистрация!"});
+        if (typeof(json.url) != "undefined"){
+          if (typeof(json.url_message) != "undefined"){
+            alert(json.url_message);
+           } else {
+            alert('Поздравляем! Вы были успешно зарегистрированы в системе. Сейчас вы будете перенаправлены на страницу по умолчанию.');
+           };
+          if (json.url==''){
+            login_dialog.dialog('close');
+           } else {
+            window.location.href=json.url;
+           };
+         } else {
+          alert('Поздравляем! Вы были успешно зарегистрированы в системе.');
+          window.location.reload();
+         };
+       });//done
+    };
+
+    var update_req_fields = function(){ //Обновлялка признака необходимости 
+      var user_type=login_dialog.dialog("instance").uiDialog.find('input[name=is_company]:checked').length;
+      login_dialog.dialog("instance").uiDialog.find('input').each(function(){
+        if (($(this).attr('type')=='checkbox')||($(this).attr('type')=='radio')){
+          return;
+         };
+        if ($(this).hasClass('req_'+(user_type?'comp':'fl'))){
+          $(this).addClass('req_field');
+          //$(this).next('.form-control-feedback').addClass('fas');
+          update_valid_state($(this));
+         } else {
+          $(this).removeClass('req_field');
+          $(this).next('.form-control-feedback').removeClass('fas fa-exclamation-triangle fa-check-circle');
+          $(this).closest('div').removeClass('has-error has-success');
+          //update_valid_state($(this));
+         };
+       });
+    };
+
+    var update_valid_state = function(field){
+      if (!field){return;};
+      var field_val=field.val().trim();
+      if (!field.hasClass('req_field')&&(field_val=='')){
+        field.closest('div').removeClass('has-error has-success');
+        field.next('.form-control-feedback').removeClass('fas fa-exclamation-triangle fa-check-circle').attr('title','');
+        return;
+       };
+      if (field.attr('type')=='email'){
+        if (validateEmail(field_val)){
+          field.closest('div').removeClass('has-error').addClass('has-success');
+          field.next('.form-control-feedback').removeClass('fa-exclamation-triangle').addClass('fas fa-check-circle').attr('title','');
+         } else {
+          field.closest('div').removeClass('has-success').addClass('has-error');
+          field.next('.form-control-feedback').addClass('fas fa-exclamation-triangle').removeClass('fa-check-circle').attr('title','Требуется заполнить это поле корректным значением');
+          //field.removeClass('valid');
+         };
+        return;
+       } else if (field.attr('is_emails')){
+        var email_list=field_val.split(/[,;\s]+/);
+        var got_error=false;
+        for (let i=0; i<email_list.length; i++) {
+          if (!validateEmail(email_list[i])){
+            field.closest('div').removeClass('has-success').addClass('has-error');
+            field.next('.form-control-feedback').addClass('fas fa-exclamation-triangle').removeClass('fa-check-circle').attr('title','Требуется заполнить это поле корректным значением');
+            got_error=true;
+            break;
+           };
+         };
+        if (!got_error){
+          field.closest('div').removeClass('has-error').addClass('has-success');
+          field.next('.form-control-feedback').removeClass('fa-exclamation-triangle').addClass('fas fa-check-circle').attr('title','');
+         };
+        return;
+       } else if (field.attr('name')=='inn'){
+        check_inn(field);
+        return;
+       };
+      if (field_val==''){
+        field.closest('div').removeClass('has-success').addClass('has-error');
+        field.next('.form-control-feedback').addClass('fas fa-exclamation-triangle').removeClass('fa-check-circle').attr('title','Требуется заполнить это поле');
+        //field.removeClass('valid');
+       } else {
+        if (field.attr('pattern')&&(field_val.search(new RegExp(field.attr('pattern')))==-1)){
+          field.closest('div').removeClass('has-success').addClass('has-error');
+          field.next('.form-control-feedback').addClass('fas fa-exclamation-triangle').removeClass('fa-check-circle').attr('title','Требуется заполнить это поле в корректном формате');
+          return;
+         };
+        field.closest('div').removeClass('has-error').addClass('has-success');
+        field.next('.form-control-feedback').removeClass('fa-exclamation-triangle').addClass('fas fa-check-circle').attr('title','');
+        //field.addClass('valid');
+       };
+    };
+
+
+    login_dialog.dialog("instance").uiDialog
+      .find('div#new_user')
+        //.find('input[name=pin]').on('keypress',submitEnter).end()
+        .find('button#check_email').on('click',check_email).end()
+        .find('button#fake_email').on('click',make_fake_email).end()
+        .find('input[name=cemail]').on('keypress',function(event){
+           if (event.keyCode == $.ui.keyCode.ENTER) {
+             login_dialog.dialog("instance").uiDialog.find("button#check_email").focus().click();
+            };
+          })
+          .on('input propertychange',function(){
+          login_dialog.dialog("instance").uiDialog
+            .find("button#check_email").attr('title','Нажмите, чтобы проверить введенный E-mail')
+              .find(".form-control-feedback").removeClass('fa-check-circle fa-minus-circle').addClass('fas fa-question-circle').end()
+              .find("span.text").text('Проверить').end()
+            .end()
+            .find("div.check_email .error-text").text('');
+         }).end()
+        .find('input[name=is_company]').on('click',update_req_fields).end()
+        .find('input[type=text],input[type=email],input[type=number]').on('input propertychange change',function(){update_valid_state($(this))}).end()
+        .find('.show_tooltip').tooltip({
+          tooltipClass :'bottom new_user',
+          position: {collision:"none" },
+          content : function(){
+            return $(this).attr('title');
+           },
+          open : function(){ //Автозакрытие других открытых параллельно тултипов
+            var opener=$(this);
+            login_dialog.dialog("instance").uiDialog.find('div#new_user .show_tooltip').each(function(){
+              if (!$(this).is(opener)){$(this).tooltip('close');};
+             });
+           }
+        });
+                                        login_dialog.dialog("instance").uiDialog.find('div#new_user input[name=cphone]').mask("+0 (000) 000-0000");
+          
+        
+ });
+</script>
+
+        
+
+
+  </head>
+  <body>
+
+        
+
+  
+        <svg height="0" xmlns="http://www.w3.org/2000/svg" style="position:absolute">
+      <filter id="svg_drop-shadow">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4"></feGaussianBlur>
+          <feOffset dx="1" dy="1" result="offsetblur"></feOffset>
+          <feFlood flood-color="rgba(0,0,0,0.5)"></feFlood>
+          <feComposite in2="offsetblur" operator="in"></feComposite>
+          <feMerge>
+            <feMergeNode></feMergeNode>
+            <feMergeNode in="SourceGraphic"></feMergeNode>
+          </feMerge>
+      </filter>
+    </svg>
+  
+  
+  <div id="wrapper" class="" itemscope="" itemtype="http://schema.org/WPHeader">
+    <meta itemprop="headline" content="ФОРД-ЭКСПЕРТ">
+    <nav class="navbar navbar-dark bg-dark fixed-top p-0 flex-nowrap justify-content-between shadow-sm" id="navbar1">
+      <div class="text-nowrap d-flex flex-nowrap">
+                    <a class="navbar-brand" href="/" title="ФОРД-ЭКСПЕРТ">
+          <img src="/download/1247/84x84/" class="svg_drop-shadow" itemprop="logo">
+        </a>
+            <div class="navbar-header top_menu_brand d-flex align-items-center ml-2 ml-lg-4">
+        <a class="navbar-brand" href="/" title="ФОРД-ЭКСПЕРТ" style="font-size: 24px;">ФОРД-ЭКСПЕРТ</a>
+              </div>
+    </div>
+
+        <form action="/search/" class="d-none d-sm-flex flex-grow-1 form-inline search mx-1 mx-md-2 mx-lg-4 " id="search_form" role="search" itemprop="potentialAction" itemscope="" itemtype="https://schema.org/SearchAction">
+   <meta itemprop="target" content="/search/?name={search_term_string}">
+   <div class="input-group flex-nowrap w-100">
+     <div class="input-group-prepend dropdown">
+       <button type="button" class="btn btn-light border dropdown-toggle" id="search_sel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="d-none d-lg-inline">Поиск по номеру</span><span class="d-inline d-lg-none">Номер</span></button>
+       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+         <a class="dropdown-item no-underline" href="#" id="search_sel_number"><span class="d-none d-lg-inline">Поиск по номеру</span><span class="d-inline d-lg-none">Номер</span></a>
+         <a class="dropdown-item no-underline" href="#" id="search_sel_ean"><span class="d-none d-lg-inline">Поиск по штрих-коду</span><span class="d-inline d-lg-none">EAN13</span></a>
+                  <a class="dropdown-item no-underline" href="#" id="search_sel_name"><span class="d-none d-lg-inline">Поиск по наименованию</span><span class="d-inline d-lg-none">Название</span></a>
+       </div>
+       <button class="btn btn-light border py-0 px-1 rus_num " type="button" title="Русские буквы в номере"><img src="/public/images/rus_disabled.png" data-img-enabled="/public/images/rus_enabled.png" data-img-disabled="/public/images/rus_disabled.png" width="36" height="24"></button>
+     </div>
+        <input type="text" id="searchbox" class="form-control flex-grow-1 ui-autocomplete-input" value="" name="detal" placeholder="Введите номер детали" maxlength="30" itemprop="query-input" autocomplete="off" pattern=".*" title="Введите номер детали">
+           <div class="input-group-append">
+       <button class="btn btn-light border" type="submit" title="Искать"><span class="fas fa-search"></span></button>
+     </div>
+   </div>
+</form>
+
+    
+        <div class="navbar-text text-right d-flex flex-nowrap mr-2">
+
+  <div class="ml-1 d-sm-none d-flex align-items-center">
+    <button class="btn btn-primary color-light" id="search_mini" type="button" title="Искать"><span class="fas fa-search"></span></button>
+  </div>
+
+   <div class="basket_top mt-0 ml-1 d-none">
+    <a href="/user/cart/" class="btn btn-primary text-nowrap basket_link" title="Перейти в корзину">
+      <span class="fas fa-shopping-cart icon-white"></span>
+      <span class="d-none d-lg-inline-block" id="basket_sum"><span id="rub">0</span> р.</span>
+      <span class="d-inline-block d-lg-none" id="basket_cnt">0</span>
+    </a>
+  </div>
+
+  <div class="ml-1 d-flex align-items-center">
+    <a href="#" class="btn btn-primary bnt-sm login_link no-underline" title="Войти"><span class="fas fa-sign-in-alt"></span><span class="d-none d-md-inline-block">&nbsp;Войти</span></a>
+  </div>
+
+</div>   </nav>
+
+  
+  <div id="menu_scroll_helper" class="btn btn-sm btn-primary" style="top:150px;display:none;"><span class="fas fa-chevron-left"></span> К меню</div>
+
+  <div id="container" class="w-100 main-center-container mb-4">
+    
+              <div class="container-fluid text-center">
+        <div class="alert shop-notice col-sm-12 col-md-10 col-lg-8" id="shop-notice" style="color:#000000;background-color:#000000">
+          <button type="button" class="close" data-dismiss="alert" onclick="$('#shop-notice').remove();$(window).trigger('resize');" style="color:#000000;">Закрыть ×</button>
+          <div style="text-align: center;"><span style="background-color: #ff0000; font-size: 36px;">УВАЖАЕМЫЕ КЛИЕНТЫ!!!</span></div>
+<div style="text-align: center;"><span style="background-color: #ff0000; font-size: 36px;">В СВЯЗИ СО СЛОЖИВЩЕЙСЯ СИТУАЦИЕЙ, ЦЕНЫ УКАЗАННЫЕ НА САЙТЕ НЕ АКТУАЛЬНЫ!!!</span></div>
+<div style="text-align: center;"><span style="background-color: #ff0000; font-size: 36px;">УТОЧНИТЬ СТОИМОСТЬ ВЫ МОЖЕТЕ ПО НАШИМ ТЕЛЕФОНАМ!!!</span></div>
+        </div>
+      </div>
+    
+    <div class="container-fluid row ml-0 mr-0 px-0 px-sm-3 main-content-row ">
+        <div class="col-xl-2 col-lg-3 col-md-3 px-sm-1 px-lg-2 menu_shown" id="left_menu">
+
+<button class="btn btn-sm btn-secondary bg-left-menu" id="left_menu_toggle" title="Свернуть меню"><span class="fas fa-chevron-left"></span><span class="text "> Свернуть</span></button>
+
+<div class="accordion" id="leftMenuAccordion" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+      <a class="list-group-item list-group-item-action d-flex align-items-center register_link p-2 text-truncate" href="#" title="Регистрация">
+      <span class="fas fa-user-plus mw-20px mr-1"></span>
+      <span class="menu_item_text text-truncate">Регистрация</span>
+    </a>
+  
+                                    
+            <a class="list-group-item list-group-item-action d-flex align-items-center  p-2 " href="/news/" title="Новости" itemprop="url">
+      <span class="fas fa-bullhorn mw-20px mr-1"></span>      <span class="menu_item_text text-truncate">Новости</span>
+          </a>
+        <a class="list-group-item list-group-item-action d-flex align-items-center  p-2 " href="/info/" title="Информация" itemprop="url">
+      <span class="fas fa-question mw-20px mr-1"></span>      <span class="menu_item_text text-truncate">Информация</span>
+          </a>
+        <a class="list-group-item list-group-item-action d-flex align-items-center  p-2 " href="/contacts/" title="Контакты" itemprop="url">
+      <span class="fas fa-globe-africa mw-20px mr-1"></span>      <span class="menu_item_text text-truncate">Контакты</span>
+          </a>
+        <a class="list-group-item list-group-item-action d-flex align-items-center  p-2 " href="/about/" title="О нас" itemprop="url">
+      <span class="fas fa-info mw-20px mr-1"></span>      <span class="menu_item_text text-truncate">О нас</span>
+          </a>
+
+  <a class="list-group-item list-group-item-action d-flex align-items-center p-2 login_link" href="#" title="Войти">
+    <span class="fas fa-sign-in-alt mw-20px mr-1"></span>
+    <span class="menu_item_text text-truncate">Войти</span>
+  </a>
+</div>
+
+
+                  <div id="left_menu_widgets">
+        <div class="card mt-3">
+          <div class="card-header p-2 text-center">
+                        <h5 class="mb-0">15 февраля 2023 г.</h5>
+          </div>
+                                <div class="card-footer text-center p-2">
+              В данный момент в базе<br><strong>4 023 904</strong> предложения
+            </div>
+                            </div>
+      </div>
+          </div>
+
+    <div id="content-main" class="col-xl-10 col-lg-9 col-md-9">
+
+
+  <h2>Политика конфиденциальности</h2><div style="text-align: center;"><span style="background-color: #ff0000; font-size: 36px;">УВАЖАЕМЫЕ КЛИЕНТЫ!!!</span></div>
+<div style="text-align: center;"><span style="background-color: #ff0000; font-size: 36px;">В СВЯЗИ СО СЛОЖИВЩЕЙСЯ СИТУАЦИЕЙ, ЦЕНЫ УКАЗАННЫЕ НА САЙТЕ НЕ АКТУАЛЬНЫ!!!</span></div>
+<div style="text-align: center;"><span style="background-color: #ff0000; font-size: 36px;">УТОЧНИТЬ СТОИМОСТЬ ВЫ МОЖЕТЕ ПО НАШИМ ТЕЛЕФОНАМ!!!</span></div>
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="bd-footer bg-dark footer-dark mt-4" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+    <div class="container-fluid p-2 p-md-4 footer-text">
+          <ul class="footer-nav">
+        <li class="nav-item"><a class="nav-link" href="/news/" title="Новости" itemprop="url">Новости</a></li>
+        <li class="nav-item"><a class="nav-link" href="/info/" title="Информация" itemprop="url">Информация</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contacts/" title="Контакты" itemprop="url">Контакты</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about/" title="О нас" itemprop="url">О нас</a></li>
+                  <li class="nav-item"><a class="nav-link register_link" href="#" title="Регистрация">Регистрация</a></li>
+          <li class="nav-item"><a class="nav-link login_link" href="#" title="Вход">Вход</a></li>
+                          <li class="nav-item"><a class="nav-link" href="/privacy/" title="Политика конфиденциальности" itemprop="url">Политика конфиденциальности</a></li>
+                      </ul>
+              <div class="py-2" title="Контакты" itemscope="" itemtype="http://schema.org/Organization">
+                          <span title="График работы" class="mr-4 d-inline-block">
+            <span class="far fa-clock"></span> Пн-Пт: 10-20; Сб-Вс: 10-17
+                      </span>
+                                                <a class="no-underline mr-4 text-nowrap" href="tel:+74957891984" title="Позвонить"><span class="fas fa-phone"></span> <span itemprop="telephone">+7 (495) 789-1984</span></a>
+                                                          <a class="no-underline mr-4 text-nowrap" href="tel:+79265451984" title="Позвонить"><span class="fas fa-phone"></span> <span itemprop="telephone">+7 (926) 545-1984</span></a>
+                                    <a class="no-underline mr-4 text-nowrap" href="mailto:shop%40fordexpert.ru" title="Написать нам E-mail"><span class="fas fa-envelope"></span> <span itemprop="Email">shop@fordexpert.ru</span></a>
+                                                  <a class="no-underline mr-4 text-nowrap" href="https://wa.me/+79265451984" target="_blank" title="Связаться с нами через Whatsapp" itemprop="sameAs"><span class="fab fa-whatsapp"></span> Whatsapp</a>
+                                              </div>
+                  <p class="mt-2" itemscope="" itemtype="http://schema.org/WPFooter">
+        <a href="http://kais.ru/" class="no-underline text-muted" target="_blank" itemprop="url"><img src="/templates/_default/images/kais.gif" alt="Технология КАИС" title="Технология КАИС АвтоСтандарТ" width="30" height="31">
+          <span itemprop="copyrightHolder">Технология КАИС "АвтоСтандарТ"</span>
+        </a>
+      </p>
+            </div>
+  </footer>
+  </div>
+  
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><ul id="ui-id-1" tabindex="0" class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" style="display: none;"></ul><div role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div style="display: none; position: absolute;" tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-resizable" aria-describedby="login_form" aria-labelledby="ui-id-2"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle"><span id="ui-id-2" class="ui-dialog-title">Вход в личный кабинет</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Закрыть" style="text-indent: initial; line-height: 1rem; height: 24px; width: 24px; margin-top: -12px;"><span class="fas fa-times"></span></button></div><div id="login_form" style="" class="ui-dialog-content ui-widget-content">
+  <div class="alert alert-danger" style="display:none"></div>
+  <div id="login" class="current text-center">
+    <p>Для входа в систему введите адрес электронной почты и пароль:</p>
+    <form style="text-align:center;margin:0">
+      <div class="form-group">
+        <input class="form-control" type="email" name="login" placeholder="Email" required="" readonly="">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="password" name="password" placeholder="Пароль" required="">
+      </div>
+      <div class="form-check mx-auto" style="width: 170px;"><input type="checkbox" name="save" id="save"> <label for="save">Сохранять вход</label></div>
+    </form>
+    <a href="#" id="restore_password">Забыли пароль?</a>
+  </div>
+    <div id="new_user" style="display:none">
+    <p>Поля, обведенные красной рамкой являются обязательными для заполнения:</p>
+    <form>
+      <div class="form-group has-feedback">
+        <input class="form-control show_tooltip req_field req_fl req_comp" type="text" name="cfio" placeholder="Фамилия, имя и отчество" title="Фамилия, имя и отчество" pattern="[а-яА-я]{2,}\s+[а-яА-я]{2,}">
+        <span class="form-control-feedback"></span>
+        <span class="error-text"></span>
+      </div>
+          <input class="d-none" type="text" name="imrobot">
+      <div class="form-group has-feedback check_email">
+        <div class="input-group">
+          <input class="form-control req_field req_fl req_comp show_tooltip" type="email" name="cemail" placeholder="Логин - e-mail" title="Введите свой E-mail и нажмите кнопку Проверить. На указанный адрес будет отправлено короткое сообщение с кодом проверки.">
+          <span class="form-control-feedback" style="right:130px;z-index:3"></span>
+          <div class="input-group-append">
+            <button type="button" id="check_email" class="btn btn-primary text-nowrap show_tooltip" title="Нажмите, чтобы получить код проверки">
+              <span class="text">Проверить</span> <span class="check_email_icon d-inline-block fas fa-question-circle"></span>
+            </button>
+          </div>
+        </div>
+        <span class="error-text"></span>
+      </div>
+          <div class="form-group has-feedback">
+        <input class="form-control req_fl req_comp show_tooltip" type="number" name="pin" placeholder="Проверочный код" min="1000" max="9999" readonly="" title="Код проверки будет отправлен на указанный адрес E-mail после нажатия на кнопку Проверить." pattern="^\d\d\d\d$" maxlength="4">
+        <span class="form-control-feedback"></span>
+        <span class="error-text"></span>
+      </div>
+                                  
+                                    
+          <div class="form-group has-feedback">
+            <input class="form-control show_tooltip req_fl req_comp" type="text" name="cphone" placeholder="Телефон" title="Телефон" pattern="^\+\d \(\d{3}\) \d{3}-\d{4}$" readonly="" maxlength="17">
+            <span class="form-control-feedback"></span>
+            <span class="error-text"></span>
+          </div>
+                            <div class="form-check">
+        <label class="show_tooltip" title="Внимательно ознакомьтесь с условиями пользовательского соглашения и установите галку.">
+          <input type="checkbox" name="eula_accept" id="eula_accept" disabled=""> Я согласен с условиями <a href="/eula/" target="_blank" title="Открыть в новом окне">пользовательского соглашения</a>
+        </label>
+      </div>
+        </form>
+  </div>
+  <div id="logout" style="display:none">
+    <p>Вы произвели вход в систему под именем <b> ()</b>.</p>
+  </div>
+</div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

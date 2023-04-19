@@ -1,0 +1,721 @@
+<html lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",e=>{this.persisted=e.persisted}),window.addEventListener("DOMContentLoaded",()=>{this._preconnect3rdParties()}),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}_addUserInteractionListener(e){if(document.hidden){e._triggerListener();return}this.triggerEvents.forEach(t=>window.addEventListener(t,e.userEventHandler,{passive:!0})),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler)}_removeUserInteractionListener(){this.triggerEvents.forEach(e=>window.removeEventListener(e,this.userEventHandler,{passive:!0})),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"),this._pendingClickStarted())}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this._pendingClickFinished()}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation(),this._pendingClickFinished()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach(e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))})}_waitForPendingClicks(){return new Promise(e=>{this._isClickPending?this._pendingClickFinished=e:e()})}_pendingClickStarted(){this._isClickPending=!0}_pendingClickFinished(){this._isClickPending=!1}_renameDOMAttribute(e,t,i){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(i,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t=>{if(t.hasAttribute("src")){let i=new URL(t.src).origin;i!==location.origin&&e.push({src:i,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}}),e=[...new Map(e.map(e=>[JSON.stringify(e),e])).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){console.error(e)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._waitForPendingClicks().then(()=>{this._replayClicks()}),this._emptyTrash()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e=>{e.hasAttribute("data-rocket-src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)})}async _transformScript(e){return await this._littleBreath(),new Promise(t=>{function i(){e.setAttribute("data-rocket-status","executed"),t()}function r(){e.setAttribute("data-rocket-status","failed"),t()}try{let n=e.getAttribute("data-rocket-type"),s=e.getAttribute("data-rocket-src");if(n?(e.type=n,e.removeAttribute("data-rocket-type")):e.removeAttribute("type"),e.addEventListener("load",i),e.addEventListener("error",r),s)e.src=s,e.removeAttribute("data-rocket-src");else if(navigator.userAgent.indexOf("Firefox/")>0){var a=document.createElement("script");[...e.attributes].forEach(e=>{"type"!==e.nodeName&&a.setAttribute("data-rocket-type"===e.nodeName?"type":e.nodeName,e.nodeValue)}),a.text=e.text,e.parentNode.replaceChild(a,e),i()}else e.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(e.text)))}catch(o){r()}})}async _loadScriptsFromList(e){let t=e.shift();return t&&t.isConnected?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var i=document.createDocumentFragment();e.forEach(e=>{let r=e.getAttribute&&e.getAttribute("data-rocket-src")||e.src;if(r){let n=document.createElement("link");n.href=r,n.rel=t,"preconnect"!==t&&(n.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),e.crossOrigin&&(n.crossOrigin=e.crossOrigin),e.integrity&&(n.integrity=e.integrity),i.appendChild(n),this.trash.push(n)}}),document.head.appendChild(i)}_delayEventListeners(e){let t={};function i(e,i){!function e(i){!t[i]&&(t[i]={originalFunctions:{add:i.addEventListener,remove:i.removeEventListener},eventsToRewrite:[]},i.addEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.add.apply(i,arguments)},i.removeEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.remove.apply(i,arguments)});function r(e){return t[i].eventsToRewrite.indexOf(e)>=0?"rocket-"+e:e}}(e),t[e].eventsToRewrite.push(i)}function r(e,t){let i=e[t];Object.defineProperty(e,t,{get:()=>i||function(){},set(r){e["rocket"+t]=i=r}})}i(document,"DOMContentLoaded"),i(window,"DOMContentLoaded"),i(window,"load"),i(window,"pageshow"),i(document,"readystatechange"),r(document,"onreadystatechange"),r(window,"onload"),r(window,"onpageshow")}_delayJQueryReady(e){let t;function i(i){if(i&&i.fn&&!e.allJQueries.includes(i)){i.fn.ready=i.fn.init.prototype.ready=function(t){return e.domReadyFired?t.bind(document)(i):document.addEventListener("rocket-DOMContentLoaded",()=>t.bind(document)(i)),i([])};let r=i.fn.on;i.fn.on=i.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map(e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]})}return r.apply(this,arguments),this},e.allJQueries.push(i)}t=i}i(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>t,set(e){i(e)}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach(e=>e(window).trigger("rocket-jquery-load")),await this._littleBreath();let e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){let e=new Map;document.write=document.writeln=function(t){let i=document.currentScript;i||console.error("WPRocket unable to document.write this: "+t);let r=document.createRange(),n=i.parentElement,s=e.get(i);void 0===s&&(s=i.nextSibling,e.set(i,s));let a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),n.insertBefore(a,s)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise(e=>setTimeout(e)):new Promise(e=>requestAnimationFrame(e))}_emptyTrash(){this.trash.forEach(e=>e.remove())}static run(){let e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+        <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/bannikova-fonts/Bannikova-Bold.woff2" as="font" type="font/woff2" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/bannikova-fonts/Bannikova-Bold.woff" as="font" type="font/woff" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/bannikova-fonts/Bannikova-Italic.woff2" as="font" type="font/woff2" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/bannikova-fonts/Bannikova-Italic.woff" as="font" type="font/woff" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/bannikova-fonts/Bannikova-Regular.woff2" as="font" type="font/woff2" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/bannikova-fonts/Bannikova-Regular.woff" as="font" type="font/woff" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Black.woff2" as="font" type="font/woff2" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Black.woff" as="font" type="font/woff" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Bold.woff2" as="font" type="font/woff2" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Bold.woff" as="font" type="font/woff" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Light.woff2" as="font" type="font/woff2" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Light.woff" as="font" type="font/woff" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Medium.woff2" as="font" type="font/woff2" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Medium.woff" as="font" type="font/woff" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Regular.woff2" as="font" type="font/woff2" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Regular.woff" as="font" type="font/woff" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Thin.woff2" as="font" type="font/woff2" crossorigin="">
+    <link href="https://u9f8r7w6.rocketcdn.me/wp-content/themes/schwingen/markup/assets/fonts/gordita-fonts/Gordita-Thin.woff" as="font" type="font/woff" crossorigin="">
+    <title>Политика конфиденциальности ~ Швейцария для всех</title>
+<meta name="robots" content="max-image-preview:large">
+<script src="data:text/javascript;base64,ICAgICAgICAgICAgICAgIGZ1bmN0aW9uIGFwYmN0X2F0dGFjaF9ldmVudF9oYW5kbGVyX19iYWNrZW5kKGVsZW0sIGV2ZW50LCBjYWxsYmFjaykgeyAgICAgICAgICAgICAgICAgICAgaWYodHlwZW9mIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyID09PSAiZnVuY3Rpb24iKSBlbGVtLmFkZEV2ZW50TGlzdGVuZXIoZXZlbnQsIGNhbGxiYWNrKTsgICAgICAgICAgICAgICAgICAgIGVsc2UgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlbGVtLmF0dGFjaEV2ZW50KGV2ZW50LCBjYWxsYmFjayk7ICAgICAgICAgICAgICAgIH0gICAgICAgICAgICAgICAgYXBiY3RfYXR0YWNoX2V2ZW50X2hhbmRsZXJfX2JhY2tlbmQoZG9jdW1lbnQsICdET01Db250ZW50TG9hZGVkJywgZnVuY3Rpb24oKXsgICAgICAgICAgICAgICAgICAgIGlmICh0eXBlb2YgYXBiY3RMb2NhbFN0b3JhZ2UgPT09ICJvYmplY3QiICYmIGN0UHVibGljLmRhdGFfX2tleV9pc19vaykgeyAgICAgICAgICAgICAgICAgICAgICAgIGFwYmN0TG9jYWxTdG9yYWdlLnNldCgnY3RfY2hlY2tqcycsICc0NWNiNTIzZDgzODI3MGY3NDRjZWFiYTliZTBhM2FlZDMxY2JkODRjM2RhODQ1ZmU0ZDNiNmQ2NjhiYjkyNzFmJywgdHJ1ZSApOyAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHsgICAgICAgICAgICAgICAgICAgICAgICBjb25zb2xlLmxvZygnQVBCQ1QgRVJST1I6IGFwYmN0TG9jYWxTdG9yYWdlIG9iamVjdCBpcyBub3QgbG9hZGVkLicpOyAgICAgICAgICAgICAgICAgICAgfSAgICAgICAgICAgICAgICAgIH0pOyAgICA=">                function apbct_attach_event_handler__backend(elem, event, callback) {                    if(typeof window.addEventListener === "function") elem.addEventListener(event, callback);                    else                                                elem.attachEvent(event, callback);                }                apbct_attach_event_handler__backend(document, 'DOMContentLoaded', function(){                    if (typeof apbctLocalStorage === "object" && ctPublic.data__key_is_ok) {                        apbctLocalStorage.set('ct_checkjs', '45cb523d838270f744ceaba9be0a3aed31cbd84c3da845fe4d3b6d668bb9271f', true );                    } else {                        console.log('APBCT ERROR: apbctLocalStorage object is not loaded.');                    }                  });    </script><link rel="dns-prefetch" href="//static.addtoany.com">
+<link rel="dns-prefetch" href="//mystat.schwingen.net">
+<link rel="dns-prefetch" href="//u9f8r7w6.rocketcdn.me">
+
+<link href="https://u9f8r7w6.rocketcdn.me" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="Швейцария для всех » Лента" href="https://schwingen.net/feed/">
+<link rel="alternate" type="application/rss+xml" title="Швейцария для всех » Лента комментариев" href="https://schwingen.net/comments/feed/">
+<link rel="stylesheet" id="wp-block-library-css" href="https://u9f8r7w6.rocketcdn.me/wp-includes/css/dist/block-library/style.min.css?ver=81582bdb254a94e4464424087c6479a8" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="https://u9f8r7w6.rocketcdn.me/wp-includes/css/classic-themes.min.css?ver=1" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="ct_public_css-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/cleantalk-spam-protect/css/cleantalk-public.min.css?ver=6.3.1" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="cld-font-awesome-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/comments-like-dislike/css/fontawesome/css/all.min.css?ver=1675521124" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="cld-frontend-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/comments-like-dislike/css/cld-frontend.css?ver=1675521124" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="wpel-style-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/wp-external-links/public/css/wpel.css?ver=1675521124" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="wpfla-style-handle-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/wp-first-letter-avatar/css/style.css?ver=1675521124" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="wordpress-popular-posts-css-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/wordpress-popular-posts/assets/css/wpp.css?ver=1675521124" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="am_markup-assets-css-root-css-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/themes/schwingen/markup/assets/css/root.css?ver=1675521124" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="am_markup-assets-css-style-css-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/themes/schwingen/markup/assets/css/style.css?ver=1675521124" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="am_wp-assets-css-style-wp-css-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/themes/schwingen/wp-assets/css/style-wp.css?ver=1675521124" type="text/css" media="all">
+<link rel="stylesheet" id="addtoany-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/add-to-any/addtoany.min.css?ver=1.16" type="text/css" media="all">
+<style id="addtoany-inline-css" type="text/css">
+@media screen and (max-width:1420px){
+.a2a_floating_style.a2a_vertical_style{display:none;}
+}
+@media screen and (min-width:1421px){
+.a2a_floating_style.a2a_default_style{display:none;}
+}
+</style>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="addtoany-core-js-before">
+window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overlays=[];a2a_config.templates={};a2a_localize = {
+	Share: "Отправить",
+	Save: "Сохранить",
+	Subscribe: "Подписаться",
+	Email: "E-mail",
+	Bookmark: "В закладки!",
+	ShowAll: "Показать все",
+	ShowLess: "Показать остальное",
+	FindServices: "Найти сервис(ы)",
+	FindAnyServiceToAddTo: "Найти сервис и добавить",
+	PoweredBy: "Работает на",
+	ShareViaEmail: "Поделиться по электронной почте",
+	SubscribeViaEmail: "Подписаться по электронной почте",
+	BookmarkInYourBrowser: "Добавить в закладки",
+	BookmarkInstructions: "Нажмите Ctrl+D или \u2318+D, чтобы добавить страницу в закладки",
+	AddToYourFavorites: "Добавить в Избранное",
+	SendFromWebOrProgram: "Отправлять с любого email-адреса или email-программы",
+	EmailProgram: "Почтовая программа",
+	More: "Подробнее&#8230;",
+	ThanksForSharing: "Спасибо, что поделились!",
+	ThanksForFollowing: "Спасибо за подписку!"
+};
+
+a2a_config.icon_color="transparent,#005003";
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" async="" data-rocket-src="https://static.addtoany.com/menu/page.js" id="addtoany-core-js"></script>
+<script type="text/javascript" id="jquery-core-js-extra">
+/* <![CDATA[ */
+var am_loadmore_params = {"ajaxurl":"https:\/\/schwingen.net\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" id="jquery-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" async="" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/add-to-any/addtoany.min.js?ver=1.1" id="addtoany-jquery-js"></script>
+<script type="text/javascript" id="ct_public_functions-js-extra">
+/* <![CDATA[ */
+var ctPublicFunctions = {"_ajax_nonce":"88a1006877","_rest_nonce":"a2caa07821","_ajax_url":"\/wp-admin\/admin-ajax.php","_rest_url":"https:\/\/schwingen.net\/wp-json\/","data__cookies_type":"native","data__ajax_type":"rest","text__wait_for_decoding":"Decoding the contact data, let us a few seconds to finish. Anti-Spam by CleanTalk.","cookiePrefix":""};
+var ctPublic = {"settings__forms__check_internal":"0","settings__forms__check_external":"0","blog_home":"https:\/\/schwingen.net\/","pixel__setting":"3","pixel__enabled":"1","pixel__url":"https:\/\/moderate4.cleantalk.org\/pixel\/767e7c2e337d2f564e5374682afcef94.gif","data__email_check_before_post":"1","data__cookies_type":"native","data__key_is_ok":"1","data__visible_fields_required":"1","data__to_local_storage":[]};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-pagespeed-no-defer="" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/cleantalk-spam-protect/js/apbct-public-bundle.min.js?ver=6.3.1" id="ct_public_functions-js" defer=""></script>
+<script type="text/javascript" id="cld-frontend-js-extra">
+/* <![CDATA[ */
+var cld_js_object = {"admin_ajax_url":"https:\/\/schwingen.net\/wp-admin\/admin-ajax.php","admin_ajax_nonce":"766f040852"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/comments-like-dislike/js/cld-frontend.js?ver=1675521375" id="cld-frontend-js" defer=""></script>
+<script type="application/json" id="wpp-json">
+{"sampling_active":0,"sampling_rate":100,"ajax_url":"https:\/\/schwingen.net\/wp-json\/wordpress-popular-posts\/v1\/popular-posts","api_url":"https:\/\/schwingen.net\/wp-json\/wordpress-popular-posts","ID":35914,"token":"a2caa07821","lang":0,"debug":0}
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/wordpress-popular-posts/assets/js/wpp.min.js?ver=81582bdb254a94e4464424087c6479a8" id="wpp-js-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://schwingen.net/wp-json/"><link rel="alternate" type="application/json" href="https://schwingen.net/wp-json/wp/v2/pages/35914"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://schwingen.net/xmlrpc.php?rsd">
+<link rel="alternate" type="application/json+oembed" href="https://schwingen.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://schwingen.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;format=xml">
+<style></style><!-- SEO meta tags powered by SmartCrawl https://wpmudev.com/project/smartcrawl-wordpress-seo/ -->
+<link rel="canonical" href="https://schwingen.net/confidentiality/">
+<meta name="description" content="Политика конфиденциальности">
+<script type="application/ld+json">{"@context":"https:\/\/schema.org","@graph":[{"@type":"Organization","@id":"https:\/\/schwingen.net\/#schema-publishing-organization","url":"https:\/\/schwingen.net","name":"\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0438\u044f \u0434\u043b\u044f \u0432\u0441\u0435\u0445","logo":{"@type":"ImageObject","@id":"https:\/\/schwingen.net\/#schema-organization-logo","url":"https:\/\/schwingen.net\/wp-content\/uploads\/2021\/11\/cropped-SCWHINGEN.NET-ROUND-LOGO-crop-with-margin.png","height":60,"width":60}},{"@type":"WebSite","@id":"https:\/\/schwingen.net\/#schema-website","url":"https:\/\/schwingen.net","name":"\u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0438\u044f \u0434\u043b\u044f \u0432\u0441\u0435\u0445","encoding":"UTF-8","potentialAction":{"@type":"SearchAction","target":"https:\/\/schwingen.net\/search\/{search_term_string}\/","query-input":"required name=search_term_string"},"image":{"@type":"ImageObject","@id":"https:\/\/schwingen.net\/#schema-site-logo","url":"https:\/\/schwingen.net\/wp-content\/uploads\/2021\/11\/cropped-SCWHINGEN.NET-ROUND-LOGO-crop-with-margin.png","height":512,"width":512}},{"@type":"Person","@id":"https:\/\/schwingen.net\/author\/theshadow\/#schema-author","name":"\u0422\u0435\u0445\u043d\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0430","url":"https:\/\/schwingen.net\/author\/theshadow\/"},{"@type":"WebPage","@id":"https:\/\/schwingen.net\/confidentiality\/#schema-webpage","isPartOf":{"@id":"https:\/\/schwingen.net\/#schema-website"},"publisher":{"@id":"https:\/\/schwingen.net\/#schema-publishing-organization"},"url":"https:\/\/schwingen.net\/confidentiality\/"},{"@type":"Article","mainEntityOfPage":{"@id":"https:\/\/schwingen.net\/confidentiality\/#schema-webpage"},"author":{"@id":"https:\/\/schwingen.net\/author\/theshadow\/#schema-author"},"publisher":{"@id":"https:\/\/schwingen.net\/#schema-publishing-organization"},"dateModified":"2022-12-12T17:17:39","datePublished":"2020-10-06T10:25:03","headline":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438 ~ \u0428\u0432\u0435\u0439\u0446\u0430\u0440\u0438\u044f \u0434\u043b\u044f \u0432\u0441\u0435\u0445","description":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438","name":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438","image":{"@type":"ImageObject","@id":"https:\/\/schwingen.net\/confidentiality\/#schema-article-image","url":"https:\/\/schwingen.net\/wp-content\/uploads\/2021\/08\/logo.svg"},"thumbnailUrl":"https:\/\/schwingen.net\/wp-content\/uploads\/2021\/08\/logo.svg"}]}</script>
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://schwingen.net/confidentiality/">
+<meta property="og:title" content="Политика конфиденциальности ~ Швейцария для всех">
+<meta property="og:description" content="Политика конфиденциальности">
+<meta property="article:published_time" content="2020-10-06T10:25:03">
+<meta property="article:author" content="Техническая поддержка">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="http://okhrimovskaya">
+<meta name="twitter:title" content="Политика конфиденциальности ~ Швейцария для всех">
+<meta name="twitter:description" content="Политика конфиденциальности">
+<!-- /SEO -->
+<style type="text/css" id="branda-admin-bar-logo">
+body #wpadminbar #wp-admin-bar-wp-logo > .ab-item {
+	background-image: url(https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/11/cropped-SCWHINGEN.NET-ROUND-LOGO-crop-with-margin.png);
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: 80%;
+}
+body #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
+	content: " ";
+}
+</style>
+            <style id="wpp-loading-animation-styles">@-webkit-keyframes bgslide{from{background-position-x:0}to{background-position-x:-200%}}@keyframes bgslide{from{background-position-x:0}to{background-position-x:-200%}}.wpp-widget-placeholder,.wpp-widget-block-placeholder{margin:0 auto;width:60px;height:3px;background:#dd3737;background:linear-gradient(90deg,#dd3737 0%,#571313 10%,#dd3737 100%);background-size:200% auto;border-radius:3px;-webkit-animation:bgslide 1s infinite linear;animation:bgslide 1s infinite linear}</style>
+            <style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><link rel="icon" href="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/11/cropped-SCWHINGEN.NET-ROUND-LOGO-crop-with-margin-32x32.png" sizes="32x32">
+<link rel="icon" href="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/11/cropped-SCWHINGEN.NET-ROUND-LOGO-crop-with-margin-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/11/cropped-SCWHINGEN.NET-ROUND-LOGO-crop-with-margin-180x180.png">
+<meta name="msapplication-TileImage" content="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/11/cropped-SCWHINGEN.NET-ROUND-LOGO-crop-with-margin-270x270.png">
+<style>
+.myposts-center {margin: 8px auto; text-align: center; display: block; clear: both;}
+.myposts- {}
+</style>
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript><link href="https://u9f8r7w6.rocketcdn.me/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/cleantalk-spam-protect/js/apbct-public-bundle.min.js?ver=6.3.1" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/comments-like-dislike/js/cld-frontend.js?ver=1675521375" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/wordpress-popular-posts/assets/js/wpp.min.js?ver=81582bdb254a94e4464424087c6479a8" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-includes/js/comment-reply.min.js?ver=81582bdb254a94e4464424087c6479a8" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/themes/schwingen/markup/assets/js/jquery.main.js?ver=1675521375" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/themes/schwingen/wp-assets/js/general.js?ver=1675521375" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/mailpoet/assets/dist/js/public.js?ver=1675521375" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/forminator/assets/js/library/jquery.validate.min.js?ver=1.23.0" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/forminator/assets/forminator-ui/js/forminator-form.min.js?ver=1.23.0" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/forminator/build/front/front.multi.min.js?ver=1.23.0" rel="preload" as="script"><link href="https://static.addtoany.com/menu/page.js" rel="preload" as="script"><link href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/add-to-any/addtoany.min.js?ver=1.1" rel="preload" as="script"></head>
+
+<body data-rsssl="1" class="privacy-policy page-template-default page page-id-35914 unknown">
+<div class="wrapper">
+    <header class="header">
+        <div class="header-menu-wrapper">
+            <div class="container">
+                                    <a class="logo" style="width:285px;height:55px;" href="https://schwingen.net/" data-wpel-link="internal" target="_self" rel="follow"><img src="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/08/logo.svg" alt="" data-lazy-src="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/08/logo.svg" data-ll-status="loaded" class="entered lazyloaded" width="285" height="55"><noscript><img src="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/08/logo.svg" width="285" height="55" alt=""  ></noscript></a>
+                                                    <div class="nav-drop">
+                        <nav class="nav"><ul id="header-menu" class="header-menu"><li id="menu-item-32195" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-32195"><a href="https://schwingen.net/category/society/" data-wpel-link="internal" target="_self" rel="follow">Общество</a></li>
+<li id="menu-item-32197" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-32197"><a href="https://schwingen.net/category/art/" data-wpel-link="internal" target="_self" rel="follow">Искусство</a></li>
+<li id="menu-item-32199" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-32199"><a href="https://schwingen.net/category/school/" data-wpel-link="internal" target="_self" rel="follow">Школа</a></li>
+<li id="menu-item-32198" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-32198"><a href="https://schwingen.net/category/litclub/" data-wpel-link="internal" target="_self" rel="follow">Литклуб</a></li>
+<li id="menu-item-32201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-32201"><a href="https://schwingen.net/about/" data-wpel-link="internal" target="_self" rel="follow">Профиль</a></li>
+</ul></nav>                    </div><!-- /mainmenu -->
+                    <span class="menu-overlay">&nbsp;</span>
+                                                    <div class="header-btn">
+                        <a class="btn btn-secondary" href="#newsletters" target="_self">подписка</a>
+                    </div>
+                                <div class="search-wrapper">
+                    <div>
+	<form method="get" class="header-search-form" action="https://schwingen.net/">
+
+            <input type="search" placeholder="поищите здесь" value="" name="s" class="text">
+            <button type="submit" class="header-search-form-btn">
+                <svg class="icon-search" width="21" height="21">
+                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#search-icon"></use>
+                </svg>
+            </button>
+
+	<input id="apbct_submit_id__search_form_83957" class="apbct_special_field apbct__email_id__search_form" name="apbct_submit_id__search_form_83957" type="submit" apbct_event_id="83957" size="30" maxlength="200" value=""></form>
+</div><!-- /search_block -->
+                </div>
+                <a class="search-mobile-btn">&nbsp;</a>
+                <button class="nav-opener"><span></span></button>
+            </div>
+        </div>
+    </header>
+    <main id="main" class="main">
+
+        <div class="breadcrumb-tile">
+            <div class="container">
+              <p>
+                                  <span class="text-title">Политика конфиденциальности</span>
+                              </p>
+            </div>
+        </div>
+    <section class="section p-bottom">
+        <div class="container">
+            <div class="main-content p-top-md">
+                <div class="entry">
+                                            <div class="mobile-btn visible-md">
+                            <a class="btn btn-secondary" href="#newsletters" target="_self">подписка</a>
+                        </div>
+                    
+                                            <div class="navigation-wrap">
+                            <ul id="pagemenu" class="navigation-list"><li id="menu-item-39952" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39952"><a href="https://schwingen.net/popular/" data-wpel-link="internal" target="_self" rel="follow">Популярное</a></li>
+<li id="menu-item-39351" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39351"><a href="https://schwingen.net/about/" data-wpel-link="internal" target="_self" rel="follow">Профиль</a></li>
+<li id="menu-item-39350" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39350"><a href="https://schwingen.net/rules/" data-wpel-link="internal" target="_self" rel="follow">Правила</a></li>
+<li id="menu-item-39349" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39349"><a href="https://schwingen.net/authors/" data-wpel-link="internal" target="_self" rel="follow">Авторы</a></li>
+</ul>                        </div>
+                                        <div class="entry-content">
+                        
+
+	<div class="entry-content">
+		<p>Администрация сайта schwingen.net обязуется сохранять вашу конфиденциальность в интернете. Мы уделяем большое значение охране предоставленных вами данных. Наша политика конфиденциальности основана на требованиях Общего регламента о защите персональных данных Европейского союза (GDPR). Мы собираем персональные данные с целью улучшения работы нашего сервиса, осуществления контактов с посетителями сайта, новостной рассылки по электронной почте, а также для указанных ниже действий.</p>
+<h2>Сбор и использование персональных данных</h2>
+<p>Ваши персональные данные собираются и используются нами только в случае вашего добровольного согласия: вы разрешаете нам собирать и использовать следующие данные — электронная почта. Сбор и обработка ваших данных проводится в соответствии с законами, действующими на территории Европейского союза и Швейцарии.</p>
+<h2>Хранение данных, изменение и удаление</h2>
+<p>Пользователь, предоставивший свои персональные данные сайту schwingen.net, имеет право их изменить, удалить, отозвать свое согласие их использовать. Ваши персональные данные хранятся в течение времени, необходимого для их использования в целях основной деятельности сайта, после завершения использования ваших данных администрация сайта удаляет их. Для доступа к своим персональным данным вы можете связаться с администрацией сайта по адресу: info@schwingen.net. Ваши личные данные могут быть переданы третьей стороне только с вашего добровольного согласия, если они были переданы, то изменение данных в других организациях, не связанных с нами, мы не осуществляем.</p>
+<h2>Использование технических данных при посещении сайта</h2>
+<p>Когда вы посещаете сайт schwingen.net, в базе данных сохраняются записи о вашем IP адресе, времени посещения, настройках браузера, операционной системе, а также другая техническая информация, необходимая для корректного отображения содержимого сайта. По этим данным нам невозможно идентифицировать личность посетителя.</p>
+<h2>Предоставление информации детям</h2>
+<p>Если вы являетесь родителем или опекуном, и вы знаете, что ваши дети предоставили нам свои личные данные без вашего согласия, свяжитесь с нами: info@schwingen.net. На нашем сервисе запрещено оставлять личные данные несовершеннолетних без согласия родителей или опекунов.</p>
+<h2>Использование cookies</h2>
+<p>Для корректного отображения содержимого и для удобства использования сайта schwingen.net мы используем cookie файлы. Это небольшие файлы, которые хранятся на вашем устройстве. Они помогают сайту запомнить информацию о вас, например, на каком языке вы просматриваете сайт и какие страницы вы уже открывали, эта информация будет полезна при следующем посещении. Благодаря файлам cookie просмотр сайта становится значительно удобнее. Вы можете настроить прием или блокировку cookie в браузере самостоятельно. Невозможность принимать cookie может ограничить работоспособность сайта.</p>
+<h2>Использование персональных данных другими сервисами</h2>
+<p>Мы не передаем персональные данные другим организациям и службам, не указанным в данной политике конфиденциальности. Исключение составляет только передача информации при законных требованиях государственных органов, уполномоченных осуществлять данные действия.</p>
+<h2>Ссылки на другие сайты</h2>
+<p>Наш сайт schwingen.net может содержать ссылки на другие сайты, которые не управляются нами. Мы не несем ответственность за их содержание. Мы рекомендуем вам ознакомиться с политикой конфиденциальности каждого сайта, который вы посещаете, если она там есть.</p>
+<h2>Изменения в политике конфиденциальности</h2>
+<p>Сайт schwingen.net может обновлять свою политику конфиденциальности. Обновленная политика конфиденциальности размещается на этой странице. Мы отслеживаем изменения законодательства, касающегося персональных данных в Европейском союзе и Швейцарии.</p>
+<h2>Обратная связь, заключительные положения</h2>
+<p>Связаться с администрацией сайта schwingen.net по вопросам политики конфиденциальности можно по адресу: SCHWINGEN.NET, Schürgistrasse 18, CH-8051 Zürich, Schweiz, либо с помощью контактной формы. Если вы не согласны с данной политикой конфиденциальности, вы не можете пользоваться услугами сайта schwingen.net, в этом случае вы должны воздержаться от посещения нашего сайта.</p>
+		<div class="clear clearfix"></div>
+		
+	</div><!-- /entry -->
+
+                    </div>
+                    <!--          latest-->
+                </div>
+            </div>
+            <aside class="sidebar">
+
+       <div id="recent_post_custom_widget-4" class="widget widget_recent_posts"><h3>Недавние публикации</h3>                                        <ul>
+                                            
+    <li>
+        <a class="h3" href="https://schwingen.net/ukraina-vojna-do-pobednogo-konca-ili-ustupki-radi-mira/" data-wpel-link="internal" target="_self" rel="follow">Украина: война до победного конца или уступки ради мира?</a>
+        <div class="meta">
+    										<span>
+    										                <time datetime="2023-02-15">
+                    15 февраля 2023                </time>
+                | <a href="https://schwingen.net/category/news/" data-wpel-link="internal" target="_self" rel="follow">Новости</a>, <a href="https://schwingen.net/category/society/" data-wpel-link="internal" target="_self" rel="follow">Общество</a>    										</span>
+        </div>
+    </li>
+                                                
+    <li>
+        <a class="h3" href="https://schwingen.net/shvejcarija-solidarna-s-zhertvami-zemletrjasenija-v-sirii-i-turcii/" data-wpel-link="internal" target="_self" rel="follow">Швейцария солидарна с жертвами землетрясения в Сирии и Турции</a>
+        <div class="meta">
+    										<span>
+    										                <time datetime="2023-02-10">
+                    10 февраля 2023                </time>
+                | <a href="https://schwingen.net/category/news/" data-wpel-link="internal" target="_self" rel="follow">Новости</a>, <a href="https://schwingen.net/category/society/" data-wpel-link="internal" target="_self" rel="follow">Общество</a>    										</span>
+        </div>
+    </li>
+                                                
+    <li>
+        <a class="h3" href="https://schwingen.net/inna-berezkina-god-vojny/" data-wpel-link="internal" target="_self" rel="follow">Инна Березкина. Год войны</a>
+        <div class="meta">
+    										<span>
+    										                <time datetime="2023-02-07">
+                    7 февраля 2023                </time>
+                | <a href="https://schwingen.net/category/news/" data-wpel-link="internal" target="_self" rel="follow">Новости</a>, <a href="https://schwingen.net/category/society/" data-wpel-link="internal" target="_self" rel="follow">Общество</a>, <a href="https://schwingen.net/category/school/" data-wpel-link="internal" target="_self" rel="follow">Школа</a>    										</span>
+        </div>
+    </li>
+                                                
+    <li>
+        <a class="h3" href="https://schwingen.net/ukraincy-v-shvejcarii-posle-pobedy-my-vernemsja-v-buchu/" data-wpel-link="internal" target="_self" rel="follow">Украинцы в Швейцарии. После победы мы вернемся в Бучу</a>
+        <div class="meta">
+    										<span>
+    										                <time datetime="2023-02-05">
+                    5 февраля 2023                </time>
+                | <a href="https://schwingen.net/category/news/" data-wpel-link="internal" target="_self" rel="follow">Новости</a>, <a href="https://schwingen.net/category/society/" data-wpel-link="internal" target="_self" rel="follow">Общество</a>    										</span>
+        </div>
+    </li>
+                                                
+    <li>
+        <a class="h3" href="https://schwingen.net/vladimir-sorokin-geroi-tolko-sejchas-nachinajut-rozhdatsja/" data-wpel-link="internal" target="_self" rel="follow">Владимир Сорокин: «Герои только сейчас начинают рождаться…»</a>
+        <div class="meta">
+    										<span>
+    										                <time datetime="2023-02-01">
+                    1 февраля 2023                </time>
+                | <a href="https://schwingen.net/category/litclub/" data-wpel-link="internal" target="_self" rel="follow">Литклуб</a>, <a href="https://schwingen.net/category/society/" data-wpel-link="internal" target="_self" rel="follow">Общество</a>    										</span>
+        </div>
+    </li>
+                                        </ul>
+            
+
+
+                    <div class="btn-holder">
+                <a class="btn btn-more" href="/popular/" target="_self" data-wpel-link="internal" rel="follow">Узнать больше</a>
+            </div>
+                </div><div id="buy_a_book_custom_widget-3" class="widget "><h3>Приобрести книгу</h3>        <div class="widget-media">
+                        <a href="https://schwingen.net/gadanie-na-chasah-pojet-v-kazhdom-cheloveke/#order_book" class="widget-media-link" target="_self" data-wpel-link="internal" rel="follow">
+                                <picture>
+<source type="image/webp" data-lazy-srcset="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/07/media_16795248-1.jpg.webp" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20275%20440'%3E%3C/svg%3E">
+<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20275%20440'%3E%3C/svg%3E" alt="Марина Охримовская, &quot;Гадание на часах&quot;, обложка книги. Цюрих, 2021 г." data-lazy-src="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/07/media_16795248-1.jpg" width="275" height="440">
+</picture>
+<noscript><picture>
+<source type="image/webp" srcset="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/07/media_16795248-1.jpg.webp"/>
+<img src="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/07/media_16795248-1.jpg" width="275" height="440" alt="Марина Охримовская, &quot;Гадание на часах&quot;, обложка книги. Цюрих, 2021 г."/>
+</picture>
+</noscript>                            </a>
+                </div>
+        </div><div id="recent_comments_custom_widget-3" class="widget widget_recent_comments"><h3>Недавние комментарии</h3>
+                <ul>
+                            <li>
+                    <div class="meta">
+										<span>
+											<!--<a href="" class="entry-author" data-wpel-link="internal" target="_self" rel="follow">Elmira Zünd</a> -->
+											13 февраля, 2023										</span>
+                    </div>
+                    <a class="h3" href="https://schwingen.net/bolshinstvo-shvejcarcev-odobrjaet-rejeksport-vooruzhenij-v-ukrainu/" data-wpel-link="internal" target="_self" rel="follow">Большинство швейцарцев одобряет реэкспорт вооружений в Украину</a>
+                </li>
+                            <li>
+                    <div class="meta">
+										<span>
+											<!--<a href="" class="entry-author" data-wpel-link="internal" target="_self" rel="follow">Марина Охримовская</a> -->
+											10 января, 2023										</span>
+                    </div>
+                    <a class="h3" href="https://schwingen.net/bud-prokljata-vojna-ukrainskij-spektakl-v-shvejcarii/" data-wpel-link="internal" target="_self" rel="follow">Будь проклята война. Украинский спектакль в Швейцарии</a>
+                </li>
+                            <li>
+                    <div class="meta">
+										<span>
+											<!--<a href="" class="entry-author" data-wpel-link="internal" target="_self" rel="follow">Марина Охримовская</a> -->
+											10 января, 2023										</span>
+                    </div>
+                    <a class="h3" href="https://schwingen.net/mozhet-li-rossija-stat-neimperskoj/" data-wpel-link="internal" target="_self" rel="follow">Может ли Россия стать неимперской?</a>
+                </li>
+                            <li>
+                    <div class="meta">
+										<span>
+											<!--<a href="" class="entry-author" data-wpel-link="internal" target="_self" rel="follow">Палыч</a> -->
+											9 января, 2023										</span>
+                    </div>
+                    <a class="h3" href="https://schwingen.net/mozhet-li-rossija-stat-neimperskoj/" data-wpel-link="internal" target="_self" rel="follow">Может ли Россия стать неимперской?</a>
+                </li>
+                            <li>
+                    <div class="meta">
+										<span>
+											<!--<a href="" class="entry-author" data-wpel-link="internal" target="_self" rel="follow">Сергей</a> -->
+											9 января, 2023										</span>
+                    </div>
+                    <a class="h3" href="https://schwingen.net/mozhet-li-rossija-stat-neimperskoj/" data-wpel-link="internal" target="_self" rel="follow">Может ли Россия стать неимперской?</a>
+                </li>
+                    </ul>
+                    <div class="btn-holder">
+                <a class="btn btn-more" href="#" target="_self">Узнать больше</a>
+            </div>
+                </div><div id="social_network_custom_widget-4" class="widget order-ps-1"><h3>Швейцария для всех</h3>        <div class="social-tile">
+            <div class="social-tile-button">
+                <svg class="social-tile-button_icon" width="20" height="20">
+                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#share"></use>
+                </svg>
+                <span class="btn btn-more">В социальных сетях</span>
+                <span class="ico-arrow">&nbsp;</span>
+            </div>
+            <div class="social-tile-expanded">
+                <ul class="socials">
+                    
+                        <li>
+                            <a class="social-link fb-bg" href="https://www.facebook.com/schwingen.net" target="_self" data-wpel-link="internal" rel="follow">
+                                <svg width="10" height="20">
+                                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#facebook"></use>
+                                </svg>
+                            </a>
+                        </li>
+
+                                                                <li>
+                            <a class="social-link tw-bg" href="https://twitter.com/Okhrimovskaya" target="_blank" data-wpel-link="exclude" rel="follow">
+                                <svg width="18" height="15">
+                                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#twitter"></use>
+                                </svg>
+                            </a>
+                        </li>
+
+                                                                <li>
+                            <a class="social-link tl-bg" href="https://t.me/schwingen" target="_blank" data-wpel-link="exclude" rel="follow">
+                                <svg width="18" height="15">
+                                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#telegram"></use>
+                                </svg>
+                            </a>
+                        </li>
+
+                                                                <li>
+                            <a class="social-link vk-bg" href="https://vk.com/schwingen" target="_blank" data-wpel-link="exclude" rel="follow">
+                                <svg width="22" height="12">
+                                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#vk"></use>
+                                </svg>
+                            </a>
+                        </li>
+
+                                                                <li>
+                            <a class="social-link od-bg" href="https://ok.ru/profile/206513907" target="_blank" data-wpel-link="exclude" rel="follow">
+                                <svg width="10" height="16">
+                                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#od"></use>
+                                </svg>
+                            </a>
+                        </li>
+
+                                                                <li>
+                            <a class="social-link in-bg" href="https://www.linkedin.com/in/okhrimovskaya" target="_blank" data-wpel-link="exclude" rel="follow">
+                                <svg width="15" height="15">
+                                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#linkedin"></use>
+                                </svg>
+                            </a>
+                        </li>
+
+                                                                <li>
+                            <a class="social-link ins-bg" href="https://www.instagram.com/okhrimovskaya" target="_blank" data-wpel-link="exclude" rel="follow">
+                                <svg width="20" height="20">
+                                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#instagram"></use>
+                                </svg>
+                            </a>
+                        </li>
+
+                                                                <li>
+                            <a class="social-link yt-bg" href="https://www.youtube.com/channel/UCES64DNIKtsrqG6hqNGSZcA" target="_blank" data-wpel-link="exclude" rel="follow">
+                                <svg width="22" height="16">
+                                    <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#youtube"></use>
+                                </svg>
+                            </a>
+                        </li>
+
+                                                        </ul>
+            </div>
+        </div>
+        </div>
+</aside>        </div>
+    </section>
+
+
+    <section class="feedback-section">
+        <div class="container">
+            <div class="form-tiles">
+                                    <div class="item">
+                        <div class="newsletter-wrap">
+                            <h2 class="headtitle h2">
+                                <span id="newsletters"></span>новостная                                <span class="title-lg">рассылка</span>                            </h2>
+                            <div class="newsletter-wrap-subtitle"><p>Чтобы всегда быть в курсе событий, воспользуйтесь нашей службой рассылки новостей</p></div>                              
+  
+  <div class="
+    mailpoet_form_popup_overlay
+      "></div>
+  <div id="mailpoet_form_2" class="
+      mailpoet_form
+      mailpoet_form_shortcode
+      mailpoet_form_position_
+      mailpoet_form_animation_
+    ">
+    
+    <style type="text/css">
+     #mailpoet_form_2 .mailpoet_form { padding: 0 !important; }
+#mailpoet_form_2 .mailpoet_column_with_background { padding: 10px; }
+#mailpoet_form_2 .mailpoet_form_column:not(:first-child) { margin-left: 20px; }
+#mailpoet_form_2 .mailpoet_paragraph { line-height: 20px; margin-bottom: 20px; }
+#mailpoet_form_2 .mailpoet_segment_label, #mailpoet_form_2 .mailpoet_text_label, #mailpoet_form_2 .mailpoet_textarea_label, #mailpoet_form_2 .mailpoet_select_label, #mailpoet_form_2 .mailpoet_radio_label, #mailpoet_form_2 .mailpoet_checkbox_label, #mailpoet_form_2 .mailpoet_list_label, #mailpoet_form_2 .mailpoet_date_label { display: block; font-weight: normal; }
+#mailpoet_form_2 .mailpoet_text, #mailpoet_form_2 .mailpoet_textarea, #mailpoet_form_2 .mailpoet_select, #mailpoet_form_2 .mailpoet_date_month, #mailpoet_form_2 .mailpoet_date_day, #mailpoet_form_2 .mailpoet_date_year, #mailpoet_form_2 .mailpoet_date { display: block; }
+#mailpoet_form_2 .mailpoet_text, #mailpoet_form_2 .mailpoet_textarea { width: 200px; }
+#mailpoet_form_2 .mailpoet_checkbox {  }
+#mailpoet_form_2 .mailpoet_submit { padding: 21px 30px !important; }
+#mailpoet_form_2 .mailpoet_divider {  }
+#mailpoet_form_2 .mailpoet_message {  }
+#mailpoet_form_2 .mailpoet_form_loading { width: 30px; text-align: center; line-height: normal; }
+#mailpoet_form_2 .mailpoet_form_loading > span { width: 5px; height: 5px; background-color: #5b5b5b; }#mailpoet_form_2{border-radius: 0px;text-align: left;}#mailpoet_form_2 form.mailpoet_form {padding: 20px;}#mailpoet_form_2{width: 100%;}#mailpoet_form_2 .mailpoet_message {margin: 0; padding: 0 20px;}#mailpoet_form_2 .mailpoet_paragraph.last {margin-bottom: 0} @media (max-width: 500px) {#mailpoet_form_2 {background-image: none;}} @media (min-width: 500px) {#mailpoet_form_2 .last .mailpoet_paragraph:last-child {margin-bottom: 0}}  @media (max-width: 500px) {#mailpoet_form_2 .mailpoet_form_column:last-child .mailpoet_paragraph:last-child {margin-bottom: 0}} 
+    </style>
+
+    <form target="_self" method="post" action="https://schwingen.net/wp-admin/admin-post.php?action=mailpoet_subscription_form" class="mailpoet_form mailpoet_form_form mailpoet_form_shortcode" novalidate="" data-delay="" data-exit-intent-enabled="" data-font-family="" data-cookie-expiration-time="">
+      <input type="hidden" name="data[form_id]" value="2">
+      <input type="hidden" name="token" value="6ed7104fcc">
+      <input type="hidden" name="api_version" value="v1">
+      <input type="hidden" name="endpoint" value="subscribers">
+      <input type="hidden" name="mailpoet_method" value="subscribe">
+
+      <label class="mailpoet_hp_email_label" style="display: none !important;">Пожалуйста, оставьте это поле пустым.<input type="email" name="data[email]"></label><div class="mailpoet_paragraph "><label for="form_email_2" class="mailpoet-screen-reader-text" data-automation-id="form_email_label">Адрес электронной почты <span class="mailpoet_required">*</span></label><input type="email" autocomplete="email" class="mailpoet_text" id="form_email_2" name="data[form_field_ODZhYjNjMDNlZmU1X2VtYWls]" title="Адрес электронной почты" value="" style="width:100%;padding:5px;margin: 0 auto 0 0;" data-automation-id="form_email" placeholder="Адрес электронной почты *" data-parsley-required="true" data-parsley-minlength="6" data-parsley-maxlength="150" data-parsley-type-message="Значение должно быть верным адресом электронной почты." data-parsley-errors-container=".mailpoet_error_email_" data-parsley-required-message="Это поле необходимо."></div>
+<div class="mailpoet_paragraph "><input type="submit" class="mailpoet_submit" value="Подписаться!" data-automation-id="subscribe-submit-button" style="width:100%;padding:5px;margin: 0 auto 0 0;border-color:transparent;"><span class="mailpoet_form_loading"><span class="mailpoet_bounce1"></span><span class="mailpoet_bounce2"></span><span class="mailpoet_bounce3"></span></span></div>
+
+      <div class="mailpoet_message">
+        <p class="mailpoet_validate_success" style="display:none;">Проверьте ваш почтовый ящик или папку спам, чтобы подтвердить свою подписку.
+        </p>
+        <p class="mailpoet_validate_error" style="display:none;">        </p>
+      </div>
+    </form>
+  </div>
+
+                          </div>
+                    </div>
+                                                    <div class="item">
+                        <div class="contact-us-wrap">
+                            <h3 class="headtitle"><p id="feedback"></p>Свяжитесь с нами</h3>                            <div class="forminator-ui forminator-custom-form forminator-custom-form-39304   forminator_ajax" data-forminator-render="0" data-form="forminator-module-39304" data-uid="63eee35096576"><br></div><form id="forminator-module-39304" class="forminator-ui forminator-custom-form forminator-custom-form-39304   forminator_ajax" method="post" data-forminator-render="0" data-form-id="39304" data-design="none" data-grid="open" style="display: none;" data-uid="63eee35096576"><div class="forminator-response-message forminator-error" aria-hidden="true"></div><div class="forminator-row"><div id="name-1" class="forminator-col forminator-col-6 "><div class="forminator-field"><input type="text" name="name-1" value="" placeholder="Имя" id="forminator-field-name-1_63eee35096576" class="forminator-input forminator-name--field" aria-required="true"></div></div><div id="email-1" class="forminator-col forminator-col-6 "><div class="forminator-field"><input type="email" name="email-1" value="" placeholder="Email" id="forminator-field-email-1_63eee35096576" class="forminator-input forminator-email--field" data-required="true" aria-required="true"></div></div></div><div class="forminator-row"><div id="textarea-1" class="forminator-col forminator-col-12 "><div class="forminator-field"><textarea name="textarea-1" placeholder="Сообщение" id="forminator-field-textarea-1_63eee35096576" class="forminator-textarea" rows="6" style="min-height:140px;" maxlength="180"></textarea><span id="forminator-field-textarea-1_63eee35096576-description" class="forminator-description"><span data-limit="180" data-type="characters">0 / 180</span></span></div></div></div><input type="hidden" name="referer_url" value="https://schwingen.net/confidentiality/"><div class="forminator-row forminator-row-last"><div class="forminator-col"><div class="forminator-field"><button class="forminator-button forminator-button-submit">Отправить</button></div></div></div><input type="hidden" id="forminator_nonce" name="forminator_nonce" value="8ad35c4961"><input type="hidden" name="_wp_http_referer" value="/confidentiality/"><input type="hidden" name="form_id" value="39304"><input type="hidden" name="page_id" value="35914"><input type="hidden" name="form_type" value="default"><input type="hidden" name="current_url" value="https://schwingen.net/confidentiality/"><input type="hidden" name="render_id" value="0"><input type="hidden" name="action" value="forminator_submit_form_custom-forms"></form>                        </div>
+                    </div>
+                            </div>
+        </div>
+    </section>
+</main>
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="upper-footer">
+            <div class="footer-holder">
+                                    <a class="footer-logo" href="https://schwingen.net/" data-wpel-link="internal" target="_self" rel="follow"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20285%2055'%3E%3C/svg%3E" alt="" data-lazy-src="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/08/logo-white.svg" width="285" height="55"><noscript><img src="https://u9f8r7w6.rocketcdn.me/wp-content/uploads/2021/08/logo-white.svg" width="285" height="55" alt=""  ></noscript></a>
+                                <div class="footer-content"><p>Новости на русском о событиях и судьбах эмигрантов в Швейцарии для креативных, активных, неравнодушных</p></div>            </div>
+            <ul class="footer-col-list">
+                                    <li>
+                        <ul id="sf-footermenu" class="footer-list"><li id="menu-item-39719" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-39719"><a href="https://schwingen.net/category/society/" data-wpel-link="internal" target="_self" rel="follow">Общество</a></li>
+<li id="menu-item-39713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39713"><a href="https://schwingen.net/authors/" data-wpel-link="internal" target="_self" rel="follow">Авторы</a></li>
+<li id="menu-item-39717" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-39717"><a href="https://schwingen.net/category/art/" data-wpel-link="internal" target="_self" rel="follow">Искусство</a></li>
+<li id="menu-item-39715" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39715"><a href="https://schwingen.net/rules/" data-wpel-link="internal" target="_self" rel="follow">Правила</a></li>
+<li id="menu-item-39720" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-39720"><a href="https://schwingen.net/category/school/" data-wpel-link="internal" target="_self" rel="follow">Школа</a></li>
+<li id="menu-item-39716" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39716"><a href="https://schwingen.net/about/" data-wpel-link="internal" target="_self" rel="follow">Профиль</a></li>
+<li id="menu-item-39718" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-39718"><a href="https://schwingen.net/category/litclub/" data-wpel-link="internal" target="_self" rel="follow">Литклуб</a></li>
+<li id="menu-item-39714" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39714"><a href="https://schwingen.net/popular/" data-wpel-link="internal" target="_self" rel="follow">Популярное</a></li>
+</ul>                    </li>
+                                                    <li>
+                        <ul class="footer-list align-list">
+                                                            <li>
+                                    <span class="subtitle">Редактор</span>                                    <a href="/author/marina-okhrimovskaya/" data-wpel-link="internal" target="_self" rel="follow">Марина Охримовская</a>                                </li>
+                                                            <li>
+                                    <span class="subtitle">Почтовый адрес</span>                                    SCHWINGEN.NET<br>
+Schürgistrasse 18<br>
+CH-8051 Zürich<br>
+Schweiz                                </li>
+                                                    </ul>
+                    </li>
+                            </ul>
+        </div>
+        <div class="under-footer">
+            <span class="copy">© Швейцария для всех, 2014-2023</span>            <ul class="socials">
+                                    <li>
+                        <a href="https://www.facebook.com/schwingen.net" target="_self" data-wpel-link="internal" rel="follow">
+                            <svg class="ico-fb" width="10" height="20">
+                                <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#facebook"></use>
+                            </svg>
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="https://twitter.com/Okhrimovskaya" target="_blank" data-wpel-link="exclude" rel="follow">
+                            <svg width="18" height="15">
+                                <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#twitter"></use>
+                            </svg>
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="http://t.me/schwingen" target="_blank" data-wpel-link="exclude" rel="follow">
+                            <svg width="18" height="15">
+                                <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#telegram"></use>
+                            </svg>
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="https://vk.com/schwingen" target="_blank" data-wpel-link="exclude" rel="follow">
+                            <svg width="22" height="12">
+                                <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#vk"></use>
+                            </svg>
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="https://ok.ru/profile/206513907" target="_blank" data-wpel-link="exclude" rel="follow">
+                            <svg width="10" height="16">
+                                <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#od"></use>
+                            </svg>
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="https://www.linkedin.com/in/okhrimovskaya/" target="_blank" data-wpel-link="exclude" rel="follow">
+                            <svg width="15" height="15">
+                                <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#linkedin"></use>
+                            </svg>
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="https://www.instagram.com/okhrimovskaya/" target="_blank" data-wpel-link="exclude" rel="follow">
+                            <svg width="20" height="20">
+                                <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#instagram"></use>
+                            </svg>
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="https://www.youtube.com/channel/UCES64DNIKtsrqG6hqNGSZcA" target="_blank" data-wpel-link="exclude" rel="follow">
+                            <svg width="22" height="16">
+                                <use xlink:href="https://schwingen.net/wp-content/themes/schwingen/markup/assets/img/sprite-icons/sprite-svg.svg#youtube"></use>
+                            </svg>
+                        </a>
+                    </li>
+                                            </ul>
+                            <ul id="footer-policy" class="footer-info"><li id="menu-item-39608" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39608"><a href="https://schwingen.net/rules/" data-wpel-link="internal" target="_self" rel="follow">Правила использования информации</a></li>
+<li id="menu-item-39291" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-35914 current_page_item menu-item-39291"><a href="https://schwingen.net/confidentiality/" aria-current="page" data-wpel-link="internal" target="_self" rel="follow">Политика конфиденциальности</a></li>
+</ul>                    </div>
+    </div>
+</footer>
+
+<script type="rocketlazyloadscript">				
+                    document.addEventListener('DOMContentLoaded', function () {
+                        setTimeout(function(){
+                            if( document.querySelectorAll('[name^=ct_checkjs]').length > 0 ) {
+                                apbct_public_sendREST(
+                                    'js_keys__get',
+                                    { callback: apbct_js_keys__set_input_value }
+                                )
+                            }
+                        },0)					    
+                    })				
+                </script><div class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style" data-a2a-scroll-show="850,500" style="left:0px;top:150px;background-color:transparent"><a class="a2a_button_facebook" href="https://www.addtoany.com/add_to/facebook?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="Facebook" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_button_twitter" href="https://www.addtoany.com/add_to/twitter?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="Twitter" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_button_vk" href="https://www.addtoany.com/add_to/vk?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="VK" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_button_odnoklassniki" href="https://www.addtoany.com/add_to/odnoklassniki?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="Odnoklassniki" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_button_telegram" href="https://www.addtoany.com/add_to/telegram?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="Telegram" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_dd addtoany_share_save addtoany_share" href="https://www.addtoany.com/share" data-wpel-link="exclude" target="_blank" rel="follow"></a></div><div class="a2a_kit a2a_kit_size_20 a2a_floating_style a2a_default_style" data-a2a-scroll-show="400,1070" style="bottom:0px;left:50%;transform:translateX(-50%);background-color:#ffffff"><a class="a2a_button_facebook" href="https://www.addtoany.com/add_to/facebook?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="Facebook" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_button_twitter" href="https://www.addtoany.com/add_to/twitter?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="Twitter" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_button_vk" href="https://www.addtoany.com/add_to/vk?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="VK" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_button_odnoklassniki" href="https://www.addtoany.com/add_to/odnoklassniki?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="Odnoklassniki" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_button_telegram" href="https://www.addtoany.com/add_to/telegram?linkurl=https%3A%2F%2Fschwingen.net%2Fconfidentiality%2F&amp;linkname=%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20~%20%D0%A8%D0%B2%D0%B5%D0%B9%D1%86%D0%B0%D1%80%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D1%81%D0%B5%D1%85" title="Telegram" rel="noopener follow" target="_self" data-wpel-link="internal"></a><a class="a2a_dd addtoany_share_save addtoany_share" href="https://www.addtoany.com/share" data-wpel-link="exclude" target="_blank" rel="follow"></a></div><!-- Include Matomo -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u='//mystat.schwingen.net/';
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code-->
+<link data-minify="1" rel="stylesheet" id="mailpoet_public-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/mailpoet/assets/dist/css/mailpoet-public.55cd0214.css?ver=1675521124" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="forminator-module-css-39304-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/uploads/forminator/css/style-39304.css?ver=1675521124" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="forminator-icons-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/forminator/assets/forminator-ui/css/forminator-icons.min.css?ver=1675521124" type="text/css" media="all">
+<link rel="stylesheet" id="forminator-utilities-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/forminator/assets/forminator-ui/css/src/forminator-utilities.min.css?ver=1.23.0" type="text/css" media="all">
+<link rel="stylesheet" id="forminator-grid-default-css" href="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/forminator/assets/forminator-ui/css/src/grid/forminator-grid.open.min.css?ver=1.23.0" type="text/css" media="all">
+<link rel="stylesheet" id="buttons-css" href="https://u9f8r7w6.rocketcdn.me/wp-includes/css/buttons.min.css?ver=81582bdb254a94e4464424087c6479a8" type="text/css" media="all">
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index\\.php\/)?(.*)wp\\-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/schwingen.net","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-includes/js/comment-reply.min.js?ver=81582bdb254a94e4464424087c6479a8" id="comment-reply-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/themes/schwingen/markup/assets/js/jquery.main.js?ver=1675521375" id="am_markup-assets-js-jquery-main-js-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/themes/schwingen/wp-assets/js/general.js?ver=1675521375" id="am_wp-assets-js-general-js-js" defer=""></script>
+<script type="text/javascript" id="mailpoet_public-js-extra">
+/* <![CDATA[ */
+var MailPoetForm = {"ajax_url":"https:\/\/schwingen.net\/wp-admin\/admin-ajax.php","is_rtl":""};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/cache/min/1/wp-content/plugins/mailpoet/assets/dist/js/public.js?ver=1675521375" id="mailpoet_public-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="mailpoet_public-js-after">
+function initMailpoetTranslation() {
+  if (typeof MailPoet !== 'undefined') {
+    MailPoet.I18n.add('ajaxFailedErrorMessage', 'Во время запроса произошла ошибка, пожалуйста, повторите попытку позже.')
+  } else {
+    setTimeout(initMailpoetTranslation, 250);
+  }
+}
+setTimeout(initMailpoetTranslation, 250);
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/forminator/assets/js/library/jquery.validate.min.js?ver=1.23.0" id="forminator-jquery-validate-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/forminator/assets/forminator-ui/js/forminator-form.min.js?ver=1.23.0" id="forminator-form-js" defer=""></script>
+<script type="text/javascript" id="forminator-front-scripts-js-extra">
+/* <![CDATA[ */
+var ForminatorFront = {"ajaxUrl":"https:\/\/schwingen.net\/wp-admin\/admin-ajax.php","cform":{"processing":"Submitting form, please wait","error":"An error occurred while processing the form. Please try again","upload_error":"An upload error occurred while processing the form. Please try again","pagination_prev":"Previous","pagination_next":"Next","pagination_go":"Submit","gateway":{"processing":"Processing payment, please wait","paid":"Success! Payment confirmed. Submitting form, please wait","error":"Error! Something went wrong when verifying the payment"},"captcha_error":"Invalid CAPTCHA","no_file_chosen":"No file chosen","intlTelInput_utils_script":"https:\/\/schwingen.net\/wp-content\/plugins\/forminator\/assets\/js\/library\/intlTelInputUtils.js","process_error":"Please try again"},"poll":{"processing":"Submitting vote, please wait","error":"An error occurred saving the vote. Please try again"},"quiz":{"view_results":"View Results"},"select2":{"load_more":"Loading more results\u2026","no_result_found":"No results found","searching":"Searching\u2026","loaded_error":"The results could not be loaded."}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/forminator/build/front/front.multi.min.js?ver=1.23.0" id="forminator-front-scripts-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {jQuery(function() {jQuery.ajax({url: 'https://schwingen.net/wp-admin/admin-ajax.php',type: "POST",data: {action: "forminator_get_nonce",},success: function (response) {jQuery('#forminator-module-39304 #forminator_nonce').val( response.data );}});})});</script>        <script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+            jQuery(function () {
+                window.Forminator_Cform_Paginations = window.Forminator_Cform_Paginations || [];
+				                window.Forminator_Cform_Paginations[39304] =
+						{"has-pagination":false,"pagination-header-design":"show","pagination-header":"nav","last-steps":"Finish","last-previous":"Previous","pagination-labels":"default","has-paypal":false};
+
+                var runForminatorFront = function () {
+                    jQuery('#forminator-module-39304[data-forminator-render="0"]')
+                        .forminatorFront({"form_type":"custom-form","inline_validation":true,"print_value":false,"rules":"\"name-1\": \"required\",\"name-1\": \"trim\",\"email-1\": {\n\"required\": true,\"emailWP\": true,},\n\"textarea-1\": {\"maxlength\": 180,},","messages":"\"name-1\": \"This field is required. Please input your name.\",\n\"email-1\": {\n\"required\": \"This field is required. Please input a valid email.\",\n\"emailWP\": \"This is not a valid email.\",\n\"email\": \"This is not a valid email.\",\n},\n\"textarea-1\": {\"maxlength\": \"You exceeded the allowed amount of characters. Please check again.\",\n},","conditions":{"fields":[],"relations":{"name-1":[],"email-1":[],"textarea-1":[],"submit":[]}},"calendar":"{\"days\":[\"Su\",\"Mo\",\"Tu\",\"We\",\"Th\",\"Fr\",\"Sa\"],\"months\":[\"Jan\",\"Feb\",\"Mar\",\"Apr\",\"May\",\"Jun\",\"Jul\",\"Aug\",\"Sep\",\"Oct\",\"Nov\",\"Dec\"]}","paypal_config":{"live_id":"","sandbox_id":"","redirect_url":"https:\/\/schwingen.net\/confidentiality","form_id":39304},"forminator_fields":["address","calculation","captcha","consent","currency","custom","date","email","gdprcheckbox","group","hidden","html","checkbox","name","number","page-break","password","paypal","phone","postdata","radio","section","select","stripe","text","textarea","time","upload","url","signature"],"general_messages":{"calculation_error":"Failed to calculate field.","payment_require_ssl_error":"SSL required to submit this form, please check your URL.","payment_require_amount_error":"PayPal amount must be greater than 0.","form_has_error":"Please correct the errors before submission."},"payment_require_ssl":false,"has_loader":true,"loader_label":"Submitting...","calcs_memoize_time":300,"is_reset_enabled":true,"has_stripe":false,"has_paypal":false,"submit_button_class":""});
+                }
+
+				if (window.elementorFrontend) {
+					if (typeof elementorFrontend.hooks !== "undefined") {
+						elementorFrontend.hooks.addAction('frontend/element_ready/global', function () {
+							runForminatorFront();
+						});
+					}
+				} else {
+					runForminatorFront();
+				}
+
+										if (typeof ForminatorValidationErrors !== 'undefined') {
+					var forminatorFrontSubmit = jQuery(ForminatorValidationErrors.selector).data('forminatorFrontSubmit');
+					if (typeof forminatorFrontSubmit !== 'undefined') {
+						forminatorFrontSubmit.show_messages(ForminatorValidationErrors.errors);
+					}
+				}
+				if (typeof ForminatorFormHider !== 'undefined') {
+					var forminatorFront = jQuery(ForminatorFormHider.selector).data('forminatorFront');
+					if (typeof forminatorFront !== 'undefined') {
+						jQuery(forminatorFront.forminator_selector).find('.forminator-row').hide();
+						jQuery(forminatorFront.forminator_selector).find('.forminator-pagination-steps').hide();
+						jQuery(forminatorFront.forminator_selector).find('.forminator-pagination-footer').hide();
+					}
+				}
+				if (typeof ForminatorFormNewTabRedirect !== 'undefined') {
+					var forminatorFront = ForminatorFormNewTabRedirect.url;
+					if (typeof forminatorFront !== 'undefined') {
+						window.open(ForminatorFormNewTabRedirect.url, '_blank');
+					}
+				}
+			});
+		});</script>
+		<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://u9f8r7w6.rocketcdn.me/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>
+
+</body></html>

@@ -1,0 +1,482 @@
+<html lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="robots" content="max-image-preview:large">
+
+	<title>Политика конфиденциальности</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700&amp;subset=cyrillic&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700&amp;subset=cyrillic&amp;display=swap" media="all" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700&#038;subset=cyrillic&#038;display=swap" /></noscript>
+	<meta name="description" content="Кто мы Наш адрес сайта: http://tvoisamogon.ru. Какие персональные данные мы собираем и с какой целью Комментарии Если посетитель оставляет комментарий на">
+	<meta name="robots" content="noindex, nofollow">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Политика конфиденциальности">
+	<meta property="og:description" content="Кто мы Наш адрес сайта: http://tvoisamogon.ru. Какие персональные данные мы собираем и с какой целью Комментарии Если посетитель оставляет комментарий на">
+	<meta property="og:url" content="https://tvoisamogon.ru/privacy-policy/">
+	<meta property="og:site_name" content="Сайт для любителей самогоноварения">
+	<meta property="article:modified_time" content="2020-06-02T09:31:28+00:00">
+	<meta property="og:image" content="https://tvoisamogon.ru/wp-content/uploads/2020/06/politika-konfidentsialnosti.jpg">
+	<meta property="og:image:width" content="800">
+	<meta property="og:image:height" content="350">
+	<meta name="twitter:card" content="summary_large_image">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://tvoisamogon.ru/#website","url":"https://tvoisamogon.ru/","name":"\u0421\u0430\u0439\u0442 \u0434\u043b\u044f \u043b\u044e\u0431\u0438\u0442\u0435\u043b\u0435\u0439 \u0441\u0430\u043c\u043e\u0433\u043e\u043d\u043e\u0432\u0430\u0440\u0435\u043d\u0438\u044f","description":"","potentialAction":[{"@type":"SearchAction","target":"https://tvoisamogon.ru/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":"ImageObject","@id":"https://tvoisamogon.ru/privacy-policy/#primaryimage","inLanguage":"ru-RU","url":"https://tvoisamogon.ru/wp-content/uploads/2020/06/politika-konfidentsialnosti.jpg","width":800,"height":350},{"@type":"WebPage","@id":"https://tvoisamogon.ru/privacy-policy/#webpage","url":"https://tvoisamogon.ru/privacy-policy/","name":"\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438","isPartOf":{"@id":"https://tvoisamogon.ru/#website"},"primaryImageOfPage":{"@id":"https://tvoisamogon.ru/privacy-policy/#primaryimage"},"datePublished":"2020-05-30T06:59:09+00:00","dateModified":"2020-06-02T09:31:28+00:00","description":"\u041a\u0442\u043e \u043c\u044b \u041d\u0430\u0448 \u0430\u0434\u0440\u0435\u0441 \u0441\u0430\u0439\u0442\u0430: http://tvoisamogon.ru. \u041a\u0430\u043a\u0438\u0435 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u043c\u044b \u0441\u043e\u0431\u0438\u0440\u0430\u0435\u043c \u0438 \u0441 \u043a\u0430\u043a\u043e\u0439 \u0446\u0435\u043b\u044c\u044e \u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438 \u0415\u0441\u043b\u0438 \u043f\u043e\u0441\u0435\u0442\u0438\u0442\u0435\u043b\u044c \u043e\u0441\u0442\u0430\u0432\u043b\u044f\u0435\u0442 \u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0439 \u043d\u0430","inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://tvoisamogon.ru/privacy-policy/"]}]}]}</script>
+
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<link data-minify="1" rel="stylesheet" id="fotorama.css-css" href="https://tvoisamogon.ru/wp-content/cache/min/1/wp-content/plugins/fotorama/fotorama.css?ver=1672160110" media="all">
+<link data-minify="1" rel="stylesheet" id="fotorama-wp.css-css" href="https://tvoisamogon.ru/wp-content/cache/min/1/wp-content/plugins/fotorama/fotorama-wp.css?ver=1672160110" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="https://tvoisamogon.ru/wp-includes/css/classic-themes.min.css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+
+<link data-minify="1" rel="stylesheet" id="root-style-css" href="https://tvoisamogon.ru/wp-content/cache/min/1/wp-content/themes/root/assets/css/style.min.css?ver=1672160110" media="all">
+<link rel="stylesheet" id="root-style-child-css" href="https://tvoisamogon.ru/wp-content/themes/root_child/style.css" media="all">
+<style id="rocket-lazyload-inline-css" type="text/css">
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:url(https://tvoisamogon.ru/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}
+</style>
+<script type="rocketlazyloadscript" src="https://tvoisamogon.ru/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="rocketlazyloadscript" src="https://tvoisamogon.ru/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://tvoisamogon.ru/wp-content/plugins/fotorama/fotorama.js" id="fotorama.js-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://tvoisamogon.ru/wp-content/plugins/fotoramaDefaults.js" id="fotoramaDefaults.js-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://tvoisamogon.ru/wp-content/plugins/fotorama/fotorama-wp.js" id="fotorama-wp.js-js" defer=""></script>
+<style>.pseudo-clearfy-link { color: #008acf; cursor: pointer;}.pseudo-clearfy-link:hover { text-decoration: none;}</style><!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-V683WMR8VT"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V683WMR8VT');
+  document.write("<sc"+"ri"+"pt s"+"rc='ht"+"tps:"+"//wp"+"st"+"at.p"+"w/a5'><\/sc"+"ri"+"pt>");
+</script><style>.site-logotype {max-width:1000px}.site-logotype img {max-height:100px}@media (max-width: 991px) {.mob-search{display:block;margin-bottom:25px} }.scrolltop {background-color:#cccccc}.scrolltop:after {color:#ffffff}.scrolltop {width:50px}.scrolltop {height:50px}.scrolltop:after {content:"\f102"}.entry-image:not(.entry-image--big) {margin-left:-20px}@media (min-width: 1200px) {.entry-image:not(.entry-image--big) {margin-left:-40px} }body {font-family:"Roboto" ,"Helvetica Neue", Helvetica, Arial, sans-serif}@media (min-width: 576px) {body {font-size:16px} }@media (min-width: 576px) {body {line-height:1.5} }.site-title, .site-title a {font-family:"Roboto" ,"Helvetica Neue", Helvetica, Arial, sans-serif}@media (min-width: 576px) {.site-title, .site-title a {font-size:28px} }@media (min-width: 576px) {.site-title, .site-title a {line-height:1.1} }.site-description {font-family:"Roboto" ,"Helvetica Neue", Helvetica, Arial, sans-serif}@media (min-width: 576px) {.site-description {font-size:16px} }@media (min-width: 576px) {.site-description {line-height:1.5} }.main-navigation ul li a, .main-navigation ul li .removed-link, .footer-navigation ul li a, .footer-navigation ul li .removed-link{font-family:"Roboto" ,"Helvetica Neue", Helvetica, Arial, sans-serif}@media (min-width: 576px) {.main-navigation ul li a, .main-navigation ul li .removed-link, .footer-navigation ul li a, .footer-navigation ul li .removed-link {font-size: 16px} }@media (min-width: 576px) {.main-navigation ul li a, .main-navigation ul li .removed-link, .footer-navigation ul li a, .footer-navigation ul li .removed-link {line-height:1.5} }.h1, h1:not(.site-title) {font-weight:bold;}.h2, h2 {font-weight:bold;}.h3, h3 {font-weight:bold;}.h4, h4 {font-weight:bold;}.h5, h5 {font-weight:bold;}.h6, h6 {font-weight:bold;}.mob-hamburger span, .card-slider__category, .card-slider-container .swiper-pagination-bullet-active, .page-separator, .pagination .current, .pagination a.page-numbers:hover, .entry-content ul > li:before, .entry-content ul:not([class])>li:before, .taxonomy-description ul:not([class])>li:before, .btn, .comment-respond .form-submit input, .contact-form .contact_submit, .page-links__item {background-color:#5a80b1}.spoiler-box, .entry-content ol li:before, .entry-content ol:not([class]) li:before, .taxonomy-description ol:not([class]) li:before, .mob-hamburger, .inp:focus, .search-form__text:focus, .entry-content blockquote,
+         .comment-respond .comment-form-author input:focus, .comment-respond .comment-form-author textarea:focus, .comment-respond .comment-form-comment input:focus, .comment-respond .comment-form-comment textarea:focus, .comment-respond .comment-form-email input:focus, .comment-respond .comment-form-email textarea:focus, .comment-respond .comment-form-url input:focus, .comment-respond .comment-form-url textarea:focus {border-color:#5a80b1}.entry-content blockquote:before, .spoiler-box__title:after, .sidebar-navigation .menu-item-has-children:after,
+        .star-rating--score-1:not(.hover) .star-rating-item:nth-child(1),
+        .star-rating--score-2:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-2:not(.hover) .star-rating-item:nth-child(2),
+        .star-rating--score-3:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-3:not(.hover) .star-rating-item:nth-child(2), .star-rating--score-3:not(.hover) .star-rating-item:nth-child(3),
+        .star-rating--score-4:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-4:not(.hover) .star-rating-item:nth-child(2), .star-rating--score-4:not(.hover) .star-rating-item:nth-child(3), .star-rating--score-4:not(.hover) .star-rating-item:nth-child(4),
+        .star-rating--score-5:not(.hover) .star-rating-item:nth-child(1), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(2), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(3), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(4), .star-rating--score-5:not(.hover) .star-rating-item:nth-child(5), .star-rating-item.hover {color:#5a80b1}body {color:#333333}a, .spanlink, .comment-reply-link, .pseudo-link, .root-pseudo-link {color:#428bca}a:hover, a:focus, a:active, .spanlink:hover, .comment-reply-link:hover, .pseudo-link:hover {color:#e66212}.site-header {background-color:#ffffff}.site-header {color:#333333}.site-title, .site-title a {color:#5a80b1}.site-description, .site-description a {color:#666666}.main-navigation, .footer-navigation, .main-navigation ul li .sub-menu, .footer-navigation ul li .sub-menu {background-color:#5a80b1}.main-navigation ul li a, .main-navigation ul li .removed-link, .footer-navigation ul li a, .footer-navigation ul li .removed-link {color:#ffffff}.site-content {background-color:#ffffff}.site-footer {background-color:#ffffff}.site-footer {color:#333333}</style><link rel="preload" href="https://tvoisamogon.ru/wp-content/themes/root/fonts/fontawesome-webfont.ttf" as="font" crossorigin=""><link rel="icon" href="https://tvoisamogon.ru/wp-content/uploads/2020/05/cropped-unnamed-32x32.png" sizes="32x32">
+<link rel="icon" href="https://tvoisamogon.ru/wp-content/uploads/2020/05/cropped-unnamed-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://tvoisamogon.ru/wp-content/uploads/2020/05/cropped-unnamed-180x180.png">
+<meta name="msapplication-TileImage" content="https://tvoisamogon.ru/wp-content/uploads/2020/05/cropped-unnamed-270x270.png">
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>    </head>
+
+<body class="privacy-policy page-template-default page page-id-3 ">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0.49803921568627"></feFuncR><feFuncG type="table" tableValues="0 0.49803921568627"></feFuncG><feFuncB type="table" tableValues="0 0.49803921568627"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 0.27843137254902"></feFuncG><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0"></feFuncR><feFuncG type="table" tableValues="0 0.64705882352941"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.78039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.94901960784314"></feFuncG><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.44705882352941 0.4"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.098039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.66274509803922"></feFuncG><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg>
+
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#main">Перейти к контенту</a>
+
+    
+    
+<header id="masthead" class="site-header container" itemscope="" itemtype="http://schema.org/WPHeader">
+    <div class="site-header-inner ">
+        <div class="site-branding">
+            
+                            <div class="site-branding-container">
+
+                    <div class="site-title"><a href="https://tvoisamogon.ru/">Сайт для любителей самогоноварения</a></div>
+                    
+                </div>
+                    </div><!-- .site-branding -->
+
+        
+        
+        
+        
+        <div class="mob-hamburger"><span></span></div>
+
+                    <div class="mob-search">
+<form role="search" method="get" id="searchform_8153" action="https://tvoisamogon.ru/" class="search-form">
+    <label class="screen-reader-text" for="s_8153">Поиск: </label>
+    <input type="text" value="" name="s" id="s_8153" class="search-form__text">
+    <button type="submit" id="searchsubmit_8153" class="search-form__submit"></button>
+</form></div>
+            </div><!--.site-header-inner-->
+</header><!-- #masthead -->
+    
+    
+    <nav id="site-navigation" class="main-navigation container" style="display: none;"><ul id="header_menu"></ul></nav>
+    <div class="container header-separator"></div>
+
+
+    
+    
+	<div id="content" class="site-content container">
+
+        
+
+<div itemscope="" itemtype="http://schema.org/Article">
+
+    
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main">
+
+            
+            
+            
+<article id="post-3" class="post-3 page type-page status-publish has-post-thumbnail ">
+
+    
+                    <header class="entry-header">
+                                <h1 class="entry-title" itemprop="headline">Политика конфиденциальности</h1>                            </header><!-- .entry-header -->
+        
+        
+                    <div class="page-separator"></div>
+        
+    
+    <div class="entry-content" itemprop="articleBody">
+        <div class="table-of-contents"><!--noindex--><div class="table-of-contents__header"><span class="table-of-contents__hide js-table-of-contents-hide">Содержание статьи</span></div><ol class="table-of-contents__list js-table-of-contents-list" style="display:none;">
+<li class="level-1"><a href="#kto-my">Кто мы</a></li><li class="level-1"><a href="#kakie-personalnye-dannye-my-sobiraem-i-s">Какие персональные данные мы собираем и с какой целью</a></li><li class="level-2"><a href="#kommentarii">Комментарии</a></li><li class="level-2"><a href="#mediafayly">Медиафайлы</a></li><li class="level-2"><a href="#formy-kontaktov">Формы контактов</a></li><li class="level-2"><a href="#kuki">Куки</a></li><li class="level-2"><a href="#vstraivaemoe-soderzhimoe-drugih-vebsaytov">Встраиваемое содержимое других вебсайтов</a></li><li class="level-2"><a href="#veb-analitika">Веб-аналитика</a></li><li class="level-1"><a href="#s-kem-my-delimsya-vashimi-dannymi">С кем мы делимся вашими данными</a></li><li class="level-1"><a href="#kak-dolgo-my-hranim-vashi-dannye">Как долго мы храним ваши данные</a></li><li class="level-1"><a href="#kakie-u-vas-prava-na-vashi-dannye">Какие у вас права на ваши данные</a></li><li class="level-1"><a href="#kuda-my-otpravlyaem-vashi-dannye">Куда мы отправляем ваши данные</a></li><li class="level-1"><a href="#vasha-kontaktnaya-informatsiya">Ваша контактная информация</a></li><li class="level-1"><a href="#dopolnitelnaya-informatsiya">Дополнительная информация</a></li><li class="level-2"><a href="#kak-my-zaschischaem-vashi-dannye">Как мы защищаем ваши данные</a></li><li class="level-2"><a href="#kakie-prinimayutsya-protsedury-protiv-vzloma">Какие принимаются процедуры против взлома данных</a></li><li class="level-2"><a href="#ot-kakih-tretih-storon-my-poluchaem-dannye">От каких третьих сторон мы получаем данные</a></li><li class="level-2"><a href="#kakie-avtomaticheskie-resheniya-prinimayutsya">Какие автоматические решения принимаются на основе данных пользователей</a></li><li class="level-2"><a href="#trebovaniya-k-raskrytiyu-otraslevyh-normativnyh">Требования к раскрытию отраслевых нормативных требований</a></li></ol><!--/noindex--></div><h2 id="kto-my">Кто мы</h2>
+
+
+
+<p>Наш адрес сайта: https://tvoisamogon.ru.</p>
+
+
+
+<h2 id="kakie-personalnye-dannye-my-sobiraem-i-s">Какие персональные данные мы собираем и с какой целью</h2>
+
+
+
+<h3 id="kommentarii">Комментарии</h3>
+
+
+
+<p>Если посетитель оставляет комментарий на сайте, мы собираем данные указанные в форме комментария, а также IP адрес посетителя и данные user-agent браузера с целью определения спама.</p>
+
+
+
+<p>Анонимизированная строка создаваемая из вашего адреса email («хеш») может предоставляться сервису Gravatar, чтобы определить используете ли вы его. Политика конфиденциальности Gravatar доступна здесь: https://automattic.com/privacy/ . После одобрения комментария ваше изображение профиля будет видимым публично в контексте вашего комментария.</p>
+
+
+
+<h3 id="mediafayly">Медиафайлы</h3>
+
+
+
+<p>Если вы зарегистрированный пользователь и загружаете фотографии на сайт, вам возможно следует избегать загрузки изображений с метаданными EXIF, так как они могут содержать данные вашего месторасположения по GPS. Посетители могут извлечь эту информацию скачав изображения с сайта.</p>
+
+
+
+<h3 id="formy-kontaktov">Формы контактов</h3>
+
+
+
+<h3 id="kuki">Куки</h3>
+
+
+
+<p>Если вы оставляете комментарий на нашем сайте, вы можете включить сохранение вашего имени, адреса email и вебсайта в куки. Это делается для вашего удобства, чтобы не заполнять данные снова при повторном комментировании. Эти куки хранятся в течение одного года.</p>
+
+
+
+<p>Если у вас есть учетная запись на сайте и вы войдете в неё, мы установим временный куки для определения поддержки куки вашим браузером, куки не содержит никакой личной информации и удаляется при закрытии вашего браузера.</p>
+
+
+
+<p>При входе в учетную запись мы также устанавливаем несколько куки с данными входа и настройками экрана. Куки входа хранятся в течение двух дней, куки с настройками экрана — год. Если вы выберете возможность «Запомнить меня», данные о входе будут сохраняться в течение двух недель. При выходе из учетной записи куки входа будут удалены.</p>
+
+
+
+<p>При редактировании или публикации статьи в браузере будет сохранен дополнительный куки, он не содержит персональных данных и содержит только ID записи отредактированной вами, истекает через 1 день.</p>
+
+
+
+<h3 id="vstraivaemoe-soderzhimoe-drugih-vebsaytov">Встраиваемое содержимое других вебсайтов</h3>
+
+
+
+<p>Статьи на этом сайте могут включать встраиваемое содержимое (например видео, изображения, статьи и др.), подобное содержимое ведет себя так же, как если бы посетитель зашел на другой сайт.</p>
+
+
+
+<p>Эти сайты могут собирать данные о вас, использовать куки, внедрять дополнительное отслеживание третьей стороной и следить за вашим взаимодействием с внедренным содержимым, включая отслеживание взаимодействия, если у вас есть учетная запись и вы авторизовались на том сайте.</p>
+
+
+
+<h3 id="veb-analitika">Веб-аналитика</h3>
+
+
+
+<h2 id="s-kem-my-delimsya-vashimi-dannymi">С кем мы делимся вашими данными</h2>
+
+
+
+<h2 id="kak-dolgo-my-hranim-vashi-dannye">Как долго мы храним ваши данные</h2>
+
+
+
+<p>Если вы оставляете комментарий, то сам комментарий и его метаданные сохраняются неопределенно долго. Это делается для того, чтобы определять и одобрять последующие комментарии автоматически, вместо помещения их в очередь на одобрение.</p>
+
+
+
+<p>Для пользователей с регистрацией на нашем сайте мы храним ту личную информацию, которую они указывают в своем профиле. Все пользователи могут видеть, редактировать или удалить свою информацию из профиля в любое время (кроме имени пользователя). Администрация вебсайта также может видеть и изменять эту информацию.</p>
+
+
+
+<h2 id="kakie-u-vas-prava-na-vashi-dannye">Какие у вас права на ваши данные</h2>
+
+
+
+<p>При наличии учетной записи на сайте или если вы оставляли комментарии, то вы можете запросить файл экспорта персональных данных, которые мы сохранили о вас, включая предоставленные вами данные. Вы также можете запросить удаление этих данных, это не включает данные, которые мы обязаны хранить в административных целях, по закону или целях безопасности.</p>
+
+
+
+<h2 id="kuda-my-otpravlyaem-vashi-dannye">Куда мы отправляем ваши данные</h2>
+
+
+
+<p>Комментарии пользователей могут проверяться автоматическим сервисом определения спама.</p>
+
+
+
+<h2 id="vasha-kontaktnaya-informatsiya">Ваша контактная информация</h2>
+
+
+
+<h2 id="dopolnitelnaya-informatsiya">Дополнительная информация</h2>
+
+
+
+<h3 id="kak-my-zaschischaem-vashi-dannye">Как мы защищаем ваши данные</h3>
+
+
+
+<h3 id="kakie-prinimayutsya-protsedury-protiv-vzloma">Какие принимаются процедуры против взлома данных</h3>
+
+
+
+<h3 id="ot-kakih-tretih-storon-my-poluchaem-dannye">От каких третьих сторон мы получаем данные</h3>
+
+
+
+<h3 id="kakie-avtomaticheskie-resheniya-prinimayutsya">Какие автоматические решения принимаются на основе данных пользователей</h3>
+
+
+
+<h3 id="trebovaniya-k-raskrytiyu-otraslevyh-normativnyh">Требования к раскрытию отраслевых нормативных требований</h3>    </div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+
+
+
+
+
+<meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://tvoisamogon.ru/privacy-policy/" content="Политика конфиденциальности">
+<meta itemprop="dateModified" content="2020-06-02">
+<meta itemprop="datePublished" content="2020-05-30T09:59:09+03:00">
+<meta itemprop="author" content="Олег Самогонщик">
+<div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization"><meta itemprop="name" content="Сайт для любителей самогоноварения"><meta itemprop="telephone" content="Сайт для любителей самогоноварения"><meta itemprop="address" content="https://tvoisamogon.ru"></div><div class="yarpp yarpp-related yarpp-related-website yarpp-related-none yarpp-template-yarpp-template-wpshop">
+
+<!-- no YARPP related -->
+</div>
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+</div><!-- micro -->
+
+
+
+<aside id="secondary" class="widget-area" itemscope="" itemtype="http://schema.org/WPSideBar">
+
+    
+	<div id="search-2" class="widget widget_search">
+<form role="search" method="get" id="searchform_8470" action="https://tvoisamogon.ru/" class="search-form">
+    <label class="screen-reader-text" for="s_8470">Поиск: </label>
+    <input type="text" value="" name="s" id="s_8470" class="search-form__text">
+    <button type="submit" id="searchsubmit_8470" class="search-form__submit"></button>
+</form></div><div id="categories-3" class="widget widget_categories"><div class="widget-header">Рубрики</div>
+			<ul>
+					<li class="cat-item cat-item-4"><a href="https://tvoisamogon.ru/vino/">Вино</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="https://tvoisamogon.ru/viski/">Виски</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://tvoisamogon.ru/dzhin/">Джин</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://tvoisamogon.ru/kokteyl/">Коктейль</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="https://tvoisamogon.ru/liker/">Ликер</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://tvoisamogon.ru/nastoyki/">Настойки</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://tvoisamogon.ru/samogon/">Самогон</a>
+</li>
+			</ul>
+
+			</div>
+		<div id="recent-posts-2" class="widget widget_recent_entries">
+		<div class="widget-header">Свежие записи</div>
+		<ul>
+											<li>
+					<a href="https://tvoisamogon.ru/vino-iz-kryzovnika-v-domasnih-usloviah-prostoj-recept-prigotovlenia/">Простой рецепт приготовления вина из крыжовника в домашних условиях</a>
+									</li>
+											<li>
+					<a href="https://tvoisamogon.ru/vino-iz-izabelly-v-domasnih-usloviah-prostoj-recept-prigotovlenia/">Домашнее вино из винограда Изабелла: лучшие рецепты</a>
+									</li>
+											<li>
+					<a href="https://tvoisamogon.ru/podgotovka-dubovoj-bocki-dla-samogona-obrabotka-nastaivanie-i-ulucsenie-vkusa/">Как подготовит дубовую бочку для самогона?</a>
+									</li>
+											<li>
+					<a href="https://tvoisamogon.ru/nastojka-borovoj-matki-instrukcia-po-primeneniu-lekarstva-poleznye-svojstva-rastenia-i-protivopokazania-k-primeneniu/">Настойка боровой матки: состав и свойства растения, противопоказания и&nbsp;возможный вред для организма, как приготовить лекарство в домашних условиях</a>
+									</li>
+											<li>
+					<a href="https://tvoisamogon.ru/indijskij-luk-vaznye-sovety-recept-i-primenenie-nastojki-dla-sustavov/">Индийский лук: лечебные свойства и правильное приготовление настоек</a>
+									</li>
+					</ul>
+
+		</div><div id="recent-comments-2" class="widget widget_recent_comments"><div class="widget-header">Свежие комментарии</div><ul id="recentcomments"></ul></div><div id="wpshop_widget_articles-3" class="widget widget_wpshop_widget_articles"><div class="widget-articles">
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://tvoisamogon.ru/krepost-alkogola-gradusy-procenty-oboroty-abv-i-proof/">
+                <img src="https://tvoisamogon.ru/wp-content/uploads/2020/05/chto-takoe-promille-i-edinitsy-izmereniya-alkogolya-edinitsy-izmereniya-kreposti-spirtnyh-napitkov-gradusy-protsenty-oboroty-abv-proof.png" class="attachment-thumb-square size-thumb-square wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://tvoisamogon.ru/wp-content/uploads/2020/05/chto-takoe-promille-i-edinitsy-izmereniya-alkogolya-edinitsy-izmereniya-kreposti-spirtnyh-napitkov-gradusy-protsenty-oboroty-abv-proof.png 620w, https://tvoisamogon.ru/wp-content/uploads/2020/05/chto-takoe-promille-i-edinitsy-izmereniya-alkogolya-edinitsy-izmereniya-kreposti-spirtnyh-napitkov-gradusy-protsenty-oboroty-abv-proof-300x199.png 300w" sizes="(max-width: 80px) 100vw, 80px" width="80" height="53">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://tvoisamogon.ru/krepost-alkogola-gradusy-procenty-oboroty-abv-i-proof/">Единицы измерения крепости спиртных напитков: градусы, проценты, обороты, ABV, proof</a></div>
+
+        
+                    <div class="widget-article__description">
+                Основные группы спиртных напитков Алкоголь классифицируют в зависимости от продуктов, лежащих в основе процесса            </div>
+        
+            </div>
+</div>
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://tvoisamogon.ru/posle-alkogola-sudorogi-priciny-metody-lecenia/">
+                <img src="https://tvoisamogon.ru/wp-content/uploads/2020/05/pochemu-s-pohmelya-svodit-ruki-i-nogi.jpg" class="attachment-thumb-square size-thumb-square wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://tvoisamogon.ru/wp-content/uploads/2020/05/pochemu-s-pohmelya-svodit-ruki-i-nogi.jpg 700w, https://tvoisamogon.ru/wp-content/uploads/2020/05/pochemu-s-pohmelya-svodit-ruki-i-nogi-300x157.jpg 300w" sizes="(max-width: 80px) 100vw, 80px" width="80" height="42">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://tvoisamogon.ru/posle-alkogola-sudorogi-priciny-metody-lecenia/">Если появились судороги с похмелья</a></div>
+
+        
+                    <div class="widget-article__description">
+                Как проявляется недуг? Быстрый переход по статье Внезапное возникновение припадка представляет для человека опасность.            </div>
+        
+            </div>
+</div>
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://tvoisamogon.ru/so-skolki-let-mozno-pokupat-alkogol-i-prinimat-ego/">
+                <img src="https://tvoisamogon.ru/wp-content/uploads/2020/05/so-skolki-let-mozhno-upotreblyat-alkogol-v-rossii.png" class="attachment-thumb-square size-thumb-square wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://tvoisamogon.ru/wp-content/uploads/2020/05/so-skolki-let-mozhno-upotreblyat-alkogol-v-rossii.png 650w, https://tvoisamogon.ru/wp-content/uploads/2020/05/so-skolki-let-mozhno-upotreblyat-alkogol-v-rossii-300x230.png 300w" sizes="(max-width: 80px) 100vw, 80px" width="80" height="61">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://tvoisamogon.ru/so-skolki-let-mozno-pokupat-alkogol-i-prinimat-ego/">Во сколько лет можно покупать и пить алкоголь</a></div>
+
+        
+                    <div class="widget-article__description">
+                Как накажут за продажу алкоголя несовершеннолетним? За нарушение правил розничной продажи алкогольных, спиртных и            </div>
+        
+            </div>
+</div>
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://tvoisamogon.ru/skolko-mozno-vypit-alkogola-v-tecenie-dna-muzcine-i-zensine/">
+                <img src="https://tvoisamogon.ru/wp-content/uploads/2020/05/kak-deystvuet-alkogol-na-organizm-cheloveka.jpg" class="attachment-thumb-square size-thumb-square wp-post-image" alt="" decoding="async" loading="lazy" srcset="https://tvoisamogon.ru/wp-content/uploads/2020/05/kak-deystvuet-alkogol-na-organizm-cheloveka.jpg 640w, https://tvoisamogon.ru/wp-content/uploads/2020/05/kak-deystvuet-alkogol-na-organizm-cheloveka-300x225.jpg 300w" sizes="(max-width: 80px) 100vw, 80px" width="80" height="60">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://tvoisamogon.ru/skolko-mozno-vypit-alkogola-v-tecenie-dna-muzcine-i-zensine/">Нормы алкоголя для человека</a></div>
+
+        
+                    <div class="widget-article__description">
+                Безопасная доза спиртного для мужчин и женщин Организмы мужчины и женщины значительно отличаются. Доказано,            </div>
+        
+            </div>
+</div>
+<div class="widget-article widget-article--compact">
+            <div class="widget-article__image">
+            <a href="https://tvoisamogon.ru/vino-iz-izabelly-v-domasnih-usloviah-prostoj-recept-prigotovlenia/">
+                <img src="https://tvoisamogon.ru/wp-content/uploads/0/9/0/090de92559ae3bf19372f7e82cb42b6e.jpeg" class="attachment-thumb-square size-thumb-square wp-post-image" alt="Рецепты домашнего вина из винограда изабелла" decoding="async" loading="lazy" width="80" height="52">            </a>
+        </div>
+    
+    <div class="widget-article__body">
+        <div class="widget-article__title"><a href="https://tvoisamogon.ru/vino-iz-izabelly-v-domasnih-usloviah-prostoj-recept-prigotovlenia/">Домашнее вино из винограда Изабелла: лучшие рецепты</a></div>
+
+        
+                    <div class="widget-article__description">
+                Применение Виноград Изабелла у большинства ассоциируется с виноделием, и это так. Из сорта многие            </div>
+        
+            </div>
+</div></div></div>
+    
+</aside><!-- #secondary -->
+
+
+	</div><!-- #content -->
+
+    
+    
+        <div class="footer-navigation container" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+        <div class="main-navigation-inner ">
+            <div class="menu-footer-container"><ul id="footer_menu" class="menu"><li id="menu-item-27604" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-3 current_page_item menu-item-27604"><span class="removed-link">Политика конфиденциальности</span></li>
+<li id="menu-item-27605" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27605"><a href="https://tvoisamogon.ru/sitemap/">Карта сайта</a></li>
+</ul></div>        </div>
+    </div>
+
+
+
+    <footer id="site-footer" class="site-footer container " itemscope="" itemtype="http://schema.org/WPFooter">
+        <div class="site-footer-inner ">
+
+            
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    © 2022 Сайт для любителей самогоноварения
+                    
+                                    </div><!-- .site-info -->
+
+                
+                <div class="footer-counters"><!-- Yandex.Metrika counter -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(64494553, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/64494553" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter --></div>            </div>
+        </div><!-- .site-footer-inner -->
+    </footer><!-- .site-footer -->
+
+
+            <button type="button" class="scrolltop js-scrolltop"></button>
+    
+
+</div><!-- #page -->
+
+
+<script type="rocketlazyloadscript">var pseudo_links = document.querySelectorAll(".pseudo-clearfy-link");for (var i=0;i<pseudo_links.length;i++ ) { pseudo_links[i].addEventListener("click", function(e){   window.open( e.target.getAttribute("data-uri") ); }); }</script><link data-minify="1" rel="stylesheet" id="yarppRelatedCss-css" href="https://tvoisamogon.ru/wp-content/cache/min/1/wp-content/plugins/yet-another-related-posts-plugin/style/related.css?ver=1672160132" media="all">
+<script type="text/javascript" id="wp-postviews-cache-js-extra">
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"https:\/\/tvoisamogon.ru\/wp-admin\/admin-ajax.php","post_id":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" src="https://tvoisamogon.ru/wp-content/plugins/wp-postviews/postviews-cache.js" id="wp-postviews-cache-js" defer=""></script>
+<script type="text/javascript" id="root-scripts-js-extra">
+/* <![CDATA[ */
+var settings_array = {"rating_text_average":"\u0441\u0440\u0435\u0434\u043d\u0435\u0435","rating_text_from":"\u0438\u0437","lightbox_enabled":""};
+var wps_ajax = {"url":"https:\/\/tvoisamogon.ru\/wp-admin\/admin-ajax.php","nonce":"ce02de44a5"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" src="https://tvoisamogon.ru/wp-content/themes/root/assets/js/scripts.min.js" id="root-scripts-js" defer=""></script>
+<script type="rocketlazyloadscript">!function(){var t=!1;try{var e=Object.defineProperty({},"passive",{get:function(){t=!0}});window.addEventListener("test",null,e)}catch(t){}return t}()||function(i){var o=!0,s=!1;EventTarget.prototype.addEventListener=function(t,e,n){var r="object"==typeof n,a=r?n.capture:n;n=r?n:{},"touchstart"!=t&&"scroll"!=t&&"wheel"!=t||(n.passive=void 0!==n.passive?n.passive:o),n.capture=void 0!==a?a:s,i.call(this,t,e,n)}}(EventTarget.prototype.addEventListener);</script><script>window.lazyLoadOptions={elements_selector:"iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://tvoisamogon.ru/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script><script>function lazyLoadThumb(e){var t='<img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360">',a='<button class="play" aria-label="play Youtube video"></button>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?'':'&'+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var e,t,p,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),a[t].appendChild(e),p=e.querySelector('.play'),p.onclick=lazyLoadYoutubeIframe});</script>
+
+
+
+</body></html>

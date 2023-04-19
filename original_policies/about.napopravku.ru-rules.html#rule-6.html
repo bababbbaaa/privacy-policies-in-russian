@@ -1,0 +1,1160 @@
+<html dir="ltr" lang="en"><head>
+    <meta charset="UTF-8">
+    <title>Правила использования сервиса – НаПоправку</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Правила использования сервиса | НаПоправку – Сервис онлайн-записи к врачу">
+
+    <link rel="canonical" href="https://about.napopravku.ru/rules.html">
+
+    <meta name="og:title" content="НаПоправку — информация о сервисе">
+    <meta name="og:description" content="Описание сервиса, информация о юридическом лице и редакции. Справочный центр по работе с сервисом.">
+    <meta name="og:type" content="article">
+    <meta name="og:image" content="https://napopravku.ru/public/repost2.png">
+    <meta name="og:url" content="https://about.napopravku.ru/rules.html">
+
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <!-- Google Tag Manager -->
+    <script async="" src="https://script.esputnik.com/3908B63B61B8449DA65F97FDB13A4EBD/sc.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-WDP9MX"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WDP9MX');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDP9MX" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- jQuery for simple interactions -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js" charset="utf-8"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+
+<script type="module">
+  import MenuController from "../js/MenuController.js";
+
+  $(document).ready(function(){
+    const desktopMenu = new MenuController(document.querySelector('.light-menu'), true);
+    const mobileMenu = new MenuController(document.querySelector('.mobile-menu'));
+
+    $('.header__menu-toggler').click(function(event){
+      $('.menu-panel, .menu-overlay' ).toggleClass('active');
+    });
+
+    $('.beauty').click(function(event){
+      $('#beauty' ).toggleClass('active');
+    });
+
+    $(document).on('click', function(e) {
+      if (!$(e.target).closest(".js-menu-item").length) {
+        $('#beauty').removeClass('active')
+      }
+      e.stopPropagation();
+    });
+
+    $('.menu-overlay').click(function(event){
+      $('.menu-panel, .menu-overlay').removeClass('active')
+    });
+
+    $('.mobile-app-form').submit(function (e) {
+      e.preventDefault()
+
+      var phone = $('#phone-number').val().replace(/[^0-9]/g, '');
+
+      $.ajax({
+        method: "POST",
+        url: "https://napopravku.ru/api/v2/user/app-link",
+        data: {phone: phone, ref: "meddoc"}
+      }).done(function (msg) {
+        var text = $('.mobile-app-form__send').text()
+
+        $('#phone-number').val('')
+        $('.mobile-app-form__send')
+          .text("Отправлено")
+          .prop('disabled', true).css({'background-color': '#B8DCE2', 'color': '#10787B'});
+
+        setTimeout(function () {
+          $('.mobile-app-form__send').text(text).prop('disabled', false).css({
+            'background-color': '#399FAE',
+            'color': '#FFF'
+          });
+        }, 5000)
+      });
+    })
+  });
+</script>
+
+
+
+    <header class="header">
+    <div class="container header-info desktop">
+        <div class="block-info">
+            <div class="part left">
+                <a href="https://napopravku.ru/moskva/?auto_detect_city=1" class="header-logo" target="_blank">
+                    <img src="/images/footer/logo.svg">
+                </a>
+            </div>
+            <div class="part right">
+                <div class="user-panel">
+                    <div class="sep-links type-links">
+                        <a href="https://business.napopravku.ru/" target="_blank" data-goal="for-clinics-landing-page" data-position="top-link">
+                            Клиникам
+                        </a>
+                        <a href="https://business.napopravku.ru/registrationdoc/" target="_blank" data-goal="for-doctors-landing-page" data-position="top-link">
+                            Врачам
+                        </a>
+                    </div>
+                    <div class="sep-links auth-links">
+                        <a class="enter js-auth-popup" target="_blank" href="https://napopravku.ru/#phone-auth">Вход</a>
+                        <a class="enter js-reg-popup" target="_blank" href="https://napopravku.ru/#phone-reg">Регистрация</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu-container desktop">
+        <div class="container menu">
+
+            <div class="toggler-container">
+                <span class="toggler"></span>
+            </div>
+
+            <div class="js-light-menu">
+                <ul class="light-menu">
+                    <li class="light-menu__item">
+                        <a class="light-menu__link" target="_blank" href="https://napopravku.ru/moskva/doctors/">Врачи</a>
+                    </li>
+                    <li class="light-menu__item">
+                        <a class="light-menu__link" target="_blank" href="https://napopravku.ru/moskva/clinics/">Клиники</a>
+                    </li>
+                    <li class="light-menu__item">
+                        <a class="light-menu__link" target="_blank" href="https://napopravku.ru/moskva/uslugi/">Услуги</a>
+                    </li>
+                    <li class="light-menu__item">
+                        <a class="light-menu__link" target="_blank" href="https://napopravku.ru/moskva/aktsii/">Акции</a>
+                    </li>
+                    <li class="light-menu__item">
+                        <a class="light-menu__link" target="_blank" href="https://lib.napopravku.ru">Библиотека</a>
+                    </li>
+                    <li class="light-menu__item light-menu__item--dropdown" data-dropdown="" data-in-dropdown="0">
+                        <a class="light-menu__link" data-in-dropdown="0">О нас</a>
+                        <div class="light-menu__dropdown" data-dropdown-panel="" data-in-dropdown="0">
+                            <ul data-in-dropdown="0">
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/reviews.html" data-in-dropdown="0">Отзывы о нас</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/press.html" data-in-dropdown="0">Пресса</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/partners.html" data-in-dropdown="0">Партнёры</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/editor.html" data-in-dropdown="0">Медицинская редакция</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/license.html" data-in-dropdown="0">Наши лицензии</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/career.html" data-in-dropdown="0">Карьера</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/contacts.html" data-in-dropdown="0">Контакты</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="light-menu__item light-menu__item--dropdown" data-dropdown="" data-in-dropdown="0">
+                        <a class="light-menu__link" data-in-dropdown="0">Пользователям</a>
+                        <div class="light-menu__dropdown" data-dropdown-panel="" data-in-dropdown="0">
+                            <ul data-in-dropdown="0">
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/about-record.html" data-in-dropdown="0">Запись в режиме реал-тайм</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/about-reviews.html" data-in-dropdown="0">Отзывы – сердце НаПоправку</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/about-treatment.html" data-in-dropdown="0">Лечиться с нами выгодно</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/user-data.html" data-in-dropdown="0">Защита данных пользователя</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/service-commission.html" data-in-dropdown="0">Про комиссию</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/content.html" data-in-dropdown="0">Качественный контент</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="light-menu__item light-menu__item--dropdown" data-dropdown="" data-in-dropdown="0">
+                        <a class="light-menu__link" data-in-dropdown="0">Правила</a>
+                        <div class="light-menu__dropdown" data-dropdown-panel="" data-in-dropdown="0">
+                            <ul data-in-dropdown="0">
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html" data-in-dropdown="0">Правила использования сервиса</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/policy.html" data-in-dropdown="0">Персональные данные пользователей</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-7" data-in-dropdown="0">Использование материалов сайта</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-4" data-in-dropdown="0">Ответственность за информацию</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-8" data-in-dropdown="0">Программа лояльности</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-5" data-in-dropdown="0">Правила сотрудничества с клиниками</a>
+                                </li>
+                                <li class="light-menu__item" data-in-dropdown="0">
+                                    <a class="light-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-6" data-in-dropdown="0">Персональные данные врачей</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-panel">
+        <noindex>
+            <div class="auth-links">
+                <a class="enter js-auth-popup" href="https://napopravku.ru/#phone-auth">Вход</a>
+                <a class="enter js-reg-popup" href="https://napopravku.ru/#phone-reg">Регистрация</a>
+            </div>
+        </noindex>
+
+        <div class="mobile-menu">
+            <ul>
+                <li class="mobile-menu__item mobile-menu__item--iconed mobile-menu__item--doctors">
+                    <a class="mobile-menu__link" target="_blank" href="https://napopravku.ru/moskva/doctors/">Врачи</a>
+                </li>
+                <li class="mobile-menu__item mobile-menu__item--iconed mobile-menu__item--clinics">
+                    <a class="mobile-menu__link" target="_blank" href="https://napopravku.ru/moskva/clinics/">Клиники</a>
+                </li>
+                <li class="mobile-menu__item mobile-menu__item--iconed mobile-menu__item--services">
+                    <a class="mobile-menu__link" target="_blank" href="https://napopravku.ru/moskva/uslugi/">Услуги</a>
+                </li>
+                <li class="mobile-menu__item mobile-menu__item--iconed mobile-menu__item--actions">
+                    <a class="mobile-menu__link" target="_blank" href="https://napopravku.ru/moskva/aktsii/">Акции</a>
+                </li>
+                <li class="mobile-menu__item mobile-menu__item--iconed mobile-menu__item--library">
+                    <a class="mobile-menu__link" target="_blank" href="https://lib.napopravku.ru">Библиотека</a>
+                </li>
+                <li class="mobile-menu__item mobile-menu__item--dropdown" data-dropdown="" data-in-dropdown="1">
+                    <a class="mobile-menu__link" data-in-dropdown="1">О нас</a>
+                    <div class="mobile-menu__dropdown mobile-menu--secondary" data-in-dropdown="1">
+                        <ul data-in-dropdown="1">
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/reviews.html" data-in-dropdown="1">Отзывы о нас</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/press.html" data-in-dropdown="1">Пресса</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/partners.html" data-in-dropdown="1">Партнёры</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/editor.html" data-in-dropdown="1">Медицинская редакция</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/license.html" data-in-dropdown="1">Наши лицензии</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/career.html" data-in-dropdown="1">Карьера</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/contacts.html" data-in-dropdown="1">Контакты</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mobile-menu__item mobile-menu__item--dropdown" data-dropdown="" data-in-dropdown="1">
+                    <a class="mobile-menu__link" data-in-dropdown="1">Пользователям</a>
+                    <div class="mobile-menu__dropdown mobile-menu--secondary" data-in-dropdown="1">
+                        <ul data-in-dropdown="1">
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/about-record.html" data-in-dropdown="1">Запись в режиме реал-тайм</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/about-reviews.html" data-in-dropdown="1">Отзывы – сердце НаПоправку</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/about-treatment.html" data-in-dropdown="1">Лечиться с нами выгодно</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/user-data.html" data-in-dropdown="1">Защита данных пользователя</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/service-commission.html" data-in-dropdown="1">Про комиссию</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/content.html" data-in-dropdown="1">Качественный контент</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mobile-menu__item mobile-menu__item--dropdown" data-dropdown="" data-in-dropdown="1">
+                    <a class="mobile-menu__link" data-in-dropdown="1">Правила</a>
+                    <div class="mobile-menu__dropdown mobile-menu--secondary" data-in-dropdown="1">
+                        <ul data-in-dropdown="1">
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html" data-in-dropdown="1">Правила использования сервиса</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/policy.html" data-in-dropdown="1">Персональные данные пользователей</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-7" data-in-dropdown="1">Использование материалов сайта</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-4" data-in-dropdown="1">Ответственность за информацию</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-8" data-in-dropdown="1">Программа лояльности</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-5" data-in-dropdown="1">Правила сотрудничества с клиниками</a>
+                            </li>
+                            <li class="mobile-menu__item" data-in-dropdown="1">
+                                <a class="mobile-menu__link" target="_blank" href="https://about.napopravku.ru/rules.html#rule-6" data-in-dropdown="1">Персональные данные врачей</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <li class="mobile-menu__item">
+                    <a class="mobile-menu__link" href="https://business.napopravku.ru/" data-goal="for-clinics-landing-page" data-position="top-link" target="_blank">Клиникам</a>
+                </li>
+                <li class="mobile-menu__item">
+                    <a class="mobile-menu__link" href="https://business.napopravku.ru/registrationdoc/" data-goal="for-doctors-landing-page" data-position="top-link" target="_blank">Врачам</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="menu-overlay"></div>
+    <div class="header-mob mobile">
+        <div class="header__main">
+            <div class="header__left-col">
+                <button class="header__menu-toggler js-menu-toggler" type="button">
+                    <span class="visually-hidden">Открыть меню</span>
+                </button>
+
+                <a href="https://napopravku.ru/moskva/?auto_detect_city=1" class="logo">
+                    <img src="/images/footer/logo.svg">
+                </a>
+            </div>
+
+            <div class="header__right-col">
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+    <main>
+        <div class="section container portal-document">
+            <div class="portal-document__section portal-section">
+                <h1 class="portal-document__title portal-h1">Пользовательское соглашение</h1>
+                <ol class="portal-document__list portal-list">
+                    <li><a class="link portal-list__link" href="#rule-1">Условия предоставления лицензии на
+                        использование Сервиса</a></li>
+                    <li><a class="link portal-list__link" href="#rule-2">Правила использования Сервиса</a></li>
+                    <li><a class="link portal-list__link" href="#rule-3">Политика конфиденциальности</a></li>
+                    <li><a class="link portal-list__link" href="#rule-4">Ответственность Сервиса за информацию,
+                        опубликованную на
+                        Сервисе</a></li>
+                    <li><a class="link portal-list__link" href="#rule-5">Правила взаимодействия с Пользователем,
+                        являющимся
+                        представителем медицинской организации или врачом</a></li>
+                    <li><a class="link portal-list__link" href="#rule-6">Персональные данные врачей</a></li>
+                    <li><a class="link portal-list__link" href="#rule-7">Использование материалов Сервиса</a></li>
+                    <li><a class="link portal-list__link" href="#rule-8">Программа лояльности для Пользователей,
+                        являющихся клиентами
+                        медицинских организаций и врачей</a></li>
+                    <li><a class="link portal-list__link" href="#rule-9">Политика Cookies</a></li>
+                </ol>
+            </div>
+            <div class="portal-document__section portal-section">
+                <p class="portal-document__text portal-text">
+                    ООО «Напоправку.ру» (199178, г. Санкт-Петербург, линия 7-я В.О.,
+                    дом 76, литер А, пом. 45-Н, этаж 4, офис 402)
+                    (далее – <b>«Администрация Сервиса»</b>) является разработчиком и правообладателем веб-сайта
+                    НаПоправку.ру, размещенного по адресу
+                    napopravku.ru, и мобильного приложения “НаПоправку” (далее – <b>«Сервис»</b>), в связи с чем
+                    предоставляет лицу, намеревающемуся
+                    воспользоваться Сервисом (далее – <b>«Пользователь»</b>),
+                    неисключительную лицензию на его использование путем принятия Пользователем условий настоящего
+                    Лицензионного соглашения.</p>
+                <p class="portal-document__text portal-text">
+                    Посещая наш Сервис, Пользователь признаёт, что прочитал, понял и согласился с нижеописанными
+                    условиями Лицензионного соглашения.</p>
+
+            </div>
+            <div class="portal-document__section portal-section">
+                <div class="portal-document__content">
+                    <h3 class="portal-document__subtitle portal-h3" id="rule-1"> 1. Условия предоставления лицензии на
+                        использование Сервиса</h3>
+                    <p class="portal-document__text portal-text">
+                        1.1. Администрация Сервиса является правообладателем Сервиса, а также всех входящих в него
+                        элементов
+                        (программы для ЭВМ,
+                        базы данных, литературные произведения и произведения дизайна, произведения искусства и графики,
+                        фотографии и иные
+                        объекты авторских прав).
+                    </p>
+                    <p class="portal-document__text portal-text">
+                        1.2. Сервис представляет собой совокупность одной и/или нескольких программ для ЭВМ и баз данных
+                        (с включенными в них элементами), алгоритмы функционирования которых обеспечивают представление
+                        в удобной форме
+                        информации о медицинских организациях, конкретных врачах и личном опыте Пользователей, а также
+                        что позволяет
+                        осуществлять выбор медицинской организации и врача, чтобы повысить эффективность лечения.
+                    </p>
+                    <p class="portal-document__text portal-text">
+                        1.3. Администрация Сервиса предоставляет Пользователю безвозмездную неисключительную лицензию на
+                        использование Сервиса и включенных в него элементов (программы для ЭВМ, базы данных и их
+                        элементы, объекты авторских прав) на
+                        территории Российской Федерации в течение срока регистрации Личного кабинета Пользователя.
+                    </p>
+                    <p class="portal-document__text portal-text">
+                        1.4. Администрация Сервиса предоставляет Пользователю право использовать Сервис и его элементы
+                        путем
+                        осуществления эксплуатации Сервиса и его элементов в соответствии с функционалом Сервиса (в том
+                        числе для размещения информации
+                        в базах данных Сервиса и записи на прием к врачам) для целей, определенных настоящим
+                        Лицензионным соглашением.
+                    </p>
+                    <p class="portal-document__text portal-text">
+                        1.5. Пользователю, являющемуся физическим лицом, намеревающимся получить информацию о
+                        медицинских
+                        организациях и врачах, доступен следующий функционал Сервиса:
+                    </p>
+                    <ul class="portal-document__list portal-list portal-list--unordered">
+                        <li>получение информации о медицинских организациях и конкретных врачах, включенных в базы
+                            данных Сервиса,
+                        </li>
+                        <li>осуществление записи в соответствующие медицинские организации и к конкретным врачам,
+                            включенным в базы данных Сервиса;
+                        </li>
+                        <li>размещать отзывы и комментарии в соответствующих разделах Сервиса.</li>
+                        <li>Пользователю, являющемуся медицинской организацией или врачом, доступен следующий функционал
+                            Сервиса: включение в базы данных
+                            Сервиса данных о Пользователе (медицинской организации и конкретных врачах) для ознакомления
+                            с профилем деятельности медицинской
+                            организации и/или конкретного врача, их опытом работы, рейтингом, отзывами о них, режимом
+                            работы, стоимостью услуг и другой
+                            информацией для поиска клиентами по базам данных Сервиса.
+                        </li>
+                    </ul>
+                    <p class="portal-document__text portal-text">
+                        1.6. Функционал, предусмотренный подпунктами 5.2, 1.5.3, 1.5.4 выше доступен Пользователю
+                        посредством регистрации на Сервисе и создания
+                        учетной записи (далее – <b>«Личный кабинет»</b>).
+                    </p>
+                    <p class="portal-document__text portal-text">
+                        1.7. Администратор Сервиса не гарантирует бесперебойную работу Сервиса.
+                    </p>
+                    <p class="portal-document__text portal-text">
+                        1.8. Копирование или любое несанкционированное использование материалов Сервиса запрещено.
+                    </p>
+                </div>
+                <div class="portal-document__content">
+                    <h3 class="portal-document__subtitle portal-h3" id="rule-2">2. Правила использования Сервиса</h3>
+                    <p class="portal-document__text portal-text">2.1. Пользователь самостоятельно и в полном объеме
+                        несет ответственность
+                        за размещенную им на Сервисе информацию в соответствии с законодательством Российской Федерации.
+                        Администрация Сервиса не несет ответственности за достоверность и актуальность информации,
+                        размещаемой
+                        Пользователем.</p>
+                    <p class="portal-document__text portal-text">2.2. Публикация комментария или отзыва Пользователя
+                        модератором
+                        Администратора Сервиса не означает, что Администрация Сервиса разделяет мнение автора
+                        комментария или
+                        отзыва.</p>
+                    <p class="portal-document__text portal-text">2.3. Размещая свой комментарий или отзыв на Сервисе,
+                        Пользователь
+                        предоставляет Администратору Сервиса согласие на использование данного контента. Администрация
+                        Сервиса
+                        может редактировать отзыв или комментарий Пользователя, размещать его на других сервисах в сети
+                        Интернет, использовать в информационных и рекламных рассылках по электронной почте, баннерах,
+                        постах
+                        в социальных сетях, печатных листовках и буклетах, а также распространять его в других формах с
+                        помощью любых каналов. Пользователю может быть отказано в удалении отзыва или комментария после
+                        того, как он был опубликован.</p>
+                    <p class="portal-document__text portal-text">2.4. На Сервисе запрещается:</p>
+                    <ul class="portal-document__list portal-list portal-list--unordered">
+                        <li>использование ненормативной лексики и нанесение личных оскорблений врачам, другим
+                            Пользователям
+                            Сервиса или любым третьим лицам;
+                        </li>
+                        <li>размещение и/или распространение контента, представляющее собой акт недобросовестной
+                            конкуренции, а именно заказные недостоверные отзывы, как с отрицательными, так и с
+                            положительными оценками;
+                        </li>
+                        <li>размещение информации, не соответствующей действительности, в том числе размещение
+                            комментариев
+                            или отзывов, если Пользователь или иное лицо не были клиентами медицинской организации или
+                            врача, в отношении которых размещена информация;
+                        </li>
+                        <li>написание сообщений прописными буквами (с включённым «Caps Lock») или чередованием прописных
+                            и
+                            строчных букв, а также транслитерацией;
+                        </li>
+                        <li>повторное размещение отзывов, заблокированных модераторами Администратора Сервиса;</li>
+                        <li>обсуждение тем и размещение сообщений, противоречащих законодательству Российской Федерации
+                            или
+                            призывающих к его нарушению, например, содержащих пропаганду межнациональной розни, насилия,
+                            расового или языкового превосходства, религиозную пропаганду и др.
+                        </li>
+                    </ul>
+                    <p class="portal-document__text portal-text">2.5. Администрация Сервиса оставляет за собой право не
+                        размещать на
+                        Сервисе или
+                        удалить с Сервиса информацию, которая, по мнению Администрации Сервиса, является нежелательной,
+                        не
+                        соответствует целям разработки и использования Сервиса, нарушает права или законные интересы
+                        других
+                        Пользователей и/или иных третьих лиц, в том числе в случае нарушения интеллектуальных прав, или
+                        по
+                        другим причинам является нежелательной для размещения в базах данных Сервиса.</p>
+                    <p class="portal-document__text portal-text">2.6. Администрация Сервиса вправе заблокировать Личный
+                        кабинет
+                        Пользователя,
+                        если им нарушаются условия настоящего Лицензионного договора.</p>
+                    <p class="portal-document__text portal-text">2.7. Администрация Сервиса не оказывает медицинские
+                        услуги.</p>
+                </div>
+                <div class="portal-document__content">
+                    <h3 class="portal-document__subtitle portal-h3" id="rule-3">3. Политика конфиденциальности</h3>
+                    <p class="portal-document__text portal-text">3.1. Регистрируясь на Сервисе, Пользователь дает
+                        согласие на обработку его
+                        персональных данных в целях обеспечения ему возможности использования функционала Сервиса, в
+                        соответствии
+                        с согласием на обработку персональных данных.</p>
+                    <p class="portal-document__text portal-text">3.2. Внесение Пользователем номера телефона или адреса
+                        электронной
+                        почты в
+                        Личном кабинете и иных формах на Сервисе, является согласием на получение рассылок от
+                        Администрации
+                        Сервиса, которые могут носить информационный и рекламный характер. Пользователь может в любой
+                        момент
+                        отписаться от рассылок Сервиса, написав сообщение Администрации Сервиса по адресу:
+                        info@napopravku.ru.</p>
+                    <p class="portal-document__text portal-text">3.3. Администрация Сервиса может использовать номер
+                        телефона и адрес
+                        электронной
+                        почты, указанные Пользователем при создании Личного кабинета, для уточнения ситуации, описанной
+                        им
+                        в комментарии или отзыве.</p>
+                    <p class="portal-document__text portal-text">3.4. В целях контроля, анализа и улучшения качества
+                        работы Сервиса звонки
+                        Пользователя в медицинские организации и врачам по размещенным на Сервисе телефонам могут
+                        записываться
+                        и анализироваться. Совершение звонка означает Согласие на включение в базу данных Сервиса,
+                        получение
+                        информационных сообщений, обработку и хранение персональных данных Пользователя, передаваемых в
+                        ходе
+                        телефонного разговора.</p>
+                    <p class="portal-document__text portal-text">3.5. Администратор Сервиса заботится о сохранности
+                        персональных данных
+                        Пользователей, указанных при регистрации. Администратор Сервиса передает персональные данные
+                        Пользователя, являющегося потенциальным клиентом медицинской организации, в медицинскую
+                        организацию или врачу, заявку на запись к которому оставил Пользователь. Администратор Сервиса
+                        не
+                        передает иным третьим лицам номера телефонов, адреса электронной почты, IP-адреса и иные
+                        персональные данные Пользователей.</p>
+                    <p class="portal-document__text portal-text">
+                        В&nbsp;Android-приложении реализованы следующие механизмы стандартных разрешений, которые
+                        пользователь может
+                        отозвать в&nbsp;любой момент в&nbsp;настройках мобильного устройства, или отказать в&nbsp;момент
+                        запроса
+                        разрешения:
+                    </p>
+                    <ul class="portal-document__list portal-list portal-list--unordered">
+                        <li>
+                            <b>ACCESS_COARSE_LOCATION</b>, <b>ACCESS_FINE_LOCATION</b> (разрешение на&nbsp;определение
+                            местоположения)
+                            для
+                            определения города Пользователя, чтобы указать ближайшие доступные для записи медицинские
+                            организации,
+                            включая лаборатории. Сервис не&nbsp;хранит информацию о&nbsp;местоположении Пользователя, а&nbsp;лишь
+                            обрабатывает полученные значения;
+                        </li>
+                        <li>
+                            <b>CAMERA</b> (разрешение на&nbsp;использование камеры) для возможности сфотографировать
+                            документ и&nbsp;загрузить
+                            его в&nbsp;соответствующий раздел Сервиса. Возможные геометки из&nbsp;файла <b>не&nbsp;обрабатываются
+                            и&nbsp;не&nbsp;хранятся</b>;
+                        </li>
+                        <li>
+                          <b>READ_EXTERNAL_STORAGE</b>, <b>WRITE_EXTERNAL_STORAGE</b> (доступ к&nbsp;файлам/галерее изображений) для
+                            возможности загрузки изображений и&nbsp;файлов в&nbsp;соответствующий раздел Сервиса; Все
+                            загружаемые файлы (изображения и&nbsp;pdf-документы) хранятся в&nbsp;зашифрованном виде в&nbsp;S3-хранилище.
+                          Приложение не&nbsp;сканирует личные файлы пользователя (<b>files from WRITE_EXTERNAL_STORAGE</b>) и&nbsp;не&nbsp;загружает
+                            их&nbsp;без его ведома&nbsp;— все файлы хранятся только для личного доступа самого
+                            пользователя в&nbsp;дальнейшем. Пользователь может удалить файл из&nbsp;интерфейса
+                            приложения&nbsp;— и&nbsp;файл будет удалён из&nbsp;облачного хранилища. Приложение
+                            также не&nbsp;сканирует и&nbsp;не&nbsp;загружает миниатюры видеофайлов (<b>Video Thumbnails
+                            from READ_EXTERNAL_STORAGE</b>, <b>WRITE_EXTERNAL_STORAGE</b>)
+                        </li>
+                    </ul>
+                    <p class="portal-document__text portal-text">3.7. Имя Пользователя, оставившего комментарий или
+                        отзыв на Сервисе,
+                        недоступно другим пользователям Сервиса (указано в обезличенном виде), кроме случаев регистрации
+                        Пользователя через социальную сеть или самостоятельного добавления имени при оставлении отзыва
+                        или комментария. Пользователь может в любой момент изменить имя в Личном кабинете.</p>
+                    <p class="portal-document__text portal-text">3.8. Администрация Сервиса вправе раскрывать
+                        персональные данные
+                        Пользователя
+                        по запросам правоохранительных органов, решению суда и в прочих случаях, предусмотренных
+                        законодательством Российской Федерации</p>
+                    <p class="portal-document__text portal-text">3.9. Пользователь вправе в любой момент удалить свой
+                        Личный кабинет на
+                        Сервисе, написав об этом Администрации Сервиса по адресу: info@napopravku.ru. После удаления
+                        Личного кабинета Пользователя (и всех его персональных данных, кроме общедоступных персональных
+                        данных врачей) опубликованные им ранее на Сервисе материалы определяются как анонимные.</p>
+                    <p class="portal-document__text portal-text">3.10. Регистрация и/или авторизация в Сервисе возможна
+                        с использованием VK ID, который является инструментом Экосистемы VK. Экосистема VK представляет
+                        собой общее пространство взаимодействия пользователей, Сервисов, входящих в Экосистему, и
+                        специализированных инструментов, призванных повысить удобство использования привычных для
+                        Пользователей сервисов. Инструмент VK ID, предоставляемый ООО «ВКонтакте» (ОГРН 1079847035179,
+                        адрес места нахождения: 191024, Санкт-Петербург, Херсонская ул., д. 12-14, лит. А, пом. 1-Н),
+                        позволяет осуществлять передачу Учетных и Иных данных Пользователя третьим лицам (участникам
+                        Экосистемы, которые используют VK ID и предоставляют в рамках Экосистеме VK свои сервисы и/или
+                        инструменты), а также получение Компанией от указанных третьих лиц Учетных и Иных данных
+                        Пользователя в процессе использования таким лицом входящих в Экосистему VK сервисов и/или
+                        инструментов в объеме, указанном в личном кабинете Пользователя Экосистемы VK, в целях
+                        исполнения соглашений с Пользователем участников Экосистемы. Регистрация и/или авторизация
+                        в Программе посредством VK ID, означает согласие с Правилами Экосистемы VK, которые размещены
+                        в открытом доступе в сети Интернет по адресу:
+                        <a href="https://vk.com/vk_ecosystem_terms">//vk.com/vk_ecosystem_terms</a>,
+                        а также Пользовательским соглашением VK ID, которое размещено в открытом доступе в сети Интернет
+                        по адресу: <a href="https://connect.vk.com/terms">//connect.vk.com/terms</a> и Правилами защиты информации
+                        о пользователях VK ID, которые размещены в открытом доступе в сети Интернет по
+                        адресу: <a href="https://connect.vk.com/privacy">//connect.vk.com/privacy</a>.</p>
+                </div>
+                <div class="portal-document__content">
+                    <h3 class="portal-document__subtitle portal-h3" id="rule-4">4. Ответственность Сервиса за
+                        информацию, опубликованную на Сервисе</h3>
+                    <p class="portal-document__text portal-text">4.1. Администрация Сервиса не несет ответственности за
+                        любую неточность,
+                        касающуюся описательной информации о медицинских организациях и врачах, представленной на
+                        Сервисе, а
+                        также за услуги или продукты, предлагаемые этими медицинскими организациями или врачами.</p>
+                    <p class="portal-document__text portal-text">4.2. Размещение данных о медицинских организациях и
+                        врачах на Сервисе не
+                        гарантирует наличие у них лицензии на оказание медицинской деятельности, так как цель Сервиса не
+                        рекламировать и продавать услуги медицинских организаций и врачей, а предоставлять площадку для
+                        свободного обмена мнениями, в том числе и о недобросовестных медицинских организациях и
+                        непрофессиональных врачах.</p>
+                    <p class="portal-document__text portal-text">4.3. Комментарии и отзывы Пользователей являются
+                        субъективными
+                        оценочными
+                        суждениями их авторов и не имеют отношения к Администрации Сервиса.</p>
+                    <p class="portal-document__text portal-text">4.4. Администрация Сервиса объективно ограничена в
+                        возможности
+                        квалифицировать
+                        суждения пользователей Сервиса в качестве личного мнения, не подлежащего проверке на
+                        соответствие
+                        действительности, или утверждения о факте, и не может определять достоверность информации,
+                        размещаемой
+                        пользователями на Сервисе. Соответствующая оценка является исключительной прерогативой суда.</p>
+                    <p class="portal-document__text portal-text">4.5. Администрация Сервиса не несет ответственности за
+                        субъективные
+                        суждения
+                        пользователей. Администрация Сервиса удалит спорную информацию с Сервиса, но только при наличии
+                        судебного
+                        решения, устанавливающего, что соответствующие сведения, распространенные Пользователем на
+                        Сервисе,
+                        порочат репутацию медицинской организации или врача и не соответствуют действительности.</p>
+                </div>
+                <div class="portal-document__content">
+                    <h3 class="portal-document__subtitle portal-h3" id="rule-5">5. Правила взаимодействия с
+                        Пользователем, являющимся представителем
+                        медицинской организации или врачом</h3>
+                    <p class="portal-document__text portal-text">5.1. Независимость и объективность – это главные
+                        принципы работы
+                        Сервиса, поэтому
+                        Администрация Сервиса ни на каких условиях <b>не</b> совершает следующие действия с данными,
+                        включенными в базы
+                        данных Сервиса:</p>
+                    <ul class="portal-document__list portal-list portal-list--unordered">
+                        <li>удаление подтвержденных негативных отзывов о клиниках и врачах, написанных Пользователями
+                            Сервиса,
+                            а также отзывов с пометкой «отзыв не засчитан»;
+                        </li>
+                        <li>размещение отзывов с корпоративных сайтов медицинских организаций, врачей или их групп в
+                            социальных сетях, а также с других ресурсов, которые не вызывают доверия. Исключение
+                            составляют
+                            независимые площадки с серьезной модерацией, причем с одного такого ресурса берутся сразу
+                            все
+                            отзывы – и положительные, и отрицательные, а не выборочно;
+                        </li>
+                        <li>удаление данных о врачах с плохим рейтингом, а также изменение места работы врача, если он
+                            фактически продолжает работать в конкретной медицинской организации;
+                        </li>
+                        <li>удаление информации о медицинских организациях, продолжающих медицинскую деятельность, даже
+                            по
+                            их официальному запросу;
+                        </li>
+                        <li>размещение Администрацией Сервиса заказных отзывов, поскольку Администрация Сервиса всячески
+                            старается противодействовать их размещению в соответствии с подходом к модерации отзывов;
+                        </li>
+                        <li>повышение на платной основе рейтинга медицинских организаций или врачей;</li>
+                        <li>включение на платной основе медицинской организации в рейтинги, составленные на основании
+                            мнения
+                            экспертов.
+                        </li>
+                    </ul>
+                    <p class="portal-document__text portal-text">5.2. Администрация Сервиса может закрыть доступ
+                        Пользователя,
+                        являющегося медицинской
+                        организацией или врачом, к Личному кабинету в случае внесения заведомо ложной информации в
+                        профиль
+                        Пользователя.</p>
+                    <p class="portal-document__text portal-text">5.3. Администрация Сервиса может вносить актуальные
+                        изменения в данные об образовании и квалификации в профиль врача, если Пользователь, являющийся
+                        врачом, предоставит такие данные на электронную почту: info@napopravku.ru.</p>
+                </div>
+                <div class="portal-document__content">
+                    <h3 class="portal-document__subtitle portal-h3" id="rule-6">6. Персональные данные врачей</h3>
+                    <p class="portal-document__text portal-text">6.1. Обработка персональных данных врачей
+                        осуществляется Компанией в
+                        соответствии с п. 7, 11 ч. 1 ст. 6 Федерального закона № 152-ФЗ от 27.07.2006 г. «О
+                        персональных
+                        данных».</p>
+                    <p class="portal-document__text portal-text">6.2. Администратор Сервиса осуществляет обработку
+                        персональных данных,
+                        которые
+                        подлежат опубликованию или обязательному раскрытию в силу закона, в частности, данных,
+                        раскрываемых
+                        медицинскими организациями-работодателями, а также данных, содержащихся в открытых
+                        государственных
+                        реестрах и на сайтах государственных и муниципальных услуг. В соответствии с п. 7 ч. 1 ст. 79
+                        Федеральный
+                        закон от 21.11.2011 № 323-ФЗ «Об основах охраны здоровья граждан в Российской Федерации»
+                        медицинская
+                        организация обязана информировать граждан в доступной форме, в том числе с использованием сети
+                        Интернет,
+                        об осуществляемой медицинской деятельности и о медицинских работниках медицинских организаций,
+                        об уровне
+                        их образования и об их квалификации.</p>
+                    <p class="portal-document__text portal-text">6.3. В соответствии с п. 6 Приказа Минздрава № 956н от
+                        30.12.2014
+                        (регистрационный
+                        № 36153 от 20.02.2015) медицинская организация в целях проведения независимой оценки качества
+                        оказания
+                        медицинских услуг обязана публиковать на своем сайте информацию о медицинских работниках, в том
+                        числе:
+                        ФИО, место работы, должность, сведения об образовании и стаже, специальности, квалификации,
+                        график
+                        работы, часы приема.</p>
+                    <p class="portal-document__text portal-text">6.4. Создание Администрацией Сервиса профилей врачей в
+                        базе данных
+                        Сервиса обеспечивает достижение общественно
+                        значимой цели – реализации прав пациента на выбор врача и на доступ к информации о врачах, об
+                        уровне
+                        их образования и квалификации, гарантированных ст. 10, 19 и 21 Федерального закона от 21.11.2011
+                        №
+                        323-ФЗ «Об основах охраны здоровья граждан в Российской Федерации».</p>
+                    <p class="portal-document__text portal-text" id="rule-6-5">6.5. Согласие на обработку персональных
+                        данных</p>
+
+                    <p class="portal-document__text portal-text">Я, субъект персональных данных, в соответствии с
+                        Федеральным законом от 27 июля 2006 года № 152 «О персональных данных» предоставляю ООО
+                        «Напоправку.ру», зарегистрированному по адресу: 199178, г. Санкт-Петербург линия 7-я В.О., дом
+                        76, литер А, пом. 45-Н, этаж 4, офис 402, ИНН 780162212, Код по ОКВЭД: 72.40, Код по ОКПО:
+                        34311438 согласие на обработку моих персональных данных, указанных мной на страницах сайта
+                        https://www.napopravku.ru/ в сети «Интернет», при заполнении веб-форм, характер информации
+                        которых предполагает или допускает включение в них следующих персональных данных:</p>
+                    <ul class="portal-document__list portal-list portal-list--unordered">
+                        <li> фамилия, имя, отчество (при наличии);
+                        </li>
+                        <li>дата рождения;
+                        </li>
+                        <li>фотография;
+                        </li>
+                        <li>номер телефона;
+                        </li>
+                        <li>адрес электронной почты;
+                        </li>
+                        <li>сведения об образовании;
+                        </li>
+                        <li>сведения о профессии.
+                        </li>
+                    </ul>
+
+                    <p class="portal-document__text portal-text">с целями формирования личного кабинета, предоставления
+                        доступа к личному кабинету, осуществления информационных рассылок, сбора статистической
+                        информации, актуализации информации по медицинским учреждениям и врачам на сайте для
+                        информирования граждан в доступной форме о медицинских работниках и проведения независимой
+                        оценки качества оказания услуг медицинскими организациями, обеспечения возможности пользователям
+                        публично делиться субъективным мнением о моей деятельности на указанном сайте.</p>
+                    <p class="portal-document__text portal-text">Согласие предоставляется на совершение следующих
+                        действий (операций) с указанными в настоящем согласии персональными данными: сбор, запись,
+                        систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение,
+                        использование, блокирование, удаление, уничтожение, осуществляемых с использованием средств
+                        автоматизации (автоматизированная обработка).</p>
+                    <p class="portal-document__text portal-text">Я подтверждаю, что ознакомлен с требованиями
+                        законодательства Российской Федерации, устанавливающими порядок обработки персональных данных, с
+                        политикой Оператора в отношении обработки персональных данных, а также с моими правами и
+                        обязанностями в этой области.</p>
+                    <p class="portal-document__text portal-text">Согласие действует по достижении целей обработки или
+                        случая утраты необходимости в достижении этих целей.</p>
+                    <p class="portal-document__text portal-text">Согласие может быть отозвано мною в любое время на
+                        основании моего письменного заявления. Я понимаю, что даже в случае отзыва данного согласия мои
+                        персональные данные могут обрабатываться на иных законных основаниях (включая случаи обработки
+                        персональных данных, подлежащих опубликованию или обязательному раскрытию в соответствии с
+                        федеральным законом) и (или) на основании согласия, данного другому лицу, допускающего обработку
+                        моих персональных данных на указанном сайте.</p>
+                    <p class="portal-document__text portal-text" id="rule-6-6">6.6. Согласие на обработку персональных
+                        данных, разрешенных субъектом персональных данных для распространения</p>
+                    <p class="portal-document__text portal-text">Я, субъект персональных данных, в соответствии с
+                        Федеральным законом от 27 июля 2006 года № 152 «О персональных данных» предоставляю ООО
+                        «Напоправку.ру», зарегистрированному по адресу: 199178, г. Санкт-Петербург линия 7-я В.О., дом
+                        76, литер А, пом. 45-Н, этаж 4, офис 402, ИНН 780162212, Код по ОКВЭД: 72.40, Код по ОКПО:
+                        34311438 согласие на распространение персональных данных, указанных мной на страницах сайта
+                        https://www.napopravku.ru/ в сети «Интернет», при заполнении веб-форм, характер информации
+                        которых предполагает или допускает включение в них следующих персональных данных, относящихся к
+                        одной общей категории:
+                    </p><ul class="portal-document__list portal-list portal-list--unordered">
+                        <li>фамилия, имя, отчество (при наличии);
+                        </li>
+                        <li>фотография;
+                        </li>
+                        <li>сведения об образовании;
+                        </li>
+                        <li>сведения о профессии.
+                        </li>
+                    </ul>
+                    <p></p><p class="portal-document__text portal-text">с целями формирования личного кабинета, предоставления
+                        доступа к личному кабинету, создания публичного профиля, осуществления информационных рассылок,
+                        сбора статистической информации, актуализации информации по медицинским учреждениям и врачам на
+                        сайте для информирования граждан в доступной форме о медицинских работниках и проведения
+                        независимой оценки качества оказания услуг медицинскими организациями, обеспечения возможности
+                        пользователям публично делиться субъективным мнением о моей деятельности на указанном сайте.</p>
+                    <p class="portal-document__text portal-text">Субъект персональных данных может установить запреты на
+                        передачу (кроме предоставления доступа) указанных персональных данных оператором неограниченному
+                        кругу лиц, а также запреты на обработку или условия обработки (кроме получения доступа) этих
+                        персональных данных неограниченным кругом лиц. ограничить категории и перечень персональных
+                        данных, для обработки которых субъект персональных данных устанавливает условия и запреты, а
+                        также перечень устанавливаемых условий и запретов, сообщив об этом на электронный адрес
+                        info@napopravku.ru.</p>
+                    <p class="portal-document__text portal-text">Согласие предоставляется на совершение следующих
+                        действий (операций) с указанными в настоящем согласии персональными данными: передачу
+                        (распространение, предоставление, доступ).</p>
+                    <p class="portal-document__text portal-text">Я подтверждаю, что ознакомлен с требованиями
+                        законодательства Российской Федерации, устанавливающими порядок обработки персональных данных, с
+                        политикой Оператора в отношении обработки персональных данных, а также с моими правами и
+                        обязанностями в этой области.</p>
+                    <p class="portal-document__text portal-text">После завершения регистрации на Сервисе создается
+                        персональная страница Пользователя, имеющая сетевой адрес вида
+                        https://www.napopravku.ru/doctor-profile/[адрес страницы].</p>
+                    <p class="portal-document__text portal-text">Согласие действует по достижении целей обработки или
+                        случая утраты необходимости в достижении этих целей.</p>
+                    <p class="portal-document__text portal-text">Согласие может быть отозвано мною в любое время на
+                        основании моего письменного заявления. Я понимаю, что даже в случае отзыва данного согласия мои
+                        персональные данные могут обрабатываться на иных законных основаниях (включая случаи обработки
+                        персональных данных, подлежащих опубликованию или обязательному раскрытию в соответствии с
+                        федеральным законом) и (или) на основании согласия, данного другому лицу, допускающего обработку
+                        моих персональных данных на указанном сайте. </p>
+                </div>
+                <div class="portal-document__content">
+                    <h3 class="portal-document__subtitle portal-h3" id="rule-7">7. Использование материалов Сервиса</h3>
+                    <p class="portal-document__text portal-text">7.1. Информация, размещенная в базах данных Сервиса,
+                        носит ознакомительный
+                        характер и не может заменить консультации врача.</p>
+                    <p class="portal-document__text portal-text">7.2. Любое использование материалов Сервиса и его
+                        элементов, в том числе
+                        парсинг, без письменного разрешения Администрации Сервиса запрещено.</p>
+                </div>
+                <div class="portal-document__content">
+                    <h3 class="portal-document__subtitle portal-h3" id="rule-8">8. Программа лояльности для
+                        Пользователей, являющихся клиентами медицинских организаций и врачей</h3>
+                    <p class="portal-document__text portal-text">8.1. За онлайн-запись Пользователя на сервисе
+                        начисляется
+                        100 баллов, за подтверждённый отзыв – 20 баллов. За добавление адреса электронной почты
+                        в Личном кабинете, если он ранее не был добавлен – 20 баллов.</p>
+                    <p class="portal-document__text portal-text">8.2. При накоплении 500 баллов Пользователь вправе
+                        запросить через
+                        Личный
+                        кабинет сертификат на 500 рублей.</p>
+                    <p class="portal-document__text portal-text">8.3. При накоплении баллов учитываются только те записи
+                        на приём, в
+                        результате которых
+                        Пользователь был на приеме врача в медицинской организации или у конкретного врача.</p>
+                    <p class="portal-document__text portal-text">8.4. Для предотвращения накрутки баллов Администрация
+                        Сервиса вправе
+                        запросить у
+                        Пользователя фото чеков, подтверждающих посещение медицинской организации или конкретного
+                        врача.</p>
+                    <p class="portal-document__text portal-text">8.5. В случае выявления накрутки баллов Администрация
+                        Сервиса вправе
+                        аннулировать
+                        баллы и отказать Пользователю в выдаче сертификата.</p>
+                    <p class="portal-document__text portal-text">8.6. Администрация Сервиса вправе менять условия (а
+                        также прекращать
+                        действие)
+                        данной программы лояльности без уведомления Пользователя.</p>
+                    <p class="portal-document__text portal-text">8.7. Администрация Сервиса оставляет за собой право
+                        вносить изменения в
+                        настоящее
+                        Лицензионное соглашение. Изменения вступают в силу сразу после их опубликования на Сервисе.</p>
+                    <p class="portal-document__text portal-text">8.8. Пользователь получает 50 баллов за каждого
+                        нового пользователя, который установит приложение по его реферальной ссылке.
+                        Приглашенный пользователь засчитывается, если он установил приложение впервые, не имел ранее регистрации
+                        в сервисе НаПоправку и проживает в городах, представленных в мобильном приложении “НаПоправку”.
+                    </p>
+                    <p class="portal-document__text portal-text">8.9. Запрещается размещение реферальных ссылок в ресурсах,
+                        посвященных бонусным программам, акциям, скидкам и кэшбеку.</p>
+                </div>
+                <div class="portal-document__content">
+                    <h3 class="portal-document__subtitle portal-h3" id="rule-9">9. Политика Cookies</h3>
+                    <p class="portal-document__text portal-text">9.1. На сервисе https://napopravku.ru/ и его поддоменах
+                        (далее — Сервис) используются файлы cookie.
+                        Файлы cookie — это небольшие текстовые файлы, которые после просмотра Пользователем фрагментов
+                        Сервиса сохраняются на его устройстве.
+                        Использование файлов cookie позволяет ООО «НаПоправку.ру» (далее – Оператор) контролировать
+                        доступность Сервиса, анализировать данные, а также понимать, как развивать оказываемые услуги.
+                        .</p>
+                    <p class="portal-document__text portal-text">9.2. На Сервисе используются следующие типы файлов
+                        cookie:</p>
+                    <ul class="portal-document__list portal-list portal-list--unordered">
+                        <li><b>Технические файлы cookie:</b> необходимы для корректной работы Сервиса и вспомогательных
+                            сервисов. Такие файлы cookie позволяют определять аппаратное и программное обеспечение
+                            устройства Пользователя; выявлять ошибки при работе Сервиса; тестировать новые функции для
+                            повышения производительности Сервиса;
+                        </li>
+                        <li><b>Файлы cookie для аутентификации:</b> они необходимы, чтобы запоминать Пользователей.
+                            Благодаря таким файлам Пользователю при новом посещении Сервиса не нужно заново вводить
+                            авторизационные данные в соответствующих разделах Сервиса.
+                        </li>
+                        <li><b>Аналитические файлы cookie:</b> они позволяют подсчитывать количество Пользователей
+                            Сервиса; определять, какие действия Пользователь совершает на Сервисе (посещаемые страницы,
+                            время и количество просмотренных страниц).
+                        </li>
+                    </ul>
+                    <p class="portal-document__text portal-text">9.3. Срок хранения файлов cookie зависит от конкретного
+                        типа, но в любом случае не превышает срока, необходимого для достижения <a class="link portal" href="/policy.html#item-2">целей
+                            обработки персональных данных</a>.</p>
+                    <p class="portal-document__text portal-text">9.4. Для прекращения обработки файлов cookie
+                        Пользователь может изменить настройки используемых браузеров на всех устройствах (компьютер,
+                        мобильные устройства).</p>
+                    <p class="portal-document__text portal-text">9.5. При отказе от использования файлов cookie
+                        отдельные функции Сервиса могут быть недоступными, что повлияет на возможность использования
+                        Сервиса.</p>
+                </div>
+            </div>
+        </div>
+        <!--Anchor-->
+        <script>
+          $('.portal-list__link').on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({scrollTop: $($(this).attr('href')).offset().top}, 1000);
+          });
+        </script>
+    </main>
+
+    <footer class="footer">
+    <div class="container">
+        <div class="footer__wrapper">
+            <div class="footer__inner">
+                <div class="footer__list">
+                    <div class="footer__list-item">
+                        <div class="footer__links-content">
+                            <div class="footer__links">
+                                <p class="footer__links-title">О нас</p>
+                                <a href="/" class="footer__link">О компании</a>
+                                <a href="career.html" class="footer__link">Карьера</a>
+                                <a href="partners.html" class="footer__link">Партнёры</a>
+                                <a href="reviews.html" class="footer__link">Отзывы о нас</a>
+                                <a href="press.html" class="footer__link">Пресса</a>
+                                <a href="contacts.html" class="footer__link">Контакты</a>
+                            </div>
+                            <div class="footer__links">
+                                <p class="footer__links-title">Клиникам и врачам</p>
+                                <a href="https://business.napopravku.ru/registrationdoc/" class="footer__link" target="_blank">
+                                    Сотрудничество с врачами
+                                </a>
+                                <a href="https://business.napopravku.ru/" class="footer__link" target="_blank">
+                                    Сотрудничество с клиниками
+                                </a>
+                                <a href="rules.html#rule-5" class="footer__link">
+                                    Правила сотрудничества с клиниками</a>
+                                <a href="rules.html#rule-6" class="footer__link">
+                                    Персональные данные врачей</a>
+                            </div>
+                            <div class="footer__links ">
+                                <p class="footer__links-title">Правила сервиса</p>
+                                <a href="rules.html" class="footer__link">
+                                    Правила использования сервиса
+                                </a>
+                                <a href="policy.html" class="footer__link">
+                                    Персональные данные пользователей
+                                </a>
+                                <a href="rules.html#rule-7" class="footer__link">
+                                    Использование материалов сайта
+                                </a>
+                                <a href="rules.html#rule-4" class="footer__link">
+                                    Ответственность за информацию
+                                </a>
+                                <a href="rules.html#rule-8" class="footer__link">
+                                    Программа лояльности
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer__list-item">
+                        <p class="footer__links-title">Пользователям</p>
+                        <div class="footer__links-content">
+                            <div class="footer__links footer__links--common">
+                                <a href="about-record.html" class="footer__link">Запись в режиме реал-тайм</a>
+                                <a href="about-reviews.html" class="footer__link">Отзывы — сердце
+                                    НаПоправку</a>
+                                <a href="about-treatment.html" class="footer__link">Лечиться с нами
+                                    выгодно</a>
+                                <a href="https://promo.napopravku.ru/sign/" class="footer__link" target="_blank">Как
+                                    записаться</a>
+                            </div>
+                            <div class="footer__links footer__links--common">
+                                <a href="user-data.html" class="footer__link">Защита данных
+                                    пользователя</a>
+                                <a href="https://promo.napopravku.ru/moderation/" class="footer__link" target="_blank">Как
+                                    мы проверяем
+                                    отзывы</a>
+                                <a href="service-commission.html" class="footer__link">Про комиссию</a>
+                                <a href="content.html" class="footer__link">Качественный контент</a>
+                            </div>
+                            <div class="footer__links footer__links--common">
+                                <a href="editor.html" class="footer__link">Медицинская редакция</a>
+                                <a href="https://promo.napopravku.ru/" class="footer__link" target="_blank">Бонусная
+                                    программа</a>
+                                <a href="https://blog.napopravku.ru/" class="footer__link" target="_blank">Блог</a>
+<!--                                <a class="footer__link">FAQ</a>-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="footer__socials">
+                    <div class="footer__socials-item">
+                        <a href="https://about.napopravku.ru/" rel="nofollow" class="footer-logo__link">
+                            <img src="/images/footer/logo.svg" alt="Напоправку" class="footer__socials-logo">
+                        </a>
+                        <div class="socials">
+                            <a href="https://vk.com/ru_napopravku" title="Мы во Вконтакте" target="_blank" rel="nofollow" class="social__icon">
+                                <img src="/images/footer/icon/vk.svg" alt="НаПоправку VK">
+                            </a>
+                            <a href="https://t.me/napopravkuru" title="Мы в Телеграм" target="_blank" rel="nofollow" class="social__icon">
+                                <img src="/images/footer/icon/telegram.svg" alt="НаПоправку Telegram">
+                            </a>
+                            <a href="https://nppv.ru/AYjY" title="Мы в Яндекс.Дзен" target="_blank" rel="nofollow" class="social__icon">
+                                <img src="/images/footer/icon/dzen.svg" alt="НаПоправку Яндекс.Дзен">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer__list-item">
+                        <p class="footer__links-title">При поддержке</p>
+                        <div class="footer__partners partners">
+                            <a href="https://navigator.sk.ru/orn/1123602" rel="nofollow" class="partners__icon">
+                                <img src="/images/footer/skolkovo.png" alt="Сколково: логотип участника" width="82" height="61">
+                            </a>
+
+                            <a href="https://www.vostoknewventures.com/" rel="nofollow" class="partners__icon">
+                                <img src="/images/footer/vnv-global.png" alt="Vostok New Ventures" width="83" height="61">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer__socials-item">
+                        <a href="https://napopravku.onelink.me/9zrC?pid=napopravku.ru&amp;c=footer&amp;af_web_dp=https%3A%2F%2Fapps.apple.com%2FRU%2Fapp%2Fid1523780579&amp;af_adset=ios-button" class="footer__socials-pic">
+                            <img src="/images/footer/appstore.png">
+                        </a>
+                        <a href="https://napopravku.onelink.me/9zrC?pid=napopravku.ru&amp;c=footer&amp;af_web_dp=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dru.napopravku&amp;af_adset=android-button" class="footer__socials-pic">
+                            <img src="/images/footer/googleplay.png">
+                        </a>
+                    </div>
+                    <div class="footer__socials-item">
+                        <p class="footer__links-title">Связаться с нами</p>
+                        <div class="footer__links footer__links--common">
+                            <p class="footer__link">Телефон: 8 (800) 101-03-93</p>
+                            <p class="footer__link">Почта: info@napopravku.ru</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__copyright">
+                <div class="footer__copyright-text">
+                    <p class="footer__copyright-info">© ООО «НаПоправку.Ру», 2014—2022.
+                        <a href="https://napopravku.ru/upload/footer/inn-napopravku.pdf" target="_blank">
+                            <br>ИНН: <u>7801622126</u>
+                        </a>
+                    </p>
+                    <p class="footer__copyright-info">ООО «Клиника "НаПоправку"». ИНН:
+                        <a href="https://napopravku.ru/upload/footer/inn-clinic-napopravku.pdf" target="_blank">
+                            <u>7813642889</u>
+                        </a>
+                    </p>
+                </div>
+                <div class="footer__copyright-links">
+                    <a href="rules.html#rule-1" class="footer__copyright-link">Лицензионное соглашение</a>
+                    <a href="consent-personal-data.html" class="footer__copyright-link">Согласие на обработку
+                        персональных данных</a>
+                </div>
+            </div>
+            <div class="footer__cookie-notice">
+                <noindex>Мы используем cookie-файлы для вашего удобства. Оставаясь на сайте, вы соглашаетесь с использованием файлов cookie.<br>
+                    Материалы, размещённые на сайте, не предназначены для постановки диагноза и лечения и не заменяют приём врача.</noindex>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+<script>!function(t,e,c,n){ var s=e.createElement(c);s.async=1, s.src='https://script.esputnik.com/' + n + '/sc.js'; var r=e.scripts[0]; r.parentNode.insertBefore(s,r);}(window,document,'script', '3908B63B61B8449DA65F97FDB13A4EBD');</script>
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "НаПоправку",
+    "url": "https://about.napopravku.ru/",
+    "logo": "https://about.napopravku.ru/images/logo.svg",
+    "sameAs": [
+        "https://www.facebook.com/napopravku",
+        "https://twitter.com/napopravku_ru",
+        "https://vk.com/ru_napopravku",
+        "https://ok.ru/napopravku"
+    ]
+}
+</script>
+
+
+
+</body></html>

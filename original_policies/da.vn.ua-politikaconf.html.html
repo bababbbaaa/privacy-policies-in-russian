@@ -1,0 +1,864 @@
+<html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Политика конфиденциальности</title>
+<base href="https://da.vn.ua/">
+<link href="https://da.vn.ua/image/data/preview_16x16.png" rel="icon">
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/online-ts/stylesheet/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/online-ts/stylesheet/responsive.css">
+<script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-TZ26VZ"></script><script async="" src="//connect.facebook.net/en_US/fbevents.js"></script><script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css">
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
+<script type="text/javascript" src="catalog/view/theme/online-ts/js/jquery/colorbox/jquery.colorbox.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/online-ts/js/jquery/colorbox/colorbox.css" media="screen">
+<script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
+<script type="text/javascript" src="catalog/view/theme/online-ts/js/common.js"></script>
+<script type="text/javascript" src="catalog/view/theme/online-ts/js/add_bc.js"></script>
+<script type="text/javascript" src="catalog/view/theme/online-ts/js/cloud-zoom.1.0.2.min.js"></script>
+<script type="text/javascript" src="catalog/view/theme/online-ts/js/category-slide.js"></script>
+<script type="text/javascript" src="catalog/view/theme/online-ts/js/jquery/contac/jquery.validate.pack.js"></script>
+<script type="text/javascript">
+(function($){
+
+	//define the new for the plugin ans how to call it	
+	$.fn.contac = function(options) {
+		//set default options  
+		var defaults = {
+			url: 'catalog/view/theme/online-ts/js/jquery/contac/mail.php',
+			namer: 'Ваше имя:',
+			number: 'Ваш телефон:',
+			message : 'Сообщение:',
+			subject : 'Сообщение контакта',
+			submit : 'Отправить',
+			recievedMsg : 'Спасибо за ваще сообщение',
+			notRecievedMsg : 'Извините, но ваше сообщение не отправлено, попробуйте позднее',
+			disclaimer: 'Пожалуйста, напишите нам, мы ценим ваше мнение',
+			hideOnSubmit: false
+
+		};
+
+		//call in the default otions
+		var options = $.extend(defaults, options);
+		//act upon the element that is passed into the design    
+		return this.each(function() {
+			//construct the form
+			var this_id_prefix = '#'+this.id+' ';
+			$(this).html('<form method="" action="" id="contactF"><div id="loading"></div><div class="recallbox"><div class="dtw"><a class="rcol close" href="#">x</a><div id="callback"></div><div class="optgroup"><div class="lgrey">'+options.namer+'</div><label for="namer"></label><input id="namer" class="f_input" name="namer"/></div><div class="optgroup"><div class="lgrey">'+options.number+'</div><label for="number"></label><input id="number" class="f_input" name="number" /></div><div class="optgroup"><div class="lgrey">'+options.message+'</div><label for="message"></label><textarea id="message" name="message" class="f_textarea" rows="4" cols="30" ></textarea></div></div><div class="dbw"><input class="f_btn" type="submit" value="'+options.submit+'"/></div></div></form>');
+			
+			$(".openrecall, .recallbox .close").click(function(){
+				$(".recallbox").slideToggle("slow");
+				$(this).toggleClass("active");
+			});
+			
+			
+			//validate the form 
+			$(this_id_prefix+"#contactF").validate({
+				//set the rules for the fild names
+				rules: {
+					namer: {
+						required: true,
+						minlength: 2
+					},
+					number: {
+						required: true,
+						minlength: 6,
+						number: true
+					},
+					
+					message: {
+						required: true
+					}
+				},
+				//set messages to appear inline
+					messages: {
+						namer: "",
+						number: "",
+						message: ""
+					},			
+
+				submitHandler: function() {
+					$(this_id_prefix+'.optgroup').hide();
+					$(this_id_prefix+'.f_btn').hide();
+					$(this_id_prefix+'#loading').show();
+				$.ajax({
+				  type: 'POST',
+				  url: options.url,
+				  data: {subject:options.subject, namer:$(this_id_prefix+'#namer').val(), number:$(this_id_prefix+'#number').val(), message:$(this_id_prefix+'#message').val()},
+				  success: function(data){
+										$(this_id_prefix+'#loading').css({display:'none'}); 
+										if( data == 'success') {
+											$(this_id_prefix+'#callback').show().append(options.recievedMsg);
+											if(options.hideOnSubmit == true) {
+												//hide the tab after successful submition if requested
+												$(this_id_prefix+'#contactF').animate({dummy:1}, 2000).animate({"marginLeft": "-=450px"}, "slow");
+												$(this_id_prefix+'div#contac_inner').animate({dummy:1}, 2000).animate({"marginLeft": "-=447px"}, "slow").animate({"marginLeft": "+=5px"}, "fast"); 
+												$(this_id_prefix+'#overlay').css({display: 'none'});	
+											}
+										} else {
+											$(this_id_prefix+'#callback').show().append(options.notRecievedMsg);
+											setTimeout(function(){
+												$(this_id_prefix+'.holder').show();
+												$(this_id_prefix+'#callback').hide().html('');
+											},2000);
+										}
+									},
+				  error:function(){
+										$(this_id_prefix+'#loading').css({display:'none'}); 
+										$(this_id_prefix+'#callback').show().append(options.notRecievedMsg);
+														}
+				});	
+				}
+			});
+		});
+	};
+ 
+})(jQuery);
+$(function(){
+    $('#contac').contac({
+    subject: 'feedback URL:'+location.href});
+});
+</script><script type="text/javascript" src="catalog/view/theme/online-ts/js/jquery/libs/jlibs_uncompressed.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/online-ts/js/jquery/contac/contac.css">
+
+
+
+<!--[if IE 7]> 
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/online-ts/stylesheet/ie7.css" />
+<![endif]-->
+<!--[if IE 8]> 
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/online-ts/stylesheet/ie8.css" />
+<![endif]-->
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/online-ts/stylesheet/ie6.css" />
+<script type="text/javascript" src="catalog/view/javascript/DD_belatedPNG_0.0.8a-min.js"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('#logo img');
+</script>
+<![endif]-->
+<script type="text/javascript"><!--
+$(document).ready(function() {
+$('body').prepend('<iframe src="https://da.vn.ua/catalog/view/javascript/crossdomain.php?session_id=7goc220i28rdesprct2c0ibba7" style="display: none;"></iframe>');
+});
+//--></script>
+<script type="text/javascript"><!--
+$("button.close").click(function () {
+   $("#modal-login").css("display", "none");
+});
+//--></script>
+
+<style type="text/css">
+body {
+    background: url("catalog/view/theme/online-ts/image/bg.png") repeat-x scroll center top transparent;
+    background: bg.png;
+}
+h1 {
+    color: #333333;    font-size: 20px;}
+h2 {
+    color: #333333;    font-size: 16px;}
+a, a b,
+.list-manuf a,
+.breadcrumb a,
+.contacts-left-header a span.callback {
+    color: #1CA9B8;
+}
+#footer .column a {
+	color: #000000;    font-size: 12px;}
+a:hover,
+.links > ul > li > a:hover,
+.box-product .name a:hover,
+.owl-carousel .name a:hover,
+#footer .column a:hover,
+.category-list ul li a:hover span,
+.breadcrumb a:hover,
+#menu > ul > li > div > ul > li.children > div a:hover,
+.box-content > ul > li > a:hover,
+.list-manuf a:hover,
+.product-grid .name a:hover,
+#welcome a:hover,
+.box-content > ul > li ul > li > a.active {
+    color: #2bab1f;
+}
+a.button, input.button {
+    color: #FFFFFF;    font-size: 14px;    background: linear-gradient(#45CED6 , #1EA5B2) repeat scroll 0 0 rgba(0, 0, 0, 0);	border: 1px solid #1EA5B2;	box-shadow: 0 0 0 1px #45CED6  inset;}
+a.button, input.button {
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45CED6 ', endColorstr='#1EA5B2',GradientType=0 );
+		background: -ms-linear-gradient(#45CED6 , #1EA5B2) repeat scroll 0 0 rgba(0, 0, 0, 0);}
+.box-product .cart input.button,
+.product-grid .cart input.button,
+.owl-carousel .cart input.button,
+.product-list .cart input.button {
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45CED6 ', endColorstr='#1EA5B2',GradientType=0 ), progid:DXImageTransform.Microsoft.AlphaImageLoader(src="catalog/view/theme/online-ts/image/cartorder.png");
+}
+.box-product .cart, .product-grid .cart, .owl-item .cart, .product-list .cart, .product-grid > div .cart_divshadowwidth768 {
+	background: linear-gradient(#45CED6 , #1EA5B2) repeat scroll 0 0 rgba(0, 0, 0, 0);	border: 1px solid #1EA5B2;	box-shadow: 0 0 0 1px #45CED6  inset;}
+	.box-product .cart:hover, .product-grid .cart:hover, .owl-item .cart:hover, .product-list .cart:hover, .product-grid > div .cart_divshadowwidth768:hover {
+		background: #1CA9B8;
+	}
+	a.button:hover, input.button:hover {
+		background: #1CA9B8;
+	}
+.product-filter .list_icon,
+.product-filter .grid_icon_active:hover,
+.product-filter .grid_icon,
+.product-filter .list_icon_active:hover {
+	background-color: #1CA9B8;
+}
+.pagination .links b,
+.pagination .links a:hover {
+	border: 1px solid #1CA9B8;
+}
+.pagination {
+    border-bottom: 1px solid #1CA9B8;
+}
+.product-compare a {
+	background: #1CA9B8;
+}
+.htabs a.selected,
+.htabs a:hover {
+	background: #E9F5F6;	color: #4F5354;}
+.htabs a {
+	background: #80CF1B;	color: #FFFFFF;}
+.tab-content {
+	border: 1px solid #E9F5F6;
+}
+.product-zoom {
+	background: #1CA9B8;
+}
+.pagination .links b {
+	color: #1CA9B8;
+}
+.icon:hover {
+	color: #1CA9B8;
+}
+a.button:hover, a.button.active, input.button:hover, input.button.active {
+    background-color: #1CA9B8;
+}
+.cart-box-bottom input.button-carts:hover {
+    background: #1CA9B8;
+}
+#menu > ul > li > a,
+#menu .center-menu ul.statii a {
+    color: #FFFFFF;    font-size: 16px;}
+#menu > ul > li > a:hover,
+#menu .center-menu ul.statii li a:hover {
+	color: #FFFFFF;	border-color: #2bab1f;}
+#menu .center-menu ul.statii li:hover {
+	background: #35d455;}
+#menu > ul > li.children:hover > a,
+#menu > ul > li.current.children:hover > a,
+#menu > ul > li:hover > a,
+#menu > ul > li.current:hover > a {
+    color: #FFFFFF;}
+#menu > ul > li > a.active {
+    color: #FFFFFF;    font-size: 16px;}
+#menu > ul > li > div > ul > li > a,
+#menu > ul > li > div > ul > li > a.shadow {
+    color: #4C4C4C;
+}
+#menu > ul > li > div > ul > li > div > ul > li > a {
+    color: #4C4C4C;
+}
+#menu > ul > li:hover {
+    background: #35d455;
+}
+#menu,
+#menu.up_to_tablet {
+    background: #42993d;}
+#content .box-heading {
+	color: #333333;	font-size: 16px;}
+.checkout a {
+    color: #000000;    font-size: 12px;}
+#cart .heading a {
+    color: #000000;    font-size: 12px;}
+#header #cart .heading a {
+    color: #000000;    font-size: 12px;}
+#header #cart .checkoutbuttons a {
+    color: #FFFFFF;    font-size: 11px;    background: #64de74;}
+#header #cart .checkoutbuttons a:hover {
+    background: #DDDDDD;    color: #000000;}
+#footer h3 {
+    color: #414141;    font-size: 16px;    background: #FFFFFF;}
+#footer .column {
+    background: #FFFFFF;    background: #FFFFFF;    background: linear-gradient(#FFFFFF, #FFFFFF) repeat scroll 0 0 rgba(0, 0, 0, 0);    
+}
+}
+#footer .column a {
+    color: #000000;    font-size: 12px;}
+#column-left .box.category, #column-right .box.category {
+    background: #F5FAFB;
+}
+ul.box-category li a {
+    font-size: 13px;    color: #000000;    text-shadow: 0px 0px 0px #000000;}
+ul.box-category > li ul > li > a {
+	font-size: 13px;    color: #000000;}
+ul.box-category > li ul > li ul > li > a {
+	font-size: 13px;    color: #000000;}
+ul.box-category > li + li,
+ul.box-category > li ul > li + li {
+    border-top-color: #D2D2CE;
+}
+ul.box-category li > ul {
+    border-top-color: #2BAB1F;
+}
+ul.box-category li:hover {
+    background: #F5FAFB;
+}
+ul.box-category li a:hover,
+ul.box-category > li ul > li:hover > a {
+    color: #2BAB1F;
+}
+.icon-plus:before {
+    color: #2BAB1F;    font-size: 10px;}
+ul.box-category a.category-button.detailed .icon-plus:before {
+    color: #2BAB1F;    font-size: 10px;}
+.box-category > ul > li.back > div > ul > li > a {
+    color: #000000;    font-size: 13px;}
+.box-category > ul > li.back > div > ul > li > ul > li > a {
+    color: #000000;    font-size: 13px;}
+.box-category > ul > li.active.back > div > ul > li > a {
+    color: #000000;    font-size: 13px;}
+.box-category > ul > li.active.back > div > ul > li > ul > li > a {
+    color: #000000;    font-size: 13px;}
+.category-list ul li a span {
+    color: #000000;    font-size: 12px;}
+.box-product .price,
+.owl-carousel .price {
+    color: #EC005C;    font-size: 18px;}
+.jcarousel-skin-carousel .price {
+    color: #EC005C;    font-size: 18px;}
+.product-list.module > div .price {
+    color: #EC005C;    font-size: 18px;}
+.box-product .price-new,
+.owl-carousel .price-new,
+.tovar_day .price-new {
+    color: #EC005C;    font-size: 18px;}
+.product-list.module > div .price .price-new {
+    color: #EC005C;    font-size: 18px;}
+.box-product .price-old,
+.owl-carousel .price-old,
+.tovar_day .price-old {
+    color: #777777;    font-size: 12px;}
+.jcarousel-skin-carousel .price-old {
+    color: #777777;    font-size: 12px;}
+.product-list.module > div .price .price-old {
+    color: #777777;    font-size: 12px;}
+.product-list.module .name a {
+    color: #326064;    font-size: 12px;}
+.box-product .name a,
+.owl-carousel .name a {
+    color: #326064;    font-size: 12px;}
+#content .box-product .description_hover,
+#content .box-product .description_no_hover {
+	color: #326064;    font-size: 10px;}
+.jcarousel-skin-carousel .name a {
+    color: #326064;    font-size: 12px;}
+.product-list > div .price {
+    color: #F60587;    font-size: 16px;}
+.product-grid > div .price {
+    color: #F60587;    font-size: 16px;}
+.product-list > div .price-new {
+    color: #F60587;    font-size: 16px;}
+.product-grid > div .price-new {
+    color: #F60587;    font-size: 16px;}
+.product-list > div .price-old {
+    color: #000000;    font-size: 14px;}
+.product-grid > div .price-old {
+    color: #000000;    font-size: 14px;}
+.product-list > div .name a {
+    color: #326064;    font-size: 12px;}
+.product-grid > div .name a {
+    color: #326064;    font-size: 12px;}
+.category-info p {
+        }
+.manufacturer-info p {
+    color: #000000;    font-size: 12px;}
+.box-heading {
+    color: #333333;    font-size: 16px;}
+.product-info h1 {
+    color: #636E75;    font-size: 23px;}
+.product-info .options .option span.bold {
+	color: #000000;    font-size: 12px;}
+.product-info .price-style {
+    color: #F60587;    font-size: 18px;}
+.product-info .price-new {
+    color: #F60587;    font-size: 18px;}
+.product-info .price-old {
+    color: #111111;    font-size: 13px;}
+.product-info .option b {
+    color: #000000;    font-size: 12px;}
+.timejob_footer h4 {
+        }
+.timejob_footer p,
+.pay_social h4 {
+    color: #FFFFFF;    font-size: 12px;}
+.questions_footer h4 {
+        }
+.questions_footer p {
+    color: #94A4A3;    font-size: 11px;}
+.menu-categories a.category-button,
+.menu-categories a.category-button.detailed {
+        }
+.menu-categories > div ul li a.name {
+        }
+.menu-categories > div ul li > div ul li a {
+        }
+.statii-footer {
+    color: #ffffff;	font-size: 12px;
+}
+.statii-footer > ul > li > a {
+    color: #ffffff;    font-size: 12px;}
+.bottom-footer {
+    background: #22373D;    background: #31464C;    background: linear-gradient(#22373D, #31464C) repeat scroll 0 0 rgba(0, 0, 0, 0);    
+}
+.footer-niz {
+    background-color: #E2F1F3;
+}
+.footer-niz {
+    color: #91B6BE;
+	font-size: 12px;
+}
+.bottom-footer-text {
+    color: #94A4A3;    font-size: 11px;	background: #F5FAFB;}
+.yesselect, .yesselect1, .yesselect2, .yesselect3, .yesselect4, .yesselect5, .yesselect6, .yesselect7, .yesselect8, .yesselect9, .yesselect10, .yesselectchek, .yesselectchek1, .yesselectchek2, .yesselectchek3, .yesselectchek4, .yesselectchek5, .yesselectchek6, .yesselectchek7, .yesselectchek8, .yesselectchek9, .yesselectchek10, .yesselect10000, .yesselect10001, .yesselect10002, .yesselect10003, .yesselect10004, .yesselect10005, .yesselect10006, .yesselect10007, .yesselect10008, .yesselect10009, .yesselect10010, .yesselectchek10000, .yesselectchek10001, .yesselectchek10002, .yesselectchek10003, .yesselectchek10004, .yesselectchek10005, .yesselectchek10006, .yesselectchek10007, .yesselectchek10008, .yesselectchek10009, .yesselectchek10010 {
+        background: #2E85BC;
+    border-color: #2E85BC;
+        color: #ffffff;    
+}
+.product-list .description-list {
+	color: #326064;    font-size: 11px;}
+.description_hover, .description_no_hover {
+	color: #326064;    font-size: 11px;}
+.box-product .image .stiker-module-popular,
+.product-grid .image .stiker-module-popular,
+.product-list .image .stiker-module-popular,
+.owl-item .image .stiker-module-popular,
+.product-info .image .stiker-popular-product {
+	background: linear-gradient(#67C41B, #39B11E) repeat scroll 0 0 rgba(0, 0, 0, 0); 
+	color: #FFFFFF;}
+.box-product .image .stiker-module-new,
+.product-grid .image .stiker-module-new,
+.product-list .image .stiker-module-new,
+.owl-item .image .stiker-module-new,
+.product-info .image .stiker-new-product {
+	background: linear-gradient(#45CED6, #1EA5B2) repeat scroll 0 0 rgba(0, 0, 0, 0); 
+	color: #FFFFFF;}
+.box-product .image .stiker-module-special,
+.product-grid .image .stiker-module-special,
+.product-list .image .stiker-module-special,
+.owl-item .image .stiker-module-special,
+.product-info .image .stiker-special-product {
+	background: linear-gradient(#FF52C6, #ED259A) repeat scroll 0 0 rgba(0, 0, 0, 0);	color: #FFFFFF;}
+#menu .center-menu > ul > li > a, #menu .mobile_menu_trigger {
+	border-bottom: 4px solid #42993d;	color: #FFFFFF;	font-size: 16px;}
+#menu .center-menu > ul > li.current > a {
+	border-bottom: 4px solid #2bab1f;}
+#menu .center-menu > ul > li:hover > a {
+	background: #35d455;	color: #FFFFFF;}
+#menu .center-menu > ul > li > div > ul > li > a.shadow {
+	color: #4C4C4C;}
+#menu .center-menu > ul > li ul > li > a {
+	color: #4C4C4C;}
+#menu .center-menu > ul.menu-ul > li:hover > a.home {
+	border-bottom: 4px solid #42993d;}
+</style>
+<!--[if IE 9]> 
+	<style type="text/css">
+.box-product .cart input.button,
+.product-grid .cart input.button,
+.owl-carousel .cart input.button,
+.product-list .cart input.button,
+a.button, input.button {
+	filter: none;
+	background-color: #45CED6 ;}
+
+.box-product .cart, .product-grid .cart, .owl-item .cart {
+	background: #45CED6 ;}
+#content .box-product > div .image:hover .product-zoom,
+#content .product-grid > div .image:hover .product-zoom,
+#content .product-list > div .image:hover .product-zoom,
+#content .owl-item > div .image:hover .product-zoom {
+    display: none;
+}
+	</style>
+<![endif]-->
+<!--[if IE]>
+<style type="text/css">
+    .box-product > div:hover .product-zoom, .product-grid > div:hover .product-zoom, .owl-item > div:hover .product-zoom {
+        display: none;
+    }
+    #menu > ul > li > a,
+    .box-heading {
+    font-size: 14px;
+    }
+    #menu > ul > li.children:hover > a,
+    #menu > ul > li.current.children:hover > a {
+        padding: 6px 0;
+    }
+</style>
+<![endif]-->
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1676042982681149');
+fbq('track', "PageView");
+fbq('track', 'ViewContent');
+fbq('track', 'Search');
+fbq('track', 'AddToCart');
+fbq('track', 'AddToWishlist');
+fbq('track', 'InitiateCheckout');
+fbq('track', 'AddPaymentInfo');
+fbq('track', 'Purchase', {value: '1.00', currency: 'USD'});
+fbq('track', 'Lead');
+fbq('track', 'CompleteRegistration');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1676042982681149&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<link rel="stylesheet" href="https://cdn.envybox.io/widget/cbk.css">
+<script type="text/javascript" src="https://cdn.envybox.io/widget/cbk.js?wcb_code=0dfeecfe8e5de9cd94c8406ac0adb9f7" charset="UTF-8" async=""></script>
+<!-- ����������� ������ ������� -->
+            <!-- ����������� �������� ������� -->
+      </head>
+<body><iframe src="https://da.vn.ua/catalog/view/javascript/crossdomain.php?session_id=7goc220i28rdesprct2c0ibba7" style="display: none;"></iframe>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TZ26VZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TZ26VZ');</script>
+<!-- End Google Tag Manager -->
+<div class="header_top">
+<div class="header_top_center">
+	<div class="head-statii-top-line">
+	<ul>
+															<li><a href="dostavka" class="shipping">
+					Доставка					</a></li>
+													<li><a href="varianti-oplati" class="pay">
+					Оплата					</a></li>
+								
+						
+				
+		</ul>
+	</div>
+		<div class="social_img">
+		<div class="child_social_img">
+																					<noindex><a rel="nofollow" href="http://facebook.com/vinnitsaflowers"><img src="catalog/view/theme/online-ts/image/social/fb.png"></a></noindex>						<noindex><a rel="nofollow" href="http://g.page/r/Cez9thCuwzRsEBM/review"><img src="catalog/view/theme/online-ts/image/social/od.png"></a></noindex>			<noindex><a rel="nofollow" href="http://instagram.com/dostavka_kvitiv_vinnitsya"><img src="catalog/view/theme/online-ts/image/social/mr.png"></a></noindex>		</div>
+		<div class="share_social_img">
+		</div>
+	</div>
+		<div id="search">
+	<div class="button-search">Поиск</div>
+	<input type="text" name="search" placeholder="Поиск" value="">
+	</div>
+	<div class="lang-curr">
+					</div>
+</div>
+</div>
+<div id="header_block">
+<div class="header_block_child">
+<div class="header_block_children">
+<div id="header">
+    <div class="bg-header">
+            <div class="logo"><a href="https://da.vn.ua/"><img src="https://da.vn.ua/image/data/ds1.gif" title="Dial Service" alt="Dial Service"></a></div>
+      	  <div id="search_tablet">
+	  <div class="button-search">Поиск</div>
+		<input type="text" name="search" placeholder="Поиск" value="">
+	  </div>	
+	  <div class="bg-header-line"></div>
+	  <div class="line-search-cart-header">
+		<div id="cart">
+  <div class="heading">
+      <div class="background"></div>
+      <div class="mini_header_cart">
+                           <a class="cart_empty" id="cart-total"><span>Ничего не куплено!</span></a>
+                   </div>
+  </div>
+    <div class="contentwrapper tablet_hide">
+  <div class="content active">
+        <div class="empty">Ничего не куплено!</div>
+      </div>
+</div>
+</div>	  </div>
+            <div class="callback-header">
+	  <div class="contacts-left-header">
+	  <a href="mailto: davnua@gmail.com"><span class="e-mail">davnua@gmail.com</span></a>
+	  <a class="openrecall"><span class="callback">Перезвоните мне</span></a>
+	  <div id="contac"><form method="" action="" id="contactF"><div id="loading"></div><div class="recallbox"><div class="dtw"><a class="rcol close" href="#">x</a><div id="callback"></div><div class="optgroup"><div class="lgrey">Ваше имя:</div><label for="namer"></label><input id="namer" class="f_input" name="namer"></div><div class="optgroup"><div class="lgrey">Ваш телефон:</div><label for="number"></label><input id="number" class="f_input" name="number"></div><div class="optgroup"><div class="lgrey">Сообщение:</div><label for="message"></label><textarea id="message" name="message" class="f_textarea" rows="4" cols="30"></textarea></div></div><div class="dbw"><input class="f_btn" type="submit" value="Отправить"></div></div></form></div>
+	  </div>
+	  								  			  	  		  <div class="contacts-right-header">
+		  							<span style="color: #326064; font-size: 24px; line-height: 18px; padding-bottom: 6px;"><span style="color: #35AF1F;">+38</span> 067 285 08 53</span><br><span style="color: #326064; font-size: 13px;">Он же Viber, WhatsApp, Telegram</span><br><span style="color: #738786; font-size: 11px;">ЦІЛОДОБОВО Вінниця, вул. Янгеля 24</span>					  					  		  </div>
+	  	  </div>
+              <div class="header_links_cart"> 
+            <div class="links">
+                <ul>
+                    <li><a href="https://da.vn.ua/">Главная</a></li>
+                    <li><a href="https://da.vn.ua/index.php?route=account/wishlist">Закладки (0)</a></li>
+                    <li><a href="https://da.vn.ua/simplecheckout/">Оформление заказа</a></li>
+                    <li class="to-gadjet"><a href="https://da.vn.ua/simplecheckout/">Корзина покупок</a></li>
+ 																																																																																																																																								<li class="mobile-s"><a href="dostavka" class="shipping">
+								Доставка								</a></li>
+																						<li class="mobile-s"><a href="varianti-oplati" class="pay">
+								Оплата								</a></li>
+														
+												
+							
+				                </ul>
+            </div>
+        </div>
+		<div id="welcome_mobile">
+						<a href="https://da.vn.ua/index.php?route=account/login"><i class="fa fa-user"></i>Войти</a> или <a href="https://da.vn.ua/simpleregister/"><i class="fa fa-pencil"></i>зарегистрироваться</a>					</div>
+</div>
+</div>
+				<div id="menu" class="none-statii">
+					<div class="center-menu">
+													
+				                <ul class="menu-ul">
+				   <li class="home_li"><a href="https://da.vn.ua/" class="home">&nbsp;</a></li>
+                   				                                             <li>
+                     <a href="https://da.vn.ua/cvety_buket_dostavka_vinnitsa/">Квіти та букети</a>
+                                                               </li>
+					                    				                                             <li>
+                     <a href="https://da.vn.ua/kompozicii_dostavka_vinnitsa/">КомпозиціЇ</a>
+                                                               </li>
+					                    				                                             <li>
+                     <a href="https://da.vn.ua/podarki_dostavka_vinnitsa/">Подарунки</a>
+                                                               </li>
+					                    				                                             <li>
+                     <a href="https://da.vn.ua/vozdushnye-shary-vinnitsa/">Шари</a>
+                                                               </li>
+					                    				                                             <li>
+                     <a href="https://da.vn.ua/karving/">Смачні букети</a>
+                                                               </li>
+					                                      </ul>
+								<div id="welcome">
+										  <div class="dropdown-login"><a href="#modal-login" class="openlogin" role="button" data-toggle="modal"><span>Вход интернет-магазин</span></a></div>
+					  <div class="dropdown-box">
+						<div class="content-login-box">
+						  <form action="https://da.vn.ua/index.php?route=account/login" method="post" enctype="multipart/form-data">
+							<input type="text" name="email" placeholder="E-Mail" value="">
+							<input type="password" name="password" placeholder="Пароль" value="">&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="submit" value="Войти" class="button"><br><br>
+							<a class="forgotten" href="https://da.vn.ua/index.php?route=account/forgotten">Забыли пароль?</a>
+													  </form>
+						</div>
+					  </div>
+					  <div id="modal-login" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="login-title" aria-hidden="true">
+						  <div class="dtw">
+							<h3 id="login-title">Вход интернет-магазин</h3>
+							<button type="button" class="close rcol" data-dismiss="modal" aria-hidden="true">?</button>
+						  </div>
+						  <form action="https://da.vn.ua/index.php?route=account/login" method="post" enctype="multipart/form-data">
+							  <div class="dcnt">
+									<div class="optgroup aclr"> <span class="lbl">Логин или e-mail:</span>
+									  <input type="text" name="email" placeholder="Логин или e-mail" value="" class="f_input">
+									</div>
+									<div class="optgroup aclr"> <span class="lbl">Пароль</span>
+									  <input type="password" name="password" placeholder="Пароль" value="" class="f_input">
+									</div>
+									<div class="optgroup"><span class="rcol vpad"><a class="forgotten" href="https://da.vn.ua/index.php?route=account/forgotten">Забыли пароль?</a></span>
+									  <input type="submit" value="Войти" class="button f_btn">
+									</div>
+							  </div>
+						  </form>
+						  <div class="dbw">
+							<a href="https://da.vn.ua/simpleregister/">Зарегистрироваться</a><br>и стать клиентом нашего магазина						  </div>
+					  </div>
+									</div>
+            </div>
+</div>
+</div>
+</div>
+</div>
+<div id="menu" class="up_to_tablet">
+    <a class="mobile_menu_trigger up_to_tablet">Каталог товаров</a>
+</div>
+<div class="mobile_menu_wrapper">
+<div class="mobile_menu">
+    	<ul>
+                                    <li>
+                          <a href="https://da.vn.ua/cvety_buket_dostavka_vinnitsa/">Квіти та букети</a>
+                                              </li>
+                                     <li>
+                          <a href="https://da.vn.ua/kompozicii_dostavka_vinnitsa/">КомпозиціЇ</a>
+                                              </li>
+                                     <li>
+                          <a href="https://da.vn.ua/podarki_dostavka_vinnitsa/">Подарунки</a>
+                                              </li>
+                                     <li>
+                          <a href="https://da.vn.ua/vozdushnye-shary-vinnitsa/">Шари</a>
+                                              </li>
+                                     <li>
+                          <a href="https://da.vn.ua/karving/">Смачні букети</a>
+                                              </li>
+                          </ul>
+</div>
+</div>
+<div id="container">
+<div id="notification"></div> 
+<div id="content">  <div class="breadcrumb">
+        <a href="https://da.vn.ua/"><i class="fa fa-home"></i>Главная</a>
+         » <a href="https://da.vn.ua/politikaconf.html">Политика конфиденциальности</a>
+      </div>
+  <h1>Политика конфиденциальности</h1>
+  <p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">Наші гарантії збереження конфіденційності:</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Ваша конфіденційність є дуже важливою для нас.&nbsp; Для того, щоб краще Вас захистити, ми публічно розміщуємо це повідомлення, з докладним поясненням для чого нам необхідна інформація, яка надається Вами і як вона буде використана ‚ інформація ‚ яку ми збираємо:</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Використовуючи сайт, та/або інші пов'язані сервіси та інструменти da.vn.ua, Ви підтверджуєте, що з метою здійснення господарської діяльності та пропозиції послуг нашою компанією, Ви даєте згоду на обробку персональних даних, а саме:</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Ім'я</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;E-mail адреса</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;контактний номер</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;На деяких сторінках Ви можете вказувати інформацію про інших людей.&nbsp; Наприклад, якщо Ви замовляєте подарунок он-лайн і необхідно надати адресу одержувача.&nbsp; У такому випадку буде потрібно наступна особиста інформація про Вашого одержувача:</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Ім'я</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Адреса</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;контактний номер</span></p>
+
+<p class="p2" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; min-height: 28.1px; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;">&nbsp;</p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Персональні дані, що обробляються Компанією, належать до конфіденційної інформації.&nbsp; Натискаючи кнопку «Оплатити», Ви автоматично погоджуєтеся з правилами надання послуг, а саме надаєте явну згоду на використання Ваших email-адрес та номера телефону для надсилання Вам маркетингових повідомлень (листи на email-скриню, viber-повідомлення або смс-повідомлення) за допомогою&nbsp; нашої системи оповіщення клієнтів, а також партнерів, яким ми можемо передавати персональні дані за дотриманням безпеки згідно з Політикою конфіденційності.&nbsp; Повідомлення та листи несуть рекламний характер з метою оповіщення Вас про нові пропозиції, акції, зміни на сайті, а також інформування Вас про найближчі свята.&nbsp; Повідомлення та будь-які інші комунікації з Вами будуть продовжуватися з моменту першого оплаченого замовлення та до моменту відписки від наших розсилок або отримання нами запиту від Вас про видалення персональних даних безпосередньо до нашого сервісу.&nbsp; У такому випадку ми зобов'язуємося негайно видалити Ваші дані та припинити розсилку рекламних пропозицій та повідомлень на Вашу електронну адресу, телефон та viber аккаунт.</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Як ми використовуємо інформацію:</span></p>
+
+<p class="p2" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; min-height: 28.1px; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;">&nbsp;</p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Інформація, надана Вами про себе під час розміщення замовлення, використовується нашою компанією лише для виконання Вашого замовлення.&nbsp; Ми не надаємо цю інформацію стороннім особам та використовуємо її лише для виконання Вашого замовлення у вказані терміни.&nbsp; Інформація, надана Вами про будь-кого при оформленні замовлення, використовується нашою компанією тільки для доставки Вашого замовлення та для підтвердження доставки.&nbsp; У зв'язку з цим дана інформація не може бути передана нікому, крім осіб (співробітників компанії da.vn.ua), які безпосередньо здійснюють доставку Вашого замовлення.&nbsp; До Вашого замовлення ми можемо додати фірмову картку, в якій Ви зможете повідомити Вашого одержувача від когось цей подарунок.&nbsp; Інформація, яку Ви вказуєте у фірмовій картці, використовується лише з цією метою та доставляється Вашому одержувачу.&nbsp; Ми використовуємо Вашу зворотну адресу електронної пошти для відповіді на отримане повідомлення.&nbsp; Ця адреса використовується тільки для цього і не надається стороннім особам.</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Реєстрація проходить шляхом оформлення та оплати першого замовлення на сайті.&nbsp; І, нарешті, ми ніколи не використовуємо особисту інформацію, надану Вами он-лайн у сторонніх цілях, дана інформація може бути використана тільки з метою описаної вище.&nbsp; У процесі роботи сайту da.vn.ua ми можемо збирати інформацію про участь Користувачів у маркетингових акціях, організованих на Сайти, а також обробляти інформацію, пов'язану з ефективністю рекламних кампаній, у тому числі перегляди оголошень на сайті.&nbsp; Ми не збираємо і не обробляємо персональні дані про расове чи етнічне походження, політичні, релігійні чи світоглядні переконання, членство в політичних партіях та професійних спілках, та подібну інформацію.&nbsp; Ми можемо використовувати як розпорядники персональних даних третіх осіб для надання деяких складових своїх послуг.&nbsp; У таких випадках розпорядники не мають повноважень використовувати персональні дані, отримані за допомогою сайту da.vn.ua, інакше як для надання послуг Компанії.</span></p>
+
+<p class="p1" style="margin: 0px; font-stretch: normal; font-size: 22.7px; line-height: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); -webkit-text-size-adjust: auto;"><span class="s1" style="font-family: UICTFontTextStyleBody; font-size: 22.68px;">&nbsp;Наші зобов'язання щодо безпеки даних: Для запобігання несанкціонованому доступу, підтримці точності даних та забезпечення правильного використання інформації, ми зробили всі необхідні фізичні, електронні та управлінські процедури для захисту та забезпечення безпеки інформації, яку ми збираємо на нашому сайті.&nbsp; Розпорядники персональних даних зобов'язуються використовувати отриману від нас інформацію відповідно до вимог безпеки та цієї Політики Конфендиційності</span></p>
+  <div class="buttons">
+    <div class="right"><a href="https://da.vn.ua/" class="button">Продолжить</a></div>
+  </div>
+  </div>
+<div style="clear: both;"></div>
+<div class="bottom-footer-width">
+  <div id="footer">
+                            <div class="column">
+                <h3>Информация</h3>
+                <ul>
+                                    <li><a href="https://da.vn.ua/varianti-oplati.html">Варіанти оплати</a></li>
+                                    <li><a href="https://da.vn.ua/politikaconf.html">Политика конфиденциальности</a></li>
+                                    <li><a href="https://da.vn.ua/uslovija-uslug-dostavki.html">Условия услуг доставки</a></li>
+                                    <li><a href="https://da.vn.ua/dostavka.html">Інформація про доставку</a></li>
+                                    <li><a href="https://da.vn.ua/uhod-za-mogilami-vinnitsa.html">Уход за могилами в Виннице</a></li>
+                                    <li><a href="https://da.vn.ua/dostavka-kv%D1%96t%D1%96v-ta-podarunk%D1%96v-po-v%D1%96nnick%D1%96j-oblast%D1%96.html">Доставка квітів та подарунків по Вінницькій області</a></li>
+                                  </ul>
+              </div>
+                        <div class="column">
+        <h3>Служба поддержки</h3>
+        <ul>
+          <li><a href="https://da.vn.ua/contacts/">Связаться с нами</a></li>
+          <li><a href="https://da.vn.ua/index.php?route=account/return/insert">Возврат товара</a></li>
+          <li><a href="https://da.vn.ua/sitemaps/">Карта сайта</a></li>
+        </ul>
+      </div>
+              <div class="column">
+        <h3>Дополнительно</h3>
+        <ul>
+          <li><a href="https://da.vn.ua/brands/">Производители</a></li>
+          <li><a href="https://da.vn.ua/index.php?route=account/voucher">Подарочные сертификаты</a></li>
+          <li><a href="https://da.vn.ua/index.php?route=affiliate/account">Партнёрская программа</a></li>
+          <li><a href="https://da.vn.ua/specials/">Акции</a></li>
+        </ul>
+      </div>
+              <div class="column">
+        <h3>Личный Кабинет</h3>
+        <ul>
+          <li><a href="https://da.vn.ua/index.php?route=account/account">Личный Кабинет</a></li>
+          <li><a href="https://da.vn.ua/index.php?route=account/order">История заказов</a></li>
+          <li><a href="https://da.vn.ua/index.php?route=account/wishlist">Закладки</a></li>
+          <li><a href="https://da.vn.ua/index.php?route=account/newsletter">Рассылка</a></li>
+        </ul>
+      </div>
+      
+</div>
+</div>
+								
+			
+<div class="bottom-footer-text">
+										<center>Сайт da.vn.ua  -  коли доставка в м. Вінниця задумана, і хочеться, щоб вийшло в найкращому вигляді і недорого..</center>						
+				
+	</div>
+</div>
+<div class="bottom-line-footer"></div>
+<div class="bottom-footer">
+<div class="bottom-footer-center">
+		<div class="bottom-footer-center-left">
+			<div class="bottom-footer-center-left-icon"></div>
+			<div class="timejob_footer">
+												<p>© Інтернет-магазин<br>служби Dial Service 2001–2023
+<br><br><span style="color: #AAC5CD;">До ваших послуг цілодобово</span><br><span style="color: #27B6C7; font-size: 16px; font-weight: bold;">Тел. або Viber +38 067 285 08 53</span></p>
+					
+								
+				
+			</div>
+			<div class="pay_social">
+								<h4>
+																					
+										
+					
+				</h4><br>
+																<img src="catalog/view/theme/online-ts/image/pay/vs.png">				<img src="catalog/view/theme/online-ts/image/pay/mc.png">																																															</div>
+			<div class="schetchiki">
+				<noindex>
+
+</noindex>   			</div>
+		</div>
+		<div class="statii-footer">
+							<ul>
+																										<li><a href="news">Новини</a></li>
+																						<li><a href="uslovija-uslug-dostavki">Допомога</a></li>
+																						<li><a href="contacts">Зворотній зв'язок</a></li>
+																						<li><a href="about_us">О нас</a></li>
+																						<li><a href="testimonial">Відгуки про магазин</a></li>
+																						<li><a href="foto-dostavki-cvetov-vinnitsa">Фото з доставок</a></li>
+																																															</ul>
+								</div>
+    </div>
+</div>
+								
+			
+	<div class="footer-niz">
+							<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M6BMX45VZP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M6BMX45VZP');
+</script>			
+				
+			<div style="clear: both;"></div>
+	</div>
+
+ 
+
+<script type="text/javascript"><!--
+$('.dropdown-enter').click(function(){
+$(this).next('.dropdown-box').slideToggle(300);
+$(this).toggleClass('active');
+});
+//--></script>
+<!-- Startcode -->
+
+<!-- End code -->
+
+<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" style="display: none; padding-bottom: 57px; padding-right: 28px;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxLoadedContent" style="width: 0px; height: 0px; overflow: hidden; float: left;"></div><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><div id="cboxNext" style="float: left;"></div><div id="cboxPrevious" style="float: left;"></div><div id="cboxSlideshow" style="float: left;"></div><div id="cboxClose" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><script src="https://cdn.envytools.com/build/widget/widget.min-3cda337b74.js" charset="utf-8"></script></body></html>

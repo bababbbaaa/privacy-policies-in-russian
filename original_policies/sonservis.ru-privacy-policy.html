@@ -1,0 +1,1474 @@
+<html lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+	
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://sonservis.ru/xmlrpc.php">
+
+			<script type="rocketlazyloadscript">window.MSInputMethodContext && document.documentMode && document.write('<script src="https://sonservis.ru/wp-content/themes/woodmart/js/libs/ie11CustomProperties.min.js" defer><\/script>');</script>
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO Premium plugin v18.7 (Yoast SEO v19.1) - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Политика конфиденциальности | Сон Сервис</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto%20Condensed%3A400%2C700%7CRoboto%3A400%2C700%2C500&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%20Condensed%3A400%2C700%7CRoboto%3A400%2C700%2C500&amp;display=swap" media="all" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%20Condensed%3A400%2C700%7CRoboto%3A400%2C700%2C500&#038;display=swap" /></noscript>
+	<meta name="description" content="Политика конфиденциальности фирмы Сон Сервис фабрика мебели | Сон Сервис">
+	<link rel="canonical" href="https://sonservis.ru/privacy-policy/">
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Политика конфиденциальности | Сон Сервис">
+	<meta property="og:description" content="Политика конфиденциальности">
+	<meta property="og:url" content="https://sonservis.ru/privacy-policy/">
+	<meta property="og:site_name" content="Сон Сервис">
+	<meta property="article:modified_time" content="2022-03-30T07:44:38+00:00">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Политика конфиденциальности | Сон Сервис">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://sonservis.ru/#organization","name":"Сон Сервис Фабрика мебели","url":"https://sonservis.ru/","sameAs":[],"logo":{"@type":"ImageObject","inLanguage":"ru-RU","@id":"https://sonservis.ru/#/schema/logo/image/","url":"https://sonservis.ru/wp-content/uploads/2022/03/logo-11-1.jpg","contentUrl":"https://sonservis.ru/wp-content/uploads/2022/03/logo-11-1.jpg","width":400,"height":180,"caption":"Сон Сервис Фабрика мебели"},"image":{"@id":"https://sonservis.ru/#/schema/logo/image/"}},{"@type":"WebSite","@id":"https://sonservis.ru/#website","url":"https://sonservis.ru/","name":"Сон Сервис","description":"Сон Сервис Фабрика мебели","publisher":{"@id":"https://sonservis.ru/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://sonservis.ru/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":"WebPage","@id":"https://sonservis.ru/privacy-policy/#webpage","url":"https://sonservis.ru/privacy-policy/","name":"Политика конфиденциальности | Сон Сервис","isPartOf":{"@id":"https://sonservis.ru/#website"},"datePublished":"2022-03-28T00:25:16+00:00","dateModified":"2022-03-30T07:44:38+00:00","description":"Политика конфиденциальности фирмы Сон Сервис фабрика мебели | Сон Сервис","breadcrumb":{"@id":"https://sonservis.ru/privacy-policy/#breadcrumb"},"inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://sonservis.ru/privacy-policy/"]}]},{"@type":"BreadcrumbList","@id":"https://sonservis.ru/privacy-policy/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://sonservis.ru/"},{"@type":"ListItem","position":2,"name":"Политика конфиденциальности"}]}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="Сон Сервис » Лента" href="https://sonservis.ru/feed/">
+<link rel="alternate" type="application/rss+xml" title="Сон Сервис » Лента комментариев" href="https://sonservis.ru/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Сон Сервис » Лента комментариев к «Политика конфиденциальности»" href="https://sonservis.ru/privacy-policy/feed/">
+<link rel="stylesheet" id="bootstrap-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/bootstrap-light.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="woodmart-style-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/base.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-widget-price-filter-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/woo-widget-price-filter.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="https://sonservis.ru/wp-includes/css/classic-themes.min.css?ver=1" type="text/css" media="all">
+<style id="woocommerce-inline-inline-css" type="text/css">
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+<link data-minify="1" rel="stylesheet" id="contactus.css-css" href="https://sonservis.ru/wp-content/cache/min/1/wp-content/plugins/ar-contactus/res/css/contactus.min.css?ver=1669740581" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="contactus.generated.desktop.css-css" href="https://sonservis.ru/wp-content/cache/min/1/wp-content/plugins/ar-contactus/res/css/generated-desktop.css?ver=1669740581" type="text/css" media="all">
+<link rel="stylesheet" id="woo-variation-swatches-css" href="https://sonservis.ru/wp-content/plugins/woo-variation-swatches/assets/css/frontend.min.css?ver=1669741341" type="text/css" media="all">
+<style id="woo-variation-swatches-inline-css" type="text/css">
+:root {
+--wvs-tick:url("data:image/svg+xml;utf8,%3Csvg filter='drop-shadow(0px 0px 2px rgb(0 0 0 / .8))' xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 30 30'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='4' d='M4 16L11 23 27 7'/%3E%3C/svg%3E");
+
+--wvs-cross:url("data:image/svg+xml;utf8,%3Csvg filter='drop-shadow(0px 0px 5px rgb(255 255 255 / .6))' xmlns='http://www.w3.org/2000/svg' width='72px' height='72px' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23ff0000' stroke-linecap='round' stroke-width='0.6' d='M5 5L19 19M19 5L5 19'/%3E%3C/svg%3E");
+--wvs-single-product-item-width:30px;
+--wvs-single-product-item-height:30px;
+--wvs-single-product-item-font-size:15px}
+</style>
+<link data-minify="1" rel="stylesheet" id="js_composer_front-css" href="https://sonservis.ru/wp-content/cache/min/1/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=1669740581" type="text/css" media="all">
+<link rel="stylesheet" id="wd-widget-nav-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/widget-nav.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-wpcf7-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/int-wpcf7.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-base-deprecated-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/base-deprecated.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-wpbakery-base-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/int-wpb-base.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-wpbakery-base-deprecated-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/int-wpb-base-deprecated.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-woocommerce-base-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/woocommerce-base.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-mod-star-rating-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/mod-star-rating.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-woo-el-track-order-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/woo-el-track-order.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-header-base-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/header-base.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-mod-tools-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/mod-tools.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-header-elements-base-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/header-el-base.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-social-icons-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/el-social-icons.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-header-search-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/header-el-search.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-header-search-form-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/header-el-search-form.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-wd-search-form-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/wd-search-form.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-woo-mod-login-form-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/woo-mod-login-form.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-header-my-account-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/header-el-my-account.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-header-cart-side-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/header-el-cart-side.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-header-cart-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/header-el-cart.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-widget-shopping-cart-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/woo-widget-shopping-cart.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-widget-product-list-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/woo-widget-product-list.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-page-title-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/page-title.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-widget-collapse-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/opt-widget-collapse.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-footer-base-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/footer-base.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-text-block-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/el-text-block.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-scroll-top-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/opt-scrolltotop.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-header-my-account-sidebar-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/header-el-my-account-sidebar.min.css?ver=6.5.4" type="text/css" media="all">
+<link rel="stylesheet" id="wd-bottom-toolbar-css" href="https://sonservis.ru/wp-content/themes/woodmart/css/parts/opt-bottom-toolbar.min.css?ver=6.5.4" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="xts-style-header_960307-css" href="https://sonservis.ru/wp-content/cache/min/1/wp-content/uploads/2022/08/xts-header_960307-1661890693.css?ver=1669740581" type="text/css" media="all">
+<link data-minify="1" rel="stylesheet" id="xts-style-theme_settings_default-css" href="https://sonservis.ru/wp-content/cache/min/1/wp-content/uploads/2022/09/xts-theme_settings_default-1663858030.css?ver=1669740581" type="text/css" media="all">
+
+<!--n2css--><script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" id="jquery-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.6.9.4" id="jquery-blockui-js" defer=""></script>
+<script type="text/javascript" id="wc-add-to-cart-js-extra">
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_view_cart":"\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440 \u043a\u043e\u0440\u0437\u0438\u043d\u044b","cart_url":"https:\/\/sonservis.ru\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=6.9.4" id="wc-add-to-cart-js" defer=""></script>
+<script type="text/javascript" id="contactus-js-extra">
+/* <![CDATA[ */
+var arCUVars = {"url":"https:\/\/sonservis.ru\/wp-admin\/admin-ajax.php","version":"2.2.4","_wpnonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"458bd99f4e\" \/><input type=\"hidden\" name=\"_wp_http_referer\" value=\"\/privacy-policy\/\" \/>"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/plugins/ar-contactus/res/js/contactus.min.js?ver=2.2.4" id="contactus-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/cache/min/1/wp-content/plugins/ar-contactus/res/js/scripts.js?ver=1669740581" id="contactus.scripts-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/cache/min/1/wp-content/plugins/js_composer/assets/js/vendors/woocommerce-add-to-cart.js?ver=1669740581" id="vc_woocommerce-add-to-cart-js-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/libs/device.min.js?ver=6.5.4" id="wd-device-library-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://sonservis.ru/wp-json/"><link rel="alternate" type="application/json" href="https://sonservis.ru/wp-json/wp/v2/pages/3"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://sonservis.ru/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://sonservis.ru/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.1.1">
+<meta name="generator" content="WooCommerce 6.9.4">
+<link rel="shortlink" href="https://sonservis.ru/?p=3">
+<link rel="alternate" type="application/json+oembed" href="https://sonservis.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsonservis.ru%2Fprivacy-policy%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://sonservis.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsonservis.ru%2Fprivacy-policy%2F&amp;format=xml">
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1427894-ewt40"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1427894-ewt40" style="position:fixed; left:-999px;" alt=""/></noscript>
+
+					<meta name="viewport" content="width=device-width, initial-scale=1">
+										<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+<link rel="icon" href="https://sonservis.ru/wp-content/uploads/2022/03/cropped-ikonka1-32x32.png" sizes="32x32">
+<link rel="icon" href="https://sonservis.ru/wp-content/uploads/2022/03/cropped-ikonka1-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://sonservis.ru/wp-content/uploads/2022/03/cropped-ikonka1-180x180.png">
+<meta name="msapplication-TileImage" content="https://sonservis.ru/wp-content/uploads/2022/03/cropped-ikonka1-270x270.png">
+		<style type="text/css" id="wp-custom-css">
+			/* виджеты атрибутов */
+
+.wd-filter-list a {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+a {
+   color: #181274;
+    text-decoration: none;
+    transition: all .25s ease;
+}
+
+.wd-filter-list {
+    --swatch-height: 25px;
+    --swatch-width: 25px;
+    --swatch-icon-size: 12px;
+    --swatch-text-size: 14px;
+}
+/* вариативные параметры в корзине */
+ul.variation {
+    --li-mb: 5px;
+    --list-mb: 0;
+    font-size: 15px;
+    color: #ff0000;
+    --wd-tags-mb: 0;
+}
+/* в сравнении шрифт */
+.wd-compare-table th {
+    flex: 0 0 20%;
+    text-transform: capitalize;
+    font-size: 14px;
+}
+
+/* кнопки 1 клик и отправить почту */
+.button, button, [type="submit"], [type="button"] {
+    padding: 18px 12px;
+    font-size: 11px;
+    line-height: 0px;
+    background-color: #f6a919;
+    color: #fff;
+    position: relative;
+}
+
+.woocommerce-variation-add-to-cart>* {
+    margin-bottom: 20px;
+}
+
+
+/* подменю цвет и шрифт*/
+.wd-sub-menu li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #000;
+    font-size: 14px;
+	text-transform: uppercase;
+    line-height: 1.3;
+
+}
+
+/* подменю фон  */
+
+.wd-dropdown-menu.wd-design-default {
+    padding: 12px 20px;
+	background-color: #E3E4E8;
+    --wd-dropdown-width: 220px;
+}
+
+/* навигация по сайту */
+.widget_nav_menu ul li a {
+   color: #fff111;
+    text-decoration: rever;
+}  
+/*  цена в карточке */
+.price .amount {
+    font-size: large;
+}
+.price del {
+    color: #444;
+    font-size: 80%;
+}
+del .amount {
+    color: #EA7E31;
+	  font-weight: 600;
+}
+
+/*увеличить картинку*/
+
+.wd-action-btn.wd-style-icon-bg-text>a {
+    flex-wrap: nowrap;
+    overflow: hidden;
+        background-color: #e83333;
+    box-shadow: #fff;
+    color: #f7f7f7;
+	font-size: 15px;
+}
+.wd-action-btn.wd-style-icon-bg-text>a:hover {
+    color: #f1f879;
+}
+
+/* разделитель между полями свойств в сайдбаре*/
+.widget {
+    margin-bottom: 2px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #fff;
+}
+
+/* кнопка наверх*/
+.scrollToTop {
+    position: fixed;
+    right: 100px;
+    bottom: 20px;
+		background-color: #ff0000;
+		color: #fff;
+}
+
+/*фильтр свойства в категориях*/
+body .select2-container--default .select2-selection {
+    border: var(--wd-form-brd-width) solid rgb(39 146 55 / 60%);
+    border-radius: var(--wd-form-brd-radius);
+background-color: transparent;
+    transition: border-color .4s ease;
+}
+/*мега меню рамка*/
+.wd-dropdown {
+    box-shadow: 0 0 8px rgb(10 113 46);
+    text-align: left;
+    visibility: visible;
+    opacity: 0;
+}
+
+/*цвет цена в карточке товаров*/
+.amount {
+    color: #000;
+    font-weight: 600;
+}
+/*убрать ОТ: в цене*/
+.price-from { display: none; }
+
+/*шрифт в карточке*/
+.price .amount {
+    font-size: larger;
+}
+
+del .amount {
+    color: #212121;
+    font-weight: 600;
+}
+
+/* шрифт цвет фильтр*/
+.wd-pf-dropdown a {
+    display: flex;
+    line-height: 1.3;
+    padding: 8px 18px;
+    color: #000;
+}
+		</style>
+		<style>
+		
+		</style><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript><link href="https://www.googletagmanager.com" rel="preconnect"></head>
+
+<body class="privacy-policy page-template-default page page-id-3 theme-woodmart woocommerce-no-js woo-variation-swatches wvs-behavior-blur wvs-theme-woodmart wvs-show-label wrapper-wide  categories-accordion-on woodmart-ajax-shop-on offcanvas-sidebar-tablet sticky-toolbar-on wpb-js-composer js-comp-ver-6.9.0 vc_responsive">
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="wd-flicker-fix">// Flicker fix.</script><script type="rocketlazyloadscript" async="" data-rocket-type="text/javascript">
+(function ct_load_script() {
+var ct = document.createElement('script'); ct.type = 'text/javascript'; ct.async=true;
+ct.src = document.location.protocol+'//cc.calltracking.ru/phone.554e3.11864.async.js?nc='+Math.floor(new Date().getTime()/300000);
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ct, s);
+})();
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async="" src="https://www.googletagmanager.com/gtag/js?id=UA-230514760-1"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-230514760-1');
+</script>	
+	
+	<div class="website-wrapper">
+									<header class="whb-header whb-full-width whb-sticky-shadow whb-scroll-stick whb-sticky-real whb-hide-on-scroll">
+					<div class="whb-main-header">
+	
+<div class="whb-row whb-top-bar whb-not-sticky-row whb-with-bg whb-without-border whb-color-light whb-flex-flex-middle">
+	<div class="container">
+		<div class="whb-flex-row whb-top-bar-inner">
+			<div class="whb-column whb-col-left whb-visible-lg">
+	
+<div class="wd-header-text set-cont-mb-s reset-last-child "><h3><span style="color: #ffffff;">Сон Сервис Фабрика мебели официальный сайт</span></h3></div>
+</div>
+<div class="whb-column whb-col-center whb-visible-lg whb-empty-column">
+	</div>
+<div class="whb-column whb-col-right whb-visible-lg">
+	<div class="wd-header-divider wd-full-height "></div>
+<div class="wd-header-nav wd-header-secondary-nav text-right wd-full-height" role="navigation" aria-label="Secondary navigation">
+	<ul id="menu-top-bar-right" class="menu wd-nav wd-nav-secondary wd-style-bordered wd-gap-s"><li id="menu-item-9999" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9999 item-level-0 menu-simple-dropdown wd-event-hover"><a href="https://sonservis.ru/contact/" class="woodmart-nav-link"><span class="nav-link-text">Контакты</span></a></li>
+</ul></div><!--END MAIN-NAV-->
+</div>
+<div class="whb-column whb-col-mobile whb-hidden-lg">
+	
+			<div class="wd-social-icons  icons-design-colored icons-size-small color-scheme-dark social-follow social-form-circle text-left">
+
+				
+				
+				
+				
+				
+									<a rel="noopener noreferrer nofollow" href="https://www.youtube.com/channel/UCFWtNmsiS6-c2GE2S_WwRNQ" target="_blank" class=" wd-social-icon social-youtube" aria-label="Социальная ссылка YouTube">
+						<span class="wd-icon"></span>
+											</a>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+									<a rel="noopener noreferrer nofollow" href="https://ok.ru/group/61708454133839/" target="_blank" class=" wd-social-icon social-ok" aria-label="Социальная ссылка Одноклассников">
+						<span class="wd-icon"></span>
+											</a>
+				
+				
+									<a rel="noopener noreferrer nofollow" href="https://vk.com/son.servis" target="_blank" class=" wd-social-icon social-vk" aria-label="Социальная ссылка ВКонтакте">
+						<span class="wd-icon"></span>
+											</a>
+								
+								
+				
+									<a rel="noopener noreferrer nofollow" href="https://t.me/son_servis" target="_blank" class=" wd-social-icon social-tg" aria-label="Социальная ссылка в Telegram">
+						<span class="wd-icon"></span>
+											</a>
+								
+				
+			</div>
+
+		</div>
+		</div>
+	</div>
+</div>
+
+<div class="whb-row whb-general-header whb-sticky-row whb-with-bg whb-without-border whb-color-dark whb-flex-flex-middle">
+	<div class="container">
+		<div class="whb-flex-row whb-general-header-inner">
+			<div class="whb-column whb-col-left whb-visible-lg">
+	<div class="site-logo">
+	<a href="https://sonservis.ru/" class="wd-logo wd-main-logo" rel="home">
+		<img src="https://sonservis.ru/wp-content/uploads/2022/03/logo-m.jpg" alt="Сон Сервис" style="max-width: 129px;">	</a>
+	</div>
+</div>
+<div class="whb-column whb-col-center whb-visible-lg">
+	
+<div class="wd-header-text set-cont-mb-s reset-last-child "><h3><a href="tel:+78312831199">8(831)283-11-99</a></h3></div>
+<div class="wd-header-divider whb-divider-default "></div>
+<div class="wd-header-text set-cont-mb-s reset-last-child  wd-inline"><a title="Whatsapp" href="whatsapp://send?phone=79200157600"><img class="alignleft" src="https://sonservis.ru/wp-content/uploads/2022/03/whatsapp1.png" alt="Написать в Whatsapp" width="30" height="30"></a><a title="Viber" href="viber://pa?chatURI=sonservis"><img class="alignleft" src="https://sonservis.ru/wp-content/uploads/2022/03/viber1.png" alt="Написать в Viber" width="30" height="30"></a></div>
+			<div class="wd-search-form wd-header-search-form wd-display-form whb-0bikdmw7anxjxdq4l57w">
+				
+				
+				<form role="search" method="get" class="searchform  wd-style-default" action="https://sonservis.ru/">
+					<input type="text" class="s" placeholder="Поиск товаров" value="" name="s" aria-label="Search" title="Поиск товаров">
+					<input type="hidden" name="post_type" value="product">
+										<button type="submit" class="searchsubmit">
+						<span>
+							Search						</span>
+											</button>
+				</form>
+
+				
+				
+				
+				
+							</div>
+		</div>
+<div class="whb-column whb-col-right whb-visible-lg">
+	<div class="wd-header-my-account wd-tools-element wd-event-hover  wd-design-1 wd-account-style-icon login-side-opener">
+			<a href="https://sonservis.ru/my-account/" title="Мой аккаунт">
+			<span class="wd-tools-icon">
+							</span>
+			<span class="wd-tools-text">
+				Вход / Регистрация			</span>
+		</a>
+
+			</div>
+<div class="wd-header-divider wd-full-height "></div>
+<div class="wd-header-cart wd-tools-element wd-design-4 cart-widget-opener">
+	<a href="https://sonservis.ru/cart/" title="Корзина">
+		<span class="wd-tools-icon">
+								</span>
+		<span class="wd-tools-text">
+									<span class="wd-cart-number wd-tools-count">0 <span>пунктов</span></span>
+					
+			<span class="subtotal-divider">/</span>
+					<span class="wd-cart-subtotal"><span class="woocommerce-Price-amount amount"><bdi>0&nbsp;<span class="woocommerce-Price-currencySymbol">₽</span></bdi></span></span>
+				</span>
+	</a>
+	</div>
+
+<div class="wd-header-wishlist wd-tools-element wd-style-icon wd-with-count wd-design-2" title="Мой список желаний">
+	<a href="https://sonservis.ru/wishlist/">
+		<span class="wd-tools-icon">
+			
+							<span class="wd-tools-count">
+					0				</span>
+					</span>
+		<span class="wd-tools-text">
+			Список желаний (Wishlist)		</span>
+	</a>
+</div>
+
+<div class="wd-header-compare wd-tools-element wd-style-icon wd-with-count wd-design-2" title="Сравнение товаров">
+	<a href="https://sonservis.ru/compare/">
+		<span class="wd-tools-icon">
+			
+							<span class="wd-tools-count">0</span>
+					</span>
+		<span class="wd-tools-text">
+			Сравнение		</span>
+	</a>
+</div>
+</div>
+<div class="whb-column whb-mobile-left whb-hidden-lg">
+	<div class="wd-tools-element wd-header-mobile-nav wd-style-text wd-design-1">
+	<a href="#" rel="nofollow">
+		<span class="wd-tools-icon">
+					</span>
+	
+		<span class="wd-tools-text">Меню</span>
+	</a>
+</div><!--END wd-header-mobile-nav--><div class="site-logo wd-switch-logo">
+	<a href="https://sonservis.ru/" class="wd-logo wd-main-logo" rel="home">
+		<img src="https://sonservis.ru/wp-content/uploads/2022/03/logo-m.jpg" alt="Сон Сервис" style="max-width: 68px;">	</a>
+					<a href="https://sonservis.ru/" class="wd-logo wd-sticky-logo" rel="home">
+			<img src="https://sonservis.ru/wp-content/uploads/2022/03/logo-m.jpg" alt="Сон Сервис" style="max-width: 65px;">		</a>
+	</div>
+</div>
+<div class="whb-column whb-mobile-center whb-hidden-lg whb-empty-column">
+	</div>
+<div class="whb-column whb-mobile-right whb-hidden-lg">
+	
+<div class="wd-header-cart wd-tools-element wd-design-5 cart-widget-opener">
+	<a href="https://sonservis.ru/cart/" title="Корзина">
+		<span class="wd-tools-icon">
+												<span class="wd-cart-number wd-tools-count">0 <span>пунктов</span></span>
+							</span>
+		<span class="wd-tools-text">
+			
+			<span class="subtotal-divider">/</span>
+					<span class="wd-cart-subtotal"><span class="woocommerce-Price-amount amount"><bdi>0&nbsp;<span class="woocommerce-Price-currencySymbol">₽</span></bdi></span></span>
+				</span>
+	</a>
+	</div>
+
+<div class="wd-header-wishlist wd-tools-element wd-style-icon wd-with-count wd-design-2" title="Мой список желаний">
+	<a href="https://sonservis.ru/wishlist/">
+		<span class="wd-tools-icon">
+			
+							<span class="wd-tools-count">
+					0				</span>
+					</span>
+		<span class="wd-tools-text">
+			Список желаний (Wishlist)		</span>
+	</a>
+</div>
+
+<div class="wd-header-compare wd-tools-element wd-style-icon wd-with-count wd-design-2" title="Сравнение товаров">
+	<a href="https://sonservis.ru/compare/">
+		<span class="wd-tools-icon">
+			
+							<span class="wd-tools-count">0</span>
+					</span>
+		<span class="wd-tools-text">
+			Сравнение		</span>
+	</a>
+</div>
+</div>
+		</div>
+	</div>
+</div>
+
+<div class="whb-row whb-header-bottom whb-sticky-row whb-with-bg whb-without-border whb-color-light whb-flex-equal-sides">
+	<div class="container">
+		<div class="whb-flex-row whb-header-bottom-inner">
+			<div class="whb-column whb-col-left whb-visible-lg whb-empty-column">
+	</div>
+<div class="whb-column whb-col-center whb-visible-lg">
+	<div class="wd-header-nav wd-header-main-nav text-center wd-design-1" role="navigation" aria-label="Главное меню">
+	<ul id="menu-glavnoe" class="menu wd-nav wd-nav-main wd-style-default wd-gap-s"><li id="menu-item-10619" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10619 item-level-0 menu-mega-dropdown wd-event-click menu-item-has-children dropdown-load-ajax"><a href="https://sonservis.ru/product-category/krovati/" class="woodmart-nav-link"><span class="nav-link-text">Кровати</span></a>
+<div class="wd-dropdown-menu wd-dropdown wd-design-full-width color-scheme-dark">
+
+<div class="container">
+<div class="dropdown-html-placeholder wd-fill" data-id="13344"></div>
+</div>
+
+</div>
+</li>
+<li id="menu-item-10625" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10625 item-level-0 menu-mega-dropdown wd-event-click menu-item-has-children dropdown-load-ajax"><a href="https://sonservis.ru/product-category/matrasy/" class="woodmart-nav-link"><span class="nav-link-text">Матрасы</span></a>
+<div class="wd-dropdown-menu wd-dropdown wd-design-full-width color-scheme-dark">
+
+<div class="container">
+<div class="dropdown-html-placeholder wd-fill" data-id="14259"></div>
+</div>
+
+</div>
+</li>
+<li id="menu-item-10634" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-10634 item-level-0 menu-mega-dropdown wd-event-hover dropdown-with-height" style="--wd-dropdown-height: 10px;--wd-dropdown-width: 300px;"><a href="https://sonservis.ru/product-category/divany/" class="woodmart-nav-link"><span class="nav-link-text">Диваны</span></a><div class="color-scheme-dark wd-design-sized wd-dropdown-menu wd-dropdown"><div class="container">
+<ul class="wd-sub-menu row color-scheme-dark">
+	<li id="menu-item-12780" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12780 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/divany/divany-uglovye/" class="woodmart-nav-link">Диваны угловые</a></li>
+	<li id="menu-item-12779" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12779 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/divany/divany-pryamye/" class="woodmart-nav-link">Диваны прямые</a></li>
+	<li id="menu-item-12781" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12781 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/divany/divany-modulnye/" class="woodmart-nav-link">Диваны модульные</a></li>
+</ul>
+</div>
+</div>
+</li>
+<li id="menu-item-10635" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-10635 item-level-0 menu-mega-dropdown wd-event-hover dropdown-with-height" style="--wd-dropdown-height: 10px;--wd-dropdown-width: 300px;"><a href="https://sonservis.ru/product-category/aksessuary/" class="woodmart-nav-link"><span class="nav-link-text">Товары для сна</span></a><div class="color-scheme-dark wd-design-sized wd-dropdown-menu wd-dropdown"><div class="container">
+<ul class="wd-sub-menu row color-scheme-dark">
+	<li id="menu-item-14480" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14480 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/toppery/" class="woodmart-nav-link">Топперы</a></li>
+	<li id="menu-item-14481" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14481 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/namatrasniki/" class="woodmart-nav-link">Наматрасники</a></li>
+	<li id="menu-item-10636" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10636 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/aksessuary/pokryvala/" class="woodmart-nav-link">Покрывала</a></li>
+	<li id="menu-item-10637" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10637 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/aksessuary/odeyala/" class="woodmart-nav-link">Одеяла</a></li>
+	<li id="menu-item-10638" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10638 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/aksessuary/podushki/" class="woodmart-nav-link">Подушки</a></li>
+	<li id="menu-item-10639" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10639 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/aksessuary/evroprostyni/" class="woodmart-nav-link">Европростыни</a></li>
+</ul>
+</div>
+</div>
+</li>
+<li id="menu-item-11264" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-11264 item-level-0 menu-mega-dropdown wd-event-hover dropdown-load-ajax dropdown-with-height" style="--wd-dropdown-height: 100px;--wd-dropdown-width: 800px;"><a href="https://sonservis.ru/product-category/myagkie-paneli/" class="woodmart-nav-link"><span class="nav-link-text">Мягкие панели</span></a></li>
+<li id="menu-item-10641" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-10641 item-level-0 menu-mega-dropdown wd-event-hover dropdown-with-height" style="--wd-dropdown-height: 10px;--wd-dropdown-width: 500px;"><a href="https://sonservis.ru/product-category/drugaya-mebel/" class="woodmart-nav-link"><span class="nav-link-text">Другая мебель</span></a><div class="color-scheme-dark wd-design-sized wd-dropdown-menu wd-dropdown"><div class="container">
+<ul class="wd-sub-menu row color-scheme-dark">
+	<li id="menu-item-10647" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10647 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/drugaya-mebel/stulya/" class="woodmart-nav-link">Стулья</a></li>
+	<li id="menu-item-10642" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10642 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/drugaya-mebel/kresla/" class="woodmart-nav-link">Кресла</a></li>
+	<li id="menu-item-10643" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10643 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/drugaya-mebel/banketki/" class="woodmart-nav-link">Банкетки</a></li>
+	<li id="menu-item-10644" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10644 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/drugaya-mebel/zhurnalnye-stoliki/" class="woodmart-nav-link">Журнальные столики</a></li>
+	<li id="menu-item-10646" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10646 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/drugaya-mebel/pufy/" class="woodmart-nav-link">Пуфы</a></li>
+	<li id="menu-item-10649" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-10649 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/drugaya-mebel/tumby/" class="woodmart-nav-link">Тумбы</a></li>
+	<li id="menu-item-11897" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-11897 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/mebel-s-elementami-kovki/" class="woodmart-nav-link">Мебель с элементами ковки</a></li>
+	<li id="menu-item-14236" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-14236 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/product-category/drugaya-mebel/ortopedicheskie-osnovaniya/" class="woodmart-nav-link">Ортопедические основания</a></li>
+</ul>
+</div>
+</div>
+</li>
+<li id="menu-item-10652" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-10652 item-level-0 menu-mega-dropdown wd-event-hover dropdown-with-height" style="--wd-dropdown-height: 10px;--wd-dropdown-width: 500px;"><a href="https://sonservis.ru/contact/" class="woodmart-nav-link"><span class="nav-link-text">Контакты</span></a><div class="color-scheme-dark wd-design-sized wd-dropdown-menu wd-dropdown"><div class="container">
+<ul class="wd-sub-menu row color-scheme-dark">
+	<li id="menu-item-10660" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-10660 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/" class="woodmart-nav-link">Сон Сервис</a></li>
+	<li id="menu-item-10655" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10655 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/adresa-magazinov/" class="woodmart-nav-link">Адреса розничных магазинов</a></li>
+	<li id="menu-item-10656" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10656 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/kak-sdelat-zakaz/" class="woodmart-nav-link">Как сделать заказ</a></li>
+	<li id="menu-item-10742" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10742 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/oplata-i-dostavka-zakazov/" class="woodmart-nav-link">Оплата и доставка</a></li>
+	<li id="menu-item-10659" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10659 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/sroki-ispolneniya-i-garantii/" class="woodmart-nav-link">Сроки и гарантии</a></li>
+	<li id="menu-item-12549" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12549 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/otzyvy-nashih-klientov/" class="woodmart-nav-link">Отзывы наших клиентов</a></li>
+	<li id="menu-item-10654" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-3 current_page_item menu-item-10654 item-level-1 wd-event-hover col-auto"><a href="https://sonservis.ru/privacy-policy/" class="woodmart-nav-link">Политика</a></li>
+</ul>
+</div>
+</div>
+</li>
+</ul></div><!--END MAIN-NAV-->
+</div>
+<div class="whb-column whb-col-right whb-visible-lg">
+	<div class="wd-header-divider wd-full-height "></div>
+<div class="wd-header-nav wd-header-secondary-nav text-left" role="navigation" aria-label="Secondary navigation">
+	<ul id="menu-akczii" class="menu wd-nav wd-nav-secondary wd-style-underline wd-gap-s"><li id="menu-item-11454" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11454 item-level-0 menu-simple-dropdown wd-event-hover"><a href="https://sonservis.ru/akczii-son-servis/" class="woodmart-nav-link"><span class="nav-link-text">Акции</span></a></li>
+</ul></div><!--END MAIN-NAV-->
+</div>
+<div class="whb-column whb-col-mobile whb-hidden-lg">
+	
+<div class="wd-header-text set-cont-mb-s reset-last-child "><span style="color: #ffff99;">Сон Сервис официальный сайт</span></div>
+
+<div class="wd-header-text set-cont-mb-s reset-last-child "><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+78312831199">8(831)283-11-99</a></span></div>
+</div>
+		</div>
+	</div>
+</div>
+</div>
+				</header>
+			
+								<div class="main-page-wrapper">
+		
+						<div class="page-title  page-title-default title-size-default title-design-disable color-scheme-light" style="">
+					<div class="container">
+													
+															<div class="breadcrumbs"><a href="https://sonservis.ru/" rel="v:url" property="v:title">Главная</a> » <span class="current">Политика конфиденциальности</span></div><!-- .breadcrumbs -->																		</div>
+				</div>
+			
+		<!-- MAIN CONTENT AREA -->
+				<div class="container">
+			<div class="row content-layout-wrapper align-items-start">
+				
+<div class="site-content col-lg-12 col-12 col-md-12" role="main">
+
+								<article id="post-3" class="post-3 page type-page status-publish hentry">
+
+					<div class="entry-content">
+						<p><strong>Политика конфиденциальности, обработка персональных данных, защита персональных данных в рамках пользования сайтом фирмы «Сон сервис», https://sonservis.ru/.&nbsp;</strong></p>
+<h2>Общие положения</h2>
+<ol>
+<li>Настоящая Политика конфиденциальности, обработки персональных данных и реализуемых требований к защите персональных данных (далее – Политика) действует в отношении всей информации, которую Администрация Сайта может получить о Пользователе во время посещения сайта sonservis.ru (далее – Сайт). Согласие Пользователя Сайта на предоставление персональной информации даётся им в соответствии с настоящей Политикой при использовании Сайта.</li>
+<li>Использование сервисов Сайта означает безоговорочное согласие Пользователя с настоящей Политикой и указанными в ней условиями обработки его персональных данных. В случае несогласия с этими условиями Пользователь должен воздержаться от использования Сайта.</li>
+<li>Настоящая Политика разработана в соответствии Федеральным законом от 27 июля 2006г. № 152-ФЗ «О персональных данных» и Постановления Правительства РФ от 1 ноября 2012г. № 1119 «Об утверждении Требований к защите персональных данных при их обработке в информационных системах персональных данных».</li>
+<li>Настоящая Политика применяется только к Сайту https://sonservis.ru/. Сайт https://sonservis.ru/ не контролирует и не несёт ответственности за сайты третьих лиц, на которые Пользователь может перейти по ссылкам, доступным на Сайте https://sonservis.ru.</li>
+</ol>
+<h2>Персональная информация в рамках Политики</h2>
+<p>В рамках настоящей Политики под персональной информацией Пользователя понимаются:</p>
+<p>Персональная информация, которую Пользователь предоставляет о себе самостоятельно при регистрации (создании учётной записи) на Сайте, включая свои персональные данные:</p>
+<ul>
+<li>фамилия, имя, отчество;</li>
+<li>адрес места проживания;</li>
+<li>номера контактных телефонов;</li>
+<li>адрес электронной почты;</li>
+<li>иная информация о Пользователе, предоставление которой необходимо для предоставления услуг по доставке товаров и сообщений с Сайта.</li>
+</ul>
+<p>Обязательная для предоставления информация помечена специальным образом. Иная информация предоставляется Пользователем на его усмотрение.</p>
+<ol>
+<li>Данные, которые автоматически передаются сервисам Сайта в процессе их использования с помощью установленного на устройстве Пользователя программного обеспечения, в том числе IP-адрес, данные файлов cookie, информация о браузере Пользователя (или иной программе, с помощью которой осуществляется доступ к сервисам), технические характеристики оборудования и программного обеспечения, используемых Пользователем, дата и время доступа к сервисам, адреса запрашиваемых страниц и иная подобная информация.</li>
+<li>Иная информация о Пользователе, обработка которой предусмотрена Пользовательским соглашением об использовании Сайта.</li>
+<li>Администрация Сайта по общему правилу не проверяет достоверность персональной информации, предоставляемой пользователями, и не осуществляет контроль за их дееспособностью. Однако Администрация Сайта исходит из того, что пользователь предоставляет достоверную и достаточную персональную информацию по вопросам, предлагаемым в форме регистрации, и поддерживает эту информацию в актуальном состоянии.</li>
+</ol>
+<h2>Цели сбора и обработки персональной информации Пользователей</h2>
+<ol>
+<li>Сайт собирает и хранит только ту персональную информацию, которая необходима для предоставления сервисов Сайта или исполнения соглашений и договоров с Пользователем, за исключением случаев, когда законодательством предусмотрено обязательное хранение персональной информации в течение определённого законом срока.</li>
+<li>Персональную информацию Пользователя Сайт обрабатывает в следующих целях:</li>
+</ol>
+<ul>
+<li>Идентификации Пользователя, зарегистрированного на Сайте.</li>
+<li>Предоставления Пользователю доступа к ресурсам Сайта.</li>
+<li>Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования Сайта, заключения договоров, оказания услуг, обработку запросов и заявок от Пользователя.</li>
+<li>Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.</li>
+<li>Создания учётной записи Пользователя.</li>
+<li>Предоставления Пользователю эффективной клиентской и технической поддержки при возникновении проблем, связанных с использованием Сайта.</li>
+<li>Осуществления рекламной деятельности с согласия Пользователя.</li>
+<li>Выполнения своих обязательств перед Пользователями, возникающих в связи с использованием Пользователем ресурсов Сайта;</li>
+<li>Продвижения Товара.</li>
+<li>Проведение статистических и иных исследований, на основе обезличенных данных.</li>
+<li>Оценки и анализа работы Сайта;</li>
+<li>Улучшение сервисов сайта, удобства их использования, разработка новых сервисов и услуг.</li>
+</ul>
+<h2>Условия обработки персональных данных и передачи третьим лицам</h2>
+<ol>
+<li>В отношении персональной информации Пользователя сохраняется конфиденциальность, кроме случаев добровольного предоставления Пользователем информации о себе для общего доступа всем Пользователям Сайта. При использовании отдельных сервисов Сайта, Пользователь соглашается с тем, что определённая часть его персональных данных становится общедоступной.</li>
+<li>Администрация Сайта вправе передавать персональные данные пользователя третьим лицам в следующих случаях:
+<ul>
+<li>Пользователь явно выразил своё согласие на такие действия;</li>
+<li>Передача предусмотрена действующим законодательством.</li>
+</ul>
+</li>
+<li>В случае продажи Сайта к приобретателю переходят все обязательства по соблюдению условий настоящей Политики применительно к полученной им персональной информации.</li>
+<li>Обработка персональных данных Пользователя осуществляется без ограничения срока любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств. Обработка персональных данных Пользователей осуществляется в соответствии с Федеральным законом от 27.07.2006 N 152-ФЗ «О персональных данных».</li>
+<li>При утрате или разглашении персональных данных Администрация Сайта информирует Пользователя об утрате или разглашении персональных данных.</li>
+<li>Администрация Сайта предоставляет доступ к персональным данным Пользователя только тем работникам, третьим лицам, которым эта информация необходима для обеспечения функционирования Сайта и предоставления услуг Пользователю. Администрация Сайта вправе использовать предоставленную Пользователем информацию, в том числе персональные данные, в целях обеспечения соблюдения требований действующего законодательства Российской Федерации (в том числе в целях предупреждения и/или пресечения незаконных и/или противоправных действий Пользователей). Раскрытие предоставленной Пользователем информации может быть произведено лишь в соответствии с действующим законодательством Российской Федерации по требованию суда, правоохранительных органов, а равно в иных предусмотренных законодательством Российской Федерации случаях.</li>
+<li>Администрация Сайта совместно с Пользователем принимает все необходимые меры по предотвращению убытков или иных отрицательных последствий, вызванных утратой или разглашением персональных данных Пользователя.</li>
+</ol>
+<h2>Изменение Пользователем персональной информации</h2>
+<ol>
+<li>Пользователь может в любой момент изменить (обновить, уточнить) предоставленную им персональную информацию или её часть.</li>
+<li>Если Пользователь не желает, чтобы его персональные данные обрабатывались, то он должен обратиться к Администрации Сайта с соответствующим заявлением. В этом случае вся полученная информация, в том числе учётная запись Пользователей удаляется из базы данных Администрации Сайта. При этом удаление аккаунта повлечёт невозможность использования сервисов сайта.</li>
+</ol>
+<h2>Меры, применяемые для защиты персональных данных</h2>
+<ol>
+<li>Администрация Сайта принимает необходимые организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.</li>
+<li>Обеспечение безопасности персональных данных достигается следующими мерами:</li>
+</ol>
+<ul>
+<li>Назначение лица, ответственного за организацию обработки персональных данных;</li>
+<li>Проведение внутреннего контроля соответствия обработки персональных данных законодательству и нормативным правовым актам, требованиям к защите персональных данных, знаний и выполнения ответственными лицами своих функциональных обязанностей в части защиты персональных данных;</li>
+<li>Определение списка лиц, допущенных к работе с персональными данными;</li>
+<li>Разработка и утверждение локальных нормативных актов, регламентирующих порядок обработки персональных данных.</li>
+</ul>
+<h2>Права Пользователя</h2>
+<p>Субъект персональных данных имеет право на получение информации, касающейся обработки его персональных данных, в том числе содержащей:</p>
+<ul>
+<li>подтверждение факта обработки персональных данных;</li>
+<li>правовые основания и цели обработки персональных данных;</li>
+<li>цели и применяемые Администрацией Сайта способы обработки персональных данных;</li>
+<li>наименование и место нахождение Администрации Сайта, сведения о лицах (за исключением работников Администрации Сайта), которые имеют доступ к персональным данным или которым могут быть раскрыты персональные данные на основании договора с Администрацией Сайта или на основании федерального закона;</li>
+<li>обрабатываемые персональные данные, относящиеся к соответствующему субъекту персональных данных, источник их получения, если иной порядок представления таких данных не предусмотрен федеральным законом;</li>
+<li>сроки обработки персональных данных, в том числе сроки их хранения;</li>
+<li>порядок осуществления субъектом персональных данных прав, предусмотренных законодательством;</li>
+<li>иные сведения, предусмотренные законодательством о персональных данных.</li>
+</ul>
+<p>Получить вышеуказанную информацию Пользователь может, обратившись с письменным запросом в Администрацию Сайта. Ответ направляется по адресу, указанному в запросе Пользователя, в течение 30 дней.</p>
+<h2>Обязанности Пользователя</h2>
+<ol>
+<li>Предоставить персональную информацию, необходимую для пользования Сайтом.</li>
+<li>Обновлять, дополнять предоставленную персональную информацию в случае изменения данной информации.</li>
+</ol>
+<h2>Обязанности Администрации Сайта</h2>
+<ol>
+<li>Использовать полученную персональную информацию Пользователя исключительно для целей, указанных в настоящей Политике.</li>
+<li>Обеспечить хранение конфиденциальной информации в тайне, не разглашать без предварительного письменного разрешения Пользователя, а также не осуществлять продажу, обмен, опубликование либо разглашение иными возможными способами переданных персональных данных Пользователя, за исключением предусмотренных настоящей Политикой.</li>
+<li>Принимать меры предосторожности для защиты конфиденциальности персональных данных Пользователя согласно порядку, обычно используемому для защиты такого рода информации в существующем деловом обороте.</li>
+<li>Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента обращения или запроса Пользователя либо уполномоченного органа по защите прав субъектов персональных данных на период проверки в случае выявления недостоверных персональных данных или неправомерных действий.</li>
+</ol>
+<h2>Ответственность Сторон</h2>
+<ol>
+<li>Администрация Сайта, не исполнившая свои обязательства, несёт ответственность за убытки, понесённые Пользователем в связи с неправомерным использованием персональных данных, в соответствии с законодательством Российской Федерации.</li>
+<li>В случае утраты или разглашения персональной информации Пользователя Администрация Сайта не несёт ответственности, если данная информация:</li>
+</ol>
+<ul>
+<li>стала публичным достоянием до её утраты или разглашения;</li>
+<li>была получена от третьей стороны до момента её получения Администрацией Сайта;</li>
+<li>была разглашена с согласия Пользователя;</li>
+<li>была утрачена не по вине Администрации Сайта.</li>
+</ul>
+<h2>Разрешение споров</h2>
+<ol>
+<li>До обращения в суд с иском по спорам, возникающим из отношений между Пользователем Сайта и Администрацией Сайта, обязательным является предъявление претензии.</li>
+<li>Получатель претензии в течение 30 календарных дней со дня получения претензии письменно уведомляет заявителя претензии о результатах рассмотрения претензии.</li>
+<li>При не достижении соглашения спор будет передан на рассмотрение в суд в соответствии с действующим законодательством Российской Федерации.</li>
+<li>К настоящей Политике конфиденциальности и отношениям между Пользователем и Администрацией Сайта применяется действующее законодательство Российской Федерации.</li>
+</ol>
+<p><strong>Дополнительные условия</strong></p>
+<ol>
+<li>Администрация Сайта вправе вносить изменения в настоящую Политику конфиденциальности без согласия Пользователя.</li>
+<li>Новая Политика конфиденциальности вступает в силу с момента её размещения на Сайте.</li>
+<li>Действующая Политика конфиденциальности размещена на странице по адресу:<br>
+https://sonservis.ru/politika/</li>
+<li>Настоящая Политика конфиденциальности является неотъемлемой частью Пользовательского соглашения об использовании Сайта, размещённого на странице по адресу: https://sonservis.ru/privacy-policy/<strong>.</strong></li>
+</ol>
+<p>Если у Вас есть дополнительные вопросы или предложения относительно настоящей Политики, Вы можете в любое время связаться с Администрацией Сайта, направив письмо по электронной почте через форму <a href="https://sonservis.ru/contact/" target="_blank" rel="noopener">«Контакты»</a></p>
+<p>Все отношения, касающиеся обработки персональных данных, не получившие отражения в настоящей Политике, регулируются согласно положениям законодательства РФ.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+											</div>
+
+					
+				</article><!-- #post -->
+
+				
+		
+</div><!-- .site-content -->
+
+
+
+			</div><!-- .main-page-wrapper --> 
+			</div> <!-- end row -->
+	</div> <!-- end container -->
+
+					<div class="wd-prefooter">
+			<div class="container">
+																</div>
+		</div>
+	
+			<footer class="footer-container color-scheme-light">
+																	<div class="container main-footer">
+		<aside class="footer-sidebar widget-area row">
+									<div class="footer-column footer-column-1 col-12 col-sm-6 col-lg-3">
+							<style data-type="vc_shortcodes-custom-css">.vc_custom_1650720608014{margin-left: 20px !important;}.vc_custom_1647970915667{margin-bottom: 20px !important;}</style><div class="vc_row wpb_row vc_row-fluid vc_custom_1650720608014 wd-rs-6263fe8cdef96"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper">		<div id="wd-623a09b8087d5" class="wd-image wd-wpb wd-rs-623a09b8087d5 text-left vc_custom_1647970915667">
+							<a href="#">
+			
+			<img class="" src="https://sonservis.ru/wp-content/uploads/2022/03/logo-11-200x90.jpg" alt="logo-11" title="лого-11" width="200" height="90">
+							</a>
+					</div>
+				<div id="wd-630e6f7ba87bf" class="wd-text-block wd-wpb reset-last-child wd-rs-630e6f7ba87bf text-left ">
+			<p class="Top__headerWrap"><strong><span class="Top__header">Сон Сервис<br>
+производство матрасов,<br>
+кроватей, мягкой мебели<br>
+г. Нижний Новгород<br>
+ул. Торфяная 31, пом 2</span></strong></p>
+<p class="Top__headerWrap"><strong><span style="color: #ffff00;"><a style="color: #ffff00;" href="tel:+78312831199">8(831)283-11-99</a></span></strong></p>
+<p><strong>написать в мессенджер</strong></p>
+		</div>
+		<a title="Whatsapp" href="whatsapp://send?phone=79200157600"><img class="alignleft" src="https://sonservis.ru/wp-content/uploads/2022/03/whatsapp1.png" alt="Написать в Whatsapp" width="30" height="30"></a><a title="Viber" href="viber://pa?chatURI=sonservis"><img class="alignleft" src="https://sonservis.ru/wp-content/uploads/2022/03/viber1.png" alt="Написать в Viber" width="30" height="30"></a></div></div></div></div>						</div>
+																	<div class="footer-column footer-column-2 col-12 col-sm-6 col-lg-3">
+							<div id="nav_menu-19" class="wd-widget widget footer-widget  widget_nav_menu"><h3 class="widget-title">Навигация по сайту</h3><div class="menu-futer-menyu-container"><ul id="menu-futer-menyu" class="menu"><li id="menu-item-10825" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-10825"><a href="https://sonservis.ru/">Сон Сервис фабрика мягкой мебели</a></li>
+<li id="menu-item-10822" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10822"><a href="https://sonservis.ru/adresa-magazinov/">Адреса розничных магазинов</a></li>
+<li id="menu-item-10823" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10823"><a href="https://sonservis.ru/kak-sdelat-zakaz/">Как сделать заказ</a></li>
+<li id="menu-item-10836" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10836"><a href="https://sonservis.ru/oplata-i-dostavka-zakazov/">Оплата и доставка</a></li>
+<li id="menu-item-10834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10834"><a href="https://sonservis.ru/sroki-ispolneniya-i-garantii/">Сроки и гарантии</a></li>
+<li id="menu-item-10835" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10835"><a href="https://sonservis.ru/contact/">Контакты</a></li>
+</ul></div></div>						</div>
+																	<div class="footer-column footer-column-3 col-12 col-sm-6 col-lg-3">
+													</div>
+																	<div class="footer-column footer-column-4 col-12 col-sm-6 col-lg-3">
+							<div id="nav_menu-20" class="wd-widget widget footer-widget  widget_nav_menu"><h3 class="widget-title">Ваш аккаунт</h3><div class="menu-menyu-magazina-container"><ul id="menu-menyu-magazina" class="menu"><li id="menu-item-12849" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-12849"><a href="https://sonservis.ru/shop/">Магазин</a>
+<ul class="sub-menu">
+	<li id="menu-item-12814" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12814"><a href="https://sonservis.ru/my-account/">Ваш аккаунт</a></li>
+	<li id="menu-item-12817" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12817"><a href="https://sonservis.ru/cart/">Корзина</a></li>
+	<li id="menu-item-12815" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12815"><a href="https://sonservis.ru/checkout/">Ваш заказ</a></li>
+	<li id="menu-item-12816" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12816"><a href="https://sonservis.ru/wishlist/">Избранное</a></li>
+	<li id="menu-item-12819" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12819"><a href="https://sonservis.ru/sroki-ispolneniya-i-garantii/">Сроки исполнения и гарантии</a></li>
+	<li id="menu-item-12813" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-3 current_page_item menu-item-12813"><a href="https://sonservis.ru/privacy-policy/" aria-current="page">Политика конфиденциальности</a></li>
+</ul>
+</li>
+</ul></div></div><div id="custom_html-2" class="widget_text wd-widget widget footer-widget  widget_custom_html"><div class="textwidget custom-html-widget"></div></div>						</div>
+													</aside><!-- .footer-sidebar -->
+	</div>
+	
+																		<div class="copyrights-wrapper copyrights-centered">
+					<div class="container">
+						<div class="min-footer">
+							<div class="col-left set-cont-mb-s reset-last-child">
+																	 <i class="fa fa-copyright"></i> ©2008-2022, ТМ Сон-Сервис - производство и продажа матрасов и кроватей в Нижнем Новгороде<a href="https://sonservis.ru/"></a>															</div>
+													</div>
+					</div>
+				</div>
+					</footer>
+	</div> <!-- end wrapper -->
+<div class="wd-close-side"></div>
+		<a href="#" class="scrollToTop" aria-label="Кнопка наверх"></a>
+		<div class="mobile-nav wd-side-hidden wd-left">			<div class="wd-search-form">
+				
+				
+				<form role="search" method="get" class="searchform " action="https://sonservis.ru/">
+					<input type="text" class="s" placeholder="Поиск товаров" value="" name="s" aria-label="Search" title="Поиск товаров">
+					<input type="hidden" name="post_type" value="product">
+										<button type="submit" class="searchsubmit">
+						<span>
+							Search						</span>
+											</button>
+				</form>
+
+				
+				
+				
+				
+							</div>
+						<ul class="wd-nav wd-nav-mob-tab wd-style-underline">
+					<li class="mobile-tab-title mobile-pages-title  wd-active" data-menu="pages">
+						<a href="#" rel="nofollow noopener">
+							<span class="nav-link-text">
+								Меню							</span>
+						</a>
+					</li>
+					<li class="mobile-tab-title mobile-categories-title " data-menu="categories">
+						<a href="#" rel="nofollow noopener">
+							<span class="nav-link-text">
+								Рубрики							</span>
+						</a>
+					</li>
+				</ul>
+			<ul id="menu-categories" class="mobile-categories-menu wd-nav wd-nav-mobile"><li id="menu-item-13249" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13249 item-level-0"><a href="https://sonservis.ru/akczii-son-servis/" class="woodmart-nav-link"><span class="nav-link-text">Акции Сон Сервис</span></a></li>
+<li id="menu-item-13247" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13247 item-level-0"><a href="https://sonservis.ru/adresa-magazinov/" class="woodmart-nav-link"><span class="nav-link-text">Розничные магазины</span></a></li>
+<li id="menu-item-8091" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8091 item-level-0"><a href="https://sonservis.ru/product-category/krovati/" class="woodmart-nav-link"><span class="nav-link-text">Кровати</span></a></li>
+<li id="menu-item-9931" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-9931 item-level-0"><a href="https://sonservis.ru/product-category/matrasy/" class="woodmart-nav-link"><span class="nav-link-text">Матрасы</span></a></li>
+<li id="menu-item-15003" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-15003 item-level-0"><a href="https://sonservis.ru/product-category/komplekty/" class="woodmart-nav-link"><span class="nav-link-text">Комплекты</span></a></li>
+<li id="menu-item-9940" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-9940 item-level-0"><a href="https://sonservis.ru/product-category/divany/" class="woodmart-nav-link"><span class="nav-link-text">Диваны</span></a></li>
+<li id="menu-item-8114" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-8114 item-level-0"><a href="https://sonservis.ru/product-category/aksessuary/" class="woodmart-nav-link"><span class="nav-link-text">Товары для сна</span></a>
+<ul class="wd-sub-menu">
+	<li id="menu-item-9939" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-9939 item-level-1"><a href="https://sonservis.ru/product-category/toppery/" class="woodmart-nav-link">Топперы</a></li>
+	<li id="menu-item-9938" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-9938 item-level-1"><a href="https://sonservis.ru/product-category/namatrasniki/" class="woodmart-nav-link">Наматрасники</a></li>
+	<li id="menu-item-8118" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8118 item-level-1"><a href="https://sonservis.ru/product-category/aksessuary/pokryvala/" class="woodmart-nav-link">Покрывала</a></li>
+	<li id="menu-item-8116" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8116 item-level-1"><a href="https://sonservis.ru/product-category/aksessuary/odeyala/" class="woodmart-nav-link">Одеяла</a></li>
+	<li id="menu-item-8117" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8117 item-level-1"><a href="https://sonservis.ru/product-category/aksessuary/podushki/" class="woodmart-nav-link">Подушки</a></li>
+	<li id="menu-item-8115" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8115 item-level-1"><a href="https://sonservis.ru/product-category/aksessuary/evroprostyni/" class="woodmart-nav-link">Европростыни</a></li>
+</ul>
+</li>
+<li id="menu-item-11265" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-11265 item-level-0"><a href="https://sonservis.ru/product-category/myagkie-paneli/" class="woodmart-nav-link"><span class="nav-link-text">Мягкие панели</span></a></li>
+<li id="menu-item-8103" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8103 item-level-0"><a href="https://sonservis.ru/product-category/drugaya-mebel/" class="woodmart-nav-link"><span class="nav-link-text">Другая мебель</span></a></li>
+</ul><ul id="menu-mobilnoe-bokovoe" class="mobile-pages-menu wd-nav wd-nav-mobile wd-active"><li id="menu-item-13252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13252 item-level-0"><a href="https://sonservis.ru/akczii-son-servis/" class="woodmart-nav-link"><span class="nav-link-text">Акции Сон Сервис</span></a></li>
+<li id="menu-item-12723" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-12723 item-level-0"><a href="https://sonservis.ru/product-category/krovati/" class="woodmart-nav-link"><span class="nav-link-text">Кровати</span></a>
+<ul class="wd-sub-menu">
+	<li id="menu-item-12724" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12724 item-level-1"><a href="https://sonservis.ru/product-category/krovati/seriya-klassik/" class="woodmart-nav-link">Серия Классик</a></li>
+	<li id="menu-item-12725" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12725 item-level-1"><a href="https://sonservis.ru/product-category/krovati/seriya-komfort/" class="woodmart-nav-link">Серия Комфорт</a></li>
+	<li id="menu-item-12726" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12726 item-level-1"><a href="https://sonservis.ru/product-category/krovati/seriya-standart/" class="woodmart-nav-link">Серия Стандарт</a></li>
+	<li id="menu-item-12727" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12727 item-level-1"><a href="https://sonservis.ru/product-category/krovati/seriya-premium/" class="woodmart-nav-link">Серия Премиум</a></li>
+	<li id="menu-item-14621" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14621 item-level-1"><a href="https://sonservis.ru/product-tag/detskie/" class="woodmart-nav-link">Для детей</a></li>
+</ul>
+</li>
+<li id="menu-item-12730" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-12730 item-level-0"><a href="https://sonservis.ru/product-category/matrasy/" class="woodmart-nav-link"><span class="nav-link-text">Матрасы</span></a>
+<ul class="wd-sub-menu">
+	<li id="menu-item-12732" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12732 item-level-1"><a href="https://sonservis.ru/product-category/matrasy/standart/" class="woodmart-nav-link">Стандарт</a></li>
+	<li id="menu-item-12733" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12733 item-level-1"><a href="https://sonservis.ru/product-category/matrasy/premium/" class="woodmart-nav-link">Премиум</a></li>
+	<li id="menu-item-12734" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12734 item-level-1"><a href="https://sonservis.ru/product-category/matrasy/klassika/" class="woodmart-nav-link">Классика</a></li>
+	<li id="menu-item-12735" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12735 item-level-1"><a href="https://sonservis.ru/product-category/matrasy/multigrupp/" class="woodmart-nav-link">Мультигрупп</a></li>
+	<li id="menu-item-12736" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12736 item-level-1"><a href="https://sonservis.ru/product-category/matrasy/bespruzhinnye/" class="woodmart-nav-link">Беспружинные</a></li>
+	<li id="menu-item-12731" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12731 item-level-1"><a href="https://sonservis.ru/product-category/matrasy/odnostoronnij/" class="woodmart-nav-link">Односторонний</a></li>
+	<li id="menu-item-12737" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12737 item-level-1"><a href="https://sonservis.ru/product-category/matrasy/detskie/" class="woodmart-nav-link">Детские матрасы</a></li>
+</ul>
+</li>
+<li id="menu-item-12729" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-12729 item-level-0"><a href="https://sonservis.ru/product-category/divany/" class="woodmart-nav-link"><span class="nav-link-text">Диваны</span></a>
+<ul class="wd-sub-menu">
+	<li id="menu-item-12782" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12782 item-level-1"><a href="https://sonservis.ru/product-category/divany/divany-pryamye/" class="woodmart-nav-link">Диваны прямые</a></li>
+	<li id="menu-item-12783" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12783 item-level-1"><a href="https://sonservis.ru/product-category/divany/divany-uglovye/" class="woodmart-nav-link">Диваны угловые</a></li>
+	<li id="menu-item-12784" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12784 item-level-1"><a href="https://sonservis.ru/product-category/divany/divany-modulnye/" class="woodmart-nav-link">Диваны модульные</a></li>
+</ul>
+</li>
+<li id="menu-item-12741" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-12741 item-level-0"><a href="https://sonservis.ru/product-category/aksessuary/" class="woodmart-nav-link"><span class="nav-link-text">Товары для сна</span></a>
+<ul class="wd-sub-menu">
+	<li id="menu-item-12739" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12739 item-level-1"><a href="https://sonservis.ru/product-category/toppery/" class="woodmart-nav-link">Топперы</a></li>
+	<li id="menu-item-12738" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12738 item-level-1"><a href="https://sonservis.ru/product-category/namatrasniki/" class="woodmart-nav-link">Наматрасники</a></li>
+	<li id="menu-item-12742" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12742 item-level-1"><a href="https://sonservis.ru/product-category/aksessuary/pokryvala/" class="woodmart-nav-link">Покрывала</a></li>
+	<li id="menu-item-12743" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12743 item-level-1"><a href="https://sonservis.ru/product-category/aksessuary/odeyala/" class="woodmart-nav-link">Одеяла</a></li>
+	<li id="menu-item-12744" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12744 item-level-1"><a href="https://sonservis.ru/product-category/aksessuary/podushki/" class="woodmart-nav-link">Подушки</a></li>
+	<li id="menu-item-12745" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12745 item-level-1"><a href="https://sonservis.ru/product-category/aksessuary/evroprostyni/" class="woodmart-nav-link">Европростыни</a></li>
+</ul>
+</li>
+<li id="menu-item-12746" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12746 item-level-0"><a href="https://sonservis.ru/product-category/myagkie-paneli/" class="woodmart-nav-link"><span class="nav-link-text">Мягкие панели</span></a></li>
+<li id="menu-item-12747" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-12747 item-level-0"><a href="https://sonservis.ru/product-category/drugaya-mebel/" class="woodmart-nav-link"><span class="nav-link-text">Другая мебель</span></a>
+<ul class="wd-sub-menu">
+	<li id="menu-item-12752" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12752 item-level-1"><a href="https://sonservis.ru/product-category/drugaya-mebel/stulya/" class="woodmart-nav-link">Стулья</a></li>
+	<li id="menu-item-12748" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12748 item-level-1"><a href="https://sonservis.ru/product-category/drugaya-mebel/kresla/" class="woodmart-nav-link">Кресла</a></li>
+	<li id="menu-item-12749" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12749 item-level-1"><a href="https://sonservis.ru/product-category/drugaya-mebel/banketki/" class="woodmart-nav-link">Банкетки</a></li>
+	<li id="menu-item-12750" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12750 item-level-1"><a href="https://sonservis.ru/product-category/drugaya-mebel/zhurnalnye-stoliki/" class="woodmart-nav-link">Журнальные столики</a></li>
+	<li id="menu-item-12751" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12751 item-level-1"><a href="https://sonservis.ru/product-category/drugaya-mebel/pufy/" class="woodmart-nav-link">Пуфы</a></li>
+	<li id="menu-item-12753" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12753 item-level-1"><a href="https://sonservis.ru/product-category/drugaya-mebel/tumby/" class="woodmart-nav-link">Тумбы</a></li>
+	<li id="menu-item-12754" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12754 item-level-1"><a href="https://sonservis.ru/product-category/mebel-s-elementami-kovki/" class="woodmart-nav-link">Мебель с элементами ковки</a></li>
+	<li id="menu-item-12728" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-12728 item-level-1"><a href="https://sonservis.ru/product-category/drugaya-mebel/ortopedicheskie-osnovaniya/" class="woodmart-nav-link">Ортопедические основания</a></li>
+</ul>
+</li>
+<li id="menu-item-12761" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-12761 item-level-0"><a href="https://sonservis.ru/contact/" class="woodmart-nav-link"><span class="nav-link-text">Контакты</span></a>
+<ul class="wd-sub-menu">
+	<li id="menu-item-12762" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-12762 item-level-1"><a href="https://sonservis.ru/" class="woodmart-nav-link">Сон Сервис</a></li>
+	<li id="menu-item-12768" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12768 item-level-1"><a href="https://sonservis.ru/adresa-magazinov/" class="woodmart-nav-link">Адреса розничных магазинов</a></li>
+	<li id="menu-item-12769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12769 item-level-1"><a href="https://sonservis.ru/kak-sdelat-zakaz/" class="woodmart-nav-link">Как сделать заказ</a></li>
+	<li id="menu-item-12764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12764 item-level-1"><a href="https://sonservis.ru/oplata-i-dostavka-zakazov/" class="woodmart-nav-link">Оплата и доставка</a></li>
+	<li id="menu-item-12767" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12767 item-level-1"><a href="https://sonservis.ru/sroki-ispolneniya-i-garantii/" class="woodmart-nav-link">Сроки и гарантии</a></li>
+	<li id="menu-item-12766" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12766 item-level-1"><a href="https://sonservis.ru/otzyvy-nashih-klientov/" class="woodmart-nav-link">Отзывы клиентов</a></li>
+	<li id="menu-item-12771" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-3 current_page_item menu-item-12771 item-level-1"><a href="https://sonservis.ru/privacy-policy/" class="woodmart-nav-link">Политика конфиденциальности</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-wishlist wd-with-icon">			<a href="https://sonservis.ru/wishlist/" class="woodmart-nav-link">
+				<span class="nav-link-text">Список желаний (Wishlist)</span>
+			</a>
+			</li><li class="menu-item menu-item-compare wd-with-icon"><a href="https://sonservis.ru/compare/">Сравнение</a></li><li class="menu-item  login-side-opener menu-item-account wd-with-icon"><a href="https://sonservis.ru/my-account/">Вход / Регистрация</a></li></ul>
+		</div><!--END MOBILE-NAV-->			<div class="cart-widget-side wd-side-hidden wd-right">
+				<div class="wd-heading widget-heading">
+					<span class="title widget-title">Корзина</span>
+					<div class="close-side-widget wd-action-btn wd-style-text wd-cross-icon">
+						<a href="#" rel="nofollow">закрыть</a>
+					</div>
+				</div>
+				<div class="widget woocommerce widget_shopping_cart"><div class="widget_shopping_cart_content"></div></div>			</div>
+					<div class="login-form-side wd-side-hidden wd-right">
+				<div class="wd-heading widget-heading">
+					<h3 class="title widget-title">Войти </h3>
+					<div class="close-side-widget wd-action-btn wd-style-text wd-cross-icon">
+						<a href="#" rel="nofollow">закрыть</a>
+					</div>
+				</div>
+
+				<div class="woocommerce-notices-wrapper"></div>
+							<form method="post" class="login woocommerce-form woocommerce-form-login
+			hidden-form			" action="https://sonservis.ru/privacy-policy/" style="display:none;">
+
+				
+				
+				<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide form-row-username">
+					<label for="username">Имя пользователя или Email&nbsp;<span class="required">*</span></label>
+					<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" value="">				</p>
+				<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide form-row-password">
+					<label for="password">Пароль&nbsp;<span class="required">*</span></label>
+					<input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password">
+				</p>
+
+				
+				<p class="form-row">
+					<input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="8ac173cd09"><input type="hidden" name="_wp_http_referer" value="/privacy-policy/">											<input type="hidden" name="redirect" value="https://sonservis.ru/privacy-policy/">
+										<button type="submit" class="button woocommerce-button woocommerce-form-login__submit" name="login" value="Войти">Войти</button>
+				</p>
+
+				<div class="login-form-footer">
+					<a href="https://sonservis.ru/my-account/lost-password/" class="woocommerce-LostPassword lost_password">Забыли пароль?</a>
+					<label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
+						<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" value="forever" title="Запомнить меня" aria-label="Запомнить меня"> <span>Запомнить меня</span>
+					</label>
+				</div>
+
+				
+							</form>
+
+		
+				<div class="create-account-question">
+					<p>Нет аккаунта?</p>
+					<a href="https://sonservis.ru/my-account/?action=register" class="btn btn-style-link btn-color-primary create-account-button">Зарегистрироваться</a>
+				</div>
+			</div>
+		<!-- Yandex.Metrika counter --> <script type="rocketlazyloadscript" data-rocket-type="text/javascript"> (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(87805749, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, ecommerce:"dataLayer" }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/87805749" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+<!-- ЧАТ АМО -->
+<script type="rocketlazyloadscript">(function(a,m,o,c,r,m){a[m]={id:"202329",hash:"00fffed4c55af7e3ddb0d74e6461536e6078416f2b0c9675012f839754d2a8d5",locale:"ru",inline:false,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js?1662450831';d.head&&d.head.appendChild(s)}(window,0,'amoSocialButton',0,0,'amo_social_button'));</script> 
+<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+	jQuery( document ).ready( function( $ ) {
+
+		/**
+		 * awooc_mail_sent_trigger
+		 * Триггер при успешной отправке формы
+		 *
+		 * @param event событие
+		 */
+		$( document.body ).on( 'awooc_mail_sent_trigger', function( event,data, detail ) {
+				 window.dataLayer.push({
+					 "ecommerce": {
+						 "purchase": {
+							 "actionField": {
+								 "id" : "TR123",// Идентификатор действия
+								 "goal_id":254079272 //идентификатор цели
+							 },
+							 "products": [
+								 {
+									 "id": data.selectedProduct.productId,// ID товара
+									 "name": data.selectedProduct.productName,// Название товара
+									 "price":data.selectedProduct.productPrice,// Цена товара
+									 "quantity":data.selectedProduct.productQty,// Количество товара
+									 "category": data.selectedProduct.productCat,// Категория товара
+									 "variant":data.selectedProduct.productAttr// Аттрибуты товара
+								 },
+							 ]
+						 }
+					 }
+				 });
+			 } );
+	} );
+});</script>
+<div id="arcontactus"></div>
+    
+    <script type="rocketlazyloadscript" src="https://sonservis.ru/wp-content/plugins/ar-contactus/res/js/maskedinput.min.js?version=2.2.4" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="arcu-main-js">
+    var $arcuWidget;
+var zaloWidgetInterval;
+var tawkToInterval;
+var tawkToHideInterval;
+var skypeWidgetInterval;
+var lcpWidgetInterval;
+var closePopupTimeout;
+var lzWidgetInterval;
+var paldeskInterval;
+var arcuOptions;
+var hideCustomerChatInterval;
+var _arCuTimeOut = null;
+var arCuPromptClosed = false;
+var _arCuWelcomeTimeOut = null;
+var arCuMenuOpenedOnce = false;
+var arcuAppleItem = null;
+
+var arcItems = [];
+window.addEventListener('load', function(){
+    $arcuWidget = document.createElement('div');
+    var body = document.getElementsByTagName('body')[0];
+    $arcuWidget.id = 'arcontactus';
+    
+    if (document.getElementById('arcontactus')) {
+        document.getElementById('arcontactus').parentElement.removeChild(document.getElementById('arcontactus'));
+    }
+    
+    body.appendChild($arcuWidget);
+    
+            arCuClosedCookie = arCuGetCookie('arcu-closed');
+        $arcuWidget.addEventListener('arcontactus.init', function(){
+        $arcuWidget.classList.add('arcuAnimated');
+        $arcuWidget.classList.add('flipInY');
+
+        setTimeout(function(){
+            $arcuWidget.classList.remove('flipInY');
+        }, 1000);
+        
+                    
+                    if (document.querySelector('#arcu-form-callback form')) {
+                document.querySelector('#arcu-form-callback form').append(contactUs.utils.DOMElementFromHTML(arCUVars._wpnonce));
+            }
+                             
+                             
+                                            if (document.querySelector('#arcu-form-email form')) {
+                document.querySelector('#arcu-form-email form').append(contactUs.utils.DOMElementFromHTML(arCUVars._wpnonce));
+            }
+                             
+                             
+                             
+                             
+                                                    $arcuWidget.addEventListener('arcontactus.successSendFormData', function(event){
+                            });
+                    $arcuWidget.addEventListener('arcontactus.successSendFormData', function(event){
+                            });
+                $arcuWidget.addEventListener('arcontactus.errorSendFormData', function(event){
+            if (event.detail.data && event.detail.data.message) {
+                alert(event.detail.data.message);
+            }
+        });
+        $arcuWidget.addEventListener('arcontactus.hideFrom', function(){
+            clearTimeout(closePopupTimeout);
+        });
+                                    setTimeout(function(){
+                if (arCuGetCookie('arcumenu-closed') == 0){
+                    contactUs.openMenu();
+                }
+            }, 6000);
+            });
+    $arcuWidget.addEventListener('arcontactus.closeMenu', function(){
+        arCuCreateCookie('arcumenu-closed', 1, 1);
+    });
+                        var arcItem = {};
+                    arcItem.id = 'msg-item-9';
+                                    arcItem.onClick = function(e){
+                e.preventDefault();
+                contactUs.closeMenu();
+                contactUs.showForm('callback');
+                return false;
+            }
+                        arcItem.class = 'msg-item-phone';
+        arcItem.title = "Запрос обратного звонка";
+                            arcItem.icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"></path></svg>';
+                            arcItem.includeIconToSlider = true;
+         
+                    arcItem.href = null;
+                        arcItem.color = '#4EB625';
+        arcItems.push(arcItem);
+        arcuOptions = {
+        rootElementId: 'arcontactus',
+        credits: false,
+        visible: true,
+        wordpressPluginVersion: '2.2.4',
+        online: true,
+                                    buttonIcon: '<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Canvas" transform="translate(-825 -308)"><g id="Vector"><use xlink:href="#path0_fill0123" transform="translate(825 308)" fill="currentColor"></use></g></g><defs><path fill="currentColor" id="path0_fill0123" d="M 19 4L 17 4L 17 13L 4 13L 4 15C 4 15.55 4.45 16 5 16L 16 16L 20 20L 20 5C 20 4.45 19.55 4 19 4ZM 15 10L 15 1C 15 0.45 14.55 0 14 0L 1 0C 0.45 0 0 0.45 0 1L 0 15L 4 11L 14 11C 14.55 11 15 10.55 15 10Z"></path></defs></svg>',
+                            layout: 'default',
+                drag: true,
+        mode: 'regular',
+        buttonIconUrl: 'https://sonservis.ru/wp-content/plugins/ar-contactus/res/img/msg.svg',
+        showMenuHeader: true,
+                    menuHeaderText: "Оставьте номер, мы Вам перезвоним",
+            menuSubheaderText: "",
+        
+        
+        showHeaderCloseBtn: true,
+                            headerCloseBtnBgColor: '#008749',
+                            headerCloseBtnColor: '#FFFFFF',
+                itemsIconType: 'non-rounded',
+        align: 'left',
+        reCaptcha: false,
+        reCaptchaKey: '',
+        countdown: 0,
+        theme: '#FF6C27',
+                                    buttonText: "связь",
+                                                    buttonSize: 'small',
+                    buttonIconSize: 24,
+                menuSize: 'normal',
+                    phonePlaceholder: '',
+            callbackSubmitText: '',
+            errorMessage: '',
+            callProcessText: '',
+            callSuccessText: '',
+            callbackFormText: '',
+                iconsAnimationSpeed: 2000,
+        iconsAnimationPause: 6000,
+        items: arcItems,
+        ajaxUrl: 'https://sonservis.ru/wp-admin/admin-ajax.php',
+                    promptPosition: 'top',
+                                            popupAnimation: 'fadeindown',
+                        style: '',
+                            itemsAnimation: 'downtoup',
+                            menuStyle: 'regular',
+                backdrop: false,
+        forms: {
+                            callback: {
+                    id: 'callback',
+                                            header: {
+                            content: "Оставьте свой номер, мы вам перезвоним!",
+                            layout: "text",
+                                                    },
+                                                                icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"></path></svg>',
+                                        success: "Запрос обратного звонка отправлен! Мы свяжемся с вами в ближайшее время.",
+                    error: "Ошибка отправки запроса обратного звонка! Пожалуйста, попробуйте еще раз!",
+                    action: 'https://sonservis.ru/wp-admin/admin-ajax.php',
+                    buttons: [
+                                                    {
+                                name: "submit",
+                                label: "Отправить",
+                                type: "submit",
+                                                                                            },
+                                            ],
+                    fields: {
+                        formId: {
+                            name: 'formId',
+                            value: 'callback',
+                            type: 'hidden'
+                        },
+                        action: {
+                            name: 'action',
+                            value: 'arcontactus_request_callback',
+                            type: 'hidden'
+                        },
+                                                    name: {
+                                name: "name",
+                                enabled: true,
+                                required: true,
+                                type: "text",
+                                label: "Ваш имя",
+                                placeholder: "Введите Имя",
+                                                                    values: [],
+                                                                                                    value: "",
+                                                            },
+                                                    phone: {
+                                name: "phone",
+                                enabled: true,
+                                required: true,
+                                type: "tel",
+                                label: "Ваш номер телефона",
+                                placeholder: "введите номер",
+                                                                    values: [],
+                                                                                                    value: "",
+                                                            },
+                                            }
+                },
+                            email: {
+                    id: 'email',
+                                            header: {
+                            content: "Есть вопросы? Пишите нам!",
+                            layout: "text",
+                                                    },
+                                                                icon: '<svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.5 64 0 85.5 0 112v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM48 96h416c8.8 0 16 7.2 16 16v41.4c-21.9 18.5-53.2 44-150.6 121.3-16.9 13.4-50.2 45.7-73.4 45.3-23.2.4-56.6-31.9-73.4-45.3C85.2 197.4 53.9 171.9 32 153.4V112c0-8.8 7.2-16 16-16zm416 320H48c-8.8 0-16-7.2-16-16V195c22.8 18.7 58.8 47.6 130.7 104.7 20.5 16.4 56.7 52.5 93.3 52.3 36.4.3 72.3-35.5 93.3-52.3 71.9-57.1 107.9-86 130.7-104.7v205c0 8.8-7.2 16-16 16z"></path></svg>',
+                                        success: "Письмо отправлено! Мы свяжемся с вами в ближайшее время.",
+                    error: "Ошибка отправки письма! Пожалуйста, попробуйте еще раз!",
+                    action: 'https://sonservis.ru/wp-admin/admin-ajax.php',
+                    buttons: [
+                                                    {
+                                name: "submit",
+                                label: "Submit",
+                                type: "submit",
+                                                                                            },
+                                            ],
+                    fields: {
+                        formId: {
+                            name: 'formId',
+                            value: 'email',
+                            type: 'hidden'
+                        },
+                        action: {
+                            name: 'action',
+                            value: 'arcontactus_request_email',
+                            type: 'hidden'
+                        },
+                                                    name: {
+                                name: "name",
+                                enabled: true,
+                                required: false,
+                                type: "text",
+                                label: "Your name",
+                                placeholder: "Введите имя",
+                                                                    values: [],
+                                                                                                    value: "",
+                                                            },
+                                                    email: {
+                                name: "email",
+                                enabled: true,
+                                required: false,
+                                type: "email",
+                                label: "Your email",
+                                placeholder: "Введите email",
+                                                                    values: [],
+                                                                                                    value: "",
+                                                            },
+                                                    message: {
+                                name: "message",
+                                enabled: true,
+                                required: true,
+                                type: "textarea",
+                                label: "Your message",
+                                placeholder: "Напишите сообщение",
+                                                                    values: [],
+                                                                                                    value: "",
+                                                            },
+                                                    gdpr: {
+                                name: "gdpr",
+                                enabled: true,
+                                required: false,
+                                type: "checkbox",
+                                label: "I accept GDPR rules",
+                                placeholder: "",
+                                                                    values: [],
+                                                                                                    value: "1",
+                                                            },
+                                            }
+                },
+               
+        }
+    };
+                        contactUs.init(arcuOptions);
+                                    });
+</script>
+		<div class="wd-toolbar wd-toolbar-label-show">
+					<div class="wd-header-mobile-nav whb-wd-header-mobile-nav mobile-style-icon wd-tools-element">
+			<a href="#" rel="nofollow">
+				<span class="wd-tools-icon"></span>
+				<span class="wd-toolbar-label">
+					Меню				</span>
+			</a>
+		</div>
+							<div class="wd-toolbar-link wd-tools-element wd-toolbar-item">
+				<a href="https://sonservis.ru/akczii-son-servis/">
+					<span class="wd-toolbar-icon wd-tools-icon wd-icon wd-custom-icon">
+											</span>
+
+					<span class="wd-toolbar-label">
+						Акции					</span>
+				</a>
+			</div>
+						<div class="wd-header-wishlist wd-tools-element wd-design-5" title="Мой список желаний">
+			<a href="https://sonservis.ru/wishlist/">
+				<span class="wd-tools-icon">
+											<span class="wd-tools-count">
+							0						</span>
+									</span>
+				<span class="wd-toolbar-label">
+					Список желаний (Wishlist)				</span>
+			</a>
+		</div>
+				<div class="wd-header-cart wd-tools-element wd-design-5 cart-widget-opener" title="Моя корзина">
+			<a href="https://sonservis.ru/cart/">
+				<span class="wd-tools-icon wd-icon-alt">
+							<span class="wd-cart-number wd-tools-count">0 <span>пунктов</span></span>
+						</span>
+				<span class="wd-toolbar-label">
+					Корзина				</span>
+			</a>
+		</div>
+				<div class="wd-header-compare wd-tools-element wd-design-5" title="Сравнение товаров">
+			<a href="https://sonservis.ru/compare/">
+				<span class="wd-tools-icon">
+											<span class="wd-tools-count">0</span>
+									</span>
+				<span class="wd-toolbar-label">
+					Сравнение				</span>
+			</a>
+		</div>
+				</div>
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<script type="text/javascript" id="wd-update-cart-fragments-fix-js-extra">
+/* <![CDATA[ */
+var wd_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_fbbbe4536a93f84356a0d36e3835cabd","fragment_name":"wc_fragments_fbbbe4536a93f84356a0d36e3835cabd","request_timeout":"5000"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/cache/min/1/wp-content/themes/woodmart/js/scripts/wc/updateCartFragmentsFix.js?ver=1669740581" id="wd-update-cart-fragments-fix-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=1669740581" id="swv-js" defer=""></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/sonservis.ru\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1669740581" id="contact-form-7-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.6.9.4" id="js-cookie-js" defer=""></script>
+<script type="text/javascript" id="woocommerce-js-extra">
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=6.9.4" id="woocommerce-js" defer=""></script>
+<script type="text/javascript" id="wc-cart-fragments-js-extra">
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_fbbbe4536a93f84356a0d36e3835cabd","fragment_name":"wc_fragments_fbbbe4536a93f84356a0d36e3835cabd","request_timeout":"5000"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=6.9.4" id="wc-cart-fragments-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/underscore.min.js?ver=1.13.4" id="underscore-js" defer=""></script>
+<script type="text/javascript" id="wp-util-js-extra">
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/wp-util.min.js?ver=6.1.1" id="wp-util-js" defer=""></script>
+<script type="text/javascript" id="wp-api-request-js-extra">
+/* <![CDATA[ */
+var wpApiSettings = {"root":"https:\/\/sonservis.ru\/wp-json\/","nonce":"010328b6e4","versionString":"wp\/v2\/"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/api-request.min.js?ver=6.1.1" id="wp-api-request-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9" id="regenerator-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" id="wp-polyfill-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/dist/hooks.min.js?ver=4169d3cf8e8d95a3d6d5" id="wp-hooks-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/dist/i18n.min.js?ver=9e794f35a71bb98672ae" id="wp-i18n-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/dist/url.min.js?ver=bb0ef862199bcae73aa7" id="wp-url-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="wp-api-fetch-js-translations">
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", {"translation-revision-date":"2022-11-24 05:36:29+0000","generator":"GlotPress\/4.0.0-alpha.3","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","plural-forms":"nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);","lang":"ru"},"You are probably offline.":["\u0412\u043e\u0437\u043c\u043e\u0436\u043d\u043e, \u0447\u0442\u043e \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u043a \u0441\u0435\u0442\u0438 \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e."],"Media upload failed. If this is a photo or a large image, please scale it down and try again.":["\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u043c\u0435\u0434\u0438\u0430\u0444\u0430\u0439\u043b\u0430 \u043d\u0435 \u0443\u0434\u0430\u043b\u0430\u0441\u044c. \u0415\u0441\u043b\u0438 \u044d\u0442\u043e \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044f \u0438\u043b\u0438 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435 \u0431\u043e\u043b\u044c\u0448\u043e\u0433\u043e \u0440\u0430\u0437\u043c\u0435\u0440\u0430, \u0443\u043c\u0435\u043d\u044c\u0448\u0438\u0442\u0435 \u0435\u0433\u043e \u0438 \u043f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0441\u043d\u043e\u0432\u0430."],"The response is not a valid JSON response.":["\u041e\u0442\u0432\u0435\u0442 \u043d\u0435 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0434\u043e\u043f\u0443\u0441\u0442\u0438\u043c\u044b\u043c \u043e\u0442\u0432\u0435\u0442\u043e\u043c JSON."],"An unknown error occurred.":["\u041f\u0440\u043e\u0438\u0437\u043e\u0448\u043b\u0430 \u043d\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043d\u0430\u044f \u043e\u0448\u0438\u0431\u043a\u0430."]}},"comment":{"reference":"wp-includes\/js\/dist\/api-fetch.js"}} );
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-includes/js/dist/api-fetch.min.js?ver=bc0029ca2c943aec5311" id="wp-api-fetch-js"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="wp-api-fetch-js-after">
+wp.apiFetch.use( wp.apiFetch.createRootURLMiddleware( "https://sonservis.ru/wp-json/" ) );
+wp.apiFetch.nonceMiddleware = wp.apiFetch.createNonceMiddleware( "010328b6e4" );
+wp.apiFetch.use( wp.apiFetch.nonceMiddleware );
+wp.apiFetch.use( wp.apiFetch.mediaUploadMiddleware );
+wp.apiFetch.nonceEndpoint = "https://sonservis.ru/wp-admin/admin-ajax.php?action=rest-nonce";
+</script>
+<script type="text/javascript" id="woo-variation-swatches-js-extra">
+/* <![CDATA[ */
+var woo_variation_swatches_options = {"show_variation_label":"1","clear_on_reselect":"","variation_label_separator":":","is_mobile":"","show_variation_stock":"","stock_label_threshold":"5","cart_redirect_after_add":"no","enable_ajax_add_to_cart":"yes","cart_url":"https:\/\/sonservis.ru\/cart\/","is_cart":""};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/plugins/woo-variation-swatches/assets/js/frontend.min.js?ver=1669741341" id="woo-variation-swatches-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/checkout\/|\/cart\/|\/my-account\/|\/wc-api\/v(.*)|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/sonservis.ru","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" id="wpb_composer_front_js-js-extra">
+/* <![CDATA[ */
+var vcData = {"currentTheme":{"slug":"woodmart"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=6.9.0" id="wpb_composer_front_js-js" defer=""></script>
+<script type="text/javascript" id="woodmart-theme-js-extra">
+/* <![CDATA[ */
+var woodmart_settings = {"menu_storage_key":"woodmart_75ac76b7b988d8af7560b660e1249359","ajax_dropdowns_save":"1","photoswipe_close_on_scroll":"1","woocommerce_ajax_add_to_cart":"yes","variation_gallery_storage_method":"old","elementor_no_gap":"enabled","adding_to_cart":"\u041e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0430","added_to_cart":"\u0422\u043e\u0432\u0430\u0440 \u0431\u044b\u043b \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d \u0432 \u0432\u0430\u0448\u0443 \u043a\u043e\u0440\u0437\u0438\u043d\u0443.","continue_shopping":"\u041f\u0440\u043e\u0434\u043e\u043b\u0436\u0438\u0442\u044c \u043f\u043e\u043a\u0443\u043f\u043a\u0438","view_cart":"\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043a\u043e\u0440\u0437\u0438\u043d\u0443","go_to_checkout":"\u041e\u0444\u043e\u0440\u043c\u043b\u0435\u043d\u0438\u0435 \u0437\u0430\u043a\u0430\u0437\u0430","loading":"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430\u2026","countdown_days":"\u0434\u043d\u0438","countdown_hours":"c","countdown_mins":"m","countdown_sec":"\u0441\u0435\u043a","cart_url":"https:\/\/sonservis.ru\/cart\/","ajaxurl":"https:\/\/sonservis.ru\/wp-admin\/admin-ajax.php","add_to_cart_action":"widget","added_popup":"no","categories_toggle":"yes","enable_popup":"no","popup_delay":"2000","popup_event":"time","popup_scroll":"1000","popup_pages":"0","promo_popup_hide_mobile":"yes","product_images_captions":"yes","ajax_add_to_cart":"1","all_results":"\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0432\u0441\u0435 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u044b","product_gallery":{"thumbs_slider":{"items":{"desktop":4,"tablet_landscape":3,"tablet":4,"mobile":3,"vertical_items":3}}},"zoom_enable":"yes","ajax_scroll":"yes","ajax_scroll_class":".main-page-wrapper","ajax_scroll_offset":"100","infinit_scroll_offset":"300","product_slider_auto_height":"yes","product_slider_dots":"no","price_filter_action":"click","product_slider_autoplay":"","close":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c (Esc)","share_fb":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u043d\u0430 Facebook","pin_it":"\u0417\u0430\u043a\u0440\u0435\u043f\u0438\u0442\u044c","tweet":"\u0422\u0432\u0438\u0442\u0442\u0435\u0440","download_image":"\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443","off_canvas_column_close_btn_text":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c","cookies_version":"1","header_banner_version":"1","promo_version":"1","header_banner_close_btn":"yes","header_banner_enabled":"no","whb_header_clone":"\n    <div class=\"whb-sticky-header whb-clone whb-main-header <%wrapperClasses%>\">\n        <div class=\"<%cloneClass%>\">\n            <div class=\"container\">\n                <div class=\"whb-flex-row whb-general-header-inner\">\n                    <div class=\"whb-column whb-col-left whb-visible-lg\">\n                        <%.site-logo%>\n                    <\/div>\n                    <div class=\"whb-column whb-col-center whb-visible-lg\">\n                        <%.wd-header-main-nav%>\n                    <\/div>\n                    <div class=\"whb-column whb-col-right whb-visible-lg\">\n                        <%.wd-header-my-account%>\n                        <%.wd-header-search:not(.wd-header-search-mobile)%>\n\t\t\t\t\t\t<%.wd-header-wishlist%>\n                        <%.wd-header-compare%>\n                        <%.wd-header-cart%>\n                        <%.wd-header-fs-nav%>\n                    <\/div>\n                    <%.whb-mobile-left%>\n                    <%.whb-mobile-center%>\n                    <%.whb-mobile-right%>\n                <\/div>\n            <\/div>\n        <\/div>\n    <\/div>\n","pjax_timeout":"5000","split_nav_fix":"","shop_filters_close":"yes","woo_installed":"1","base_hover_mobile_click":"no","centered_gallery_start":"1","quickview_in_popup_fix":"","one_page_menu_offset":"150","hover_width_small":"1","is_multisite":"","current_blog_id":"1","swatches_scroll_top_desktop":"no","swatches_scroll_top_mobile":"no","lazy_loading_offset":"0","add_to_cart_action_timeout":"yes","add_to_cart_action_timeout_number":"4","single_product_variations_price":"yes","google_map_style_text":"\u0421\u0432\u043e\u0439 \u0441\u0442\u0438\u043b\u044c","quick_shop":"no","sticky_product_details_offset":"150","preloader_delay":"300","comment_images_upload_size_text":"\u041d\u0435\u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u0444\u0430\u0439\u043b\u044b \u0441\u043b\u0438\u0448\u043a\u043e\u043c \u0432\u0435\u043b\u0438\u043a\u0438. \u0414\u043e\u043f\u0443\u0441\u0442\u0438\u043c\u044b\u0439 \u0440\u0430\u0437\u043c\u0435\u0440 \u0444\u0430\u0439\u043b\u0430 1 \u041c\u0411.","comment_images_count_text":"\u0412\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0434\u043e 3 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0439 \u043a \u0432\u0430\u0448\u0435\u043c\u0443 \u043e\u0431\u0437\u043e\u0440\u0443.","single_product_comment_images_required":"no","comment_required_images_error_text":"\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435 \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u043e.","comment_images_upload_mimes_text":"\u0412\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u0442\u043e\u043b\u044c\u043a\u043e \u0432 \u0444\u043e\u0440\u043c\u0430\u0442\u0430\u0445 png, jpeg.","comment_images_added_count_text":"\u0414\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u043e \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0439: %s","comment_images_upload_size":"1048576","comment_images_count":"3","search_input_padding":"no","comment_images_upload_mimes":{"jpg|jpeg|jpe":"image\/jpeg","png":"image\/png"},"home_url":"https:\/\/sonservis.ru\/","shop_url":"https:\/\/sonservis.ru\/shop\/","age_verify":"no","banner_version_cookie_expires":"60","promo_version_cookie_expires":"7","age_verify_expires":"30","cart_redirect_after_add":"no","swatches_labels_name":"yes","product_categories_placeholder":"\u0412\u044b\u0431\u0440\u0430\u0442\u044c \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044e","product_categories_no_results":"No matches found","cart_hash_key":"wc_cart_hash_fbbbe4536a93f84356a0d36e3835cabd","fragment_name":"wc_fragments_fbbbe4536a93f84356a0d36e3835cabd","photoswipe_template":"<div class=\"pswp\" aria-hidden=\"true\" role=\"dialog\" tabindex=\"-1\"><div class=\"pswp__bg\"><\/div><div class=\"pswp__scroll-wrap\"><div class=\"pswp__container\"><div class=\"pswp__item\"><\/div><div class=\"pswp__item\"><\/div><div class=\"pswp__item\"><\/div><\/div><div class=\"pswp__ui pswp__ui--hidden\"><div class=\"pswp__top-bar\"><div class=\"pswp__counter\"><\/div><button class=\"pswp__button pswp__button--close\" title=\"\u0417\u0430\u043a\u0440\u044b\u0442\u044c (Esc)\"><\/button> <button class=\"pswp__button pswp__button--share\" title=\"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f\"><\/button> <button class=\"pswp__button pswp__button--fs\" title=\"\u041d\u0430 \u0432\u0435\u0441\u044c \u044d\u043a\u0440\u0430\u043d\"><\/button> <button class=\"pswp__button pswp__button--zoom\" title=\"\u041c\u0430\u0441\u0448\u0442\u0430\u0431 +\/-\"><\/button><div class=\"pswp__preloader\"><div class=\"pswp__preloader__icn\"><div class=\"pswp__preloader__cut\"><div class=\"pswp__preloader__donut\"><\/div><\/div><\/div><\/div><\/div><div class=\"pswp__share-modal pswp__share-modal--hidden pswp__single-tap\"><div class=\"pswp__share-tooltip\"><\/div><\/div><button class=\"pswp__button pswp__button--arrow--left\" title=\"\u041f\u0440\u0435\u0434. (\u0441\u0442\u0440\u0435\u043b\u043a\u0430 \u0432\u043b\u0435\u0432\u043e)\"><\/button> <button class=\"pswp__button pswp__button--arrow--right\" title=\"\u0421\u043b\u0435\u0434. (\u0441\u0442\u0440\u0435\u043b\u043a\u0430 \u0432\u043f\u0440\u0430\u0432\u043e)>\"><\/button><div class=\"pswp__caption\"><div class=\"pswp__caption__center\"><\/div><\/div><\/div><\/div><\/div>","load_more_button_page_url":"yes","load_more_button_page_url_opt":"no","menu_item_hover_to_click_on_responsive":"no","clear_menu_offsets_on_resize":"yes","three_sixty_framerate":"60","three_sixty_prev_next_frames":"5","ajax_search_delay":"300","animated_counter_speed":"3000","site_width":"1600","combined_css":"no","cookie_secure_param":"1","slider_distortion_effect":"sliderWithNoise","current_page_builder":"wpb","collapse_footer_widgets":"yes","ajax_fullscreen_content":"yes","ajax_links":".wd-nav-product-cat a, .website-wrapper .widget_product_categories a, .widget_layered_nav_filters a, .woocommerce-widget-layered-nav a, .filters-area:not(.custom-content) a, body.post-type-archive-product:not(.woocommerce-account) .woocommerce-pagination a, body.tax-product_cat:not(.woocommerce-account) .woocommerce-pagination a, .wd-shop-tools a:not(.breadcrumb-link), .woodmart-woocommerce-layered-nav a, .woodmart-price-filter a, .wd-clear-filters a, .woodmart-woocommerce-sort-by a, .woocommerce-widget-layered-nav-list a, .wd-widget-stock-status a, .widget_nav_mega_menu a, .wd-products-shop-view a, .wd-products-per-page a, .category-grid-item a, .wd-cat a, body[class*=\"tax-pa_\"] .woocommerce-pagination a"};
+var woodmart_page_css = {"wd-widget-price-filter-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/woo-widget-price-filter.min.css","wd-widget-nav-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/widget-nav.min.css","wd-wpcf7-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/int-wpcf7.min.css","wd-base-deprecated-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/base-deprecated.min.css","wd-wpbakery-base-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/int-wpb-base.min.css","wd-wpbakery-base-deprecated-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/int-wpb-base-deprecated.min.css","wd-woocommerce-base-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/woocommerce-base.min.css","wd-mod-star-rating-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/mod-star-rating.min.css","wd-woo-el-track-order-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/woo-el-track-order.min.css","wd-header-base-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/header-base.min.css","wd-mod-tools-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/mod-tools.min.css","wd-header-elements-base-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/header-el-base.min.css","wd-social-icons-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/el-social-icons.min.css","wd-header-search-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/header-el-search.min.css","wd-header-search-form-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/header-el-search-form.min.css","wd-wd-search-form-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/wd-search-form.min.css","wd-woo-mod-login-form-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/woo-mod-login-form.min.css","wd-header-my-account-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/header-el-my-account.min.css","wd-header-cart-side-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/header-el-cart-side.min.css","wd-header-cart-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/header-el-cart.min.css","wd-widget-shopping-cart-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/woo-widget-shopping-cart.min.css","wd-widget-product-list-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/woo-widget-product-list.min.css","wd-page-title-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/page-title.min.css","wd-widget-collapse-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/opt-widget-collapse.min.css","wd-footer-base-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/footer-base.min.css","wd-text-block-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/el-text-block.min.css","wd-scroll-top-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/opt-scrolltotop.min.css","wd-header-my-account-sidebar-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/header-el-my-account-sidebar.min.css","wd-bottom-toolbar-css":"https:\/\/sonservis.ru\/wp-content\/themes\/woodmart\/css\/parts\/opt-bottom-toolbar.min.css"};
+var woodmart_variation_gallery_data = [];
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/global/helpers.min.js?ver=6.5.4" id="woodmart-theme-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/wc/woocommerceNotices.min.js?ver=6.5.4" id="wd-woocommerce-notices-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/global/scrollBar.min.js?ver=6.5.4" id="wd-scrollbar-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/header/headerBuilder.min.js?ver=6.5.4" id="wd-header-builder-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/menu/menuOffsets.min.js?ver=6.5.4" id="wd-menu-offsets-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/menu/menuSetUp.min.js?ver=6.5.4" id="wd-menu-setup-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/wc/loginSidebar.min.js?ver=6.5.4" id="wd-login-sidebar-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/wc/onRemoveFromCart.min.js?ver=6.5.4" id="wd-on-remove-from-cart-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/wc/wishlist.min.js?ver=6.5.4" id="wd-wishlist-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/wc/woodmartCompare.min.js?ver=6.5.4" id="wd-woodmart-compare-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/menu/menuDropdownsAJAX.min.js?ver=6.5.4" id="wd-menu-dropdowns-ajax-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/global/widgetCollapse.min.js?ver=6.5.4" id="wd-widget-collapse-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/global/scrollTop.min.js?ver=6.5.4" id="wd-scroll-top-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/menu/mobileNavigation.min.js?ver=6.5.4" id="wd-mobile-navigation-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="https://sonservis.ru/wp-content/themes/woodmart/js/scripts/wc/cartWidget.min.js?ver=6.5.4" id="wd-cart-widget-js" defer=""></script>
+
+<div id="awooc-form-custom-order" class="awooc-form-custom-order awooc-popup-wrapper" style="display: none">
+	<div class="awooc-close">×</div>
+	<div class="awooc-custom-order-wrap awooc-popup-inner">
+		<h2 class="awooc-form-custom-order-title awooc-popup-title"></h2>		<div class="awooc-col-wrap awooc-row">
+			<div class="awooc-col columns-left ">
+
+				<div class="awooc-form-custom-order-img awooc-popup-image"></div><div class="awooc-form-custom-order-sku awooc-popup-sku"></div><div class="awooc-form-custom-order-attr awooc-popup-attr"></div><div class="awooc-form-custom-order-price awooc-popup-price"></div><div class="awooc-form-custom-order-qty awooc-popup-qty"></div><div class="awooc-form-custom-order-sum awooc-popup-sum"></div>
+			</div>
+			<div class="awooc-col columns-right ">
+
+				
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<script type="rocketlazyloadscript">(function(d, w){ w.lp9 = 'cycoba99'; var s = d.createElement('script'); s.async = true; s.src = 'https://lp9.ru/widget/'+w.lp9+'.js?'+Date.now(); s.charset = 'UTF-8'; if (d.head) d.head.appendChild(s); })(document, window);</script>
+
+
+
+</body></html>

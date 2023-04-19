@@ -1,0 +1,722 @@
+<html prefix="og: https://ogp.me/ns#" lang="ru-RU"><head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",e=>{this.persisted=e.persisted}),window.addEventListener("DOMContentLoaded",()=>{this._preconnect3rdParties()}),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}_addUserInteractionListener(e){if(document.hidden){e._triggerListener();return}this.triggerEvents.forEach(t=>window.addEventListener(t,e.userEventHandler,{passive:!0})),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler)}_removeUserInteractionListener(){this.triggerEvents.forEach(e=>window.removeEventListener(e,this.userEventHandler,{passive:!0})),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"),this._pendingClickStarted())}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this._pendingClickFinished()}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation(),this._pendingClickFinished()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach(e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))})}_waitForPendingClicks(){return new Promise(e=>{this._isClickPending?this._pendingClickFinished=e:e()})}_pendingClickStarted(){this._isClickPending=!0}_pendingClickFinished(){this._isClickPending=!1}_renameDOMAttribute(e,t,i){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(i,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t=>{if(t.hasAttribute("src")){let i=new URL(t.src).origin;i!==location.origin&&e.push({src:i,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}}),e=[...new Map(e.map(e=>[JSON.stringify(e),e])).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){console.error(e)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._waitForPendingClicks().then(()=>{this._replayClicks()}),this._emptyTrash()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e=>{e.hasAttribute("data-rocket-src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)})}async _transformScript(e){return await this._littleBreath(),new Promise(t=>{function i(){e.setAttribute("data-rocket-status","executed"),t()}function r(){e.setAttribute("data-rocket-status","failed"),t()}try{let n=e.getAttribute("data-rocket-type"),s=e.getAttribute("data-rocket-src");if(n?(e.type=n,e.removeAttribute("data-rocket-type")):e.removeAttribute("type"),e.addEventListener("load",i),e.addEventListener("error",r),s)e.src=s,e.removeAttribute("data-rocket-src");else if(navigator.userAgent.indexOf("Firefox/")>0){var a=document.createElement("script");[...e.attributes].forEach(e=>{"type"!==e.nodeName&&a.setAttribute("data-rocket-type"===e.nodeName?"type":e.nodeName,e.nodeValue)}),a.text=e.text,e.parentNode.replaceChild(a,e),i()}else e.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(e.text)))}catch(o){r()}})}async _loadScriptsFromList(e){let t=e.shift();return t&&t.isConnected?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var i=document.createDocumentFragment();e.forEach(e=>{let r=e.getAttribute&&e.getAttribute("data-rocket-src")||e.src;if(r){let n=document.createElement("link");n.href=r,n.rel=t,"preconnect"!==t&&(n.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),e.crossOrigin&&(n.crossOrigin=e.crossOrigin),e.integrity&&(n.integrity=e.integrity),i.appendChild(n),this.trash.push(n)}}),document.head.appendChild(i)}_delayEventListeners(e){let t={};function i(e,i){!function e(i){!t[i]&&(t[i]={originalFunctions:{add:i.addEventListener,remove:i.removeEventListener},eventsToRewrite:[]},i.addEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.add.apply(i,arguments)},i.removeEventListener=function(){arguments[0]=r(arguments[0]),t[i].originalFunctions.remove.apply(i,arguments)});function r(e){return t[i].eventsToRewrite.indexOf(e)>=0?"rocket-"+e:e}}(e),t[e].eventsToRewrite.push(i)}function r(e,t){let i=e[t];Object.defineProperty(e,t,{get:()=>i||function(){},set(r){e["rocket"+t]=i=r}})}i(document,"DOMContentLoaded"),i(window,"DOMContentLoaded"),i(window,"load"),i(window,"pageshow"),i(document,"readystatechange"),r(document,"onreadystatechange"),r(window,"onload"),r(window,"onpageshow")}_delayJQueryReady(e){let t;function i(i){if(i&&i.fn&&!e.allJQueries.includes(i)){i.fn.ready=i.fn.init.prototype.ready=function(t){return e.domReadyFired?t.bind(document)(i):document.addEventListener("rocket-DOMContentLoaded",()=>t.bind(document)(i)),i([])};let r=i.fn.on;i.fn.on=i.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map(e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]})}return r.apply(this,arguments),this},e.allJQueries.push(i)}t=i}i(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>t,set(e){i(e)}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach(e=>e(window).trigger("rocket-jquery-load")),await this._littleBreath();let e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){let e=new Map;document.write=document.writeln=function(t){let i=document.currentScript;i||console.error("WPRocket unable to document.write this: "+t);let r=document.createRange(),n=i.parentElement,s=e.get(i);void 0===s&&(s=i.nextSibling,e.set(i,s));let a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),n.insertBefore(a,s)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise(e=>setTimeout(e)):new Promise(e=>requestAnimationFrame(e))}_emptyTrash(){this.trash.forEach(e=>e.remove())}static run(){let e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<script src="data:text/javascript;base64,CnZhciB0aGVwbHVzX2FqYXhfdXJsID0gImh0dHBzOi8vd3d3Lmhhcm1vbnktY2xlYW5pbmcuY29tL3dwLWFkbWluL2FkbWluLWFqYXgucGhwIjsKCQl2YXIgdGhlcGx1c19hamF4X3Bvc3RfdXJsID0gImh0dHBzOi8vd3d3Lmhhcm1vbnktY2xlYW5pbmcuY29tL3dwLWFkbWluL2FkbWluLXBvc3QucGhwIjsKCQl2YXIgdGhlcGx1c19ub25jZSA9ICJjNmE1YzU1MmE2IjsK">
+var theplus_ajax_url = "https://www.harmony-cleaning.com/wp-admin/admin-ajax.php";
+		var theplus_ajax_post_url = "https://www.harmony-cleaning.com/wp-admin/admin-post.php";
+		var theplus_nonce = "c6a5c552a6";
+</script>
+
+
+<title>Политика конфиденциальности - «Гармония-клининг»</title><link rel="stylesheet" href="https://www.harmony-cleaning.com/wp-content/cache/min/1/9f742eec535dcd2ed362e2a336806c9a.css" media="all" data-minify="1">
+<meta name="description" content="Политика в отношении обработки персональных данных на сайте компании «Гармония-клининг»">
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+<link rel="canonical" href="https://www.harmony-cleaning.com/politika-konfidencialnosti.html">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Политика конфиденциальности - «Гармония-клининг»">
+<meta property="og:description" content="Политика в отношении обработки персональных данных на сайте компании «Гармония-клининг»">
+<meta property="og:url" content="https://www.harmony-cleaning.com/politika-konfidencialnosti.html">
+<meta property="og:site_name" content="«Гармония-Клининг»">
+<meta property="og:updated_time" content="2023-02-11T12:08:32+03:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Политика конфиденциальности - «Гармония-клининг»">
+<meta name="twitter:description" content="Политика в отношении обработки персональных данных на сайте компании «Гармония-клининг»">
+
+
+
+<link rel="alternate" type="application/rss+xml" title="«Гармония-клининг» » Лента" href="https://www.harmony-cleaning.com/feed">
+<script type="rocketlazyloadscript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.harmony-cleaning.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=1cf1726869ce329e8af72ba36c111124"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style>
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	
+
+
+<style id="global-styles-inline-css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--ast-global-color-0: var(--ast-global-color-0);--wp--preset--color--ast-global-color-1: var(--ast-global-color-1);--wp--preset--color--ast-global-color-2: var(--ast-global-color-2);--wp--preset--color--ast-global-color-3: var(--ast-global-color-3);--wp--preset--color--ast-global-color-4: var(--ast-global-color-4);--wp--preset--color--ast-global-color-5: var(--ast-global-color-5);--wp--preset--color--ast-global-color-6: var(--ast-global-color-6);--wp--preset--color--ast-global-color-7: var(--ast-global-color-7);--wp--preset--color--ast-global-color-8: var(--ast-global-color-8);--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}body { margin: 0;--wp--style--global--content-size: var(--wp--custom--ast-content-width-size);--wp--style--global--wide-size: var(--wp--custom--ast-wide-width-size); }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }.wp-site-blocks > * { margin-block-start: 0; margin-block-end: 0; }.wp-site-blocks > * + * { margin-block-start: 24px; }body { --wp--style--block-gap: 24px; }body .is-layout-flow > *{margin-block-start: 0;margin-block-end: 0;}body .is-layout-flow > * + *{margin-block-start: 24px;margin-block-end: 0;}body .is-layout-constrained > *{margin-block-start: 0;margin-block-end: 0;}body .is-layout-constrained > * + *{margin-block-start: 24px;margin-block-end: 0;}body .is-layout-flex{gap: 24px;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}a:where(:not(.wp-element-button)){text-decoration: none;}.wp-element-button, .wp-block-button__link{background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;line-height: inherit;padding: calc(0.667em + 2px) calc(1.333em + 2px);text-decoration: none;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-ast-global-color-0-color{color: var(--wp--preset--color--ast-global-color-0) !important;}.has-ast-global-color-1-color{color: var(--wp--preset--color--ast-global-color-1) !important;}.has-ast-global-color-2-color{color: var(--wp--preset--color--ast-global-color-2) !important;}.has-ast-global-color-3-color{color: var(--wp--preset--color--ast-global-color-3) !important;}.has-ast-global-color-4-color{color: var(--wp--preset--color--ast-global-color-4) !important;}.has-ast-global-color-5-color{color: var(--wp--preset--color--ast-global-color-5) !important;}.has-ast-global-color-6-color{color: var(--wp--preset--color--ast-global-color-6) !important;}.has-ast-global-color-7-color{color: var(--wp--preset--color--ast-global-color-7) !important;}.has-ast-global-color-8-color{color: var(--wp--preset--color--ast-global-color-8) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-ast-global-color-0-background-color{background-color: var(--wp--preset--color--ast-global-color-0) !important;}.has-ast-global-color-1-background-color{background-color: var(--wp--preset--color--ast-global-color-1) !important;}.has-ast-global-color-2-background-color{background-color: var(--wp--preset--color--ast-global-color-2) !important;}.has-ast-global-color-3-background-color{background-color: var(--wp--preset--color--ast-global-color-3) !important;}.has-ast-global-color-4-background-color{background-color: var(--wp--preset--color--ast-global-color-4) !important;}.has-ast-global-color-5-background-color{background-color: var(--wp--preset--color--ast-global-color-5) !important;}.has-ast-global-color-6-background-color{background-color: var(--wp--preset--color--ast-global-color-6) !important;}.has-ast-global-color-7-background-color{background-color: var(--wp--preset--color--ast-global-color-7) !important;}.has-ast-global-color-8-background-color{background-color: var(--wp--preset--color--ast-global-color-8) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-ast-global-color-0-border-color{border-color: var(--wp--preset--color--ast-global-color-0) !important;}.has-ast-global-color-1-border-color{border-color: var(--wp--preset--color--ast-global-color-1) !important;}.has-ast-global-color-2-border-color{border-color: var(--wp--preset--color--ast-global-color-2) !important;}.has-ast-global-color-3-border-color{border-color: var(--wp--preset--color--ast-global-color-3) !important;}.has-ast-global-color-4-border-color{border-color: var(--wp--preset--color--ast-global-color-4) !important;}.has-ast-global-color-5-border-color{border-color: var(--wp--preset--color--ast-global-color-5) !important;}.has-ast-global-color-6-border-color{border-color: var(--wp--preset--color--ast-global-color-6) !important;}.has-ast-global-color-7-border-color{border-color: var(--wp--preset--color--ast-global-color-7) !important;}.has-ast-global-color-8-border-color{border-color: var(--wp--preset--color--ast-global-color-8) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+
+
+<style id="crp-style-rounded-thumbs-inline-css">
+
+			.crp_related.crp-rounded-thumbs a {
+			  width: 150px;
+			  height: 150px;
+			  text-decoration: none;
+			}
+			.crp_related.crp-rounded-thumbs img {
+			  max-width: 150px;
+			  margin: auto;
+			}
+			.crp_related.crp-rounded-thumbs .crp_title {
+			  width: 100%;
+			}
+			
+</style>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" id="elementor-post-5709-css" href="https://www.harmony-cleaning.com/wp-content/uploads/elementor/css/post-5709.css?ver=1671102057" media="all">
+
+
+
+<link rel="stylesheet" id="elementor-post-7935-css" href="https://www.harmony-cleaning.com/wp-content/uploads/elementor/css/post-7935.css?ver=1671102058" media="all">
+<link rel="stylesheet" id="elementor-post-8077-css" href="https://www.harmony-cleaning.com/wp-content/uploads/elementor/css/post-8077.css?ver=1675782569" media="all">
+<link rel="stylesheet" id="elementor-post-5759-css" href="https://www.harmony-cleaning.com/wp-content/uploads/elementor/css/post-5759.css?ver=1671102058" media="all">
+
+
+
+
+<!--[if IE]>
+<script src='https://www.harmony-cleaning.com/wp-content/themes/astra/assets/js/minified/flexibility.min.js?ver=4.0.2' id='astra-flexibility-js'></script>
+<script id='astra-flexibility-js-after'>
+flexibility(document.documentElement);</script>
+<![endif]-->
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" id="jquery-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" id="jquery-migrate-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://www.harmony-cleaning.com/wp-content/cache/min/1/wp-content/plugins/bt_cost_calculator/jquery.dd.js?ver=1676474967" id="bt_cc_dd-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://www.harmony-cleaning.com/wp-content/cache/min/1/wp-content/plugins/bt_cost_calculator/cc.main.js?ver=1676474967" id="bt_cc_main-js" defer=""></script>
+<script type="rocketlazyloadscript" id="bt_cc_main-js-after">
+window.bt_cc_translate = [];window.bt_cc_translate['prev'] = 'Предыдущий';window.bt_cc_translate['next'] = 'Следующая';window.bt_cc_translate['su'] = 'Вс';window.bt_cc_translate['mo'] = 'Пн';window.bt_cc_translate['tu'] = 'Вт';window.bt_cc_translate['we'] = 'Ср';window.bt_cc_translate['th'] = 'Чт';window.bt_cc_translate['fr'] = 'Пт';window.bt_cc_translate['sa'] = 'Сб';window.bt_cc_translate['january'] = 'Январь';window.bt_cc_translate['february'] = 'февраля';window.bt_cc_translate['march'] = 'Март';window.bt_cc_translate['april'] = 'Апрель';window.bt_cc_translate['may'] = 'Май';window.bt_cc_translate['june'] = 'Июнь';window.bt_cc_translate['july'] = 'Июль';window.bt_cc_translate['august'] = 'августа';window.bt_cc_translate['september'] = 'Сентябрь';window.bt_cc_translate['october'] = 'Октябрь';window.bt_cc_translate['november'] = 'ноября';window.bt_cc_translate['december'] = 'Декабрь';
+</script>
+<script type="rocketlazyloadscript" data-rocket-src="//www.harmony-cleaning.com/wp-content/plugins/theplus_elementor_addon/assets/js/main/pre-loader/plus-pre-loader-extra-transition.min.js?ver=5.1.3" id="plus-pre-loader-js2-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="//www.harmony-cleaning.com/wp-content/plugins/theplus_elementor_addon/assets/js/main/pre-loader/plus-pre-loader.min.js?ver=5.1.3" id="plus-pre-loader-js-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.9.1" id="font-awesome-4-shim-js" defer=""></script>
+<link rel="https://api.w.org/" href="https://www.harmony-cleaning.com/wp-json/"><link rel="alternate" type="application/json" href="https://www.harmony-cleaning.com/wp-json/wp/v2/pages/7994"><link rel="icon" href="https://www.harmony-cleaning.com/wp-content/uploads/favicon.ico" sizes="32x32">
+<link rel="icon" href="https://www.harmony-cleaning.com/wp-content/uploads/favicon.ico" sizes="192x192">
+<link rel="apple-touch-icon" href="https://www.harmony-cleaning.com/wp-content/uploads/favicon.ico">
+<meta name="msapplication-TileImage" content="https://www.harmony-cleaning.com/wp-content/uploads/favicon.ico">
+<link href="https://www.harmony-cleaning.com/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-includes/js/dist/hooks.min.js?ver=4169d3cf8e8d95a3d6d5" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-includes/js/dist/i18n.min.js?ver=9e794f35a71bb98672ae" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.1" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/cache/min/1/wp-content/plugins/bt_cost_calculator/jquery.dd.js?ver=1676474967" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/cache/min/1/wp-content/plugins/bt_cost_calculator/cc.main.js?ver=1676474967" rel="preload" as="script"><link href="//www.harmony-cleaning.com/wp-content/plugins/theplus_elementor_addon/assets/js/main/pre-loader/plus-pre-loader-extra-transition.min.js?ver=5.1.3" rel="preload" as="script"><link href="//www.harmony-cleaning.com/wp-content/plugins/theplus_elementor_addon/assets/js/main/pre-loader/plus-pre-loader.min.js?ver=5.1.3" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.9.1" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/themes/astra/assets/js/minified/style.min.js?ver=4.0.2" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-includes/js/jquery/ui/mouse.min.js?ver=1.13.2" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-includes/js/jquery/ui/slider.min.js?ver=1.13.2" rel="preload" as="script"><link href="//www.harmony-cleaning.com/wp-content/uploads/theplus-addons/theplus-post-7994.min.js?ver=5.1.3" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-includes/js/jquery/ui/draggable.min.js?ver=1.13.2" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/cache/min/1/wp-includes/js/jquery/jquery.ui.touch-punch.js?ver=1676474967" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/cache/min/1/wp-content/uploads/astra-addon/astra-addon-63e26b3be573d0-47101133.js?ver=1676474967" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.0.1" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.9.0" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.9.1" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.9.1" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.9.0" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.9.1" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=3.9.0" rel="preload" as="script"><link href="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min.js?ver=3.9.0" rel="preload" as="script"><link href="/js/jquery.jbform.js" rel="preload" as="script"><link href="/js/jquery.maskedinput.js" rel="preload" as="script"></head>
+
+<body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="privacy-policy page-template-default page page-id-7994 ast-desktop ast-page-builder-template ast-no-sidebar astra-4.0.2 ast-header-custom-item-inside ast-single-post ast-inherit-site-logo-transparent elementor-page-5759 ast-normal-title-enabled elementor-default elementor-kit-5709 astra-addon-3.9.4">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0.49803921568627"></feFuncR><feFuncG type="table" tableValues="0 0.49803921568627"></feFuncG><feFuncB type="table" tableValues="0 0.49803921568627"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 0.27843137254902"></feFuncG><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0"></feFuncR><feFuncG type="table" tableValues="0 0.64705882352941"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.78039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.94901960784314"></feFuncG><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.44705882352941 0.4"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.098039215686275 1"></feFuncR><feFuncG type="table" tableValues="0 0.66274509803922"></feFuncG><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg>
+<a class="skip-link screen-reader-text" href="#content" role="link" title="Перейти к содержимому">
+		Перейти к содержимому</a>
+
+<div class="hfeed site" id="page">
+			<header data-elementor-type="header" data-elementor-id="7935" class="elementor elementor-7935 elementor-location-header">
+								<section class="elementor-section elementor-top-section elementor-element elementor-element-3fc87ef8 elementor-section-full_width elementor-hidden-tablet elementor-hidden-phone elementor-section-height-default elementor-section-height-default" data-id="3fc87ef8" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-624d368e" data-id="624d368e" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-1e669d29 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="1e669d29" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-242f249a" data-id="242f249a" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-49825913 elementor-mobile-align-left elementor-icon-list--layout-inline elementor-align-right elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="49825913" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items elementor-inline-items">
+							<li class="elementor-icon-list-item elementor-inline-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="far fa-envelope"></i>						</span>
+										<span class="elementor-icon-list-text"> harmony-cleaning@yandex.ru</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-7d4d4dcf elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7d4d4dcf" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-78da12c7" data-id="78da12c7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-28e6bd07 elementor-widget elementor-widget-image" data-id="28e6bd07" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+																<a href="https://www.harmony-cleaning.com">
+							<img src="https://www.harmony-cleaning.com/wp-content/uploads/logo-w-2-1.png" class="attachment-full size-full wp-image-7933" alt="" loading="lazy" srcset="https://www.harmony-cleaning.com/wp-content/uploads/logo-w-2-1.png 240w, https://www.harmony-cleaning.com/wp-content/uploads/logo-w-2-1-150x44.png 150w" sizes="(max-width: 240px) 100vw, 240px" width="240" height="70">								</a>
+															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-638d4707" data-id="638d4707" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-332a33b3 elementor-align-right callback elementor-widget elementor-widget-button" data-id="332a33b3" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="#" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+							<span class="elementor-button-icon elementor-align-icon-left">
+				<i aria-hidden="true" class="fas fa-phone-volume"></i>			</span>
+						<span class="elementor-button-text">Заказать обратный звонок</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-621c165e" data-id="621c165e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7713556f elementor-align-right elementor-mobile-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="7713556f" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-phone-alt"></i>						</span>
+										<span class="elementor-icon-list-text"><a href="tel:+74991159351">+7 (499) 115-93-51</a></span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-phone-alt"></i>						</span>
+										<span class="elementor-icon-list-text"><a href="tel:+79165975476">+7 (916) 597-54-76</a></span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-e80921c" data-id="e80921c" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-fedfd16 elementor-widget elementor-widget-html" data-id="fedfd16" data-element_type="widget" data-widget_type="html.default">
+				<div class="elementor-widget-container">
+			<a href="https://api.whatsapp.com/send?phone=79031985556" target="_blank" rel="nofollow noopener"> <img style="margin-left: -10px;" src="/wp-content/uploads/whatsapp51.jpg" alt="" width="50" height="50"></a>		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-20 elementor-inner-column elementor-element elementor-element-52ae5b26" data-id="52ae5b26" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-44c36897 elementor-widget elementor-widget-text-editor" data-id="44c36897" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							График работы: <br>
+<i class="fas fa-clock"></i>
+9.00 — 21.00						</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<nav class="elementor-section elementor-inner-section elementor-element elementor-element-1e111218 elementor-section-full_width elementor-section-content-middle elementor-section-height-default elementor-section-height-default" data-id="1e111218" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;gradient&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+					<nav class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-66fffca6" data-id="66fffca6" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-3159e45b elementor-widget elementor-widget-tp-navigation-menu" data-id="3159e45b" data-element_type="widget" data-widget_type="tp-navigation-menu.default">
+				<div class="elementor-widget-container">
+					<div class="plus-navigation-wrap text-center nav-menu63ecfc0a9263a3159e45b">
+			<div class="plus-navigation-inner menu-hover main-menu-indicator-none sub-menu-indicator-none plus-menu-style-1" data-menu_transition="style-1" data-mobile-menu-click="no">
+				<div id="theplus-navigation-normal-menu" class="collapse navbar-collapse navbar-ex1-collapse">
+				
+					<div class="plus-navigation-menu menu-horizontal   ">
+												<ul id="menu-glavnoe-menju" class="nav navbar-nav yamm menu-hover-style-1  "><li id="menu-item-5475" class="menu-item menu-item-type-custom menu-item-object-custom animate-dropdown menu-item-5475 plus-dropdown-container"><a title="О компании" href="/" class="menu-link" data-text="О компании"><i class="plus-nav-icon-menu <i class=&quot;fa2 fas fa-home fa-lg&quot;></i>"></i>О компании</a></li>
+<li id="menu-item-5474" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children animate-dropdown menu-item-5474 depth-0 dropdown plus-dropdown-default plus-dropdown-menu-" data-dropdown-width="300px"><a title="Наши услуги" href="#" class="dropdown-toggle menu-link" aria-haspopup="true" data-text="Наши услуги"><i class="plus-nav-icon-menu <i class=&quot;fa2 fa fa-arrow-circle-down fa-lg&quot;></i>"></i>Наши услуги</a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-5485" class="menu-item menu-item-type-post_type menu-item-object-page animate-dropdown menu-item-5485 plus-dropdown-container"><a title="Химчистка ковролина" href="https://www.harmony-cleaning.com/himchistka-kovrolina.html" class="menu-link" data-text="Химчистка ковролина">Химчистка ковролина</a></li>
+	<li id="menu-item-5488" class="menu-item menu-item-type-post_type menu-item-object-page animate-dropdown menu-item-5488 plus-dropdown-container"><a title="Химчистка ковров на дому" href="https://www.harmony-cleaning.com/himchistka-kovrov-na-domu.html" class="menu-link" data-text="Химчистка ковров на дому">Химчистка ковров на дому</a></li>
+	<li id="menu-item-5489" class="menu-item menu-item-type-post_type menu-item-object-page animate-dropdown menu-item-5489 plus-dropdown-container"><a title="Химчистка мягкой мебели" href="https://www.harmony-cleaning.com/himchistka-mebeli.html" class="menu-link" data-text="Химчистка мягкой мебели">Химчистка мягкой мебели</a></li>
+	<li id="menu-item-5498" class="menu-item menu-item-type-post_type menu-item-object-page animate-dropdown menu-item-5498 plus-dropdown-container"><a title="Удаление запахов" href="https://www.harmony-cleaning.com/udalim-zapah-suhim-tumanom.html" class="menu-link" data-text="Удаление запахов">Удаление запахов</a></li>
+	<li id="menu-item-5487" class="menu-item menu-item-type-post_type menu-item-object-page animate-dropdown menu-item-5487 plus-dropdown-container"><a title="Уборка квартир" href="https://www.harmony-cleaning.com/uborka-kvartir.html" class="menu-link" data-text="Уборка квартир">Уборка квартир</a></li>
+	<li id="menu-item-5486" class="menu-item menu-item-type-post_type menu-item-object-page animate-dropdown menu-item-5486 plus-dropdown-container"><a title="Мойка окон" href="https://www.harmony-cleaning.com/moika-okon.html" class="menu-link" data-text="Мойка окон">Мойка окон</a></li>
+	<li id="menu-item-5634" class="menu-item menu-item-type-post_type menu-item-object-page animate-dropdown menu-item-5634 plus-dropdown-menu-"><a title="Полировка мраморных полов" href="https://www.harmony-cleaning.com/mramor.html" class="menu-link" data-text="Полировка мраморных полов">Полировка мраморных полов</a></li>
+</ul>
+</li>
+<li id="menu-item-7331" class="menu-item menu-item-type-custom menu-item-object-custom animate-dropdown menu-item-7331 plus-dropdown-container"><a title="Полезные советы" href="/sovety.html" class="menu-link" data-text="Полезные советы"><i class="plus-nav-icon-menu <i class=&quot;fa2 fas fa-book-reader fa-lg&quot;></i>"></i>Полезные советы</a></li>
+<li id="menu-item-5491" class="menu-item menu-item-type-post_type menu-item-object-page animate-dropdown menu-item-5491 plus-dropdown-container"><a title="Цены" href="https://www.harmony-cleaning.com/price.html" class="menu-link" data-text="Цены"><i class="plus-nav-icon-menu <i class=&quot;fa2 fas fa-calculator fa-lg&quot;></i>"></i>Цены</a></li>
+<li id="menu-item-5484" class="menu-item menu-item-type-post_type menu-item-object-page animate-dropdown menu-item-5484 plus-dropdown-container"><a title="Контакты" href="https://www.harmony-cleaning.com/contact.html" class="menu-link" data-text="Контакты"><i class="plus-nav-icon-menu <i class=&quot;fa2 fas fa-phone fa-lg&quot;></i>"></i>Контакты</a></li>
+</ul>						
+					</div>
+					
+				</div>
+				
+								
+			</div>
+		</div>
+		 
+		<style>.plus-navigation-wrap.nav-menu63ecfc0a9263a3159e45b #theplus-navigation-normal-menu{display: block!important;}</style>		</div>
+				</div>
+					</div>
+		</nav>
+							</div>
+		</nav>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-15a7c4e0 elementor-hidden-desktop elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="15a7c4e0" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;sticky_on&quot;:[&quot;mobile&quot;],&quot;sticky&quot;:&quot;top&quot;,&quot;sticky_offset&quot;:0,&quot;sticky_effects_offset&quot;:0}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-876b03d" data-id="876b03d" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-31e96ef2 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="31e96ef2" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-6eaecfc4" data-id="6eaecfc4" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-38548a37 elementor-widget elementor-widget-image" data-id="38548a37" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+																<a href="https://www.harmony-cleaning.com">
+							<img src="https://www.harmony-cleaning.com/wp-content/uploads/logo-mini-1-1-1.jpg" class="attachment-full size-full wp-image-7934" alt="" loading="lazy" srcset="https://www.harmony-cleaning.com/wp-content/uploads/logo-mini-1-1-1.jpg 175w, https://www.harmony-cleaning.com/wp-content/uploads/logo-mini-1-1-1-150x50.jpg 150w" sizes="(max-width: 175px) 100vw, 175px" width="175" height="58">								</a>
+															</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-365dd2f" data-id="365dd2f" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-2a70a17 elementor-align-center callback5 elementor-widget elementor-widget-button" data-id="2a70a17" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="#" class="elementor-button-link elementor-button elementor-size-xs" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">Заказать</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+				<nav class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-36c6d9df" data-id="36c6d9df" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-539a7a3e elementor-nav-menu--stretch elementor-nav-menu__text-align-center elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="539a7a3e" data-element_type="widget" data-settings="{&quot;layout&quot;:&quot;dropdown&quot;,&quot;full_width&quot;:&quot;stretch&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;<i class=\&quot;fas fa-caret-down\&quot;><\/i>&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
+			<i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close eicon-close"></i>			<span class="elementor-screen-only">Menu</span>
+		</div>
+			<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" aria-hidden="true">
+				<ul id="menu-2-539a7a3e" class="elementor-nav-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5475"><a href="/" class="elementor-item menu-link" tabindex="-1">О компании</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-5474"><a href="#" class="elementor-item elementor-item-anchor menu-link" tabindex="-1">Наши услуги</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5485"><a href="https://www.harmony-cleaning.com/himchistka-kovrolina.html" class="elementor-sub-item menu-link" tabindex="-1">Химчистка ковролина</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5488"><a href="https://www.harmony-cleaning.com/himchistka-kovrov-na-domu.html" class="elementor-sub-item menu-link" tabindex="-1">Химчистка ковров на дому</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5489"><a href="https://www.harmony-cleaning.com/himchistka-mebeli.html" class="elementor-sub-item menu-link" tabindex="-1">Химчистка мягкой мебели</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5498"><a href="https://www.harmony-cleaning.com/udalim-zapah-suhim-tumanom.html" class="elementor-sub-item menu-link" tabindex="-1">Удаление запахов</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5487"><a href="https://www.harmony-cleaning.com/uborka-kvartir.html" class="elementor-sub-item menu-link" tabindex="-1">Уборка квартир</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5486"><a href="https://www.harmony-cleaning.com/moika-okon.html" class="elementor-sub-item menu-link" tabindex="-1">Мойка окон</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5634"><a href="https://www.harmony-cleaning.com/mramor.html" class="elementor-sub-item menu-link" tabindex="-1">Полировка мраморных полов</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7331"><a href="/sovety.html" class="elementor-item menu-link" tabindex="-1">Полезные советы</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5491"><a href="https://www.harmony-cleaning.com/price.html" class="elementor-item menu-link" tabindex="-1">Цены</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5484"><a href="https://www.harmony-cleaning.com/contact.html" class="elementor-item menu-link" tabindex="-1">Контакты</a></li>
+</ul>			</nav>
+				</div>
+				</div>
+					</div>
+		</nav>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+						</header>
+			<div id="content" class="site-content">
+		<div class="ast-container">
+		
+
+	<div id="primary" class="content-area primary">
+
+		
+					<main id="main" class="site-main">
+						<div data-elementor-type="single-page" data-elementor-id="5759" class="elementor elementor-5759 elementor-location-single post-7994 page type-page status-publish ast-article-single">
+								<main class="elementor-section elementor-top-section elementor-element elementor-element-4bd3a1d4 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="4bd3a1d4" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-3e5edb18" data-id="3e5edb18" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7838a627 elementor-widget elementor-widget-theme-post-content" data-id="7838a627" data-element_type="widget" data-widget_type="theme-post-content.default">
+				<div class="elementor-widget-container">
+			<h1>Политика в отношении обработки персональных данных</h1>
+<p><strong>1. Общие положения</strong><br>
+Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных» (далее — Закон о персональных данных) и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных,<br>
+предпринимаемые ИП Тимохин П.П. , действующий под коммерческим обозначением клининговая компания «Гармония-клининг» (далее – Оператор).<br>
+1.1. Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.<br>
+1.2. Настоящая политика Оператора в отношении обработки персональных данных (далее – Политика) применяется ко всей информации, которую Оператор может получить о посетителях веб-сайта https://www.harmony-cleaning.com.</p>
+<p>1.3. Этот сайт использует кэширование для ускорения отклика и улучшить взаимодействие с пользователем. Кэширование потенциально сохраняет дублирующую копию каждой страницы данного сайта. Все файлы кэша являются временными и никогда не доступны третьим лицам, за исключением случаев, когда это необходимо для получения технической поддержки от поставщика подключаемого модуля кэширования. Срок действия файлов кэша истекает по расписанию, установленному администратором сайта, но при необходимости администратор может легко удалять их до истечения срока действия. Мы можем использовать службы QUIC.cloud для временной обработки и кэширования ваших данных.</p>
+<p><strong>2. Основные понятия, используемые в Политике</strong><br>
+2.1. Автоматизированная обработка персональных данных – обработка персональных данных с помощью средств вычислительной техники.<br>
+2.2. Блокирование персональных данных – временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных).<br>
+2.3. Веб-сайт – совокупность графических и информационных материалов, а также программ для ЭВМ и баз данных, обеспечивающих их доступность в сети интернет по сетевому адресу https://www.harmony-cleaning.com.<br>
+2.4. Информационная система персональных данных — совокупность содержащихся в базах данных персональных данных, и обеспечивающих их обработку информационных технологий и технических средств.<br>
+2.5. Обезличивание персональных данных — действия, в результате которых невозможно определить без использования дополнительной информации принадлежность персональных данных конкретному Пользователю или иному субъекту персональных данных.<br>
+2.6. Обработка персональных данных – любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных.<br>
+2.7. Оператор – государственный орган, муниципальный орган, юридическое или физическое лицо, самостоятельно или совместно с другими лицами организующие и (или) осуществляющие обработку персональных данных, а также определяющие цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.<br>
+2.8. Персональные данные – любая информация, относящаяся прямо или косвенно к определенному или определяемому Пользователю веб-сайта https://www.harmony-cleaning.com.<br>
+2.9. Персональные данные, разрешенные субъектом персональных данных для распространения, — персональные данные, доступ неограниченного круга лиц к которым предоставлен субъектом персональных данных путем дачи согласия на обработку персональных данных, разрешенных субъектом персональных данных для распространения в порядке, предусмотренном Законом о персональных данных (далее — персональные данные, разрешенные для распространения).<br>
+2.10. Пользователь – любой посетитель веб-сайта https://www.harmony-cleaning.com.<br>
+2.11. Предоставление персональных данных – действия, направленные на раскрытие персональных данных определенному лицу или определенному кругу лиц.<br>
+2.12. Распространение персональных данных – любые действия, направленные на раскрытие персональных данных неопределенному кругу лиц (передача персональных данных) или на ознакомление с персональными данными неограниченного круга лиц, в том числе обнародование персональных данных в средствах массовой информации, размещение в информационно-телекоммуникационных сетях или предоставление доступа к персональным данным каким-либо иным способом.<br>
+2.13. Трансграничная передача персональных данных – передача персональных данных на территорию иностранного государства органу власти иностранного государства, иностранному физическому или иностранному юридическому лицу.</p>
+<p>2.14. Уничтожение персональных данных – любые действия, в результате которых персональные данные уничтожаются безвозвратно с невозможностью дальнейшего восстановления содержания персональных данных в информационной системе персональных данных и (или) уничтожаются материальные носители персональных данных.</p>
+<p><strong>3. Основные права и обязанности Оператора</strong><br>
+3.1. Оператор имеет право:<br>
+– получать от субъекта персональных данных достоверные информацию и/или документы, содержащие персональные данные;<br>
+– в случае отзыва субъектом персональных данных согласия на обработку персональных данных Оператор вправе продолжить обработку персональных данных без согласия субъекта персональных данных при наличии оснований, указанных в Законе о персональных данных;<br>
+– самостоятельно определять состав и перечень мер, необходимых и достаточных для обеспечения выполнения обязанностей, предусмотренных Законом о персональных данных и принятыми в соответствии с ним нормативными правовыми актами, если иное не предусмотрено Законом о персональных данных или другими федеральными законами.<br>
+3.2. Оператор обязан:<br>
+– предоставлять субъекту персональных данных по его просьбе информацию, касающуюся обработки его персональных данных;<br>
+– организовывать обработку персональных данных в порядке, установленном действующим законодательством РФ;<br>
+– отвечать на обращения и запросы субъектов персональных данных и их законных представителей в соответствии с требованиями Закона о персональных данных;<br>
+– сообщать в уполномоченный орган по защите прав субъектов персональных данных по запросу этого органа необходимую информацию в течение 30 дней с даты получения такого запроса;<br>
+– публиковать или иным образом обеспечивать неограниченный доступ к настоящей Политике в отношении обработки персональных данных;<br>
+– принимать правовые, организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа к ним, уничтожения, изменения, блокирования, копирования, предоставления, распространения персональных данных, а также от иных неправомерных действий в отношении персональных данных;<br>
+– прекратить передачу (распространение, предоставление, доступ) персональных данных, прекратить обработку и уничтожить персональные данные в порядке и случаях, предусмотренных Законом о персональных данных;</p>
+<p>– исполнять иные обязанности, предусмотренные Законом о персональных данных.</p>
+<p><strong>4. Основные права и обязанности субъектов персональных данных</strong><br>
+4.1. Субъекты персональных данных имеют право:<br>
+– получать информацию, касающуюся обработки его персональных данных, за исключением случаев, предусмотренных федеральными законами. Сведения предоставляются субъекту персональных данных Оператором в доступной форме, и в них не должны содержаться персональные данные, относящиеся к другим субъектам персональных данных, за исключением случаев, когда имеются законные основания для раскрытия таких персональных данных. Перечень информации и порядок ее получения установлен Законом о персональных данных;<br>
+– требовать от оператора уточнения его персональных данных, их блокирования или уничтожения в случае, если персональные данные являются неполными, устаревшими, неточными, незаконно полученными или не являются необходимыми для заявленной цели обработки, а также принимать предусмотренные законом меры по защите своих прав;<br>
+– выдвигать условие предварительного согласия при обработке персональных данных в целях продвижения на рынке товаров, работ и услуг;<br>
+– на отзыв согласия на обработку персональных данных;<br>
+– обжаловать в уполномоченный орган по защите прав субъектов персональных данных или в судебном порядке неправомерные действия или бездействие Оператора при обработке его персональных данных;<br>
+– на осуществление иных прав, предусмотренных законодательством РФ.<br>
+4.2. Субъекты персональных данных обязаны:<br>
+– предоставлять Оператору достоверные данные о себе;<br>
+– сообщать Оператору об уточнении (обновлении, изменении) своих персональных данных.</p>
+<p>4.3. Лица, передавшие Оператору недостоверные сведения о себе, либо сведения о другом субъекте персональных данных без согласия последнего, несут ответственность в соответствии с законодательством РФ.</p>
+<p><strong>5. Оператор может обрабатывать следующие персональные данные Пользователя</strong><br>
+5.1. Фамилия, имя, отчество.<br>
+5.2. Электронный адрес.<br>
+5.3. Номера телефонов.<br>
+5.4. Также на сайте происходит сбор и обработка обезличенных данных о посетителях (в т.ч. файлов «cookie») с помощью сервисов интернет-статистики (Яндекс Метрика и Гугл Аналитика и других).<br>
+5.5. Вышеперечисленные данные далее по тексту Политики объединены общим понятием Персональные данные.<br>
+5.6. Обработка специальных категорий персональных данных, касающихся расовой, национальной принадлежности, политических взглядов, религиозных или философских убеждений, интимной жизни, Оператором не осуществляется.<br>
+5.7. Обработка персональных данных, разрешенных для распространения, из числа специальных категорий персональных данных, указанных в ч. 1 ст. 10 Закона о персональных данных, допускается, если соблюдаются запреты и условия, предусмотренные ст. 10.1 Закона о персональных данных.<br>
+5.8. Согласие Пользователя на обработку персональных данных, разрешенных для распространения, оформляется отдельно от других согласий на обработку его персональных данных. При этом соблюдаются условия, предусмотренные, в частности, ст. 10.1 Закона о персональных данных. Требования к содержанию такого согласия устанавливаются уполномоченным органом по защите прав субъектов персональных данных.<br>
+5.8.1 Согласие на обработку персональных данных, разрешенных для распространения, Пользователь предоставляет Оператору непосредственно.<br>
+5.8.2 Оператор обязан в срок не позднее трех рабочих дней с момента получения указанного согласия Пользователя опубликовать информацию об условиях обработки, о наличии запретов и условий на обработку неограниченным кругом лиц персональных данных, разрешенных для распространения.<br>
+5.8.3 Передача (распространение, предоставление, доступ) персональных данных, разрешенных субъектом персональных данных для распространения, должна быть прекращена в любое время по требованию субъекта персональных данных. Данное требование должно включать в себя фамилию, имя, отчество (при наличии), контактную информацию (номер телефона, адрес электронной почты или почтовый адрес) субъекта персональных данных, а также перечень персональных данных, обработка которых подлежит прекращению. Указанные в данном требовании персональные данные могут обрабатываться только Оператором, которому оно направлено.</p>
+<p>5.8.4 Согласие на обработку персональных данных, разрешенных для распространения, прекращает свое действие с момента поступления Оператору требования, указанного в п. 5.8.3 настоящей Политики в отношении обработки персональных данных.</p>
+<p><strong>6. Принципы обработки персональных данных</strong><br>
+6.1. Обработка персональных данных осуществляется на законной и справедливой основе.<br>
+6.2. Обработка персональных данных ограничивается достижением конкретных, заранее определенных и законных целей. Не допускается обработка персональных данных, несовместимая с целями сбора персональных данных.<br>
+6.3. Не допускается объединение баз данных, содержащих персональные данные, обработка которых осуществляется в целях, несовместимых между собой.<br>
+6.4. Обработке подлежат только персональные данные, которые отвечают целям их обработки.<br>
+6.5. Содержание и объем обрабатываемых персональных данных соответствуют заявленным целям обработки. Не допускается избыточность обрабатываемых персональных данных по отношению к заявленным целям их обработки.<br>
+6.6. При обработке персональных данных обеспечивается точность персональных данных, их достаточность, а в необходимых случаях и актуальность по отношению к целям обработки персональных данных. Оператор принимает необходимые меры и/или обеспечивает их принятие по удалению или уточнению неполных или неточных данных.</p>
+<p>6.7. Хранение персональных данных осуществляется в форме, позволяющей определить субъекта персональных данных, не дольше, чем этого требуют цели обработки персональных данных, если срок хранения персональных данных не установлен федеральным законом, договором, стороной которого, выгодоприобретателем или поручителем по которому является субъект персональных данных. Обрабатываемые персональные данные уничтожаются либо обезличиваются по достижении целей обработки или в случае утраты необходимости в достижении этих целей, если иное не предусмотрено федеральным законом.</p>
+<p><strong>7. Цели обработки персональных данных</strong><br>
+7.1. Цель обработки персональных данных Пользователя:<br>
+– информирование Пользователя посредством отправки электронных писем;<br>
+– заключение, исполнение и прекращение гражданско-правовых договоров;<br>
+– предоставление доступа Пользователю к сервисам, информации и/или материалам, содержащимся на веб-сайте https://www.harmony-cleaning.com.<br>
+7.2. Также Оператор имеет право направлять Пользователю уведомления о новых продуктах и услугах, специальных предложениях и различных событиях. Пользователь всегда может отказаться от получения информационных сообщений, направив Оператору письмо на адрес электронной почты harmony-cleaning@yandex.ru с пометкой «Отказ от уведомлений о новых продуктах и услугах и специальных предложениях».</p>
+<p>7.3. Обезличенные данные Пользователей, собираемые с помощью сервисов интернет-статистики, служат для сбора информации о действиях Пользователей на сайте, улучшения качества сайта и его содержания.</p>
+<p><strong>8. Правовые основания обработки персональных данных</strong><br>
+8.1. Правовыми основаниями обработки персональных данных Оператором являются:<br>
+– договоры, заключаемые между оператором и субъектом персональных данных;<br>
+– федеральные законы, иные нормативно-правовые акты в сфере защиты персональных данных;<br>
+– согласия Пользователей на обработку их персональных данных, на обработку персональных данных, разрешенных для распространения.<br>
+8.2. Оператор обрабатывает персональные данные Пользователя только в случае их заполнения и/или отправки Пользователем самостоятельно через специальные формы, расположенные на сайте https://www.harmony-cleaning.com или направленные Оператору посредством электронной почты. Заполняя соответствующие формы и/или отправляя свои персональные данные Оператору, Пользователь выражает свое согласие с данной Политикой.<br>
+8.3. Оператор обрабатывает обезличенные данные о Пользователе в случае, если это разрешено в настройках браузера Пользователя (включено сохранение файлов «cookie» и использование технологии JavaScript).</p>
+<p>8.4. Субъект персональных данных самостоятельно принимает решение о предоставлении его персональных данных и дает согласие свободно, своей волей и в своем интересе.</p>
+<p><strong>9. Условия обработки персональных данных</strong><br>
+9.1. Обработка персональных данных осуществляется с согласия субъекта персональных данных на обработку его персональных данных.<br>
+9.2. Обработка персональных данных необходима для достижения целей, предусмотренных международным договором Российской Федерации или законом, для осуществления возложенных законодательством Российской Федерации на оператора функций, полномочий и обязанностей.<br>
+9.3. Обработка персональных данных необходима для осуществления правосудия, исполнения судебного акта, акта другого органа или должностного лица, подлежащих исполнению в соответствии с законодательством Российской Федерации об исполнительном производстве.<br>
+9.4. Обработка персональных данных необходима для исполнения договора, стороной которого либо выгодоприобретателем или поручителем по которому является субъект персональных данных, а также для заключения договора по инициативе субъекта персональных данных или договора, по которому субъект персональных данных будет являться выгодоприобретателем или поручителем.<br>
+9.5. Обработка персональных данных необходима для осуществления прав и законных интересов оператора или третьих лиц либо для достижения общественно значимых целей при условии, что при этом не нарушаются права и свободы субъекта персональных данных.<br>
+9.6. Осуществляется обработка персональных данных, доступ неограниченного круга лиц к которым предоставлен субъектом персональных данных либо по его просьбе (далее – общедоступные персональные данные).</p>
+<p>9.7. Осуществляется обработка персональных данных, подлежащих опубликованию или обязательному раскрытию в соответствии с федеральным законом.</p>
+<p><strong>10. Порядок сбора, хранения, передачи и других видов обработки персональных данных</strong><br>
+Безопасность персональных данных, которые обрабатываются Оператором, обеспечивается путем реализации правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований действующего законодательства в области защиты персональных данных.<br>
+10.1. Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.<br>
+10.2. Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства либо в случае, если субъектом персональных данных дано согласие Оператору на передачу данных третьему лицу для исполнения обязательств по гражданско-правовому договору.<br>
+10.3. В случае выявления неточностей в персональных данных, Пользователь может актуализировать их самостоятельно, путем направления Оператору уведомление на адрес электронной почты Оператора harmony-cleaning@yandex.ru с пометкой «Актуализация персональных данных».<br>
+10.4. Срок обработки персональных данных определяется достижением целей, для которых были собраны персональные данные, если иной срок не предусмотрен договором или действующим законодательством.<br>
+Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора harmony-cleaning@yandex.ru с пометкой «Отзыв согласия на обработку персональных данных».<br>
+10.5. Вся информация, которая собирается сторонними сервисами, в том числе платежными системами, средствами связи и другими поставщиками услуг, хранится и обрабатывается указанными лицами (Операторами) в соответствии с их Пользовательским соглашением и Политикой конфиденциальности. Субъект персональных данных и/или Пользователь обязан самостоятельно своевременно ознакомиться с указанными документами. Оператор не несет ответственность за действия третьих лиц, в том числе указанных в настоящем пункте поставщиков услуг.<br>
+10.6. Установленные субъектом персональных данных запреты на передачу (кроме предоставления доступа), а также на обработку или условия обработки (кроме получения доступа) персональных данных, разрешенных для распространения, не действуют в случаях обработки персональных данных в государственных, общественных и иных публичных интересах, определенных законодательством РФ.<br>
+10.7. Оператор при обработке персональных данных обеспечивает конфиденциальность персональных данных.<br>
+10.8. Оператор осуществляет хранение персональных данных в форме, позволяющей определить субъекта персональных данных, не дольше, чем этого требуют цели обработки персональных данных, если срок хранения персональных данных не установлен федеральным законом, договором, стороной которого, выгодоприобретателем или поручителем по которому является субъект персональных данных.</p>
+<p>10.9. Условием прекращения обработки персональных данных может являться достижение целей обработки персональных данных, истечение срока действия согласия субъекта персональных данных или отзыв согласия субъектом персональных данных, а также выявление неправомерной обработки персональных данных.</p>
+<p><strong>11. Перечень действий, производимых Оператором с полученными персональными данными</strong><br>
+11.1. Оператор осуществляет сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление и уничтожение персональных данных.</p>
+<p>11.2. Оператор осуществляет автоматизированную обработку персональных данных с получением и/или передачей полученной информации по информационно-телекоммуникационным сетям или без таковой.</p>
+<p><strong>12. Трансграничная передача персональных данных</strong><br>
+12.1. Оператор до начала осуществления трансграничной передачи персональных данных обязан убедиться в том, что иностранным государством, на территорию которого предполагается осуществлять передачу персональных данных, обеспечивается надежная защита прав субъектов персональных данных.</p>
+<p>12.2. Трансграничная передача персональных данных на территории иностранных государств, не отвечающих вышеуказанным требованиям, может осуществляться только в случае наличия согласия в письменной форме субъекта персональных данных на трансграничную передачу его персональных данных и/или исполнения договора, стороной которого является субъект персональных данных.</p>
+<p><strong>13. Конфиденциальность персональных данных</strong></p>
+<p>Оператор и иные лица, получившие доступ к персональным данным, обязаны не раскрывать третьим лицам и не распространять персональные данные без согласия субъекта персональных данных, если иное не предусмотрено федеральным законом.</p>
+<p><strong>14. Заключительные положения</strong><br>
+14.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты harmony-cleaning@yandex.ru.<br>
+14.2. В данном документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены ее новой версией.<br>
+14.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу https://www.harmony-cleaning.com/politika-konfidencialnosti.html.</p>
+<p>Обновлено «11» февраля 2023 г.</p>
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</main>
+						</div>
+					</main>
+			
+		
+	</div>
+
+
+	</div> 
+	</div>
+		<footer data-elementor-type="footer" data-elementor-id="8077" class="elementor elementor-8077 elementor-location-footer">
+								<section class="elementor-section elementor-top-section elementor-element elementor-element-279f7760 elementor-section-full_width elementor-section-content-middle elementor-section-height-default elementor-section-height-default" data-id="279f7760" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-3e8487dc" data-id="3e8487dc" data-element_type="column">
+			<div class="elementor-widget-wrap">
+									</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-38e883c elementor-section-full_width elementor-section-height-min-height elementor-section-height-default elementor-section-items-middle" data-id="38e883c" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;shape_divider_bottom&quot;:&quot;tilt&quot;,&quot;shape_divider_top&quot;:&quot;tilt&quot;}">
+					<div class="elementor-shape elementor-shape-top" data-negative="false">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+	<path class="elementor-shape-fill" d="M0,6V0h1000v100L0,6z"></path>
+</svg>		</div>
+				<div class="elementor-shape elementor-shape-bottom" data-negative="false">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+	<path class="elementor-shape-fill" d="M0,6V0h1000v100L0,6z"></path>
+</svg>		</div>
+					<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-103e0bf4" data-id="103e0bf4" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<section class="elementor-section elementor-inner-section elementor-element elementor-element-63c4a3b elementor-section-height-min-height elementor-section-boxed elementor-section-height-default" data-id="63c4a3b" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-562a17e6" data-id="562a17e6" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7a2066e0 elementor-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="7a2066e0" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-phone"></i>						</span>
+										<span class="elementor-icon-list-text"><a href="tel:+74991159351">+7 (499) 115-93-51</a></span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-phone"></i>						</span>
+										<span class="elementor-icon-list-text"> <a href="tel:+79165975476">+7 (916) 597-54-76</a></span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-763e0f8e" data-id="763e0f8e" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-52ee0d02 elementor-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="52ee0d02" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-clock"></i>						</span>
+										<span class="elementor-icon-list-text">Часы работы: 9.00 — 21.00</span>
+									</li>
+								<li class="elementor-icon-list-item">
+										<span class="elementor-icon-list-text"> г. Москва, ул. Мосфильмовская д.17б</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-9e6e5bb" data-id="9e6e5bb" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-136aa98 elementor-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="136aa98" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="https://www.harmony-cleaning.com/politika-konfidencialnosti.html">
+
+											<span class="elementor-icon-list-text">Политика конфиденциальности</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://www.harmony-cleaning.com/oferta.html">
+
+												<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-handshake"></i>						</span>
+										<span class="elementor-icon-list-text">Договор публичной оферты</span>
+											</a>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-539e0e04" data-id="539e0e04" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-7173db5e elementor-align-center elementor-tablet-align-left elementor-mobile-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="7173db5e" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-envelope"></i>						</span>
+										<span class="elementor-icon-list-text"><a href="mailto:harmony-cleaning@yandex.ru">harmony-cleaning@yandex.ru</a></span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-4a5caccd elementor-section-height-min-height elementor-section-boxed elementor-section-height-default" data-id="4a5caccd" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-742b0ece" data-id="742b0ece" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-10498dbd elementor-widget elementor-widget-tp-circle-menu" data-id="10498dbd" data-element_type="widget" data-widget_type="tp-circle-menu.default">
+				<div class="elementor-widget-container">
+			<div class="plus-circle-menu-wrapper circle_menu63ecfc0ab2049 layout-straight   " data-uid="circle_menu63ecfc0ab2049"><div class="plus-circle-menu-inner-wrapper "><ul class="plus-circle-menu circleMenu-closed circle_menu_position_fix menu-direction-top menu-style-1   "><li class="plus-circle-main-menu-list plus-circle-menu-list style-3"><a class="main_menu_icon " style="cursor:pointer;"><img src="https://www.harmony-cleaning.com/wp-content/uploads/whatsapptel.jpg" class="toggle-icon-wrap" alt="" decoding="async" loading="lazy" width="65" height="65"><span class="close-toggle-icon"></span></a></li><li class="plus-circle-menu-list elementor-repeater-item-35fd696 arrow-left tooltip-default-show"><a href="https://api.whatsapp.com/send?phone=79031985556" class="menu_icon "><img src="https://www.harmony-cleaning.com/wp-content/uploads/whatsapp.jpg" class="img" alt="" decoding="async" loading="lazy" width="70" height="70"><span class="menu-tooltip-title ">Написать и отправить фото</span></a></li><li class="plus-circle-menu-list elementor-repeater-item-91314c2 arrow-left tooltip-default-show"><a href="tel:79165975476" class="menu_icon "><img src="https://www.harmony-cleaning.com/wp-content/uploads/tel22.jpg" class="img" alt="" decoding="async" loading="lazy" width="72" height="70"><span class="menu-tooltip-title ">Позвонить</span></a></li></ul></div></div><style>.circle_menu63ecfc0ab2049 .plus-circle-menu{margin: 0 auto !important;margin-top:auto !important;bottom:3%;left:5%;right:auto;}.circle_menu63ecfc0ab2049 .plus-circle-menu{top: auto;}.circle_menu63ecfc0ab2049.plus-circle-menu-wrapper.layout-straight .plus-circle-menu.circleMenu-open.menu-direction-top .plus-circle-menu-list:not(.plus-circle-main-menu-list):nth-child(2), .circle_menu63ecfc0ab2049.plus-circle-menu-wrapper.layout-straight .plus-circle-menu.circleMenu-open.menu-direction-top .plus-circle-menu-list:not(.plus-circle-main-menu-list):nth-child(2){
+												bottom: 125px;
+											}.circle_menu63ecfc0ab2049.plus-circle-menu-wrapper.layout-straight .plus-circle-menu.circleMenu-open.menu-direction-top .plus-circle-menu-list:not(.plus-circle-main-menu-list):nth-child(3), .circle_menu63ecfc0ab2049.plus-circle-menu-wrapper.layout-straight .plus-circle-menu.circleMenu-open.menu-direction-top .plus-circle-menu-list:not(.plus-circle-main-menu-list):nth-child(3){
+												bottom: 250px;
+											}</style>		</div>
+				</div>
+				<div class="elementor-element elementor-element-5188b784 elementor-widget elementor-widget-text-editor" data-id="5188b784" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Copyright © 2017-2023 «Гармония-клининг»</p>						</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+						</footer>
+			</div>
+
+<div id="ast-scroll-top" class="ast-scroll-top-icon ast-scroll-to-top-right" data-on-devices="both">
+		<span class="screen-reader-text">Прокрутить вверх</span>
+</div>
+<div id="ast-scroll-top" class="ast-scroll-top-icon ast-scroll-to-top-right" data-on-devices="both">
+	<span class="ast-icon icon-arrow"></span>	<span class="screen-reader-text">Прокрутить наверх</span>
+</div>
+<script id="astra-theme-js-js-extra">
+var astra = {"break_point":"921","isRtl":"","is_scroll_to_id":"","is_scroll_to_top":"1"};
+</script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/themes/astra/assets/js/minified/style.min.js?ver=4.0.2" id="astra-theme-js-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2" id="jquery-ui-core-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/jquery/ui/mouse.min.js?ver=1.13.2" id="jquery-ui-mouse-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/jquery/ui/slider.min.js?ver=1.13.2" id="jquery-ui-slider-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="//www.harmony-cleaning.com/wp-content/uploads/theplus-addons/theplus-post-7994.min.js?ver=5.1.3" id="theplus-front-js-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/jquery/ui/draggable.min.js?ver=1.13.2" id="jquery-ui-draggable-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://www.harmony-cleaning.com/wp-content/cache/min/1/wp-includes/js/jquery/jquery.ui.touch-punch.js?ver=1676474967" id="jquery-touch-punch-js" defer=""></script>
+<script id="astra-addon-js-js-extra">
+var astraAddon = {"sticky_active":"","svgIconClose":"<span class=\"ast-icon icon-close\"><\/span>","is_header_builder_active":""};
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-src="https://www.harmony-cleaning.com/wp-content/cache/min/1/wp-content/uploads/astra-addon/astra-addon-63e26b3be573d0-47101133.js?ver=1676474967" id="astra-addon-js-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.0.1" id="smartmenus-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.9.0" id="elementor-pro-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.9.1" id="elementor-webpack-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.9.1" id="elementor-frontend-modules-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9" id="regenerator-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" id="wp-polyfill-js"></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/dist/hooks.min.js?ver=4169d3cf8e8d95a3d6d5" id="wp-hooks-js"></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-includes/js/dist/i18n.min.js?ver=9e794f35a71bb98672ae" id="wp-i18n-js"></script>
+<script type="rocketlazyloadscript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type="rocketlazyloadscript" id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/www.harmony-cleaning.com\/wp-admin\/admin-ajax.php","nonce":"fc68d5f229","urls":{"assets":"https:\/\/www.harmony-cleaning.com\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/www.harmony-cleaning.com\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},
+"facebook_sdk":{"lang":"ru_RU","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/www.harmony-cleaning.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.9.0" id="elementor-pro-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2" id="elementor-waypoints-js" defer=""></script>
+<script type="rocketlazyloadscript" id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u0432 Facebook","shareOnTwitter":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f \u0432 Twitter","pinIt":"\u0417\u0430\u043f\u0438\u043d\u0438\u0442\u044c","download":"\u0421\u043a\u0430\u0447\u0430\u0442\u044c","downloadImage":"\u0421\u043a\u0430\u0447\u0430\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435","fullscreen":"\u0412\u043e \u0432\u0435\u0441\u044c \u044d\u043a\u0440\u0430\u043d","zoom":"\u0423\u0432\u0435\u043b\u0438\u0447\u0435\u043d\u0438\u0435","share":"\u041f\u043e\u0434\u0435\u043b\u0438\u0442\u044c\u0441\u044f","playVideo":"\u041f\u0440\u043e\u0438\u0433\u0440\u0430\u0442\u044c \u0432\u0438\u0434\u0435\u043e","previous":"\u041d\u0430\u0437\u0430\u0434","next":"\u0414\u0430\u043b\u0435\u0435","close":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"\u0422\u0435\u043b\u0435\u0444\u043e\u043d","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"\u0422\u0435\u043b\u0435\u0444\u043e\u043d \u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0435","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"\u041f\u043b\u0430\u043d\u0448\u0435\u0442","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"\u041f\u043b\u0430\u043d\u0448\u0435\u0442 \u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0435","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"\u041d\u043e\u0443\u0442\u0431\u0443\u043a","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"\u0428\u0438\u0440\u043e\u043a\u043e\u0444\u043e\u0440\u043c\u0430\u0442\u043d\u044b\u0435","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},
+"version":"3.9.1","is_static":false,"experimentalFeatures":{"e_dom_optimization":true,"e_optimized_assets_loading":true,"a11y_improvements":true,"additional_custom_breakpoints":true,"e_hidden_wordpress_widgets":true,"theme_builder_v2":true},"urls":{"assets":"https:\/\/www.harmony-cleaning.com\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"body_background_background":"gradient","active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_zoom":"yes"},"post":{"id":7994,"title":"%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20-%20%C2%AB%D0%93%D0%B0%D1%80%D0%BC%D0%BE%D0%BD%D0%B8%D1%8F-%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D0%B3%C2%BB","excerpt":"","featuredImage":false}};
+</script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.9.1" id="elementor-frontend-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=3.9.0" id="pro-elements-handlers-js" defer=""></script>
+<script type="rocketlazyloadscript" data-rocket-src="https://www.harmony-cleaning.com/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min.js?ver=3.9.0" id="e-sticky-js" defer=""></script>
+			<script type="rocketlazyloadscript">
+			/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+			</script>
+			<script type="rocketlazyloadscript" data-no-optimize="1">
+( function () {
+                var loadedTLAnalytics = false,                    
+                    timerId;
+if ( navigator.userAgent.indexOf( 'YandexMetrika' ) > -1 ) {
+                    loadTLAnalytics();
+                } else {
+                window.addEventListener( 'scroll', loadTLAnalytics, {passive: true} );
+                window.addEventListener( 'touchstart', loadTLAnalytics, {passive: true} );
+                document.addEventListener( 'mouseenter', loadTLAnalytics, {passive: true} );
+                document.addEventListener( 'click', loadTLAnalytics, {passive: true} );
+                document.addEventListener( 'DOMContentLoaded', loadFallback, {passive: true} );
+		}
+
+                function loadFallback() {
+                    timerId = setTimeout( loadTLAnalytics, 5000 );
+                }
+
+                function loadTLAnalytics( e ) {
+
+                    if ( e && e.type ) {
+                        console.log( e.type );
+                    } else {
+                        console.log( 'DOMContentLoaded' );
+                    }
+
+                    if ( loadedTLAnalytics ) {
+                        return;
+                    }
+
+                    setTimeout(
+                        function () {
+				
+var analyticsId = "G-BLM8MZSXP2";
+var a = document.createElement("script");
+function e() {
+    dataLayer.push(arguments);
+}
+(a.src = "https://www.googletagmanager.com/gtag/js?id=" + analyticsId),
+(a.async = !0),
+document.getElementsByTagName("head")[0].appendChild(a),
+    (window.dataLayer = window.dataLayer || []),
+    e("js", new Date()),
+    e("config", analyticsId),
+    console.log("gtag start");
+var metricaId = 25806263;(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym");
+                            ym( metricaId, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, triggerEvent:true });
+console.log("ym start");},
+                        100
+                    );
+
+                    loadedTLAnalytics = true;
+                    clearTimeout( timerId );
+                    window.removeEventListener( 'scroll', loadTLAnalytics, {passive: true}  );
+                    window.removeEventListener( 'touchstart', loadTLAnalytics, {passive: true}  );
+                    document.removeEventListener( 'mouseenter', loadTLAnalytics );
+                    document.removeEventListener( 'click', loadTLAnalytics );
+                    document.removeEventListener( 'DOMContentLoaded', loadFallback );
+                }
+            } )()
+</script>
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="/js/jquery.jbform.js" defer=""></script>
+
+<link rel="stylesheet" type="text/css" href="/css/blue.jquery.jbform.css"> 
+
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="/js/jquery.maskedinput.js" defer=""></script> 	
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {jQuery(document).ready(function($){$('.zayvka,.callback5').jbform({key:"dd3226d36ac784fb7f4df61534f6cdab",title:"📌&nbsp;&nbsp;Оформить заявку",success:"Спасибо. Мы перезвоним Вам для уточнений деталей заказа.",copyright:false,postfix:"product_order_normal",fields:{name:{type:"text",required:true,placeholder:"* Ваше имя"},tel:{type:"tel",required:true,placeholder:"* Ваш номер телефона"},select_2:{type:"select",label:"Выберите услугу",options:["Химчистка мебели","Химчистка ковролина в офисе","Уборка квартиры","Химчистка ковров на дому","Мойка окон","Устранение запахов сухим туманом"]},descr:{type:"textarea",label:"Дополнительная информация:"},agreement_2:{type:"checkbox",label:"Я согласен с <a href='/politika-konfidencialnosti.html' target='_blank'>политикой конфиденциальности</a>",checked:true,value:"Да",required:true},submit:{type:"submit",value:"Отправить заявку"}},onShow:function(){$('#jbForm_product_order_normal [name=tel]').mask('+7 (999) 999-99-99')}})});});</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {jQuery(document).ready(function($){$('.callback').jbform({key:"8932c55af092d2e1ad17960027c19a75",title:" Заказ обратного звонка.",copyright:false,success:"Спасибо. Мы свяжемся с Вами в указанное время",postfix:"call_me_maxi",fields:{name:{type:"text",required:true,placeholder:"Ваше имя:"},tel:{type:"tel",required:true,placeholder:"Ваш номер телефона:"},time:{type:"text",label:"Удобное для звонка время",placeholder:"В течении 5 мин."},descr:{type:"textarea",label:"Дополнительная информация"},agreement_2:{type:"checkbox",label:"Я согласен с <a href='/politika-konfidencialnosti.html' target='_blank'>политикой конфиденциальности</a>",checked:true,value:"Да",required:true},submit:{type:"submit",value:"Перезвоните мне"}},onShow:function(){$('#jbForm_call_me_maxi [name=tel]').mask('+7 (999) 999-99-99')}})});});</script>		
+	<script>class RocketElementorAnimation{constructor(){this.deviceMode=document.createElement("span"),this.deviceMode.id="elementor-device-mode",this.deviceMode.setAttribute("class","elementor-screen-only"),document.body.appendChild(this.deviceMode)}_detectAnimations(){let t=getComputedStyle(this.deviceMode,":after").content.replace(/"/g,"");this.animationSettingKeys=this._listAnimationSettingsKeys(t),document.querySelectorAll(".elementor-invisible[data-settings]").forEach(t=>{const e=t.getBoundingClientRect();if(e.bottom>=0&&e.top<=window.innerHeight)try{this._animateElement(t)}catch(t){}})}_animateElement(t){const e=JSON.parse(t.dataset.settings),i=e._animation_delay||e.animation_delay||0,n=e[this.animationSettingKeys.find(t=>e[t])];if("none"===n)return void t.classList.remove("elementor-invisible");t.classList.remove(n),this.currentAnimation&&t.classList.remove(this.currentAnimation),this.currentAnimation=n;let s=setTimeout(()=>{t.classList.remove("elementor-invisible"),t.classList.add("animated",n),this._removeAnimationSettings(t,e)},i);window.addEventListener("rocket-startLoading",function(){clearTimeout(s)})}_listAnimationSettingsKeys(t="mobile"){const e=[""];switch(t){case"mobile":e.unshift("_mobile");case"tablet":e.unshift("_tablet");case"desktop":e.unshift("_desktop")}const i=[];return["animation","_animation"].forEach(t=>{e.forEach(e=>{i.push(t+e)})}),i}_removeAnimationSettings(t,e){this._listAnimationSettingsKeys().forEach(t=>delete e[t]),t.dataset.settings=JSON.stringify(e)}static run(){const t=new RocketElementorAnimation;requestAnimationFrame(t._detectAnimations.bind(t))}}document.addEventListener("DOMContentLoaded",RocketElementorAnimation.run);</script>
+
+
+<span id="elementor-device-mode" class="elementor-screen-only"></span></body></html>

@@ -1,0 +1,836 @@
+<html class=" webkit chrome mac js" lang="ru-RU"><head><meta charset="UTF-8"><script type="text/javascript" async="" src="https://mc.yandex.ru/metrika/watch.js"></script><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+	
+	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	
+
+		<link rel="shortcut icon" href="//dverigrad-spb.ru/wp-content/themes/porto-child/images/logo/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="//dverigrad-spb.ru/wp-content/themes/porto-child/images/logo/apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="//dverigrad-spb.ru/wp-content/themes/porto-child/images/logo/apple-touch-icon_120x120.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="//dverigrad-spb.ru/wp-content/themes/porto-child/images/logo/apple-touch-icon_76x76.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="//dverigrad-spb.ru/wp-content/themes/porto-child/images/logo/apple-touch-icon_152x152.png">
+					<script type="rocketlazyloadscript">document.documentElement.className = document.documentElement.className + ' yes-js js_active js'</script>
+				
+<link rel="preload" as="font" href="https://dverigrad-spb.ru/wp-content/themes/porto/fonts/porto-font/porto.woff2" crossorigin="">
+<link rel="preload" as="font" href="https://dverigrad-spb.ru/wp-content/uploads/redux/custom-fonts/custom/Oswald-light/Oswald-light.woff2" crossorigin="">
+<link rel="preload" as="font" href="https://dverigrad-spb.ru/wp-content/uploads/redux/custom-fonts/custom/Oswald-regular/Oswald-regular.woff2" crossorigin="">
+<link rel="preload" as="font" href="https://dverigrad-spb.ru/wp-content/uploads/redux/custom-fonts/custom/Open-sans-light/Open-sans-light.woff2" crossorigin="">
+<link rel="preload" as="font" href="https://dverigrad-spb.ru/wp-content/uploads/redux/custom-fonts/custom/Open-sans-regular/Open-sans-regular.woff2" crossorigin="">
+<link rel="preload" as="font" href="https://dverigrad-spb.ru/wp-content/uploads/redux/custom-fonts/custom/Open-sans-bold/Open-sans-bold.woff2" crossorigin=""><meta name="robots" content="noindex, follow">
+
+	
+	<title>Политика конфиденциальности - ПКФ «ГРАД»</title>
+	<meta property="og:locale" content="ru_RU">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Политика конфиденциальности - ПКФ «ГРАД»">
+	<meta property="og:description" content="Политика Конфиденциальности Владелец сайта dverigrad-spb.ru (далее ПКФ «Град» или Администрация) обязуется сохранять Вашу конфиденциальность в сети Интернет. Настоящая Политика Конфиденциальности, рассказывает о том, как собираются, обрабатываются и хранятся Ваши личные данные. Администрация уделяет большое внимание защите личной информации пользователей. Пользуюсь сайтом ПКФ «Град», пользователь тем самым дает согласие на применение правил сбора и использования данных, […]">
+	<meta property="og:url" content="https://dverigrad-spb.ru/politika-konfidencialnosti/">
+	<meta property="og:site_name" content="ПКФ «ГРАД»">
+	<meta name="twitter:card" content="summary_large_image">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dverigrad-spb.ru/#organization","name":"ПКФ «ГРАД»","url":"https://dverigrad-spb.ru/","sameAs":[],"logo":{"@type":"ImageObject","@id":"https://dverigrad-spb.ru/#logo","inLanguage":"ru-RU","url":"https://dverigrad-spb.ru/wp-content/uploads/2018/06/logo.png","contentUrl":"https://dverigrad-spb.ru/wp-content/uploads/2018/06/logo.png","width":200,"height":43,"caption":"ПКФ «ГРАД»"},"image":{"@id":"https://dverigrad-spb.ru/#logo"}},{"@type":"WebSite","@id":"https://dverigrad-spb.ru/#website","url":"https://dverigrad-spb.ru/","name":"ПКФ «ГРАД»","description":"Входные двери от производителя. Бесплатная установка и доставка в СПб.","publisher":{"@id":"https://dverigrad-spb.ru/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://dverigrad-spb.ru/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"ru-RU"},{"@type":"WebPage","@id":"https://dverigrad-spb.ru/politika-konfidencialnosti/#webpage","url":"https://dverigrad-spb.ru/politika-konfidencialnosti/","name":"Политика конфиденциальности - ПКФ «ГРАД»","isPartOf":{"@id":"https://dverigrad-spb.ru/#website"},"breadcrumb":{"@id":"https://dverigrad-spb.ru/politika-konfidencialnosti/#breadcrumb"},"inLanguage":"ru-RU","potentialAction":[{"@type":"ReadAction","target":["https://dverigrad-spb.ru/politika-konfidencialnosti/"]}]},{"@type":"BreadcrumbList","@id":"https://dverigrad-spb.ru/politika-konfidencialnosti/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dverigrad-spb.ru/"},{"@type":"ListItem","position":2,"name":"Политика конфиденциальности"}]}]}</script>
+	
+
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+ <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter49843885 = new Ya.Metrika({ id:49843885, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/49843885" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <link data-minify="1" rel="stylesheet" id="my_fonts-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/themes/porto-child/fonts/fonts.css?ver=1672644537" media="all">
+<style id="global-styles-inline-css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--primary: #fc6440;--wp--preset--color--secondary: #e36159;--wp--preset--color--tertiary: #0088cc;--wp--preset--color--quaternary: #383f48;--wp--preset--color--dark: #2e353e;--wp--preset--color--light: #ffffff;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link data-minify="1" rel="stylesheet" id="contact-form-7-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=1672644537" media="all">
+<style id="woocommerce-inline-inline-css">
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+<link data-minify="1" rel="stylesheet" id="porto-css-vars-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/uploads/porto_styles/theme_css_vars.css?ver=1672644537" media="all">
+<link data-minify="1" rel="stylesheet" id="js_composer_front-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/uploads/porto_styles/js_composer.css?ver=1672644537" media="all">
+<link data-minify="1" rel="stylesheet" id="bootstrap-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/uploads/porto_styles/bootstrap.css?ver=1672644537" media="all">
+<link data-minify="1" rel="stylesheet" id="porto-plugins-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/themes/porto/css/plugins_optimized.css?ver=1672644537" media="all">
+<link data-minify="1" rel="stylesheet" id="porto-theme-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/themes/porto/css/theme.css?ver=1672644537" media="all">
+<link data-minify="1" rel="stylesheet" id="porto-shortcodes-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/uploads/porto_styles/shortcodes.css?ver=1672644537" media="all">
+<link data-minify="1" rel="stylesheet" id="porto-theme-shop-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/themes/porto/css/theme_shop.css?ver=1672644537" media="all">
+<link data-minify="1" rel="stylesheet" id="porto-dynamic-style-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/uploads/porto_styles/dynamic_style.css?ver=1672644537" media="all">
+<link data-minify="1" rel="stylesheet" id="porto-style-css" href="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/themes/porto/style.css?ver=1672644537" media="all">
+<style id="porto-style-inline-css">
+#header .logo,.side-header-narrow-bar-logo{max-width:170px}@media (min-width:1398px){#header .logo{max-width:250px}}@media (max-width:991px){#header .logo{max-width:110px}}@media (max-width:767px){#header .logo{max-width:110px}}#header.sticky-header .logo{max-width:87.5px}#header,.sticky-header .header-main.sticky{border-top:3px solid #fc6440}@media (min-width:992px){}.page-top .product-nav{position:static;height:auto;margin-top:0}.page-top .product-nav .product-prev,.page-top .product-nav .product-next{float:none;position:absolute;height:30px;top:50%;bottom:50%;margin-top:-15px}.page-top .product-nav .product-prev{right:10px}.page-top .product-nav .product-next{left:10px}.page-top .product-nav .product-next .product-popup{right:auto;left:0}.page-top .product-nav .product-next .product-popup:before{right:auto;left:6px}.page-top .sort-source{position:static;text-align:center;margin-top:5px;border-width:0}.page-top ul.breadcrumb{-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}.page-top .page-title{font-weight:700}#login-form-popup{position:relative;width:80%;max-width:525px;margin-left:auto;margin-right:auto}#login-form-popup .featured-box{margin-bottom:0;box-shadow:none;border:none;border-radius:0}#login-form-popup .featured-box .box-content{padding:45px 36px 30px;border:none}#login-form-popup .featured-box h2{text-transform:uppercase;font-size:15px;letter-spacing:.05em;font-weight:600;line-height:2}#login-form-popup .porto-social-login-section{margin-top:20px}.porto-social-login-section{background:#f4f4f2;text-align:center;padding:20px 20px 25px}.porto-social-login-section p{text-transform:uppercase;font-size:12px;color:#8e8e8e;font-weight:600;margin-bottom:8px}#login-form-popup .col2-set{margin-left:-20px;margin-right:-20px}#login-form-popup .col-1,#login-form-popup .col-2{padding-left:20px;padding-right:20px}@media (min-width:992px){#login-form-popup .col-1{border-right:1px solid #f5f6f6}}#login-form-popup .input-text{box-shadow:none;padding-top:10px;padding-bottom:10px;border-color:#ddd;border-radius:2px;line-height:1.5 !important}#login-form-popup .form-row{margin-bottom:20px}#login-form-popup .woocommerce-privacy-policy-text{display:none}#login-form-popup .button{border-radius:2px;padding:18px 24px;text-shadow:none;font-family:Oswald,sans-serif;font-size:12px;letter-spacing:-0.025em}#login-form-popup label.inline{margin-top:15px;float:right;position:relative;cursor:pointer;line-height:1.5}#login-form-popup label.inline input[type=checkbox]{opacity:0;margin-right:8px;margin-top:0;margin-bottom:0}#login-form-popup label.inline span:before{content:'';position:absolute;border:1px solid #ddd;border-radius:1px;width:16px;height:16px;left:0;top:0;text-align:center;line-height:15px;font-family:'Font Awesome 5 Free';font-weight:900;font-size:9px;color:#aaa}#login-form-popup label.inline input[type=checkbox]:checked + span:before{content:'\f00c'}#login-form-popup .social-button i{font-size:16px;margin-right:8px}#login-form-popup p.status{color:#8e8e8e}.porto-social-login-section .google-plus{background:#dd4e31}.porto-social-login-section .facebook{background:#3a589d}.porto-social-login-section .twitter{background:#1aa9e1}.featured-box .porto-social-login-section i{color:#fff}.porto-social-login-section .social-button:hover{background:var(--bs-primary)}#login-form-popup{max-width:480px}html.panel-opened body > .mfp-bg{z-index:9042}html.panel-opened body > .mfp-wrap{z-index:9043}
+</style>
+<link rel="stylesheet" id="styles-child-css" href="https://dverigrad-spb.ru/wp-content/themes/porto-child/style.min.css?ver=0.0.2" media="all">
+<style id="wbcr-wll-inline-css">
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;background:#000;margin:5px}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;cursor:pointer;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:72px;width:72px;left:50%;top:50%;margin-left:-36px;margin-top:-36px;position:absolute;background:url(https://dverigrad-spb.ru/wp-content/plugins/clearfy_package/plugins/lazy-load/assets/img/youtube.png) no-repeat;cursor:pointer}
+</style>
+<script src="https://dverigrad-spb.ru/wp-includes/js/jquery/jquery.min.js?ver=3.6.0" id="jquery-core-js"></script>
+<link rel="https://api.w.org/" href="https://dverigrad-spb.ru/wp-json/"><link rel="alternate" type="application/json" href="https://dverigrad-spb.ru/wp-json/wp/v2/pages/2232"><link rel="shortlink" href="https://dverigrad-spb.ru/?p=2232">
+	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+<noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript></head>
+<body class="privacy-policy page-template-default page page-id-2232 wp-embed-responsive theme-porto woocommerce-no-js login-popup full blog-1 wpb-js-composer js-comp-ver-6.9.0 vc_responsive">
+
+	<div class="page-wrapper">
+
+		
+								
+			<div class="header-wrapper">
+								<header id="header" class="header-separate header-1 sticky-menu-header">
+		<div class="header-top">
+		<div class="container">
+			<div class="header-left">
+							</div>
+			<div class="header-right">
+				<span class="welcome-msg"><span class="text-uppercase">Металлические входные двери в СПб и ЛенОбласти - производство и установка!</span></span><span class="gap">|</span><ul id="menu-top-navigation" class="top-links mega-menu show-arrow"><li id="nav-menu-item-1697" class="my_noindex_menu menu-item menu-item-type-post_type menu-item-object-page  narrow "><!--noindex--><a rel="nofollow" href="https://dverigrad-spb.ru/wishlist/" class="">Список Избранного</a><!--/noindex--></li>
+<li id="nav-menu-item-1930" class="modal_obratniy_zvonok menu-item menu-item-type-custom menu-item-object-custom  narrow "><a class="nolink" href="#">Обратный звонок</a></li>
+<li id="nav-menu-item-1931" class="modal_vizov_zamershika menu-item menu-item-type-custom menu-item-object-custom  narrow "><a class="nolink" href="#">Вызвать замерщика</a></li>
+</ul>			</div>
+		</div>
+	</div>
+	
+	<div class="header-main">
+		<div class="container header-row">
+			<div class="header-left">
+				<a class="mobile-toggle" href="#"><i class="fas fa-bars"></i></a>
+						<div class="logo">
+		<a href="https://dverigrad-spb.ru/" title="ПКФ «ГРАД» - Входные двери от производителя. Бесплатная установка и доставка в СПб." rel="home">
+		<img class="img-responsive standard-logo retina-logo" src="//dverigrad-spb.ru/wp-content/uploads/2018/06/logo.png" alt="ПКФ «ГРАД»" width="200" height="43">	</a>
+			</div>
+					</div>
+			<div class="header-center">
+				<div class="searchform-popup"><a class="search-toggle"><i class="fas fa-search"></i><span class="search-text">Поиск</span></a>	<form action="https://dverigrad-spb.ru/" method="get" class="searchform searchform-cats">
+		<div class="searchform-fields">
+			<span class="text"><input name="s" type="text" value="" placeholder="Быстрый поиск..." autocomplete="off"></span>
+							<input type="hidden" name="post_type" value="product">
+				<select name="product_cat" id="product_cat" class="cat">
+	<option value="0">Все категории</option>
+	<option class="level-0" value="dveri-v-kvartiru">Двери в квартиру</option>
+	<option class="level-0" value="dveri-v-podezd">Двери в подъезд</option>
+	<option class="level-0" value="dveri-v-staryj-fond">Двери в старый фонд</option>
+	<option class="level-0" value="dveri-dlya-dachi">Двери для дачи</option>
+	<option class="level-0" value="dveri-s-shumoizolyaciey">Двери с шумоизоляцией</option>
+	<option class="level-0" value="dvuhstvorchatye-dveri">Двухстворчатые двери</option>
+	<option class="level-0" value="nestandartnye-dveri">Нестандартные двери</option>
+	<option class="level-0" value="tamburnye-dveri">Тамбурные двери</option>
+	<option class="level-0" value="tekhnicheskie-dveri">Технические двери</option>
+	<option class="level-0" value="ulichnye-dveri">Уличные двери</option>
+	<option class="level-0" value="uteplennye-dveri">Утепленные двери</option>
+	<option class="level-0" value="furnitura">Фурнитура</option>
+	<option class="level-1" value="zamki">&nbsp;&nbsp;&nbsp;Замки</option>
+	<option class="level-2" value="apecs">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apecs</option>
+	<option class="level-2" value="cisa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CISA</option>
+	<option class="level-2" value="crit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Crit</option>
+	<option class="level-2" value="kale">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kale</option>
+	<option class="level-2" value="barer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Барьер</option>
+	<option class="level-2" value="mettjem">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;МЕТТЭМ</option>
+	<option class="level-2" value="cerber">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Цербер</option>
+	<option class="level-2" value="jelbor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Эльбор</option>
+	<option class="level-1" value="nakladki-na-zamki">&nbsp;&nbsp;&nbsp;Накладки на замки</option>
+	<option class="level-1" value="ostalnaja-furnitura">&nbsp;&nbsp;&nbsp;Остальная фурнитура</option>
+	<option class="level-1" value="ruchki">&nbsp;&nbsp;&nbsp;Ручки</option>
+	<option class="level-0" value="jelementy-konstrukcii">Элементы конструкции</option>
+	<option class="level-1" value="nalichniki">&nbsp;&nbsp;&nbsp;Наличники</option>
+</select>
+			<span class="button-wrap">
+							<button class="btn btn-special" title="Поиск" type="submit"><i class="fas fa-search"></i></button>
+						</span>
+		</div>
+				<div class="live-search-list"></div>
+			</form>
+	</div>			</div>
+			<div class="header-right">
+				<div class="header-minicart">
+					<div class="header-contact"><div class="my-contact-info">
+<div class="mhc-clock-icon align-self-end"><i class="porto-icon-clock-1" onclick=""></i></div>
+<div class="mhc-phone-full"><span class="text-uppercase mb-2">Позвоните нам сейчас</span><br><a class="bold text-uppercase" style="color: #777777;font-size:18px" href="tel:88129558132">(812) 955-81-32</a><br><span class="text-uppercase">Режим работы: Пн.-Пт. с 10.00 до 18.30</span></div>
+<div class="mhc-phone-icon"><a href="tel:88129558132"><i class="porto-icon-phone-2"></i></a></div>
+</div></div>		<div id="mini-cart" class="mini-cart minicart-arrow-alt">
+			<div class="cart-head">
+			<span class="cart-icon"><i class="minicart-icon porto-icon-bag-2"></i><span class="cart-items"><i class="fas fa-spinner fa-pulse"></i></span></span><span class="cart-items-text"><i class="fas fa-spinner fa-pulse"></i></span>			</div>
+			<div class="cart-popup widget_shopping_cart">
+				<div class="widget_shopping_cart_content">
+									<div class="cart-loading"></div>
+								</div>
+			</div>
+				</div>
+						</div>
+
+				
+			</div>
+		</div>
+			</div>
+
+			<div class="main-menu-wrap">
+			<div id="main-menu" class="container ">
+									<div class="menu-left">
+								<div class="logo">
+		<a href="https://dverigrad-spb.ru/" title="ПКФ «ГРАД» - Входные двери от производителя. Бесплатная установка и доставка в СПб.">
+		<img class="img-responsive standard-logo retina-logo" src="//dverigrad-spb.ru/wp-content/uploads/2018/06/logo.png" alt="ПКФ «ГРАД»" width="200" height="43">	</a>
+			</div>
+							</div>
+								<div class="menu-center">
+					<ul id="menu-main-menu" class="main-menu mega-menu show-arrow"><li id="nav-menu-item-1640" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home  narrow "><a href="https://dverigrad-spb.ru/" class="">Главная</a></li>
+<li id="nav-menu-item-1639" class="my_menu_catalog menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has-sub wide  col-4"><a href="https://dverigrad-spb.ru/katalog-dverey/" class="">Каталог дверей</a>
+<div class="popup"><div class="inner" style=";max-width:800px;"><ul class="sub-menu">
+	<li id="nav-menu-item-1700" class="my_cust_menu_1 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/dveri-v-kvartiru/" class="">Двери в квартиру</a></li>
+	<li id="nav-menu-item-2861" class="my_cust_menu_2 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/dveri-dlya-dachi/" class="">Двери для дачи</a></li>
+	<li id="nav-menu-item-1702" class="my_cust_menu_3 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/tamburnye-dveri/" class="">Тамбурные двери</a></li>
+	<li id="nav-menu-item-2860" class="my_cust_menu_4 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/dveri-v-podezd/" class="">Двери в подъезд</a></li>
+	<li id="nav-menu-item-2862" class="my_cust_menu_5 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/ulichnye-dveri/" class="">Уличные двери</a></li>
+	<li id="nav-menu-item-1703" class="my_cust_menu_6 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/tekhnicheskie-dveri/" class="">Технические двери</a></li>
+	<li id="nav-menu-item-2867" class="my_cust_menu_7 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/dvuhstvorchatye-dveri/" class="">Двухстворчатые двери</a></li>
+	<li id="nav-menu-item-2870" class="my_cust_menu_8 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/uteplennye-dveri/" class="">Утепленные двери</a></li>
+	<li id="nav-menu-item-3183" class="my_cust_menu_9 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/dveri-s-shumoizolyaciey/" class="">Двери с шумоизоляцией</a></li>
+	<li id="nav-menu-item-3720" class="my_cust_menu_10 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/dveri-v-staryj-fond/" class="">Двери в старый фонд</a></li>
+	<li id="nav-menu-item-3719" class="my_cust_menu_11 menu-item menu-item-type-taxonomy menu-item-object-product_cat " data-cols="1"><a href="https://dverigrad-spb.ru/nestandartnye-dveri/" class="">Нестандартные двери</a></li>
+</ul></div></div>
+</li>
+<li id="nav-menu-item-1632" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has-sub narrow "><a href="https://dverigrad-spb.ru/akcii_and_news/" class="">Акции и новости</a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu">
+	<li id="nav-menu-item-1704" class="menu-item menu-item-type-taxonomy menu-item-object-category " data-cols="1"><a href="https://dverigrad-spb.ru/category/akcii/" class="">Акции</a></li>
+	<li id="nav-menu-item-1705" class="menu-item menu-item-type-taxonomy menu-item-object-category " data-cols="1"><a href="https://dverigrad-spb.ru/category/novosti/" class="">Новости</a></li>
+</ul></div></div>
+</li>
+<li id="nav-menu-item-1751" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub narrow "><a class="nolink" href="#">Информация</a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu">
+	<li id="nav-menu-item-2344" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  sub" data-cols="1"><a class="nolink" href="#">Отделка и покраска</a>
+	<ul class="sub-menu">
+		<li id="nav-menu-item-1792" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children "><a class="nolink" href="#">Покраска</a>
+		<ul class="sub-menu">
+			<li id="nav-menu-item-1790" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/grunt/" class="">Грунт 3 в 1</a></li>
+			<li id="nav-menu-item-1794" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children "><a class="nolink" href="#">Порошковые напыления</a>
+			<ul class="sub-menu">
+				<li id="nav-menu-item-1787" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/poroshkovoe-napylenie-shagren/" class="">Порошковое напыление «Шагрень»</a></li>
+				<li id="nav-menu-item-1786" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/poroshkovoe-napylenie-antik/" class="">Порошковое напыление «Антик»</a></li>
+			</ul>
+</li>
+		</ul>
+</li>
+		<li id="nav-menu-item-1791" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children "><a class="nolink" href="#">Отделка</a>
+		<ul class="sub-menu">
+			<li id="nav-menu-item-1789" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/vagonka/" class="">ЕвроВагонка</a></li>
+			<li id="nav-menu-item-1781" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/laminat/" class="">Ламинат</a></li>
+			<li id="nav-menu-item-1783" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/viniliskozha/" class="">Винилискожа</a></li>
+			<li id="nav-menu-item-1793" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children "><a class="nolink" href="#">МДФ</a>
+			<ul class="sub-menu">
+				<li id="nav-menu-item-1782" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/mdf-laminirovanyj/" class="">МДФ ламинированный</a></li>
+				<li id="nav-menu-item-1785" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/mdf-krashenyj/" class="">МДФ крашеный</a></li>
+				<li id="nav-menu-item-1784" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/mdf-s-zerkalom/" class="">МДФ с зеркалом</a></li>
+			</ul>
+</li>
+		</ul>
+</li>
+	</ul>
+</li>
+	<li id="nav-menu-item-2339" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  sub" data-cols="1"><a class="nolink" href="#">Замки и фурнитура</a>
+	<ul class="sub-menu">
+		<li id="nav-menu-item-1798" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children "><a href="https://dverigrad-spb.ru/furnitura/zamki/" class="">Замки</a>
+		<ul class="sub-menu">
+			<li id="nav-menu-item-2158" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/apecs/" class="">Apecs</a></li>
+			<li id="nav-menu-item-2159" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/cisa/" class="">CISA</a></li>
+			<li id="nav-menu-item-2160" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/crit/" class="">Crit</a></li>
+			<li id="nav-menu-item-2161" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/kale/" class="">Kale</a></li>
+			<li id="nav-menu-item-2163" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/barer/" class="">Барьер</a></li>
+			<li id="nav-menu-item-2164" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/mettjem/" class="">МЕТТЭМ</a></li>
+			<li id="nav-menu-item-2165" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/cerber/" class="">Цербер</a></li>
+			<li id="nav-menu-item-2166" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/jelbor/" class="">Эльбор</a></li>
+		</ul>
+</li>
+		<li id="nav-menu-item-2075" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/ruchki/" class="">Ручки</a></li>
+		<li id="nav-menu-item-2076" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/nakladki-na-zamki/" class="">Накладки на замки</a></li>
+		<li id="nav-menu-item-2231" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/ostalnaja-furnitura/" class="">Остальная фурнитура</a></li>
+	</ul>
+</li>
+	<li id="nav-menu-item-2333" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  sub" data-cols="1"><a class="nolink" href="#">Конструкция</a>
+	<ul class="sub-menu">
+		<li id="nav-menu-item-2403" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/kolichestvo-stvorok/" class="">Количество створок</a></li>
+		<li id="nav-menu-item-2338" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children "><a class="nolink" href="#">Количество листов</a>
+		<ul class="sub-menu">
+			<li id="nav-menu-item-2337" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/konstrukcija-odnolistovoj-dveri/" class="">Конструкция однолистовой двери</a></li>
+			<li id="nav-menu-item-2335" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/konstrukcija-dvuhlistovoj-dveri/" class="">Конструкция двухлистовой двери</a></li>
+			<li id="nav-menu-item-2336" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/konstrukcija-trehlistovoj-dveri/" class="">Конструкция трехлистовой двери</a></li>
+			<li id="nav-menu-item-2334" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/konstrukcija-reshetchatoj-dveri/" class="">Конструкция решетчатой двери</a></li>
+		</ul>
+</li>
+		<li id="nav-menu-item-2451" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children "><a class="nolink" href="#">Открывание</a>
+		<ul class="sub-menu">
+			<li id="nav-menu-item-2453" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/naruzhnoe-otkryvanie/" class="">Наружное открывание</a></li>
+			<li id="nav-menu-item-2452" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/vnutrennee-otkryvanie/" class="">Внутреннее открывание</a></li>
+		</ul>
+</li>
+		<li id="nav-menu-item-2360" class="menu-item menu-item-type-post_type menu-item-object-product "><a href="https://dverigrad-spb.ru/jelementy-konstrukcii/dvojnoj-pritvor/" class="">Второй притвор</a></li>
+		<li id="nav-menu-item-2230" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/jelementy-konstrukcii/nalichniki/" class="">Наличники</a></li>
+		<li id="nav-menu-item-2341" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/uteplitel-rockwool-skandik/" class="">Утеплитель</a></li>
+		<li id="nav-menu-item-2430" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/uplotnitel-pervyj-kontur/" class="">Уплотнительная резинка (первый контур)</a></li>
+		<li id="nav-menu-item-2433" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/uplotnitel-vtoroj-kontur/" class="">Уплотнительная резинка (второй контур)</a></li>
+	</ul>
+</li>
+</ul></div></div>
+</li>
+<li id="nav-menu-item-3467" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub narrow "><a class="nolink" href="#">Услуги и сервис</a>
+<div class="popup"><div class="inner" style=""><ul class="sub-menu">
+	<li id="nav-menu-item-2381" class="menu-item menu-item-type-post_type menu-item-object-page " data-cols="1"><a href="https://dverigrad-spb.ru/zamer/" class="">Замер</a></li>
+	<li id="nav-menu-item-2372" class="menu-item menu-item-type-post_type menu-item-object-page " data-cols="1"><a href="https://dverigrad-spb.ru/dostavka/" class="">Доставка</a></li>
+	<li id="nav-menu-item-2378" class="menu-item menu-item-type-post_type menu-item-object-page " data-cols="1"><a href="https://dverigrad-spb.ru/ustanovka/" class="">Установка</a></li>
+	<li id="nav-menu-item-2384" class="menu-item menu-item-type-post_type menu-item-object-page " data-cols="1"><a href="https://dverigrad-spb.ru/oplata/" class="">Оплата</a></li>
+	<li id="nav-menu-item-2367" class="menu-item menu-item-type-post_type menu-item-object-page " data-cols="1"><a href="https://dverigrad-spb.ru/garantiya/" class="">Гарантия</a></li>
+</ul></div></div>
+</li>
+<li id="nav-menu-item-1684" class="menu-item menu-item-type-post_type menu-item-object-page  narrow "><a href="https://dverigrad-spb.ru/contact/" class="">Контакты</a></li>
+<li class="menu-custom-content pull-right"><div class="menu-custom-block"><a href="/metallicheskie-dveri-zakaz/" class="text-uppercase href_menu_calc_dverey ">Калькулятор дверей<em class="tip hot">ХИТ</em></a></div></li></ul>				</div>
+									<div class="menu-right">
+						<div class="searchform-popup"><a class="search-toggle"><i class="fas fa-search"></i><span class="search-text">Поиск</span></a>	<form action="https://dverigrad-spb.ru/" method="get" class="searchform searchform-cats">
+		<div class="searchform-fields">
+			<span class="text"><input name="s" type="text" value="" placeholder="Быстрый поиск..." autocomplete="off"></span>
+							<input type="hidden" name="post_type" value="product">
+				<select name="product_cat" id="product_cat" class="cat">
+	<option value="0">Все категории</option>
+	<option class="level-0" value="dveri-v-kvartiru">Двери в квартиру</option>
+	<option class="level-0" value="dveri-v-podezd">Двери в подъезд</option>
+	<option class="level-0" value="dveri-v-staryj-fond">Двери в старый фонд</option>
+	<option class="level-0" value="dveri-dlya-dachi">Двери для дачи</option>
+	<option class="level-0" value="dveri-s-shumoizolyaciey">Двери с шумоизоляцией</option>
+	<option class="level-0" value="dvuhstvorchatye-dveri">Двухстворчатые двери</option>
+	<option class="level-0" value="nestandartnye-dveri">Нестандартные двери</option>
+	<option class="level-0" value="tamburnye-dveri">Тамбурные двери</option>
+	<option class="level-0" value="tekhnicheskie-dveri">Технические двери</option>
+	<option class="level-0" value="ulichnye-dveri">Уличные двери</option>
+	<option class="level-0" value="uteplennye-dveri">Утепленные двери</option>
+	<option class="level-0" value="furnitura">Фурнитура</option>
+	<option class="level-1" value="zamki">&nbsp;&nbsp;&nbsp;Замки</option>
+	<option class="level-2" value="apecs">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apecs</option>
+	<option class="level-2" value="cisa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CISA</option>
+	<option class="level-2" value="crit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Crit</option>
+	<option class="level-2" value="kale">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kale</option>
+	<option class="level-2" value="barer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Барьер</option>
+	<option class="level-2" value="mettjem">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;МЕТТЭМ</option>
+	<option class="level-2" value="cerber">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Цербер</option>
+	<option class="level-2" value="jelbor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Эльбор</option>
+	<option class="level-1" value="nakladki-na-zamki">&nbsp;&nbsp;&nbsp;Накладки на замки</option>
+	<option class="level-1" value="ostalnaja-furnitura">&nbsp;&nbsp;&nbsp;Остальная фурнитура</option>
+	<option class="level-1" value="ruchki">&nbsp;&nbsp;&nbsp;Ручки</option>
+	<option class="level-0" value="jelementy-konstrukcii">Элементы конструкции</option>
+	<option class="level-1" value="nalichniki">&nbsp;&nbsp;&nbsp;Наличники</option>
+</select>
+			<span class="button-wrap">
+							<button class="btn btn-special" title="Поиск" type="submit"><i class="fas fa-search"></i></button>
+						</span>
+		</div>
+				<div class="live-search-list"></div>
+			</form>
+	</div><div class="header-contact"><div class="my-contact-info">
+<div class="mhc-clock-icon align-self-end"><i class="porto-icon-clock-1" onclick=""></i></div>
+<div class="mhc-phone-full"><span class="text-uppercase mb-2">Позвоните нам сейчас</span><br><a class="bold text-uppercase" style="color: #777777;font-size:18px" href="tel:88129558132">(812) 955-81-32</a><br><span class="text-uppercase">Режим работы: Пн.-Пт. с 10.00 до 18.30</span></div>
+<div class="mhc-phone-icon"><a href="tel:88129558132"><i class="porto-icon-phone-2"></i></a></div>
+</div></div>		<div id="mini-cart" class="mini-cart minicart-arrow-alt">
+			<div class="cart-head">
+			<span class="cart-icon"><i class="minicart-icon porto-icon-bag-2"></i><span class="cart-items"><i class="fas fa-spinner fa-pulse"></i></span></span><span class="cart-items-text"><i class="fas fa-spinner fa-pulse"></i></span>			</div>
+			<div class="cart-popup widget_shopping_cart">
+				<div class="widget_shopping_cart_content">
+									<div class="cart-loading"></div>
+								</div>
+			</div>
+				</div>
+							</div>
+							</div>
+		</div>
+	</header>
+
+							</div>
+			
+		
+		
+					<div id="breadcrumbs-boxed">
+        <div class="porto-wrap-container container">
+		<section class="page-top page-header-3">
+		<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="text-center">
+				<h1 class="page-title">Политика конфиденциальности</h1>
+							</div>
+							<div class="breadcrumbs-wrap text-center">
+					<ul class="breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem"><a itemprop="item" href="https://dverigrad-spb.ru"><span itemprop="name">Главная</span></a><meta itemprop="position" content="1"><i class="delimiter delimiter-2"></i></li><li>Политика конфиденциальности</li></ul>				</div>
+								</div>
+	</div>
+</div>
+	</section>
+	    </div>
+		</div>
+
+	
+		<div id="main" class="column1 boxed">
+
+			<div class="container">
+			<div class="row main-content-wrap">
+
+			
+			<div class="main-content col-lg-12">
+
+			
+	<div id="content" role="main">
+				
+			<article class="post-2232 page type-page status-publish hentry">
+				
+				
+				<div class="page-content">
+					<div class="entry clearfix">
+<h3>Политика Конфиденциальности</h3>
+<p>Владелец сайта dverigrad-spb.ru (далее ПКФ «Град» или Администрация) обязуется сохранять Вашу конфиденциальность в сети Интернет.<br>
+Настоящая Политика Конфиденциальности, рассказывает о том, как собираются, обрабатываются и хранятся Ваши личные данные.<br>
+Администрация уделяет большое внимание защите личной информации пользователей.<br>
+Пользуюсь сайтом ПКФ «Град», пользователь тем самым дает согласие на применение правил сбора и использования данных, изложенных в настоящем документе.</p>
+<p><b>Если Вы не согласны с условиями нашей политики конфиденциальности, не используйте сайт ПКФ «Град»!</b></p>
+<h3>Собираемая информация</h3>
+<p>Администрация сайта может собирать следующую информацию о пользователях сайта:<br>
+— Имя<br>
+— Адрес замера (монтажа)<br>
+— Адрес электронной почты<br>
+— Номер телефона<br>
+— Помимо этого автоматизированно собираются такие данные как IP пользователя, версия браузера и пр. при помощи сервисов статистики LiveInternet и Google Analytics.</p>
+<h3>Использование информации</h3>
+<p>Ниже описаны некоторые способы использования личной информации пользователя:<br>
+— для внутреннего отчета<br>
+— для предоставления информации и услуг, которые запрашивает пользователь<br>
+— для ответа на запросы пользователя<br>
+— для улучшения качества продуктов сайта<br>
+— для улучшения качества предоставления услуг<br>
+— для мониторинга работы сайта<br>
+— для формирования статистических данных</p>
+<h3>Раскрытие информации</h3>
+<p>Администрация не продает личные данные пользователя и не передает их третьим лицам без согласия на то пользователя.<br>
+Далее, описаны некоторые случаи передачи личной информации пользователя:</p>
+<p>— в случаях, если это требуется органам спецслужб или если это требует законодательство</p>
+<h3>Прочая информация</h3>
+<p>Дети любых возрастов могут беспрепятственно пользоваться данным сайтом.</p>
+<h3>Связь с нами</h3>
+<p>По всем вопросам, касающимся политики конфиденциальности и безопасности ваших личных данных при использовании сайта dverigrad-spb.ru, вы можете связаться с нами одним из следующих способов:<br>
+1. По телефону: (812) 955-81-32<br>
+2. Посредством электронной почты: info@dverigrad-spb.ru</p>
+</div>
+				</div>
+			</article>
+					
+	</div>
+
+		
+
+</div>
+
+<div class="sidebar-overlay"></div>
+
+	</div>
+	</div>
+
+
+		
+			
+			</div>
+
+			
+			<div class="footer-wrapper">
+
+																							
+						<div id="footer" class="footer-1">
+			<div class="footer-main">
+			<div class="container">
+				
+									<div class="row">
+														<div class="col-lg-12">
+									<aside id="block-widget-5" class="widget widget-block">			<div class="block">
+				<div class="porto-block"><style>.vc_custom_1527263020718{border-bottom-width: 1px !important;padding-top: 5px !important;border-bottom-color: #3d3d38 !important;border-bottom-style: solid !important;}.vc_custom_1527263192148{padding-top: 29px !important;}.vc_custom_1490692262942{margin-top: 8px !important;margin-bottom: 0px !important;}.vc_custom_1650983148380{margin-bottom: 13px !important;}.vc_custom_1650983166101{margin-bottom: 30px !important;}.vc_custom_1535732102215{margin-top: 0px !important;margin-bottom: 19px !important;}</style><div class="vc_row wpb_row row vc_custom_1527263020718 vc_row-has-fill"><div class="vc_column_container col-md-5"><div class="wpb_wrapper vc_column-inner"><h4 class="vc_custom_heading vc_custom_1650983148380 align-left">ОБРАТНЫЙ ЗВОНОК</h4>
+	<div class="wpb_text_column wpb_content_element  vc_custom_1650983166101">
+		<div class="wpb_wrapper">
+			<p style="line-height: 19px; letter-spacing: 0.19px;">Хотите, чтобы мы сами с вами связались и проконсультировали?<br>
+Оставьте ваш номер телефона!</p>
+
+		</div>
+	</div>
+</div></div><div class="vc_column_container col-md-7 vc_custom_1490692262942"><div class="wpb_wrapper vc_column-inner">
+	<div class="wpb_text_column wpb_content_element  pull-left">
+		<div class="wpb_wrapper">
+			<div role="form" class="wpcf7" id="wpcf7-f1512-o1" dir="ltr" lang="en-US">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/politika-konfidencialnosti/#wpcf7-f1512-o1" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="1512">
+<input type="hidden" name="_wpcf7_version" value="5.5.6">
+<input type="hidden" name="_wpcf7_locale" value="en_US">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f1512-o1">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<div class="widget_wysija_cont widget_wysija">
+<div class="wysija-paragraph">
+<span class="wpcf7-form-control-wrap tel-652"><input type="tel" name="tel-652" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel form-control wysija-input" aria-required="true" aria-invalid="false" placeholder="Ваш Номер Телефона"></span>
+    </div>
+<div class="d-none">
+<span class="wpcf7-form-control-wrap agree"><span class="wpcf7-form-control wpcf7-acceptance invert"><span class="wpcf7-list-item"><input type="checkbox" name="agree" value="1" aria-invalid="false" checked="checked" class="mycf7_agree d-none"></span></span></span>
+</div>
+<div class="d-table-cell">
+        <input type="submit" value="Отправить!" class="wpcf7-form-control has-spinner wpcf7-submit btn btn-default wysija-submit">
+    </div>
+</div>
+<div class="wpcf7-response-output" aria-hidden="true"></div></form></div>
+
+		</div>
+	</div>
+</div></div></div><div class="vc_row wpb_row row vc_custom_1527263192148"><div class="vc_column_container col-md-3"><div class="wpb_wrapper vc_column-inner"><h4 class="vc_custom_heading vc_custom_1535732102215 align-left text-uppercase">Контакты Для Связи</h4>
+	<div class="wpb_text_column wpb_content_element  custom-line-height-20 m-b-none">
+		<div class="wpb_wrapper">
+			<p>ТЕЛЕФОН<br>
+<a href="tel:88129558132">(812) 955-81-32</a> (для консультаций и вызова замерщика)</p>
+<p>EMAIL<br>
+<a href="mailto:info@dverigrad-spb.ru">info@dverigrad-spb.ru</a>&nbsp;(для заказов, запросов КП и связи)</p>
+<p>АДРЕС (ДЛЯ СУБПОДРЯДЧИКОВ И ПОСТАВОК)<br>
+Санкт-Петербург, Октябрьская набережная, д. 50А (предварительно <strong>обязательно</strong> звонить и согласовывать время)</p>
+
+		</div>
+	</div>
+</div></div><div class="vc_column_container col-md-9"><div class="wpb_wrapper vc_column-inner"><div class="porto-block"><style>.vc_custom_1490690628883{margin-top: -3px !important;margin-bottom: 8px !important;border-top-width: 1px !important;padding-top: 28px !important;border-top-color: #3d3d38 !important;border-top-style: solid !important;}.vc_custom_1554619076113{margin-bottom: 17px !important;}.vc_custom_1530527007521{margin-top: -1px !important;}@media (max-width: 480px) {
+	.section-copyright { text-align: left !important; }
+}</style><div class="vc_row wpb_row row"><div class="vc_column_container col-md-5"><div class="wpb_wrapper vc_column-inner"><h4 class="vc_custom_heading align-left">ПОЛЕЗНАЯ ИНФОРМАЦИЯ</h4><div class="vc_row wpb_row vc_inner row"><div class="vc_column_container col-md-6"><div class="wpb_wrapper vc_column-inner">
+	<div class="wpb_text_column wpb_content_element  cust_vozvr_margin">
+		<div class="wpb_wrapper">
+			<ul>
+<li><a title="Контакты для связи" href="/contact/">Контакты Для Связи</a></li>
+</ul>
+
+		</div>
+	</div>
+</div></div><div class="vc_column_container col-md-6"><div class="wpb_wrapper vc_column-inner">
+	<div class="wpb_text_column wpb_content_element  cust_margin_footer">
+		<div class="wpb_wrapper">
+			<ul>
+<li><a href="/politika-konfidencialnosti/">Политика Конфиденциальности</a></li>
+</ul>
+
+		</div>
+	</div>
+</div></div></div></div></div><div class="vc_column_container col-md-7"><div class="wpb_wrapper vc_column-inner"><h4 class="vc_custom_heading align-left">УСЛУГИ, ОПЛАТА И ГАРАНТИЯ</h4><div class="vc_row wpb_row vc_inner row"><div class="vc_column_container col-md-6"><div class="wpb_wrapper vc_column-inner">
+	<div class="wpb_text_column wpb_content_element  cust_vozvr_margin">
+		<div class="wpb_wrapper">
+			<ul>
+<li><a href="/zamer/">Замер</a></li>
+<li><a href="/dostavka/">Доставка</a></li>
+<li><a href="/ustanovka/">Установка</a></li>
+</ul>
+
+		</div>
+	</div>
+</div></div><div class="vc_column_container col-md-6"><div class="wpb_wrapper vc_column-inner">
+	<div class="wpb_text_column wpb_content_element  cust_margin_footer">
+		<div class="wpb_wrapper">
+			<ul>
+<li><a href="/oplata/">Способы Оплаты</a></li>
+<li><a href="/garantiya/">Гарантия</a></li>
+</ul>
+
+		</div>
+	</div>
+</div></div></div></div></div></div><div class="vc_row wpb_row row vc_custom_1490690628883 vc_row-has-fill"><div class="vc_column_container col-md-12 col-lg-5"><div class="wpb_wrapper vc_column-inner">
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			<p>© Металлические двери - Группа компаний «ПКФ «Град».</p>
+
+		</div>
+	</div>
+</div></div><div class="vc_column_container col-md-12 col-lg-7"><div class="wpb_wrapper vc_column-inner">
+	<div class="wpb_text_column wpb_content_element  vc_custom_1554619076113 pull-left m-b-none">
+		<div class="wpb_wrapper">
+			<div style="line-height: 18px;margin-bottom: 10px"><span style="color: #fff">КОНСУЛЬТАЦИЯ, ВЫЗОВ ЗАМЕРЩИКА ПО ТЕЛЕФОНУ</span><br>
+<strong style="letter-spacing: 0.26px">Пн. - Пт. / 10:00 - 18:30; Сб., Вс. / Выходной</strong></div>
+<div style="line-height: 18px"><span style="color: #fff">ВЫЗОВ ЗАМЕРЩИКА ЧЕРЕЗ ФОРМЫ НА САЙТЕ</span><br>
+<strong style="letter-spacing: 0.26px">Пн. - Вс. / 00:00 - 24:00</strong> (<a href="https://dverigrad-spb.ru/zamer/">подробнее...</a>)</div>
+
+		</div>
+	</div>
+
+	<div class="wpb_single_image wpb_content_element vc_align_right  vc_custom_1530527007521  m-b-none section-copyright">
+		<div class="wpb_wrapper">
+			
+			<div class="vc_single_image-wrapper   vc_box_border_grey"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20129%2036'%3E%3C/svg%3E" class="vc_single_image-img attachment-full" alt="Политика конфиденциальности" title="Политика конфиденциальности" data-lazy-src="https://dverigrad-spb.ru/wp-content/uploads/2018/07/payment-icon.png" width="129" height="36"><noscript><img width="129" height="36" src="https://dverigrad-spb.ru/wp-content/uploads/2018/07/payment-icon.png" class="vc_single_image-img attachment-full" alt="Политика конфиденциальности" title="Политика конфиденциальности" /></noscript></div>
+		</div>
+	</div>
+</div></div></div></div></div></div></div><div class="vc_row wpb_row row"><div class="vc_column_container col-md-12"><div class="wpb_wrapper vc_column-inner">
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			<p><!--noindex-->Интернет-сайт носит исключительно информационный характер и ни при каких условиях не является публичной офертой. Компания оставляет за собой право в любое время вносить изменения в перечень и спецификацию продукции.<!--/noindex--></p>
+
+		</div>
+	</div>
+</div></div></div></div>			</div>
+		</aside>								</div>
+													</div>
+				
+							</div>
+		</div>
+	
+	</div>
+										
+				
+			</div>
+					
+		
+	</div>
+	
+<div class="panel-overlay"></div>
+<div id="side-nav-panel" class="">
+	<a href="#" class="side-nav-panel-close"><i class="fas fa-times"></i></a>
+	<div class="menu-wrap"><ul id="menu-main-menu-1" class="mobile-menu accordion-menu"><li id="accordion-menu-item-1640" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home "><a href="https://dverigrad-spb.ru/" rel="nofollow" class="">Главная</a></li>
+<li id="accordion-menu-item-1639" class="my_menu_catalog menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has-sub"><a href="https://dverigrad-spb.ru/katalog-dverey/" rel="nofollow" class="">Каталог дверей</a>
+<span class="arrow"></span><ul class="sub-menu">
+	<li id="accordion-menu-item-1700" class="my_cust_menu_1 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/dveri-v-kvartiru/" rel="nofollow" class="">Двери в квартиру</a></li>
+	<li id="accordion-menu-item-2861" class="my_cust_menu_2 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/dveri-dlya-dachi/" rel="nofollow" class="">Двери для дачи</a></li>
+	<li id="accordion-menu-item-1702" class="my_cust_menu_3 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/tamburnye-dveri/" rel="nofollow" class="">Тамбурные двери</a></li>
+	<li id="accordion-menu-item-2860" class="my_cust_menu_4 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/dveri-v-podezd/" rel="nofollow" class="">Двери в подъезд</a></li>
+	<li id="accordion-menu-item-2862" class="my_cust_menu_5 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/ulichnye-dveri/" rel="nofollow" class="">Уличные двери</a></li>
+	<li id="accordion-menu-item-1703" class="my_cust_menu_6 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/tekhnicheskie-dveri/" rel="nofollow" class="">Технические двери</a></li>
+	<li id="accordion-menu-item-2867" class="my_cust_menu_7 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/dvuhstvorchatye-dveri/" rel="nofollow" class="">Двухстворчатые двери</a></li>
+	<li id="accordion-menu-item-2870" class="my_cust_menu_8 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/uteplennye-dveri/" rel="nofollow" class="">Утепленные двери</a></li>
+	<li id="accordion-menu-item-3183" class="my_cust_menu_9 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/dveri-s-shumoizolyaciey/" rel="nofollow" class="">Двери с шумоизоляцией</a></li>
+	<li id="accordion-menu-item-3720" class="my_cust_menu_10 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/dveri-v-staryj-fond/" rel="nofollow" class="">Двери в старый фонд</a></li>
+	<li id="accordion-menu-item-3719" class="my_cust_menu_11 menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/nestandartnye-dveri/" rel="nofollow" class="">Нестандартные двери</a></li>
+</ul>
+</li>
+<li id="accordion-menu-item-1632" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has-sub"><a href="https://dverigrad-spb.ru/akcii_and_news/" rel="nofollow" class="">Акции и новости</a>
+<span class="arrow"></span><ul class="sub-menu">
+	<li id="accordion-menu-item-1704" class="menu-item menu-item-type-taxonomy menu-item-object-category "><a href="https://dverigrad-spb.ru/category/akcii/" rel="nofollow" class="">Акции</a></li>
+	<li id="accordion-menu-item-1705" class="menu-item menu-item-type-taxonomy menu-item-object-category "><a href="https://dverigrad-spb.ru/category/novosti/" rel="nofollow" class="">Новости</a></li>
+</ul>
+</li>
+<li id="accordion-menu-item-1751" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Информация</a>
+<span class="arrow"></span><ul class="sub-menu">
+	<li id="accordion-menu-item-2344" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Отделка и покраска</a>
+	<span class="arrow"></span><ul class="sub-menu">
+		<li id="accordion-menu-item-1792" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Покраска</a>
+		<span class="arrow"></span><ul class="sub-menu">
+			<li id="accordion-menu-item-1790" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/grunt/" rel="nofollow" class="">Грунт 3 в 1</a></li>
+			<li id="accordion-menu-item-1794" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Порошковые напыления</a>
+			<span class="arrow"></span><ul class="sub-menu">
+				<li id="accordion-menu-item-1787" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/poroshkovoe-napylenie-shagren/" rel="nofollow" class="">Порошковое напыление «Шагрень»</a></li>
+				<li id="accordion-menu-item-1786" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/poroshkovoe-napylenie-antik/" rel="nofollow" class="">Порошковое напыление «Антик»</a></li>
+			</ul>
+</li>
+		</ul>
+</li>
+		<li id="accordion-menu-item-1791" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Отделка</a>
+		<span class="arrow"></span><ul class="sub-menu">
+			<li id="accordion-menu-item-1789" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/vagonka/" rel="nofollow" class="">ЕвроВагонка</a></li>
+			<li id="accordion-menu-item-1781" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/laminat/" rel="nofollow" class="">Ламинат</a></li>
+			<li id="accordion-menu-item-1783" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/viniliskozha/" rel="nofollow" class="">Винилискожа</a></li>
+			<li id="accordion-menu-item-1793" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">МДФ</a>
+			<span class="arrow"></span><ul class="sub-menu">
+				<li id="accordion-menu-item-1782" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/mdf-laminirovanyj/" rel="nofollow" class="">МДФ ламинированный</a></li>
+				<li id="accordion-menu-item-1785" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/mdf-krashenyj/" rel="nofollow" class="">МДФ крашеный</a></li>
+				<li id="accordion-menu-item-1784" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/mdf-s-zerkalom/" rel="nofollow" class="">МДФ с зеркалом</a></li>
+			</ul>
+</li>
+		</ul>
+</li>
+	</ul>
+</li>
+	<li id="accordion-menu-item-2339" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Замки и фурнитура</a>
+	<span class="arrow"></span><ul class="sub-menu">
+		<li id="accordion-menu-item-1798" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children  has-sub"><a href="https://dverigrad-spb.ru/furnitura/zamki/" rel="nofollow" class="">Замки</a>
+		<span class="arrow"></span><ul class="sub-menu">
+			<li id="accordion-menu-item-2158" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/apecs/" rel="nofollow" class="">Apecs</a></li>
+			<li id="accordion-menu-item-2159" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/cisa/" rel="nofollow" class="">CISA</a></li>
+			<li id="accordion-menu-item-2160" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/crit/" rel="nofollow" class="">Crit</a></li>
+			<li id="accordion-menu-item-2161" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/kale/" rel="nofollow" class="">Kale</a></li>
+			<li id="accordion-menu-item-2163" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/barer/" rel="nofollow" class="">Барьер</a></li>
+			<li id="accordion-menu-item-2164" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/mettjem/" rel="nofollow" class="">МЕТТЭМ</a></li>
+			<li id="accordion-menu-item-2165" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/cerber/" rel="nofollow" class="">Цербер</a></li>
+			<li id="accordion-menu-item-2166" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/zamki/jelbor/" rel="nofollow" class="">Эльбор</a></li>
+		</ul>
+</li>
+		<li id="accordion-menu-item-2075" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/ruchki/" rel="nofollow" class="">Ручки</a></li>
+		<li id="accordion-menu-item-2076" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/nakladki-na-zamki/" rel="nofollow" class="">Накладки на замки</a></li>
+		<li id="accordion-menu-item-2231" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/furnitura/ostalnaja-furnitura/" rel="nofollow" class="">Остальная фурнитура</a></li>
+	</ul>
+</li>
+	<li id="accordion-menu-item-2333" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Конструкция</a>
+	<span class="arrow"></span><ul class="sub-menu">
+		<li id="accordion-menu-item-2403" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/kolichestvo-stvorok/" rel="nofollow" class="">Количество створок</a></li>
+		<li id="accordion-menu-item-2338" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Количество листов</a>
+		<span class="arrow"></span><ul class="sub-menu">
+			<li id="accordion-menu-item-2337" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/konstrukcija-odnolistovoj-dveri/" rel="nofollow" class="">Конструкция однолистовой двери</a></li>
+			<li id="accordion-menu-item-2335" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/konstrukcija-dvuhlistovoj-dveri/" rel="nofollow" class="">Конструкция двухлистовой двери</a></li>
+			<li id="accordion-menu-item-2336" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/konstrukcija-trehlistovoj-dveri/" rel="nofollow" class="">Конструкция трехлистовой двери</a></li>
+			<li id="accordion-menu-item-2334" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/konstrukcija-reshetchatoj-dveri/" rel="nofollow" class="">Конструкция решетчатой двери</a></li>
+		</ul>
+</li>
+		<li id="accordion-menu-item-2451" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Открывание</a>
+		<span class="arrow"></span><ul class="sub-menu">
+			<li id="accordion-menu-item-2453" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/naruzhnoe-otkryvanie/" rel="nofollow" class="">Наружное открывание</a></li>
+			<li id="accordion-menu-item-2452" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/vnutrennee-otkryvanie/" rel="nofollow" class="">Внутреннее открывание</a></li>
+		</ul>
+</li>
+		<li id="accordion-menu-item-2360" class="menu-item menu-item-type-post_type menu-item-object-product "><a href="https://dverigrad-spb.ru/jelementy-konstrukcii/dvojnoj-pritvor/" rel="nofollow" class="">Второй притвор</a></li>
+		<li id="accordion-menu-item-2230" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat "><a href="https://dverigrad-spb.ru/jelementy-konstrukcii/nalichniki/" rel="nofollow" class="">Наличники</a></li>
+		<li id="accordion-menu-item-2341" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/uteplitel-rockwool-skandik/" rel="nofollow" class="">Утеплитель</a></li>
+		<li id="accordion-menu-item-2430" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/uplotnitel-pervyj-kontur/" rel="nofollow" class="">Уплотнительная резинка (первый контур)</a></li>
+		<li id="accordion-menu-item-2433" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/uplotnitel-vtoroj-kontur/" rel="nofollow" class="">Уплотнительная резинка (второй контур)</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="accordion-menu-item-3467" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children  has-sub"><a class="nolink" href="#">Услуги и сервис</a>
+<span class="arrow"></span><ul class="sub-menu">
+	<li id="accordion-menu-item-2381" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/zamer/" rel="nofollow" class="">Замер</a></li>
+	<li id="accordion-menu-item-2372" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/dostavka/" rel="nofollow" class="">Доставка</a></li>
+	<li id="accordion-menu-item-2378" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/ustanovka/" rel="nofollow" class="">Установка</a></li>
+	<li id="accordion-menu-item-2384" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/oplata/" rel="nofollow" class="">Оплата</a></li>
+	<li id="accordion-menu-item-2367" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/garantiya/" rel="nofollow" class="">Гарантия</a></li>
+</ul>
+</li>
+<li id="accordion-menu-item-1684" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="https://dverigrad-spb.ru/contact/" rel="nofollow" class="">Контакты</a></li>
+</ul></div><div class="menu-custom-block"><a href="/metallicheskie-dveri-zakaz/" class="text-uppercase href_menu_calc_dverey ">Калькулятор дверей<em class="tip hot">ХИТ</em></a></div><div class="menu-wrap"><ul id="menu-top-navigation-1" class="top-links accordion-menu show-arrow"><li id="accordion-menu-item-1697" class="my_noindex_menu menu-item menu-item-type-post_type menu-item-object-page "><!--noindex--><a rel="nofollow" href="https://dverigrad-spb.ru/wishlist/" class="">Список Избранного</a><!--/noindex--></li>
+<li id="accordion-menu-item-1930" class="modal_obratniy_zvonok menu-item menu-item-type-custom menu-item-object-custom "><a class="nolink" href="#">Обратный звонок</a></li>
+<li id="accordion-menu-item-1931" class="modal_vizov_zamershika menu-item menu-item-type-custom menu-item-object-custom "><a class="nolink" href="#">Вызвать замерщика</a></li>
+</ul></div></div>
+<div class="porto-block"><div id="modal_obratniy_zvonok" class="modal fade">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+
+<div class="modal-header">
+<h3 class="modal-title">Обратный звонок</h3>
+<button class="close" type="button" data-bs-dismiss="modal" aria-hidden="true">×</button>
+
+</div>
+
+<div class="modal-body"><div role="form" class="wpcf7" id="wpcf7-f1727-o2" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/politika-konfidencialnosti/#wpcf7-f1727-o2" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="1727">
+<input type="hidden" name="_wpcf7_version" value="5.5.6">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f1727-o2">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<p><label> Ваше Имя (требуется)<br>
+    <span class="wpcf7-form-control-wrap text-739"><input type="text" name="text-739" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span> </label></p>
+<p><label> Ваш Телефон (требуется)<br>
+    <span class="wpcf7-form-control-wrap tel-951"><input type="tel" name="tel-951" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel" aria-required="true" aria-invalid="false"></span> </label></p>
+<p><label> Желательное время звонка<br>
+    <span class="wpcf7-form-control-wrap text-668"><input type="text" name="text-668" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false"></span> </label></p>
+<div class="d-none">
+<span class="wpcf7-form-control-wrap agree"><span class="wpcf7-form-control wpcf7-acceptance invert"><span class="wpcf7-list-item"><input type="checkbox" name="agree" value="1" aria-invalid="false" checked="checked" class="mycf7_agree d-none"></span></span></span>
+</div>
+<p><input type="submit" value="Отправить" class="wpcf7-form-control has-spinner wpcf7-submit"></p>
+<div class="wpcf7-response-output" aria-hidden="true"></div></form></div></div>
+</div>
+</div>
+</div>
+<div id="modal_vizov_zamershika" class="modal fade">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+
+<div class="modal-header">
+<h3 class="modal-title">Вызов замерщика</h3>
+<button class="close" type="button" data-bs-dismiss="modal" aria-hidden="true">×</button>
+
+</div>
+
+<div class="modal-body"><div role="form" class="wpcf7" id="wpcf7-f1728-o3" dir="ltr" lang="ru-RU">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/politika-konfidencialnosti/#wpcf7-f1728-o3" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="1728">
+<input type="hidden" name="_wpcf7_version" value="5.5.6">
+<input type="hidden" name="_wpcf7_locale" value="ru_RU">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f1728-o3">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="_wpcf7_posted_data_hash" value="">
+</div>
+<p><label> Ваше Имя (требуется)<br>
+    <span class="wpcf7-form-control-wrap text-115"><input type="text" name="text-115" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span> </label></p>
+<p><label> Ваш Телефон (требуется)<br>
+    <span class="wpcf7-form-control-wrap tel-39"><input type="tel" name="tel-39" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel" aria-required="true" aria-invalid="false"></span> </label></p>
+<p><label> Ваш Адрес<br>
+    <span class="wpcf7-form-control-wrap textarea-500"><textarea name="textarea-500" cols="40" rows="4" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false"></textarea></span> </label></p>
+<p><span class="wpcf7-form-control-wrap textarea-73"><textarea name="textarea-73" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" id="parametry_dveri_quick_zamer" aria-invalid="false">Вызов замерщика не из карточки двери</textarea></span></p>
+<div class="d-none">
+<span class="wpcf7-form-control-wrap agree"><span class="wpcf7-form-control wpcf7-acceptance invert"><span class="wpcf7-list-item"><input type="checkbox" name="agree" value="1" aria-invalid="false" checked="checked" class="mycf7_agree"></span></span></span>
+</div>
+<p><input type="submit" value="Вызвать Замерщика" class="wpcf7-form-control has-spinner wpcf7-submit"></p>
+<div class="wpcf7-response-output" aria-hidden="true"></div></form></div>Подробнее о вызове замерщика читайте <a href="/zamer/">здесь</a>.</div>
+</div>
+</div>
+</div>
+<span id="show_link_modal_podrobnee"></span>
+<div id="modal_podrobnee" class="modal fade">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+
+<div class="modal-header">
+<h3 class="modal-title">Подробнее для дверей</h3>
+<button class="close" type="button" data-bs-dismiss="modal" aria-hidden="true">×</button>
+
+</div>
+
+<div class="modal-body"></div>
+</div>
+</div>
+</div></div><script type="text/html" id="wpb-modifications"></script>	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<script type="rocketlazyloadscript" src="https://dverigrad-spb.ru/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9" id="regenerator-runtime-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://dverigrad-spb.ru/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0" id="wp-polyfill-js"></script>
+<script id="contact-form-7-js-extra">
+var wpcf7 = {"api":{"root":"https:\/\/dverigrad-spb.ru\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+</script>
+<script type="rocketlazyloadscript" id="contact-form-7-js-before">
+wpcf7.cached = 0;
+</script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1672644537" id="contact-form-7-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.6.4.1" id="jquery-blockui-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.6.4.1" id="js-cookie-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=6.4.1" id="woocommerce-js" defer=""></script>
+<script id="wc-cart-fragments-js-extra">
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_d489dd1b18fb7536bcb36b1b58572872","fragment_name":"wc_fragments_d489dd1b18fb7536bcb36b1b58572872","request_timeout":"5000"};
+</script>
+<script src="https://dverigrad-spb.ru/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=6.4.1" id="wc-cart-fragments-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-includes/js/imagesloaded.min.js?ver=4.1.4" id="imagesloaded-js" defer=""></script>
+<script id="porto-theme-js-extra">
+var js_porto_vars = {"rtl":"","theme_url":"https:\/\/dverigrad-spb.ru\/wp-content\/themes\/porto-child","ajax_url":"https:\/\/dverigrad-spb.ru\/wp-admin\/admin-ajax.php","change_logo":"1","container_width":"1368","grid_gutter_width":"30","show_sticky_header":"1","show_sticky_header_tablet":"1","show_sticky_header_mobile":"1","ajax_loader_url":"\/\/dverigrad-spb.ru\/wp-content\/themes\/porto\/images\/ajax-loader@2x.gif","category_ajax":"1","compare_popup":"","compare_popup_title":"","prdctfltr_ajax":"","slider_loop":"1","slider_autoplay":"1","slider_autoheight":"1","slider_speed":"5000","slider_nav":"","slider_nav_hover":"1","slider_margin":"","slider_dots":"1","slider_animatein":"","slider_animateout":"","product_thumbs_count":"4","product_zoom":"0","product_zoom_mobile":"","product_image_popup":"1","zoom_type":"lens","zoom_scroll":"1","zoom_lens_size":"150","zoom_lens_shape":"round","zoom_contain_lens":"1","zoom_lens_border":"1","zoom_border_color":"#fc6440","zoom_border":"2","screen_lg":"1398","mfp_counter":"%curr% \u0438\u0437 %total%","mfp_img_error":"<a href=\u00ab%url%\u00bb>\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435<\/a> \u043d\u0435 \u0431\u044b\u043b\u043e \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043d\u043e.","mfp_ajax_error":"<a href=\u00ab%url%\u00bb>\u0414\u0430\u043d\u043d\u044b\u0439 \u043a\u043e\u043d\u0442\u0435\u043d\u0442<\/a> \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043d.","popup_close":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c","popup_prev":"\u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0430\u044f","popup_next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0430\u044f","request_error":"\u041d\u0435\u0432\u043e\u0437\u043c\u043e\u0436\u043d\u043e \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0437\u0430\u043f\u0440\u0430\u0448\u0438\u0432\u0430\u0435\u043c\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435.<br\/>\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430 \u043f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u043f\u043e\u0437\u0436\u0435.","loader_text":"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430...","submenu_back":"\u041d\u0430\u0437\u0430\u0434","porto_nonce":"8b56787f56","use_skeleton_screen":[],"user_edit_pages":""};
+</script>
+<script src="https://dverigrad-spb.ru/wp-content/themes/porto/js/theme.min.js?ver=6.2.6" id="porto-theme-js" defer=""></script>
+<script id="porto-woocommerce-theme-js-before">
+hrefLoadedPage=window.location.href;
+jQuery( document ).on( 'click', '.gridlist-toggle #grid, .gridlist-toggle #list', function ( e ) {
+    var link = document.createElement("a");
+    link.href = hrefLoadedPage;
+    history.pushState({},'',link.pathname + location.search);
+})
+</script>
+<script src="https://dverigrad-spb.ru/wp-content/themes/porto/js/woocommerce-theme.min.js?ver=6.2.6" id="porto-woocommerce-theme-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-content/themes/porto-child/js/my-global-common.min.js?ver=0.0.2" id="my-global-common-js" defer=""></script>
+<script id="porto-live-search-js-extra">
+var porto_live_search = {"nonce":"6b5fc7f962"};
+</script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/themes/porto/inc/lib/live-search/live-search.js?ver=1672644537" id="porto-live-search-js" defer=""></script>
+<script id="my-jquery-yith-wcwl-js-extra">
+var yith_wcwl_l10n = {"ajax_url":"\/wp-admin\/admin-ajax.php","redirect_to_cart":"no","multi_wishlist":"","hide_add_button":"1","enable_ajax_loading":"1","ajax_loader_url":"https:\/\/dverigrad-spb.ru\/wp-content\/plugins\/yith-woocommerce-wishlist\/assets\/images\/ajax-loader-alt.svg","remove_from_wishlist_after_add_to_cart":"1","is_wishlist_responsive":"1","time_to_close_prettyphoto":"3000","fragments_index_glue":".","reload_on_found_variation":"1","mobile_media_query":"768","labels":{"cookie_disabled":"We are sorry, but this feature is available only if cookies on your browser are enabled.","added_to_cart_message":"<div class=\"woocommerce-notices-wrapper\"><div class=\"woocommerce-message\" role=\"alert\">Product added to cart successfully<\/div><\/div>"},"actions":{"add_to_wishlist_action":"add_to_wishlist","remove_from_wishlist_action":"remove_from_wishlist","reload_wishlist_and_adding_elem_action":"reload_wishlist_and_adding_elem","load_mobile_action":"load_mobile","delete_item_action":"delete_item","save_title_action":"save_title","save_privacy_action":"save_privacy","load_fragments":"load_fragments"},"nonce":{"add_to_wishlist_nonce":"6f885dc821","remove_from_wishlist_nonce":"f9dc837f95","reload_wishlist_and_adding_elem_nonce":"580129075a","load_mobile_nonce":"56b3029ee9","delete_item_nonce":"157d25e495","save_title_nonce":"f9df3cb12f","save_privacy_nonce":"1a41ba833a","load_fragments_nonce":"a7af0d3cd5"},"enable_notices":""};
+</script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/themes/porto-child/js/plugs-rewriten/jquery.yith-wcwl.js?ver=1672644537" id="my-jquery-yith-wcwl-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://dverigrad-spb.ru/wp-includes/js/comment-reply.min.js?ver=5.9.3" id="comment-reply-js" defer=""></script>
+<script id="wpb_composer_front_js-js-extra">
+var vcData = {"currentTheme":{"slug":"porto"}};
+</script>
+<script type="rocketlazyloadscript" src="https://dverigrad-spb.ru/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=6.9.0" id="wpb_composer_front_js-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-content/themes/porto/js/bootstrap.min.js?ver=5.0.1" id="bootstrap-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-content/plugins/woocommerce/assets/js/jquery-cookie/jquery.cookie.min.js?ver=1.4.1-wc.6.4.1" id="jquery-cookie-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-content/themes/porto/js/libs/owl.carousel.min.js?ver=2.3.4" id="owl.carousel-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-content/themes/porto/js/libs/jquery.magnific-popup.min.js?ver=1.1.0" id="jquery-magnific-popup-js" defer=""></script>
+<script type="rocketlazyloadscript" src="https://dverigrad-spb.ru/wp-content/themes/porto/js/libs/jquery.fancybox.min.js?ver=2.1.5" id="jquery-fancybox-js" defer=""></script>
+<script src="https://dverigrad-spb.ru/wp-content/themes/porto/js/theme-async.min.js?ver=6.2.6" id="porto-theme-async-js" defer=""></script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://dverigrad-spb.ru/wp-content/cache/min/1/wp-content/plugins/clearfy_package/plugins/hide-my-wp/public/js/woo-resolver.js?ver=1672644537" id="whm-woo-resolver-js" defer=""></script>
+<script type="rocketlazyloadscript">jQuery(document).ready(function($){
+    $("#footer .wysija-submit").removeClass('btn-default').addClass('btn-primary');
+});</script><script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async="" src="https://dverigrad-spb.ru/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script>
+
+</body></html>

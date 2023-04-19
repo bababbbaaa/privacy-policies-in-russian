@@ -1,0 +1,3089 @@
+<html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%;"><head><style>
+  .fc.old-theme-fix {
+    overflow: visible;
+  }
+  .fc.old-theme-fix:after {
+    clear: both;
+    display: block;
+    content: '';
+  }
+  .tt-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+
+  }
+  .twitter-typeahead {
+    display: inherit !important;
+  }
+  .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+  }
+  .tt-suggestion, .tt-footer {
+    display: block;
+    padding: 1px 0px 1px 10px;
+  }
+  .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+    color: #fff;
+  }
+  .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+    color: #fff;
+    background-color: #428bca;
+  }
+  .tt-suggestion p, .tt-footer p {
+    margin: 0;
+  }
+</style><style>
+  .spinner-container, .spinner {
+    position: absolute;
+    left:     0;
+    bottom:   0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .spinner-container {
+    z-index:  900;
+    overflow: hidden;
+
+    &.animate .spinner {
+      &.slide-up {
+        opacity: 0;
+      }
+
+      &.fade-in {
+        opacity: 0;
+      }
+    }
+  }
+
+  .spinner {
+    height:   100%;
+    opacity:  0.6;
+    background: #fff;
+
+    &.slide-up {
+      @include transition-property(opacity, bottom);
+      @include transition-duration(0.3s);
+    }
+
+    &.fade-in {
+      @include transition-property(opacity);
+      @include transition-duration(1s);
+    }
+
+    .spin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+
+  .spinner {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  .spinner-screen {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+  }
+</style><meta data-config="{&quot;money_with_currency_format&quot;:{&quot;delimiter&quot;:&quot;&quot;,&quot;separator&quot;:&quot;.&quot;,&quot;format&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;руб&quot;,&quot;show_price_without_cents&quot;:0},&quot;currency_code&quot;:&quot;RUR&quot;,&quot;default_currency&quot;:{&quot;title&quot;:&quot;Российский рубль&quot;,&quot;code&quot;:&quot;RUR&quot;,&quot;rate&quot;:1.0,&quot;format_string&quot;:&quot;%n\u0026nbsp;%u&quot;,&quot;unit&quot;:&quot;руб&quot;,&quot;price_separator&quot;:null,&quot;is_default&quot;:true,&quot;price_delimiter&quot;:null,&quot;show_price_with_delimiter&quot;:null,&quot;show_price_without_cents&quot;:null},&quot;facebook&quot;:{&quot;pixelActive&quot;:false,&quot;currency_code&quot;:&quot;RUB&quot;,&quot;use_variants&quot;:null},&quot;vk&quot;:{&quot;pixel_active&quot;:null,&quot;price_list_id&quot;:null},&quot;new_ya_metrika&quot;:true,&quot;ecommerce_data_container&quot;:&quot;dataLayer&quot;,&quot;common_js_version&quot;:null,&quot;vue_ui_version&quot;:null,&quot;feedback_captcha_enabled&quot;:&quot;1&quot;,&quot;account_id&quot;:90233,&quot;hide_items_out_of_stock&quot;:true,&quot;forbid_order_over_existing&quot;:true,&quot;minimum_items_price&quot;:null,&quot;enable_comparison&quot;:true,&quot;locale&quot;:&quot;ru&quot;,&quot;client_group&quot;:null,&quot;consent_to_personal_data&quot;:{&quot;active&quot;:true,&quot;obligatory&quot;:true,&quot;description&quot;:&quot;Настоящим подтверждаю, что я ознакомлен и согласен с условиями \u003ca href='/page/oferta-politica-konfedicialnosti' target='blank'\u003eоферты и политики конфиденциальности\u003c/a\u003e.&quot;},&quot;recaptcha_key&quot;:&quot;6Lc0T0YUAAAAAAVNiH-_bnSC4E-YHMFTeYOqZyRx&quot;,&quot;checkout_float_order_content_block&quot;:false,&quot;sber_id_app_id&quot;:&quot;5b5a3c11-72e5-4871-8649-4cdbab3ba9a4&quot;,&quot;theme_generation&quot;:2,&quot;quick_checkout_captcha_enabled&quot;:false,&quot;max_order_lines_count&quot;:500}" name="shop-config" content=""><meta name="js-evnvironment" content="production"><meta name="default-locale" content="ru"><meta name="insales-redefined-api-methods" content="[]"><script async="" src="//www.google-analytics.com/analytics.js"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript" async="" src="https://top-fwz1.mail.ru/js/code.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-NZTJGJT"></script><script async="" src="https://widget.flamp.ru/loader.js"></script><script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="/javascripts/insales_counter.js?6"></script><script src="/packs/js/shop_bundle-8a1e792bc7fc3e09587c.js"></script><style type="text/css"></style>
+        <!--InsalesCounter -->
+        <script type="text/javascript">
+        if (typeof(__id) == 'undefined') {
+          var __id=90233;
+
+          (function() {
+            var ic = document.createElement('script'); ic.type = 'text/javascript'; ic.async = true;
+            ic.src = '/javascripts/insales_counter.js?6';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ic, s);
+          })();
+        }
+        </script>
+        <!-- /InsalesCounter -->
+    <script type="text/javascript">
+      (function() {
+        var fileref = document.createElement('script');
+        fileref.setAttribute("type","text/javascript");
+        fileref.setAttribute("src", 'https://sberbank.pimentos.net/js/notifications.min.js');
+        document.getElementsByTagName("head")[0].appendChild(fileref);
+      })();
+    </script><script type="text/javascript" src="https://sberbank.pimentos.net/js/notifications.min.js"></script>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Пользовательское соглашение</title>
+  <meta name="keywords" content="Пользовательское соглашение">
+  <meta name="description" content="Пользовательское соглашение">
+  
+   <link rel="icon" href="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/favicon.ico" type="image/x-icon">   
+  <link rel="shortcut icon" href="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/favicon.ico" type="image/x-icon"> 
+  
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/style.css" type="text/css" media="screen, projection">
+ 
+  <link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/jquery.rating.css">  
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <!--<script type="text/javascript" src="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/pie.js"></script>
+  <![endif]-->
+  <!--[if lte IE 8]>
+  <style type="text/css">
+  #menu ul, #menu .first, #menu .last, .cart, .search .txt, .catalog, .quantity_input, .price-filter .txt, .coupon .txt, #comment_form input.txt, #review_form input.txt, #comment_form textarea, #review_form textarea, .style-block, #add_product_notification  {
+behavior: url(https://www.mega-gastronom.ruhttps://static.insales-cdn.com/assets/1/8070/941958/1622187787/PIE.htc);
+   zoom: 1;
+ }
+.style-block {position: relative;}
+.txt, .quantity_input {position: relative;}
+#menu ul {z-index: 100; position: relative;}
+</style>
+<![endif]-->
+  <script type="text/javascript" src="/served_assets/public/shadowbox/adapter/shadowbox-jquery.js?1676529010"></script>
+  <script type="text/javascript" src="/served_assets/public/shadowbox/shadowbox.js?1676529010"></script>
+  <script type="text/javascript" src="/served_assets/public/jquery.cookie.js?1676529010"></script> 
+  <script type="text/javascript" src="/served_assets/empty.js"></script>
+  <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/jquery.MetaData.js"> </script>
+  <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/jquery.rating.pack.js"> </script>
+  <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/jquery.cycle.all.js"></script>
+  <script type="text/javascript" src="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/common.js"></script>
+  
+  <script type="text/javascript">
+    var cv_currency_format = "{\"delimiter\":\"\",\"separator\":\".\",\"format\":\"%n\\u0026nbsp;%u\",\"unit\":\"руб\",\"show_price_without_cents\":0}";
+  </script>
+  <script type="text/javascript">
+    Shadowbox.loadSkin('classic', '/javascripts/shadowbox/skin');
+    Shadowbox.loadLanguage('ru', '/javascripts/shadowbox/lang');
+    Shadowbox.loadPlayer(['img'], '/javascripts/shadowbox/player');
+    window.onload = Shadowbox.init;
+       
+    jQuery(function() {
+      $("a.add_to_compare").live('click',function(e){ 
+        e.preventDefault(); 
+      });
+  
+      new InSales.Compare({
+        selector: 'a.add_to_compare',
+        draw: function(products) {
+
+          var text = '<h2>Сравнение товаров</h2>';
+          if (products.length == 0) {
+            text += '<i>Пока ни одного товара к сравнению не добавлено.</i>';
+            
+          } else {
+            text += '<ul class="compare-sidebar">';
+            $(products).each(function(index,product) {
+              text += '<li><a class="comp-info fl" href="/product/?product_id=' + product.id + '">'+product.title+'</a><a href="#" rel="' + product.id + '" class="remove_compare del fr" href="#">×</a></li>';  
+            });
+            text += '</ul><input type="submit" value="Сравнить" onclick="window.open(\'/compares\'); return false;" name="" class="button fr">';
+          }
+          $('.compare-wrap').html(text);
+          
+        }
+      });
+      
+      $('.compare-sidebar li .remove_compare').each(function() {
+ $(this).parents('#middle').find('.prod-block a.add_to_compare[rel="'+$(this).attr('rel')+'"]').replaceWith("<p rel="+$(this).attr('rel')+" class='added'>Товар добавлен к сравнению</p>");
+        
+       
+        
+      });
+      
+      $('.compare-sidebar li .remove_compare').live('click',function() {
+         $(this).parents('#middle').find('.prod-block p[rel="'+$(this).attr('rel')+'"]').replaceWith('<a href="#" class="add_to_compare" rel="'+$(this).attr('rel')+'">Добавить к сравнению</a> ');
+         
+      });
+            
+      startCart = new InSales.Cart({
+        selector: 'input.buy',
+        draw: function(cart) {
+          var text = '';
+          if (cart.order_lines.length == 0) {
+            text += '<i>Корзина пуста</i>';
+          } else {
+            text += '<span class="cart_items_price">' + InSales.formatMoney(cart.items_price, "{\"delimiter\":\"\",\"separator\":\".\",\"format\":\"%n\\u0026nbsp;%u\",\"unit\":\"руб\",\"show_price_without_cents\":0}") + '</span> <span class="cart_items_count">' + cart.items_count + '</span>';
+          }
+          $('.cart-inner').html(text);
+          this.addCallback = function () {
+                this.reloadCart(function () {
+                  cart.draw();
+                  set_preloaders_message('<div id="add_product_notification"><h3>Товар добавлен в корзину</h3><!--a href="#" class="closeCartMsg fl buy_button order_button">Продолжить покупки</a><a href="/cart_items/" class="fr buy_button">Перейти в корзину</a--></div>');
+                  window.setTimeout( hide_preloader, 1000);
+
+                });
+              }
+        }
+      });       
+      
+      /* поиска по сайту или в категории */
+      changeSearch();
+      $('.search_check').change(function(){
+        changeSearch();
+      });
+      
+      function changeSearch() {
+        if($('.search_check').is(':checked')) {
+          $('form.searchform').attr('action', '');
+        } else {
+          $('form.searchform').attr('action', '/search');
+        }
+      }
+      
+      $('.closeCartMsg').live('click', function(e){
+       e.preventDefault();
+        hide_preloader();
+      });
+    });
+  </script><link rel="stylesheet" type="text/css" href="/javascripts/shadowbox/skin/classic/skin.css"><script type="text/javascript" src="/javascripts/shadowbox/skin/classic/skin.js"></script><script type="text/javascript" src="/javascripts/shadowbox/lang/shadowbox-ru.js"></script><script type="text/javascript" src="/javascripts/shadowbox/player/shadowbox-img.js"></script>
+  <script type="text/javascript">
+ $(function(){
+   $('.catalog-arrow').click(function(e){
+     e.preventDefault();
+     $('.catalog .hidden').css('display','inline-block');
+     $(this).hide();
+   });
+   
+   $('.prod-descr.init-tooltip').each(function(){
+     
+     var fullDescr = $(this).attr('title');
+     $(this).parents('.prod-block:first').append('<span class="tooltip">' + fullDescr + '</span>');
+   });
+   
+   $('.prod-descr').mouseover(function(){
+    $(this).parents('.prod-block:first').find('.tooltip').fadeIn('100');
+   });
+   
+   $('.tooltip').mouseout(function(){
+     $(this).parents('.prod-block:first').find('.tooltip').hide();
+   });
+ });
+</script>
+
+
+  <link type="text/css" rel="stylesheet" media="all" href="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/custom-user.css">
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45779126-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<meta name="yandex-verification" content="521fbdb8d2ebd178">
+
+<!-- Global site tag (gtag.js) - Google Ads: 992295586 --> <script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-992295586"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-992295586'); </script>
+<meta name="yandex-verification" content="dc4ffd9a767d2fd1">
+
+<script>
+// колбек добавления рекапчи в форму автоматически
+window.recaptchaCallbackInsalesCommon = function () {
+  var key = $('[name="shop-config"]').data('config').recaptcha_key;
+  var recaptchaVerify = function (response) {
+    jquery('[name="g-recaptcha-response"]').html(response);
+  };
+
+  // селектор формы на странице обратной связи.
+  var nativeForm = '[action="/client_account/feedback"]';
+
+  // Добавляем блок js-recaptcha-field в формы feedback автоматически
+  $(nativeForm).each(function(index, el) {
+    var recapchaNative = $(el).find('.js-recaptcha-field, [name="g-recaptcha-response"]');
+    if (recapchaNative.length == 0) {
+      $(el).append($('<div/>', {
+        class: 'js-recaptcha-field'
+      }))
+    }
+  });
+
+  // добавляем к блокам с классом js-recaptcha-field рекапчу
+  $('.js-recaptcha-field').each(function(index, el) {
+    if ($(window).width() < 360) {
+      $(el).attr('data-size', 'compact').data('size', 'compact');
+    }
+    grecaptchaWidget = grecaptcha.render($(el).get(0), {
+      sitekey: key,
+      callback: recaptchaVerify
+    });
+    window = { grecaptchaWidget: grecaptchaWidget };
+  });
+}
+
+function scriptLoader (src) {
+  var testDouble = document.querySelector('script[src="'+src+'"]');
+  if (!testDouble) {
+    var script_tag = document.createElement('script');
+    script_tag.setAttribute('src', src);
+    script_tag.setAttribute('async', '');
+    script_tag.setAttribute('defer', '');
+    document.body.insertAdjacentElement('afterend', script_tag);
+  }
+}
+
+// window load и setTimeout, чтобы скрипт рекапчи не блокировал загрузку сайта
+window.addEventListener('load', function() {
+  var shopConfig = $('[name="shop-config"]').data('config');
+  setTimeout(function () {
+    if (shopConfig.feedback_captcha_enabled) {
+      scriptLoader('https://www.google.com/recaptcha/api.js?onload=recaptchaCallbackInsalesCommon&hl=' + shopConfig.locale + '&render=explicit');
+    }
+  }, 2500)
+});
+</script>
+<style id="abu-collapse-styles" type="text/css"></style><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.cYEbrOmw59Q.L.W.O/d=0/rs=AN8SPfpU282joXDlbkUblMtWLWoZn4bb2g/m=el_main_css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/_/translate_http/_/js/k=translate_http.tr.en_US.IX50iS7lRzk.O/d=1/exm=el_conf/ed=1/rs=AN8SPfrlaQG6BlrcuvocdoLe1vj1HgTttw/m=el_main"></script></head>
+
+  <body id="one-column" style="position: relative; min-height: 100%; top: 0px;">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(22983010, "init", {
+        webvisor:true,
+        ecommerce:dataLayer,
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<script type="text/javascript">
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/22983010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+    <div id="goog-gt-" class="skiptranslate VIpgJd-yAWNEb-L7lbkb" dir="ltr"><div style="padding: 8px;"><div><div class="VIpgJd-yAWNEb-l4eHX"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" alt="Google Translate" width="20" height="20"></div></div></div><div style="padding: 8px; float: left; width: 100%;"><h1 class="VIpgJd-yAWNEb-r4nke VIpgJd-yAWNEb-mrxPge">Original text</h1></div><div style="padding: 8px;"><div class="VIpgJd-yAWNEb-nVMfcd-fmcmS"></div></div><div class="VIpgJd-yAWNEb-cGMI2b" style="padding: 8px;"><div class="VIpgJd-yAWNEb-Z0Arqf-PLDbbf"><span class="VIpgJd-yAWNEb-Z0Arqf-hSRGPd">Contribute a better translation</span></div><div class="VIpgJd-yAWNEb-fw42Ze-Z0Arqf-haAclf"><hr style="color: #ccc; background-color: #ccc; height: 1px; border: none;"><div class="VIpgJd-yAWNEb-Z0Arqf-H9tDt"></div></div></div><div class="VIpgJd-yAWNEb-jOfkMb-Ne3sFf" style="display: none;"></div></div><div id="wrapper">
+      <div id="header-bg"></div>
+      <div id="header">
+        <div class="center-align">          
+          <div id="menu">
+            <div class="first"></div>
+            <div class="menu-inner">
+              <ul>	
+                
+                <li><a href="/page/o-nas" title="О нас" class="">О нас</a></li>
+                
+                <li><a href="/page/dostavka" title="Доставка и оплата" class="">Доставка и оплата</a></li>
+                
+                <li><a href="/page/otzyvy-o-nas" title="Отзывы о нас на Флампе" class="">Отзывы о нас на Флампе</a></li>
+                
+                <li><a href="/page/kak-zakazat" title="Как заказать?" class="">Как заказать?</a></li>
+                
+                <li><a href="/page/kontakty" title="Контакты" class="">Контакты</a></li>
+                
+                <li><a href="/client_account/login" title="Личный кабинет" class="">Личный кабинет</a></li>
+                	
+              </ul>	
+            </div>
+            <div class="last"></div>
+          </div>	
+          <div class="b-langs">
+        
+      </div>
+
+          
+          <a href="/" class="logo">
+            <img src="https://static.insales-cdn.com/assets/1/8070/941958/1622187787/loaded_logo.png" alt="МЕГА-Гастроном">
+		</a>
+          
+          
+          
+          <div class="phone" itemscope="" itemtype="http://schema.org/Store">
+            <span itemprop="telephone">+7 (383) 292-23-51</span>
+            <span itemprop="name" class="hidden">МЕГА-Гастроном</span>
+            <span class="hidden" itemprop="address">https://www.mega-gastronom.ru</span>
+          </div>	
+          
+		<div class="search">
+          <form action="/search" method="get" class="searchform">     
+           	 
+		  <fieldset>
+		   <input type="text" name="q" class="txt" placeholder="Поиск товаров" value=""><img id="xButton0" src="https://static-internal.insales.ru/files/1/3445/4590965/original/delete.svg" style="display: none; cursor: pointer; margin-left: -15px;">
+		   <input type="submit" class="btn" value="">
+            
+		  </fieldset>
+		 </form>
+		</div>         
+          <div class="header-wishlist"><a href="/page/wishlist"><i class="fa fa-heart fa-lg"></i><span class="wishlist-count">0</span></a></div>
+	   <div class="cart">
+         <a href="/cart_items" class="cart-inner"><i>Корзина пуста</i></a>
+		</div>
+
+
+
+
+ 
+
+          	
+          
+		
+	          <div class="main-clear"></div>
+          <div class="catalog">
+            <a class="catalog-arrow" title="Все категории" href="#" style="display: none;"><span>〉</span></a>
+            
+		 <ul style="text-align:center;">
+           
+          
+           <li class=""><a href="/collection/produkty" class="">Продукты питания</a>
+              
+             
+		   <ul>
+             
+               
+             <li class=""><a href="/collection/aziatskaya-kuhnya" class="">Азиатская кухня</a>
+                
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/bakaleya" class="">Бакалея</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/krupy" class="">Крупы</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/bobovye" class="">Бобовые</a></li>	
+               
+               
+               
+               <li><a href="/collection/grecha" class="">Гречка</a></li>	
+               
+               
+               
+               <li><a href="/collection/krupy-s-dobavkami-i-smesi" class="">Крупы с добавками и смеси</a></li>	
+               
+               
+               
+               <li><a href="/collection/mannaya-krupa" class="">Манная крупа</a></li>	
+               
+               
+               
+               <li><a href="/collection/perlovaya-krupa" class="">Перловая крупа</a></li>	
+               
+               
+               
+               <li><a href="/collection/psheno" class="">Пшено</a></li>	
+               
+               
+               
+               <li><a href="/collection/ris" class="">Рис</a></li>	
+               
+               
+               
+               <li><a href="/collection/prochie" class="">Прочие крупы</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/makaronnye-izdeliya" class="">Макаронные изделия</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/vermishel" class="">Вермишель</a></li>	
+               
+               
+               
+               <li><a href="/collection/lapsha-i-gnezda" class="">Лапша и гнезда</a></li>	
+               
+               
+               
+               <li><a href="/collection/perya-trubochki" class="">Перья, трубочки</a></li>	
+               
+               
+               
+               <li><a href="/collection/rozhki-rakushki-babochki-bantiki" class="">Рожки, ракушки, бабочки, бантики</a></li>	
+               
+               
+               
+               <li><a href="/collection/spagetti-solomka" class="">Спагетти, соломка</a></li>	
+               
+               
+               
+               <li><a href="/collection/spirali" class="">Спирали</a></li>	
+               
+               
+               
+               <li><a href="/collection/figurnye-izdeliya-i-lazanya" class="">Фигурные изделия и лазанья</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/masla-rastitelnye" class="">Масла растительные</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/muka-i-smesi-dlya-hlebopechek" class="">Мука и смеси для хлебопечек</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/orehi-suhofrukty-semechki" class="">Орехи, сухофрукты, семечки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/produkty-bystrogo-prigotovleniya" class="">Продукты быстрого приготовления</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sahar-sol" class="">Сахар, соль</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/smesi-i-komponenty-dlya-vypechki" class="">Смеси и компоненты для выпечки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/suhie-zavtraki-kashi-hlopya" class="">Сухие завтраки, каши, хлопья</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/chipsy-suhariki-sneki-popkorn" class="">Чипсы, сухарики, снеки, попкорн</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/myaso-ptitsa-ryba-i-moreprodukty" class="">Мясо, птица, рыба и морепродукты</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/myaso-ohlazhdennoe-i-zamorozhennoe" class="">Мясо охлажденное и замороженное</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/myaso-zamorozhennoe" class="">Мясо замороженное</a></li>	
+               
+               
+               
+               <li><a href="/collection/myaso-ohlazhdennoe" class="">Мясо охлажденное</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/myaso-ptitsy-ohlazhdennoe-i-zamorozhennoe" class="">Мясо птицы охлажденное и замороженное</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/myaso-ohlazhdennoe-2" class="">Мясо охлажденное</a></li>	
+               
+               
+               
+               <li><a href="/collection/myaso-zamorozhennoe-2" class="">Мясо замороженное</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/ryba-ohlazhdennaya-i-zamorozhennaya" class="">Рыба охлажденная и замороженная</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/ryba-ohlazhdennaya" class="">Рыба охлажденная</a></li>	
+               
+               
+               
+               <li><a href="/collection/ryba-zamorozhennaya" class="">Рыба замороженная</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/moreprodukty-ohlazhdennye-i-zamorozhennye" class="">Морепродукты охлажденные и замороженные</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/polufabrikaty-ohlazhdennye-i-zamorozhennye" class="">Полуфабрикаты охлажденные и замороженные</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/myasnaya-gastronomiya" class="">Мясная гастрономия</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/delikatesy" class="">Деликатесы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/kolbasa" class="">Колбасы и паштеты</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/vareno-kopchenye-kolbasy" class="">Сервелаты</a></li>	
+               
+               
+               
+               <li><a href="/collection/varenye-kolbasy" class="">Вареные колбасы</a></li>	
+               
+               
+               
+               <li><a href="/collection/vetchiny-i-vetchinnye-kolbasy" class="">Ветчины и ветчинные колбасы</a></li>	
+               
+               
+               
+               <li><a href="/collection/livernye-krovyanye-pashtety" class="">Паштеты, Ливерные колбасы</a></li>	
+               
+               
+               
+               <li><a href="/collection/polukopchenye-kolbasy" class="">Полукопченые колбасы</a></li>	
+               
+               
+               
+               <li><a href="/collection/syrokopchenye-kolbasy" class="">Сырокопченые колбасы</a></li>	
+               
+               
+               
+               <li><a href="/collection/syrovyalenye-kolbasy" class="">Сыровяленые колбасы</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sosiski-sardelki" class="">Сосиски, сардельки</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/sosiski" class="">Сосиски</a></li>	
+               
+               
+               
+               <li><a href="/collection/sardelki-shpikachki" class="">Сардельки, Шпикачки, Колбаски</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/holodtsy" class="">Холодцы</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/rybnaya-gastronomiya" class="">Рыбная гастрономия</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/zakuski-iz-ryby-i-moreproduktov" class="">Сушеная рыбка, Закуски из морепродуктов</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/ikra" class="">Икра</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/ryba-slabosolenaya-pryanaya-kopchenaya" class="">Пресервы, филе</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/ovoschi-frukty-zelen-griby" class="">Овощи, фрукты, зелень, грибы</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/griby" class="">Грибы</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/griby-svezhie" class="">Грибы свежие и сушеные</a></li>	
+               
+               
+               
+               <li><a href="/collection/griby-zamorozhennye" class="">Грибы замороженные</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/zelen-salaty" class="">Зелень, салаты, проростки</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/zelen-svezhaya" class="">Зелень свежая</a></li>	
+               
+               
+               
+               <li><a href="/collection/prorostki" class="">Проростки</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/ovoschi" class="">Овощи</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/svezhie-ovoschi" class="">Свежие овощи</a></li>	
+               
+               
+               
+               <li><a href="/collection/zamorozhennye-ovoschi-2" class="">Замороженные овощи</a></li>	
+               
+               
+               
+               <li><a href="/collection/zamorozhennye-ovoschnye-smesi" class="">Замороженные овощные смеси</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/frukty" class="">Фрукты</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/frukty-svezhie" class="">Фрукты свежие</a></li>	
+               
+               
+               
+               <li><a href="/collection/frukty-zamorozhennye" class="">Фрукты замороженные</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/yagody" class="">Ягоды</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/yagody-svezhie" class="">Ягоды свежие</a></li>	
+               
+               
+               
+               <li><a href="/collection/yagody-zamorozhennye" class="">Ягоды замороженные</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/molochnye-produkty-morozhenoe" class="">Молочные продукты, мороженое</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/moloko" class="">Молоко</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/smetana" class="">Сметана</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/slivki" class="">Сливки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/kislomolochnye-produkty" class="">Кисломолочные продукты</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/yogurty-deserty-tvorozhki" class="">Йогурты, десерты, творожки и желе</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               
+               
+               <li><a href="/collection/aktivia" class="">Активиа</a></li>	
+               
+               
+               
+               <li><a href="/collection/aktimel" class="">Актимель</a></li>	
+               
+               
+               
+               <li><a href="/collection/danon" class="">Данон</a></li>	
+               
+               
+               
+               <li><a href="/collection/imunele" class="">Имунеле</a></li>	
+               
+               
+               
+               <li><a href="/collection/rastishka" class="">Растишка</a></li>	
+               
+               
+               
+               <li><a href="/collection/chudo" class="">Чудо</a></li>	
+               
+               
+               
+               <li><a href="/collection/frugurt-bio-maks" class="">Фругурт, Био Макс</a></li>	
+               
+               
+               
+               <li><a href="/collection/ostalnye" class="">Остальные йогурты, десерты, творожки и желе</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/molochnye-kokteyli" class="">Молочные коктейли</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/molochnye-napitki-i-produkty" class="">Молочные напитки и продукты</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/tvorozhnye-izdeliya" class="">Творожные изделия</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/slivochnye-masla-margariny-spredy" class="">Сливочные масла, маргарины, спреды</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/maslo-slivochnoe" class="">Масло сливочное и спред</a></li>	
+               
+               
+               
+               <li><a href="/collection/margariny" class="">Маргарин и кулинарный жир</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/syry" class="">Сыры</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/syrnoe-assorti" class="">Сырное ассорти</a></li>	
+               
+               
+               
+               <li><a href="/collection/syry-tverdye" class="">Сыры твердые и полутвердые</a></li>	
+               
+               
+               
+               <li><a href="/collection/syry-myagkie" class="">Сыры мягкие</a></li>	
+               
+               
+               
+               <li><a href="/collection/syry-kopchenye" class="">Сыры копченые</a></li>	
+               
+               
+               
+               <li><a href="/collection/syry-tvorozhnye" class="">Сыры творожные</a></li>	
+               
+               
+               
+               <li><a href="/collection/syry-plavlenye" class="">Сыры плавленые</a></li>	
+               
+               
+               
+               <li><a href="/collection/syry-rassolnye" class="">Сыры рассольные</a></li>	
+               
+               
+               
+               <li><a href="/collection/syry-s-plesenyu" class="">Сыры с плесенью</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/morozhenoe" class="">Мороженое</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/stakanchiki-i-rozhki" class="">Стаканчики и рожки, лед</a></li>	
+               
+               
+               
+               <li><a href="/collection/eskimo-batonchiki" class="">Эскимо, батончики</a></li>	
+               
+               
+               
+               <li><a href="/collection/brikety-i-semeynye-upakovki" class="">Брикеты и семейные упаковки</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/soevye-produkty" class="">Соевые и зерновые продукты</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/hlebobulochnye-izdeliya-i-vypechka" class="">Хлебобулочные изделия и выпечка</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/hleb-tosty-lavash-lepeshki" class="">Хлеб, тосты, лаваш, лепешки, булочки</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/belyy-hleb" class="">Белый хлеб</a></li>	
+               
+               
+               
+               <li><a href="/collection/chernyy-seryy-borodinskiy-hleb" class="">Черный, серый, бородинский хлеб</a></li>	
+               
+               
+               
+               <li><a href="/collection/hleb-s-napolnitelyami" class="">Хлеб с наполнителями</a></li>	
+               
+               
+               
+               <li><a href="/collection/baton" class="">Батон, лаваш и лепешки</a></li>	
+               
+               
+               
+               <li><a href="/collection/bulochki" class="">Булочки</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/zamorozhennyy-hleb-i-vypechka" class="">Замороженная выпечка и хлеб</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/baranki-sushki-suhari" class="">Баранки, сушки, сухари</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/hlebnye-palochki-solomka" class="">Хлебные палочки, соломка</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/hlebtsy" class="">Хлебцы, слайсы и тарталетки</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/yaytso" class="">Яйцо</a>
+                
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/chay-kofe-kakao-tsikoriy" class="">Чай, кофе, какао, цикорий</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/chay" class="">Чай</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/chernyy-paketirovannyy-chay" class="">Черный пакетированный чай</a></li>	
+               
+               
+               
+               <li><a href="/collection/chernyy-listovoy-chay" class="">Черный листовой чай</a></li>	
+               
+               
+               
+               <li><a href="/collection/zelenyy-paketirovannyy-chay" class="">Зеленый пакетированный чай</a></li>	
+               
+               
+               
+               <li><a href="/collection/zelenyy-listovoy-chay" class="">Зеленый листовой чай</a></li>	
+               
+               
+               
+               <li><a href="/collection/travyanoy-fruktovyy-chay-mate" class="">Травяной, фруктовый чай, Матэ</a></li>	
+               
+               
+               
+               <li><a href="/collection/filtr-pakety-dlya-chaya" class="">Фильтр пакеты для чая</a></li>	
+               
+               
+               
+               
+               
+               <li><a href="/collection/chay-zamorozhennyy" class="">Чай замороженный</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/goryachiy-shokolad-napitki-kakao" class="">Горячий шоколад, напитки, какао</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/kofe" class="">Кофе</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/kofe-rastvorimyy" class="">Кофе растворимый</a></li>	
+               
+               
+               
+               <li><a href="/collection/kofe-molotyy" class="">Кофе молотый</a></li>	
+               
+               
+               
+               <li><a href="/collection/kofe-zernovoy" class="">Кофе зерновой</a></li>	
+               
+               
+               
+               <li><a href="/collection/kofe-v-kapsulah" class="">Кофе в капсулах</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/tsikoriy" class="">Цикорий</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/konditerskie-izdeliya" class="">Кондитерские изделия</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/vostochnye-sladosti" class="">Восточные сладости</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/zhevatelnaya-rezinka-i-osvezhayuschie-konfety" class="">Жевательная резинка, освежающие и жевательные конфеты, леденцы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/keksy-rulety-kruassany-pirozhnye" class="">Кексы, рулеты, круассаны, пирожные</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/konfety" class="">Конфеты и Наборы конфет</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/konfetys" class="">Конфеты</a></li>	
+               
+               
+               
+               <li><a href="/collection/nabory-konfet" class="">Наборы конфет</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/marmelad-zefir-pastila-sufle" class="">Мармелад, зефир, пастила, суфле</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/pechenie-vafli-pryaniki-kreker" class="">Печенье, вафли, пряники, крекер</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/pechenie" class="">Печенье</a></li>	
+               
+               
+               
+               <li><a href="/collection/vafli" class="">Вафли</a></li>	
+               
+               
+               
+               <li><a href="/collection/pryaniki" class="">Пряники</a></li>	
+               
+               
+               
+               <li><a href="/collection/kreker" class="">Крекер и Галеты</a></li>	
+               
+               
+               
+               <li><a href="/collection/krendel-kolechki-ushki" class="">Крендель, Колечки, Хворост, Ушки</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/torty-pirogi" class="">Торты, пироги</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/torty-i-pirogi" class="">Торты и пироги</a></li>	
+               
+               
+               
+               <li><a href="/collection/zamorozhennye-konditerskie-izdeliya" class="">Замороженные кондитерские изделия</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/shokolad" class="">Шоколад</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/novogodnie-podarki" class="">Новогодние подарки</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/dieticheskie-produkty" class="">Диетические продукты</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/zdorovaya-dieta" class="">Здоровая диета</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/konditerskie-izdeliya-bez-sahara" class="">Кондитерские изделия без сахара или глютена</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/plodovoyagodnye-konservy-bez-sahara" class="">Плодовоягодные консервы без сахара</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/saharozameniteli" class="">Сахарозаменители</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/muka-i-smesi-dlya-vypechki" class="">Мука и смеси для выпечки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/krupy-i-makaronnye-izdeliya" class="">Крупы и макаронные изделия</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             
+             
+               
+             <li class=""><a href="/collection/gotovye-blyuda-i-kulinariya" class="">Замороженные блюда, полуфабрикаты</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/zam-konditerskie-izdeliya-2" class="">Кондитерские изделия</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/blinchiki-syrniki-pirogi" class="">Блинчики, сырники, пироги...</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/pelmeni-hinkali-manty-vareniki" class="">Пельмени, хинкали, манты, вареники</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/pelmeni" class="">Пельмени</a></li>	
+               
+               
+               
+               <li><a href="/collection/hinkali-manty-vareniki" class="">Хинкали, манты, вареники</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/bifshteksy-kotlety-shnitseli" class="">Бифштексы, котлеты, шницели</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/vtorye-blyuda" class="">Вторые блюда</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/zamorozhennye-myasnye-izdeliya" class="">Замороженные мясные изделия, чебуреки, наггетсы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/pitstsa-lazanya" class="">Пицца, лазанья</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/konservirovannye-produkty" class="">Консервированные продукты</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/gotovye-blyuda" class="">Готовые блюда</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/gribnye-konservy" class="">Грибные консервы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/masliny-olivki-i-kapersy" class="">Маслины, оливки и каперсы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/molochnye-konservy" class="">Молочные консервы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/moreprodukty-konservirovannye" class="">Морепродукты консервированные</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/myasnye-konservy" class="">Мясные консервы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/ovoschnye-konservy" class="">Овощные консервы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/plodovo-yagodnye-konservy" class="">Плодово-ягодные консервы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/rybnye-konservy" class="">Рыбные консервы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/med" class="">Мед</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/zapravki-sousy-pripravy" class="">Заправки, соусы, приправы и ингредиенты</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/mayonez" class="">Майонез</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/traditsionnyy-mayonez" class="">Традиционный майонез</a></li>	
+               
+               
+               
+               <li><a href="/collection/olivkovyy-mayonez" class="">Оливковый майонез</a></li>	
+               
+               
+               
+               <li><a href="/collection/legkiy-postnyy-mayonez" class="">Легкий, постный майонез</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sousy-ketchupy-tomatnye-pasty" class="">Соусы, кетчупы, томатные пасты</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/spetsii-pripravy" class="">Специи, приправы, ингредиенты</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/uksus-marinady-gorchitsa-hren-azhdika" class="">Уксус, маринады, горчица, хрен, аджика</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/salaty-2" class="">Салаты и охлажденные блюда</a>
+                
+                             
+		    </li>
+              
+             
+             
+		   </ul>
+             
+		  </li>	
+             
+           
+          
+           <li class=""><a href="/collection/napitki" class="">Напитки</a>
+              
+             
+		   <ul>
+             
+               
+             <li class=""><a href="/collection/napitki-soki-vody" class="">Напитки, соки, воды</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/gazirovannye-napitki-limonady" class="">Газированные напитки, лимонады</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/kvas" class="">Квас</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/mineralnye-i-pitievye-vody" class="">Минеральные и питьевые воды</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/morsy-kiseli" class="">Морсы, кисели и компоты</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/soki-nektary-sokosoderzhaschie-napitki" class="">Соки, нектары, сокосодержащие напитки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/holodnyy-chay" class="">Холодный чай</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/energeticheskie-napitki" class="">Энергетические и спортивные напитки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/siropy-dlya-kokteyley" class="">Сиропы для коктейлей</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/pivo-bezalkogolnoe" class="">Безалкогольное вино и пиво</a>
+                
+                             
+		    </li>
+              
+             
+             
+		   </ul>
+             
+		  </li>	
+             
+           
+          
+           <li class=""><a href="/collection/detskie-tovary" class="">Детские товары</a>
+              
+             
+		   <ul>
+             
+               
+             <li class=""><a href="/collection/detskoe-pitanie" class="">Детское питание</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/zameniteli-materinskogo-moloka-i-smesi" class="">Заменители материнского молока и смеси</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/detskie-kashi" class="">Детские каши</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/molochnye-produkty-dlya-detey" class="">Молочные продукты для детей</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/detskie-soki-i-napitki" class="">Детские соки и напитки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/detskoe-pyure" class="">Детское пюре</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/detskaya-bakaleya-pechenie" class="">Детская бакалея, печенье</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/gigiena-i-uhod-za-kozhey" class="">Гигиена и уход за кожей, подгузники</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/podguzniki-pelenki-gorshki" class="">Подгузники, пеленки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/vlazhnye-salfetki-sredstva-ot-oprelostey" class="">Влажные салфетки, средства от опрелостей</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/vse-dlya-kupaniya" class="">Все для купания</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/detskoe-mylo-i-salfetki-dlya-ruk" class="">Детское мыло и салфетки для рук</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/kremy-masla-ochischayuschie-sredstva" class="">Кремы, масла, очищающие средства</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/katalog-1-2" class="">Игрушки</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/deti-doshkolnogo-vozrasta" class="">Дети дошкольного возраста</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/igry-i-pazly" class="">Игры и пазлы</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/igry-na-ulitse" class="">Игры на улице</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/igrushki-dlya-devochek" class="">Игрушки для девочек</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               
+                    
+               <li><a href="/collection/igrushki-dlya-detey" class="">Игрушки для детей</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               
+                    
+               <li><a href="/collection/plyushevye-i-interaktivnye-igrushki" class="">Плюшевые и интерактивные игрушки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/igrushki-dlya-tvorchestva" class="">Игрушки для творчества</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/prinadlezhnosti-dlya-kormleniya" class="">Принадлежности для кормления</a>
+                
+                             
+		    </li>
+              
+             
+             
+		   </ul>
+             
+		  </li>	
+             
+           
+          
+           <li class=""><a href="/collection/kosmetika-i-gigiena" class="">Косметика и гигиена</a>
+              
+             
+		   <ul>
+             
+               
+             <li class=""><a href="/collection/vatnye-i-bumazhnye-izdeliya" class="">Ватные и бумажные изделия</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/bumaga-tualetnaya" class="">Бумага туалетная</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/salfetki-vlazhnye" class="">Салфетки влажные</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/salfetki-i-platochki-bumazhnye" class="">Салфетки и платочки бумажные</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/vatnye-izdeliya" class="">Ватные изделия</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/vatnye-palochki" class="">Ватные палочки</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/gigienicheskie-prinadlezhnosti" class="">Гигиенические принадлежности</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/zhenskaya-gigiena" class="">Женская гигиена</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/prezervativy-testy-na-beremennost" class="">Презервативы, тесты на беременность</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/tovary-meditsinskogo-naznacheniya" class="">Товары медицинского назначения</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/sr-va-i-prinadlezhnosti-dlya-vanny-i-dusha" class="">Ср-ва и принадлежности для ванны и душа</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/geli-dlya-dusha" class="">Гели для душа</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/mochalki-gubki" class="">Мочалки, губки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/mylo-zhidkoe" class="">Мыло жидкое</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/mylo-myagkoe" class="">Мыло мягкое</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/mylo-tverdoe" class="">Мыло твердое</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/soli-peny-masla-dlya-vann" class="">Соли, пены, масла для ванн</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-dlya-intimnoy-gigieny" class="">Средства для интимной гигиены</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/tovary-dlya-britya-i-depilyatsii" class="">Товары для и после бритья и депиляции</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/sredstva-dlya-britya" class="">Средства для бритья</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/stanki-i-kassety-dlya-britya" class="">Станки и кассеты для бритья</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-posle-britya" class="">Средства после бритья</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-dlya-depilyatsii" class="">Средства для депиляции</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/uhod-za-volosami" class="">Уход за волосами</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/ukladka-volos" class="">Укладка волос</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/shampuni-i-balzamy" class="">Шампуни</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/konditsionery-balzamy-i-opolaskivateli" class="">Кондиционеры, бальзамы и ополаскиватели</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/tovary-dlya-okrashivaniya-volos" class="">Товары для окрашивания волос</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/maski-eliksiry-syvorotki-i-masla-dlya-volos-i-kozhi-golovy" class="">Маски, эликсиры, сыворотки и масла для волос и кожи головы</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/uhod-za-zubami-i-polostyu-rta-2" class="">Уход за зубами и полостью рта</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/zubnye-niti-zubochistki-ershiki" class="">Зубные нити, зубочистки, ершики</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/zubnye-pasty-i-opolaskivateli" class="">Зубные пасты</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/zubnye-schetki" class="">Зубные щетки и насадки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/opolaskivateli" class="">Ополаскиватели</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/uhod-za-kozhey-litsa-i-tela" class="">Уход за кожей лица и тела</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/dezodoranty-i-antiperspiranty" class="">Дезодоранты и антиперспиранты</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-dlya-vek-i-kozhi-litsa" class="">Средства для век и кожи лица</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-po-uhodu-za-rukami-nogami" class="">Средства по уходу за руками, ногами</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-dlya-tela" class="">Средства для тела</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-dlya-zagara" class="">Средства для загара</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-dlya-gub" class="">Средства для губ</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/uhod-za-nogtyami" class="">Уход за ногтями</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/sredstva-dlya-nogtey" class="">Средства для ногтей</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/professionalnaya-produktsiya" class="">Профессиональная продукция</a>
+                
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/podarochnye-nabory" class="">Подарочные наборы</a>
+                
+                             
+		    </li>
+              
+             
+             
+		   </ul>
+             
+		  </li>	
+             
+           
+          
+           <li class=""><a href="/collection/bytovaya-himiya" class="">Хозтовары</a>
+              
+             
+		   <ul>
+             
+               
+             <li class=""><a href="/collection/stirka-i-uhod-za-beliem" class="">Стирка и уход за бельем</a>
+                
+              
+               <ul class="">
+               
+                    
+               
+                    
+               <li><a href="/collection/mylo-hozyaystvennoe" class="">Мыло хозяйственное</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/poroshki-i-geli-dlya-stirki" class="">Порошки, гели и таблетки для стирки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/pyatnovyvoditeli-i-otbelivateli" class="">Пятновыводители и отбеливатели</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/konditsionery-3" class="">Кондиционеры и ополаскиватели</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-dlya-smyagcheniya-vody-i-ot-nakipi" class="">Средства для смягчения воды и от накипи</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/zaschita-veschey-ot-okrashivaniya" class="">Защита вещей от окрашивания</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/prochie-tovary" class="">Прочие товары</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/uborka-i-uhod-za-domom" class="">Уборка и уход за домом</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/osvezhiteli-vozduhaneytralizatory-zapaha" class="">Освежители воздуха/нейтрализаторы запаха</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-dlya-mytya-posudy" class="">Средства для мытья посуды</a>
+                   
+                  
+		     <ul class="">
+               
+               
+               <li><a href="/collection/dlya-ruchnoy-moyki-posudy" class="">Для ручной мойки посуды</a></li>	
+               
+               
+               
+               <li><a href="/collection/dlya-posudomoechnyh-mashin" class="">Для посудомоечных машин</a></li>	
+               
+               
+		     </ul>
+              
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/sredstva-dlya-prochistki-trub" class="">Средства для прочистки труб</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/chistyaschie-i-moyuschie-sredstva" class="">Чистящие и моющие средства</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/svechi" class="">Свечи и аксессуары</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/uhod-za-obuvyu-i-izdeliyami-iz-kozhi" class="">Уход за обувью и изделиями из кожи</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/gubki-dlya-kozhi-i-nubuka" class="">Губки и щетки для кожи и нубука</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/kremy-i-kraski" class="">Кремы, краски, растяжители и дезодоранты</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/sredstva-dlya-borby-s-nasekomymi" class="">Средства для борьбы с насекомыми и грызунами</a>
+                
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/domashniy-master" class="">Домашний мастер</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/klei-germetiki-izolyatsiya-uplotniteli" class="">Клеи, герметики, изоляция, уплотнители</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/ostalnoe" class="">Остальное</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/odnorazovaya-posuda-skaterti-salfetki" class="">Одноразовая посуда, скатерти, салфетки</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/posuda" class="">Посуда</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/skaterti-salfetki-polotentsa" class="">Скатерти, салфетки, полотенца</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/stolovye-pribory" class="">Столовые приборы и аксессуары</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/prinadlezhnosti-po-uhodu-za-odezhdoy" class="">Принадлежности по уходу за одеждой</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/roliki-schetki-dlya-odezhdy" class="">Ролики, щетки для одежды</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/tovary-dlya-uborki" class="">Товары для уборки</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/gubki-i-tryapki" class="">Губки и тряпки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/pakety-dlya-musora" class="">Пакеты для мусора</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/perchatki" class="">Перчатки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/schetki-shvabry-nasadki-vedra" class="">Щетки, швабры, насадки, ведра</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/upakovka-i-hranenie-produktov" class="">Упаковка и хранение продуктов</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/pakety-plenka" class="">Пакеты, пленка, фольга, бумага для выпечки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/elektrotovary" class="">Электротовары</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/batareyki-elementy-pitaniya" class="">Батарейки, элементы питания</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/lampochki" class="">Лампочки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/fonari-svetilniki-zvonki" class="">Фонари, светильники, звонки</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/udliniteli-adaptery-osnastka" class="">Удлинители, адаптеры, оснастка</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/kovriki" class="">Коврики</a>
+                
+                             
+		    </li>
+              
+             
+             
+               
+             
+             
+               
+             <li class=""><a href="/collection/zazhigalki-i-spichki" class="">Зажигалки и спички</a>
+                
+                             
+		    </li>
+              
+             
+             
+		   </ul>
+             
+		  </li>	
+             
+           
+          
+           <li class=""><a href="/collection/zootovary" class="">Зоотовары</a>
+              
+             
+		   <ul>
+             
+               
+             <li class=""><a href="/collection/dlya-koshek" class="">Для кошек</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/korma-konservirovannye" class="">Корма влажные для кошек</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/korma-suhie" class="">Корма сухие для кошек</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/dlya-sobak" class="">Для собак</a>
+                
+              
+               <ul class="">
+               
+                    
+               <li><a href="/collection/korma-suhie-2" class="">Корма сухие для собак</a>
+                   
+                  
+               </li>	
+                  
+               
+                    
+               <li><a href="/collection/korma-vlazhnye-dlya-sobak" class="">Корма влажные для собак</a>
+                   
+                  
+               </li>	
+                  
+               
+		     </ul>
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/dlya-gryzunov" class="">Для грызунов</a>
+                
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/dlya-popugaev" class="">Для попугаев</a>
+                
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/dlya-ryb" class="">Для рыб</a>
+                
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/napolniteli-pelenki-podguzniki" class="">Наполнители, пеленки, подстилки</a>
+                
+                             
+		    </li>
+              
+             
+             
+               
+             <li class=""><a href="/collection/miski-igrushki-i-aksessuary" class="">Миски, игрушки и аксессуары</a>
+                
+                             
+		    </li>
+              
+             
+             
+		   </ul>
+             
+		  </li>	
+             
+           
+		 </ul>
+          
+		</div>
+          
+			</div>
+	</div><!-- #header-->
+
+
+
+
+     	<div id="middle" data-template="page"> 
+
+          
+
+ 
+   
+
+      
+      
+      
+      
+      
+      <div class="breadcrumbs center-align">
+  <a href="/" style="font-family:Arial Corsiva;color:black;font-weight:normal;font-size:12px">Интернет-магазин</a> &gt;
+  
+  <span style="font-family:Arial Corsiva;color:black;font-weight:normal;font-size:12px">Пользовательское соглашение</span>
+   
+</div>
+
+      
+
+      
+		<div id="container">
+          <!-- 	-->	
+			<div id="content">
+				
+			  
+		<div class="style-block" style="background: #ffffff;"> 
+			<h1>Пользовательское соглашение</h1>
+			<div class="editor-content"><p>Настоящий документ «Пользовательское соглашение» (далее - Соглашение) представляет собой предложение ИП Зиновьева, размещенное на сайте www.mega-gastronom.ru (далее - «Сайт»), заключить договор на изложенных ниже условиях Соглашения.</p>
+<p>&nbsp;</p>
+<p><strong>1.Общие положения</strong><strong>&nbsp;</strong></p>
+<p>1.1.Вы настоящим подтверждаете, что с момента регистрации на Сайте и в течение времени пользования Сайтом, а также персонализированными сервисами Сайта, вы являетесь Пользователем Сайта вплоть до вашего личного обращения в администрацию Сайта с требованием об отказе от любых взаимоотношений с Сайтом.</p>
+<p>&nbsp;</p>
+<p>1.2.Использование вами Сайта любым способом и в любой форме в пределах его объявленных функциональных возможностей, включая:</p>
+<p>а)просмотр размещенных на Сайте материалов;</p>
+<p>б)регистрация и/или авторизация на Сайте;</p>
+<p>в)размещение или отображение на Сайте любых материалов, включая но не ограничиваясь такими как: тексты, гипертекстовые ссылки, изображения, аудио и видео- файлы, сведения и/или иная информация;</p>
+<p>создает договор на условиях настоящего Соглашения в соответствии с положениями ст.437 и 438 Гражданского кодекса Российской Федерации.</p>
+<p>&nbsp;</p>
+<p>1.3.Воспользовавшись любой из указанных выше возможностей по использованию Сайта вы подтверждаете, что:</p>
+<p>а)ознакомились с условиями настоящего Соглашения в полном объеме до начала использования Сайта;</p>
+<p>б)принимаете все условия настоящего Соглашения в полном объеме без каких-либо изъятий и ограничений с вашей стороны и обязуетесь их соблюдать или прекратить использование Сайта. Если вы не согласны с условиями настоящего Соглашения или не имеете права на заключение договора на их основе, вам следует незамедлительно прекратить любое использование Сайта;</p>
+<p>в)Соглашение (в том числе любая из его частей) может быть изменено Сайтом без какого-либо специального уведомления. Новая редакция Соглашения вступает в силу с момента ее размещения на Сайте либо доведения до сведения Пользователя в иной удобной форме, если иное не предусмотрено новой редакцией Соглашения.</p>
+<p>&nbsp;</p>
+<p>&nbsp;2.<strong>Общие условия пользования Сайтом</strong><strong> <br></strong></p>
+<p>2.1.Сайт осуществляет продажу товара посредством веб-ресурса www.mega-gastronom.ru&nbsp;и сопутствующих сервисных служб Сайта.&nbsp;<br> 2.2.Сайт осуществляет доставку товара способами, определенными в Части 3 настоящего Соглашения.&nbsp;<br> 2.3.Сайт предоставляет доступ к персонализированным сервисам Сайта для получения наиболее полной информации по интересующему вас товару, создания рейтингов и мнений, участия в конкурсных программах и иных акциях, проводимых Сайтом.</p>
+<p>2.4.Настоящим вы даете своё добровольное согласие на информирование вас обо всех действиях Сайта, связанных с продажей товара и/или оказанием услуг, в том числе о статусе выполнения заказа, а также об иных событиях любого характера, относящихся к сервисам Сайта.&nbsp;<br> 2.5.Согласие на получение рассылки:<br> Подписываясь на SMS- и email-рассылку www.mega-gastronom.ru или третьих лиц, уполномоченных на рассылку от имени&nbsp;www.mega-gastronom.ru, в сети Интернет&nbsp;www.mega-gastronom.ru, я соглашаюсь получать информационную рассылку на телефон и электронный адрес, указанный мной при подписке через сервис подписки информационной рассылки на сайте&nbsp;www.mega-gastronom.ru. Я проинформирован о том, что в случае, если у меня возникнет желание отказаться от информационной рассылки www.mega-gastronom.ru, мне будет необходимо самостоятельно перейти по ссылке «Отписаться от рассылки», указанной в тексте отправляемых сайтом сообщений с электронного адреса&nbsp;Сайта dostavka@mega-gastronom.ru или же сообщить о несогласии получения информационных рассылок по адресам, указанным в разделе «Контакты» данного Соглашения. Я также даю разрешение&nbsp;Сайту или третьим лицам, уполномоченным на рассылку от имени&nbsp;Сайта, собирать, хранить и обрабатывать все переданные мною в адрес&nbsp;Сайта персональные данные (в том числе фамилию, имя, отчество и адрес электронной почты) с целью информирования о новостях и других событиях&nbsp;Сайта. &nbsp;<br> 2.6.Вы соглашаетесь, что Сайт не несет никакой ответственности за задержки, сбои, неверную или несвоевременную доставку, удаление или несохранность каких-либо уведомлений. При этом Сайт оставляет за собой право повторного направления любого уведомления, в случае его неполучения Вами.&nbsp;<br> 2.7.Все вопросы по информационной поддержке Вы можете задать по адресу&nbsp;dostavka@mega-gastronom.ru.</p>
+<p>2.8.Вы признаёте, что сопровождающее товар описание на Сайте не претендует на исчерпывающую информативность и может содержать неточности. Вы вправе направить все замечания по неточному описанию товара Сайту по адресу&nbsp;dostavka@mega-gastronom.ru.</p>
+<p>2.9.Вы признаёте, что Сайт прилагает достаточные усилия, чтобы внешний вид, упаковка и характеристики товаров соответствовали описаниям, приведенным в каталоге Сайта. Одновременно Сайт доводит до вашего сведения, что фактические внешний вид, упаковка и характеристики товара могут отличаться от этих описаний в случае ассортиментного товара, а также в случае внесения изменений в товар непосредственно производителем.<br> 2.10.Вы проинформированы, что цена и наличие товара на Сайте изменяется на круглосуточно без предварительного уведомления об этом и указываются в индивидуальном статусе и подробной карточке товара, отображаемым в каталоге на Сайте.&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>3.Обязательства Пользователя при использовании Сайта</strong><strong>&nbsp;</strong></p>
+<p>3.1.Вы соглашаетесь не использовать сервисы Сайта с целью:&nbsp;<br> 3.1.1.загрузки контента, который является незаконным, нарушает любые права третьих лиц; пропагандирует насилие, жестокость, ненависть и/или дискриминацию по расовому, национальному, половому, религиозному, социальному признакам; содержит недостоверные сведения и/или оскорбления в адрес конкретных лиц, организаций, органов власти;&nbsp;<br> 3.1.2.побуждения к совершению противоправных действий, а также содействия лицам, действия которых направлены на нарушение ограничений и запретов, действующих на территории РФ;<br> 3.1.3.нарушения прав несовершеннолетних лиц и/или причинение им вреда в любой форме;&nbsp;<br> 3.1.4.ущемления прав меньшинств;&nbsp;<br> 3.1.5.выдачи себя за другого человека или представителя организации и/или сообщества без достаточных на то прав, в том числе за сотрудников Сайта;<br> 3.1.6.введения в заблуждение относительно свойств и характеристик каких-либо товаров из каталога на Сайте; некорректного сравнения товаров, а также формирования негативного отношения к лицам, (не) пользующимся определенными товарами, или осуждения таких лиц;<br> 3.1.7.загрузки контента, который вы не имеете права делать доступным по законодательству РФ или согласно каким-либо контрактным отношениям;&nbsp;<br> 3.1.8.загрузки контента, который затрагивает и/или содержит какой-либо патент, торговый знак, коммерческую тайну, фирменное наименование, авторские и смежные с ними права, а равно прочие права на результаты интеллектуальной деятельности, принадлежащие или правомерно используемые третьими лицами;&nbsp;<br> 3.1.9.загрузки не разрешенной специальным образом рекламной информации и/или спама;&nbsp;<br> 3.1.10.сбора и обработки персональных данных, информации о частной жизни любых лиц;&nbsp;<br> 3.1.11.нарушения нормальной работы Сайта;<br> 3.1.12.нарушения российских или международных норм права.<br> 3.2.Вы соглашаетесь не использовать на Сайте бранных слов, непристойных и оскорбительных образов, сравнений и выражений, в том числе в отношении пола, расы, национальности, профессии, социальной категории, возраста, языка человека и гражданина, а также в отношении организаций, органов власти, официальных государственных символов (флагов, гербов, гимнов), религиозных символов, объектов культурного наследия (памятников истории и культуры).<br> 3.3.Вы признаете и соглашаетесь, что Сайт имеет право (но не обязанность) по своему усмотрению отказать в размещении и/или удалить любой контент, доступный через сервисы Сайта.</p>
+<p>&nbsp;</p>
+<p><strong>4.Политика конфиденциальности</strong>&nbsp;</p>
+<p>4.1.Условия Политики конфиденциальности и отношения между вами и Сайтом, связанные с обработкой персональных данных, регулируются Федеральным Законом РФ №152-ФЗ от 27 июля 2006г. «О персональных данных».&nbsp;<br> 4.2.Политика конфиденциальности действует в отношении персональных данных, которые Сайт получил или может получить от вас при регистрации и/или оформлении заказа на Сайте, и необходимые для выполнения обязательств со стороны Сайта в отношении приобретаемого вами товара/услуги и/или вашего доступа к сервисам Сайта.&nbsp;</p>
+<p>4.3.Политика конфиденциальности доступна по ссылке – <a href="http://www.mega-gastronom.ru/page/politica-konfedicialnosti">www.mega-gastronom.ru/page/politica-konfedicialnosti</a>.</p>
+<p>&nbsp;</p>
+<p><strong>5.Условия приобретения и доставки товара</strong>&nbsp;</p>
+<p>5.1.Вы можете приобрести товар на Сайте, оплатив его следующими способами: наличными, кредитной картой, электронными деньгами, с лицевого счёта мобильного телефона, банковским переводом по квитанции, подарочным сертификатом.</p>
+<p>5.2.Настоящим вы соглашаетесь, что выбранный вами способ оплаты не подлежит изменению с момента оформления заказа на Сайте.&nbsp;<br> 5.3.Настоящим вы соглашаетесь, что подтверждение заказа, оплаченного электронными деньгами, кредитной картой, с личного счета мобильного телефона, банковским переводом, происходит только после подтверждения списания денежных средств в счёт оплаты заказа.&nbsp;<br> 5.4.Вы подтверждаете, что оплата заказа электронными деньгами, кредитной картой, с личного счета мобильного телефона должна быть произведена в течение 5 календарных дней с момента его оформления на Сайте. Вы соглашаетесь, что в случае неоплаты заказа по истечении указанного срока, заказ может быть аннулирован.&nbsp;</p>
+<p>5.5.Сайт осуществляет доставку товара следующими способами: служба доставки Сайта (курьерская доставка или доставка в пункт самовывоза), почтовая доставка. Вы вправе выбрать любой удобный для вас способ доставки в соответствии с условиями доставки в свой регион/страну или исходя из своих предпочтений.&nbsp;<br> 5.6.Вы соглашаетесь, что в случае невозможности передачи вам товара по вашей вине, в том числе нарушения вами срока, в течение которого вы обязаны забрать товар, будет расцениваться Сайтом как ваш отказ от товара. При этом товар возвращается Сайту, а заказ считается аннулированным.&nbsp;<br> 5.7.В случае вашего отказа от товара, а также в случае отсутствия заказанного вами товара, перечисленная Сайту предоплата за товар, за исключением расходов Сайта на доставку товара, будет возвращена вам не позднее чем через 10 календарных дней с даты предъявления.&nbsp;<br> 5.8.Все вопросы, связанные со сроками и условиями доставки товара, вы можете направить в Сайту по адресу - dostavka@mega-gastronom.ru.</p>
+<p>&nbsp;</p>
+<p><strong>6.Ответственность</strong><strong>&nbsp;</strong></p>
+<p>6.1.Сервисы Сайта могут содержать ссылки на другие ресурсы. Вы признаете и соглашаетесь с тем, что Сайт не несет никакой ответственности за доступность этих ресурсов и за их контент, а также за любые последствия, связанные с использованием вами контента этих ресурсов.<br> 6.2.Вы также соглашаетесь с тем, что Сайт не несёт никакой ответственности за ваши персональные данные, которые вы предоставляете сторонним ресурсам и/или иным третьим лицам в случае перехода на них с Сайта.<br> 6.3.Вы подтверждаете, что Сайт не отвечает за возможную потерю и/или порчу данных, которая может произойти из-за нарушения вами положений настоящего Соглашения, а также неправильного доступа и/или использования персонализированных сервисов Сайта.</p>
+<p>6.4.Ответственность за действия несовершеннолетних, включая приобретение ими товаров из каталога на Сайте, лежит на законных представителях несовершеннолетних.</p>
+<p>6.5.Вы соглашаетесь, что в случае неисполнения и/или ненадлежащего исполнения Сайтом обязательств по продаже и/или доставке вам товара в связи с предоставлением вами недостоверных и/или недействительных данных о себе, а равно невыполнение вами условий настоящего Соглашения, Сайт ответственности не несет.&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>7.Реквизиты Сайта</strong>&nbsp;</p>
+<p>ИП Зиновьев</p>
+<p>ИНН 544511350241</p>
+<p>ОГРНИП 316547600107050</p>
+<p>Адрес: www.mega-gastronom.ru</p>
+<p>Электронная почта для обращений&nbsp; - dostavka@mega-gastronom.ru.</p>
+<p>&nbsp;</p>
+<p>Дата публикации – 30.06.2017</p>
+<p>&nbsp;</p></div>
+		</div>
+
+              <div class="main-clear">&nbsp;</div>
+			</div><!-- #content-->
+		</div><!-- #container-->
+      
+      
+      
+
+      
+		  
+      
+      
+      
+      
+
+	</div>
+       <div class="center-align" style="padding: 18px 0px; display:none">
+
+          <a href="/page/o-nas?utm_source=banner&amp;utm_medium=nijnii&amp;utm_campaign=o_nas"><img src="/files/1/3628/798252/original/svegest_small.jpg" style="padding: 0px 12px"></a>
+           <a href="/page/dostavka?utm_source=banner&amp;utm_medium=nijnii&amp;utm_campaign=dostavka"><img src="/files/1/6815/1219231/original/dostavka_niz_3.jpg" style="padding: 0px 12px"></a>
+           <a href="/page/dostavka?utm_source=banner&amp;utm_medium=nijnii&amp;utm_campaign=otkaz"><img src="/files/1/2742/1100470/original/otkaz_small1.png" style="padding: 0px 11px"></a>
+        </div>
+      
+     
+<div id="footer">
+  
+ 
+         
+        
+<footer class="container_12 text_12 decor_footer" style="text-shadow: 0px -1px 0px rgba(55, 164, 0, 1);">
+
+<dl><div class="center-align">
+
+<a href="/page/o-nas">О нас</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="/page/kak-zakazat">Как заказать?</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="/page/dostavka">Доставка и оплата</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="/page/kontakty">Контакты</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<span>Вы можете оформить заказ по телефону (383) 292-23-51</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <br>
+  <br>
+<noindex>
+<span><script>!function(d,s){var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);js.async=1;js.src="https://widget.flamp.ru/loader.js";fjs.parentNode.insertBefore(js,fjs);}(document,"script");</script><iframe scrolling="no" style="width: 1px; min-width: 100%; height: 31px; border: medium none;" allowtransparency="true" src="//widget.flamp.ru/?id=141266769760076&amp;type=small&amp;color=yellow&amp;textColor=black&amp;orientation=landscape&amp;" frameborder="0"></iframe></span>
+
+  
+  <div class="center-align">  
+ Интернет-гипермаркет МЕГА-Гастроном © 2022. <br> Информация, опубликованная на сайте, не является публичной офертой или рекламой, а носит информационный характер и может быть изменена по усмотрению компании. При использовании материалов с сайта ссылка на сайт обязательна. <br> <a rel="”nofollow”" href="/page/oferta-politica-konfedicialnosti" style="text-decoration: underline;" target="_blank">Оферта и политика конфиденциальности</a> <a rel="”nofollow”" href="/page/polzovatelskoe-soglachenie" style="text-decoration: underline;" target="_blank">Пользовательское соглашение</a> <br> Создание и продвижение интернет-магазина - <a rel="”nofollow”" href="http://schneider-consult.ru/ecom.htm" target="_blank">Шнайдер Консалт © </a> </div>
+ </noindex>
+  </div></dl>
+
+ </footer> 
+        
+</div>        
+        
+		  <!-- #footer -->
+    <!-- #wrapper -->
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $('.txt').AddXbutton({ img: 'https://static-internal.insales.ru/files/1/3445/4590965/original/delete.svg' });
+          $('.txt').focus();
+        });
+      </script>
+      <script>
+        (function($) {
+    $.fn.AddXbutton = function(options) {
+        var defaults = {
+            img: 'https://static-internal.insales.ru/files/1/3445/4590965/original/delete.svg'
+        };
+        var opts = $.extend(defaults, options);
+        var objs = new Array();
+        $(this).each(
+        function(i) {
+            $obj = $(this);
+            objs[i] = $obj;
+            $(this).after(
+                $('<img id="xButton' + i + '" src="' + opts['img'] + '" />')
+                    .css({ 'display': 'none', 'cursor': 'pointer', 'marginLeft': '-15px' })
+                    .click(function() {
+                        objs[i].val('').focus();
+                        $("#xButton" + i).hide();
+                    }))
+            .keyup(function() {
+                if ($(this).val().length > 0) {
+                    $("#xButton" + i).show();
+                } else {
+                    $("#xButton" + i).hide();
+                }
+            }); 
+            if ($obj.val() != '') $("#xButton" + i).show();
+        });
+
+    };
+})(jQuery);
+
+      </script> 
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NZTJGJT');</script>
+<!-- End Google Tag Manager -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZTJGJT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Rating@Mail.ru counter --> 
+<script type="text/javascript">//<![CDATA[ 
+var _tmr = _tmr || []; 
+_tmr.push({id: "2437258", type: "pageView", start: (new Date()).getTime()}); 
+(function (d, w) { 
+var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; 
+ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js"; 
+var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);}; 
+if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } 
+})(document, window); 
+//]]></script><noscript><div style="position:absolute;left:-10000px;"> 
+<img src="//top-fwz1.mail.ru/counter?id=2437258;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" /> 
+</div></noscript> 
+<!-- //Rating@Mail.ru counter -->
+
+<img src="https://vk.com/rtrg?r=QgamawEz6OiQKSkNE/*WMyZx95dqVMXm6rmVNsobtG/UhC0qQixUwG*RkWkc0WEkRv*kpGKQ*Ob4mDwChHEZjw/IaoUls*2/6YqikR5s2YYxP4oW/sqz7kwkU4ArtzMLaeawekDeOlzok2bglVE5kYx6KUMj4RrQRquJTe2QNdE-" width="1" height="1" border="0">
+<!-- Код тега ремаркетинга Google -->
+<!--------------------------------------------------
+С помощью тега ремаркетинга запрещается собирать информацию, по которой можно идентифицировать личность пользователя. Также запрещается размещать тег на страницах с контентом деликатного характера. Подробнее об этих требованиях и о настройке тега читайте на странице http://google.com/ads/remarketingsetup.
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 992295586;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/992295586/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-134542354-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-134542354-1');
+</script>
+
+<div id="google_translate_element"><div class="skiptranslate goog-te-gadget" dir="ltr" style="display: none;"><div id=":0.targetLanguage" style="display: inline;"><select class="goog-te-combo" aria-label="Language Translate Widget"></select></div>&nbsp;&nbsp;Powered by <span style="white-space:nowrap"><a class="VIpgJd-ZVi9od-l4eHX-hSRGPd" href="https://translate.google.com" target="_blank"><img src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_42x16dp.png" style="padding-right: 3px" alt="Google Translate" width="37px" height="14px">Translate</a></span></div></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'ru', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, gaTrack: true, gaId: 'UA-45779126-1'}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>       
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(22983010, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/22983010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->    <!-- Google Analytics Universal Code -->
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45779126-1', 'auto');
+      
+      ga('send', 'pageview');
+    </script>
+
+
+  
+  
+  
+  
+  
+  
+  </div><div class="VIpgJd-ZVi9od-aZ2wEe-wOHMyf"><div class="VIpgJd-ZVi9od-aZ2wEe-OiiCO"><svg xmlns="http://www.w3.org/2000/svg" class="VIpgJd-ZVi9od-aZ2wEe" width="96px" height="96px" viewBox="0 0 66 66"><circle class="VIpgJd-ZVi9od-aZ2wEe-Jt5cK" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="shadowbox_container"><div id="shadowbox_overlay"></div><div id="shadowbox"><div id="shadowbox_title"><div id="shadowbox_title_inner"></div></div><div id="shadowbox_body"><div id="shadowbox_body_inner"></div><div id="shadowbox_loading"><div id="shadowbox_loading_indicator"></div><span><a onclick="Shadowbox.close();">Отмена</a></span></div></div><div id="shadowbox_info"><div id="shadowbox_info_inner"><div id="shadowbox_counter"></div><div id="shadowbox_nav"><a id="shadowbox_nav_close" title="Закрыть" onclick="Shadowbox.close()"></a><a id="shadowbox_nav_next" title="Следующая" onclick="Shadowbox.next()"></a><a id="shadowbox_nav_play" title="Пуск" onclick="Shadowbox.play()"></a><a id="shadowbox_nav_pause" title="Пауза" onclick="Shadowbox.pause()"></a><a id="shadowbox_nav_previous" title="Предыдущая" onclick="Shadowbox.previous()"></a></div><div class="shadowbox_clear"></div></div></div></div></div></body><iframe sandbox="allow-scripts" style="display: none;" srcdoc="<!DOCTYPE html><body><script>(function(){/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+'use strict';var e=this||self;function f(a){return a};var h;function k(a,c){this.g=c===l?a:&quot;&quot;}k.prototype.toString=function(){return this.g+&quot;&quot;};var l={};function m(a){if(void 0===h){var c=null;var b=e.trustedTypes;if(b&amp;&amp;b.createPolicy){try{c=b.createPolicy(&quot;goog#html&quot;,{createHTML:f,createScript:f,createScriptURL:f})}catch(d){e.console&amp;&amp;e.console.error(d.message)}h=c}else h=c}a=(c=h)?c.createScriptURL(a):a;return new k(a,l)};/*
+
+ SPDX-License-Identifier: Apache-2.0
+*/
+if(!function(){if(self.origin)return&quot;null&quot;===self.origin;if(&quot;&quot;!==location.host)return!1;try{return window.parent.escape(&quot;&quot;),!1}catch(a){return!0}}())throw Error(&quot;sandboxing error&quot;);
+window.addEventListener(&quot;message&quot;,function(a){var c=a.ports[0];a=a.data;var b=a.callbackName.split(&quot;.&quot;),d=window;&quot;window&quot;===b[0]&amp;&amp;b.shift();for(var g=0;g<b.length-1;g++)d[b[g]]={},d=d[b[g]];d[b[b.length-1]]=function(n){c.postMessage(JSON.stringify(n))};b=document.createElement(&quot;script&quot;);a=m(a.url);b.src=a instanceof k&amp;&amp;a.constructor===k?a.g:&quot;type_error:TrustedResourceUrl&quot;;document.body.appendChild(b)},!0);}).call(this);
+</script></body>" src="data:text/html;charset=UTF-8;base64,PCFET0NUWVBFIGh0bWw+PGJvZHk+PHNjcmlwdD4oZnVuY3Rpb24oKXsvKgoKIENvcHlyaWdodCBUaGUgQ2xvc3VyZSBMaWJyYXJ5IEF1dGhvcnMuCiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogQXBhY2hlLTIuMAoqLwondXNlIHN0cmljdCc7dmFyIGU9dGhpc3x8c2VsZjtmdW5jdGlvbiBmKGEpe3JldHVybiBhfTt2YXIgaDtmdW5jdGlvbiBrKGEsYyl7dGhpcy5nPWM9PT1sP2E6IiJ9ay5wcm90b3R5cGUudG9TdHJpbmc9ZnVuY3Rpb24oKXtyZXR1cm4gdGhpcy5nKyIifTt2YXIgbD17fTtmdW5jdGlvbiBtKGEpe2lmKHZvaWQgMD09PWgpe3ZhciBjPW51bGw7dmFyIGI9ZS50cnVzdGVkVHlwZXM7aWYoYiYmYi5jcmVhdGVQb2xpY3kpe3RyeXtjPWIuY3JlYXRlUG9saWN5KCJnb29nI2h0bWwiLHtjcmVhdGVIVE1MOmYsY3JlYXRlU2NyaXB0OmYsY3JlYXRlU2NyaXB0VVJMOmZ9KX1jYXRjaChkKXtlLmNvbnNvbGUmJmUuY29uc29sZS5lcnJvcihkLm1lc3NhZ2UpfWg9Y31lbHNlIGg9Y31hPShjPWgpP2MuY3JlYXRlU2NyaXB0VVJMKGEpOmE7cmV0dXJuIG5ldyBrKGEsbCl9Oy8qCgogU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0yLjAKKi8KaWYoIWZ1bmN0aW9uKCl7aWYoc2VsZi5vcmlnaW4pcmV0dXJuIm51bGwiPT09c2VsZi5vcmlnaW47aWYoIiIhPT1sb2NhdGlvbi5ob3N0KXJldHVybiExO3RyeXtyZXR1cm4gd2luZG93LnBhcmVudC5lc2NhcGUoIiIpLCExfWNhdGNoKGEpe3JldHVybiEwfX0oKSl0aHJvdyBFcnJvcigic2FuZGJveGluZyBlcnJvciIpOwp3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcigibWVzc2FnZSIsZnVuY3Rpb24oYSl7dmFyIGM9YS5wb3J0c1swXTthPWEuZGF0YTt2YXIgYj1hLmNhbGxiYWNrTmFtZS5zcGxpdCgiLiIpLGQ9d2luZG93OyJ3aW5kb3ciPT09YlswXSYmYi5zaGlmdCgpO2Zvcih2YXIgZz0wO2c8Yi5sZW5ndGgtMTtnKyspZFtiW2ddXT17fSxkPWRbYltnXV07ZFtiW2IubGVuZ3RoLTFdXT1mdW5jdGlvbihuKXtjLnBvc3RNZXNzYWdlKEpTT04uc3RyaW5naWZ5KG4pKX07Yj1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCJzY3JpcHQiKTthPW0oYS51cmwpO2Iuc3JjPWEgaW5zdGFuY2VvZiBrJiZhLmNvbnN0cnVjdG9yPT09az9hLmc6InR5cGVfZXJyb3I6VHJ1c3RlZFJlc291cmNlVXJsIjtkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGIpfSwhMCk7fSkuY2FsbCh0aGlzKTsKPC9zY3JpcHQ+PC9ib2R5Pg=="></iframe></html>
